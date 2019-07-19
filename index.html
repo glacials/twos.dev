@@ -1,101 +1,239 @@
 <html>
   <head>
     <title>Ben Carlsson</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
-    <link href="https://unpkg.com/nes.css@2.1.0/css/nes.min.css" rel="stylesheet" />
+    <script src="https://kit.fontawesome.com/2b022a4ed7.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
   </head>
-  <body style="max-width: 800px; margin: auto; padding: 1em;">
-    <header>
-      <h1>Ben Carlsson</h1>
-    </header>
-    <section class="nes-container with-title member-card" style="margin-top: 1em">
-      <h3 class="title">Summary</h3>
-      <img src="me.png" width="130" style="float: left; margin: 0 1em 1em 0; image-rendering: pixelated" />
-      <p>
-        Experienced lead engineer specializing in Ruby on Rails, Go, and AWS with a focus on gaming tech (not
-        games). </p>
-      <p>
-        Founder at <a href="https://splits.io">Splits I/O</a>, a speedrunning company.
-      </p>
-      <p>
-        Based out of Seattle.
-      </p>
-      <p style="text-align: center">
-        <a href="https://twitter.com/glcls"><i class="nes-icon twitter"></i></a>
-        <a href="https://www.twitch.tv/glacials"><i class="nes-icon twitch"></i></a>
-        <a href="https://github.com/glacials"><i class="nes-icon github"></i></a>
-        <a href="https://linkedin.com/in/ben"><i class="nes-icon linkedin"></i></a>
-        <a href="mailto:qhiiyr@gmail.com"><i class="nes-icon gmail"></i></a>
-      </p>
-    </section>
-    <section class="nes-container with-title is-dark" style="margin-top: 1em">
-      <h3 class="title">History</h3>
-      <p>
-        <span class="nes-text is-success">Employee #90</span> at <i class="nes-icon twitch"></i> Twitch; left at 1,800
-        after five years.
-      </p>
-      <p>
-        Built financial tech, realtime n-to-n chat, authN/authZ, and spam filters.
-        Migrated the company from a Rails monolith to Go microservices.
-      </p>
-      <p>
-        Merged much of said tech with the duplicates of an acquired company.
-      </p>
-      <p>
-        Before Twitch, worked in the climate science group at <span class="nes-text is-success">Lawrence Livermore
-        National Laboratory</span>.
-      </p>
-    </section>
-    <section class="nes-container with-title" style="margin-top: 1em">
-      <h3 class="title">Projects</h3>
-      <img src="splitsio.png" width="130" style="float: left; margin: 0 1em 1em 0; image-rendering: pixelated" />
-      <h4 class="nes-balloon from-left">
-        <a href="https://splits.io">Splits I/O</a>
-      </h4>
-      <p>
-        A statistical analysis platform for speedrunners.
-        <ul class="nes-list is-disc">
-          <li>~10k monthly users</li>
-          <li>Ruby on Rails</li>
-          <li>Docker</li>
-        </ul>
-      </p>
-      <img src="whatsinstandard.png" width="130" style="float: left; margin: 0 1em 1em 0; image-rendering: pixelated" />
-      <h4 class="nes-balloon from-left">
-        <a href="https://whatsinstandard.com/">What's in Standard?</a>
-      </h4>
-      <p>
-        A reference site for Magic: The Gathering players.
-        <ul class="nes-list is-disc">
-          <li>~20k monthly users</li>
-          <li>Progressive Web App</li>
-        </ul>
-      </p>
-      <img src="housebot.png" width="130" style="float: left; margin: 0 1em 1em 0; image-rendering: pixelated" />
-      <h4 class="nes-balloon from-left">
-        <a href="https://github.com/glacials/housebot">Housebot</a>
-      </h4>
-      <p>
-        A Twitch bot that lets chat control your lights.
-        <ul class="nes-list is-disc">
-          <li>Probably not a good idea</li>
-          <li>Made it anyway</li>
-        </ul>
-      </p>
-    </section>
-    <section class="nes-container with-title is-dark" style="margin-top: 1em">
-      <h3 class="title">Interests</h3>
-      <p>
-        Professional interests are in <span class="nes-text is-success">games</span>, <span class="nes-text
-        is-success">speedrunning</span>, and <span class="nes-text is-success">do-good tech</span>.
-      </p>
-      <p>
-        Let's chat. To win my heart, buy me a beer.
-      </p>
-      <a type="button" class="nes-btn is-primary" href="mailto:qhiiyr@gmail.com?subject=Let me buy you a beer">
-        <i class="nes-icon heart is-small"></i> Buy Beer
-      </a>
-    </section>
+  <body>
+    <main role="main">
+      <section class="jumbotron text-center">
+        <div class="container">
+          <img src="me.jpg" class="mb-5" style="height: 10em" />
+          <h1 class="jumbotron-heading">Ben "Glacials" Carlsson</h1>
+          <p class="lead text-muted">
+            I'm a late-20s senior backend and full-stack engineer in Seattle. I was the 91st employee at Twitch. I've
+            worked on everything from social networks to authentication-as-a-service.</p>
+          <p>
+            <a class="btn btn-primary my-2" href="mailto:qhiiyr@gmail.com?subject=Let me buy you a beer">Buy me a beer</a>
+            <a class="btn btn-secondary my-2" href="mailto:qhiiyr@gmail.com">Email me</a>
+          </p>
+          <a href="https://twitter.com/glcls"><i class="fab fa-twitter"></i></a>
+          <a href="https://www.twitch.tv/glacials"><i class="fab fa-twitch"></i></a>
+          <a href="https://github.com/glacials"><i class="fab fa-github"></i></a>
+          <a href="https://linkedin.com/in/ben"><i class="fab fa-linkedin"></i></a>
+        </div>
+      </section>
+      <div class="py-5 bg-light">
+        <div class="container">
+          <h3 class="title">Highlights</h3>
+          <div class="row">
+            <section style="margin-top: 1em">
+              <h4><img src="splitsio.svg" style="height: 1em" /> Splits.io</h4>
+              <p>
+                I've been working on my own startup since January 2019.
+              </p>
+            </section>
+            <div class="card-group mb-4">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Statistical analysis
+                  </h5>
+                  <p class="card-text">
+                    My startup is a statistical analysis company at its core. We take large datasets that users
+                    voluntarily upload and give them generated feedback.
+                  </p>
+                </div>
+              </div>
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Esports
+                  </h5>
+                  <p class="card-text">
+                    Speedrunning is the track & field of esports, and that's where we're focused. We help speedrunners
+                    get faster at games they can already blow through at professional levels.
+                  </p>
+                </div>
+              </div>
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Commentary
+                  </h5>
+                  <p class="card-text">
+                    Up next for us is using our large datasets in conglomerate to provide dashboards for commentators
+                    and other event staff. Good commentary tells stories, and stories need data.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <section style="margin-top: 1em">
+              <h4><i class="fab fa-twitch"></i> Twitch</h4>
+              <p>
+                I worked at Twitch from January 2014 to December 2018. I was on several teams before and after
+                acquisition.
+              </p>
+            </section>
+            <div class="card-group">
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Localization
+                  </h5>
+                  <p class="card-text">
+                    I championed and led a public rework of how we handle localization on Twitch. You can read the
+                    project summary
+                    <a href="https://blog.twitch.tv/the-innards-of-our-new-internationalization-systems-e84f99a27526">
+                    at the Twitch blog</a>.
+                  </p>
+                </div>
+              </div>
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Host mode
+                  </h5>
+                  <p class="card-text">
+                    One night at 9pm three team members and I received a business-critical work text. Over the next 14
+                    hours we built and launched host mode from scratch, a feature still loved by users today.
+                  </p>
+                </div>
+              </div>
+              <div class="card shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Auth
+                  </h5>
+                  <p class="card-text">
+                    Following a
+                    <a href="https://blog.twitch.tv/important-notice-about-your-twitch-account-aaa876745856">security
+                    breach</a>, I formed the Identity team with two coworkers where we replaced our authentication
+                    infrastructure with a low-surface-area OpenID Connect implementation, still in service today.
+                  </p>
+                </div>
+              </div>
+            </div>
+            <div class="card-group mb-4">
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Spam
+                  </h5>
+                  <p class="card-text">
+                    I built the first spam filter on Twitch, still in operation today. I can't really talk about it
+                    because spam filters are one of those things that stop working when you talk about them.
+                  </p>
+                </div>
+              </div>
+              <div class="card mb-4 shadow-sm">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Social merging
+                  </h5>
+                  <p class="card-text">
+                    When Twitch acquired Curse, a company with social features nearly identical to ours, I smoothly
+                    merged the code, products, and data powering social features like Friends without downtime for
+                    either platform.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="title">Projects</h3>
+          <div class="row">
+            <div class="card-group">
+              <div class="card mb-4 shadow-sm">
+                <img src="splitsio.svg" class="card-img p-4" alt="Splits.io logo" style="max-height: 20rem">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Splits.io
+                  </h5>
+                  <p class="card-text">
+                    Social esports analytics platform for speedrunners.
+                    <div class="badge badge-primary">~10k monthly users</div>
+                    <div class="badge badge-secondary">Ruby on Rails</div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="https://splits.io" class="btn btn-sm btn-outline-secondary">
+                        Website
+                      </a>
+                      <a href="https://github.com/glacials/splits-io" class="btn btn-sm btn-outline-secondary">
+                        Source
+                      </a>
+                    </div>
+                    <small class="text-muted">Current</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 shadow-sm">
+                <img src="whatsinstandard.svg" class="card-img p-4" alt="What's in Standard? logo" style="max-height: 20rem">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    What's in Standard?
+                  </h5>
+                  <p class="card-text">
+                    Reference tool for Magic: The Gathering players.
+                    <div class="badge badge-primary">~20k monthly users</div>
+                    <div class="badge badge-secondary">Progressive Web App</div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="https://whatsinstandard.com/" class="btn btn-sm btn-outline-secondary">
+                        Website
+                      </a>
+                      <a href="https://github.com/glacials/whatsinstandard" class="btn btn-sm btn-outline-secondary">
+                        Source
+                      </a>
+                    </div>
+                    <small class="text-muted">Current</small>
+                  </div>
+                </div>
+              </div>
+              <div class="card mb-4 shadow-sm">
+                <img src="housebot.svg" class="card-img p-4" alt="Housebot logo" style="max-height: 20rem">
+                <div class="card-body">
+                  <h5 class="card-title">
+                    Housebot
+                  </h5>
+                  <p class="card-text">
+                    Twitch bot that lets chat participants vote to control your lights.
+                    <div class="badge badge-primary">Probably not a good idea</div>
+                    <div class="badge badge-secondary">Made it anyway</div>
+                  </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <a href="https://github.com/glacials/housebot" class="btn btn-sm btn-outline-secondary">
+                        Source
+                      </a>
+                    </div>
+                    <small class="text-muted">Archived</small>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+          <section style="margin-top: 1em">
+            <h3 class="title">Interests</h3>
+            <p>
+              My professional interests are <span class="text-info">games</span>,
+              <span class="text-info">speedrunning</span>, <span class="text-info">open source</span>, and tech that
+              solves <span class="text-info">socioeconomic</span> and <span class="text-info">environmental</span>
+              issues.
+            </p>
+            <p>
+              To win my heart, buy me a beer.
+            </p>
+            <a class="btn btn-primary" href="mailto:qhiiyr@gmail.com?subject=Let me buy you a beer">
+              Buy me a beer
+            </a>
+          </section>
+        </div>
+      </div>
+    </main>
   </body>
 </html>
