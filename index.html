@@ -2,19 +2,19 @@
   <head>
     <title>Ben Carlsson</title>
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2b022a4ed7.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <link rel="shortcut icon" href="favicon.ico" type="image/x-icon">
-    <link rel="icon" href="favicon.ico" type="image/x-icon">
+    <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
+    <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <main role="main">
       <section class="jumbotron text-center">
         <div class="container">
-          <img src="me.jpg" class="mb-5" style="height: 10em" />
+          <img src="img/me.jpg" class="mb-5" style="height: 10em" />
           <h1 class="jumbotron-heading">Ben "Glacials" Carlsson</h1>
           <p class="lead text-muted">
             I'm a late-20s senior backend and full-stack engineer in Seattle. I was the 91st employee at Twitch. I've
@@ -31,202 +31,210 @@
       </section>
       <div class="py-5 bg-light">
         <div class="container">
+          <h3 class="title mb-4">Articles</h3>
+          <div class="card-group mb-4">
+            <div class="card shadow-sm" style="max-width: 500px">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Gut-driven development
+                </h5>
+                <div class="mb-1 text-muted">July 2019</div>
+                <p class="card-text">
+                  I worked at Twitch for five years. Here's what I came away with: I don't like being data-driven.
+                </p>
+                <a href="articles/gut-driven-development.html" class="stretched-link">Continue reading</a>
+              </div>
+            </div>
+          </div>
           <h3 class="title mb-4">Highlights</h3>
-          <div class="row">
-            <section class="ml-3 ml-md-1">
-              <h4><img src="splitsio.svg" style="height: 1em" /> Splits.io</h4>
-              <p>
-                I've been working on my own startup since January 2019.
-              </p>
-            </section>
-            <div class="card-group mb-4">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Statistical analysis
-                  </h5>
-                  <p class="card-text">
-                    My startup is a statistical analysis company at its core. We take large datasets that users
-                    voluntarily upload and give them generated feedback.
-                  </p>
-                </div>
-              </div>
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Esports
-                  </h5>
-                  <p class="card-text">
-                    Speedrunning is the track & field of esports, and that's where we're focused. We help speedrunners
-                    get faster at games they can already blow through at professional levels.
-                  </p>
-                </div>
-              </div>
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Commentary
-                  </h5>
-                  <p class="card-text">
-                    Up next for us is using our large datasets in conglomerate to provide dashboards for commentators
-                    and other event staff. Good commentary tells stories, and stories need data.
-                  </p>
-                </div>
+          <section>
+            <h4><img src="img/splitsio.svg" style="height: 1em" /> Splits.io</h4>
+            <p>
+              I've been working on my own startup since January 2019.
+            </p>
+          </section>
+          <div class="card-group mb-4">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Statistical analysis
+                </h5>
+                <p class="card-text">
+                  My startup is a statistical analysis company at its core. We take large datasets that users
+                  voluntarily upload and give them generated feedback.
+                </p>
               </div>
             </div>
-            <section class="ml-3 ml-md-1">
-              <h4><i class="fab fa-twitch"></i> Twitch</h4>
-              <p>
-                I worked at Twitch from January 2014 to December 2018. I was on several teams before and after
-                acquisition.
-              </p>
-            </section>
-            <div class="card-group">
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Localization
-                  </h5>
-                  <p class="card-text">
-                    I championed and led a public rework of how we handle localization on Twitch. You can read the
-                    project summary
-                    <a href="https://blog.twitch.tv/the-innards-of-our-new-internationalization-systems-e84f99a27526">
-                    at the Twitch blog</a>.
-                  </p>
-                </div>
-              </div>
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Host mode
-                  </h5>
-                  <p class="card-text">
-                    One night at 9pm three team members and I received a business-critical work text. Over the next 14
-                    hours we built and launched host mode from scratch, a feature still loved by users today.
-                  </p>
-                </div>
-              </div>
-              <div class="card shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Auth
-                  </h5>
-                  <p class="card-text">
-                    Following a
-                    <a href="https://blog.twitch.tv/important-notice-about-your-twitch-account-aaa876745856">security
-                    breach</a>, I formed the Identity team with two coworkers where we replaced our authentication
-                    infrastructure with a low-surface-area OpenID Connect implementation, still in service today.
-                  </p>
-                </div>
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Esports
+                </h5>
+                <p class="card-text">
+                  Speedrunning is the track & field of esports, and that's where we're focused. We help speedrunners
+                  get faster at games they can already blow through at professional levels.
+                </p>
               </div>
             </div>
-            <div class="card-group mb-4">
-              <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Spam
-                  </h5>
-                  <p class="card-text">
-                    I built the first spam filter on Twitch, still in operation today. I can't really talk about it
-                    because spam filters are one of those things that stop working when you talk about them.
-                  </p>
-                </div>
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Commentary
+                </h5>
+                <p class="card-text">
+                  Up next for us is using our large datasets in conglomerate to provide dashboards for commentators
+                  and other event staff. Good commentary tells stories, and stories need data.
+                </p>
               </div>
-              <div class="card mb-4 shadow-sm">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Social merging
-                  </h5>
-                  <p class="card-text">
-                    When Twitch acquired Curse, a company with social features nearly identical to ours, I smoothly
-                    merged the code, products, and data powering social features like Friends without downtime for
-                    either platform.
-                  </p>
-                </div>
+            </div>
+          </div>
+          <section>
+            <h4><i class="fab fa-twitch"></i> Twitch</h4>
+            <p>
+              I worked at Twitch from January 2014 to December 2018. I was on several teams before and after
+              acquisition.
+            </p>
+          </section>
+          <div class="card-group">
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Localization
+                </h5>
+                <p class="card-text">
+                  I championed and led a public rework of how we handle localization on Twitch. You can read the
+                  project summary
+                  <a href="https://blog.twitch.tv/the-innards-of-our-new-internationalization-systems-e84f99a27526">
+                  at the Twitch blog</a>.
+                </p>
+              </div>
+            </div>
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Host mode
+                </h5>
+                <p class="card-text">
+                  One night at 9pm three team members and I received a business-critical work text. Over the next 14
+                  hours we built and launched host mode from scratch, a feature still loved by users today.
+                </p>
+              </div>
+            </div>
+            <div class="card shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Auth
+                </h5>
+                <p class="card-text">
+                  Following a
+                  <a href="https://blog.twitch.tv/important-notice-about-your-twitch-account-aaa876745856">security
+                  breach</a>, I formed the Identity team with two coworkers where we replaced our authentication
+                  infrastructure with a low-surface-area OpenID Connect implementation, still in service today.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="card-group mb-4">
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Spam
+                </h5>
+                <p class="card-text">
+                  I built the first spam filter on Twitch, still in operation today. I can't really talk about it
+                  because spam filters are one of those things that stop working when you talk about them.
+                </p>
+              </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Social merging
+                </h5>
+                <p class="card-text">
+                  When Twitch acquired Curse, a company with social features nearly identical to ours, I merged the
+                  code, products, and data powering social features like Friends without downtime for either platform.
+                </p>
               </div>
             </div>
           </div>
           <h3 class="title mb-4">Projects</h3>
-          <div class="row">
-            <div class="card-group">
-              <div class="card mb-4 shadow-sm">
-                <img src="splitsio.svg" class="card-img p-4" alt="Splits.io logo" style="max-height: 20rem">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Splits.io
-                  </h5>
-                  <p class="card-text">
-                    Social esports analytics platform for speedrunners.
-                    <div class="badge badge-primary">~10k monthly users</div>
-                    <div class="badge badge-secondary">Ruby on Rails</div>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="https://splits.io" class="btn btn-sm btn-outline-secondary">
-                        Website
-                      </a>
-                      <a href="https://github.com/glacials/splits-io" class="btn btn-sm btn-outline-secondary">
-                        Source
-                      </a>
-                    </div>
-                    <small class="text-muted">Current</small>
+          <div class="card-group">
+            <div class="card mb-4 shadow-sm">
+              <img src="img/splitsio.svg" class="card-img p-4" alt="Splits.io logo" style="max-height: 20rem">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Splits.io
+                </h5>
+                <p class="card-text">
+                  Social esports analytics platform for speedrunners.
+                  <div class="badge badge-primary">~10k monthly users</div>
+                  <div class="badge badge-secondary">Ruby on Rails</div>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://splits.io" class="btn btn-sm btn-outline-secondary">
+                      Website
+                    </a>
+                    <a href="https://github.com/glacials/splits-io" class="btn btn-sm btn-outline-secondary">
+                      Source
+                    </a>
                   </div>
-                </div>
-              </div>
-              <div class="card mb-4 shadow-sm">
-                <img src="whatsinstandard.svg" class="card-img p-4" alt="What's in Standard? logo" style="max-height: 20rem">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    What's in Standard?
-                  </h5>
-                  <p class="card-text">
-                    Reference tool for Magic: The Gathering players.
-                    <div class="badge badge-primary">~20k monthly users</div>
-                    <div class="badge badge-secondary">Progressive Web App</div>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="https://whatsinstandard.com/" class="btn btn-sm btn-outline-secondary">
-                        Website
-                      </a>
-                      <a href="https://github.com/glacials/whatsinstandard" class="btn btn-sm btn-outline-secondary">
-                        Source
-                      </a>
-                    </div>
-                    <small class="text-muted">Current</small>
-                  </div>
-                </div>
-              </div>
-              <div class="card mb-4 shadow-sm">
-                <img src="housebot.svg" class="card-img p-4" alt="Housebot logo" style="max-height: 20rem">
-                <div class="card-body">
-                  <h5 class="card-title">
-                    Housebot
-                  </h5>
-                  <p class="card-text">
-                    Twitch bot that lets chat participants vote to control your lights.
-                    <div class="badge badge-primary">Probably not a good idea</div>
-                    <div class="badge badge-secondary">Made it anyway</div>
-                  </p>
-                  <div class="d-flex justify-content-between align-items-center">
-                    <div class="btn-group">
-                      <a href="https://github.com/glacials/housebot" class="btn btn-sm btn-outline-secondary">
-                        Source
-                      </a>
-                    </div>
-                    <small class="text-muted">Archived</small>
-                  </div>
+                  <small class="text-muted">Current</small>
                 </div>
               </div>
             </div>
-          </section>
-          <section class="ml-3 ml-md-1">
-            <h3 class="title mb-4">Interests</h3>
+            <div class="card mb-4 shadow-sm">
+              <img src="img/whatsinstandard.svg" class="card-img p-4" alt="What's in Standard? logo" style="max-height: 20rem">
+              <div class="card-body">
+                <h5 class="card-title">
+                  What's in Standard?
+                </h5>
+                <p class="card-text">
+                  Reference tool for Magic: The Gathering players.
+                  <div class="badge badge-primary">~20k monthly users</div>
+                  <div class="badge badge-secondary">Progressive Web App</div>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://whatsinstandard.com/" class="btn btn-sm btn-outline-secondary">
+                      Website
+                    </a>
+                    <a href="https://github.com/glacials/whatsinstandard" class="btn btn-sm btn-outline-secondary">
+                      Source
+                    </a>
+                  </div>
+                  <small class="text-muted">Current</small>
+                </div>
+              </div>
+            </div>
+            <div class="card mb-4 shadow-sm">
+              <img src="img/housebot.svg" class="card-img p-4" alt="Housebot logo" style="max-height: 20rem">
+              <div class="card-body">
+                <h5 class="card-title">
+                  Housebot
+                </h5>
+                <p class="card-text">
+                  Twitch bot that lets chat participants vote to control your lights.
+                  <div class="badge badge-primary">Probably not a good idea</div>
+                  <div class="badge badge-secondary">Made it anyway</div>
+                </p>
+                <div class="d-flex justify-content-between align-items-center">
+                  <div class="btn-group">
+                    <a href="https://github.com/glacials/housebot" class="btn btn-sm btn-outline-secondary">
+                      Source
+                    </a>
+                  </div>
+                  <small class="text-muted">Archived</small>
+                </div>
+              </div>
+            </div>
+          </div>
+          <h3 class="title mb-4">Interests</h3>
+          <section>
             <p>
-              My professional interests are <span class="text-info">games</span>,
-              <span class="text-info">speedrunning</span>, <span class="text-info">open source</span>, and tech that
-              solves <span class="text-info">socioeconomic</span> and <span class="text-info">environmental</span>
-              issues.
+              My professional interests are <b>games</b>, <b>speedrunning</b>, <b>open source</b>, and tech that solves
+              <b>socioeconomic</b> and <b>environmental</b> issues.
             </p>
             <p>
               To win my heart, buy me a beer.
