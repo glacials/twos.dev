@@ -1,18 +1,20 @@
 <html>
   <head>
     <title>Ben Carlsson</title>
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" href="/style.css">
+    <link id="bootstrapCss" rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    <link rel="stylesheet" href="css/style.css">
+    <link id="txtCss" rel="stylesheet" href="css/txt.css" disabled>
     <link href="https://fonts.googleapis.com/css?family=Press+Start+2P" rel="stylesheet">
     <script src="https://kit.fontawesome.com/2b022a4ed7.js"></script>
+    <script src="js/swap.js"></script>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <link rel="shortcut icon" href="/favicon.ico" type="image/x-icon">
     <link rel="icon" href="/favicon.ico" type="image/x-icon">
   </head>
   <body>
     <main role="main">
       <section class="jumbotron text-center pb-4">
+        <small><a id="toggleView" href="#" class="text-muted">view text only</a></small>
         <div class="container">
           <img src="img/me.jpg" class="mb-5" style="height: 10em" />
           <h1 class="jumbotron-heading">Ben "Glacials" Carlsson</h1>
@@ -108,8 +110,8 @@
                   Localization
                 </h5>
                 <p class="card-text">
-                  I championed and led a public rework of how we handle localization on Twitch. You can read the
-                  project summary
+                  I championed and led a public rework of how we handle localization on Twitch. You can read my
+                  write-up
                   <a href="https://blog.twitch.tv/the-innards-of-our-new-internationalization-systems-e84f99a27526">
                   at the Twitch blog</a>.
                 </p>
