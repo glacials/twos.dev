@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <small class="text-muted float-right text-right">
+    <small class="text-muted float-right text-right m-3">
       <div>
         Like all my work, this website is open source.
       </div>
