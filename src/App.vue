@@ -33,7 +33,12 @@ export default {
 }
 </script>
 
-<style>
+<style lang="scss">
+@import 'assets/custom-vars.scss';
+
+@import '~bootstrap/scss/bootstrap.scss';
+@import '~bootstrap-vue/src/index.scss';
+
 .title {
   margin-top: 2em;
 }

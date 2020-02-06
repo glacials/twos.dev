@@ -16,7 +16,9 @@
     "bootstrap": "^4.4.1",
     "bootstrap-vue": "^2.4.0",
     "core-js": "^3.4.4",
+    "node-sass": "^4.13.1",
     "popper.js": "^1.16.1",
+    "sass-loader": "^8.0.2",
     "vue": "^2.6.10"
   },
   "devDependencies": {
