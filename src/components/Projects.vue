@@ -13,7 +13,7 @@
           Dead-simple dual-licensing for open source projects.
         </template>
         <template v-slot:buttons>
-          <b-button href="https://license.land" variant="outline-secondary" size="sm">
+          <b-button href="https://license.land" variant="outline-primary" size="sm">
             Website
           </b-button>
         </template>
@@ -28,13 +28,13 @@
           A reference tool for Magic: The Gathering players.
         </template>
         <template v-slot:buttons>
-          <b-button href="https://whatsinstandard.com/" variant="outline-secondary" size="sm">
+          <b-button href="https://whatsinstandard.com/" variant="outline-primary" size="sm">
             Website
           </b-button>
-          <b-button href="https://play.google.com/store/apps/details?id=com.whatsinstandard" variant="outline-secondary" size="sm">
+          <b-button href="https://play.google.com/store/apps/details?id=com.whatsinstandard" variant="outline-primary" size="sm">
             Android app
           </b-button>
-          <b-button href="https://github.com/glacials/whatsinstandard" variant="outline-secondary" size="sm">
+          <b-button href="https://github.com/glacials/whatsinstandard" variant="outline-primary" size="sm">
             Source
           </b-button>
         </template>
@@ -49,7 +49,7 @@
           A Twitch bot that lets chat participants vote to control your lights.
         </template>
         <template v-slot:buttons>
-          <b-button href="https://github.com/glacials/housebot" variant="outline-secondary" size="sm">
+          <b-button href="https://github.com/glacials/housebot" variant="outline-primary" size="sm">
             Source
           </b-button>
         </template>
