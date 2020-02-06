@@ -1,11 +1,26 @@
 # twos.dev
-This is my portfolio! There's no JavaScript.
+`twos.dev` (pronounced "tooz dot dev" or "two esses dot dev" if you like) is my portfolio, whose name is a joke based on
+how I have to describe my last name to people. This website is basically an extended version of my resume.
 
-To run it, open any static file web server of your choice.
+The site is written in Vue single-file components, for no other reason than that's what I was learning last time I
+rewrote it.
 
-```sh
-git clone git@github.com:glacials/twos.dev
-cd twos.dev
-npm install -g http-server
-http-server
+## Project setup
+```
+yarn install
+```
+
+### Compile and hot-reloads for development
+```
+yarn serve
+```
+
+### Compile and minifies for production
+```
+yarn build
+```
+
+### Lint and fix files
+```
+yarn lint
 ```
