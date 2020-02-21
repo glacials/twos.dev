@@ -1,12 +1,12 @@
 <template>
   <div class="mb-4">
-    <b-button href="mailto:qhiiyr@gmail.com?subject=Let me buy you a beer" variant="primary">
+    <b-button href="mailto:qhiiyr@gmail.com?subject=Let me buy you a beer" variant="primary" class="d-print-none">
       Buy me a beer
     </b-button>
     <b-button href="mailto:qhiiyr@gmail.com">
       Email me
       <span class="d-none d-print-inline">
-        at qhiiyr@gmail.com
+        &mdash; qhiiyr@gmail.com
       </span>
     </b-button>
     <b-button variant="link" class="text-muted" v-b-popover.hover.top="'(925) 979-5797'">

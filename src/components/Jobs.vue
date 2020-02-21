@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h3 class="title">Job history</h3>
+    <h2 class="title">Job history</h2>
     <b-media>
       <template v-slot:aside>
         <img src="../assets/splitsio.svg" class="company-logo d-none d-md-flex" alt="Splits.io logo" />
@@ -13,9 +13,6 @@
         </span>
         <img src="../assets/splitsio.svg" class="company-logo d-flex d-md-none" alt="Splits.io logo" style="height: 2em; width: 2em" />
       </h5>
-      <b-badge pill>Product</b-badge>
-      <b-badge pill>Leadership</b-badge>
-      <b-badge pill>Ruby on Rails</b-badge>
       <p>
         After five years of bootstrapping to 10k monthly active users as a side project, I formed a company, convinced
         two people to come on board, and went full-time on my pet project: building the Strava of esports.
@@ -61,9 +58,6 @@
         </span>
         <img src="../assets/twitch.svg" class="company-logo d-flex d-md-none" alt="Twitch logo" style="height: 2em; width: 2em" />
       </h5>
-      <b-badge pill>Go</b-badge>
-      <b-badge pill>Ruby on Rails</b-badge>
-      <b-badge pill>AWS</b-badge>
       <p>
         As the 91st employee at Twitch I built many formational tools and products, including ones that directly led to
         acquisition, and others that followed up on integrating into Amazon's tech stack.
@@ -134,9 +128,6 @@
         </span>
         <img src="../assets/llnl.gif" class="company-logo d-flex d-md-none" alt="Lawrence Livermore National Laboratory logo" style="height: 2em; width: 2em" />
       </h5>
-      <b-badge pill>Java</b-badge>
-      <b-badge pill>Oracle</b-badge>
-      <b-badge pill>Python</b-badge>
       <p>
         As a repeat intern at LLNL, I worked both on closed source tools for the communications systems team and later
         <b-link href="https://github.com/esgf">open source tools</b-link> for the climate science team.

@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h3 class="title">Education</h3>
+    <h2 class="title">Education</h2>
     <b-media>
       <template v-slot:aside>
         <img src="../assets/chico.png" class="school-logo d-none d-md-flex" alt="California State University, Chico logo" />

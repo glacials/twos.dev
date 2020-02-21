@@ -5,8 +5,8 @@
     <Projects />
     <Interests />
     <Education />
-    <FollowUp />
-    <Footer />
+    <FollowUp class="d-print-none" />
+    <Footer class="d-print-none" />
   </div>
 </template>
 
@@ -35,9 +35,15 @@ export default {
 
 <style lang="scss">
 @import 'assets/custom-vars.scss';
+@import url('https://fonts.googleapis.com/css?family=Barlow|Pattaya&display=swap');
 
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-vue/src/index.scss';
+
+
+h1, h2, h3 {
+  font-family: 'Pattaya';
+}
 
 .title {
   margin-top: 2em;

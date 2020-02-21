@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h3 class="title">Interests</h3>
+    <h2 class="title">Interests</h2>
     <b-row cols="1" cols-sm="2" cols-xl="4">
       <b-col>
         <b-card header="Industry" no-body>

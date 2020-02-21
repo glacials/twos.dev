@@ -1,7 +1,7 @@
 <template>
   <b-col>
     <b-card no-body>
-      <b-card-img :src="logo" :alt="`${logo} logo`" class="d-none d-md-block" top />
+      <b-card-img :src="logo" :alt="`${logo} logo`" class="d-none d-md-block d-print-none" top />
       <b-card-body>
         <div class="justify-content-between d-flex">
           <div>

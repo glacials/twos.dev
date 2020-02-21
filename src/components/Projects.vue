@@ -1,6 +1,6 @@
 <template>
   <b-container>
-    <h3 class="title">Projects</h3>
+    <h2 class="title">Projects</h2>
     <p>I've had many, many solo side projects over the years. Here's a small selection.</p>
     <b-row cols="1" cols-md="2" cols-xl="3">
       <Project name="Licenseland" logo="../assets/licenseland.png" status="Current">
