@@ -11,7 +11,7 @@
       </div>
     </template>
     <small>
-      <BuyMeABeer />
+      <CallToAction />
       <h6>
         <b-link href="https://twitter.com/glcls" class="social" v-b-tooltip.nofade title="glcls">
           <font-awesome-icon :icon="['fab', 'twitter']" />
@@ -34,17 +34,18 @@
     <small class="text-muted">
       <font-awesome-icon icon="comment-dots" />
       I speak English and a little Chinese.<br />
+      <font-awesome-icon icon="comment-dots" />
       我会说英文，也会说一点中文。
     </small>
   </b-jumbotron>
 </template>
 
 <script>
-import BuyMeABeer from './BuyMeABeer.vue'
+import CallToAction from './CallToAction.vue'
 
 export default {
   components: {
-    BuyMeABeer,
+    CallToAction,
   },
   name: 'Summary',
 }
