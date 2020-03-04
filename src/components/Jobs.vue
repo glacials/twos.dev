@@ -35,7 +35,7 @@
         <b-card title="Finding the market">
           <b-card-text>
             Our segment of esports is niche, with a market size of only a few hundred thousand. However like streaming
-            in 2014, it's in the early stages. Much of our effort is on growing the market itself.
+            in 2014, it's in the early stages. Much of our effort is in growing the market itself.
           </b-card-text>
         </b-card>
         <b-card title="Building an open startup">
