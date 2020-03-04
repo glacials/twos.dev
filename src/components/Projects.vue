@@ -10,7 +10,7 @@
           <b-badge pill>Stripe Connect</b-badge>
         </template>
         <template v-slot:description>
-          Dead-simple dual-licensing for open source projects.
+          Dead simple dual-licensing for open source projects.
         </template>
         <template v-slot:buttons>
           <b-button href="https://license.land" variant="outline-primary" size="sm">
