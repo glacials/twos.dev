@@ -12,7 +12,7 @@
               {{ status }}
             </b-card-sub-title>
           </div>
-          <b-img :src="logo" class="d-md-none small-logo" />
+          <b-img :src="logo" class="d-md-none small-logo" :alt="`${name} logo`" />
         </div>
         <b-card-text>
           <slot name="description" />

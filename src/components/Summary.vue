@@ -1,7 +1,7 @@
 <template>
   <b-jumbotron header-level="4">
     <template v-slot:header>
-      <img src="../assets/images/me.webp" />
+      <img src="../assets/images/me.webp" alt="Photograph of Ben Carlsson" />
       Ben "Glacials" Carlsson
     </template>
     <template v-slot:lead>
@@ -12,24 +12,28 @@
     </template>
     <small>
       <CallToAction />
-      <h6>
+      <h4>
         <b-link href="https://twitter.com/glcls" class="social" v-b-tooltip.nofade title="glcls">
           <font-awesome-icon :icon="['fab', 'twitter']" />
           <span class="d-none d-print-inline">@glcls</span>
+          <span class="sr-only">Twitter: @glcls</span>
         </b-link>
         <b-link href="https://www.twitch.tv/glacials" class="social" v-b-tooltip.nofade title="glacials">
           <font-awesome-icon :icon="['fab', 'twitch']" />
           <span class="d-none d-print-inline">Glacials</span>
+          <span class="sr-only">Twitch: Glacials</span>
         </b-link>
         <b-link href="https://github.com/glacials" class="social" v-b-tooltip.nofade title="glacials">
           <font-awesome-icon :icon="['fab', 'github']" />
           <span class="d-none d-print-inline">glacials</span>
+          <span class="sr-only">GitHub: glacials</span>
         </b-link>
         <b-link href="https://linkedin.com/in/ben" class="social" v-b-tooltip.nofade title="ben">
           <font-awesome-icon :icon="['fab', 'linkedin']" />
           <span class="d-none d-print-inline">ben</span>
+          <span class="sr-only">LinkedIn: ben</span>
         </b-link>
-      </h6>
+      </h4>
     </small>
     <small class="text-muted">
       <font-awesome-icon icon="comment-dots" />
@@ -53,7 +57,7 @@ export default {
 
 <style scoped>
 .social {
-  margin-right: .25em;
+  margin: .25em;
 }
 
 .btn {

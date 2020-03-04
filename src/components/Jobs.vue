@@ -3,7 +3,7 @@
     <h2 class="title">Job history</h2>
     <b-media>
       <template v-slot:aside>
-        <img src="../assets/images/splitsio.svg" class="company-logo d-none d-md-flex" alt="Splits.io logo" />
+        <b-img src="../assets/images/splitsio.svg" class="company-logo d-none d-md-flex" alt="Splits.io logo" />
       </template>
       <h5 class="mb-0 justify-content-between d-flex">
         <span>
@@ -11,7 +11,7 @@
           <small class="text-muted">2019 - present</small>
           <small class="text-secondary d-block">Founder & CEO</small>
         </span>
-        <img src="../assets/images/splitsio.svg" class="company-logo d-flex d-md-none" alt="Splits.io logo" style="height: 2em; width: 2em" />
+        <b-img src="../assets/images/splitsio.svg" class="company-logo d-flex d-md-none" alt="Splits.io logo" style="height: 2em; width: 2em" />
       </h5>
       <p>
         After five years of bootstrapping to 10k monthly active users as a side project, I formed a company, convinced
@@ -48,7 +48,7 @@
     </b-media>
     <b-media>
       <template v-slot:aside>
-        <img src="../assets/images/twitch.svg" class="company-logo d-none d-md-flex" alt="Twitch logo" />
+        <b-img src="../assets/images/twitch.svg" class="company-logo d-none d-md-flex" alt="Twitch logo" />
       </template>
       <h5 class="mb-0 justify-content-between d-flex">
         <span>
@@ -56,7 +56,7 @@
           <small class="text-muted">2014 - 2019</small>
           <small class="text-secondary d-block">Senior Software Engineer</small>
         </span>
-        <img src="../assets/images/twitch.svg" class="company-logo d-flex d-md-none" alt="Twitch logo" style="height: 2em; width: 2em" />
+        <b-img src="../assets/images/twitch.svg" class="company-logo d-flex d-md-none" alt="Twitch logo" style="height: 2em; width: 2em" />
       </h5>
       <p>
         As the 91st employee at Twitch I built many formational tools and products, including ones that directly led to
@@ -118,7 +118,7 @@
     </b-media>
     <b-media>
       <template v-slot:aside>
-        <img src="../assets/images/llnl.gif" class="company-logo d-none d-md-flex" alt="Lawrence Livermore National Laboratory logo" />
+        <b-img src="../assets/images/llnl.gif" class="company-logo d-none d-md-flex" alt="Lawrence Livermore National Laboratory logo" />
       </template>
       <h5 class="mb-0 justify-content-between d-flex">
         <span>
@@ -126,7 +126,7 @@
           <small class="text-muted">2010 - 2013</small>
           <small class="text-secondary d-block">Software Engineering Intern</small>
         </span>
-        <img src="../assets/images/llnl.gif" class="company-logo d-flex d-md-none" alt="Lawrence Livermore National Laboratory logo" style="height: 2em; width: 2em" />
+        <b-img src="../assets/images/llnl.gif" class="company-logo d-flex d-md-none" alt="Lawrence Livermore National Laboratory logo" style="height: 2em; width: 2em" />
       </h5>
       <p>
         As a repeat intern at LLNL, I worked both on closed source tools for the communications systems team and later
