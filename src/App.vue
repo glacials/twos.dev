@@ -35,11 +35,20 @@ export default {
 
 <style lang="scss">
 @import 'assets/custom-vars.scss';
-@import url('https://fonts.googleapis.com/css?family=Barlow|Pattaya&display=swap');
 
 @import '~bootstrap/scss/bootstrap.scss';
 @import '~bootstrap-vue/src/index.scss';
 
+
+@font-face {
+  font-family: 'Barlow';
+  src: url('./assets/fonts/Barlow-Regular.ttf');
+};
+
+@font-face {
+  font-family: 'Pattaya';
+  src: url('./assets/fonts/Pattaya-Regular.ttf');
+};
 
 h1, h2, h3 {
   font-family: 'Pattaya';
