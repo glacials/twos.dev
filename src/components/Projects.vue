@@ -3,7 +3,7 @@
     <h2 class="title">Projects</h2>
     <p>I've had many, many solo side projects over the years. Here's a small selection.</p>
     <b-row cols="1" cols-md="2" cols-xl="3">
-      <Project name="Licenseland" logo="../assets/licenseland.png" status="Current">
+      <Project name="Licenseland" logo="../assets/images/licenseland.webp" status="Current">
         <template v-slot:tags>
           <b-badge pill>Vue</b-badge>
           <b-badge pill>Firebase</b-badge>
@@ -18,7 +18,7 @@
           </b-button>
         </template>
       </Project>
-      <Project name="What's in Standard?" logo="../assets/whatsinstandard.svg" status="Current">
+      <Project name="What's in Standard?" logo="../assets/images/whatsinstandard.svg" status="Current">
         <template v-slot:tags>
           <b-badge pill variant="info">20k MAU</b-badge>
           <b-badge pill>Flutter</b-badge>
@@ -39,7 +39,7 @@
           </b-button>
         </template>
       </Project>
-      <Project name="Housebot" logo="../assets/housebot.svg" status="Archived">
+      <Project name="Housebot" logo="../assets/images/housebot.svg" status="Archived">
         <template v-slot:tags>
           <b-badge pill>CoffeeScript</b-badge>
           <b-badge pill>Not a great idea</b-badge>

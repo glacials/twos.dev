@@ -3,7 +3,7 @@
     <h2 class="title">Education</h2>
     <b-media>
       <template v-slot:aside>
-        <img src="../assets/chico.png" class="school-logo d-none d-md-flex" alt="California State University, Chico logo" />
+        <img src="../assets/images/chico.webp" class="school-logo d-none d-md-flex" alt="California State University, Chico logo" />
       </template>
       <h5 class="mb-0 justify-content-between d-flex">
         <span>
@@ -11,7 +11,7 @@
           <small class="text-muted">2010 - 2013</small>
           <small class="text-secondary d-block">B.Sc. Computer Science</small>
         </span>
-        <img src="../assets/chico.png" class="company-logo d-flex d-md-none" alt="California State University, Chico logo logo" style="height: 2em; width: 2em" />
+        <img src="../assets/images/chico.webp" class="company-logo d-flex d-md-none" alt="California State University, Chico logo logo" style="height: 2em; width: 2em" />
       </h5>
       <ul>
         <li>President, Chico State Linux User Group</li>

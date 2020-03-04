@@ -1,7 +1,7 @@
 <template>
   <b-jumbotron header-level="4">
     <template v-slot:header>
-      <img src="../assets/images/me.jpg" />
+      <img src="../assets/images/me.webp" />
       Ben "Glacials" Carlsson
     </template>
     <template v-slot:lead>
