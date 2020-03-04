@@ -60,7 +60,7 @@
       </h5>
       <p>
         As the 91st employee at Twitch I built many formational tools and products, including ones that directly led to
-        acquisition, and others that followed up on integrating into Amazon's tech stack.
+        its $1B acquisition, and others that followed up on integrating into Amazon's tech stack.
       </p>
       <b-card-group>
         <b-card title="Localization">
