@@ -102,9 +102,9 @@
         </b-card>
         <b-card title="Mentorship">
           <b-card-text>
-            By the time I left Twitch, I was mentoring two full-time engineers&mdash;one new grad and one self-taught
-            internal transfer from customer support. Both had unique challenges in mentorship, and I'm proud to say both
-            are still thriving in their roles today.
+            By the time I left Twitch I was mentoring two engineers, teaching an internal Go class I'd created
+            for new hires, advising for an internal postmortem council, and training engineering teams to build
+            scalable GraphQL.
           </b-card-text>
         </b-card>
       </b-card-group>
