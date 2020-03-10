@@ -43,7 +43,7 @@
         <template v-slot:tags>
           <b-badge pill>CoffeeScript</b-badge>
           <b-badge pill>Not a great idea</b-badge>
-          <b-badge pill>Still made it</b-badge>
+          <b-badge pill>Made it anyway</b-badge>
         </template>
         <template v-slot:description>
           A Twitch bot that lets chat participants vote to control your lights.

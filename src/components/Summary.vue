@@ -1,13 +1,15 @@
 <template>
   <b-jumbotron header-level="4">
     <template v-slot:header>
-      <img src="../assets/images/me.webp" alt="Photograph of Ben Carlsson" />
+      <div>
+        <img src="../assets/images/me.webp" alt="Photograph of Ben Carlsson" style="height: 3em" />
+      </div>
       Ben "Glacials" Carlsson
     </template>
     <template v-slot:lead>
       <div class="mb-4">
-        I'm a senior backend and full-stack engineer in Seattle. I was the 91st employee at Twitch. I've worked on
-        everything from social networks to authentication-as-a-service.
+        I'm a senior backend and full-stack engineer in Seattle. I was the 91st employee at Twitch
+        <small>($1B exit)</small>. I've worked on everything from social networks to authentication-as-a-service.
       </div>
     </template>
     <small>
