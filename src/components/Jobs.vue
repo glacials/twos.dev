@@ -31,13 +31,13 @@
         <b-card title="Finding the market">
           <b-card-text>
             Our segment of esports is niche, with a market size of only a few hundred thousand. However like streaming
-            in 2014, it's in the early stages. Much of our effort is on growing the market itself.
+            in 2014, it's in the early stages. Much of our effort is in growing the market itself.
           </b-card-text>
         </b-card>
         <b-card title="Building an open startup">
           <b-card-text>
-            Our core product is open source, forcing an interesting balancing act of risk against community
-            goodwill. Because we're in a grassroots market, openness is valued highly by our customers.
+            Our core product is open source, forcing an interesting balancing act of risk against community goodwill.
+            Because we're in a grassroots market, openness is valued highly by our customers.
           </b-card-text>
         </b-card>
       </b-card-group>
@@ -51,7 +51,7 @@
     >
       <p>
         As the 91st employee at Twitch I built many formational tools and products, including ones that directly led to
-        acquisition, and others that followed up on integrating into Amazon's tech stack.
+        its $1B acquisition, and others that followed up on integrating into Amazon's tech stack.
       </p>
       <b-card-group>
         <b-card title="Localization">
@@ -63,8 +63,8 @@
         </b-card>
         <b-card title="Host mode">
           <b-card-text>
-            One night at 9pm three team members and I received a business-critical work text. Over the next 14
-            hours we built and launched host mode from scratch, a feature still loved by users today.
+            One night at 9pm three team members and I received a business-critical work text. Over the next 14 hours we
+            built and launched host mode from scratch, a feature still loved by users today.
           </b-card-text>
         </b-card>
       </b-card-group>
@@ -79,23 +79,23 @@
         </b-card>
         <b-card title="Spam">
           <b-card-text>
-            I built the first spam filter on Twitch, still in operation today. I can't really talk about it
-            because spam filters are one of those things that stop working when you talk about them.
+            I built the first spam filter on Twitch, still in operation today. I can't really talk about it because spam
+            filters are one of those things that stop working when you talk about them.
           </b-card-text>
         </b-card>
       </b-card-group>
       <b-card-group>
         <b-card title="Social merging">
           <b-card-text>
-            When Twitch acquired Curse, a company with social features nearly identical to ours, I merged the
-            code, products, and data powering social features like Friends without downtime for either platform.
+            When Twitch acquired Curse, a company with social features nearly identical to ours, I merged the code,
+            products, and data powering social features like Friends without downtime for either platform.
           </b-card-text>
         </b-card>
         <b-card title="Mentorship">
           <b-card-text>
-            By the time I left Twitch, I was mentoring two full-time engineers&mdash;one new grad and one self-taught
-            internal transfer from customer support. Both had unique challenges in mentorship, and I'm proud to say both
-            are still thriving in their roles today.
+            By the time I left Twitch I was mentoring two engineers, teaching an internal Go class I'd created for new
+            hires, advising for an internal postmortem council, and training engineering teams to build scalable
+            GraphQL.
           </b-card-text>
         </b-card>
       </b-card-group>
