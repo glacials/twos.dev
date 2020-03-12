@@ -67,11 +67,8 @@ export default {
 }
 
 img {
-  display: block;
-  height: 3em;
   margin: auto;
   margin-bottom: 1em;
-  width: 3em;
 }
 
 .jumbotron {
@@ -82,5 +79,9 @@ img {
   max-width: 40rem;
   margin: auto;
   text-align: center;
+}
+
+.jumbotron > .display-4 {
+  max-width: 100%;
 }
 </style>

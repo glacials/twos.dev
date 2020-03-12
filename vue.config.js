@@ -20,6 +20,7 @@ module.exports = {
           'b-carousel-slide': 'img-src',
           'b-embed': 'src',
           'Project': 'logo',
+          'CareerEntry': 'logo',
         },
       })
   },
