@@ -9,8 +9,8 @@ import { library } from '@fortawesome/fontawesome-svg-core'
 // Font Awesome - specific icon imports
 import { faTwitter, faTwitch, faGithub, faLinkedin, faOsi } from '@fortawesome/free-brands-svg-icons'
 library.add(faTwitter,faTwitch, faGithub, faLinkedin, faOsi)
-import { faMobileAlt, faCommentDots } from '@fortawesome/free-solid-svg-icons'
-library.add(faMobileAlt, faCommentDots)
+import { faDownload, faCommentDots } from '@fortawesome/free-solid-svg-icons'
+library.add(faDownload, faCommentDots)
 
 // Bootstrap
 import { BootstrapVue, IconsPlugin } from 'bootstrap-vue'

@@ -1,6 +1,7 @@
 <template>
   <b-container>
     <h2 class="title">Job history</h2>
+    <!-- Adding a new entry? Remember to update your resume too! -->
     <CareerEntry
       name="Splits.io"
       url="https://splits.io/"
