@@ -8,8 +8,8 @@
     </template>
     <template v-slot:lead>
       <div class="mb-4">
-        I'm a senior backend and full-stack engineer in Seattle. I was the 91st employee at Twitch
-        <small>($1B exit)</small>. I've worked on everything from social networks to authentication-as-a-service.
+        I'm a senior full-stack engineer in Seattle. I was an early employee at Twitch
+        and I've worked on everything from social networks to authentication-as-a-service.
       </div>
     </template>
     <small>
