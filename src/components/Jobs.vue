@@ -50,8 +50,9 @@
       role="Senior Software Engineer"
     >
       <p>
-        As the 91st employee at Twitch I built many formational tools and products, including ones that directly led to
-        its $1B acquisition, and others that followed up on integrating into Amazon's tech stack.
+        As the 91st employee at Twitch (YC W07) I built many formational tools and products—including ones that directly led to
+        its $1B acquisition by Amazon, and others that followed up on integrating into the Amazon stack—before leaving at
+        around 1800 employees.
       </p>
       <b-card-group>
         <b-card title="Localization">
