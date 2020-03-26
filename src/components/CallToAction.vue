@@ -12,7 +12,7 @@
       </b-button>
     </div>
     <div>
-      <b-button href="../ben-carlsson-resume-2020-03.pdf" variant="dark">
+      <b-button href="../ben-carlsson-resume-2020-03.pdf" variant="link">
         <font-awesome-icon :icon="['fas', 'download']" />
         Download my resume
       </b-button>
