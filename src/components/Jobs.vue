@@ -3,10 +3,22 @@
     <h2 class="title">Job history</h2>
     <!-- Adding a new entry? Remember to update your resume too! -->
     <CareerEntry
+      name="YourBase"
+      url="https://yourbase.io/"
+      logo="../assets/images/yourbase.svg"
+      dates="2020 - present"
+      role="Senior Software Engineer"
+    >
+      <p>
+        I started in April 2020 as the fifth employee at YourBase, a CI company with a special sauce that can speed up
+        builds by 10x.
+      </p>
+    </CareerEntry>
+    <CareerEntry
       name="Splits.io"
       url="https://splits.io/"
       logo="../assets/images/splitsio.svg"
-      dates="2019 - present"
+      dates="2019 - 2020"
       role="Founder & CEO"
     >
       <p>
