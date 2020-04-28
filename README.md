@@ -5,22 +5,15 @@ how I have to describe my last name to people. This website is basically an exte
 The site is written in Vue single-file components, for no other reason than that's what I was learning last time I
 rewrote it.
 
-## Project setup
-```
-yarn install
-```
+## Development
 
-### Compile and hot-reloads for development
-```
-yarn serve
-```
+### Dependencies
+- [`yb`][yb]
 
-### Compile and minifies for production
-```
-yarn build
-```
+[yb]: https://github.com/yourbase/yb
 
-### Lint and fix files
+### Build, test, and run
+
 ```
-yarn lint
+yb build
 ```

@@ -1,0 +1,17 @@
+dependencies:
+  build:
+    - node:10.15.1
+    - yarn:1.22.4
+
+build_targets:
+  - name: default
+    environment:
+      - NODE_ENV=development
+    commands:
+      - yarn install
+      - yarn serve
+
+ci:
+  builds:
+    - name: default
+      build_target: default
