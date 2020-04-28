@@ -9,7 +9,6 @@ build_targets:
       - NODE_ENV=development
     commands:
       - yarn install
-      - yarn serve
 
 ci:
   builds:
