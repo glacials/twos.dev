@@ -8,12 +8,18 @@ rewrote it.
 ## Development
 
 ### Dependencies
+- [`yarn`][yarn]
 - [`yb`][yb]
 
 [yb]: https://github.com/yourbase/yb
+[yarn]: https://github.com/yarnpkg/yarn
 
-### Build, test, and run
-
+### Build and test
 ```
 yb build
+```
+
+### Run
+```
+yarn serve
 ```
