@@ -1,15 +1,29 @@
 dependencies:
   build:
-    - node:10.15.1
+    - node:14.0.0
+    - yarn:1.22.4
+    - python:2.7.18
+  runtime:
+    - node:14.0.0
     - yarn:1.22.4
 
 build_targets:
   - name: default
-    environment:
-      - NODE_ENV=development
     commands:
       - yarn install
-      - yarn build
+    environment:
+      - NODE_ENV=development
+
+exec:
+  commands:
+    - npm rebuild node-sass
+    - yarn serve
+  environment:
+    default:
+      - NODE_ENV=development
+  image: nodejs:latest
+  ports:
+    - 8080
 
 ci:
   builds:

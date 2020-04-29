@@ -21,5 +21,5 @@ yb build
 
 ### Run
 ```
-yarn serve
+yb exec
 ```
