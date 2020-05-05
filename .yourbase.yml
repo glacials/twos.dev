@@ -13,6 +13,21 @@ build_targets:
       - yarn install
     environment:
       - NODE_ENV=development
+  - name: deploy
+    commands:
+      - yarn install
+      - echo "Cannot deploy with a dirty working directory. If the next command errors, commit or stash changes then try again."
+      - git diff --cached --exit-code
+      - git checkout gh-pages
+      - git -c "user.name=YourBase" -c "user.email=ben@yourbase.io" merge --no-ff --no-edit --allow-unrelated-histories -s recursive -Xtheirs master
+      - yarn build
+      - mv dist/* .
+      - git -c "user.name=Yourbase" -c "user.email=ben@yourbase.io" commit --all --message 'Automatic build by YourBase'
+      - git prune
+      - git push
+      - git checkout master
+    environment:
+      - NODE_ENV=production
 
 exec:
   commands:

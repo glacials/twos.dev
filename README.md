@@ -23,3 +23,18 @@ yb build
 ```
 yb exec
 ```
+
+### Deploy
+Deploys to GitHub Pages happen automatically on push to `master` via [YourBase][1], but you can initiate one manually
+with
+```
+yb build deploy
+```
+For that to work you will have to set up Git to use a [GitHub token][2] with `repo` permissions for authentication by
+running something like this first:
+```
+git remote set-url origin https://glacials:INSERT_TOKEN_HERE@github.com/glacials/twos.dev.git
+```
+
+[1]: https://yourbase.io
+[2]: https://github.com/settings/tokens
