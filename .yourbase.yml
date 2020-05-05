@@ -18,7 +18,7 @@ build_targets:
       - yarn install
       - yarn build
       - git add dist
-      - git -c "user.name=YourBase" -c "user.email=ben@yourbase.io" commit -m 'Automatic build by YourBase'
+      - git -c "user.name=YourBase" -c "user.email=ben@yourbase.io" commit -m 'Automatic build by YourBase' --allow-empty
       - git subtree push --prefix dist origin gh-pages
     environment:
       - NODE_ENV=production
