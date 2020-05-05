@@ -14,6 +14,8 @@ build_targets:
     environment:
       - NODE_ENV=development
   - name: deploy
+    build_after:
+      - default
     commands:
       - yarn install
       - yarn build
@@ -36,5 +38,8 @@ exec:
 
 ci:
   builds:
-    - name: default
+    - name: build
       build_target: default
+    - name: deploy
+      build_target: deploy
+      when: branch is 'master'
