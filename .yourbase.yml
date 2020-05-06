@@ -14,10 +14,6 @@ build_targets:
       - NODE_ENV=development
   - name: deploy
     commands:
-      - yarn install
-      - yarn build
-      - git add dist
-      - git -c "user.name=YourBase" -c "user.email=ben@yourbase.io" commit -m 'Automatic build by YourBase' --allow-empty
       - ./yourbase_helper.sh
     environment:
       - NODE_ENV=production
