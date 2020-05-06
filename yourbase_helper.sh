@@ -1,9 +1,9 @@
 #!/bin/sh
 
-mkdir -p build
+mkdir -p dist
 yarn install
 yarn build
-cd build
+cd dist
 git init
 git remote add origin https://glacials:${GITHUB_TOKEN}@github.com/glacials/twos.dev
 git checkout -b gh-pages
