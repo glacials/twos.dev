@@ -4,7 +4,7 @@
       <div>
         <img src="../assets/images/me.webp" alt="Photograph of Ben Carlsson" style="height: 3em" />
       </div>
-      Ben "Glacials" Carlsson
+      Ben Carlsson
     </template>
     <template v-slot:lead>
       <div class="mb-4">
