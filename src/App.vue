@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <Summary />
+    <Header />
     <Jobs />
     <Projects />
     <Interests />
@@ -17,7 +17,7 @@ import Footer from './components/Footer.vue'
 import Interests from './components/Interests.vue'
 import Jobs from './components/Jobs.vue'
 import Projects from './components/Projects.vue'
-import Summary from './components/Summary.vue'
+import Header from './components/Header.vue'
 
 export default {
   name: 'app',
@@ -25,10 +25,10 @@ export default {
     Education,
     FollowUp,
     Footer,
+    Header,
     Interests,
     Jobs,
     Projects,
-    Summary,
   }
 }
 </script>

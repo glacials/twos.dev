@@ -53,7 +53,7 @@ export default {
   components: {
     CallToAction,
   },
-  name: 'Summary',
+  name: 'Header',
 }
 </script>
 

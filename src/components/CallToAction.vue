@@ -7,7 +7,7 @@
           &mdash; qhiiyr@gmail.com
         </span>
       </b-button>
-      <b-button href="../ben-carlsson-resume-2020-03.pdf">
+      <b-button href="../ben-carlsson-resume.pdf">
         View my resume
       </b-button>
     </div>
