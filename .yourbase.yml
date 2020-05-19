@@ -14,7 +14,7 @@ build_targets:
       - NODE_ENV=development
   - name: deploy
     commands:
-      - ./yourbase_helper.sh
+      - ./.yourbase_deploy.sh
     environment:
       - NODE_ENV=production
 
