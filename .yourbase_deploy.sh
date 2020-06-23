@@ -24,5 +24,5 @@ git init
 git remote add origin https://${GITHUB_USERNAME}:${GITHUB_TOKEN}@github.com/${GITHUB_ORGANIZATION}/${GITHUB_REPOSITORY}
 git checkout -b gh-pages
 git add .
-git -c "user.name=${COMMITTER_NAME}" -c "user.email=${COMMITTER_EMAIL}" commit -am "${COMMIT_MESSAGE}"
+git -c "user.name=${COMMITTER_NAME}" -c "user.email=${COMMITTER_EMAIL}" commit --allow-empty -am "${COMMIT_MESSAGE}"
 git push origin gh-pages --force
