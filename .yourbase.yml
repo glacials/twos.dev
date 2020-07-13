@@ -1,9 +1,9 @@
 dependencies:
   build:
-    - node:14.0.0
+    - node:13.14.0
     - yarn:1.22.4
   runtime:
-    - node:14.0.0
+    - node:13.14.0
     - yarn:1.22.4
 
 build_targets:

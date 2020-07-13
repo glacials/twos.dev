@@ -10,9 +10,25 @@
       role="Senior Software Engineer"
     >
       <p>
-        I started in April 2020 as the fifth employee at YourBase, a CI company with a special sauce that can speed up
-        builds by 10x.
+        I started in April 2020 as the fifth employee at YourBase (now nine), a
+        simplified build system and accelerator for complex code bases.
       </p>
+      <b-card-group>
+        <b-card title="Delving into RSpec">
+          <b-card-text>
+            So far at YourBase I've dived deep into the internals of RSpec to
+            update our test selection tech for Ruby, which infers dependency
+            graphs to later skip tests that don't need to run.
+          </b-card-text>
+        </b-card>
+        <b-card title="Optimizing APIs">
+          <b-card-text>
+            Using knowledge I gained from years working with ORMs, I've
+            decreased latency across the board for the YourBase API by over an
+            order of magnitude.
+          </b-card-text>
+        </b-card>
+      </b-card-group>
     </CareerEntry>
     <CareerEntry
       name="Splits.io"
@@ -114,10 +130,12 @@
       </b-card-group>
       <h5 class="mt-4">...and a lot more.</h5>
       <p>
-        Especially while small, Twitch consumed a large part of my life and I spent blood, sweat, and tears building and
-        fixing things I'd been passionate about as a user without guidance. Some made <b-link
-        href="https://twitter.com/glcls/status/720689621466619904">big splashes</b-link>; others hummed silently along
-        forever.
+        Especially while small, Twitch consumed a large part of my life and I
+        spent blood, sweat, and tears working towards things I'd always wanted
+        as a user, including open source involvement, running
+        <b-link href="https://www.twitch.tv/videos/93570710">panels</b-link>,
+        and small features with
+        <b-link href="https://twitter.com/glcls/status/720689621466619904">big splashes</b-link>.
       </p>
     </CareerEntry>
     <CareerEntry
