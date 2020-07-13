@@ -10,25 +10,9 @@
       role="Senior Software Engineer"
     >
       <p>
-        I started in April 2020 as the fifth employee at YourBase (now nine), a
-        simplified build system and accelerator for complex code bases.
+        In April 2020 I was hired as the fifth employee at YourBase (now nine),
+        a simplified build system and accelerator for complex code bases.
       </p>
-      <b-card-group>
-        <b-card title="Delving into RSpec">
-          <b-card-text>
-            So far at YourBase I've dived deep into the internals of RSpec to
-            update our test selection tech for Ruby, which infers dependency
-            graphs to later skip tests that don't need to run.
-          </b-card-text>
-        </b-card>
-        <b-card title="Optimizing APIs">
-          <b-card-text>
-            Using knowledge I gained from years working with ORMs, I've
-            decreased latency across the board for the YourBase API by over an
-            order of magnitude.
-          </b-card-text>
-        </b-card>
-      </b-card-group>
     </CareerEntry>
     <CareerEntry
       name="Splits.io"
