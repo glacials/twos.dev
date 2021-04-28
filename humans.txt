@@ -1,0 +1,8 @@
+/* TEAM */
+	Me: Ben Carlsson
+	Contact: qhiiyr@gmail.com
+	Twitter: @glcls
+	Location: Seattle, WA
+
+/* SITE */
+	Software: VSCode, Vim, Git
