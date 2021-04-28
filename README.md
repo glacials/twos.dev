@@ -15,7 +15,7 @@ that's what I was learning last time I rewrote it.
 
 [yarn]: https://github.com/yarnpkg/yarn
 
-### Build and test
+### Build
 
 ```sh
 yarn install
