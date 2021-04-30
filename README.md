@@ -8,23 +8,8 @@ I originally wrote this in Vue single-file components, with a lot of CSS and Jav
 
 [fancy]: https://twos.dev/fancy
 
-## Development
-
-### Dependencies
-
-- [`yarn`][yarn]
-
-[yarn]: https://github.com/yarnpkg/yarn
-
-### Build
+## First run
 
 ```sh
-yarn install
-```
-
-### Run
-
-```sh
-npm rebuild node-sass
-yarn serve
+open src/index.html
 ```
