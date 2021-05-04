@@ -1,0 +1,32 @@
+html {
+  font-family: monospace;
+  max-width: 44em;
+  text-transform: lowercase;
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+li {
+  margin: 1em 0;
+}
+
+footer {
+  margin-top: 4em;
+}
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #222;
+    color: #eee;
+  }
+
+  a {
+    color: lightblue;
+  }
+
+  a:visited {
+    color: plum;
+  }
+}
