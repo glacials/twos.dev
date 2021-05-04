@@ -1,7 +1,7 @@
 html {
   font-family: monospace;
   max-width: 44em;
-  text-transform: lowercase;
+  /* text-transform: lowercase; */
 }
 
 ul {
