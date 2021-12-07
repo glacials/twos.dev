@@ -1,8 +1,8 @@
 /* TEAM */
 	Me: Ben Carlsson
-	Contact: qhiiyr@gmail.com
+	Contact: ben@twos.dev
 	Twitter: @glcls
 	Location: Seattle, WA
 
 /* SITE */
-	Software: VSCode, Vim, Git
+	Software: Neovim, Git

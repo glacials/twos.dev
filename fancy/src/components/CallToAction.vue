@@ -1,10 +1,10 @@
 <template>
   <div class="mb-4">
     <div class="mb-1">
-      <b-button href="mailto:qhiiyr@gmail.com" variant="primary">
+      <b-button href="mailto:ben@twos.dev" variant="primary">
         Email me
         <span class="d-none d-print-inline">
-          &mdash; qhiiyr@gmail.com
+          &mdash; ben@twos.dev
         </span>
       </b-button>
       <b-button href="https://twos.dev/ben-carlsson-resume.pdf">
