@@ -1,5 +1,6 @@
 html {
   font-family: monospace;
+  letter-spacing: -0.5px;
   max-width: 44em;
   /* text-transform: lowercase; */
 }
