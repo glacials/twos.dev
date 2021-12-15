@@ -32,7 +32,16 @@ footer {
   }
 }
 
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(5, 1fr);
+}
+
+.photo-grid a {
+  /* Otherwise we get gaps for having spaces between </a> and <a ... */
+  font-size: 0;
+}
+
 .photo-grid img {
-  height: 100px;
-  width: 100px;
+  width: 100%;
 }
