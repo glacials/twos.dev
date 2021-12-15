@@ -22,12 +22,16 @@
     Replace twos.dev/index.html with twos.dev. Why do this instead of linking to '/'?
     Because then you'd need a web server for local dev.
     */
-    if (window.location.protocol != 'file:' && window.location.pathname.endsWith("index.html"))
-      history.replaceState({}, 'twos.dev', '/')
+    if (window.location.protocol != 'file:' && window.location.pathname.endsWith("index.html")) {
+      history.replaceState({}, 'twos.dev', '/');
+    }
   </script>
 </head>
 
 <body>
+  <header>
+    &#9825; <a href="index.html">twos.dev</a>
+  </header>
   <center>
     <img src="me1024.webp" width="100" height="100" />
     <h1>Ben Carlsson</h1>
@@ -53,7 +57,7 @@
   </ol>
 
   <h2>My 2021 hobbies</h2>
-  <p>I'm learning interior design and amateur photography.</p>
+  <p>I'm learning interior design and photography.</p>
 
   <div class="photo-grid">
     <a href="img/photography/2021/IMG_0385.JPG"><img src="img/photography/2021/IMG_0385.JPG" /></a>
