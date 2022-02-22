@@ -45,3 +45,8 @@ footer {
 .photo-grid img {
   width: 100%;
 }
+
+/* Nesting em/i should drop styling. Extend nesting levels as needed. */
+i i, i em, em i, em em {
+  font-style: normal;
+}
