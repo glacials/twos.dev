@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>twos.dev</title>
+    <link>https://twos.dev</link>
+    <description>Miscellaneous writing by Ben Carlsson</description>
+    <language>en-us</language>
+    <item>
+      <title>Tattoos as Moral Contracts</title>
+      <link>https://twos.dev/tattoo.html</link>
+      <guid>https://twos.dev/tattoo.html</guid>
+      <description>
+        One expected and one unexpected way a tattoo can keep you in check with your
+        ethics.
+      </description>
+    </item>
+    <item>
+      <title>The Remote Pop-In</title>
+      <link>https://twos.dev/thepopin.html</link>
+      <guid>https://twos.dev/thepopin.html</guid>
+      <description>
+        A method of dealing with one of the missing features of fully remote teams: the
+        pop-in.
+      </description>
+    </item>
+  </channel>
+</rss>
