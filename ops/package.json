@@ -2,5 +2,6 @@
   "dependencies": {
     "@markdoc/markdoc": "^0.1.2",
     "yaml": "^2.1.0"
-  }
+  },
+  "type": "module"
 }

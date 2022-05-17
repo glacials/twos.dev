@@ -1,12 +1,11 @@
 #!/usr/bin/env node
+import fsSync from 'fs'
+import fs from 'fs/promises'
+import os from 'os'
+import path from 'path'
+import yaml from 'yaml'
 
-const fsSync = require('fs')
-const fs = require('fs/promises')
-const os = require('os')
-const path = require('path')
-const yaml = require('yaml')
-
-const Markdoc = require('@markdoc/markdoc')
+import Markdoc from '@markdoc/markdoc'
 
 const writingDir = `${os.homedir()}/Library/Mobile\ Documents/27N4MQEA55\~pro\~writer/Documents/Published`;
 const buildDir = './dist';
@@ -44,28 +43,49 @@ const buildDir = './dist';
 
     // Re-glob after renames 
     // TODO: Just remember the renames
-    const files = (await fs.readdir(writingDir)).map(filename => {
-      return fs.readFile(`${writingDir}/${filename}`, {encoding: 'utf8'}).then(body => {
+    const files = (await fs.readdir(writingDir)).map(async filename => {
+      return fs.readFile(`${writingDir}/${filename}`, {encoding: 'utf8'}).then(async body => {
+        const stat = fs.stat(`${writingDir}/${filename}`)
         const ast = Markdoc.parse(body)
         const content = Markdoc.transform(ast)
-        const html = Markdoc.renderers.html(content)
+        let html = Markdoc.renderers.html(content)
         if (!ast.attributes.frontmatter) {
-          promises.push(fs.writeFile(
-            `${writingDir}/${filename}`,
-            `---\nerror: Must specify shortname\n---\n\n${body}`,
-          ))
-          throw `Frontmatter not found for "${filename}"`
+          ast.attributes.frontmatter = {some: "frontmatter"}
         }
-        const frontmatter = yaml.parse(ast.attributes.frontmatter)
+        const frontmatter = yaml.parse(ast.attributes.frontmatter) || {}
+        let error = false
         if (!frontmatter.shortname) {
-          frontmatter.error = "Must specify shortname"
+          frontmatter.shortname = "TODO"
+          error = true
+        }
+        const date = new Date()
+        if (!frontmatter.date) {
+          frontmatter.date = "TODO"
+          error = true
+        } else {
+          const parts = frontmatter.date.split('-')
+          date.setYear(parts[0])
+          if (parts[1]) {
+            date.setMonth(parts[1] - 1)
+          }
+          if (parts[2]) {
+            date.setDate(parts[2])
+          }
+          let dateStr = `${date.toLocaleString('default', {month: 'long'})} ${date.getFullYear()}`
+          if ((await stat).mtime.getMonth() != date.getMonth() || (await stat).mtime.getFullYear() != date.getFullYear()) {
+            dateStr += `; last updated ${(await stat).mtime.toLocaleString('default', {month: 'long'})} ${(await stat).mtime.getFullYear()}`
+          }
+          html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
+        }
+        if (error) {
           promises.push(fs.writeFile(
             `${writingDir}/${filename}`,
-            body.replace(ast.attributes.frontmatter + '\n', `${yaml.stringify(frontmatter)}`),
+            `---\n${yaml.stringify(frontmatter)}---\n\n${body}`,
           ))
         }
         return {
-          shortname: frontmatter.shortname,
+          shortname: frontmatter.shortname || 'error',
+          date,
           filename: filename.substring(0, filename.length - ".md".length),
           title: filename.substring(0, filename.length - ".md".length),
           body: html,
