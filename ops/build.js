@@ -25,7 +25,7 @@ const dist = './dist';
     const footer = fs.readFile(`${src}/_footer.html`);
 
     (await fs.readdir(src)).filter(filename => {
-      return filename.substring(filename.length - ".md") == ".md"
+      return filename.substring(filename.length - ".md".length) == ".md"
     }).map(filename => fs.readFile(`${src}/${filename}`, {encoding: 'utf8'}).then(async body => {
       const stat = fs.stat(`${src}/${filename}`)
       const ast = Markdoc.parse(body)
