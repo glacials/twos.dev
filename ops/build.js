@@ -84,7 +84,7 @@ const dist = './dist';
 
     await Promise.all(
       files.map(async file => fs.writeFile(
-        `${buildDir}/${(await file).desiredFilename}`,
+        `${dist}/${(await file).desiredFilename}`,
         (await header) + (await file).body + (await footer),
       ))
     )
