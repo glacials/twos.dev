@@ -1,12 +1,9 @@
 #!/usr/bin/env node
 import fsSync from 'fs-extra'
 import fs from 'fs/promises'
-import os from 'os'
-import path from 'path'
 import yaml from 'yaml'
 
 import Markdoc from '@markdoc/markdoc'
-import replaceExt from 'replace-ext'
 
 const src = './src';
 const dist = './dist';
