@@ -1,11 +1,12 @@
 #!/usr/bin/env node
-import fsSync from 'fs'
+import fsSync from 'fs-extra'
 import fs from 'fs/promises'
 import os from 'os'
 import path from 'path'
 import yaml from 'yaml'
 
 import Markdoc from '@markdoc/markdoc'
+import replaceExt from 'replace-ext'
 
 const src = './src';
 const dist = './dist';
@@ -33,13 +34,14 @@ const dist = './dist';
         const ast = Markdoc.parse(body)
         const content = Markdoc.transform(ast)
         let html = Markdoc.renderers.html(content)
+        const originalFrontmatter = ast.attributes.frontmatter
         if (!ast.attributes.frontmatter) {
-          ast.attributes.frontmatter = {some: "frontmatter"}
+          ast.attributes.frontmatter = 'some: frontmatter\n'
         }
         const frontmatter = yaml.parse(ast.attributes.frontmatter) || {}
         let error = false
-        if (!frontmatter.shortname) {
-          frontmatter.shortname = "TODO"
+        if (!frontmatter.filename) {
+          frontmatter.filename = "TODO"
           error = true
         }
         const date = new Date()
@@ -63,12 +65,15 @@ const dist = './dist';
         }
         if (error) {
           promises.push(fs.writeFile(
-            `${dist}/${filename}`,
-            `---\n${yaml.stringify(frontmatter)}---\n\n${body}`,
+            `${src}/${filename}`,
+            `---\n${yaml.stringify(frontmatter)}---\n\n` + body.replace(
+              `---\n${originalFrontmatter}\n---\n\n`,
+              '',
+            )
           ))
         }
         return {
-          shortname: frontmatter.shortname || 'error',
+          desiredFilename: frontmatter.filename || 'TODO.html',
           date,
           filename: filename.substring(0, filename.length - ".md".length),
           title: filename.substring(0, filename.length - ".md".length),
@@ -79,11 +84,12 @@ const dist = './dist';
 
     await Promise.all(
       files.map(async file => fs.writeFile(
-        `${dist}/${(await file).shortname}.html`,
+        `${buildDir}/${(await file).desiredFilename}`,
         (await header) + (await file).body + (await footer),
       ))
     )
     await Promise.all(promises)
+    fsSync.copySync('./public', './dist')
   } catch (e) {
     console.error(e)
     await Promise.all(promises)
