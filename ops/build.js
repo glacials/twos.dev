@@ -80,7 +80,7 @@ const dist = './dist';
           body: html,
         }
       })
-    })
+    }).filter(f => f)
 
     await Promise.all(
       files.map(async file => fs.writeFile(
