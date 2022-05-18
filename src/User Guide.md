@@ -1,12 +1,6 @@
 ---
 filename: guide.html
 date: 2021-05
-shortname: TODO
----
-
----
-filename: guide.html
-date: 2021-05
 ---
 
 # User Guide
