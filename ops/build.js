@@ -7,45 +7,29 @@ import yaml from 'yaml'
 
 import Markdoc from '@markdoc/markdoc'
 
-const writingDir = `${os.homedir()}/Library/Mobile\ Documents/27N4MQEA55\~pro\~writer/Documents/Published`;
-const buildDir = './dist';
+const src = './src';
+const dist = './dist';
 
 (async () => {
   // Anything in here will be waited on before the process exits.
   const promises = []
 
   try {
-    if (fsSync.existsSync(buildDir)) {
-      await fs.rm(buildDir, {recursive: true})
+    if (fsSync.existsSync(dist)) {
+      await fs.rm(dist, {recursive: true})
     }
-    await fs.mkdir(buildDir)
+    await fs.mkdir(dist)
 
-    // Add .md to any file without it
-    await Promise.all((await fs.readdir(writingDir)).map(filename => {
-      if (filename.substring(filename.length - ".md".length) == ".md") {
-        return Promise.resolve()
+    const header = fs.readFile(`${src}/_header.html`)
+    const footer = fs.readFile(`${src}/_footer.html`)
+
+    const files = (await fs.readdir(src)).map(async filename => {
+      if (filename.substring(filename.length - ".md") != ".md") {
+        return
       }
 
-      if (filename.substring(filename.length - ".txt".length) == ".txt") {
-        return fs.rename(
-          `${writingDir}/${filename}`,
-          `${writingDir}/${filename.substring(0, filename.length - ".txt".length)}.md`,
-        )
-      }
-
-      return fs.rename(`${writingDir}/${filename}`, `${writingDir}/${filename}.md`)
-    }))
-
-    const header = fs.readFile(`./src/_header.html`)
-    const footer = fs.readFile(`./src/_footer.html`)
-    promises.push(fs.copyFile('./src/index.html', `${buildDir}/index.html`))
-    promises.push(fs.copyFile('./src/style.css', `${buildDir}/style.css`))
-
-    // Re-glob after renames 
-    // TODO: Just remember the renames
-    const files = (await fs.readdir(writingDir)).map(async filename => {
-      return fs.readFile(`${writingDir}/${filename}`, {encoding: 'utf8'}).then(async body => {
-        const stat = fs.stat(`${writingDir}/${filename}`)
+      return fs.readFile(`${src}/${filename}`, {encoding: 'utf8'}).then(async body => {
+        const stat = fs.stat(`${src}/${filename}`)
         const ast = Markdoc.parse(body)
         const content = Markdoc.transform(ast)
         let html = Markdoc.renderers.html(content)
@@ -79,7 +63,7 @@ const buildDir = './dist';
         }
         if (error) {
           promises.push(fs.writeFile(
-            `${writingDir}/${filename}`,
+            `${dist}/${filename}`,
             `---\n${yaml.stringify(frontmatter)}---\n\n${body}`,
           ))
         }
@@ -95,7 +79,7 @@ const buildDir = './dist';
 
     await Promise.all(
       files.map(async file => fs.writeFile(
-        `${buildDir}/${(await file).shortname}.html`,
+        `${dist}/${(await file).shortname}.html`,
         (await header) + (await file).body + (await footer),
       ))
     )
