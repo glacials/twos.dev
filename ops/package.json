@@ -1,6 +1,9 @@
 {
   "dependencies": {
     "@markdoc/markdoc": "^0.1.2",
+    "fs-extra": "^10.1.0",
+    "replace-ext": "^2.0.0",
+    "simple-git": "^3.7.1",
     "yaml": "^2.1.0"
   },
   "type": "module"

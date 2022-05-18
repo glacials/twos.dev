@@ -1,13 +1,14 @@
 #!/usr/bin/env node
-import fsSync from 'fs'
+import fsSync from 'fs-extra'
 import fs from 'fs/promises'
 import os from 'os'
 import path from 'path'
 import yaml from 'yaml'
 
 import Markdoc from '@markdoc/markdoc'
+import replaceExt from 'replace-ext'
 
-const writingDir = `${os.homedir()}/Library/Mobile\ Documents/27N4MQEA55\~pro\~writer/Documents/Published`;
+const writingDir = './src';
 const buildDir = './dist';
 
 (async () => {
@@ -20,26 +21,20 @@ const buildDir = './dist';
     }
     await fs.mkdir(buildDir)
 
-    // Add .md to any file without it
+    // Change any .txt or no-extension file to .md
     await Promise.all((await fs.readdir(writingDir)).map(filename => {
-      if (filename.substring(filename.length - ".md".length) == ".md") {
-        return Promise.resolve()
-      }
-
-      if (filename.substring(filename.length - ".txt".length) == ".txt") {
+      if (filename.substring(filename.length - ".txt".length) == ".txt" || filename.indexOf('.') < 0) {
         return fs.rename(
           `${writingDir}/${filename}`,
-          `${writingDir}/${filename.substring(0, filename.length - ".txt".length)}.md`,
+          `${writingDir}/${replaceExt(`${writingDir}/${filename}`, '.md')}`,
         )
       }
 
-      return fs.rename(`${writingDir}/${filename}`, `${writingDir}/${filename}.md`)
+      return Promise.resolve()
     }))
 
     const header = fs.readFile(`./src/_header.html`)
     const footer = fs.readFile(`./src/_footer.html`)
-    promises.push(fs.copyFile('./src/index.html', `${buildDir}/index.html`))
-    promises.push(fs.copyFile('./src/style.css', `${buildDir}/style.css`))
 
     // Re-glob after renames 
     // TODO: Just remember the renames
@@ -49,13 +44,14 @@ const buildDir = './dist';
         const ast = Markdoc.parse(body)
         const content = Markdoc.transform(ast)
         let html = Markdoc.renderers.html(content)
+        const originalFrontmatter = ast.attributes.frontmatter
         if (!ast.attributes.frontmatter) {
-          ast.attributes.frontmatter = {some: "frontmatter"}
+          ast.attributes.frontmatter = 'some: frontmatter\n'
         }
         const frontmatter = yaml.parse(ast.attributes.frontmatter) || {}
         let error = false
-        if (!frontmatter.shortname) {
-          frontmatter.shortname = "TODO"
+        if (!frontmatter.filename) {
+          frontmatter.filename = "TODO"
           error = true
         }
         const date = new Date()
@@ -80,11 +76,14 @@ const buildDir = './dist';
         if (error) {
           promises.push(fs.writeFile(
             `${writingDir}/${filename}`,
-            `---\n${yaml.stringify(frontmatter)}---\n\n${body}`,
+            `---\n${yaml.stringify(frontmatter)}---\n\n` + body.replace(
+              `---\n${originalFrontmatter}\n---\n\n`,
+              '',
+            )
           ))
         }
         return {
-          shortname: frontmatter.shortname || 'error',
+          desiredFilename: frontmatter.filename || 'TODO.html',
           date,
           filename: filename.substring(0, filename.length - ".md".length),
           title: filename.substring(0, filename.length - ".md".length),
@@ -95,11 +94,12 @@ const buildDir = './dist';
 
     await Promise.all(
       files.map(async file => fs.writeFile(
-        `${buildDir}/${(await file).shortname}.html`,
+        `${buildDir}/${(await file).desiredFilename}`,
         (await header) + (await file).body + (await footer),
       ))
     )
     await Promise.all(promises)
+    fsSync.copySync('./public', './dist')
   } catch (e) {
     console.error(e)
     await Promise.all(promises)
