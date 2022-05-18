@@ -18,8 +18,8 @@ const dist = './dist';
     }
     await fs.mkdir(dist)
 
-    const header = fs.readFile(`${src}/_header.html`);
-    const footer = fs.readFile(`${src}/_footer.html`);
+    const header = fs.readFile(`${src}/_header.html`, {encoding: 'utf8'});
+    const footer = fs.readFile(`${src}/_footer.html`, {encoding: 'utf8'});
 
     (await fs.readdir(src)).filter(filename => {
       return filename.substring(filename.length - ".md".length) == ".md"
@@ -47,7 +47,10 @@ const dist = './dist';
       html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
       promises.push(fs.writeFile(
         `${dist}/${frontmatter.filename}`,
-        (await header) + html + (await footer),
+        (await header) + html + (await footer).replace(
+          `https://github.com/glacials/twos.dev`,
+          `https://github.com/glacials/twos.dev/blob/main/src/${filename}`,
+        )
       ))
     }))
 
