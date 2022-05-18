@@ -47,7 +47,10 @@ const dist = './dist';
       html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
       promises.push(fs.writeFile(
         `${dist}/${frontmatter.filename}`,
-        (await header) + html + (await footer).replace(
+        (await header).replaceAll(
+          "{{title}}",
+          filename.substring(0, filename.length - ".md".length),
+        ) + html + (await footer).replace(
           `https://github.com/glacials/twos.dev`,
           `https://github.com/glacials/twos.dev/blob/main/src/${filename}`,
         )
