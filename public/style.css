@@ -1,0 +1,70 @@
+html {
+  font-family: Oxygen, monospace;
+  font-size: 14px;
+  font-smoothing: antialiased;
+  -webkit-font-smoothing: antialiased;
+  hyphens: auto;
+  -webkit-hyphens: auto;
+  letter-spacing: -0.5px;
+  line-height: 1.75em;
+  margin: 0.5em;
+  text-align: justify;
+}
+
+.container {
+  margin: auto;
+  max-width: 75em;
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+footer {
+  margin-top: 4em;
+}
+
+@media (prefers-color-scheme: light) {
+  body {
+    background: #f2f3f5;
+    color: #2e3137;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #2e3137;
+    color: #f2f3f5;
+  }
+
+  a {
+    color: lightblue;
+  }
+
+  a:visited {
+    color: plum;
+  }
+}
+
+.photo-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+}
+
+.photo-grid a {
+  /* Otherwise we get gaps for having spaces between </a> and <a ... */
+  font-size: 0;
+}
+
+.photo-grid img {
+  float: left;
+  width: 100%;
+}
+
+/* Nesting em/i should drop styling. Extend nesting levels as needed. */
+i i, i em, em i, em em {
+  font-style: normal;
+}
