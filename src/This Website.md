@@ -3,17 +3,19 @@ filename: meta.html
 date: 2022-05
 ---
 
-# My Phone is Part of this Website’s CI/CD
-I have two goals for this website:
+# This Website’s Bespoke CD Pipeline
+The CD pipeline for twos.dev has two goals:
 
-1. It should be easy to write things
-2. It should be hard to break things
+1. Encourage writing
+2. Resist breaking
 
-## It Should Be Easy to Write Things
+## Encourage Writing 
 
-I use [iA Writer](https://ia.net/writer) for writing drafts. It lets me get thoughts out quickly, without mucking about in code. However, I’d like not to have to do extra work to move them from there to the internet.
+I use [iA Writer](https://ia.net/writer) for writing drafts. It lets me get thoughts out quickly, without mucking about with formatting or DOM. However, I need to be able to muck about with formatting or DOM sometimes. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image in dark mode.
 
-That’s a straightforward task on its own, but being easy to write sometimes means having the ability to drop into code. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image to readers in dark mode. I need a way to keep things in iA Writer by default, but allow moving into my code editor if I need to get fancy.
+From experience I know there’s no solution to this problem that allows me to stay in iA Writer even for the code parts, and that’s fine because I don’t want to be writing code in a Markdown editor.
+
+I need a way to keep things in iA Writer by default, but allow moving into my code editor if I need to get fancy.
 
 ## It Should Be Hard to Break Things
 
