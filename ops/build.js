@@ -31,44 +31,23 @@ const dist = './dist';
       const ast = Markdoc.parse(body)
       const content = Markdoc.transform(ast)
       let html = Markdoc.renderers.html(content)
-      const originalFrontmatter = ast.attributes.frontmatter
-      if (!ast.attributes.frontmatter) {
-        ast.attributes.frontmatter = 'some: frontmatter\n'
-      }
       const frontmatter = yaml.parse(ast.attributes.frontmatter) || {}
-      let error = false
-      if (!frontmatter.filename) {
-        frontmatter.filename = "TODO"
-        error = true
-      }
+
       const date = new Date()
-      if (!frontmatter.date) {
-        frontmatter.date = "TODO"
-        error = true
-      } else {
-        const parts = frontmatter.date.split('-')
-        date.setYear(parts[0])
-        if (parts[1]) {
-          date.setMonth(parts[1] - 1)
-        }
-        if (parts[2]) {
-          date.setDate(parts[2])
-        }
-        let dateStr = `${date.toLocaleString('default', {month: 'long'})} ${date.getFullYear()}`
-        if ((await stat).mtime.getMonth() != date.getMonth() || (await stat).mtime.getFullYear() != date.getFullYear()) {
-          dateStr += `; last updated ${(await stat).mtime.toLocaleString('default', {month: 'long'})} ${(await stat).mtime.getFullYear()}`
-        }
-        html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
+      const parts = frontmatter.date.split('-')
+      date.setYear(parts[0])
+      if (parts[1]) {
+        date.setMonth(parts[1] - 1)
       }
-      if (error) {
-        promises.push(fs.writeFile(
-          `${src}/${filename}`,
-          `---\n${yaml.stringify(frontmatter)}---\n\n` + body.replace(
-            `---\n${originalFrontmatter}\n---\n\n`,
-            '',
-          )
-        ))
+      if (parts[2]) {
+        date.setDate(parts[2])
       }
+      let dateStr = `${date.toLocaleString('default', {month: 'long'})} ${date.getFullYear()}`
+
+      if ((await stat).mtime.getMonth() != date.getMonth() || (await stat).mtime.getFullYear() != date.getFullYear()) {
+        dateStr += `; last updated ${(await stat).mtime.toLocaleString('default', {month: 'long'})} ${(await stat).mtime.getFullYear()}`
+      }
+      html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
       promises.push(fs.writeFile(
         `${dist}/${frontmatter.filename}`,
         (await header) + html + (await footer),
