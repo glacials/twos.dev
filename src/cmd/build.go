@@ -29,6 +29,7 @@ import (
 	"os"
 	"path/filepath"
 
+	"github.com/otiai10/copy"
 	"github.com/spf13/cobra"
 	"golang.org/x/image/draw"
 )
@@ -47,6 +48,10 @@ var buildCmd = &cobra.Command{
 		destinationDir, err := filepath.Abs(args[1])
 		if err != nil {
 			return fmt.Errorf("can't resolve path `%s`: %w", args[1], err)
+		}
+
+		if err := copy.Copy(filepath.Join(sourceDir, "img"), filepath.Join(destinationDir, "img")); err != nil {
+			return fmt.Errorf("can't copy original images to build dir: %w", err)
 		}
 
 		if err := genThumbnails(
@@ -109,7 +114,7 @@ func genThumbnails(sourceDir, destinationDir string) error {
 			return fmt.Errorf("can't get relative path of `%s`: %w", path, err)
 		}
 
-		destinationPath := filepath.Join(filepath.Join(destinationDir, relativePath))
+		destinationPath := filepath.Join(filepath.Join(destinationDir, "thumb", relativePath))
 		destinationFile, err := os.Create(destinationPath)
 		if err != nil {
 			return fmt.Errorf("can't create thumbnail file for image at path `%s`: %w", path, err)
