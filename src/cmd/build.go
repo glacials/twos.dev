@@ -114,7 +114,11 @@ func genThumbnails(sourceDir, destinationDir string) error {
 			return fmt.Errorf("can't get relative path of `%s`: %w", path, err)
 		}
 
-		destinationPath := filepath.Join(filepath.Join(destinationDir, "thumb", relativePath))
+		destinationPath := filepath.Join(destinationDir, "thumb", relativePath)
+		if err := os.MkdirAll(filepath.Dir(destinationPath), 0755); err != nil {
+			return fmt.Errorf("can't make thumbnail directory in path `%s`: %w", destinationDir, err)
+		}
+
 		destinationFile, err := os.Create(destinationPath)
 		if err != nil {
 			return fmt.Errorf("can't create thumbnail file for image at path `%s`: %w", path, err)
