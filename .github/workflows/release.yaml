@@ -12,17 +12,16 @@ jobs:
       - name: Install and Build 🔧
         run: |
           rm -rf dist
-          cd src
-          go build -o twos
-          cd ..
-          src/twos build src dist
           cd ops
           npm install
           cd ../
           # Replace "&mdash;" with " -- " since we render in a monospace font
           find src -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'
           ./ops/build.js
-          cp -r public/* dist
+          cd src
+          go build -o twos
+          cd ..
+          src/twos build src dist
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
