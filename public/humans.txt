@@ -1,8 +1,0 @@
-/* TEAM */
-	Me: Ben Carlsson
-	Contact: ben@twos.dev
-	Twitter: @glcls
-	Location: Seattle, WA
-
-/* SITE */
-	Software: Neovim, Git
