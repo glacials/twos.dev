@@ -15,7 +15,7 @@ jobs:
           cd src
           go build -o twos
           cd ..
-          src/twos src dist
+          src/twos build src dist
           cd ops
           npm install
           cd ../
