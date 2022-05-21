@@ -12,6 +12,7 @@ random things here.
 ### Starting a dev server
 
 ```sh
+src/js/build.js
 go install
 twos.dev serve
 

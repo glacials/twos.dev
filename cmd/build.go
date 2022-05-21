@@ -38,7 +38,11 @@ import (
 	"golang.org/x/image/draw"
 )
 
-const imageContainerTemplatePath = "templates/_imgcontainer.html"
+const (
+	imageContainerTemplatePath = "templates/_imgcontainer.html"
+	sourceDir                  = "src"
+	destinationDir             = "dist"
+)
 
 type imageContainerVars struct {
 	PrevLink string
@@ -48,25 +52,13 @@ type imageContainerVars struct {
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
-	Use:   "build SOURCE DESTINATION",
 	Short: "Build twos.dev",
-	Long:  `Build twos.dev from the given source directory into the given destination directory.`,
-	Args:  cobra.ExactArgs(2),
+	Long:  `Build twos.dev into dist/.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		sourceDir, err := filepath.Abs(args[0])
-		if err != nil {
-			return fmt.Errorf("can't resolve path `%s`: %w", args[0], err)
-		}
-		destinationDir, err := filepath.Abs(args[1])
-		if err != nil {
-			return fmt.Errorf("can't resolve path `%s`: %w", args[1], err)
-		}
-
 		if err := buildImages(sourceDir, destinationDir); err != nil {
 			return fmt.Errorf("can't build images: %w", err)
 		}
 
-		// TODO: Generate html pages (one per image) for bigger image viewing
 		// TODO: Move some pre-Markdoc things in here
 
 		return nil

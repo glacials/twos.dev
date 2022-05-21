@@ -18,8 +18,8 @@ const dist = './dist';
     }
     await fs.mkdir(dist)
 
-    const header = fs.readFile(`${src}/_header.html`, {encoding: 'utf8'});
-    const footer = fs.readFile(`${src}/_footer.html`, {encoding: 'utf8'});
+    const header = fs.readFile(`${src}/templates/_header.html`, {encoding: 'utf8'});
+    const footer = fs.readFile(`${src}/templates/_footer.html`, {encoding: 'utf8'});
 
     (await fs.readdir(src)).filter(filename => {
       return filename.substring(filename.length - ".md".length) == ".md"

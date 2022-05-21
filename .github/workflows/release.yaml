@@ -12,12 +12,12 @@ jobs:
       - name: Install and Build 🔧
         run: |
           rm -rf dist
-          cd ops
+          cd src/js
           npm install
           cd ../
           # Replace "&mdash;" with " -- " since we render in a monospace font
           find src -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'
-          ./ops/build.js
+          ./src/js/build.js
           go build
           ./twos.dev build src dist
 
