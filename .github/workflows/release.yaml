@@ -18,8 +18,8 @@ jobs:
           # Replace "&mdash;" with " -- " since we render in a monospace font
           find src -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'
           ./ops/build.js
-          go install
-          twos.dev build src dist
+          go build
+          ./twos.dev build src dist
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
