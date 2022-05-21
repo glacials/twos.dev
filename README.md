@@ -13,6 +13,8 @@ random things here.
 
 ```sh
 go install
-twos.dev build src dist
 twos.dev serve
+
+# In another terminal:
+watch twos.dev build src dist
 ```
