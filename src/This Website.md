@@ -3,13 +3,18 @@ filename: meta.html
 date: 2022-05
 ---
 
-# The CD Pipeline that Produced This File
-The twos.dev CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me, so can be designed in otherwise obnoxious and unintuitive ways to serve my peculiarities.
+# The Bespoke Twos Deployment Pipeline
+The Twos CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me, so can be designed in what would otherwise be obnoxious and unintuitive ways to serve my peculiarities.
 
 My two biggest goals for this pipeline:
 
 1. Encourage myself to write
 2. URLs must never change
+
+To fulfill these goals, the Twos CD pipeline allows for two content types:
+
+- Warm content
+- Cold content
 
 ## On Writing
 
@@ -46,11 +51,11 @@ Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up
 1. (Working Copy) Pull from `twos.dev` remote
 2. (Files) Get contents of folder `Published`
 3. Repeat with each item in `Contents of Folder`
-  1. (Working Copy) write `Repeat Item` to `src` in `twos.dev`
+    1. (Working Copy) Write `Repeat Item` to `src` in `twos.dev`
 4. (Working Copy) Commit `twos.dev` with `Automatic commit by iA Writer sync job`
-5. (Working Copy) push `twos.dev` to remote
+5. (Working Copy) Push `twos.dev` to remote
 
-([Shortcuts link](https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888))
+([see the shortcut](https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888))
 
 My iPhone runs this once daily at sunrise. If I switch to another iPhone later, it will inherit the behavior without any action on my part.
 
@@ -58,7 +63,7 @@ We now have glue between iCloud Drive and GitHub Actions.
 
 #### Markdown → HTML
 
-This step is straightforward. Using Stripe’s new Markdoc library (TODO: more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.
+This step is straightforward. Using Stripe’s Markdoc library (more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.
 
 ### Custom Content
 
