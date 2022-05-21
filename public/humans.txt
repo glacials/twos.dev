@@ -5,4 +5,4 @@
 	Location: Seattle, WA
 
 /* SITE */
-	Software: Neovim, Git
+	Software: Neovim, Git, Go, Node
