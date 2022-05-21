@@ -7,14 +7,12 @@ random things here.
 
 ### Dependencies
 
-No dependencies.
+- Go 1.18+
 
-### Starting a dev "server"
+### Starting a dev server
 
 ```sh
-# macOS
-open src/index.html
-
-# Linux
-xdg-open src/index.html
+go install
+twos.dev build src dist
+twos.dev serve
 ```
