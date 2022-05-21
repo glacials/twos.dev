@@ -3,54 +3,98 @@ filename: meta.html
 date: 2022-05
 ---
 
-# This Website’s Bespoke CD Pipeline
-The CD pipeline for twos.dev has two goals:
+# The CD Pipeline that Produced This File
+The twos.dev CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me, so can be designed in otherwise obnoxious and unintuitive ways to serve my peculiarities.
 
-1. Encourage writing
-2. Resist breaking
+My two biggest goals for this pipeline:
 
-## Encourage Writing 
+1. Encourage myself to write
+2. URLs must never change
 
-I use [iA Writer](https://ia.net/writer) for writing drafts. It lets me get thoughts out quickly, without mucking about with formatting or DOM. However, I need to be able to muck about with formatting or DOM sometimes. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image in dark mode.
+## On Writing
 
-From experience I know there’s no solution to this problem that allows me to stay in iA Writer even for the code parts, and that’s fine because I don’t want to be writing code in a Markdown editor.
+I use [iA Writer](https://ia.net/writer) to write drafts. It gets my thoughts out quickly, without mucking about in formatting or DOM. If I were writing for a personal diary, things would end there.
 
-I need a way to keep things in iA Writer by default, but allow moving into my code editor if I need to get fancy.
+Because I like to publish, it's a problem that these drafts too often stay drafts.
 
-## It Should Be Hard to Break Things
+Luckily, iA Writer stores documents as plaintext Markdown files. Normally, shipping these files to a Markdown parser would be a sufficient general solution.
+
+But there are two peculiarities I’m allowing myself to indulge.
+
+### Automatic Publishing
+
+Because I have trouble pulling the publish trigger, I’ve decided upfront that I need to make that trigger 10x easier to pull. For this case, a good path towards that is to pull the publishing process out of Git and into iA Writer itself, to allow easy publishing from even my phone.
+
+### Mechanics
+
+iA Writer on macOS has some automation tools, but not a lot. It has the ability to store documents in services like Dropbox and Google Drive, but for [unrelated peculiarities](apple.html) I limit myself to iCloud Drive for those purposes at the moment. Unfortunately, iCloud Drive has no native API or other way to reach files from within GitHub Actions. (TODO: Perhaps there’s a way to sign into an Apple ID on a GitHub Actions Mac? Perhaps not due to 2FA, or maybe an app-specific password would work?)
+
+I keep infrastructure off my own devices when I can—I wipe my drives a lot—but it seems there is no way to avoid it if I need to ship files from iCloud Drive to GitHub Actions.
+
+What I can do is automate this in a way that is resistant to my drive-wiping habits. And so far, the most resistant device I own to this, the only one I’m comfortable directly transferring to a replacement device using its migration tool, is my iPhone.
+
+#### Shortcuts
+
+Starting with iOS 13, all iPhones ship with an Apple app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752). If you’re from Android like I am, Shortcuts is like Tasker, if it were built into the operating system and had buy-in from every third-party app. For example, I use a shortcut to turn on my coffee machine every morning when I take my phone off its charger.
+
+Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up a shortcut to run like a cron job, inspect a specific directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
+
+#### Working Copy
+
+[Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807) is a Git client for iOS that exposes Shortcuts hooks. Using it, we can build a shortcut that does what we need:
+
+1. (Working Copy) Pull from `twos.dev` remote
+2. (Files) Get contents of folder `Published`
+3. Repeat with each item in `Contents of Folder`
+  1. (Working Copy) write `Repeat Item` to `src` in `twos.dev`
+4. (Working Copy) Commit `twos.dev` with `Automatic commit by iA Writer sync job`
+5. (Working Copy) push `twos.dev` to remote
+
+([Shortcuts link](https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888))
+
+My iPhone runs this once daily at sunrise. If I switch to another iPhone later, it will inherit the behavior without any action on my part.
+
+We now have glue between iCloud Drive and GitHub Actions.
+
+#### Markdown → HTML
+
+This step is straightforward. Using Stripe’s new Markdoc library (TODO: more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.
+
+### Custom Content
+
+We’ve got our Markdown pipeline set up, but not everything fits neatly into Markdown. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image in dark mode.
+
+To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:
+
+- I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
+- When it’s time to write code I want to use `$EDITOR`, not iA Writer
+- twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
+
+For these not-quite-Markdown situations, then, **the right option  is to hardcode**. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.
+
+#### Implementation
+
+To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow to explicitly allow it:
+
+1. Render `src/*.md` files → `dist/*.html`
+2. Copy `src/*.html` files → `dist/`, overwriting existing files
+
+#### Results
+
+Allowing myself this escape hatch is freeing. It has three effects:
+
+- I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
+- Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
+- TODO
+
+## On URLs
 
 I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.
 
-I’d like for this never to happen again. [Cool URLs don’t change](https://www.w3.org/Provider/Style/URI). If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die [and beyond](death.html).
+It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: [cool URLs don’t change](https://www.w3.org/Provider/Style/URI). I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply `cp -r` these files into the `public` directory.
 
-## Implementation 
+If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die—[and then some](death.html).
 
-Frameworks are out of the question. I do not pretend I can stop my future self from another overhaul, or from dropping content that’s hard to migrate through one. Instead I must prepare for it.
+### Extra Credit
 
-Abstracting content far from structure (e.g. Markdown) does not satisfy my requirement for dropping into code once in a while.
-
-### Biphasic Content
-
-To accommodate my needs, this website has two modes of content.
-
-#### Warm Content
-
-Warm content is easy to write. I write new, in-progress, or simple content in iA Writer. iA Writer saves this content to iCloud in a directory of its own, natively in Markdown.
-
-On my iPhone, I have a Shortcuts automation that triggers daily. This automation copies these files from iCloud into [Working Copy](https://workingcopyapp.com/)’s local clone of this website, which adds, commits, and pushes them.
-
-A GitHub Actions workflow triggers that builds the Markdown files into HTML files using [Markdoc](https://markdoc.io/), and places it between a header and footer using a few lines of Node and bespoke templating to get, for example, the `<title>` tag right.
-
-##### Aside: Why iPhone
-
-As I get older, I worry less about things working now and more about them working in 10 years. I can set up a cron job on [a machine that’s persistently on](apple.html#iMac), but when I inevitably replace it I’m going to forget—or forget how—to set it up again. I may not even replace that machine, but instead remove it. Discovering that missing cron is a ripe opportunity for me to overhaul things again, which is not something I want to encourage.
-
-But the process of migrating from one iPhone to another is seamless. The shortcuts and automations come along automatically. And I will always have a phone.
-
-There’s something magical about having your “server at home” be in your pocket.
-
-#### Cold Content
-
-Cold content is hard to break. I render old, complete, and complex content into HTML once, sans header and footer, and commit the result. 
-
-When a piece of cold content and a piece of warm content conflict, the cold content wins—I cannot update the content with iA Writer anymore, because it can’t do the job sufficiently for complex content.
+TODO: Frontmatter 
