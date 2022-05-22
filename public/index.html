@@ -18,15 +18,6 @@
   <link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
   <title>Ben Carlsson</title>
   <link rel="stylesheet" href="style.css" />
-  <script>
-    /*
-    Replace twos.dev/index.html with twos.dev. Why do this instead of linking to '/'?
-    Because then you'd need a web server for local dev.
-    */
-    if (window.location.protocol != 'file:' && window.location.pathname.endsWith("index.html")) {
-      history.replaceState({}, 'twos.dev', '/');
-    }
-  </script>
 </head>
 
 <body><div class="container">

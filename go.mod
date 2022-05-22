@@ -9,4 +9,5 @@ require (
 	github.com/spf13/cobra v1.4.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/image v0.0.0-20220413100746-70e8d0d3baa9 // indirect
+	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

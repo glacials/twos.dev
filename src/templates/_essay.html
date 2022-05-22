@@ -58,9 +58,9 @@
   <div class="container">
     <header>
       &larr; <a href="index.html">twos.dev</a>
-      <!--{{if .CreatedAt}}
-        / {{.CreatedAt}}{{if .UpdatedAt}}; updated {{.UpdatedAt}}{{end}}
-        {{end}}-->
+      {{if .CreatedAt}}
+        / {{.CreatedAt}}{{if .UpdatedAt}} (updated {{.UpdatedAt}}){{end}}
+      {{end}}
     </header>
     {{.Body}}
     <footer>

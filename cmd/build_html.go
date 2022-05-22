@@ -10,6 +10,9 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"time"
+
+	"gopkg.in/yaml.v2"
 )
 
 type htmlFileVars struct {
@@ -53,24 +56,28 @@ func buildHTML(sourceDir, destinationDir string) error {
 			return nil
 		}
 
-		desiredHTMLFilename, err := desiredFilename(path)
-		if err != nil {
-			return fmt.Errorf("can't generate desired filename from Markdown file: %w", err)
+		if strings.Contains(path, "node_modules") {
+			return nil
 		}
 
-		relativeHTMLPath, err := filepath.Rel(sourceDir, filepath.Join(filepath.Dir(path), desiredHTMLFilename))
+		frontmatter, err := getFrontmatter(path)
 		if err != nil {
-			return fmt.Errorf("can't get relative path of `%s`: %w", desiredHTMLFilename, err)
+			return fmt.Errorf("can't get frontmatter from Markdown file: %w", err)
+		}
+
+		relativeHTMLPath, err := filepath.Rel(sourceDir, filepath.Join(filepath.Dir(path), frontmatter.Filename))
+		if err != nil {
+			return fmt.Errorf("can't get relative path of `%s`: %w", frontmatter.Filename, err)
 		}
 
 		if err := os.MkdirAll(filepath.Join(destinationDir, filepath.Dir(relativeHTMLPath)), 0755); err != nil {
 			return fmt.Errorf("can't make src-equivalent directory in dist: %w", err)
 		}
 
-		destinationFilePath := filepath.Join(destinationDir, filepath.Dir(relativeHTMLPath), desiredHTMLFilename)
+		destinationFilePath := filepath.Join(destinationDir, filepath.Dir(relativeHTMLPath), frontmatter.Filename)
 		htmlFile, err := os.Create(destinationFilePath)
 		if err != nil {
-			return fmt.Errorf("can't create HTML file from templates for `%s`: %w", path, err)
+			return fmt.Errorf("can't create HTML file at `%s` (`%s` + `%s` + `%s`) from templates for `%s`: %w", destinationFilePath, destinationDir, filepath.Dir(relativeHTMLPath), frontmatter.Filename, path, err)
 		}
 
 		renderedHTML := bytes.NewBuffer([]byte{})
@@ -82,13 +89,28 @@ func buildHTML(sourceDir, destinationDir string) error {
 			return fmt.Errorf("can't run `src/js/build.js body '%s'`: %w", path, err)
 		}
 
+		created, err := time.Parse("2006-01", frontmatter.CreatedAt)
+		if err != nil {
+			return fmt.Errorf("can't parse created date `%s`: %w", frontmatter.CreatedAt, err)
+		}
+
+		var updated string
+		if frontmatter.UpdatedAt != "" {
+			updatedAt, err := time.Parse("2006-01", frontmatter.UpdatedAt)
+			if err != nil {
+				return fmt.Errorf("can't parse updated date `%s`: %w", frontmatter.UpdatedAt, err)
+			}
+
+			updated = updatedAt.Format("2006 January")
+		}
+
 		v := htmlFileVars{
 			Body:      template.HTML(renderedHTML.String()),
 			Title:     d.Name()[0 : len(d.Name())-len(".md")],
 			SourceURL: fmt.Sprintf("https://github.com/glacials/twos.dev/blob/main/src/%s", relativeHTMLPath),
 
-			CreatedAt: "TODO",
-			UpdatedAt: "TODO",
+			CreatedAt: created.Format("2006 January"),
+			UpdatedAt: updated,
 		}
 
 		if err := essay.Execute(htmlFile, v); err != nil {
@@ -103,15 +125,45 @@ func buildHTML(sourceDir, destinationDir string) error {
 	return nil
 }
 
-func desiredFilename(markdownFilePath string) (string, error) {
-	filename := bytes.NewBuffer([]byte{})
-	filenameCmd := exec.Command("src/js/build.js", "filename", markdownFilePath)
-	filenameCmd.Stdout = filename
+type frontmatter struct {
+	Filename string `yaml:"filename"`
+	// Date is an alias for CreatedAt.
+	Date      string `yaml:"date"`
+	CreatedAt string `yaml:"created"`
+	UpdatedAt string `yaml:"updated"`
+}
+
+func getFrontmatter(markdownFilePath string) (frontmatter, error) {
+	yml := bytes.NewBuffer([]byte{})
+	filenameCmd := exec.Command("src/js/build.js", "frontmatter", markdownFilePath)
+	filenameCmd.Stdout = yml
 	filenameCmd.Stderr = os.Stderr
 
 	if err := filenameCmd.Run(); err != nil {
-		return "", fmt.Errorf("can't run `src/js/build.js filename '%s'`: %w", markdownFilePath, err)
+		return frontmatter{}, fmt.Errorf("can't run `src/js/build.js frontmatter '%s'`: %w", markdownFilePath, err)
 	}
 
-	return strings.TrimSpace(filename.String()), nil
+	var out frontmatter
+	if err := yaml.Unmarshal(yml.Bytes(), &out); err != nil {
+		return frontmatter{}, fmt.Errorf("can't unmarshal frontmatter YAML in `%s`: %w", markdownFilePath, err)
+	}
+
+	if out.Date != "" && out.CreatedAt != "" {
+		return frontmatter{}, fmt.Errorf(
+			"frontmatter for file `%s` specified date and created, but date is an alias for created; only one should be specified",
+			markdownFilePath,
+		)
+	}
+
+	if out.Date != "" {
+		out.CreatedAt = out.Date
+	} else if out.CreatedAt != "" {
+		out.Date = out.CreatedAt
+	}
+
+	if out.Filename == "" {
+		return frontmatter{}, fmt.Errorf("no `filename` attribute in frontmatter for `%s`", markdownFilePath)
+	}
+
+	return out, nil
 }

@@ -8,7 +8,7 @@ import Markdoc from '@markdoc/markdoc'
 (async () => {
   // Two modes of calling:
   // 
-  //     src/js/build.js filename FILEPATH
+  //     src/js/build.js frontmatter FILEPATH
   //     src/js/build.js body FILEPATH
   //
   // The first will print to stdout filename the Markdown file given to stdin wants,
@@ -19,33 +19,22 @@ import Markdoc from '@markdoc/markdoc'
     const stat = fs.stat(src)
     const body = fs.readFileSync(src, {encoding: "utf8"})
     const ast = Markdoc.parse(body)
-    const content = Markdoc.transform(ast)
-    let html = Markdoc.renderers.html(content)
-    const frontmatter = (ast.attributes.frontmatter ? yaml.parse(ast.attributes.frontmatter) : {}) || {}
 
-    if (argv[2] == "filename") {
-      console.log(frontmatter.filename)
+    if (argv[2] == "frontmatter") {
+      if (ast.attributes.frontmatter) {
+        console.log(ast.attributes.frontmatter)
+      }
       return
     }
 
-    if (frontmatter.date) {
-      const date = new Date()
-      const parts = frontmatter.date.split('-')
-      date.setYear(parts[0])
-      if (parts[1]) {
-        date.setMonth(parts[1] - 1)
+    if (argv[2] == "body") {
+      const content = Markdoc.transform(ast)
+      const html = Markdoc.renderers.html(content)
+      if (html) {
+        console.log(html)
       }
-      if (parts[2]) {
-        date.setDate(parts[2])
-      }
-      let dateStr = `${date.toLocaleString('default', {month: 'long'})} ${date.getFullYear()}`
-
-      if ((await stat).mtime.getMonth() != date.getMonth() || (await stat).mtime.getFullYear() != date.getFullYear()) {
-        dateStr += `; last updated ${(await stat).mtime.toLocaleString('default', {month: 'long'})} ${(await stat).mtime.getFullYear()}`
-      }
-      html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
+      return
     }
-    console.log(html)
   } catch (e) {
     console.error(e)
     process.exit(1)
