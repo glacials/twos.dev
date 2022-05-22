@@ -1,35 +1,34 @@
 #!/usr/bin/env node
-import fsSync from 'fs-extra'
-import fs from 'fs/promises'
+import { argv } from 'node:process'
+import fs from 'fs-extra'
 import yaml from 'yaml'
 
 import Markdoc from '@markdoc/markdoc'
 
-const src = './src';
-const dist = './dist';
-
 (async () => {
-  // Anything in here will be waited on before the process exits.
-  const promises = []
-
+  // Two modes of calling:
+  // 
+  //     src/js/build.js filename FILEPATH
+  //     src/js/build.js body FILEPATH
+  //
+  // The first will print to stdout filename the Markdown file given to stdin wants,
+  // based on frontmatter. The second will print to stdout the HTML rendering of the
+  // Markdown file given to stdin.
   try {
-    if (fsSync.existsSync(dist)) {
-      await fs.rm(dist, {recursive: true})
+    const src = argv[3]
+    const stat = fs.stat(src)
+    const body = fs.readFileSync(src, {encoding: "utf8"})
+    const ast = Markdoc.parse(body)
+    const content = Markdoc.transform(ast)
+    let html = Markdoc.renderers.html(content)
+    const frontmatter = (ast.attributes.frontmatter ? yaml.parse(ast.attributes.frontmatter) : {}) || {}
+
+    if (argv[2] == "filename") {
+      console.log(frontmatter.filename)
+      return
     }
-    await fs.mkdir(dist)
 
-    const header = fs.readFile(`${src}/templates/_header.html`, {encoding: 'utf8'});
-    const footer = fs.readFile(`${src}/templates/_footer.html`, {encoding: 'utf8'});
-
-    (await fs.readdir(src)).filter(filename => {
-      return filename.substring(filename.length - ".md".length) == ".md"
-    }).map(filename => fs.readFile(`${src}/${filename}`, {encoding: 'utf8'}).then(async body => {
-      const stat = fs.stat(`${src}/${filename}`)
-      const ast = Markdoc.parse(body)
-      const content = Markdoc.transform(ast)
-      let html = Markdoc.renderers.html(content)
-      const frontmatter = yaml.parse(ast.attributes.frontmatter) || {}
-
+    if (frontmatter.date) {
       const date = new Date()
       const parts = frontmatter.date.split('-')
       date.setYear(parts[0])
@@ -45,23 +44,10 @@ const dist = './dist';
         dateStr += `; last updated ${(await stat).mtime.toLocaleString('default', {month: 'long'})} ${(await stat).mtime.getFullYear()}`
       }
       html = html.replace('</h1>', `</h1><p>${dateStr}</p>`)
-      promises.push(fs.writeFile(
-        `${dist}/${frontmatter.filename}`,
-        (await header).replaceAll(
-          "{{title}}",
-          filename.substring(0, filename.length - ".md".length),
-        ) + html + (await footer).replace(
-          `https://github.com/glacials/twos.dev`,
-          `https://github.com/glacials/twos.dev/blob/main/src/${filename}`,
-        )
-      ))
-    }))
-
-    await Promise.all(promises)
-    fsSync.copySync('./public', './dist')
+    }
+    console.log(html)
   } catch (e) {
     console.error(e)
-    await Promise.all(promises)
     process.exit(1)
   }
 })()

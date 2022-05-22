@@ -19,7 +19,7 @@ jobs:
           find src -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'
           ./src/js/build.js
           go build
-          ./twos.dev build src dist
+          ./twos.dev build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
