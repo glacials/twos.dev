@@ -107,7 +107,7 @@ func buildHTML(sourceDir, destinationDir string) error {
 		v := htmlFileVars{
 			Body:      template.HTML(renderedHTML.String()),
 			Title:     d.Name()[0 : len(d.Name())-len(".md")],
-			SourceURL: fmt.Sprintf("https://github.com/glacials/twos.dev/blob/main/src/%s", relativeHTMLPath),
+			SourceURL: fmt.Sprintf("https://github.com/glacials/twos.dev/blob/main/%s", path),
 
 			CreatedAt: created.Format("2006 January"),
 			UpdatedAt: updated,
