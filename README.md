@@ -12,10 +12,9 @@ random things here.
 ### Starting a dev server
 
 ```sh
-src/js/build.js
 go install
 twos.dev serve
 
 # In another terminal:
-watch twos.dev build src dist
+watch twos.dev build
 ```
