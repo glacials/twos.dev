@@ -9,7 +9,6 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strings"
 
 	"github.com/otiai10/copy"
@@ -30,14 +29,9 @@ func buildImages(sourceDir, destinationDir string) error {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	// Create HTML container pages for each image that can be clicked through
+	// Create gallery pages for each image
 	if err := genImageContainers(sourceDir, destinationDir); err != nil {
 		return fmt.Errorf("can't generate image container pages: %w", err)
-	}
-
-	// Replace any <img> tag with the thumbnail version
-	if err := replaceImgTags(sourceDir, destinationDir); err != nil {
-		return fmt.Errorf("can't replace img tags: %w", err)
 	}
 
 	return nil
@@ -183,51 +177,6 @@ func genImageContainers(imageSourceDir, imageDestinationDir string) error {
 		if err := t.Execute(f, v); err != nil {
 			return fmt.Errorf("can't execute imgcontainer template: %w", err)
 		}
-	}
-
-	return nil
-}
-
-func replaceImgTags(sourceDir, destinationDir string) error {
-	if err := filepath.WalkDir(destinationDir, func(path string, d fs.DirEntry, err error) error {
-		if err != nil {
-			return fmt.Errorf("can't walk path `%s`: %w", path, err)
-		}
-
-		if d.IsDir() {
-			return nil
-		}
-
-		matched, err := filepath.Match("*.html", strings.ToLower(d.Name()))
-		if err != nil {
-			return fmt.Errorf("can't match against filename `%s`: %w", d.Name(), err)
-		}
-		if !matched {
-			return nil
-		}
-
-		originalHTML, err := ioutil.ReadFile(path)
-		if err != nil {
-			return fmt.Errorf("can't read HTML file `%s`: %w", path, err)
-		}
-
-		// TODO: Support other filetypes
-		re, err := regexp.Compile(
-			"(<a[^<>]*\\s[^<>]*href=[\"']\\/?img\\/[^<>]*\\.[jJ][pP][gG])([\"'][^<>]*>\\s*<img[^<>]*\\s[^<>]*src=[\"']\\/?img\\/)([^<>]*\\.[jJ][pP][gG][\"'][^<>]*>\\s*<\\/a>)",
-		)
-		if err != nil {
-			return fmt.Errorf("can't compile regexp: %w", err)
-		}
-
-		replacedHTML := re.ReplaceAll(originalHTML, []byte("${1}.html${2}thumb/${3}"))
-
-		if err := ioutil.WriteFile(path, replacedHTML, 0); err != nil {
-			return fmt.Errorf("can't write thumbnail replacements to file: %w", err)
-		}
-
-		return nil
-	}); err != nil {
-		return fmt.Errorf("can't iterate over source to replace images with thumbnails: %s", err)
 	}
 
 	return nil
