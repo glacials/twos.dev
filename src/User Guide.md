@@ -1,10 +1,6 @@
 ---
-
-date: 2022-05
----
-
 filename: guide.html
-created: 2021-05
+date: 2021-05
 updated: 2022-05
 ---
 
