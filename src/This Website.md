@@ -92,6 +92,53 @@ Allowing myself this escape hatch is freeing. It has three effects:
 - Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
 - TODO
 
+The final architecture:
+
+```
+  ┌─────┐ Low touch  ┌───────────┐     ┌──────────────────────────┐
+  │ Me  │───────────▣│ iA Writer │     │    Shortcuts for iOS     │
+  └─────┘            └───────────┘     │       Automations        │──┐
+     │                     │           │          (cron)          │  │
+     │High                 │           └──────────────────────────┘  │
+     │touch                │                                         │
+     │                     │                                         │
+     │                     │                     Shortcuts           │
+     │                     │            ┌─────────────────────────┐  │
+     │                     ■         ┌─■│ Initialize frontmatter  │□─┤
+     │              ┌─────────────┐  │  ├─────────────────────────┤  │
+     │              │iCloud Drive │──┼─■│      Backfill date      │□─┤
+     │              └─────────────┘  │  ├─────────────────────────┤  │
+     │                     │         └─■│    Backfill filename    │□─┤
+     │                     │            ├─────────────────────────┤  │
+     │                     └───────────■│        Git push         │□─┘
+     │                                  └─────────────────────────┘
+     │         Local development                     │
+     │        ┌──────────────────┐                   ▣
+     ├───────▣│       Vim        │       ┌───────────────────────┐
+     │        ├──────────────────┤       │ Working Copy for iOS  │
+     └───────□│       Git        │       │     (Git client)      │
+              └──────────────────┘       └───────────────────────┘
+                        │                            │
+                        │                            ▣
+                        │            ┌───────────────────────────────┐
+                        └───────────▣│ github.com/glacials/twos.dev  │──┐
+                                     └───────────────────────────────┘  │
+                                                                        │
+                                               GitHub Actions           │
+                                        ┌──────────────────────────┐    │
+                                        │ Render Markdown to HTML  │▣───┤
+                                        ├──────────────────────────┤    │
+                                        │ Copy in high touch pages │▣───┤
+                                        ├──────────────────────────┤    │
+  ┌──────────────────────────────────┐  │  Deploy to GitHub Pages  │▣───┘
+  │ Key                              │  └──────────────────────────┘
+  │                                  │                │
+  │ A ───■ B   Data flows from A → B │                ■
+  │ A ───□ B   A invokes B           │         ┌────────────┐
+  │                                  │         │  twos.dev  │
+  └──────────────────────────────────┘         └────────────┘
+  ```
+
 ## On URLs
 
 I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.
