@@ -42,7 +42,7 @@ What I can do is automate this in a way that is resistant to my drive-wiping hab
 
 Starting with iOS 13, all iPhones ship with an Apple app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752). If you’re from Android like I am, Shortcuts is like Tasker, if it were built into the operating system and had buy-in from every third-party app. For example, I use a shortcut to turn on my coffee machine every morning when I take my phone off its charger.
 
-Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up a shortcut to run like a cron job, inspect a specific directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
+Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up a shortcut to run like a cron job, or even better, to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
 
 #### Working Copy
 
@@ -57,7 +57,7 @@ Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up
 
 ([see the shortcut](https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888))
 
-My iPhone runs this once daily at sunrise. If I switch to another iPhone later, it will inherit the behavior without any action on my part.
+My iPhone runs this each time I switch away from iA Writer, so changes are immediately published. If I switch to another iPhone later, it will inherit the behavior without any action on my part.
 
 We now have glue between iCloud Drive and GitHub Actions.
 
