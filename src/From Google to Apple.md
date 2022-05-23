@@ -5,7 +5,7 @@ date: 2022-05
 
 # From Google to Apple
 
-I have been an Android user for 12 years, 10 of them Nexus/Pixel. My life is in Google. The common ones, sure—Gmail, Docs, Sheets, Maps, Calendar, Chrome, Photos—but the uncommon ones too—One, Stadia, Tasks, Keep. I’ve been bitten harder than most by shutdowns of services like Allo and Hangouts. I was even gung-ho about Google+ for a few years.
+I have been an Android user for 12 years, 10 of them Nexus/Pixel. My life is in Google. The common ones, sure—Gmail, Docs, Sheets, Maps, Calendar, Chrome, Photos—but the uncommon ones too—One, Stadia, Tasks, Keep. I was a beta user of the very first Chromebook, the cr-48. I’ve been bitten harder than most by shutdowns of services like Allo and Hangouts. I was even gung-ho about Google+ for a few years.
 
 I try to be an informed person, and that means knowing what I’m missing out on, to understand why (or whether) I prefer the thing I chose.
 
