@@ -3,46 +3,47 @@ filename: apple.html
 date: 2022-05
 ---
 
+TODO: USB-C (maybe?), Touch Bar, SMS in macOS, 
+
 # From Google to Apple
 
-I have been an Android user for 12 years, 10 of them Nexus/Pixel. My life is in Google. The common ones, sure—Gmail, Docs, Sheets, Maps, Calendar, Chrome, Photos—but the uncommon ones too—One, Stadia, Tasks, Keep. I was a beta user of the very first Chromebook, the cr-48. I’ve been bitten harder than most by shutdowns of services like Allo and Hangouts. I was even gung-ho about Google+ for a few years.
+My life is in Google more than anyone I know. The usual suspects, sure -- Gmail, Photos, Chrome, and the like, but also the ones people stay away from—Stadia, Tasks, One, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies & TV, Podcasts. We have more Google Homes than rooms. I was a beta user for the first Chromebook, the Cr-48. I have more scar tissue than most from services being sent to the “Google graveyard” like Allo and Hangouts. For a few years I was gung-ho enough to overlay my Facebook profile picture with a Google+ logo and the text “I’ve moved”. (How embarrassing that eventually was!)
 
-I try to be an informed person, and that means knowing what I’m missing out on, to understand why (or whether) I prefer the thing I chose.
+I’ve been an Android user for 12 years, 10 of them with Nexus and Pixel devices. But once in a while I try to challenge my beliefs by changing seats. This is how I understand why—or whether—I really prefer what I chose. But when I've previously trialed a borrowed iPhone for a few months (thanks [@bensw](https://twitter.com/bensw)), my thoughts amounted to "It's not that different, except the Google apps don't have any OS integration".
 
-For all the hate the walled garden gets, I understand I can't appreciate it perched on the wall. In Apple land, one device on its own doesn’t make a convincing argument—the ecosystem cohesion does.
+I've realized since then it’s hard to know the Apple value proposition without being immersed in the ecosystem. For the same reason the Google Assistant doesn't shine iOS, iOS doesn't shine if you only use Google apps.
 
-Knowing the garden may or may not let me out, I risk being trapped but knowing both sides, over letting fear of entrapment trap me into knowing only one. This is my story of hopping the fence.
+After a buggy summer with my Pixel 3a, I decided now’s a good time to give Apple an honest shot. The infamous walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. This is my story of hopping the fence.
 
 ## The Plan
 
-My last Apple device, other than Macs used for development, was an iPhone 3G in 2008. Starting with iPad, I’ve tiptoed my way into the ecosystem, checking my satisfaction as I go. Each component I add theoretically adds value to each existing component. For example, having an iPad and a Mac enables using the iPad as an external display for the Mac. I will document here these benefits and my thoughts about each product I add.
+I use a Mac for development, but otherwise use no Apple devices. Google’s tablet game has been nonexistent for a few years, so iPad seems a good place to start. Starting there, I’ll tiptoe my way into the ecosystem, checking deltas as I go. Each piece I add theoretically adds value to each existing piece. For example, iPads can be used as external displays for Macs. I'll document my journey here.
 
-## Execution 
+## Execution
 
 ### Precondition: MacBook
 
-I have used a MacBook running macOS as my development machine since I switched from ArchLinux on my Cr-48 in 2013.
+I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time.
 
 ### iPad
 
-The iPad is my slow ease into the iOS ecosystem. In the past, I’ve used a Nexus 7 as a household tablet. To me, a the point of a tablet is to replace all uses of my phone while at home. This gives an upgraded experience and drains a separate battery than the one I may need later.
+My goal for a tablet is to replace all my at-home phone use. It gives an upgraded experience and as a bonus, drains a different battery bank than the one I may need later. As a habit, I carry it room-to-room.
 
-However, within about a year of buying my Nexus 7 I’d stopped my habit of carrying it room to room. It afforded too little benefit and took too much effort to maintain separately from my phone. Apps didn’t expect one user to be using two devices; bugs were frequent. Almost zero apps used a different design for the tablet form factor.
-
-I expected a similar experience from iPad.
+My last tablet was a Nexus 7, but within a year I’d stopped that habit. It afforded too little benefit and took too much effort to maintain separately from my phone. Apps didn’t expect one user to be using two devices, so bugs were frequent. Almost zero apps used the tablet form factor well (or at all), making the UX worse than a phone. I expected a similar experience from iPad.
 
 Replacements afforded:
 
 - None
 
-Thoughts:
+#### Thoughts
 
-With iPad, I’ve carried it room to room for two years now. The app ecosystem better understands that tablets exist. For example, Octal, an iOS HN viewer, will show the front page and the current article side by side in independent scroll views. The multitasking experience is opinionated, but phenomenal. 
+With iPad, I’ve carried it room to room for two years now. The app ecosystem better understands the tablet form factor; many will display more information or at least differently laid out information. The multitasking experience is opinionated, but the best on a mobile OS.
 
-Ecosystem benefits:
+#### Ecosystem Benefits
 
-- Sidecar (use iPad as external monitor for macOS)
-- Universal Control (use mouse and keyboard from macOS to control iPad)
+- Sidecar (use iPad as external monitor for Mac)
+- Universal Control (use mouse and keyboard from Mac to control iPad)
+- macOS Preview lets you use an iOS device as a cursor to annotate or sign a document, in one click. This was my first exposure to the magic of “it just works” in the Apple ecosystem; anyone can transfer an image to a touchscreen device for editing, but doing it in one click and one second was magical.
 
 ### iPhone
 
@@ -59,21 +60,25 @@ Thoughts:
 
 Things immediately become clear in how Google and Apple approach customer problems. In the Google ecosystem, 
 
+One surprising thing is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
+
 Ecosystem benefits:
 
-- macOS’s Preview.app will let me use my iPhone as a cursor to annotate or sign a document, in two clicks.
 - For some friends, SMS becomes iMessage
 - For SMS and iMessage, I can interact from my MacBook
 
 ### Apple TV (hardware)
 
-Replaces Chromecast.
+Replacements afforded:
+
+- Chromecast
+- Google TV
 
 Thoughts:
 
-Given that we don’t have HomePods, and my spouse forbids me to get any after filling our home with more Google Home Minis than we have rooms (they give them out like candy to people deep in the ecosystem), we’ve had to get used to using a remote again.
+Given that we don’t have HomePods and my spouse forbids me to get any after filling our home with Google Home[ Mini]s  (they give them out like candy if you’re deep in the ecosystem), we’ve gotten used to using a remote again. It’s a high quality remote and feels good in the hand, but it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table.
 
-It’s a high quality remote and feels good in the hand, but it’s a remote and it can be lost. We’ve 3D printed a holder for it that attaches to the coffee table.
+TODO: Resume here
 
 Ecosystem benefits:
 
@@ -249,7 +254,7 @@ Ecosystem benefits:
 
 ### Shortcuts
 
-Replaces Google Assistant routines.
+Replaces Google Assistant routines and apps like Tasker.
 
 Thoughts:
 
