@@ -3,48 +3,98 @@ filename: meta.html
 date: 2022-05
 ---
 
-# The Bespoke Twos Deployment Pipeline
-The Twos CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me, so can be designed in what would otherwise be obnoxious and unintuitive ways to serve my peculiarities.
+# The twos.dev CI/CD Pipeline
+
+```
+             ┌─────┐
+      ┌──────│ Me  │─────┐
+      ▣      └─────┘     ▣
+   ┌─────┐         ┌───────────┐
+   │ Vim │  ┌──────│ iA Writer │
+   ├─────┤  │      └───────────┘
+┌──│ Git │  │            │
+│  └─────┘  │            □
+│           ■      ┌───────────┐
+│      ┌────────┐  │ Shortcuts │
+│   ┌──│ iCloud │  │  for iOS  │──┐
+│   │  └────────┘  └───────────┘  │
+│   │                             │
+│   │           Shortcuts         │
+│   │  ┌───────────────────────┐  │
+│   ├─■│ Backfill frontmatter  │□─┤
+│   │  ├───────────────────────┤  │
+│   └─■│ Git add, commit, push │□─┘
+│      └───────────────────────┘
+│                  │
+│                  ▣
+│          ┌──────────────┐
+│          │ Working Copy │
+│          │   for iOS    │
+│          │              │
+│          └──────────────┘
+│                  │
+│                  ▣
+│  ┌──────────────────────────────┐
+└─▣│ github.com/glacials/twos.dev │──┐
+   └──────────────────────────────┘  │
+                                     │
+            GitHub Actions           │
+     ┌──────────────────────────┐    │
+     │ Render Markdown to HTML  │▣───┤
+     ├──────────────────────────┤    │
+     │ Copy in high touch pages │▣───┤
+     ├──────────────────────────┤    │
+     │  Deploy to GitHub Pages  │▣───┘
+     └──────────────────────────┘
+                   │
+                   ■
+            ┌────────────┐
+            │  twos.dev  │
+            └────────────┘
+
+   ┌──────────────────────────────────┐
+   │ Key                              │
+   │                                  │
+   │ A ───■ B   Data flows from A → B │
+   │ A ───□ B   A invokes B           │
+   │                                  │
+   └──────────────────────────────────┘
+   ```
+
+
+The twos.dev CI/CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me. I can therefore design it in obnoxious and unintuitive ways to serve my peculiarities.
 
 My two biggest goals for this pipeline:
 
-1. Encourage myself to write
+1. Easy to publish writing
 2. URLs must never change
 
-To fulfill these goals, the Twos CD pipeline allows for two content types:
+To fulfill these goals I divide my content into two types, warm and cold.
 
-- Warm content
-- Cold content
+## Warm Content
 
-## On Writing
+I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:
 
-I use [iA Writer](https://ia.net/writer) to write drafts. It gets my thoughts out quickly, without mucking about in formatting or DOM. If I were writing for a personal diary, things would end there.
+- Once transferred to HTML, context switching to that piece of writing became much more effortful
+- Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
+- A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
 
-Because I like to publish, it's a problem that these drafts too often stay drafts.
+To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.
 
-Luckily, iA Writer stores documents as plaintext Markdown files. Normally, shipping these files to a Markdown parser would be a sufficient general solution.
+I found [iA Writer](https://ia.net/writer) to replace my note-taking app for draft writing. It gets my thoughts out quickly, has helpful tools for e.g. reducing filler words, and looks nice to boot. Importantly, it stores writing as Markdown files.
 
-But there are two peculiarities I’m allowing myself to indulge.
+### Shortcuts
 
-### Automatic Publishing
+iOS and macOS devices ship with a first-party app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752). If you’re from Android like I am, Shortcuts is like Tasker if it were built into the operating system and had buy-in from third parties. They're like event-driven shell scripts for the masses, and they run on iOS natively.
 
-Because I have trouble pulling the publish trigger, I’ve decided upfront that I need to make that trigger 10x easier to pull. For this case, a good path towards that is to pull the publishing process out of Git and into iA Writer itself, to allow easy publishing from even my phone.
+Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:
 
-### Mechanics
+1. Adds default frontmatter to iA Writer documents in the `published/` directory without any
+2. 
 
-iA Writer on macOS has some automation tools, but not a lot. It has the ability to store documents in services like Dropbox and Google Drive, but for [unrelated peculiarities](apple.html) I limit myself to iCloud Drive for those purposes at the moment. Unfortunately, iCloud Drive has no native API or other way to reach files from within GitHub Actions. (TODO: Perhaps there’s a way to sign into an Apple ID on a GitHub Actions Mac? Perhaps not due to 2FA, or maybe an app-specific password would work?)
+behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
 
-I keep infrastructure off my own devices when I can—I wipe my drives a lot—but it seems there is no way to avoid it if I need to ship files from iCloud Drive to GitHub Actions.
-
-What I can do is automate this in a way that is resistant to my drive-wiping habits. And so far, the most resistant device I own to this, the only one I’m comfortable directly transferring to a replacement device using its migration tool, is my iPhone.
-
-#### Shortcuts
-
-Starting with iOS 13, all iPhones ship with an Apple app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752). If you’re from Android like I am, Shortcuts is like Tasker, if it were built into the operating system and had buy-in from every third-party app. For example, I use a shortcut to turn on my coffee machine every morning when I take my phone off its charger.
-
-Shortcuts can therefore behave as an API gateway into iCloud Drive. I can set up a shortcut to run like a cron job, or even better, to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
-
-#### Working Copy
+### Working Copy
 
 [Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807) is a Git client for iOS that exposes Shortcuts hooks. Using it, we can build a shortcut that does what we need:
 
@@ -61,11 +111,11 @@ My iPhone runs this each time I switch away from iA Writer, so changes are immed
 
 We now have glue between iCloud Drive and GitHub Actions.
 
-#### Markdown → HTML
+### Markdown → HTML
 
 This step is straightforward. Using Stripe’s Markdoc library (more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.
 
-### Custom Content
+## Cold Content
 
 We’ve got our Markdown pipeline set up, but not everything fits neatly into Markdown. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image in dark mode.
 
@@ -91,53 +141,6 @@ Allowing myself this escape hatch is freeing. It has three effects:
 - I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
 - Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
 - TODO
-
-The final architecture:
-
-```
-  ┌─────┐ Low touch  ┌───────────┐     ┌──────────────────────────┐
-  │ Me  │───────────▣│ iA Writer │     │    Shortcuts for iOS     │
-  └─────┘            └───────────┘     │       Automations        │──┐
-     │                     │           │          (cron)          │  │
-     │High                 │           └──────────────────────────┘  │
-     │touch                │                                         │
-     │                     │                                         │
-     │                     │                     Shortcuts           │
-     │                     │            ┌─────────────────────────┐  │
-     │                     ■         ┌─■│ Initialize frontmatter  │□─┤
-     │              ┌─────────────┐  │  ├─────────────────────────┤  │
-     │              │iCloud Drive │──┼─■│      Backfill date      │□─┤
-     │              └─────────────┘  │  ├─────────────────────────┤  │
-     │                     │         └─■│    Backfill filename    │□─┤
-     │                     │            ├─────────────────────────┤  │
-     │                     └───────────■│        Git push         │□─┘
-     │                                  └─────────────────────────┘
-     │         Local development                     │
-     │        ┌──────────────────┐                   ▣
-     ├───────▣│       Vim        │       ┌───────────────────────┐
-     │        ├──────────────────┤       │ Working Copy for iOS  │
-     └───────□│       Git        │       │     (Git client)      │
-              └──────────────────┘       └───────────────────────┘
-                        │                            │
-                        │                            ▣
-                        │            ┌───────────────────────────────┐
-                        └───────────▣│ github.com/glacials/twos.dev  │──┐
-                                     └───────────────────────────────┘  │
-                                                                        │
-                                               GitHub Actions           │
-                                        ┌──────────────────────────┐    │
-                                        │ Render Markdown to HTML  │▣───┤
-                                        ├──────────────────────────┤    │
-                                        │ Copy in high touch pages │▣───┤
-                                        ├──────────────────────────┤    │
-  ┌──────────────────────────────────┐  │  Deploy to GitHub Pages  │▣───┘
-  │ Key                              │  └──────────────────────────┘
-  │                                  │                │
-  │ A ───■ B   Data flows from A → B │                ■
-  │ A ───□ B   A invokes B           │         ┌────────────┐
-  │                                  │         │  twos.dev  │
-  └──────────────────────────────────┘         └────────────┘
-  ```
 
 ## On URLs
 

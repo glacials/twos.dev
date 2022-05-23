@@ -9,13 +9,13 @@ I have been an Android user for 10 years -- Google Android, at that. Starting wi
 
 I bought an iPhone. I try to be an informed person, and that means knowing what I’m missing out on, to understand why (or whether) I prefer the thing I chose.
 
-For all the hate the walled garden gets, I understand that I can't appreciate the garden while perched on top of the wall. In Apple land, one device on its own doesn’t make a convincing argument.
+For all the hate the walled garden gets, I understand I can't appreciate it perched on the wall. In Apple land, one device on its own doesn’t make a convincing argument—the ecosystem cohesion does.
 
-Knowing the garden may or may not let me out, I made the decision to risk being trapped but knowing both sides, rather than letting fear of entrapment trap me in Google land. This is my story of hopping the fence.
+Knowing the garden may or may not let me out, I risk being trapped but knowing both sides, over letting fear of entrapment trap me into knowing only one. This is my story of hopping the fence.
 
 ## The Plan
 
-Starting with iPad, I’ll tiptoe into the ecosystem, checking my satisfaction as I go. Each component I add theoretically adds value to each existing component. For example, having an iPad and a Mac enables using the iPad as an external display for the Mac. I will document here these benefits and my thoughts about each product I add.
+My last Apple device, other than MacBooks used for development, was an iPhone 3G in 2010. Starting with iPad, I’ve tiptoed my way into the ecosystem, checking my satisfaction as I go. Each component I add theoretically adds value to each existing component. For example, having an iPad and a Mac enables using the iPad as an external display for the Mac. I will document here these benefits and my thoughts about each product I add.
 
 ## Execution 
 
