@@ -37,30 +37,49 @@ Replacements afforded:
 
 #### Thoughts
 
-With iPad, I’ve carried it room to room for two years now. The app ecosystem better understands the tablet form factor; many will display more information or at least differently laid out information. The multitasking experience is opinionated, but the best on a mobile OS.
+With iPad, I’ve carried it room to room for two years now. The app ecosystem better understands the tablet form factor; many apps use it to display more information or at least differently laid out information. The multitasking experience is opinionated but helpful.
 
 #### Ecosystem Benefits
 
 - Sidecar (use iPad as external monitor for Mac)
 - Universal Control (use mouse and keyboard from Mac to control iPad)
-- macOS Preview lets you use an iOS device as a cursor to annotate or sign a document, in one click. This was my first exposure to the magic of “it just works” in the Apple ecosystem; anyone can transfer an image to a touchscreen device for editing, but doing it in one click and one second was magical.
+- macOS Preview lets you use an iOS device to annotate or sign a document, in one click. This was my first exposure to the synergy of the ecosystem; anyone can transfer an image to a touchscreen device for editing, but doing it in one click and having it show up in less than a second was magical.
 
 ### iPhone
 
+To allow iPhone the opportunity to prove my previous opinion wrong, I’m using it as an opportunity to switch app suites.
+
 Replacements afforded:
 
-- Hangouts/Chat → iMessage
-- Google Photos → iOS Photos + iCloud
+- Google Assistant → Siri (when used from phone)
+- Google Calendar → Apple Calendar
+- Google Docs → Apple Pages
+- Google Drive → iCloud Drive
+- Google Duo → FaceTime 
+- Google Fit → Apple Health
+- Google Home → Apple Home
+- Google Keep → Apple Notes
 - Google Maps → Apple Maps
-- YouTube Music → Apple Music
-- Google Podcasts → Apple Podcasts
+- Google Photos → iOS Photos
 - Google Play Books → Apple Books
+- Google Play Movies & TV → Apple TV (the app)
+- Google Podcasts → Apple Podcasts
+- Google Sheets → Apple Numbers
+- Gmail → Apple Mail
+- Hangouts/Chat/Messages → iMessage
+- YouTube Music → Apple Music
 
 Thoughts:
 
-Things immediately become clear in how Google and Apple approach customer problems. In the Google ecosystem, 
+Things immediately become clear in how Google and Apple differently approach user identity. In the Google ecosystem a user is a Google account; an Android phone is one of many windows into that account.
 
-One surprising thing is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
+In the Apple ecosystem the user is an iPhone. There is no “Apple Wallet”; there is only iPhone Wallet. Seeing iMessages on a Mac is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details, I am speaking only of UX.]
+
+This is not to say I can’t access my iPhone photos from my iPad or my 
+
+This difference in approaches is refreshing, but has its limits. I regularly experience synchronization problems.
+
+One surprising iPhone quality is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
 
 Ecosystem benefits:
 
