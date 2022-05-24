@@ -44,56 +44,38 @@ For example, in Google Docs documents are saved to your account, presumably to a
 
 There’s a part of this that’s charming, but it’s not for everyone. I regularly experience synchronization delays and conflicts.
 
-I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, there is no calculator app for iPad because they Apple hasn’t found the time to adapt the iPhone calculator design.
+I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, there is no calculator app for iPad because Apple hasn’t found the time to adapt the iPhone calculator design.
 
-##### Notifications 
+#### Notifications 
 
-Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first, but after some time I’d call them a sidegrade.
+Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first. After some time I’d call them a sidegrade.
 
-Android notifications are stateful. If you receive a Gmail notification on your phone then read that email in any way on any platform, the notification goes away. If you don’t, the notification will still be there, even days later. In this way, Android notifications can be used as a todo list of sorts.
+Android notifications are stateful. If you receive a Gmail notification on your phone then read that email on any platform, the notification goes away. Otherwise, the notification will be there even days later. In this way, Android notifications can be used as a todo list of sorts.
 
-iOS notifications are stateless. In the same scenario on iOS, the email notification persists until it’s tapped or until the phone is unlocked. If tapped, it’s cleared; if the phone is unlocked, the notification moves to a secondary location on the lockscreen that requires a gesture to show. In this way, iOS notifications behave more as a feed, with states for “unread” and “read”.
+iOS notifications are a feed. In the same scenario on iOS, the notification is (usually) never revoked remotely. Instead, when the phone is unlocked the notification moves to a secondary location “below” (via swipe) the lockscreen. I do inbox zero, so this is strictly worse. I forget to address notifications by committing the cardinal sin of unlocking my phone.
 
-As someone who does inbox zero, this is strictly worse. I forget to address notifications all the time. However iOS fills the gap elsehow, with badges. Badges are red numbers in the corners of app icons, and they are stateful in the same way Android notifications are. I’ve found these a decent enough substitute, although I still prefer Android’s behavior.
+However, iOS mostly fills the gap with badges. Badges are red numbers in the corners of app icons that are stateful in the same way Android notifications are, so can be used as a todo list. I’ve found these a decent enough substitute, although I still prefer Android’s notifications.
 
-##### iMessage
+#### iMessage
 
-I finally know why none of my iPhone friends were as excited as me about “solving” chat—it’s been solved for them already. iMessage is the gold standard of chat apps.
+I finally know why none of my iPhone friends were as excited as me about “solving” mobile chat—it’s been solved for them for years. iMessage is the gold standard of chat apps. I’m even feeling the guilty urge to nudge friends towards iPhone so I can use it with them.
 
-One note is, in Apple ecosystem fashion, you don’t community with Apple accounts, but with devices. I recently changed my email address, but I need to keep 
+In classic Apple fashion iMessages aren’t between Apple accounts, but devices. I recently changed my email address but I need to keep my old one in my Apple account indefinitely so my friends’ threads with me won’t retroactively split into two.
 
-#### Ecosystem benefits
+### Chromecast/Google TV → Apple TV
 
-- For some friends, SMS becomes iMessage
-- I can send and receive phone calls, SMS, and iMessages from Mac and iPad
+We don’t have HomePods and my spouse forbids me to get any after filling our home with Google Home Minis, so we’ve had to migrate away from “hey Google, play $SHOW”. 
 
-### Apple TV (hardware)
-
-Replacements afforded:
-
-- Chromecast
-- Google TV
-
-#### Thoughts
-
-We don’t have HomePods and my spouse forbids me to get any after filling our home with Google Home[ Mini]s, so we’ve had to migrate away from “hey Google, play $SHOW”. 
-
-##### The Remote
+#### The Remote
 Apple TV can initiate play from a phone like Chromecast, but beyond that we’ve used the remote. The touchpad on the remote is awkward and hard to use; I brush it when trying to click it, causing me to click on the wrong thing.
 
 Otherwise it has a good build quality and feels good in the hand. But it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table. I miss the remote-free life.
 
-#### Ecosystem benefits
+When a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
 
-- When a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
+### Home → Home
 
-### Apple Home
-
-Replaces Google Home.
-
-Thoughts:
-
-My biggest fear was that a decade of building up Google Nest devices would be for naught, but Starling Home Hub and later Homemanager with a Nest plugin made it all work seamlessly.
+My biggest fear with this change was losing a decade of Google Nest ecosystem benefits, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to our Nest doorbell camera showing on our Apple TV picture-in-picture when the doorbell rings. (If you’re not keen to se up a raspi, try Starling Home Hub instead.)
 
 Ecosystem benefits:
 
