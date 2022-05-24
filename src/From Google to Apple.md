@@ -40,15 +40,11 @@ The ecosystem benefits I receive from iPad are the ability to use it as a second
 
 iPhone makes clear the differences in the Google and Apple attitudes around user identity. In Google a user is a Google account; an Android phone is a window into it. In Apple a user is an iPhone, and the iPhone is possibly synchronized with an Apple account.
 
-For example, in Google there is Google Pay, a backend service usable through an Android phone. In Apple no “Apple Wallet”, there is only iPhone Wallet—if you lose your iPhone, there’s no version of your wallet in the cloud to recover from. Seeing the same iMessage state on Mac as on iPhone is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details; I’m only speaking from UX inferences.]
+For example, in Google Docs documents are saved to your account, presumably to a row in a database somewhere. In Pages documents are saved to the filesystem, defaulting to the iCloud Drive directory, which synchronizes them to your Apple account. The filesystem is the database.
 
-This is not to say I can’t use my iPad to access photos I took on my iPhone, but the focus is more on deferred synchronization than always-online. Apps that store data “in the cloud” like Pages and Shortcuts tend to do so by making a directory for themselves in iCloud Drive and using it as their file system.
+There’s a part of this that’s charming, but it’s not for everyone. I regularly experience synchronization delays and conflicts.
 
-This difference in approaches is refreshing, but has its limits. I regularly experience synchronization delays and conflicts. Bulk-importing hundreds or thousands of photos from my DSLR means waiting a full day for things to settle; even when I delete photos that haven’t been synced, they continue to clog the sync queue because the trash needs to be synced.
-
-There’s a certain part of this that’s charming,  but it’s not for everyone.
-
-One surprising iPhone quality is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
+I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
 
 ##### Notifications 
 
