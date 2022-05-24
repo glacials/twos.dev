@@ -79,11 +79,21 @@ This is not to say I can’t use my iPad to access photos I took on my iPhone, b
 
 This difference in approaches is refreshing, but has its limits. I regularly experience synchronization delays and conflicts. Bulk-importing hundreds or thousands of photos from my DSLR means waiting a full day for things to settle; even when I delete photos that haven’t been synced, they continue to clog the sync queue because the trash needs to be synced.
 
-There’s a certain part of this that’s charming. It charms the same part of me that, emotionally, prefers to own a car than lease one.
+There’s a certain part of this that’s charming,  but it’s not for everyone.
 
 One surprising iPhone quality is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
 
-Ecosystem benefits:
+##### Notifications 
+
+Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first, but after some time I’d call it a sidegrade.
+
+Android notifications are stateful. If you receive a Gmail notification on your phone then read that email in any way on any platform, the notification goes away. In this way, Android notifications can be used as a todo list of sorts.
+
+iOS notifications are mostly stateless. In the same scenario, the email notification would persist until it’s tapped or until the phone is unlocked. If tapped, it’s cleared; if the phone is unlocked, the notification moves to a secondary location on the lockscreen that requires a gesture to show. In this way, iOS notifications behave more as a feed.
+
+So far, this is strictly worse. However iOS fills the todo list gap 
+
+#### Ecosystem benefits
 
 - For some friends, SMS becomes iMessage
 - I can send and receive phone calls, SMS, and iMessages from Mac and iPad
@@ -95,15 +105,18 @@ Replacements afforded:
 - Chromecast
 - Google TV
 
-Thoughts:
+#### Thoughts
 
-Given that we don’t have HomePods and my spouse forbids me to get any after filling our home with Google Home[ Mini]s  (they give them out like candy if you’re deep in the ecosystem), we’ve gotten used to using a remote again. It’s a high quality remote and feels good in the hand, but it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table.
+We don’t have HomePods and my spouse forbids me to get any after filling our home with Google Home[ Mini]s, so we’ve had to migrate away from “hey Google, play $SHOW”. 
 
-TODO: Resume here
+##### The Remote
+Apple TV can initiate play from a phone like Chromecast, but beyond that we’ve used the remote. The touchpad on the remote is awkward and hard to use; I brush it when trying to click it, causing me to click on the wrong thing.
 
-Ecosystem benefits:
+Otherwise it has a good build quality and feels good in the hand. But it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table. I miss the remote-free life.
 
-- When an onscreen keyboard shows up, a notification shows on my iPhone and iPad allowing me to type on that device instead. This lets me use 1Password autofill for passwords on those services like Hulu that haven’t yet added QR code authentication or similar.
+#### Ecosystem benefits
+
+- When a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
 
 ### Apple Home
 
