@@ -75,7 +75,7 @@ Things immediately become clear in how Google and Apple differently approach use
 
 In the Apple ecosystem the user is an iPhone. There is no “Apple Wallet”; there is only iPhone Wallet. Seeing iMessages on a Mac is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details, I am speaking only of UX.]
 
-This is not to say I can’t access my iPhone photos from my iPad or receive phone calls on my Mac, but the focus seems more on synchronization over always-online. Even apps that store data “in the cloud” like Pages and Shortcuts are doing it by making a directory for themselves in iCloud Drive, and using it as their file system.
+This is not to say I can’t access my iPhone photos from my iPad or receive phone calls on my Mac, but the focus is more on synchronizati than always-online. Even apps that store data “in the cloud” like Pages and Shortcuts are doing it by making a directory for themselves in iCloud Drive, and using it as their file system.
 
 This difference in approaches is refreshing, but has its limits. I regularly experience synchronization problems.
 
