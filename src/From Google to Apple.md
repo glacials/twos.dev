@@ -85,13 +85,19 @@ One surprising iPhone quality is lack of feature parity with iPad. For example, 
 
 ##### Notifications 
 
-Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first, but after some time I’d call it a sidegrade.
+Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first, but after some time I’d call them a sidegrade.
 
-Android notifications are stateful. If you receive a Gmail notification on your phone then read that email in any way on any platform, the notification goes away. In this way, Android notifications can be used as a todo list of sorts.
+Android notifications are stateful. If you receive a Gmail notification on your phone then read that email in any way on any platform, the notification goes away. If you don’t, the notification will still be there, even days later. In this way, Android notifications can be used as a todo list of sorts.
 
-iOS notifications are mostly stateless. In the same scenario, the email notification would persist until it’s tapped or until the phone is unlocked. If tapped, it’s cleared; if the phone is unlocked, the notification moves to a secondary location on the lockscreen that requires a gesture to show. In this way, iOS notifications behave more as a feed.
+iOS notifications are stateless. In the same scenario on iOS, the email notification persists until it’s tapped or until the phone is unlocked. If tapped, it’s cleared; if the phone is unlocked, the notification moves to a secondary location on the lockscreen that requires a gesture to show. In this way, iOS notifications behave more as a feed, with states for “unread” and “read”.
 
-So far, this is strictly worse. However iOS fills the todo list gap 
+As someone who does inbox zero, this is strictly worse. I forget to address notifications all the time. However iOS fills the gap elsehow, with badges. Badges are red numbers in the corners of app icons, and they are stateful in the same way Android notifications are. I’ve found these a decent enough substitute, although I still prefer Android’s behavior.
+
+##### iMessage
+
+I finally know why none of my iPhone friends were as excited as me about “solving” chat—it’s been solved for them already. iMessage is the gold standard of chat apps.
+
+One note is, in Apple ecosystem fashion, you don’t community with Apple accounts, but with devices. I recently changed my email address, but I need to keep 
 
 #### Ecosystem benefits
 
