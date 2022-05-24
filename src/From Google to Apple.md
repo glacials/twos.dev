@@ -40,7 +40,7 @@ The ecosystem benefits I receive from iPad are the ability to use it as a second
 
 iPhone makes clear the differences in the Google and Apple attitudes around user identity. In Google a user is a Google account; an Android phone is a window into it. In Apple a user is an iPhone, and the iPhone is possibly synchronized with an Apple account.
 
-For example, in Google there is a Google Wallet. no “Apple Wallet”, there is only iPhone Wallet—if you lose your iPhone, there’s no version of your wallet in the cloud to recover from. Seeing the same iMessage state on Mac as on iPhone is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details; I’m only speaking from UX inferences.]
+For example, in Google there is Google Pay, a backend service usable through an Android phone. In Apple no “Apple Wallet”, there is only iPhone Wallet—if you lose your iPhone, there’s no version of your wallet in the cloud to recover from. Seeing the same iMessage state on Mac as on iPhone is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details; I’m only speaking from UX inferences.]
 
 This is not to say I can’t use my iPad to access photos I took on my iPhone, but the focus is more on deferred synchronization than always-online. Apps that store data “in the cloud” like Pages and Shortcuts tend to do so by making a directory for themselves in iCloud Drive and using it as their file system.
 
