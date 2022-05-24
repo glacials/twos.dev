@@ -75,36 +75,13 @@ When a text input is selected on the Apple TV, a notification shows on my iOS de
 
 ### Home → Home
 
-My biggest fear with this change was losing a decade of Google Nest ecosystem benefits, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to our Nest doorbell camera showing on our Apple TV picture-in-picture when the doorbell rings. (If you’re not keen to se up a raspi, try Starling Home Hub instead.)
+My biggest fear with this change was losing a decade of Google Nest ecosystem benefits, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to our Nest doorbell camera showing on our Apple TV picture-in-picture when the doorbell rings. (If you’re not keen to se up a Raspberry Pi, try Starling Home Hub instead.)
 
-Ecosystem benefits:
+The UX of Shortcuts with Home is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
 
-- Can use Shortcuts for automation
+### Pixel Buds → AirPods Pro
 
-### Starling Home Hub
-- When my doorbell rings, my Nest camera shows up in picture-in-picture
-
-### Apple TV (service)
-
-Replacements afforded:
-
-- None
-
-Thoughts:
-
-Apple TV feels like early Netflix productions—everything is high quality (both technically and narratively). Ted Lasso is the most wholesome show of the last decade. See and WeCrashed are shows I’m working through but have been good—about 70-80% as good as Breaking Bad, which is my barometer these days.
-
-Ecosystem benefits:
-
-- None
-
-### AirPods Pro 
-
-Replaces Google Pixel Buds 2 and Bose QC35 II.
-
-Thoughts:
-
-Everything you’ve heard about the AirPods Pro noise cancellation is true. More than once I’ve forgotten they’re in my ears; transparency mode is good.
+Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. I’ve stopped bringing my Bose QC 35-IIs on flights.
 
 Ecosystem benefits:
 
