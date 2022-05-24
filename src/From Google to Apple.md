@@ -44,7 +44,7 @@ For example, in Google Docs documents are saved to your account, presumably to a
 
 There’s a part of this that’s charming, but it’s not for everyone. I regularly experience synchronization delays and conflicts.
 
-I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
+I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, there is no calculator app for iPad because they Apple hasn’t found the time to adapt the iPhone calculator design.[^[]()]
 
 ##### Notifications 
 
