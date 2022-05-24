@@ -24,55 +24,21 @@ After a buggy summer with my Pixel 3a, I decided now’s a good time to give App
 
 ### ArchLinux → macOS
 
-I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time. 
+I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time. Having gone straight from Windows to Linux due to a love of the POSIX command line and the simplicity of the system (e.g. the “everything is a file” notion), I found macOS to scratch the same itches minus the days spent customizing things.
 
 ### Nexus 7 → iPad
 
-My goal for a tablet is to replace all my at-home phone use. It gives an upgraded experience and as a bonus, drains a different battery bank than the one I may need later. As a habit, I carry it room-to-room.
+My minimum goal for a tablet is to replace all my at-home phone use. It gives an upgraded experience and as a bonus, drains a different battery bank than the one I may need later. As a habit, I carry it room-to-room.
 
-My last tablet was a Nexus 7, but within a year I’d stopped that habit. It afforded too little benefit and took too much effort to maintain separately from my phone. Apps didn’t expect one user to be using two devices, so bugs were frequent. Almost zero apps used the tablet form factor well (or at all), making the UX worse than a phone. I expected a similar experience from iPad.
+With the Nexus 7, within a year I’d stopped that habit. It afforded too little benefit and took too much effort to maintain separately from my phone. Apps didn’t expect one user to be using two devices, so bugs were frequent. Almost zero apps used the tablet form factor well (or at all), making the UX worse than a phone. I expected a similar experience from iPad.
 
-Replacements afforded:
+Instead, I’ve carried it room to room for two years now. It’s fulfilled the minimum goal and has even replaced some light computer usage, such as writing. The app ecosystem better understands the tablet form factor; many apps use it to display more information or at least differently laid out information. The multitasking experience is opinionated but helpful.
 
-- None
+The ecosystem benefits I receive from iPad are the ability to use it as a second monitor, and the ability to use my Mac’s mouse and keyboard to control the iPad (a subtle but important distinction). macOS also allows iPad to be used as an input device for signing documents and marking up images. This is something I did before by manually transferring files, but now it’s two clicks with instant sync.
 
-#### Thoughts
+### Pixel → iPhone
 
-With iPad, I’ve carried it room to room for two years now. The app ecosystem better understands the tablet form factor; many apps use it to display more information or at least differently laid out information. The multitasking experience is opinionated but helpful.
-
-#### Ecosystem Benefits
-
-- Sidecar (use iPad as external monitor for Mac)
-- Universal Control (use mouse and keyboard from Mac to control iPad)
-- macOS Preview lets you use an iOS device to annotate or sign a document, in one click. This was my first exposure to the synergy of the ecosystem; anyone can transfer an image to a touchscreen device for editing, but doing it in one click and having it show up in less than a second was magical.
-
-### iPhone
-
-To allow iPhone the opportunity to prove my previous opinion wrong, I’m using it as an opportunity to switch app suites.
-
-Replacements afforded:
-
-- Google Assistant → Siri (when used from phone)
-- Google Calendar → Apple Calendar
-- Google Docs → Apple Pages
-- Google Drive → iCloud Drive
-- Google Duo → FaceTime 
-- Google Fit → Apple Health
-- Google Home → Apple Home
-- Google Keep → Apple Notes
-- Google Maps → Apple Maps
-- Google Photos → iOS Photos
-- Google Play Books → Apple Books
-- Google Play Movies & TV → Apple TV (the app)
-- Google Podcasts → Apple Podcasts
-- Google Sheets → Apple Numbers
-- Gmail → Apple Mail
-- Hangouts/Chat/Messages → iMessage
-- YouTube Music → Apple Music
-
-#### Thoughts
-
-After getting an iPhone the difference in the Google and Apple ethos around user identity quickly became clear. In the Google ecosystem a user is a Google account; an Android phone is one of many windows into that account. In the Apple ecosystem a user is an iPhone. The iPhone is possibly tied to an Apple account, but that’s incidental.
+iPhone makes the difference in the Google and Apple user identity ethos clear. In Google a user is a Google account; an Android phone is one of many windows into that account. In the Apple ecosystem a user is an iPhone. The iPhone is possibly tied to an Apple account, but that’s incidental.
 
 For example, there is no “Apple Wallet”, there is only iPhone Wallet—if you lose your iPhone, there’s no version of your wallet in the cloud to recover from. Seeing the same iMessage state on Mac as on iPhone is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details; I’m only speaking from UX inferences.]
 
