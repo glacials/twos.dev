@@ -69,15 +69,17 @@ Replacements afforded:
 - Hangouts/Chat/Messages → iMessage
 - YouTube Music → Apple Music
 
-Thoughts:
+#### Thoughts
 
-Things immediately become clear in how Google and Apple differently approach user identity. In the Google ecosystem a user is a Google account; an Android phone is one of many windows into that account.
+After getting an iPhone the difference in the Google and Apple ethos around user identity quickly became clear. In the Google ecosystem a user is a Google account; an Android phone is one of many windows into that account. In the Apple ecosystem a user is an iPhone. The iPhone is possibly tied to an Apple account, but that’s incidental.
 
-In the Apple ecosystem the user is an iPhone. There is no “Apple Wallet”; there is only iPhone Wallet. Seeing iMessages on a Mac is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details, I am speaking only of UX.]
+For example, there is no “Apple Wallet”, there is only iPhone Wallet—if you lose your iPhone, there’s no version of your wallet in the cloud to recover from. Seeing the same iMessage state on Mac as on iPhone is an opt-in feature and involves n-to-n device synchronization, not several frontends consuming one source-of-truth backend.[^I don’t know that these are the correct technical details; I’m only speaking from UX inferences.]
 
-This is not to say I can’t access my iPhone photos from my iPad or receive phone calls on my Mac, but the focus is more on asynchronous parity than always-online. Even apps that store data “in the cloud” like Pages and Shortcuts are doing it by making a directory for themselves in iCloud Drive, and using it as their file system.
+This is not to say I can’t use my iPad to access photos I took on my iPhone, but the focus is more on deferred synchronization than always-online. Apps that store data “in the cloud” like Pages and Shortcuts tend to do so by making a directory for themselves in iCloud Drive and using it as their file system.
 
-This difference in approaches is refreshing, but has its limits. I regularly experience synchronization problems.
+This difference in approaches is refreshing, but has its limits. I regularly experience synchronization delays and conflicts. Bulk-importing hundreds or thousands of photos from my DSLR means waiting a full day for things to settle; even when I delete photos that haven’t been synced, they continue to clog the sync queue because the trash needs to be synced.
+
+There’s also a certain part of this that’s charming. It charms the same part of me that, emotionally, prefers to own a car than lease one.
 
 One surprising iPhone quality is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
 
