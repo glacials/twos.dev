@@ -1,31 +1,32 @@
 ---
-filename: apple.html
+
 date: 2022-05
+---
+
+filename: apple.html
+created: 2022-05
+updated: 2022-05
 ---
 
 TODO: USB-C (maybe?), Touch Bar, SMS in macOS, 
 
 # From Google to Apple
 
-My life is in Google more than anyone I know. The usual suspects, sure -- Gmail, Photos, Chrome, and the like, but also the ones people stay away from—Stadia, Tasks, One, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies & TV, Podcasts. We have more Google Homes than rooms. I was a beta user for the first Chromebook, the Cr-48. I have more scar tissue than most from services being sent to the “Google graveyard” like Allo and Hangouts. For a few years I was gung-ho enough to overlay my Facebook profile picture with a Google+ logo and the text “I’ve moved”. (How embarrassing that eventually was!)
+This is a living document.
 
-I’ve been an Android user for 12 years, 10 of them with Nexus and Pixel devices. But once in a while I try to challenge my beliefs by changing seats. This is how I understand why—or whether—I really prefer what I chose. But when I've previously trialed a borrowed iPhone for a few months (thanks [@bensw](https://twitter.com/bensw)), my thoughts amounted to "It's not that different, except the Google apps don't have any OS integration".
+My life is in Google more than anyone I know. The usual suspects, sure -- Gmail, Photos, Chrome, and the like, but also the ones people stay away from—Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies & TV, Podcasts. Our house has more Google Home Minis than rooms. I was a beta user for the first Chromebook, the Cr-48. I have more scar tissue than most from services being sent to the “Google graveyard”. For a few years I was gung-ho enough to overlay my Facebook profile picture with a Google+ logo and the text “I’ve moved”. It’s no surprise I’ve been an Android user for 12 years, 10 of them with Nexus and Pixel devices.
+
+Once in a while I challenge my beliefs by changing seats. This is how I understand why—or whether—I really prefer what I chose. But when I've previously trialed a borrowed iPhone for a few months (thanks [@bensw](https://twitter.com/bensw)), my thoughts amounted to "It's not that different, but the Google apps don't have OS integration".
 
 I've realized since then it’s hard to know the Apple value proposition without being immersed in the ecosystem. For the same reason the Google Assistant doesn't shine iOS, iOS doesn't shine if you only use Google apps.
 
-After a buggy summer with my Pixel 3a, I decided now’s a good time to give Apple an honest shot. The infamous walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. This is my story of hopping the fence.
+After a buggy summer with my Pixel 3a, I decided now’s a good time to give Apple an honest shot. The infamous walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. These are my notes on hopping the fence.
 
-## The Plan
+### ArchLinux → macOS
 
-I use a Mac for development, but otherwise use no Apple devices. Google’s tablet game has been nonexistent for a few years, so iPad seems a good place to start. Starting there, I’ll tiptoe my way into the ecosystem, checking deltas as I go. Each piece I add theoretically adds value to each existing piece. For example, iPads can be used as external displays for Macs. I'll document my journey here.
+I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time. 
 
-## Execution
-
-### Precondition: MacBook
-
-I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time.
-
-### iPad
+### Nexus 7 → iPad
 
 My goal for a tablet is to replace all my at-home phone use. It gives an upgraded experience and as a bonus, drains a different battery bank than the one I may need later. As a habit, I carry it room-to-room.
 
