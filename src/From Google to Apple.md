@@ -79,7 +79,7 @@ This is not to say I can’t use my iPad to access photos I took on my iPhone, b
 
 This difference in approaches is refreshing, but has its limits. I regularly experience synchronization delays and conflicts. Bulk-importing hundreds or thousands of photos from my DSLR means waiting a full day for things to settle; even when I delete photos that haven’t been synced, they continue to clog the sync queue because the trash needs to be synced.
 
-There’s also a certain part of this that’s charming. It charms the same part of me that, emotionally, prefers to own a car than lease one.
+There’s a certain part of this that’s charming. It charms the same part of me that, emotionally, prefers to own a car than lease one.
 
 One surprising iPhone quality is lack of feature parity with iPad. For example, iPhone has swipe-to-type on the software keyboard while iPad does not. iPad can show multiple apps on the screen at a time, but iPhone cannot. This was my first introduction to Apple’s strong design opinions; certainly it’d be easier to keep the two systems at feature parity, but Apple would rather disable a feature than allow a user to have a poor experience using it. Infamously, Apple has not released a calculator app for iPad because they haven’t found the time to make the design feel great (TODO: Find quote/link).
 
