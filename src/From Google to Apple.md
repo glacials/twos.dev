@@ -81,7 +81,7 @@ The UX of Shortcuts with Home is miles better than Google Home’s long device l
 
 ### Pixel Buds → AirPods Pro
 
-Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. I’ve stopped bringing my Bose QC 35-IIs on flights.
+Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. I’ve stopped bringing my Bose QuietComfort 35 IIs on
 
 Ecosystem benefits:
 
