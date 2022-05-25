@@ -43,7 +43,7 @@ The more native apps I use on iOS, the better the UX gets. For example, you can 
 
 #### Notifications 
 
-Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first. After some time I’d call them a sidegrade.
+Notifications on iOS behave differently than on Android, and that difference makes them feel worse at first. After some time I’d call them a sidegrade.
 
 Android notifications are stateful. If you receive a Gmail notification on your phone then read that email on any platform, the notification goes away. Otherwise, the notification will be there even days later. In this way, Android notifications can be used as a todo list of sorts.
 
