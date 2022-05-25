@@ -151,7 +151,7 @@ As a casual spreadsheet user, Sheets and Numbers are nearly identical. Numbers h
 
 I value simplicity and elasticity in notetaking—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout asks too much of me (color coding) to look good and is hard to browse, but it makes up for it with great search.
 
-Notes is simple and elastic in a different way. Where Keep focuses on shortform sticky-style notes, Notes focuses on longform, with roughly the same text formatting options as Markdown (unfortunately without the actual markup).
+Notes is simple and elastic in a different way. Where Keep focuses on shortform sticky-style notes, Notes focuses on longform, with roughly the same text formatting options as Markdown (unfortunately without the markup).
 
 - I use Shortcuts to start my Chinese lesson, which creates a scratch note with the current date as its title and opens my Zoom meeting
 
