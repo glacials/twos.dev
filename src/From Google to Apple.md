@@ -102,7 +102,7 @@ macOS Mail supports filters, but only locally. The iCloud Mail service has a sep
 
 If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer on Mail but uses Gmail APIs instead of SMTP.
 
-### Calendar → Calendar
+### Google Calendar → Calendar
 
 After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was my new email address, if that Google Workspace account was present on my device, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
 
