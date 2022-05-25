@@ -128,7 +128,7 @@ Apple Maps gets a lot of flak for its initial release state, rightly so. But tha
 
 Unfortunately it’s only gotten good, not great. There are UX benefits over Google Maps, such as the spoken direction “Go past this light, then at the next one, turn `$DIRECTION`”, but about 5% of my trips to new places end me at the right area but wrong specific destination. I’ve been routed to the delivery entrance for a museum, the back entrance for an airport, and the wrong parking lot (15 minutes of walking wrong) of a large shopping center.
 
-I’m continuing to give it chances because I know more data helps, but for risky timelines I go back to Google Maps.
+I’m continuing to give it chances because I know more data helps, but for tight schedules I go back to Google Maps.
 
 The ecosystem benefits of Apple Maps include rich links in iMessage and Calendar, Siri suggestions for destinations based on those and other sources, and Apple Watch vibration patterns to indicate upcoming turns.
 
