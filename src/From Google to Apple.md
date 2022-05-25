@@ -76,7 +76,7 @@ My biggest fear with this change was losing the decade I’ve spent building up 
 
 The Apple Home UX is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
 
-The ecosystem benefits of Apple Home include using Apple TV as your IoT gateway, having home controls in the iOS and macOS control center pull-down menus, and 
+The ecosystem benefits of Apple Home include using Apple TV as your IoT gateway, and having home controls in the iOS and macOS control center pull-down menus.
 
 ### Pixel Buds → AirPods Pro
 
