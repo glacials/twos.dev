@@ -107,7 +107,7 @@ Mail is bad at dealing with calendar invitations. One invitation appears as two 
 
 macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
-If you want a Mail-like experience with Gmail as a backend, I recommend Mimestream.
+If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead.
 
 ### Calendar
 
