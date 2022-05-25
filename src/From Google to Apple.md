@@ -4,8 +4,6 @@ date: 2022-05
 updated: 2022-05
 ---
 
-TODO: USB-C (maybe?), Touch Bar, SMS in macOS, 
-
 # From Google to Apple
 
 This is a living document.
