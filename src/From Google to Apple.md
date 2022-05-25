@@ -106,7 +106,7 @@ macOS Mail supports filters, but only locally. The iCloud Mail service has a sep
 
 If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer but uses Gmail APIs instead of SMTP.
 
-Ecosystem benefits of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar floating partial.
+Ecosystem benefits of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar float.
 
 ### Google Calendar → Calendar
 
