@@ -80,9 +80,9 @@ The ecosystem benefits of Apple Home include using Apple TV as your IoT gateway,
 
 ### Pixel Buds → AirPods Pro
 
-Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. They’ve,ore than replaced my Bose QuietComfort 35 IIs.
+Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. They’ve more than replaced my Bose QuietComfort 35 IIs.
 
-The ecosystem starts to shine here. When I am working at my Mac with my AirPods connected to it, then I walk away and start using my iPhone, they switch automatically.- 
+The ecosystem benefits of AirPods include automatic switching between devices based on attention.
 
 ### Gmail → iCloud Mail
 
