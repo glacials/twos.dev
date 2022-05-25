@@ -1,7 +1,6 @@
 ---
 filename: apple.html
 date: 2022-05
-updated: 2022-05
 ---
 
 # From Google to Apple
