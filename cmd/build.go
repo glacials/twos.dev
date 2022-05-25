@@ -50,12 +50,16 @@ var buildCmd = &cobra.Command{
 			return fmt.Errorf("can't build images: %w", err)
 		}
 
-		if err := buildHTML(sourceDir, destinationDir); err != nil {
+		if err := buildMarkdown(sourceDir, destinationDir); err != nil {
 			return fmt.Errorf("can't build HTML: %w", err)
 		}
 
 		if err := buildStatic(staticAssetsDir, destinationDir); err != nil {
 			return fmt.Errorf("can't build static assets: %w", err)
+		}
+
+		if err := buildFormatting(destinationDir); err != nil {
+			return fmt.Errorf("can't post-process build dir: %w", err)
 		}
 
 		return nil

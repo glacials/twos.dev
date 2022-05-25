@@ -24,7 +24,7 @@ type htmlFileVars struct {
 	UpdatedAt string
 }
 
-func buildHTML(sourceDir, destinationDir string) error {
+func buildMarkdown(sourceDir, destinationDir string) error {
 	templateHTML, err := ioutil.ReadFile(filepath.Join(sourceDir, "templates", "_essay.html"))
 	if err != nil {
 		return fmt.Errorf("can't read essay template: %w", err)
