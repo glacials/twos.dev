@@ -183,18 +183,14 @@ I miss Google Play Music.
 
 The ecosystem benefits of Apple Music include tighter Shazam integration and better Siri support for when I’m driving and want to play something.
 
-### Shortcuts
+### Google Assistant Routines / Tasker → Shortcuts
 
-Replaces Google Assistant routines and apps like Tasker.
+I can’t say enough good things about Shortcuts. It is the most power-user-friendly thing about iOS and goes against all expectations I had around Apple and power users. I prefer it to shell scripts.
 
-Thoughts:
+As one example, I like to write in an app called iA Writer. I use Shortcuts to automatically commit and push my writing to this website daily. Because iA Writer stores files in iCloud, and another app called Working Copy can interact with Git repositories, Shortcuts lets me glue them together:
 
-I can’t say enough good things about Shortcuts. It is the most power user friendly thing about iOS and goes against all expectations I had around Apple not allowing a hacking mentality on iOS. I prefer it to shell scripts on a cron job.
-
-As one example, I like to write in an app called iA Writer, and I use Shortcuts to automatically commit and push those to this website daily. Because iA Writer stores files in iCloud, and another app called Working Copy can interact with Git repositories, Shortcuts lets me glue them together:
-
-1. (Working Copy) Pull from TWOS.DEV remote
-2. (iOS) Get contents of folder ICLOUD/IA WRITING/PUBLISHED
+1. (Working Copy) Pull from `twos.dev` remote
+2. (iOS) Get contents of folder `iCloud/iA Writing/Published`
 3. (Working Copy) Write CONTENTS OF FOLDER to ./SRC in TWOS.DEV
 4. (Working Copy) Stage ./SRC in TWOS.DEV
 5. Commit TWOS.DEV with message AUTOMATIC COMMIT BY IA WRITER SYNC JOB
