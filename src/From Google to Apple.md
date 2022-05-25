@@ -139,7 +139,7 @@ Using the 2FA field involved manual effort. Scanning almost never worked, so I w
 
 I moved back to 1Password.
 
-### Sheets → Numbers,
+### Sheets → Numbers
 
 As a casual spreadsheet user, Sheets and Numbers are nearly identical. Numbers has nicer UX when editing formulae that visualizes any cell(s) being referenced. It also tries to humanize references, e.g. “Ben age” for a cell in a row with header “Ben” and a column with header “Age”, instead of something like A:123. This is nice until headers get long and multiworded. Overall it’s a wash.
 
