@@ -96,8 +96,6 @@ Ignoring that, Gmail still wins search by an order of magnitude. For example, Gm
 
 Mail is okay at displaying emails as conversations. Once in a while, it omits something it shouldn’t. When I click Send while replying to a thread it doesn't immediately append my message, causing me to believe something went wrong.
 
-Mail has no special treatment of calendar invitations, which is to say they appear as raw attachments. When Google Calendar users send an invitation there are two attachments, `invite.ics` and `mime-attachment.ics`. Each opens Calendar with an identical event draft, but I’ve learned to use `mime-attachment.ics` because it is a two-way connection with the sender’s event; the other is only a copy.
-
 macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
 If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer on Mail but uses Gmail APIs instead of SMTP.
@@ -107,6 +105,10 @@ If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestr
 After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was my new email address, if that Google Workspace account was present on my device, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
 
 I don't recommend using the Week view in Calendar. Similar to Google Calendar, Calendar uses a horizontal red bar to represent the current time; however this red bar extends to occupy 100% of the width of the week, and does not do a good enough job of showing you which day today is. This has led me to mistake the wrong day of the week for today multiple times, inducing panic about being late for meetings and reaching out to people to reschedule other meetings. I now use Day view, where no red bar shows unless viewing today.
+
+Mail has no special treatment of calendar invitations, which is to say they appear as raw attachments. When Google Calendar users send a calendar invitation there are two attachments, `invite.ics` and `mime-attachment.ics`. Each will pop up a Calendar float to add the event; I’ve learned to use `mime-attachment.ics` because it seems to open a two-way connection with the sender’s event, where `invite.ics` seems to be a local copy.
+
+Google Calendar is the stickiest part of the Google ecosystem due to the features they’ve built on top of vanilla calendaring and their ubiquity. Interactions with Google Calendar users, which in my experience is everyone, always leave me with a feeling of unease, of “did they get this RSVP?” or “did their event update with the new time?”. For some use cases, Calendar will RSVP by sending an email from your account with a plaintext description of your response. I haven’t discovered yet if these are seen by human eyes or interpreted automatically.
 
 Quick look is a blast, the same way it is for previewing files in Finder.
 
