@@ -29,7 +29,7 @@ With the Nexus 7, within a year I’d stopped that habit. It afforded too little
 
 Instead, I’ve carried it room to room for two years now. It’s fulfilled the minimum goal and has even replaced some light computer uses like writing. The app ecosystem understands the tablet form factor; apps use it to display more information, differently laid out. The multitasking experience is opinionated but helpful. Opening multiple windows per app is a big leap towards not feeling like a phone, but I’ve only seen native apps support it.
 
-The ecosystem benefits I receive from iPad are the ability to use it as a second monitor, and the ability to use my Mac’s mouse and keyboard to control the iPad. macOS’s Preview app allows iPad to be used as an input device for signing documents and marking up images. This is something I did before by manually transferring files, but now it’s two clicks with instant sync.
+Ecosystem effects of iPad are the ability to use it as a second monitor, and the ability to use my Mac’s mouse and keyboard to control the iPad. macOS’s Preview app allows iPad to be used as an input device for signing documents and marking up images. This is something I did before by manually transferring files, but now it’s two clicks with instant sync.
 
 ### Pixel → iPhone
 
@@ -68,7 +68,7 @@ Apple TV can initiate play from a phone like Chromecast, but beyond that we’ve
 
 Otherwise it has a good build quality and feels good in the hand. But it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table. I miss the remote-free life.
 
-The ecosystem benefits of Apple TV include typing: when a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
+Ecosystem effects of Apple TV include typing: when a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
 
 ### Google Home → Apple Home
 
@@ -76,13 +76,13 @@ My biggest fear with this change was losing the decade I’ve spent building up 
 
 The Apple Home UX is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
 
-The ecosystem benefits of Apple Home include using Apple TV as your IoT gateway, and having home controls in the iOS and macOS control center pull-down menus.
+Ecosystem effects of Apple Home include using Apple TV as your IoT gateway, and having home controls in the iOS and macOS control center pull-down menus.
 
 ### Pixel Buds → AirPods Pro
 
 Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. They’ve more than replaced my Bose QuietComfort 35 IIs.
 
-The ecosystem benefits of AirPods include automatic switching between devices based on attention.
+Ecosystem effects of AirPods include automatic switching between devices based on attention.
 
 ### Gmail → iCloud Mail
 
@@ -106,7 +106,7 @@ macOS Mail supports filters, but only locally. The iCloud Mail service has a sep
 
 If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer but uses Gmail APIs instead of SMTP.
 
-Ecosystem benefits of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar float.
+Ecosystem effects of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar float.
 
 ### Google Calendar → Calendar
 
@@ -120,7 +120,7 @@ Google Calendar is the stickiest part of the Google ecosystem due to the feature
 
 Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to have a refresh in a decade. Calendar can automatically generate “travel to” and “travel from” based on the travel time between locations.
 
-Ecosystem benefits of Calendar include Maps and Siri suggestions for navigation destinations.
+Ecosystem effects of Calendar include Maps and Siri suggestions for navigation destinations.
 
 ### Google Maps → Apple Maps
 
@@ -130,7 +130,7 @@ Unfortunately it’s only gotten good, not great. There are UX benefits over Goo
 
 I’m continuing to give it chances because I know more data helps, but for tight schedules I go back to Google Maps.
 
-The ecosystem benefits of Apple Maps include rich links in iMessage and Calendar, Siri suggestions for destinations based on those and other sources, and Apple Watch vibration patterns to indicate upcoming turns.
+Ecosystem effects of Apple Maps include rich links in iMessage and Calendar, Siri suggestions for destinations based on those and other sources, and Apple Watch vibration patterns to indicate upcoming turns.
 
 ### Chrome → Safari
 
@@ -140,7 +140,7 @@ In macOS the Safari chrome fades into the background better than the Chrome chro
 
 I tend to switch back to Chrome for Meet meetings, as I’ve experienced some webcam freezing in Safari of myself or others (local only); Meet also supports more types of screen sharing in Chrome, like sharing one tab.
 
-The ecosystem effects of Safari include Handoff, which allows a browsing session to smoothly transition from device to device.
+Ecosystem effects of Safari include Handoff, which allows a browsing session to smoothly transition from device to device.
 
 #### iCloud Keychain
 
@@ -152,7 +152,7 @@ Using the 2FA field involves manual effort. Scanning almost never works, so I en
 
 I moved back to 1Password.
 
-The ecosystem effects of iCloud Keychain include faster and more fluid autofill support in Safari.
+Ecosystem effects of iCloud Keychain include faster and more fluid autofill support in Safari.
 
 ### Sheets → Numbers
 
@@ -170,7 +170,7 @@ Notes is simple and elastic in a different way. Where Keep focuses on shortform 
 
 For me, it’s a wash between the two.
 
-The ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I use a shortcut to create a new note titled and sorted correctly before starting a Chinese lesson.
+Ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I use a shortcut to create a new note titled and sorted correctly before starting a Chinese lesson.
 
 ### Tasks / Google Assistant Reminders → Reminders
 
@@ -182,13 +182,13 @@ It’s a powerful app, but everything is presented simply. There is a native mac
 
 As one use case, my spouse and I share a family reminders list. On that list, a reminder to take out the trash pops every trash day when I arrive home. It’s assigned to me, but if she happens to do it before I get home she can check it off; it won’t then pop for me.
 
-The ecosystem benefits of Reminders include integration with the share sheet in native apps (e.g. sharing from Safari automatically fills in the URL field) and the ability to persistently show a popped reminder (if any) on my Apple Watch homescreen.
+Ecosystem effects of Reminders include integration with the share sheet in native apps (e.g. sharing from Safari automatically fills in the URL field) and the ability to persistently show a popped reminder (if any) on my Apple Watch homescreen.
 
 ### Google Assistant → Siri
 
 Siri is nearly strictly worse than Google Assistant. It can't answer questions like "What temperature do I need to cook chicken to?" or "Who played Alan in Tron Legacy?".
 
-The ecosystem benefits of Siri include surface-level interaction with native apps: setting reminders, playing music, 
+Ecosystem effects of Siri include surface-level interaction with native apps: setting reminders, playing music, 
 
 ### YouTube Music → Apple Music
 
@@ -200,7 +200,7 @@ The UI of Apple Music for macOS is a let-down and is more on par with the iCloud
 
 I miss Google Play Music.
 
-The ecosystem benefits of Apple Music include tighter Shazam integration and better Siri support for when I’m driving and want to play something.
+Ecosystem effects of Apple Music include tighter Shazam integration and better Siri support for when I’m driving and want to play something.
 
 ### Google Assistant Routines / Tasker → Shortcuts
 
