@@ -92,7 +92,7 @@ I don’t recommend importing Gmail archives into iCloud Mail; the experience wa
 
 The iCloud web interface is bad. On my Windows gaming computer I’ve installed Thunderbird to get by.
 
-Mail itself integrates very well with the rest of the ecosystem and has a solid UX at its core, but is plagued paradoxically by usability issues.
+Mail itself integrates very well with the rest of the ecosystem and has a solid UX at its core, but is plagued paradoxically by usability issues:
 
 Mail's junk filter sorts ~one legitimate email per week into the junk folder, even after months of correcting it.
 
