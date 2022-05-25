@@ -1,10 +1,6 @@
 ---
-
-date: 2022-05
----
-
 filename: apple.html
-created: 2022-05
+date: 2022-05
 updated: 2022-05
 ---
 
