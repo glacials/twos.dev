@@ -66,7 +66,7 @@ Apple TV can initiate play from a phone like Chromecast, but beyond that we’ve
 
 Otherwise it has a good build quality and feels good in the hand. But it’s a remote and can be lost. We’ve 3D printed a holder for it that attaches to the coffee table. I miss the remote-free life.
 
-When a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
+The ecosystem benefits of Apple TV include typing: when a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
 
 ### Home → Home
 
