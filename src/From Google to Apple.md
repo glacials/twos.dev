@@ -119,7 +119,7 @@ Unfortunately it’s only gotten good, not great. There are a lot of small UX be
 
 I’m continuing to give it chances because I know more data helps, but for risky timelines I go back to Google Maps.
 
-The ecosystem benefits of Apple Maps include rich links in iMessage and Calendar, Siri suggestions for destinations based on those and other sources, and 
+The ecosystem benefits of Apple Maps include rich links in iMessage and Calendar, Siri suggestions for destinations based on those and other sources, and Apple Watch vibration patterns to indicate upcoming turns.
 
 ### Chrome → Safari
 
