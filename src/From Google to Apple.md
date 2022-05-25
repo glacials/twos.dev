@@ -177,9 +177,11 @@ Apple Music is a great example of the big place Apple still struggles: services.
 
 Importing my music was a headache and missed or incorrectly identified a lot of songs. The most reliable method I had involved an Automator workflow that would move the cursor to my existing library, select and copy a title, then move it to Apple Music’s search field, paste, and add the top result.
 
-The UI of Apple Music for macOS is a let-down and is more on par with the iCloud Mail web interface than with any other native Apple app. Navigation is slow and unresponsive, which is compounded by the fact that it takes too many n
+The UI of Apple Music for macOS is a let-down and is more on par with the iCloud Mail web interface than with any other native Apple app. Navigation is slow and unresponsive, which is compounded by the fact that it takes too many transitions to get where you’re going.
 
-I miss Google Play Music, but not YouTube Music.
+I miss Google Play Music.
+
+The ecosystem benefits of Apple Music include tighter Shazam integration and better Siri support for when I’m driving and want to play something.
 
 ### Shortcuts
 
