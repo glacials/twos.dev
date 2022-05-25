@@ -104,7 +104,7 @@ Mail is okay at displaying emails as conversations. Once in a while, it omits so
 
 macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
-If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer on Mail but uses Gmail APIs instead of SMTP.
+If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer but uses Gmail APIs instead of SMTP.
 
 Ecosystem benefits of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar floating partial.
 
