@@ -170,7 +170,7 @@ It’s a powerful app, but everything is presented simply. There is a native mac
 
 As one use case, my spouse and I share a family reminders list. On that list, a reminder to take out the trash pops every trash day when I arrive home. It’s assigned to me, but if she happens to do it before I get home she can check it off; it won’t then pop for me.
 
-The ecosystem benefits of Reminders include integration with the share sheet in native apps; e.g. sharing from Safari automatically fills in the URL field.
+The ecosystem benefits of Reminders include integration with the share sheet in native apps (e.g. sharing from Safari automatically fills in the URL field) and the ability to persistently show a popped reminder (if any) on my Apple Watch homescreen.
 
 ### Google Assistant → Siri
 
