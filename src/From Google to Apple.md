@@ -109,23 +109,25 @@ macOS Mail supports filters, but only locally. The iCloud Mail service has a sep
 
 If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestream](https://mimestream.com) instead; it is written by a former Apple engineer on Mail but uses Gmail APIs instead of SMTP.
 
-### Calendar
+### Calendar → Calendar
 
-Before transitioning my custom-domain email address to iCloud Mail, it was serviced by Google Workspace; I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was my new email address, if that Google Workspace account was present on my device, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
+After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was my new email address, if that Google Workspace account was present on my device, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
 
 I don't recommend using the Week view in Calendar. Similar to Google Calendar, Calendar uses a horizontal red bar to represent the current time; however this red bar extends to occupy 100% of the width of the week, and does not do a good enough job of showing you which day today is. This has led me to mistake the wrong day of the week for today multiple times, inducing panic about being late for meetings and reaching out to people to reschedule other meetings. I now use Day view, where no red bar shows unless viewing today.
 
-Ecosystem benefits:
+Quick look is a blast, the same way it is for previewing files in Finder.
 
-- Quick look is a blast, the same way it is for previewing files in Finder
-
-### Maps
+### Maps → Maps
 
 Replaces Google Maps.
 
-### Safari
+### Chrome → Safari
 
-Replaces Google Chrome.
+This was a far less noticeable change than I expected. Everything from bookmark sync to my extensions to rendering works the same.
+
+In macOS the Safari chrome fades into the background better than the Chrome chrome, such that websites feel a bit closer to standalone applications even when in a tabbed window. The touchpad gesture to go back or forward produces a natural transition where the whole web page slides off screen to reveal the target web page, but it backfires and feels artificial on single-page apps where the original navigation event from the target page was no so heavyweight as that.
+
+The ecosystem effects of Safari include 
 
 ### Numbers, Pages
 
