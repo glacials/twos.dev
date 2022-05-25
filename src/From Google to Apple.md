@@ -31,7 +31,7 @@ The ecosystem benefits I receive from iPad are the ability to use it as a second
 
 ### Pixel → iPhone
 
-iPhone makes clear the differences in the Google and Apple attitudes toward user identity. In Google a user is a Google account; an Android phone is a window into it. In Apple a user is an iPhone, and the iPhone is possibly synchronized with an Apple account.
+iPhone makes clear the differences in the Google and Apple attitudes toward user identity. In Google a user is a Google account; an Android phone is a window into it. In Apple a user is an iPhone.
 
 For example, in Google Docs documents are saved to your account, presumably to a row in a database somewhere. In Pages documents are saved to the filesystem, defaulting to the iCloud Drive directory, which synchronizes them to your Apple account. The filesystem is the database.
 
