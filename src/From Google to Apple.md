@@ -96,7 +96,7 @@ Ignoring that, Gmail still wins search by an order of magnitude. For example, Gm
 
 Mail is okay at displaying emails as conversations. Once in a while, it omits something it shouldn’t. When I click Send while replying to a thread it doesn't immediately append my message, causing me to believe something went wrong.
 
-Mail has no special treatment of calendar invitations, which is to say they appear as a pair of attachments (at least when coming from Google Calendar users): one `invite.ics` file and one `mime-attachment.ics` file. Each opens Calendar with an identical event draft, but I’ve learned to use `mime-attachment.ics` because it is a two-way connection with the sender; ICS is only a copy of the initial event details.
+Mail has no special treatment of calendar invitations, which is to say they appear as raw attachments. When Google Calendar users send an invitation there are two attachments, `invite.ics` and `mime-attachment.ics`. Each opens Calendar with an identical event draft, but I’ve learned to use `mime-attachment.ics` because it is a two-way connection with the sender’s event; the other is only a copy.
 
 macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
