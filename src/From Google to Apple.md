@@ -93,46 +93,21 @@ The big one. I’ve been wanting to switch my email to a domain I control anyway
 
 I don’t recommend importing Gmail archives into iCloud Mail; the experience was fraught with landmines and didn’t achieve the desired result. I’ve chosen to live the life of searching in two places when I need something.
 
-The iCloud web interface is bad. On my Windows gaming computer I’ve installed Thunderbird to get by.
+The iCloud web interface is bad. On my Windows gaming computer I’ve installed Thunderbird to get by. Mail itself integrates very well with the rest of the ecosystem and has a solid UX at its core, but is plagued paradoxically by usability issues.
 
-Mail's junk filter sorts roughly one legitimate email per week into the junk folder, even after multiple months of correcting it. Sometimes two similar emails from the same mailing list will come in around the same time, one into junk, one not.
+Mail's junk filter sorts ~one legitimate email per week into the junk folder, even after months of correcting it.
 
-Mail's search feature is bad. On macOS, it will assume you want to search the current mailbox, e.g. Inbox. Because I archive emails that don't need my attention, this is never what I want to search. (Mail on iOS and iPadOS correctly searches everything by default.) When you are done searching and click Inbox to "return home", the search field doesn't clear on its own, leading you to believe your Inbox is empty.
+Mail's search is bad. On macOS, it will assume you want to search the current mailbox. Because I do inbox zero, this is never what I want to search. (iOS and iPadOS correctly search everything.) When you are done searching and click Inbox to "return home" the search field doesn't clear, leading you to believe your Inbox is empty.
 
-Even beyond that, Gmail unsurprisingly wins search by an order of magnitude. As one example, Gmail searches the contents of PDFs attached to emails.
+Ignoring that, Gmail still wins search by an order of magnitude. For example, Gmail searches the contents of PDFs attached to emails; I’ve found this invaluable finding old leases and whatnot.
 
-Mail is okay at displaying emails as conversations. Once in a while, it misses something. When you add an email to a thread and click send, it doesn't immediately appear below the thread, causing you to believe something went wrong. Presumably it's not discovered until the screen re-scans the Sent mailbox for related emails.
+Mail is okay at displaying emails as conversations. Once in a while, it omits something it shouldn’t. When I click Send while replying to a thread it doesn't immediately append my message, causing me to believe something went wrong.
 
-Mail is bad at dealing with calendar invitations. They appear as normal attachments -- two per invitation, an ICS file and one generically called "Mail Attachment". You have to learn by trial and error that the ICS file is not the one you should use, although it appears to work, because it holds no ties back to the creator. Instead, you should open "Mail Attachment", which will allow you to RSVP.
+Mail is bad at dealing with calendar invitations. One invitation appears as two attachments: one ICS file and one generic "Mail Attachment". Each opens Calendar with an identical event draft, but I’ve learned to use “Mail Attachment” because it is a two-way connection with the sender; ICS is only a copy of the initial event details.
 
-Ecosystem benefits:
+macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
-- Share menu feels more natively “part of” iOS, iPadOS
-- Gesture support on macOS 
-- Drag-and-collect support on iOS
-
-Notes:
-
-- If you use Gmail and want the UX of Mail.app, I suggest Mimestream. Created by the ex-Apple developer of Mail.app to use Gmail APIs and features instead of SMTP.
-
-
-### iCloud Mail
-
-Replaces Gmail backend.
-
-Thoughts:
-
-After seeing many harrowing stories of Google users' accounts being inexplicably banned I decided I'd start the years-long process of changing my email address, to a domain I control. Luckily, Apple released custom domain support for iCloud Mail around the same time.
-
-The iCloud Mail web app experience is bad. With Apple's quality bar they set for themselves, I'm surprised it exists. I quickly switched to Thunderbird on my gaming computer.
-
-Although the macOS Mail app supports auto sorting rules, these apply locally. The iCloud Mail service has a separate rules system with the same effect, but the two have disparate feature sets and don't synchronize. For example, iCloud rules can match one condition per rule -- from: or subject:, but not both.
-
-Later, I inherited an old iMac and I have it always running so my mail always gets sorted.
-
-Ecosystem benefits:
-
-- Push works for Mail when used with iCloud Mail
+If you want a Mail-like experience with Gmail as a backend, I recommend Mimestream.
 
 ### Calendar
 
