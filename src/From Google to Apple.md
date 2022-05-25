@@ -74,7 +74,9 @@ The ecosystem benefits of Apple TV include typing: when a text input is selected
 
 My biggest fear with this change was losing the decade I’ve spent building up our Google Nest devices, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to Apple TV showing our Nest doorbell camera picture-in-picture when the doorbell rings. (If you’re not keen to set up a Raspberry Pi, try Starling Home Hub.)
 
-The UX of Shortcuts with Home is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
+The Apple Home UX is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
+
+The ecosystem benefits of Apple Home include using Apple TV as your IoT gateway, having home controls in the iOS and macOS control center pull-down menus, and 
 
 ### Pixel Buds → AirPods Pro
 
