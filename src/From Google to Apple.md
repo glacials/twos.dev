@@ -163,20 +163,23 @@ It’s a powerful app, but everything is presented simply. There is a native mac
 
 As one use case, my spouse and I share a family reminders list. On that list, a reminder to take out the trash pops every trash day when I arrive home. It’s assigned to me, but if she happens to do it before I get home she can check it off; it won’t then pop for me.
 
-The ecosystem benefits of Reminders include tight integration with the share sheet in native apps; e.g. sharing from Safari automatically fills in the URL field
+The ecosystem benefits of Reminders include integration with the share sheet in native apps; e.g. sharing from Safari automatically fills in the URL field.
 
-### Siri
-
-Replaces Google Assistant.
-
-Thoughts:
+### Google Assistant → Siri
 
 Siri is nearly strictly worse than Google Assistant. It can't answer questions like "What temperature do I need to cook chicken to?" or "Who played Alan in Tron Legacy?".
 
-Otherwise, the user experience of Siri has the classic Apple pleasantness.
+The ecosystem benefits of Siri include surface-level interaction with native apps: setting reminders, playing music, 
 
-Ecosystem benefits:
+### YouTube Music → Apple Music
 
+Apple Music is a great example of the big place Apple still struggles: services.
+
+Importing my music was a headache and missed or incorrectly identified a lot of songs. The most reliable method I had involved an Automator workflow that would move the cursor to my existing library, select and copy a title, then move it to Apple Music’s search field, paste, and add the top result.
+
+The UI of Apple Music for macOS is a let-down and is more on par with the iCloud Mail web interface than with any other native Apple app. Navigation is slow and unresponsive, which is compounded by the fact that it takes too many n
+
+I miss Google Play Music, but not YouTube Music.
 
 ### Shortcuts
 
