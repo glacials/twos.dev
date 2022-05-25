@@ -163,11 +163,11 @@ Reminders is one of the best-designed apps on iOS. Reminders can be scheduled to
 
 Reminders have a name, description, URL field, and priority (higher priority reminders are sorted higher and given special UI treatment). Reminders can have images attached to them, and any number of subtasks. They can be tagged and flagged.
 
-I use the “Today” view when in-app, which shows any reminder that’s popped or that has no pop trigger.
+It’s a powerful app, but everything is presented simply. There is a native macOS app that synchronizes, so I get proper notifications on most of my devices. In app, I use the “Today” view which shows reminders ready to be addressed.
 
-I have a reminder that pops every Tuesday when I arrive home that reminds me to take out the trash.
+As one use case, my spouse and I share a family reminders list. On that list, a reminder to take out the trash pops every trash day when I arrive home. It’s assigned to me, but if she happens to do it before I get home she can check it off; it won’t then pop for me.
 
-- Siri
+The ecosystem benefits of Reminders include tight integration with the share sheet in native apps; e.g. sharing from Safari automatically fills in the URL field
 
 ### Siri
 
