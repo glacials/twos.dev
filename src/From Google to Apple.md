@@ -159,7 +159,7 @@ The ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I 
 
 ### Tasks / Google Assistant Reminders → Reminders
 
-Reminders is one of the best-designed apps on iOS.
+Reminders is one of the best-designed apps on iOS. Reminders can be scheduled to “pop” at a date only, a date and time, a location, 
 
 - Siri
 
