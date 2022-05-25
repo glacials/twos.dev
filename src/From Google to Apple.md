@@ -133,7 +133,7 @@ The ecosystem effects of Safari include Handoff, which allows a browsing session
 
 While moving to Safari, I replaced 1Password with iCloud Keychain. It serves basic needs, but that’s it. It can store a username, a password, a 2FA code, and a domain name for each entry; nothing more.
 
-It cannot store two domains for one entry, e.g. gmail.com and google.com. It cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer service agents ask for. It cannot even store a name for an entry, e.g. h
+It cannot store two domains for one entry, e.g. gmail.com and google.com. It cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer service agents ask for. It cannot even store a name for an entry, e.g. Washington Corporations and Charities System instead of 
 
 
 
