@@ -161,7 +161,7 @@ The ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I 
 
 Reminders is one of the best-designed apps on iOS. Reminders can be scheduled to “pop” at a date, a date and time, a location, and/or when messaging `$PERSON`. Reminders can belong to lists (e.g. work vs. personal), lists can be shared (e.g. family chores), and reminders within shared lists can be assigned to people.
 
-Reminders have a name, description, URL field, and priority (higher priority reminders are sorted higher and given special UI treatment). Reminders can have images attached to them, and any number of subtasks.
+Reminders have a name, description, URL field, and priority (higher priority reminders are sorted higher and given special UI treatment). Reminders can have images attached to them, and any number of subtasks. They can be tagged and flagged.
 
 I use the “Today” view when in-app, which shows any reminder that’s popped or that has no pop trigger.
 
