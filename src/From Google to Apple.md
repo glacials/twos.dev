@@ -15,6 +15,8 @@ I've realized since then it’s hard to know the Apple value proposition without
 
 After a buggy summer with my Pixel 3a, I decided now’s a good time to give Apple an honest shot. The infamous walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. These are my notes on hopping the fence.
 
+## The Swaps
+
 ### ArchLinux → macOS
 
 I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time. Having gone straight from Windows to Linux due to a love of the POSIX command line and the simplicity of the system (e.g. the “everything is a file” notion), I found macOS to scratch the same itches minus the days spent customizing things.
@@ -68,7 +70,7 @@ Otherwise it has a good build quality and feels good in the hand. But it’s a r
 
 The ecosystem benefits of Apple TV include typing: when a text input is selected on the Apple TV, a notification shows on my iOS devices allowing me to use them as a keyboard. Password manager support works as normal; this is helpful for invoking 1Password to fill logins.
 
-### Home → Home
+### Google Home → Apple Home
 
 My biggest fear with this change was losing a decade of Google Nest ecosystem benefits, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to our Nest doorbell camera showing on our Apple TV picture-in-picture when the doorbell rings. (If you’re not keen to se up a Raspberry Pi, try Starling Home Hub instead.)
 
