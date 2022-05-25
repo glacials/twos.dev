@@ -190,10 +190,20 @@ I can’t say enough good things about Shortcuts. It is the most power-user-frie
 As one example, I like to write in an app called iA Writer. I use Shortcuts to automatically commit and push my writing to this website daily. Because iA Writer stores files in iCloud, and another app called Working Copy can interact with Git repositories, Shortcuts lets me glue them together:
 
 1. (Working Copy) Pull from `twos.dev` remote
-2. (iOS) Get contents of folder `iCloud/iA Writing/Published`
-3. (Working Copy) Write CONTENTS OF FOLDER to ./SRC in TWOS.DEV
-4. (Working Copy) Stage ./SRC in TWOS.DEV
-5. Commit TWOS.DEV with message AUTOMATIC COMMIT BY IA WRITER SYNC JOB
-6. Push TWOS.DEV to remote
+2. (iOS) Get contents of folder `iCloud/iA Writer/Published`
+3. (Working Copy) Write CONTENTS OF FOLDER to `./src` in `twos.dev`
+4. (Working Copy) Stage `./src` in `twos.dev`
+5. Commit `twos.dev` with message “Automatic commit by iA Writer sync job”
+6. Push `twos.dev` to remote
 
-I’m a software engineer and am comfortable coding, but the fact that I could do all this without any was impressive.
+I’m a software engineer and am comfortable coding, but the fact that I could do all this without any was impressive. It’s also fun to say that [my phone is a vital part of my CI/CD pipeline][meta.html].
+
+## Conclusion
+
+This is a living document.
+
+Its goal is to document whether the Apple ecosystem is bigger than the sum of its parts. It is. But the more interesting detail I’ve learned is that it’s the long tail of ecosystem benefits that makes up most of that excess. Not the two or three things per product I’ve mentioned above, but the dozens that happen without me noticing that add up to make a more enjoyable experience.
+
+I equate it to working in a clean space vs. a messy space. There are functional benefits to working in a clean space—it’s easier to find things, spilling a liquid is not as destructive, you breathe in less dust—but the bulk of the benefit is in the hard-to-describe ways the space feels better and motivates more.
+
+As of 2022 May, I’m overall happy with the Apple ecosystem and would not count it out from becoming my new preference.
