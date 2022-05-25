@@ -159,7 +159,7 @@ The ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I 
 
 ### Tasks / Google Assistant Reminders → Reminders
 
-Reminders is one of the best-designed apps on iOS. Reminders can be scheduled to “pop” at a date, a date and time, a location, and/or when messaging `$PERSON`. Reminders can be sorted manually into lists (e.g. work vs. personal) and lists can be shared
+Reminders is one of the best-designed apps on iOS. Reminders can be scheduled to “pop” at a date, a date and time, a location, and/or when messaging `$PERSON`. Reminders can belong to lists (e.g. work vs. personal), lists can be shared (e.g. family chores), and reminders within shared lists can be assigned to people.
 
 I use the “Today” view when in-app, which shows any reminder that’s popped or that has no pop trigger.
 
