@@ -46,6 +46,8 @@ There’s a part of this that’s charming, but it’s not for everyone. I regul
 
 I was initially surprised iPhone and iPad lack feature parity. This first came up trying to swipe-type on iPad. Another is iPad can show multiple apps on the screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt confused at first, but I see Apple’s angle—none of these quite make sense on the other form factor. They’d rather deny you the feature than allow using it to be confusing or unintuitive. Infamously, there is no calculator app for iPad because Apple hasn’t found the time to adapt the iPhone calculator design.
 
+The more native apps I use on iOS, the better the UX gets. For example, you can use multi-touch to drag-and-drop items between apps, such as from Photos into Mail. Third-party apps only implement this functionality sometimes.
+
 #### Notifications 
 
 Notifications on iOS behave differently than on Android, and that difference makes them feel a lot worse at first. After some time I’d call them a sidegrade.
@@ -81,36 +83,19 @@ The UX of Shortcuts with Home is miles better than Google Home’s long device l
 
 ### Pixel Buds → AirPods Pro
 
-Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. I’ve stopped bringing my Bose QuietComfort 35 IIs on
+Everything you’ve heard about the AirPods Pro noise cancellation is true. Transparency mode is so good that more than once I’ve forgotten they’re in my ears. They’ve,ore than replaced my Bose QuietComfort 35 IIs.
 
-Ecosystem benefits:
+The ecosystem starts to shine here. When I am working at my Mac with my AirPods connected to it, then I walk away and start using my iPhone, they switch automatically.- 
 
-- Automatically switches between MacBook, iPad, and iPhone based on heuristics like screen-on or lid-closed
-- Supports Siri, but I don’t use it
+### Gmail → iCloud Mail
 
-### iMac
+The big one. I’ve been wanting to switch my email to a domain I control anyway, and iCloud+ supports that.
 
-Replacements afforded:
+I don’t recommend importing Gmail archives into iCloud Mail; the experience was fraught with landmines and didn’t achieve the desired result. I’ve chosen to live the life of searching in two places when I need something.
 
-- Google Code cron → macOS’s Shortcuts.app
-- Gmail → iCloud Mail (see below)
+The iCloud web interface is bad. On my Windows gaming computer I’ve installed Thunderbird to get by.
 
-Thoughts:
-
-This is a used iMac from 2017; no fancy M1 chip. 
-
-Ecosystem benefits:
-
-- One more device AirPods Pro can switch between
-- 
-
-### Mail
-
-Replaces Gmail UI.
-
-Thoughts:
-
-Mail's junk filter is bad. It has sorted roughly one legitimate email per week into the junk folder, even after multiple months of correcting it. Sometimes two similar emails from the same mailing list will come in around the same time, one into junk, one not.
+Mail's junk filter sorts roughly one legitimate email per week into the junk folder, even after multiple months of correcting it. Sometimes two similar emails from the same mailing list will come in around the same time, one into junk, one not.
 
 Mail's search feature is bad. On macOS, it will assume you want to search the current mailbox, e.g. Inbox. Because I archive emails that don't need my attention, this is never what I want to search. (Mail on iOS and iPadOS correctly searches everything by default.) When you are done searching and click Inbox to "return home", the search field doesn't clear on its own, leading you to believe your Inbox is empty.
 
