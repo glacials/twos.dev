@@ -110,7 +110,7 @@ Ecosystem benefits of Mail include having search results show up in Spotlight an
 
 ### Google Calendar → Calendar
 
-After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was my new email address, if that Google Workspace account was present on my device, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
+After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was that email address, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
 
 I don't recommend using the Week view in Calendar. Similar to Google Calendar, Calendar uses a horizontal red bar to represent the current time; however this red bar extends to occupy 100% of the width of the week, and does not do a good enough job of showing you which day today is. This has led me to mistake the wrong day of the week for today multiple times, inducing panic about being late for meetings and reaching out to people to reschedule other meetings. I now use Day view, where no red bar shows unless viewing today.
 
