@@ -118,7 +118,9 @@ Mail has no special treatment of calendar invitations, which is to say they appe
 
 Google Calendar is the stickiest part of the Google ecosystem due to the features they’ve built on top of vanilla calendaring and their ubiquity. Interactions with Google Calendar users, which in my experience is everyone, always leave me with a feeling of unease: “did they get this RSVP?” or “did their event update with the new time?”. For some use cases, Calendar will RSVP by sending an email from your account with a plaintext description of your response. I haven’t discovered yet if these are seen by human eyes or interpreted automatically.
 
-Quick look is a blast, the same way it is for previewing files in Finder.
+Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to have a refresh in a decade. Calendar can automatically generate “travel to” and “travel from” based on the travel time between locations.
+
+Ecosystem benefits of Calendar include Maps and Siri suggestions for navigation destinations.
 
 ### Google Maps → Apple Maps
 
