@@ -149,7 +149,9 @@ As a casual spreadsheet user, Sheets and Numbers are nearly identical. Numbers h
 
 ### Keep → Notes
 
-I value simplicity and elasticity in a notetaking app—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout much value, but it makes up for it with great search. I never used tags
+I value simplicity and elasticity in notetaking—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout asks too much of me (color coding) to look good and is hard to browse, but it makes up for it with great search.
+
+Notes is simple and elastic in a different way. Where Keep focuses on shortform sticky-style notes, Notes focuses on longform notes, with 
 
 - I use Shortcuts to start my Chinese lesson, which creates a scratch note with the current date as its title and opens my Zoom meeting
 
