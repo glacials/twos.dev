@@ -88,7 +88,7 @@ The ecosystem benefits of AirPods include automatic switching between devices ba
 
 The big one. I’ve been wanting to switch my email to a domain I control anyway, and iCloud+ supports that.
 
-I don’t recommend importing Gmail archives into iCloud Mail; the experience was fraught with landmines and didn’t achieve the desired result. I’ve chosen to live the life of searching in two places when I need something.
+I don’t recommend importing Gmail archives into iCloud Mail; the experience was fraught with landmines and didn’t achieve the desired result. After starting from scratch several times, I’ve chosen to live the life of searching in two places when I need something.
 
 The iCloud web interface is bad. On my Windows gaming computer I’ve installed Thunderbird to get by. Mail itself integrates very well with the rest of the ecosystem and has a solid UX at its core, but is plagued paradoxically by usability issues.
 
