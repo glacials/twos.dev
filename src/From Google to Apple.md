@@ -133,29 +133,23 @@ The ecosystem effects of Safari include Handoff, which allows a browsing session
 
 While moving to Safari, I replaced 1Password with iCloud Keychain. It serves basic needs, but that’s it. It can store a username, a password, a 2FA code, and a domain name for each entry; nothing more.
 
-It cannot store two domains for one entry, e.g. gmail.com and google.com. It cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer service agents ask for. It cannot even store a name for an entry, e.g. Washington Corporations and Charities System instead of 
+It cannot store two domains for one entry, e.g. gmail.com and google.com. It cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer service agents ask for. It cannot name an entry, e.g. Washington Corporations and Charities System instead of ccfs.sos.wa.gov. It cannot store non-login entries like documents, ID numbers, or insurance information.
 
-
+Using the 2FA field involved manual effort. Scanning almost never worked, so I would enter the 2FA secret by copying and pasting the code. Some sites provide a raw code as the code, while others wrap the code in a URL that contains other metadata. 1Password accepts either, but iCloud Keychain assumes you always hand it a code; if you hand it a URL it will silently accept it but produce incorrect codes.
 
 I moved back to 1Password.
 
-### Numbers, Pages
+### Sheets → Numbers,
 
-Replaces Google Sheets, Google Docs.
+As a casual spreadsheet user, Sheets and Numbers are nearly identical. Numbers has nicer UX when editing formulae that visualizes any cell(s) being referenced. It also tries to humanize references, e.g. “Ben age” for a cell in a row with header “Ben” and a column with header “Age”, instead of something like A:123. This is nice until headers get long and multiworded. Overall it’s a wash.
 
-Thoughts:
+### Docs → Pages
 
-Ecosystem benefits:
+(To be filled in; I have not had much Pages experience.)
 
-- Siri suggestions take me to specific sheets, docs
+### Keep → Notes
 
-### Notes
-
-Replaces Google Keep.
-
-Thoughts:
-
-Ecosystem benefits:
+I value simplicity and elasticity in a notetaking app—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout much value, but it makes up for it with great search. I never used tags
 
 - I use Shortcuts to start my Chinese lesson, which creates a scratch note with the current date as its title and opens my Zoom meeting
 
