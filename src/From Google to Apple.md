@@ -126,7 +126,7 @@ Ecosystem benefits of Calendar include Maps and Siri suggestions for navigation 
 
 Apple Maps gets a lot of flak for its initial release state, rightly so. But that was years ago, and they’ve kept at it. It’s improved.
 
-Unfortunately it’s only gotten good, not great. There are UX benefits over Google Maps, such as the spoken direction “Go past this light, then at the next one, turn `$DIRECTION`”, but about 5% of my trips to new places end me at the right area, but wrong specific destination. I’ve been routed to the delivery entrance for a museum, the back entrance for an airport, and the wrong parking lot (15 minutes of walking wrong) of a large 360° shopping center.
+Unfortunately it’s only gotten good, not great. There are UX benefits over Google Maps, such as the spoken direction “Go past this light, then at the next one, turn `$DIRECTION`”, but about 5% of my trips to new places end me at the right area but wrong specific destination. I’ve been routed to the delivery entrance for a museum, the back entrance for an airport, and the wrong parking lot (15 minutes of walking wrong) of a large 360° shopping center.
 
 I’m continuing to give it chances because I know more data helps, but for risky timelines I go back to Google Maps.
 
