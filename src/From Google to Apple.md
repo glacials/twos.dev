@@ -149,19 +149,17 @@ As a casual spreadsheet user, Sheets and Numbers are nearly identical. Numbers h
 
 ### Keep → Notes
 
-I value simplicity and elasticity in notetaking—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout asks too much of me (color coding) to look good and is hard to browse, but it makes up for it with great search.
+I value simplicity and elasticity in notetaking—get out of my way and let me write, then let me deal with it later. Keep supplies that. Its layout is hard to browse, but it makes up for it with great search.
 
-Notes is simple and elastic in a different way. Where Keep focuses on shortform sticky-style notes, Notes focuses on longform, with roughly the same text formatting options as Markdown (unfortunately without the markup).
+Notes is simple and elastic in a different way. Where Keep focuses on shortform sticky-style notes, Notes focuses on longform, with roughly the same text formatting options as Markdown (unfortunately without the markup). Instead of adding several notes to a category or color in Keep, I append to an existing note that contains several thoughts. This keeps the number of notes down, which makes categorization more reasonable, which improves browsing.
 
-- I use Shortcuts to start my Chinese lesson, which creates a scratch note with the current date as its title and opens my Zoom meeting
+For me, it’s a wash between the two.
 
-### Reminders
+The ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I use a shortcut to create a new note titled and sorted correctly before starting a Chinese lesson.
 
-Replaces Google Tasks and the reminders feature of Google Assistant.
+### Tasks / Google Assistant Reminders → Reminders
 
-Thoughts:
-
-Ecosystem benefits:
+Reminders is one of the best-designed apps on iOS.
 
 - Siri
 
