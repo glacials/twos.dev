@@ -116,7 +116,7 @@ I don't recommend using the Week view in Calendar. Similar to Google Calendar, C
 
 Mail has no special treatment of calendar invitations, which is to say they appear as raw attachments. When Google Calendar users send a calendar invitation there are two attachments, `invite.ics` and `mime-attachment.ics`. Each will pop up a Calendar float to add the event; I’ve learned to use `mime-attachment.ics` because it seems to open a two-way connection with the sender’s event, where `invite.ics` seems to be a local copy.
 
-Google Calendar is the stickiest part of the Google ecosystem due to the features they’ve built on top of vanilla calendaring and their ubiquity. Interactions with Google Calendar users, which in my experience is everyone, always leave me with a feeling of unease, of “did they get this RSVP?” or “did their event update with the new time?”. For some use cases, Calendar will RSVP by sending an email from your account with a plaintext description of your response. I haven’t discovered yet if these are seen by human eyes or interpreted automatically.
+Google Calendar is the stickiest part of the Google ecosystem due to the features they’ve built on top of vanilla calendaring and their ubiquity. Interactions with Google Calendar users, which in my experience is everyone, always leave me with a feeling of unease: “did they get this RSVP?” or “did their event update with the new time?”. For some use cases, Calendar will RSVP by sending an email from your account with a plaintext description of your response. I haven’t discovered yet if these are seen by human eyes or interpreted automatically.
 
 Quick look is a blast, the same way it is for previewing files in Finder.
 
