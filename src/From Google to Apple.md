@@ -27,7 +27,7 @@ With the Nexus 7, within a year I’d stopped that habit. It afforded too little
 
 Instead, I’ve carried it room to room for two years now. It’s fulfilled the minimum goal and has even replaced some light computer uses like writing. The app ecosystem understands the tablet form factor; apps use it to display more information, differently laid out. The multitasking experience is opinionated but helpful. Opening multiple windows per app is a big leap towards not feeling like a phone, but I’ve only seen native apps support it.
 
-The ecosystem benefits I receive from iPad are the ability to use it as a second monitor, and the ability to use my Mac’s mouse and keyboard to control the iPad. macOS also allows iPad to be used as an input device for signing documents and marking up images. This is something I did before by manually transferring files, but now it’s two clicks with instant sync.
+The ecosystem benefits I receive from iPad are the ability to use it as a second monitor, and the ability to use my Mac’s mouse and keyboard to control the iPad. macOS’s Preview app allows iPad to be used as an input device for signing documents and marking up images. This is something I did before by manually transferring files, but now it’s two clicks with instant sync.
 
 ### Pixel → iPhone
 
