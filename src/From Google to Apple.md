@@ -72,7 +72,7 @@ The ecosystem benefits of Apple TV include typing: when a text input is selected
 
 ### Google Home → Apple Home
 
-My biggest fear with this change was losing a decade of Google Nest ecosystem benefits, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to our Nest doorbell camera showing on our Apple TV picture-in-picture when the doorbell rings. (If you’re not keen to se up a Raspberry Pi, try Starling Home Hub instead.)
+My biggest fear with this change was losing the decade I’ve spent building up our Google Nest devices, but running Homemanager on a Raspberry Pi made it all work seamlessly, even down to Apple TV showing our Nest doorbell camera picture-in-picture when the doorbell rings. (If you’re not keen to set up a Raspberry Pi, try Starling Home Hub.)
 
 The UX of Shortcuts with Home is miles better than Google Home’s long device list that feels like a web page. This was a strict upgrade.
 
