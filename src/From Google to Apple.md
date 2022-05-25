@@ -127,7 +127,7 @@ This was a far less noticeable change than I expected. Everything from bookmark 
 
 In macOS the Safari chrome fades into the background better than the Chrome chrome, such that websites feel a bit closer to standalone applications even when in a tabbed window. The touchpad gesture to go back or forward produces a natural transition where the whole web page slides off screen to reveal the target web page, but it backfires and feels artificial on single-page apps where the original navigation event from the target page was no so heavyweight as that.
 
-The ecosystem effects of Safari include 
+The ecosystem effects of Safari include Handoff, 
 
 ### Numbers, Pages
 
