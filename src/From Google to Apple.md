@@ -136,7 +136,7 @@ The ecosystem benefits of Apple Maps include rich links in iMessage and Calendar
 
 This was a far less noticeable change than I expected. Everything from bookmark sync to my extensions to rendering works the same.
 
-In macOS the Safari chrome fades into the background better than the Chrome chrome, such that websites feel a bit closer to standalone applications even when in a tabbed window. The touchpad gesture to go back or forward produces a natural transition where the whole web page slides off screen to reveal the target web page, but it backfires and feels artificial on single-page apps where the original navigation event from the target page was no so heavyweight as that.
+In macOS the Safari chrome fades into the background better than the Chrome chrome, such that websites feel a bit closer to standalone applications even when in a tabbed window. The touchpad gesture to go back or forward produces a natural transition where the whole web page slides off screen to reveal the target web page, but it backfires and feels artificial on single-page apps where the navigation event doesn’t deserve such a heavyweight animation.
 
 The ecosystem effects of Safari include Handoff, which allows a browsing session to smoothly transition from device to device.
 
