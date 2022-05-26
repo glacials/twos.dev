@@ -160,6 +160,7 @@ func genImageContainers(imageSourceDir, imageDestinationDir string) error {
 			return fmt.Errorf("can't create imgcontainer file for `%s`: %w", path, err)
 		}
 
+		// TODO: Make prev/next only go through images in the same directory
 		var prevLink, nextLink string
 		if i > 0 {
 			prevLink = fmt.Sprintf("%s.html", filepath.Base(imgs[i-1]))

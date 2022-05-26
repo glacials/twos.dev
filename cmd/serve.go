@@ -25,6 +25,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"time"
 
 	"github.com/spf13/cobra"
 )
@@ -38,8 +39,25 @@ var serveCmd = &cobra.Command{
 		port := 8100
 		http.Handle("/", http.FileServer(http.Dir("dist/")))
 
+		stop := make(chan struct{})
+
+		go func() {
+			for {
+				if err := buildCmd.RunE(cmd, args); err != nil {
+					log.Fatalf(fmt.Errorf("cannot build: %w", err).Error())
+				}
+				select {
+				case <-time.After(1 * time.Second):
+				case <-stop:
+					return
+				}
+			}
+		}()
+
 		log.Printf("Serving dist/ on http://localhost:%d\n", port)
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
+
+		stop <- struct{}{}
 
 		return nil
 	},
