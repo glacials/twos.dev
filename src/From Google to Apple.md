@@ -5,23 +5,23 @@ date: 2022-05
 
 # From Google to Apple
 
-This is a living document.
+My life is in Google more than anyone I know. The usual suspects, sure—Gmail, Photos, Chrome, and the like—but also the ones people stay away from—Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies & TV, Podcasts. We have more Google Homes than rooms. I was a beta user for the first Chromebook, the Cr-48. I have more scar tissue than most from services being sent to the “Google graveyard”. For a few years I even overlaid my Facebook profile picture with a Google+ logo and the text “I’ve moved”. It’s no surprise I’ve been an Android user for 12 years, 10 of them with Nexus and Pixel devices.
 
-My life is in Google more than anyone I know. The usual suspects, sure -- Gmail, Photos, Chrome, and the like, but also the ones people stay away from—Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies & TV, Podcasts. Our house has more Google Home Minis than rooms. I was a beta user for the first Chromebook, the Cr-48. I have more scar tissue than most from services being sent to the “Google graveyard”. For a few years I was gung-ho enough to overlay my Facebook profile picture with a Google+ logo and the text “I’ve moved”. It’s no surprise I’ve been an Android user for 12 years, 10 of them with Nexus and Pixel devices.
+But once in a while I like to challenge my beliefs by changing seats. This is how I understand why—or whether—I prefer what I chose. But when I've previously trialed a borrowed iPhone for a few months (thanks [@bensw](https://twitter.com/bensw)), my thoughts were "It's actually not that different, but the Google apps don't have OS integration, so I’ll stick with Android".
 
-Once in a while I challenge my beliefs by changing seats. This is how I understand why—or whether—I really prefer what I chose. But when I've previously trialed a borrowed iPhone for a few months (thanks [@bensw](https://twitter.com/bensw)), my thoughts amounted to "It's not that different, but the Google apps don't have OS integration".
+I've realized since then it’s hard to know the Apple value proposition without being immersed in the ecosystem. For the same reason Google apps don’t shine on iOS, iOS doesn't shine if you only use Google apps.
 
-I've realized since then it’s hard to know the Apple value proposition without being immersed in the ecosystem. For the same reason the Google Assistant doesn't shine on iOS, iOS doesn't shine if you only use Google apps.
-
-After a buggy summer with my Pixel 3a, I decided now’s a good time to give Apple an honest shot. The infamous walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. These are my notes on hopping the fence.
+So after a buggy summer with my Pixel 3a, I decided it’s a good time to give Apple an honest, holistic, multi-year shot. The walled garden may not let me out, but better to trap myself on one side and know both, than trap myself on the other and know one. These are my notes on hopping the fence.
 
 ## Preface: Design Language
 
+Apple’s design language is best-in-class and is a core part of why, as you scroll through this list, you’ll see that I decided to go deeper into the ecosystem than I’d planned.
 
+I will not be capturing much about differences in design language, because there are too many facets of design language to capture in a digestible list of bullet points without doing you a disservice.
 
 ## The Swaps
 
-### Recap: ArchLinux → macOS
+### ArchLinux → macOS
 
 I have used one or another Mac as a development machine since I switched from the Cr-48 in 2013, which was running ArchLinux at the time. Having gone straight from Windows to Linux due to a love of the POSIX command line and the simplicity of the system (e.g. “everything is a file”), I found macOS to scratch the same itches minus the days spent customizing things and debugging machine issues that blocked me from developing software (both admittedly fun).
 
@@ -112,7 +112,7 @@ If you want a Mail-like experience with Gmail as a backend, I recommend [Mimestr
 
 Ecosystem effects of Mail include having search results show up in Spotlight and having calendar invitations open in a Calendar float.
 
-### Google Calendar → Calendar
+### Google Calendar → Apple Calendar
 
 After migrating calendars but before transitioning my custom-domain email address to iCloud Mail, my email was serviced by Google Workspace. I had this Google Workspace account added to my iPhone and iPad. This got me into a weird state where Calendar would not let me add an event to my iCloud calendar if the invitee was that email address, but it would allow me to add it to that Google account's calendar. When I removed that Google account from my device, I could add the event to my iCloud calendar fine.
 
@@ -148,15 +148,15 @@ Ecosystem effects of Safari include Handoff, which allows a browsing session to 
 
 #### iCloud Keychain
 
-While moving to Safari, I replaced 1Password with iCloud Keychain. It serves basic needs, but that’s it. It can store a username, a password, a 2FA code, and a domain name for each entry; nothing more.
+While moving to Safari, I replaced 1Password with iCloud Keychain. It serves basic needs, but that’s it. It can store a username, a password, a 2FA code, and a domain name for each entry.
 
 It cannot store two domains for one entry, e.g. gmail.com and google.com. It cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer service agents ask for. It cannot name an entry, e.g. Washington Corporations and Charities System instead of ccfs.sos.wa.gov. It cannot store non-login entries like documents, ID numbers, or insurance information.
 
-Using the 2FA field involves manual effort. Scanning almost never works, so I enter the 2FA secret by copying and pasting the code. Some sites provide a raw code, while others wrap the code in a URL that contains other metadata. 1Password accepts either, but iCloud Keychain assumes you always hand it a code; if you hand it a URL it will silently accept it but produce incorrect codes.
+Using the 2FA field involves manual effort. Scanning rarely works, so I enter the 2FA secret by copying and pasting the code. Some sites provide a raw code, while others wrap the code in a URL that contains other metadata. 1Password accepts either, but iCloud Keychain assumes you hand it a code; if you hand it a URL it will silently accept it but produce incorrect codes.
 
 I moved back to 1Password.
 
-Ecosystem effects of iCloud Keychain include faster and more fluid autofill support in Safari.
+Ecosystem effects of iCloud Keychain include faster and more fluid autofill support in Safari, on both macOS and iOS.
 
 ### Sheets → Numbers
 
