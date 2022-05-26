@@ -17,6 +17,8 @@ After a buggy summer with my Pixel 3a, I decided now’s a good time to give App
 
 ## Preface: Design Language
 
+
+
 ## The Swaps
 
 ### Recap: ArchLinux → macOS
