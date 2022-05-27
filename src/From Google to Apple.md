@@ -104,7 +104,7 @@ Mail's search is bad. On macOS, it will assume you want to search the current ma
 
 Ignoring that, Gmail still wins search by an order of magnitude. For example, Gmail searches the contents of PDFs attached to emails; I’ve found this invaluable finding old leases and whatnot.
 
-Mail is okay at displaying emails as conversations. Once in a while, it omits something it shouldn’t. When I click Send while replying to a thread it doesn't immediately append my message, causing me to believe something went wrong.
+Mail is okay at displaying emails as conversations. Once in a while, it omits something it shouldn’t. When I click Send while replying to a thread it doesn't immediately append my message, causing me to believe something went wrong. I experience long, uncollapsible nested quotes in some emails, where Gmail was always good at collapsing them automatically.
 
 macOS Mail supports filters, but only locally. The iCloud Mail service has a separate filter system with the same effect, but the two have disparate feature sets and don't synchronize. iOS Mail does not support filters. I’ve opted to use Mail’s local-only filters, and have my iMac stay awake 24/7.
 
