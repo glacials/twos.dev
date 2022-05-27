@@ -206,6 +206,10 @@ I miss Google Play Music.
 
 Ecosystem effects of Apple Music include tighter Shazam integration and better Siri support for when I’m driving and want to play something.
 
+### Google Pay → Apple Pay
+
+(in progress)
+
 ### Google Assistant Routines / Tasker → Shortcuts
 
 I can’t say enough good things about Shortcuts. It is the most power-user-friendly thing about iOS and goes against all expectations I had around Apple and power users. I prefer it to shell scripts.
