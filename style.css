@@ -68,3 +68,17 @@ footer {
 i i, i em, em i, em em {
   font-style: normal;
 }
+
+.dark-video {
+  display: none;
+}
+
+@media (prefers-color-scheme: dark) {
+  .dark-video {
+    display: block;
+  }
+
+  .light-video {
+    display: none;
+  }
+}
