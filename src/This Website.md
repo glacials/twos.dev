@@ -152,4 +152,4 @@ If I’ve done things right, this web page will be accessible at twos.dev/meta.h
 
 ### Extra Credit
 
-TODO: Frontmatter 
+TODO: Frontmatter œ
