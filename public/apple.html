@@ -19,7 +19,7 @@
 <link rel="icon" href="favicon.ico">
 <link rel="alternate" type="application/rss+xml" title="twos.dev" href=
 "/feed.rss">
-<title>apple</title>
+<title>From Google to Apple</title>
 <link rel="stylesheet" href="style.css">
 <style>
     .spectrum {
@@ -106,7 +106,7 @@ command line and the simplicity of the system. I found macOS to scratch the
 same itches without the days spent customizing and debugging things.
 </p>
 <p>
-TODO: TouchID
+TouchID
 </p>
 
 <h3>Nexus 7 → iPad</h3>
@@ -206,7 +206,8 @@ into Mail (one finger holding the items, one switching apps). Third-party apps
 only implement this functionality sometimes.
 </p>
 <p>
-TODO: FaceID
+  FaceID is about on par with fingerprint unlock on Pixel. They each encounter their own
+  situational troubles, but both are great overall and I'm no more or less happy.
 </p>
 
 <h4>Notifications</h4>
@@ -443,25 +444,52 @@ navigation destinations.
 <h3>Google Maps → Apple Maps</h3>
 
 <p>
-Apple Maps gets a lot of flak for its initial release state, rightly so. But
-that was years ago, and they’ve kept at it. It’s improved.
+  Apple Maps gets a lot of flak for its initial release state, rightly so. But that was
+  years ago, and they’ve kept at it. It’s improved.
 </p>
 <p>
-Unfortunately it’s only gotten good, not great. There are UX benefits over
-Google Maps, such as the spoken direction “Go past this light, then at the next
-one, turn <code>$DIRECTION</code>”, but about 5% of my trips to new places end
-me at the right area but wrong specific destination. I’ve been routed to the
-delivery entrance for a museum, the back entrance for an airport, and the wrong
-parking lot (15 minutes of walking wrong) of a large shopping center.
+  Unfortunately it’s only gotten good, not great. There are UX benefits over Google
+  Maps, such as the spoken direction “Go past this light, then at the next one, turn
+  <code>$DIRECTION</code>”, but about 5% of my trips to new places end me at the right
+  area but wrong specific destination. I’ve been routed to the delivery entrance for a
+  museum, the back entrance for an airport, and the wrong parking lot (15 minutes of
+  walking wrong) of a large shopping center.
 </p>
 <p>
-I’m continuing to give it chances because I know more data helps, but for
-tight schedules I go back to Google Maps.
+  I’m continuing to give it chances because I know more data helps, but for tight
+  schedules I go back to Google Maps.
 </p>
 <p>
-Ecosystem effects of Apple Maps include rich links in iMessage and Calendar,
-Siri suggestions for destinations based on those and other sources, and Apple
-Watch vibration patterns to indicate upcoming turns.
+  Then there's the other dimension of Google Maps: reviews, photos, menus, ordering, and
+  reservations. Apple is a generation behind here; their purchase of Yelp means they
+  inherit photos & reviews, but even the ubiquity of Yelp reviews and photos just can't
+  beat the sheer volume Google Maps. I've only seen one or two restaurants with orering
+  functionality enabled. Guiltily, I find myself missing the gamification of Google
+  Maps. I'm sure it's no coincidence.
+</p>
+<p>
+  Ecosystem effects of Apple Maps include rich links in iMessage and Calendar, Siri
+  suggestions for destinations based on those and other sources, and Apple Watch
+  vibration patterns to indicate upcoming turns.
+</p>
+
+<h4>Find My</h4>
+
+<p>
+  I use persistent location sharing with a small set of close friends and family. The
+  Google offering (built into Google Maps) and the Apple offering (a separate Find My
+  app) are similar; anyone happy with one would be happy with the other.
+</p>
+<p>
+  I can see why Apple decided to contain the feature in an app you must launch with
+  intention, but it's a wash for me -- I've had serendipitous encounters enabled by
+  seeing a friend is close by in Google Maps accidentally.
+</p>
+<p>
+  AirTags and device tracking are the big Apple killer feature here, which work as
+  seamlessly as advertised. I threw one in my car and one in my bag just to have peace
+  of mind. The app sends a notification when I leave $DEVICE at $LOCATION, with easy
+  controls to disable future notifications for that combination.
 </p>
 
 <h3>Chrome → Safari</h3>
@@ -604,61 +632,71 @@ apps: setting reminders, playing music,
 </p>
 
 <h3>YouTube Music → Apple Music</h3>
-
 <p>
-Apple Music is a great example of the big place Apple still struggles:
-services.
+  Apple Music is a great example of the big place Apple still struggles: services.
 </p>
 <p>
-Importing my music was a headache and missed or incorrectly identified a lot
-of songs. The most reliable method I had involved an Automator workflow that
-would move the cursor to my existing library, select and copy a title, then
-move it to Apple Music’s search field, paste, and add the top result.
+  Importing my music was a headache and missed or incorrectly identified a lot of songs.
+  The most reliable method I had involved an Automator workflow that would move the
+  cursor to my existing library, select and copy a title, then move it to Apple Music’s
+  search field, paste, and add the top result.
 </p>
 <p>
-The UI of Apple Music for macOS is a let-down and is more on par with the
-iCloud Mail web interface than with any other native Apple app. Navigation is
-slow and unresponsive, which is compounded by the fact that it takes too many
-transitions to get where you’re going.
+  The UI of Apple Music for macOS is a let-down and is more on par with the iCloud Mail
+  web interface than with any other native Apple app. Navigation is slow and
+  unresponsive, which is compounded by the fact that it takes too many transitions to
+  get where you’re going.
 </p>
 <p>
-I miss Google Play Music.
+  I miss Google Play Music.
 </p>
 <p>
-Ecosystem effects of Apple Music include tighter Shazam integration and
-better Siri support for when I’m driving and want to play something.
+  Ecosystem effects of Apple Music include tighter Shazam integration and better Siri
+  support for when I’m driving and want to play something.
 </p>
 
 <h3>Google Pay → Apple Pay</h3>
-
 <p>
-(in progress)
+  (in progress)
 </p>
 
 <h3>Google Assistant Routines / Tasker → Shortcuts</h3>
-
 <p>
-I can’t say enough good things about Shortcuts. It is the most
-power-user-friendly thing about iOS and goes against all expectations I had
-around Apple and power users. I prefer it to shell scripts.
+  I can’t say enough good things about Shortcuts. It is the most power-user-friendly
+  thing about iOS and goes against all expectations I had around Apple and power users.
+  For life automation, I prefer it to shell scripts.
 </p>
 <p>
-As one example, I like to write in an app called iA Writer. I use Shortcuts
-to automatically commit and push my writing to this website daily. Because iA
-Writer stores files in iCloud, and another app called Working Copy can interact
-with Git repositories, Shortcuts lets me glue them together:
+  <center>
+    <picture>
+      <source srcset="img/apple-shortcuts-dark.png" media="(prefers-color-scheme: dark)">
+      <img src="img/apple-shortcuts-light.png" style="max-height: 40em; max-width: 100%;" />
+    </picture>
+  </center>
+</p>
+<center>
+  <p>
+    <i>
+      An excerpt from a shortcut that blocks off times on my work calendar that are occupied by events on my personal calendar.
+    </i>
+  </p>
+</center>
+<p>
+  As one example, I like to write in an app called iA Writer. I use Shortcuts to
+  automatically commit and push my writing to this website daily. Because iA Writer
+  stores files in iCloud, and another app called Working Copy can interact with Git
+  repositories, Shortcuts lets me glue them together:
 </p>
 <ol>
-<li>(Working Copy) Pull from <code>twos.dev</code> remote</li>
-<li>(iOS) Get contents of folder <code>iCloud/iA Writer/Published</code></li>
-<li>(Working Copy) Write CONTENTS OF FOLDER to <code>./src</code> in
-<code>twos.dev</code></li>
-<li>(Working Copy) Stage <code>./src</code> in <code>twos.dev</code></li>
-<li>Commit <code>twos.dev</code> with message “Automatic commit by iA Writer
-sync job”</li>
-<li>Push <code>twos.dev</code> to remote</li>
+  <li>(Working Copy) Pull from <code>twos.dev</code> remote</li>
+  <li>(iOS) Get contents of folder <code>iCloud/iA Writer/Published</code></li>
+  <li>(Working Copy) Write contents of folder to <code>./src</code> in
+  <code>twos.dev</code></li>
+  <li>(Working Copy) Stage <code>./src</code> in <code>twos.dev</code></li>
+  <li>Commit <code>twos.dev</code> with message “Automatic commit by iA Writer
+  sync job”</li>
+  <li>Push <code>twos.dev</code> to remote</li>
 </ol>
-
 <p>
 I’m a software engineer and am comfortable coding, but the fact that I could
 do all this without any was impressive. It’s also fun to say that [my phone is
