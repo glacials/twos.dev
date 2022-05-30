@@ -8,10 +8,12 @@ random things here.
 ### Dependencies
 
 - Go 1.18+
+- npm
 
 ### Starting a dev server
 
 ```sh
+cd src/js && npm install && cd ../..
 go install
 twos.dev serve
 ```
