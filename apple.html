@@ -1,10 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <meta
-      name="generator"
-      content="HTML Tidy for HTML5 for Apple macOS version 5.8.0"
-    />
     <meta charset="utf-8" />
     <script
       async
@@ -39,38 +35,159 @@
         <h1>From Google to Apple</h1>
 
         <p>
-          My life is in Google more than anyone I know. The usual suspects, sure -- Gmail, Photos, Chrome, and the like -- but also the ones people
-          stay away from -- Tasks, Keep, YouTube Music, Fit, Pay, Play Books,
-          Play Movies & TV, Podcasts. We have more Google Homes than rooms. I
-          was a beta user for the first Chromebook, the Cr-48. I have more scar
-          tissue than most from services being sent to the “Google graveyard”.
-          For a few years I even overlaid my Facebook profile picture with a
-          Google+ logo and the text “I’ve moved”. It’s no surprise I’ve been an
-          Android user for 12 years, 10 of them with Nexus and Pixel devices.
+          My life is in Google more than anyone I know. The usual suspects sure -- Gmail, Photos, Chrome, etc. -- but also the ones people stay away
+          from -- Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies
+          &amp; TV, Podcasts. We have more Google Homes than rooms. I was a beta
+          user for the first Chromebook, the Cr-48. I have more scar tissue than
+          most from services being sent to the “Google graveyard”. And for a few
+          years, I overlaid my Facebook profile picture with a Google+ logo and
+          the text “I’ve moved”. Of course, it's no surprise I’ve been an
+          Android user for 12 years, 10 of them on Nexus and Pixel devices.
         </p>
         <p>
           But once in a while I like to challenge my beliefs by changing seats.
           This is how I understand why -- or whether -- I prefer what I chose.
-          But when I've previously trialed a borrowed iPhone for a few months
-          (thanks <a href="https://twitter.com/bensw">@bensw</a>), my thoughts
-          were "It's actually not that different, but the Google apps don't have
-          OS integration, so I’ll stick with Android".
+          For Android, that means trialing an iPhone.
+          <a
+            href="https://twitter.com/glcls/status/880455300444176384?s=21&t=R2cM8pplLpZNEq6ju3Weaw"
+            >I did this</a
+          >
+          five years ago for a few months (thanks
+          <a href="https://twitter.com/bensw">@bensw</a>), but afterwards I
+          thought "It's actually not that different, it's just that the Google
+          apps don't feel native, so I’ll stick with Android".
         </p>
         <p>
-          I've realized since then it’s hard to know the Apple value proposition
-          without being immersed in the ecosystem. For the same reason Google
-          apps don’t shine on iOS, iOS doesn't shine if you only use Google
-          apps.
+          Since then, I've realized it’s hard to know the Apple value
+          proposition without being immersed in the Apple ecosystem. For the
+          same reason Google apps don’t shine on iOS, iOS doesn't shine if you
+          only use Google apps.
         </p>
         <p>
-          So after a buggy summer with my Pixel 3a, I decided it’s a good time
-          to give Apple an honest, holistic, multi-year shot. The walled garden
-          may not let me out, but better to trap myself on one side and know
-          both, than trap myself on the other and know one. These are my notes
-          on hopping the fence.
+          So after a buggy summer with my Pixel 3a, I decided to give Apple an
+          honest, holistic, multi-year shot. Its walled garden may not let me
+          out, but better to trap myself on one side and know both, than trap
+          myself on the other and know one. These are my notes on hopping the
+          fence.
         </p>
 
-        <h2>The Swaps</h2>
+        <h2>The Broad Theme: Safety vs. Freedom</h2>
+
+        <p>
+          In 2020 I tried to release a Flutter app on iOS. I'd long ago
+          published its Android build, but the iOS approval process was yielding
+          denial after denial. I was frustrated, but I was also a new iOS user,
+          and I could see with fresh eyes the effects of the strictness.
+        </p>
+        <p>
+          Compared with Android, iOS apps on the whole feel more "part of" the
+          operating system. They don't feel like they were written by others,
+          and that makes me feel safe. My data feels like part of my device, not
+          part of Google. And I trust my device to manage my payment, location,
+          etc. data, because it is mine. I own it.
+        </p>
+        <p>
+          That feeling is not strong enough that people will voice it, or fight
+          for it. But it's a good feeling. And it only comes with control -- control by a representative you trust, over parties you don't. You
+          don't know me, I'm just a random developer. But you know Apple.
+          Through them, you can trust me, but only because they so heavily
+          control what I can publish. I can't send you to my sketchy site or use
+          dark patterns to trick you into paying me.
+        </p>
+        <p>
+          A lot of people would say that choice is always good; that if you
+          don't feel safe, you have the choice not to do the sketchy thing.
+        </p>
+        <p>
+          Hard disagree. I have the choice to not eat ice cream, but I still do
+          it when I shouldn't. It's easier for me to say no at the grocery store
+          than while staring into my freezer. And I now understand people who
+          say no at the grocery store -- who buy a device they have less control
+          over. It gives them the ability to trust every action they can take on
+          their device.
+        </p>
+        <p>
+          For example, all purchases that enable new app functionality must go
+          through the Apple in-app purchase flow. As a developer, this means
+          Apple takes a cut of everything. As a user, this means one central
+          place where I can manage (read: cancel) subscriptions -- no digging
+          through menus or talking to customer service agents.
+        </p>
+        <center>
+          <picture>
+            <source
+              srcset="img/apple-subscriptions-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-subscriptions-light.png"
+              style="max-height: 40em; max-width: 100%"
+            />
+          </picture>
+          <picture>
+            <source
+              srcset="img/apple-subscription-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-subscription-light.png"
+              style="max-height: 40em; max-width: 100%"
+            />
+          </picture>
+          <p>
+            <i> The App Store's subscriptions management menus.</i>
+          </p>
+        </center>
+        <p>
+          Another example: If your app allows signing in with any third party
+          auth providers, Apple must be one of them. As a developer, this means
+          building another sign-in flow and database table. As a user, this
+          means I get a native, one-tap, FaceID sign-in.
+        </p>
+
+        <center>
+          <video autoplay loop muted style="max-height: 30em; max-width: 100%">
+            <!-- video->source->media queries not supportd :( commented for now
+          <source
+            src="/img/apple-signin-light.mov"
+            type="video/quicktime"
+            media="(prefers-color-scheme:light)"
+          />
+          <source
+            src="/img/apple-signin-light.mp4"
+            type="video/mp4"
+            media="(prefers-color-scheme:light)"
+          />
+          <source
+            src="/img/apple-signin-dark.mov"
+            type="video/quicktime"
+            media="(prefers-color-scheme:dark)"
+          />
+          <source
+            src="/img/apple-signin-dark.mp4"
+            type="video/mp4"
+            media="(prefers-color-scheme:dark)"
+          />
+          -->
+            <source src="/img/apple-signin-dark.mov" type="video/quicktime" />
+            <source src="/img/apple-signin-dark.mp4" type="video/mp4" />
+          </video>
+        </center>
+        <p>
+          These examples continue throughout the ecosystem, and the more I see
+          the more I believe Apple thinks of itself as a government providing
+          "public goods", whereas Google optimizes for what increases ad
+          clickthrough -- data, eyeballs, and engagement. Of course, this has
+          its problems. Apple is a private company, not elected officials, so is
+          only as beholden to its end users as the person in charge wants it to
+          be. But these are the broad strokes differences I've found between
+          Apple and Google.
+        </p>
+
+        <h2>Specific Notes</h2>
+
+        Below are my notes on moving between the ecosystems at specific
+        touchpoints.
 
         <h3>ArchLinux → macOS</h3>
 
@@ -117,31 +234,27 @@
           information. Generally, the extra horizontal space is used to
           persistently display a nav menu or the previous screen.
         </p>
-        <p>
-          <center>
-            <picture>
-              <source
-                srcset="img/apple-iphone-dark.png"
-                media="(prefers-color-scheme: dark)"
-              />
-              <img
-                src="img/apple-iphone-light.png"
-                style="max-height: 40em; max-width: 100%"
-              />
-            </picture>
-            <picture>
-              <source
-                srcset="img/apple-ipad-dark.png"
-                media="(prefers-color-scheme: dark)"
-              />
-              <img
-                src="img/apple-ipad-light.png"
-                style="max-height: 57em; max-width: 100%"
-              />
-            </picture>
-          </center>
-        </p>
         <center>
+          <picture>
+            <source
+              srcset="img/apple-iphone-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-iphone-light.png"
+              style="max-height: 40em; max-width: 100%"
+            />
+          </picture>
+          <picture>
+            <source
+              srcset="img/apple-ipad-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-ipad-light.png"
+              style="max-height: 57em; max-width: 100%"
+            />
+          </picture>
           <p>
             <i>
               The Wikipedia app on iPhone vs. iPad. Note the persistent table of
@@ -439,21 +552,17 @@
           archive. Thankfully macOS natively supports rebinding shortcuts for
           any app.
         </p>
-        <p>
-          <center>
-            <picture>
-              <source
-                srcset="img/apple-rebind-dark.png"
-                media="(prefers-color-scheme: dark)"
-              />
-              <img
-                src="img/apple-rebind-light.png"
-                style="max-height: 40em; max-width: 100%"
-              />
-            </picture>
-          </center>
-        </p>
         <center>
+          <picture>
+            <source
+              srcset="img/apple-rebind-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-rebind-light.png"
+              style="max-height: 40em; max-width: 100%"
+            />
+          </picture>
           <p>
             <i>
               Any app's menu actions can be [re]bound at a system level. Menu
@@ -491,21 +600,17 @@
           current time of day; but this bar extends 100% of the width of the
           week, and does not do a good job showing you which day today is.
         </p>
-        <p>
-          <center>
-            <picture>
-              <source
-                srcset="img/apple-calendar-dark.png"
-                media="(prefers-color-scheme: dark)"
-              />
-              <img
-                src="img/apple-calendar-light.png"
-                style="max-height: 57em; max-width: 100%"
-              />
-            </picture>
-          </center>
-        </p>
         <center>
+          <picture>
+            <source
+              srcset="img/apple-calendar-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-calendar-light.png"
+              style="max-height: 57em; max-width: 100%"
+            />
+          </picture>
           <p>
             <i>
               Week view in Apple Calendar. At a glance, can you tell what day it
@@ -529,14 +634,15 @@
           connection with the sender’s event, where
           <code>invite.ics</code> seems to be a local copy.
         </p>
-        <video
-          autoplay
-          loop
-          muted
-          type="video/mp4"
-          style="max-height: 57em; max-width: 100%"
-        >
-          <!-- video->source->media queries not supportd :( commented for now
+        <center>
+          <video
+            autoplay
+            loop
+            muted
+            type="video/mp4"
+            style="max-height: 57em; max-width: 100%"
+          >
+            <!-- video->source->media queries not supportd :( commented for now
           <source
             src="/img/apple-mail-light.mp4"
             media="(prefers-color-scheme:light)"
@@ -546,16 +652,15 @@
             media="(prefers-color-scheme:dark)"
           />
           -->
-          <source src="/img/apple-mail-dark.mp4" />
-        </video>
-        <p>
-          <center>
+            <source src="/img/apple-mail-dark.mp4" />
+          </video>
+          <p>
             <i
               >Opening a Google Calendar invitation from within in the Apple
               ecosystem.</i
             >
-          </center>
-        </p>
+          </p>
+        </center>
         <p>
           Google Calendar is the stickiest part of the Google ecosystem due to
           the features they’ve built on top of vanilla calendaring and their
@@ -811,21 +916,17 @@
           I had around Apple and power users. For life automation, I prefer it
           to shell scripts.
         </p>
-        <p>
-          <center>
-            <picture>
-              <source
-                srcset="img/apple-shortcuts-dark.png"
-                media="(prefers-color-scheme: dark)"
-              />
-              <img
-                src="img/apple-shortcuts-light.png"
-                style="max-height: 40em; max-width: 100%"
-              />
-            </picture>
-          </center>
-        </p>
         <center>
+          <picture>
+            <source
+              srcset="img/apple-shortcuts-dark.png"
+              media="(prefers-color-scheme: dark)"
+            />
+            <img
+              src="img/apple-shortcuts-light.png"
+              style="max-height: 40em; max-width: 100%"
+            />
+          </picture>
           <p>
             <i>
               An excerpt from a shortcut that blocks off times on my work
