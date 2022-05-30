@@ -65,7 +65,10 @@ footer {
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
-i i, i em, em i, em em {
+i i,
+i em,
+em i,
+em em {
   font-style: normal;
 }
 
