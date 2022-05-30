@@ -83,7 +83,19 @@
           of the system. I found macOS to scratch the same itches without the
           days spent customizing and debugging things.
         </p>
-        <p>TouchID</p>
+        <p>
+          Homebrew is as mature as any package manager, similar in ease-of-use
+          to apt[-get] but with on average more up-to-date packages and,
+          including taps, a breadth of packages rivaling even (dare I say it)
+          the AUR. It also bundles its own service management, e.g.
+          <code>brew services start postgresql</code>.
+        </p>
+        <p>
+          TouchID is a good middle ground for administrative access between
+          Windows security (click yes) and Linux (type your password). It's good
+          enough that it stops me from using clamshell mode more, knowing I'll
+          have to type my password to unlock 1Password here and there.
+        </p>
 
         <h3>Nexus 7 → iPad</h3>
 
@@ -424,6 +436,34 @@
           support filters. I’ve opted to use Mail’s local-only filters, and have
           my iMac stay awake 24/7.
         </p>
+        <p>
+          macOS Mail has horrible keyboard shortcuts by default, e.g. ⌘^A to
+          archive. Thankfully macOS natively supports rebinding shortcuts for
+          any app.
+        </p>
+        <p>
+          <center>
+            <picture>
+              <source
+                srcset="img/apple-rebind-dark.png"
+                media="(prefers-color-scheme: dark)"
+              />
+              <img
+                src="img/apple-rebind-light.png"
+                style="max-height: 40em; max-width: 100%"
+              />
+            </picture>
+          </center>
+        </p>
+        <center>
+          <p>
+            <i>
+              Any app's menu actions can be [re]bound at a system level. Menu
+              actions are things like Message &rarr; Archive or File &rarr;
+              Save.
+            </i>
+          </p>
+        </center>
         <p>
           If you want a Mail-like experience with Gmail as a backend, I
           recommend
