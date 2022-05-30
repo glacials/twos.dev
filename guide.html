@@ -1,74 +1,47 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-2876079-11');
-  </script>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content='User Guide'>
-  <link rel="icon" href="favicon.ico">
-  <link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
-  <title>User Guide</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .spectrum {
-      height: 10em;
-      width: 10em;
-      background: conic-gradient(
-        hsl(0, 90%, 65%),
-        hsl(36, 90%, 65%),
-        hsl(72, 90%, 65%),
-        hsl(108, 90%, 65%),
-        hsl(144, 90%, 65%),
-        hsl(180, 90%, 65%),
-        hsl(216, 90%, 65%),
-        hsl(252, 90%, 65%),
-        hsl(288, 90%, 65%),
-        hsl(324, 90%, 65%),
-        hsl(360, 90%, 65%)
-      );
-      border: 1px solid;
-      border-radius: 90%;
-    }
-    @media (prefers-color-scheme:light) {
-      .spectrum {
-        border-color: black;
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
       }
-    @media (prefers-color-scheme:dark) {
-      .spectrum {
-        border-color: white;
-      }
-    }
+      gtag("js", new Date());
+      gtag("config", "UA-2876079-11");
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="User Guide" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>User Guide</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    summary {
-      cursor: pointer;
-    }
-  </style>
-</head>
+  <body>
+    <div class="container">
+      <header>
+        &larr; <a href="index.html">twos.dev</a>
+         / 2021 May (updated
+        2022 May) 
+      </header>
+      <article><h1>User Guide</h1><p>This page describes things I value at work. This is descriptive, not prescriptive; try to treat this as a set of FYIs, not a set of requirements. Use or ignore at your discretion, and share your own guide with me!</p><h2>Communication Style</h2><ol><li><strong>Succinctness</strong>: The more people who will read what you're writing, the higher the cost/benefit of spending more time writing it. (For widespread pieces, my &quot;writing time&quot; is 90% editing.) More, even more</li><li><strong>Agree on a vision</strong>: Coordination is slow. Once we agree on a shared vision, it's easier for everyone if we trust (and authorize) each other to make the right decisions in motion.</li><li><strong>Async, by default</strong>: A thirty-second interruption can set me back 30 minutes. I like to bring more conversations async: tickets, pull requests, recordings. More</li><li><strong>Tickets, by default</strong>: As a forgetful person I love single-origin paper trails.</li><li><strong>Speak in customer problems</strong>: Even if a solution &quot;feels right&quot; be prepared for me to ask what customer problem it solves. The one free pass is tech debt, since we all know how it impacts customers.</li><li><strong>Know when to meet</strong>: Async communication has its limits [2]. If things are getting heated, misunderstood, or blocked, throw a meeting on my calendar or pop in.</li><li><strong>Give unprompted feedback</strong>: I love feedback. We all feel it's awkward to give feedback and I think that is dumb and you should help me break that norm.</li></ol><h2>Warnings</h2><ul><li><strong>My brain is backburners.</strong> I can't immediately answer complex questions. I can temporarily get past this by asking a flurry of questions. This means I'm excited about the problem, but sometimes stresses people out; see #7 above :)</li><li><strong>I go rogue.</strong> Sometimes I care about fixing or building something that I'll do it without tracking it, because the overhead is bigger than the job itself. Loved features have come out of having the freedom to do this; see #2 above :)</li><li><strong>I work weird hours.</strong> Motivation strikes me randomly. Sometimes that's during a workday but sometimes it's on a Sunday or at 4 AM or for 16 hours straight. To counterbalance, I shorten my workdays and the math roughly works out. If you see emails or commits from me with unhealthy-feeling timestamps, keep in mind my default workday is at ~70% capacity.</li></ul><h2>Footnotes</h2><p>This guide is in the form of Abby Falik's user guide and inspired by Dina Levitan's user guide.</p></article>
 
-<body>
-  <div class="container">
-    <header>
-      &larr; <a href="index.html">twos.dev</a>
-      
-        / 2021 May (updated 2022 May)
-      
-    </header>
-    <article><h1>User Guide</h1><p>This page describes things I value at work. This is descriptive, not prescriptive; try to treat this as a set of FYIs, not a set of requirements. Use or ignore at your discretion, and share your own guide with me!</p><h2>Communication Style</h2><ol><li><strong>Succinctness</strong>: The more people who will read what you're writing, the higher the cost/benefit of spending more time writing it. (For widespread pieces, my &quot;writing time&quot; is 90% editing.) More, even more</li><li><strong>Agree on a vision</strong>: Coordination is slow. Once we agree on a shared vision, it's easier for everyone if we trust (and authorize) each other to make the right decisions in motion.</li><li><strong>Async, by default</strong>: A thirty-second interruption can set me back 30 minutes. I like to bring more conversations async: tickets, pull requests, recordings. More</li><li><strong>Tickets, by default</strong>: As a forgetful person I love single-origin paper trails.</li><li><strong>Speak in customer problems</strong>: Even if a solution &quot;feels right&quot; be prepared for me to ask what customer problem it solves. The one free pass is tech debt, since we all know how it impacts customers.</li><li><strong>Know when to meet</strong>: Async communication has its limits [2]. If things are getting heated, misunderstood, or blocked, throw a meeting on my calendar or pop in.</li><li><strong>Give unprompted feedback</strong>: I love feedback. We all feel it's awkward to give feedback and I think that is dumb and you should help me break that norm.</li></ol><h2>Warnings</h2><ul><li><strong>My brain is backburners.</strong> I can't immediately answer complex questions. I can temporarily get past this by asking a flurry of questions. This means I'm excited about the problem, but sometimes stresses people out; see #7 above :)</li><li><strong>I go rogue.</strong> Sometimes I care about fixing or building something that I'll do it without tracking it, because the overhead is bigger than the job itself. Loved features have come out of having the freedom to do this; see #2 above :)</li><li><strong>I work weird hours.</strong> Motivation strikes me randomly. Sometimes that's during a workday but sometimes it's on a Sunday or at 4 AM or for 16 hours straight. To counterbalance, I shorten my workdays and the math roughly works out. If you see emails or commits from me with unhealthy-feeling timestamps, keep in mind my default workday is at ~70% capacity.</li></ul><h2>Footnotes</h2><p>This guide is in the form of Abby Falik's user guide and inspired by Dina Levitan's user guide.</p></article>
-
-    <footer>
-      &larr; <a href="index.html">twos.dev</a> /
-      
+      <footer>
+        &larr; <a href="index.html">twos.dev</a> / 
         <a href="https://github.com/glacials/twos.dev/blob/main/src/User%20Guide.md">Source</a>
-      
-    </footer>
-  </div></body>
+        
+      </footer>
+    </div>
+  </body>
 </html>

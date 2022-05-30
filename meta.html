@@ -1,68 +1,40 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
-
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
-
-    gtag('config', 'UA-2876079-11');
-  </script>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content='This Website'>
-  <link rel="icon" href="favicon.ico">
-  <link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
-  <title>This Website</title>
-  <link rel="stylesheet" href="style.css" />
-  <style>
-    .spectrum {
-      height: 10em;
-      width: 10em;
-      background: conic-gradient(
-        hsl(0, 90%, 65%),
-        hsl(36, 90%, 65%),
-        hsl(72, 90%, 65%),
-        hsl(108, 90%, 65%),
-        hsl(144, 90%, 65%),
-        hsl(180, 90%, 65%),
-        hsl(216, 90%, 65%),
-        hsl(252, 90%, 65%),
-        hsl(288, 90%, 65%),
-        hsl(324, 90%, 65%),
-        hsl(360, 90%, 65%)
-      );
-      border: 1px solid;
-      border-radius: 90%;
-    }
-    @media (prefers-color-scheme:light) {
-      .spectrum {
-        border-color: black;
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
       }
-    @media (prefers-color-scheme:dark) {
-      .spectrum {
-        border-color: white;
-      }
-    }
+      gtag("js", new Date());
+      gtag("config", "UA-2876079-11");
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="This Website" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>This Website</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    summary {
-      cursor: pointer;
-    }
-  </style>
-</head>
-
-<body>
-  <div class="container">
-    <header>
-      &larr; <a href="index.html">twos.dev</a>
-      
-        / 2022 May
-      
-    </header>
-    <article><h1>The twos.dev CI/CD Pipeline</h1><pre>             ┌─────┐
+  <body>
+    <div class="container">
+      <header>
+        &larr; <a href="index.html">twos.dev</a>
+         / 2022 May 
+      </header>
+      <article><h1>The twos.dev CI/CD Pipeline</h1><pre>             ┌─────┐
       ┌──────│ Me  │─────┐
       ▣      └─────┘     ▣
    ┌─────┐         ┌───────────┐
@@ -115,13 +87,13 @@
    │ A ───□ B   A invokes B           │
    │                                  │
    └──────────────────────────────────┘
-</pre><p>The twos.dev CI/CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me. I can therefore design it in obnoxious and unintuitive ways to serve my peculiarities.</p><p>My two biggest goals for this pipeline:</p><ol><li>Easy to publish writing</li><li>URLs must never change</li></ol><p>To fulfill these goals I divide my content into two types, warm and cold.</p><h2>Warm Content</h2><p>I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:</p><ul><li>Once transferred to HTML, context switching to that piece of writing became much more effortful</li><li>Writing was slowed down by paper cuts like typing <code>&lt;p&gt;</code> tags, using <code>gqj</code> to wrap lines, etc.</li><li>A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer</li></ul><p>To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.</p><p>I found <a href="https://ia.net/writer">iA Writer</a> to replace my note-taking app for draft writing. It gets my thoughts out quickly, has helpful tools for e.g. reducing filler words, and looks nice to boot. Importantly, it stores writing as Markdown files.</p><h3>Shortcuts</h3><p>iOS and macOS devices ship with a first-party app called <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>. If you’re from Android like I am, Shortcuts is like Tasker if it were built into the operating system and had buy-in from third parties. They're like event-driven shell scripts for the masses, and they run on iOS natively.</p><p>Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:</p><ol><li>Adds default frontmatter to iA Writer documents in the <code>published/</code> directory without any</li><li></li></ol><p>behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.</p><h3>Working Copy</h3><p><a href="https://apps.apple.com/us/app/working-copy-git-client/id896694807">Working Copy</a> is a Git client for iOS that exposes Shortcuts hooks. Using it, we can build a shortcut that does what we need:</p><ol><li>(Working Copy) Pull from <code>twos.dev</code> remote</li><li>(Files) Get contents of folder <code>Published</code></li><li>Repeat with each item in <code>Contents of Folder</code><ol><li>(Working Copy) Write <code>Repeat Item</code> to <code>src</code> in <code>twos.dev</code></li></ol></li><li>(Working Copy) Commit <code>twos.dev</code> with <code>Automatic commit by iA Writer sync job</code></li><li>(Working Copy) Push <code>twos.dev</code> to remote</li></ol><p>(<a href="https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888">see the shortcut</a>)</p><p>My iPhone runs this each time I switch away from iA Writer, so changes are immediately published. If I switch to another iPhone later, it will inherit the behavior without any action on my part.</p><p>We now have glue between iCloud Drive and GitHub Actions.</p><h3>Markdown → HTML</h3><p>This step is straightforward. Using Stripe’s Markdoc library (more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.</p><h2>Cold Content</h2><p>We’ve got our Markdown pipeline set up, but not everything fits neatly into Markdown. For example, <a href="autism.html">Anonymously Autistic</a> uses CSS gradients to render a spectrum. <a href="thepopin.html">The Pop-In</a> uses media queries to show a different image in dark mode.</p><p>To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:</p><ul><li>I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled</li><li>When it’s time to write code I want to use <code>$EDITOR</code>, not iA Writer</li><li>twos.dev has a low volume of content -- I don’t want to write new templating code for small features that may only be used once</li></ul><p>For these not-quite-Markdown situations, then, <strong>the right option  is to hardcode</strong>. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.</p><h4>Implementation</h4><p>To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow to explicitly allow it:</p><ol><li>Render <code>src/*.md</code> files → <code>dist/*.html</code></li><li>Copy <code>src/*.html</code> files → <code>dist/</code>, overwriting existing files</li></ol><h4>Results</h4><p>Allowing myself this escape hatch is freeing. It has three effects:</p><ul><li>I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX</li><li>Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a <a href="cv.html">CV</a> has a unique need for bicolumnar content)</li><li>TODO</li></ul><h2>On URLs</h2><p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.</p><p>It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply <code>cp -r</code> these files into the <code>public</code> directory.</p><p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die -- <a href="death.html">and then some</a>.</p><h3>Extra Credit</h3><p>TODO: Frontmatter œ</p></article>
+</pre><p>The twos.dev CI/CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me. I can therefore design it in obnoxious and unintuitive ways to serve my peculiarities.</p><p>My two biggest goals for this pipeline:</p><ol><li>Easy to publish writing</li><li>URLs must never change</li></ol><p>To fulfill these goals I divide my content into two types, warm and cold.</p><h2>Warm Content</h2><p>I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:</p><ul><li>Once transferred to HTML, context switching to that piece of writing became much more effortful</li><li>Writing was slowed down by paper cuts like typing <code>&lt;p&gt;</code> tags, using <code>gqj</code> to wrap lines, etc.</li><li>A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer</li></ul><p>To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.</p><p>I found <a href="https://ia.net/writer">iA Writer</a> to replace my note-taking app for draft writing. It gets my thoughts out quickly, has helpful tools for e.g. reducing filler words, and looks nice to boot. Importantly, it stores writing as Markdown files.</p><h3>Shortcuts</h3><p>iOS and macOS devices ship with a first-party app called <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>. If you’re from Android like I am, Shortcuts is like Tasker if it were built into the operating system and had buy-in from third parties. They're like event-driven shell scripts for the masses, and they run on iOS natively.</p><p>Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:</p><ol><li>Adds default frontmatter to iA Writer documents in the <code>published/</code> directory without any</li><li></li></ol><p>behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.</p><h3>Working Copy</h3><p><a href="https://apps.apple.com/us/app/working-copy-git-client/id896694807">Working Copy</a> is a Git client for iOS that exposes Shortcuts hooks. Using it, we can build a shortcut that does what we need:</p><ol><li>(Working Copy) Pull from <code>twos.dev</code> remote</li><li>(Files) Get contents of folder <code>Published</code></li><li>Repeat with each item in <code>Contents of Folder</code><ol><li>(Working Copy) Write <code>Repeat Item</code> to <code>src</code> in <code>twos.dev</code></li></ol></li><li>(Working Copy) Commit <code>twos.dev</code> with <code>Automatic commit by iA Writer sync job</code></li><li>(Working Copy) Push <code>twos.dev</code> to remote</li></ol><p>(<a href="https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888">see the shortcut</a>)</p><p>My iPhone runs this each time I switch away from iA Writer, so changes are immediately published. If I switch to another iPhone later, it will inherit the behavior without any action on my part.</p><p>We now have glue between iCloud Drive and GitHub Actions.</p><h3>Markdown → HTML</h3><p>This step is straightforward. Using Stripe’s Markdoc library (more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.</p><h2>Cold Content</h2><p>We’ve got our Markdown pipeline set up, but not everything fits neatly into Markdown. For example, <a href="autism.html">Anonymously Autistic</a> uses CSS gradients to render a spectrum. <a href="thepopin.html">The Pop-In</a> uses media queries to show a different image in dark mode.</p><p>To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:</p><ul><li>I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled</li><li>When it’s time to write code I want to use <code>$EDITOR</code>, not iA Writer</li><li>twos.dev has a low volume of content -- I don’t want to write new templating code for small features that may only be used once</li></ul><p>For these not-quite-Markdown situations, then, <strong>the right option is to hardcode</strong>. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.</p><h4>Implementation</h4><p>To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow to explicitly allow it:</p><ol><li>Render <code>src/*.md</code> files → <code>dist/*.html</code></li><li>Copy <code>src/*.html</code> files → <code>dist/</code>, overwriting existing files</li></ol><h4>Results</h4><p>Allowing myself this escape hatch is freeing. It has three effects:</p><ul><li>I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX</li><li>Twos.dev is uniformly structured by default, but I’m allowed case-by-case to break that uniformity when I see fit (e.g. a <a href="cv.html">CV</a> has a unique need for bicolumnar content)</li><li>TODO</li></ul><h2>On URLs</h2><p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.</p><p>It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply <code>cp -r</code> these files into the <code>public</code> directory.</p><p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die -- <a href="death.html">and then some</a>.</p><h3>Extra Credit</h3><p>TODO: Frontmatter œ</p></article>
 
-    <footer>
-      &larr; <a href="index.html">twos.dev</a> /
-      
+      <footer>
+        &larr; <a href="index.html">twos.dev</a> / 
         <a href="https://github.com/glacials/twos.dev/blob/main/src/This%20Website.md">Source</a>
-      
-    </footer>
-  </div></body>
+        
+      </footer>
+    </div>
+  </body>
 </html>
