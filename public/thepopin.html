@@ -1,140 +1,154 @@
-<!doctype html>
+<!DOCTYPE html>
 <html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
 
-<head>
-  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
-  <script>
-    window.dataLayer = window.dataLayer || [];
-    function gtag() { dataLayer.push(arguments); }
-    gtag('js', new Date());
+      gtag("config", "UA-2876079-11");
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="The Remote Pop-In" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>The Remote Pop-In</title>
+    <link rel="stylesheet" href="style.css" />
+  </head>
 
-    gtag('config', 'UA-2876079-11');
-  </script>
-  <meta charset="utf-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width,initial-scale=1.0">
-  <meta name="description" content='The Remote Pop-In'>
-  <link rel="icon" href="favicon.ico">
-  <link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
-  <title>The Remote Pop-In</title>
-  <link rel="stylesheet" href="style.css" />
-</head>
+  <body>
+    <div class="container">
+      <header>&larr; <a href="index.html">twos.dev</a> / 2021 May</header>
+      <h1>The Remote Pop-In</h1>
 
-<body><div class="container">
-  <header>
-    &larr; <a href="index.html">twos.dev</a> / 2021 May
-  </header>
-  <h1>The Remote Pop-In</h1>
+      <p>
+        This page describes a method of dealing with one of the missing features
+        of fully remote teams: the pop-in.
 
-  <p>
-    This page describes a method of dealing with one of the missing features of
-    fully remote teams: the pop-in.
+        <!-- TODO: make another about social time re: hallway conversations -->
+      </p>
 
-    <!-- TODO: make another about social time re: hallway conversations -->
-  </p>
+      <h2>The Pop-In</h2>
+      <p>
+        The pop-in, back before open floorplans, is when you physically walk
+        into someone's office to ask them a question or spitball an idea. In an
+        open floorplan you can instead swivel your chair or walk to their desk.
+      </p>
+      <p>
+        The pop-in is valuable because it's as informal as email, but as
+        high-bandwidth and low-latency as meetings. It's interruptive to be
+        popped in on, but that interruption power is self-limiting: the effort
+        of physically going somewhere is high, and the tools available to the
+        target like doors, signs, and social cues are numerous and don't require
+        much thought to implement.
+      </p>
+      <p>
+        Slack DMs come close to replacing the pop-in, but they reduce the effort
+        too much. This leads to more interruptions (a little lower in intensity,
+        but a lot higher in number) and even to the replacement of trackers,
+        emails, and wikis with DMs.
+      </p>
+      <p>
+        There's a lot wrong with the pop-in, but like any tool it has its uses.
+        Many great products&mdash;companies, even&mdash;have been built on the
+        shoulders of the pop-in.
+      </p>
+      <h2>The Remote Pop-In</h2>
+      <p>
+        There's really no remote equivalent to the pop-in. There are products
+        that help you "hang out" like Facebook Portal, but nothing that
+        implements the pop-in.
+      </p>
+      <p>
+        At <a href="https://yourbase.io">YourBase</a> we decided we needed one.
+        Rather than build another tool, we experimented with Discord. I'm happy
+        to say we found something that works, and even solves the worst problem
+        of the open-office pop-in: the inability to shut your damned door.
+      </p>
+      <h3>The Setup</h3>
+      <picture>
+        <source
+          srcset="img/thepopin-0-dark.png"
+          media="(prefers-color-scheme: dark)"
+        />
+        <img src="img/thepopin-0-light.png" />
+      </picture>
+      <p>
+        In our company Discord server, we give everyone one voice channel of
+        their own. This is your "office". When you are online and able to be
+        disturbed, you join your office, alone. You stay in there as long as you
+        are "in".
+      </p>
+      <p>
+        Because of how Discord works, everyone can see who is in what office at
+        all times. But you can only hear conversations for the room you're in,
+        and you can only be in one room at a time. Joining a room plays an
+        obvious audio chime and is not something you can do sneakily.
+      </p>
+      <p>
+        When someone wants to pop in, they join your voice channel. The chime
+        plays, they say hello, you unmute and turn on video if you like, and
+        have your pop-in. And that's really it.
+      </p>
+      <p>
+        If you're going to the restroom and will be AFK, you can join the
+        restroom channel. You're in, but away. No one is actually wearing a
+        headset on the toilet, it's just a fun way to feel like a real office.
+      </p>
+      <p>We've even fallen into some typical office behaviors:</p>
 
-  <h2>The Pop-In</h2>
-  <p>
-    The pop-in, back before open floorplans, is when you physically walk into
-    someone's office to ask them a question or spitball an idea. In an open
-    floorplan you can instead swivel your chair or walk to their desk.
-  </p>
-  <p>
-    The pop-in is valuable because it's as informal as email, but as
-    high-bandwidth and low-latency as meetings. It's interruptive to be popped
-    in on, but that interruption power is self-limiting: the effort of
-    physically going somewhere is high, and the tools available to the target
-    like doors, signs, and social cues are numerous and don't require much
-    thought to implement.
-  </p>
-  <p>
-    Slack DMs come close to replacing the pop-in, but they reduce the effort too
-    much. This leads to more interruptions (a little lower in intensity, but a
-    lot higher in number) and even to the replacement of trackers, emails, and
-    wikis with DMs.
-  </p>
-  <p>
-    There's a lot wrong with the pop-in, but like any tool it has its uses. Many
-    great products&mdash;companies, even&mdash;have been built on the shoulders
-    of the pop-in.
-  </p>
-  <h2>The Remote Pop-In</h2>
-  <p>
-    There's really no remote equivalent to the pop-in. There are products that
-    help you "hang out" like Facebook Portal, but nothing that implements the
-    pop-in.
-  </p>
-  <p>
-    At <a href="https://yourbase.io">YourBase</a> we decided we needed one.
-    Rather than build another tool, we experimented with Discord. I'm happy to
-    say we found something that works, and even solves the worst problem of the
-    open-office pop-in: the inability to shut your damned door.
-  </p>
-  <h3>The Setup</h3>
-  <picture>
-    <source srcset="img/thepopin-0-dark.png" media="(prefers-color-scheme: dark)">
-    <img src="img/thepopin-0-light.png" />
-  </picture>
-  <p>
-    In our company Discord server, we give everyone one voice channel of their
-    own. This is your "office". When you are online and able to be disturbed,
-    you join your office, alone. You stay in there as long as you are "in".
-  </p>
-  <p>
-    Because of how Discord works, everyone can see who is in what office at all
-    times. But you can only hear conversations for the room you're in, and you
-    can only be in one room at a time. Joining a room plays an obvious audio
-    chime and is not something you can do sneakily.
-  </p>
-  <p>
-    When someone wants to pop in, they join your voice channel. The chime plays,
-    they say hello, you unmute and turn on video if you like, and have your
-    pop-in. And that's really it.
-  </p>
-  <p>
-    If you're going to the restroom and will be AFK, you can join the restroom
-    channel. You're in, but away. No one is actually wearing a headset on the
-    toilet, it's just a fun way to feel like a real office.
-  </p>
-  <p>
-    We've even fallen into some typical office behaviors:
-  <ul>
-    <li>
-      We've started having meetings in people's offices, just because it's
-      easier.
-    </li>
-    <li>
-      We have a "cafeteria" room where you can eat your lunch if you've got
-      nothing going on in real life. We also hold lunch-and-learns here.
-    </li>
-    <li>
-      We have a "rooftop" and other common spaces where some people chill, which
-      signals that they're open for a chat.
-    </li>
-  </ul>
-  </p>
-  <p>
-    The oddest one is that when it's slow around the office, you can tell. You
-    can almost hear how quiet it is when you're the first one in or the last
-    one out.
-  </p>
-  <p>
-    The pop-in is valuable because it's informal, high bandwidth, and low
-    latency. Enabling it using Discord has worked very well for us over the last
-    six months, and we didn't even have to build anything.
-  </p>
-  <p>
-    Thanks to <a href="https://discordapp.com">Discord</a> for making such a
-    flexible platform. Thanks to <a href="https://yourbase.io">YourBase</a> for
-    being so open to crazy ideas. (Check us out if your CI is slow.)
-  </p>
-  <footer>
-    &larr; <a href="index.html">twos.dev</a> /
-    <a href="https://www.youtube.com/watch?v=KzOv2jrC1I8">"The Pop-In"</a> /
-    <a href="https://github.com/glacials/twos.dev/blob/main/public/thepopin.html">
-      Source
-    </a>
-  </footer>
-</div></body>
-
+      <ul>
+        <li>
+          We've started having meetings in people's offices, just because it's
+          easier.
+        </li>
+        <li>
+          We have a "cafeteria" room where you can eat your lunch if you've got
+          nothing going on in real life. We also hold lunch-and-learns here.
+        </li>
+        <li>
+          We have a "rooftop" and other common spaces where some people chill,
+          which signals that they're open for a chat.
+        </li>
+      </ul>
+      <p>
+        The oddest one is that when it's slow around the office, you can tell.
+        You can almost hear how quiet it is when you're the first one in or the
+        last one out.
+      </p>
+      <p>
+        The pop-in is valuable because it's informal, high bandwidth, and low
+        latency. Enabling it using Discord has worked very well for us over the
+        last six months, and we didn't even have to build anything.
+      </p>
+      <p>
+        Thanks to <a href="https://discordapp.com">Discord</a> for making such a
+        flexible platform. Thanks to
+        <a href="https://yourbase.io">YourBase</a> for being so open to crazy
+        ideas. (Check us out if your CI is slow.)
+      </p>
+      <footer>
+        &larr; <a href="index.html">twos.dev</a> /
+        <a href="https://www.youtube.com/watch?v=KzOv2jrC1I8">"The Pop-In"</a> /
+        <a
+          href="https://github.com/glacials/twos.dev/blob/main/public/thepopin.html"
+        >
+          Source
+        </a>
+      </footer>
+    </div>
+  </body>
 </html>

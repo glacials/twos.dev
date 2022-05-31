@@ -14,13 +14,14 @@ As an engineer, big parts of my life exist digitally. I’d like to hand these o
 My [side](https://splits.io) [projects](https://whatsinstandard.com), for example, serve ~25k users per month. I would hate to get hit by a bus and have them slowly fall over as bills go unpaid and infrastructure rots. However, I’m not looking to lay a ton of responsibility at someone’s feet.
 
 ## Assets to Consider
+
 - Side projects
-	- Infrastructure
-	- Code
+  - Infrastructure
+  - Code
 - Money
-	- Discovery: where is it?
-	- Instruction: why?
-	- Access: how does one get at it?
+  - Discovery: where is it?
+  - Instruction: why?
+  - Access: how does one get at it?
 
 # Storage
 
@@ -28,7 +29,7 @@ I'm not looking to keep an ever-growing file folder of 2FA backup codes.
 
 # Security
 
-One of the most interesting questions is how to give someone full administrator access after you've gone and not before. Lawyers and wills are great at *delivering* postmortem information reliably, but I wouldn't trust that system to *secure* it reliably, at least to my standards.
+One of the most interesting questions is how to give someone full administrator access after you've gone and not before. Lawyers and wills are great at _delivering_ postmortem information reliably, but I wouldn't trust that system to _secure_ it reliably, at least to my standards.
 
 We will need automated mechanism to release the keys. It's okay for this mechanism to be triggered by law such as a will, but not for it to be easy to silently steal (such as a private key written on a piece of paper in a filing cabinet).
 
@@ -40,9 +41,9 @@ Although proper authentication feels like the correct way to do things, it comes
 
 ## Deploying
 
-Triggering a deploy sounds difficult at first (how can a system  detect my death?) but remember humans can be a part of this system. Setting up a deploy trigger can be as lightweight as telling someone you trust the location of a sealed envelope which should be opened in the event of your death. Inside it, place a letter that asks them to kick off other processes. For extra failover, make two envelopes in two locations for two people.
+Triggering a deploy sounds difficult at first (how can a system detect my death?) but remember humans can be a part of this system. Setting up a deploy trigger can be as lightweight as telling someone you trust the location of a sealed envelope which should be opened in the event of your death. Inside it, place a letter that asks them to kick off other processes. For extra failover, make two envelopes in two locations for two people.
 
-## 
+##
 
 ## Health Checks
 

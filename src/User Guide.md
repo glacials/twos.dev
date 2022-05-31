@@ -4,7 +4,6 @@ date: 2021-05
 updated: 2022-05
 ---
 
-
 # User Guide
 
 This page describes things I value at work. This is descriptive, not prescriptive; try to treat this as a set of FYIs, not a set of requirements. Use or ignore at your discretion, and share your own guide with me!
@@ -28,4 +27,3 @@ This page describes things I value at work. This is descriptive, not prescriptiv
 ## Footnotes
 
 This guide is in the form of Abby Falik's user guide and inspired by Dina Levitan's user guide.
-

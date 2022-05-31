@@ -8,10 +8,12 @@ random things here.
 ### Dependencies
 
 - Go 1.18+
+- npm
 
 ### Starting a dev server
 
 ```sh
+cd src/js && npm install && cd ../..
 go install
 twos.dev serve
 ```
@@ -25,7 +27,7 @@ binary, whose code is mostly in `cmd/`. The build steps include:
 - Create thumbnails from photos & replace non-gallery `<img>` tags accordingly
 - Build Markdown into HTML
 - Copy in static assets
-- Clean up small formatting issues like correcting between ` -- ` & `&mdash;`
+- Clean up small formatting issues like correcting between `--` & `&mdash;`
 
 `twos.dev serve` continuously builds while acting as a file server for the build
 directory.
