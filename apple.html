@@ -487,7 +487,7 @@
 
         <p>
           Apple TV can initiate play from a phone like Chromecast, but beyond
-          that we’ve used the remote. The touchpad on the remote is awkward and
+          that it's pretty remote-centric. The touchpad on the remote is awkward and
           hard to use; I brush it when trying to click it, causing me to click
           on the wrong thing.
         </p>
@@ -516,12 +516,12 @@
         </p>
         <p>
           The Apple Home UX is miles better than Google Home’s long device list
-          that feels like a web page. This was a strict upgrade.
+          that feels like a web page. This was a strict upgrade. Automation is a breeze.
         </p>
         <p>
           Ecosystem effects of Apple Home include using Apple TV as your IoT
-          gateway, and having home controls in the iOS and macOS control center
-          pull-down menus.
+          gateway, having home controls in the iOS and macOS control center
+          pull-down menus, and hooking up more devices through automation with Shortcuts.
         </p>
 
         <a name="airpods"></a>
@@ -535,7 +535,7 @@
         </p>
         <p>
           Ecosystem effects of AirPods include automatic switching between
-          devices based on attention.
+          devices based on attention, and Siri integration slightly worse than Pixel Buds's Google Assistant imtegration.
         </p>
 
         <a name="mail"></a>
@@ -564,10 +564,11 @@
           Mail's junk filter sorts ~one legitimate email per week into the junk
           folder, even after months of correcting it.
         </p>
+        <p>When attaching large files Mail allows you to send them as iCloud Drive links instead, but I've had recipients experience trouble downloading them.</p>
         <p>
-          Mail's search is bad. On macOS, it will assume you want to search the
-          current mailbox. Because I do inbox zero, this is never what I want to
-          search. (iOS and iPadOS correctly search everything.) When you are
+          Mail's search is bad. On macOS, it searches only the
+          mailbox being viewed (e.g. Inbox) by default. Because I do inbox zero, this is never what I want to
+          search. (iOS and iPadOS correctly search everything by default.) When you are
           done searching and click Inbox to "return home" the search field
           doesn't clear, leading you to believe your Inbox is empty.
         </p>
@@ -588,7 +589,7 @@
           macOS Mail supports filters, but only locally. The iCloud Mail service
           has a separate filter system with the same effect, but the two have
           disparate feature sets and don't synchronize. iOS Mail does not
-          support filters. I’ve opted to use Mail’s local-only filters, and have
+          support filters. I’ve opted to use Mail’s local-only filters because the iCloud filters can only check one condition per filter, and I just have
           my iMac stay awake 24/7.
         </p>
         <p>
@@ -616,14 +617,14 @@
           </p>
         </center>
         <p>
-          If you want a Mail-like experience with Gmail as a backend, I
+          If you want a Mail-like experience with Gmail as a backend, instead of using SMTP I
           recommend
-          <a href="https://mimestream.com">Mimestream</a> instead; it is written
-          by a former Apple engineer but uses Gmail APIs instead of SMTP.
+          <a href="https://mimestream.com">Mimestream</a>; it is written
+          by a former Apple engineer on Mail to have a similar UX but using proper Gmail APIs.
         </p>
         <p>
           Ecosystem effects of Mail include having search results show up in
-          Spotlight and having calendar invitations open in a Calendar float.
+          Spotlight and behaving super well as a multitasking app on iPadOS.
         </p>
 
         <a name="calendar"></a>
@@ -664,9 +665,8 @@
           </p>
         </center>
         <p>
-          This has led me to misread the current day multiple times, leading to
-          panic about being late for meetings and reaching out to reschedule
-          other meetings. I now use Day view, where the bar only shows when
+          This has led me to misread the current day multiple times, inducing
+          panic about being late for meetings. I now use Day view, where the bar only shows when
           viewing today.
         </p>
         <p>
@@ -720,12 +720,12 @@
         <p>
           Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed
           to have a refresh in a decade. Calendar can automatically generate
-          “travel to” and “travel from” based on the travel time between
+          “travel to” and “travel from” events based on the travel time between
           locations.
         </p>
         <p>
-          Ecosystem effects of Calendar include Maps and Siri suggestions for
-          navigation destinations.
+          Ecosystem effects of Calendar include context-aware Maps and Siri suggestions for
+          navigation destinations and video call links.
         </p>
 
         <a name="maps"></a>
@@ -753,7 +753,7 @@
           Then there's the other dimension of Google Maps: reviews, photos,
           menus, ordering, and reservations. Apple is a generation behind here;
           their purchase of Yelp means they inherit photos & reviews, but even
-          the ubiquity of Yelp reviews and photos just can't beat the sheer
+          the ubiquity of Yelp reviews and photos can't beat the sheer
           volume Google Maps. I've only seen one or two restaurants with orering
           functionality enabled. Guiltily, I find myself missing the
           gamification of Google Maps. I'm sure it's no coincidence.
@@ -785,7 +785,7 @@
           which work as seamlessly as advertised. I threw one in my car and one
           in my bag just to have peace of mind. The app sends a notification
           when I leave $DEVICE at $LOCATION, with easy controls to disable
-          future notifications for that combination.
+          future notifications for any such combination.
         </p>
 
         <a name="safari"></a>
@@ -801,7 +801,7 @@
           applications even when in a tabbed window. The touchpad gesture to go
           back or forward produces a natural transition where the whole web page
           slides off screen to reveal the target web page, but it backfires and
-          feels artificial on single-page apps where the navigation event
+          feels artificial for anchor links and single-page apps where the navigation event
           doesn’t deserve such a heavyweight animation.
         </p>
         <p>
@@ -849,7 +849,7 @@
         <h3>Google Sheets → Numbers</h3>
 
         <p>
-          As a casual spreadsheet user, Sheets and Numbers are nearly identical.
+          As a casual spreadsheets user, Sheets and Numbers are nearly identical.
           Numbers has nicer UX when editing formulae that visualizes cell(s)
           being referenced. It tries to humanize references, e.g. “Ben age” for
           a cell in a row with header “Ben” and a column with header “Age”,
@@ -913,7 +913,7 @@
           As one use case, my spouse and I share a family reminders list. On
           that list, a reminder to take out the trash pops every trash day when
           I arrive home. It’s assigned to me, but if she happens to do it before
-          I get home she can check it off; it won’t then pop for me.
+          I get home she can check it off; it then won't pop for me.
         </p>
         <p>
           Ecosystem effects of Reminders include integration with the share
@@ -932,7 +932,7 @@
         </p>
         <p>
           Ecosystem effects of Siri include surface-level interaction with
-          native apps: setting reminders, playing music,
+          native apps: setting reminders, playing music, controlling Home devices, etc.
         </p>
 
         <a name="shortcuts"></a>
@@ -981,15 +981,15 @@
             (Working Copy) Stage <code>./src</code> in <code>twos.dev</code>
           </li>
           <li>
-            Commit <code>twos.dev</code> with message “Automatic commit by iA
+            (Working Copy) Commit <code>twos.dev</code> with message “Automatic commit by iA
             Writer sync job”
           </li>
-          <li>Push <code>twos.dev</code> to remote</li>
+          <li>(Working Copy) Push <code>twos.dev</code> to remote</li>
         </ol>
         <p>
           I’m a software engineer and am comfortable coding, but the fact that I
           could do all this without any was impressive. It’s also fun to say
-          that [my phone is a vital part of my CI/CD pipeline][meta.html].
+          that my phone is a vital part of my CI/CD pipeline.
         </p>
 
         <a name="drive"></a>
@@ -998,7 +998,7 @@
           Most Dropbox-esque apps are the same and iCloud Drive is no exception.
           Use it if you're in the Apple ecosystem, and don't if you're not.
           Otherwise, the only benefit it has over Google Drive is that it
-          synchronizes everything to disk instead of mounting a network drive -- or at least, its UX is so good that it feels like it.
+          synchronizes everything to disk instead of mounting a network drive -- or at least, its UX makes it feel that way.
         </p>
         <p>
           Ecosystem effects of iCloud Drive include a more native sharing flow
@@ -1008,7 +1008,7 @@
           spreadsheets there).
         </p>
         <p>
-          It also seems there's also a trick macOS pulls where it allows you to
+          It also seems macOS pulls a trick where it allows you to
           open files that haven't fully synced by delaying the open action until
           the sync is complete. This gives some unnoticed benefit for small
           files like documents and images, but backfires with large files and/or
@@ -1033,7 +1033,7 @@
           The UI of Apple Music for macOS is a let-down and is more on par with
           the iCloud Mail web interface than with any other native Apple app.
           Navigation is slow and unresponsive, which is compounded by the fact
-          that it takes too many transitions to get where you’re going.
+          that it takes too many transitions to get where you’re going. For details on its UX failings, see <a href="https://cinnamon.agency/blog/post/apple_musics_ux_problem">Jake from Cinnamon's post</a>.
         </p>
         <p>I miss Google Play Music.</p>
         <p>
@@ -1066,7 +1066,7 @@
         </p>
         <p>
           As of 2022 May, I’m overall happy with the Apple ecosystem and would
-          not count it out from becoming my new preference.
+          not count it out from becoming my new preference. But, time will tell and I'll comtinue to document my journey here.
         </p>
       </article>
       <footer>
