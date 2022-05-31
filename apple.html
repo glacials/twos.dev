@@ -71,8 +71,11 @@
           fence.
         </p>
 
-        <h2>The Broad Theme: Safety vs. Freedom</h2>
+        <h2>Broad Themes</h2>
+        Before I dump by notes about specific transition experiences, I'll
+        summarize the themes I've witnessed during them.
 
+        <h3>Safety vs. Freedom</h3>
         <p>
           In 2020 I tried to release a Flutter app on iOS. I'd long ago
           published its Android build, but the iOS approval process was yielding
@@ -176,6 +179,55 @@
           only as beholden to its end users as the person in charge wants it to
           be. But these are the broad strokes differences I've found between
           Apple and Google.
+        </p>
+
+        <h3>Offline-first vs. Online-first Design</h3>
+
+        <p>
+          Having multiple macOS and iOS devices made clear the differences in
+          attitude Google and Apple have toward user data, and by extension user
+          identity. To Google, a user is a Google account first; a device is
+          just a window into that account. The device may have some caching and
+          synchronization to remain useful offline, but ultimately Google's
+          servers are the source of truth.
+        </p>
+        <p>
+          To Apple, a user is a device first. iCloud exists to synchronize data
+          between multiple devices, but it's just that -- synchronization. Apps
+          usually wait until the device is plugged in to bother syncing, and you
+          can even sync with a cable (or not at all) instead of iCloud.
+        </p>
+        <p>Here are some ways these differences are expressed:</p>
+        <ul>
+          <li>
+            Google Docs documents are rows in a database, where Apple Pages
+            documents are files on a filesystem; sharing and synchronization are
+            handled by iCloud which is more akin to Dropbox in this mode. It
+            does support 100 simultaneous writers, but I'm not sure how.
+          </li>
+          <li>
+            When you message someone with iMessage you are messaging a device (a
+            phone number or email), not an Apple account -- even if the bubble
+            is blue. You may be unknowingly using a combination of phone and
+            email for one contact, because iMessage silently interleaves them if
+            they're owned by the same Apple account. If that person later
+            removes one from their Apple account, your iMessage thread with them
+            retroactively splits.
+          </li>
+          <li>
+            In the Google ecosystem, when you take or make a Fi / Voice call
+            from your computer, you're going through Google's servers. In the
+            Apple ecosystem, when you take or make a call from your Mac or iPad,
+            you're connecting locally to your iPhone to route the call.
+          </li>
+        </ul>
+        <p>
+          Part of this local-first approach is charming compared to a monolithic
+          always-online Google account, but it’s not for everyone. I regularly
+          experience synchronization delays and conflicts. Sync settings for a
+          machine are centralized in iCloud settings where they're often off by
+          default. I still can't get one of my Safaris to synchronize its
+          bookmarks with the rest.
         </p>
 
         <h2>Specific Notes</h2>
@@ -333,22 +385,6 @@
         <a name="iphone"></a>
         <h3>Pixel → iPhone</h3>
 
-        <p>
-          iPhone makes clear the differences in the Google and Apple attitudes
-          toward user identity. In Google a user is a Google account; an Android
-          phone is a window into it. In Apple a user is an iPhone.
-        </p>
-        <p>
-          For example, in Google Docs documents are saved to your account,
-          presumably to a row in a database somewhere. In Pages documents are
-          saved to the filesystem, defaulting to the iCloud Drive directory,
-          which synchronizes them to your Apple account. The filesystem is the
-          database.
-        </p>
-        <p>
-          There’s a part of this that’s charming, but it’s not for everyone. I
-          regularly experience synchronization delays and conflicts.
-        </p>
         <p>
           I was initially surprised iPhone and iPad lack feature parity. This
           first came up trying to swipe-type on iPad. Another is iPad can show
@@ -1068,11 +1104,10 @@
           I always felt that Google Pay was finicky, and that made me
           embarrassed to use it. It was hard to find "the spot" on credit card
           machines to tap. Apple Pay feels more spatially generous; once I start
-          hunting for the spot, it's already found it. It could be that the
+          hunting for the spot, it's already been found. It could be that the
           iPhone NFC chip has a stronger signal or my Android phones had worse
-          latency, or maybe the world has just gotten better at this and me
-          switching phones was just incidental. I'm now using Apple Pay every
-          chance I get.
+          latency, or maybe the world has just gotten better at this since then.
+          I'm now using Apple Pay every chance I get.
         </p>
         <p>
           The apparent meta for credit card companies in the US is to give
