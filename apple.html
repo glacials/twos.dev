@@ -242,6 +242,7 @@
           <li>
             <a href="#iphone">Pixel &rarr; iPhone</a>
             <ul>
+              <li><a href="#fi">Google Fi</a></li>
               <li><a href="#notifications">Notifications</a></li>
               <li><a href="#imessage">iMessage</a></li>
             </ul>
@@ -421,8 +422,7 @@
             src="/img/apple-drag-photos-dark.mp4"
             type="video/mp4"
             media="(prefers-color-scheme:dark)"
-          />
-          -->
+          /> -->
             <source
               src="/img/apple-drag-photos-light.mov"
               type="video/quicktime"
@@ -465,6 +465,22 @@
           FaceID is about on par with fingerprint unlock on Pixel. They each
           encounter their own situational troubles, but both are great overall
           and I'm no more or less happy.
+        </p>
+
+        <a name="fi"></a>
+        <h4>Google Fi</h4>
+        <p>
+          When I switched to iPhone, we had been using Google Fi as our carrier.
+          We decided to stay with it because they'd recently started to
+          officially support iPhone. However, after about a year we found out
+          that Google Fi had been intermittently dropping outgoing SMS messages
+          from iPhones, leading a friend and I to think we were ghosting each
+          other. Once we learned this, we immediately switched.
+        </p>
+        <p>
+          Even if this whole Apple experiment fails and I go back to Android, I
+          can't see myself trusting Fi again after such an impactful and
+          long-term bug that was never even communicated.
         </p>
 
         <a name="notifications"></a>
@@ -849,12 +865,53 @@
         <p>
           In macOS the Safari chrome fades into the background better than the
           Chrome chrome, such that websites feel a bit closer to standalone
-          applications even when in a tabbed window. The touchpad gesture to go
-          back or forward produces a natural transition where the whole web page
-          slides off screen to reveal the target web page, but it backfires and
-          feels artificial for anchor links and single-page apps where the
-          navigation event doesn’t deserve such a heavyweight animation.
+          applications even when in a tabbed window. The touch gesture to go
+          back or forward slides the page on/off screen allowing you to peek
+          back or forward without navigating, but it backfires and feels
+          artificial for low-travel anchor links and some single-page app
+          transitions. It also sometimes reveals a blank page until the
+          navigation event triggers (when the gesture ends) for reasons I can't
+          identify.
         </p>
+        <p>
+          When it works it's beautiful and useful, but when it doesn't it's
+          jarring.
+        </p>
+        <center>
+          <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+            <!-- video->source->media queries not supportd :( commented for now
+          <source
+            src="/img/apple-back-light.mov"
+            type="video/quicktime"
+            media="(prefers-color-scheme:light)"
+          />
+          <source
+            src="/img/apple-back-light.mp4"
+            type="video/mp4"
+            media="(prefers-color-scheme:light)"
+          />
+          <source
+            src="/img/apple-back-dark.mov"
+            type="video/quicktime"
+            media="(prefers-color-scheme:dark)"
+          />
+          <source
+            src="/img/apple-back-dark.mp4"
+            type="video/mp4"
+            media="(prefers-color-scheme:dark)"
+          /> -->
+            <source src="/img/apple-back-dark.mov" type="video/quicktime" />
+            <source src="/img/apple-back-dark.mp4" type="video/mp4" />
+          </video>
+          <p>
+            <i>
+              Navigating through history in Safari. The back-and-forth motions
+              are me poorly demonstrating that the page moves with my fingers,
+              not on rails.
+            </i>
+          </p>
+        </center>
+
         <p>
           I tend to switch back to Chrome for Meet meetings, as I’ve experienced
           some webcam freezing in Safari of myself or others (local only); Meet
@@ -1105,8 +1162,9 @@
           embarrassed to use it. It was hard to find "the spot" on credit card
           machines to tap. Apple Pay feels more spatially generous; once I start
           hunting for the spot, it's already been found. It could be because the
-          iPhone NFC chip is located at the top of the device while Pixels have them in the middle, or maybe the world has just gotten better at this since then.
-          I'm now using Apple Pay every chance I get.
+          iPhone NFC chip is located at the top of the device while Pixels have
+          them in the middle, or maybe the world has just gotten better at this
+          since then. I'm now using Apple Pay every chance I get.
         </p>
         <p>
           The apparent meta for credit card companies in the US is to give
