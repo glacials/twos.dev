@@ -30,6 +30,8 @@ import (
 	"github.com/spf13/cobra"
 )
 
+var noBuild *bool
+
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
@@ -41,18 +43,20 @@ var serveCmd = &cobra.Command{
 
 		stop := make(chan struct{})
 
-		go func() {
-			for {
-				if err := buildCmd.RunE(cmd, args); err != nil {
-					log.Fatalf(fmt.Errorf("cannot build: %w", err).Error())
+		if !*noBuild {
+			go func() {
+				for {
+					if err := buildCmd.RunE(cmd, args); err != nil {
+						log.Fatalf(fmt.Errorf("cannot build: %w", err).Error())
+					}
+					select {
+					case <-time.After(1 * time.Second):
+					case <-stop:
+						return
+					}
 				}
-				select {
-				case <-time.After(1 * time.Second):
-				case <-stop:
-					return
-				}
-			}
-		}()
+			}()
+		}
 
 		log.Printf("Serving dist/ on http://localhost:%d\n", port)
 		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
@@ -65,4 +69,5 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+	noBuild = serveCmd.Flags().Bool("no-build", false, "don't continually rebuild while serving")
 }

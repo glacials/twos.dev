@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"fmt"
+	"html/template"
 
 	"github.com/spf13/cobra"
 )
@@ -33,6 +34,23 @@ const (
 	sourceDir                  = "src"
 	destinationDir             = "dist"
 )
+
+type essayFrontmatter struct {
+	Filename string `yaml:"filename"`
+	// Date is an alias for CreatedAt.
+	Date      string `yaml:"date"`
+	CreatedAt string `yaml:"created"`
+	UpdatedAt string `yaml:"updated"`
+}
+
+type htmlFileVars struct {
+	Body      template.HTML
+	Title     string
+	SourceURL string
+
+	CreatedAt string
+	UpdatedAt string
+}
 
 type imageContainerVars struct {
 	PrevLink string
@@ -51,6 +69,10 @@ var buildCmd = &cobra.Command{
 		}
 
 		if err := buildMarkdown(sourceDir, destinationDir); err != nil {
+			return fmt.Errorf("can't build Markdown: %w", err)
+		}
+
+		if err := buildHTML(sourceDir, destinationDir); err != nil {
 			return fmt.Errorf("can't build HTML: %w", err)
 		}
 

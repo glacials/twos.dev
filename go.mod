@@ -3,6 +3,8 @@ module github.com/glacials/twos.dev
 go 1.18
 
 require (
+	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/adrg/frontmatter v0.2.0 // indirect
 	github.com/bamiaux/rez v0.0.0-20170731184118-29f4463c688b // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/otiai10/copy v1.7.0 // indirect
