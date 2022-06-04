@@ -1,6 +1,6 @@
 ---
 filename: death.html
-date: 2022-05
+date: 2022-05-01
 ---
 
 # Death Cleaning for Engineers

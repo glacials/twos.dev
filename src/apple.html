@@ -1,6 +1,6 @@
 ---
-date: 2022-05
-updated: 2022-06
+date: 2022-05-25
+updated: 2022-06-02
 ---
 
 <h1>From Google to Apple</h1>
@@ -80,40 +80,44 @@ themes I've witnessed during them.
   (read: cancel) subscriptions -- no digging through menus or talking to
   customer service agents.
 </p>
-<center>
-  <picture>
-    <source
-      srcset="img/apple-subscriptions-dark.png"
-      media="(prefers-color-scheme: dark)"
-    />
-    <img
-      src="img/apple-subscriptions-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  <picture>
-    <source
-      srcset="img/apple-subscription-dark.png"
-      media="(prefers-color-scheme: dark)"
-    />
-    <img
-      src="img/apple-subscription-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  <p>
-    <i> The App Store's subscriptions management menus.</i>
-  </p>
-</center>
+<picture style="text-align: center">
+  <source
+    srcset="img/apple-subscriptions-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    alt="Screenshot of iOS App Store showing multiple active subscriptions"
+    src="img/apple-subscriptions-light.png"
+    style="max-height: 40em; max-width: 100%"
+  />
+</picture>
+<picture>
+  <source
+    srcset="img/apple-subscription-dark.png"
+    media="(prefers-color-scheme: dark)"
+  />
+  <img
+    alt="Screenshot of iOS App Store showing an active subscription, with the option to change plan or cancel"
+    src="img/apple-subscription-light.png"
+    style="max-height: 40em; max-width: 100%"
+  />
+</picture>
+<p style="text-align: center">
+  <i> The App Store's subscriptions management menus.</i>
+</p>
 <p>
   Another example: If your app allows signing in with any third party auth
   providers, Apple must be one of them. As a developer, this means building
   another sign-in flow and database table. As a user, this means I get a native,
   one-tap, FaceID sign-in.
 </p>
-<center>
-  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-    <!-- video->source->media queries not supportd :( commented for now
+<video
+  autoplay
+  loop
+  muted
+  style="max-height: 40em; max-width: 100%; text-align: center"
+>
+  <!-- video->source->media queries not supportd :( commented for now
           <source
             src="/img/apple-signin-light.mov"
             type="video/quicktime"
@@ -134,11 +138,10 @@ themes I've witnessed during them.
             type="video/mp4"
             media="(prefers-color-scheme:dark)"
           /> -->
-    <source src="/img/apple-signin-dark.mov" type="video/quicktime" />
-    <source src="/img/apple-signin-dark.mp4" type="video/mp4" />
-  </video>
-  <p><i>Signing in with Apple.</i></p>
-</center>
+  <source src="/img/apple-signin-dark.mov" type="video/quicktime" />
+  <source src="/img/apple-signin-dark.mp4" type="video/mp4" />
+</video>
+<p><i>Signing in with Apple.</i></p>
 <p>
   These examples continue throughout the ecosystem, and the more I see the more
   I believe Apple thinks of itself as a government providing "public goods",

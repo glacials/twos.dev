@@ -42,11 +42,14 @@
       <center>
         <img src="{{.CurImage}}" style="max-width: 100%; max-height: 75vh" />
       </center>
-      <p>
+      <footer>
         <center>&copy; 2021-2022 Benjamin Carlsson</center>
-        &larr; <a href="index.html">twos.dev</a> /
+        &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
+        <a href="{{.SourceURL}}">Source</a>
+        {{else}}
         <a href="https://github.com/glacials/twos.dev">Source</a>
-      </p>
+        {{end}}
+      </footer>
     </div>
   </body>
 </html>

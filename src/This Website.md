@@ -1,6 +1,6 @@
 ---
 filename: meta.html
-date: 2022-05
+date: 2022-05-01
 ---
 
 # The twos.dev CI/CD Pipeline
@@ -74,9 +74,9 @@ To fulfill these goals I divide my content into two types, warm and cold.
 
 I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:
 
-- Once transferred to HTML, context switching to that piece of writing became much more effortful
-- Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
-- A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
+-  Once transferred to HTML, context switching to that piece of writing became much more effortful
+-  Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
+-  A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
 
 To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.
 
@@ -120,9 +120,9 @@ We’ve got our Markdown pipeline set up, but not everything fits neatly into Ma
 
 To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:
 
-- I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
-- When it’s time to write code I want to use `$EDITOR`, not iA Writer
-- twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
+-  I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
+-  When it’s time to write code I want to use `$EDITOR`, not iA Writer
+-  twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
 
 For these not-quite-Markdown situations, then, **the right option is to hardcode**. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.
 
@@ -137,9 +137,9 @@ To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow t
 
 Allowing myself this escape hatch is freeing. It has three effects:
 
-- I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
-- Twos.dev is uniformly structured by default, but I’m allowed case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
-- TODO
+-  I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
+-  Twos.dev is uniformly structured by default, but I’m allowed case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
+-  TODO
 
 ## On URLs
 
