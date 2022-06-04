@@ -9,6 +9,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
@@ -21,7 +22,12 @@ func imageBuilder(src, dst string) error {
 	}
 
 	imgdst := filepath.Join(dst, relsrc)
-	thmdst := filepath.Join(dst, "thumb", relsrc)
+	thmdst := strings.Replace(
+		imgdst,
+		filepath.FromSlash("/img/"),
+		filepath.FromSlash("/img/thumb/"),
+		1,
+	)
 
 	if err := os.MkdirAll(filepath.Dir(imgdst), 0755); err != nil {
 		return fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdst), err)
@@ -42,7 +48,7 @@ func imageBuilder(src, dst string) error {
 	}
 
 	// Generate thumbnails and place into build dir
-	if err := genThumbnail(src, filepath.Dir(thmdst), 300); err != nil {
+	if err := genThumbnail(src, thmdst, 300); err != nil {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
@@ -81,24 +87,18 @@ func genThumbnail(src, dst string, width int) error {
 		nil,
 	)
 
-	relativePath, err := filepath.Rel(commonPathAncestor(src, dst), src)
-	if err != nil {
-		return fmt.Errorf("can't get relative path of `%s`: %w", src, err)
-	}
-
-	destinationPath := filepath.Join(dst, "thumb", relativePath)
-	if err := os.MkdirAll(filepath.Dir(destinationPath), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
 		return fmt.Errorf("can't make thumbnail directory in path `%s`: %w", dst, err)
 	}
 
-	destinationFile, err := os.Create(destinationPath)
+	destinationFile, err := os.Create(dst)
 	if err != nil {
 		return fmt.Errorf("can't create thumbnail file for image at path `%s`: %w", src, err)
 	}
 	defer destinationFile.Close()
 
 	if err := jpeg.Encode(destinationFile, destinationImage, nil); err != nil {
-		return fmt.Errorf("can't encode to destination file at path `%s`: %w", destinationPath, err)
+		return fmt.Errorf("can't encode to destination file at path `%s`: %w", dst, err)
 	}
 
 	return nil
