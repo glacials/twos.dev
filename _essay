@@ -16,7 +16,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="_imgcontainer" />
+    <meta name="description" content="twos.dev" />
     <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
@@ -24,7 +24,7 @@
       title="twos.dev"
       href="/feed.rss"
     />
-    <title>_imgcontainer</title>
+    <title>twos.dev</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -47,13 +47,12 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-2876079-11");
     </script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="twos.dev Photo Viewer" />
+    <meta name="description" content="{{.Title}}" />
     <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
@@ -61,27 +60,19 @@
       title="twos.dev"
       href="/feed.rss"
     />
-    <title>twos.dev Photo Viewer</title>
-    <link rel="stylesheet" href="/style.css" />
+    <title>{{.Title}}</title>
+    <link rel="stylesheet" href="style.css" />
   </head>
 
   <body>
     <div class="container">
-      <header>&larr; <a href="/">twos.dev</a></header>
-      <center>
-        {{if .PrevLink}}
-        <a href="{{.PrevLink}}">&larr; prev</a>
-        {{if .NextLink}}/{{end}} {{end}} {{if .NextLink}}
-        <a href="{{.NextLink}}">next &rarr;</a>
-        {{end}}
-      </center>
-      <center>
-        <img src="{{.CurImage}}" style="max-width: 100%; max-height: 75vh" />
-      </center>
+      <header>
+        &larr; <a href="index.html">twos.dev</a>
+        {{if .CreatedAt}} / {{.CreatedAt}} {{if .UpdatedAt}} (updated
+        {{.UpdatedAt}}){{end}} {{end}}
+      </header>
+      <article>{{.Body}}</article>
       <footer>
-        <span style="text-align: center">
-          &copy; 2021-2022 Benjamin Carlsson
-        </span>
         &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
         <a href="{{.SourceURL}}">Source</a>
         {{else}}
@@ -94,7 +85,7 @@
 </article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / 
-        <a href="https://github.com/glacials/twos.dev/blob/main/src/templates/_imgcontainer.html">Source</a>
+        <a href="https://github.com/glacials/twos.dev/blob/main/">Source</a>
         
       </footer>
     </div>

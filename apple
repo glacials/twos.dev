@@ -16,7 +16,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="apple" />
+    <meta name="description" content="twos.dev" />
     <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
@@ -24,7 +24,7 @@
       title="twos.dev"
       href="/feed.rss"
     />
-    <title>apple</title>
+    <title>twos.dev</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -39,7 +39,9 @@
 <h1>From Google to Apple</h1>
 
 <p>
-  My life is in Google more than anyone I know. The usual suspects sure -- Gmail, Photos, Chrome, etc. -- but also the ones people stay away from -- Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies &amp; TV,
+  My life is in Google more than anyone I know. The usual suspects sure --
+  Gmail, Photos, Chrome, etc. -- but also the ones people stay away from --
+  Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies &amp; TV,
   Podcasts, etc. We have more Google Homes than rooms. I was a beta user for the
   first Chromebook, the Cr-48. I have more scar tissue than most from services
   being sent to the “Google graveyard”. And for a few years, I overlaid my
@@ -1312,7 +1314,7 @@ p>
 </article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / 
-        <a href="https://github.com/glacials/twos.dev/blob/main/src/apple.html">Source</a>
+        <a href="https://github.com/glacials/twos.dev/blob/main/">Source</a>
         
       </footer>
     </div>
