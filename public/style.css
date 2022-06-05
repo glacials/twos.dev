@@ -24,8 +24,13 @@ li {
   margin: 0.5em 0;
 }
 
-h1, h2, h3, h4, h5, h6 {
-  margin-top: 2em; 
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2em;
 }
 
 footer {
@@ -76,16 +81,16 @@ em em {
   font-style: normal;
 }
 
-.dark-video {
+.dark-only {
   display: none;
 }
 
 @media (prefers-color-scheme: dark) {
-  .dark-video {
+  .dark-only {
     display: block;
   }
 
-  .light-video {
+  .light-only {
     display: none;
   }
 }

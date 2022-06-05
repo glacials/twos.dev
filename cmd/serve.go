@@ -66,6 +66,13 @@ var serveCmd = &cobra.Command{
 
 				return nil
 			},
+			"./*.css": func(_, _ string) error {
+				if err := buildTheWorld(); err != nil {
+					return err
+				}
+
+				return nil
+			},
 			"./public": staticFileBuilder,
 		},
 		)

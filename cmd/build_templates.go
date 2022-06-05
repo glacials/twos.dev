@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"log"
 	"os"
 	"os/exec"
 	"path/filepath"
@@ -35,11 +36,16 @@ func NewTemplateBuilder() (templateBuilder, error) {
 	buildHTMLFile := func(src, dst string) error {
 		f, err := os.Open(src)
 		if err != nil {
-			return fmt.Errorf(
-				"template builder can't open HTML file at `%s` for building: %w",
-				src,
-				err,
+			// TODO: Clean this up; Prettier autoformatting seems to remove the file
+			// and quickly place it back, so ignore th error.
+			log.Printf(
+				fmt.Errorf(
+					"can't open HTML file at `%s` for building: %w",
+					src,
+					err,
+				).Error(),
 			)
+			return nil
 		}
 
 		matter, body, err := frontmatter.Parse(f)
@@ -109,7 +115,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 		f, err := os.Open(src)
 		if err != nil {
 			return fmt.Errorf(
-				"can't open HTML file at `%s` for building: %w",
+				"can't open Markdown file at `%s` for building: %w",
 				src,
 				err,
 			)
