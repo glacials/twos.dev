@@ -59,7 +59,14 @@ var serveCmd = &cobra.Command{
 			"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
 			"./src/*.html":               templater.htmlBuilder,
 			"./src/*.md":                 templater.markdownBuilder,
-			"./public":                   staticFileBuilder,
+			"./src/templates/*.html": func(_, _ string) error {
+				if err := buildTheWorld(); err != nil {
+					return err
+				}
+
+				return nil
+			},
+			"./public": staticFileBuilder,
 		},
 		)
 
@@ -70,7 +77,7 @@ var serveCmd = &cobra.Command{
 		stop := make(chan struct{})
 
 		if !*noBuild {
-			if err := buildCmd.RunE(cmd, args); err != nil {
+			if err := buildTheWorld(); err != nil {
 				log.Fatalf("can't build: %s", err.Error())
 			}
 
@@ -81,15 +88,12 @@ var serveCmd = &cobra.Command{
 						if !ok {
 							return
 						}
-						log.Println("event:", event)
-						if event.Op&fsnotify.Write == fsnotify.Write {
+						if event.Op&(fsnotify.Write|fsnotify.Rename|fsnotify.Create) > 0 {
+							log.Println("event:", event)
 							for path, builder := range distributer.Assignments {
-								fmt.Printf("matching %s to %s\n", path, event.Name)
-
 								if ok, err := filepath.Match(path, event.Name); err != nil {
 									log.Fatalf("can't match `%s`: %s", path, err)
 								} else if ok {
-									fmt.Printf("building\n")
 									if err := builder(event.Name, dst); err != nil {
 										log.Fatalf("can't build `%s`: %s", path, err)
 									}
