@@ -85,7 +85,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 
 		v := htmlFileVars{
 			Body:  template.HTML(body),
-			Title: filepath.Base(src)[0 : len(filepath.Base(src))-len(".md")],
+			Title: filepath.Base(src)[0 : len(filepath.Base(src))-len(".html")],
 			SourceURL: fmt.Sprintf(
 				"https://github.com/glacials/twos.dev/blob/main/%s",
 				src,
