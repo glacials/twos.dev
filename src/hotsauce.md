@@ -51,19 +51,36 @@ We're a small team with no designer, so I cracked open Acorn and spent way too l
 
 ### Shipping
 
-I went into this expecting to have to make some bulk trips to the post office, but I never had to leave the house—USPS allows you to schedule, through their website, someone to pick up your packages during their normal route. I had ordered padded flat-rate envelopes from their website earlier. My flow for each order was:
+I went into this expecting to make bulk trips to the post office, but I actually never had to leave the house—usps.com allows you to schedule a mail carrier to pick up packages during their mail route. I ordered padded flat-rate envelopes from their website. On April 1st, here was my pipeline:
 
 1. (Trigger) Receive “payment completed” email from Stripe
 2. Pay for a shipping label at usps.com (~$9)
 3. Print shipping label, affix to a padded envelope with scotch tape
-4. Pack hot sauce into said envelope
+4. Pack in hot sauce and extra packing material
 5. Schedule a pickup at usps.com
-6. (On pickup day) Put the package on my doorstep 
+6. (On pickup day) Put queued package(s) on the porch
 
 ## Final Surprises
 
-I built the full-page takeover to check if the day was April 1 when deciding whether to take over or lie dormant, but I didn't think about checking the year. So one year later, we suddenly got another influx of orders. Luckily I still had plenty of stock with expiration dates still over a year away, so spent a happy little surprise day packing hot sauce again.
+I built the full-page takeover to check if the day was April 1 when deciding whether to take over or lie dormant, but I didn't think about checking the year. So one year later, we suddenly got another influx of orders. Luckily I still had plenty of stock with expiration dates still over a year away, so spent a little surprise day packing hot sauce again -- and again a third time, another year later.
 
-## Was it Worth It?
+# Finances
 
-[todo: did it make money?]
+After the sample packs and the bulk order of 48 bottles (the minimum), upfront costs came to $192.05. Shipping was $9 per package. Over three April Fool's Days we sold 28 bottles among 25 packages at $15 / bottle.
+
+The cost of my labor and the boon to the brand are harder to calculate. I'll call them a wash.
+
+```plain
+Revenue
+Orders: $15*28 =    $420.00
+
+Costs
+Samples:           ($ 25.00)
+Hot sauce:         ($167.05)
+Shipping: $9*25  = ($225.00)
+
+Profit/loss ----------------
+                    $  2.95
+```
+
+I'll take it.
