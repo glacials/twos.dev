@@ -43,6 +43,8 @@ The hot sauce we selected was called Pale Ale Chipotle and had an 8/10 heat scor
 
 We're a small team with no designer, so I cracked open Acorn and spent way too long making way too ugly a label.
 
+[todo - label pic]
+
 ## Launch Day
 
 [todo: show tweets from others]
