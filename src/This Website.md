@@ -3,7 +3,7 @@ filename: meta.html
 date: 2022-06-04
 ---
 
-# The twos.dev CI/CD Pipeline
+# How I Write
 
 ```
              ┌─────┐
@@ -62,21 +62,21 @@ date: 2022-06-04
    ```
 
 
-The twos.dev CI/CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me. I can therefore design it in obnoxious and unintuitive ways to serve my peculiarities.
+twos.dev has a unique advantage over anything I’ve ever worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.
 
-My two biggest goals for this pipeline:
+With this in mind, I decided to ruthlessly optimize it around two goals:
 
-1. Easy to publish writing
+1. Make it easy to publish
 2. URLs must never change
 
-To fulfill these goals I divide my content into two types, warm and cold.
+To fulfill these goals I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.
 
 ## Warm Content
 
-I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:
+I previously wrote in my notes app while drafting, then manually migrated the draft into an HTML file when the piece started getting serious. From then until publish time I would work directly in HTML. This method had three problems that worked against my first goal:
 
-- Once transferred to HTML, context switching to that piece of writing became much more effortful
-- Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
+- Context switching to writing HTML is high cost (e.g. hard to do from my phone)
+- Writing was slowed down by paper cuts like typing `<p>`, `<ul>`, etc.
 - A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
 
 To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.
