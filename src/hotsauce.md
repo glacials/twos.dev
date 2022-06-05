@@ -51,6 +51,11 @@ We're a small team with no designer, so I cracked open Acorn and spent way too l
 
 ### Shipping
 
+I went into this expecting to have to make some bulk trips to the post office, but I never had to leave the house—USPS allows you to schedule, through their website, someone to pick up your packages during their normal route. I had ordered padded flat-rate envelopes from their website earlier. My flow for each order was:
+
+1. (Trigger) Receive “payment completed” email from Stripe
+2. 
+
 ## Final Surprises
 
 I built the full-page takeover to check if the day was April 1 when deciding whether to take over or lie dormant, but I didn't think about checking the year. So one year later, we suddenly got another influx of orders. Luckily I still had plenty of stock with expiration dates still over a year away, so spent a happy little surprise day packing hot sauce again.
