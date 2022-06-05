@@ -201,6 +201,14 @@ themes I've witnessed during them.
 <p>Here are some ways these differences are expressed:</p>
 <ul>
   <li>
+    Google wants a blurry line between web and native experiences; its official
+    apps are going the way of PWAs and similar tech that can be deployed to web
+    and app ~identically. In contrast Apple puts every major UX flow in a native
+    app, from email and calendar to bug reporting and account management. Even
+    uploading apps to the App Store for publishing -- a fundamentally online
+    experience -- is a native app.
+  </li>
+  <li>
     Google Docs documents are rows in a database, where Apple Pages documents
     are files on a filesystem; sharing and synchronization are handled by iCloud
     which is more akin to Dropbox in this mode. It does support 100 simultaneous
@@ -229,6 +237,43 @@ themes I've witnessed during them.
   can't get one of my Safaris to synchronize its bookmarks with the rest.
 </p>
 
+<h3>Committment vs. Experimentation</h3>
+
+<p>
+  Google is infamous for killing products. They release early, often, and in
+  isolation; see Hangouts and Allo, Meet and Duo, or Reminders and Tasks.
+  Innovation comes first and stablizing the product offering comes second, when
+  the product is proven (or not proven) to work.
+</p>
+<p>
+  Apple instead takes the "measure twice, cut once" approach; products are
+  rarely released and rarely killed. The iPod was around for 21 years,
+  co-existing with the iPhone for 12 of them. Apple Maps was a notoriously
+  failed app at launch in 2012 and still suffers from that reputational injury,
+  however <em>it's still around anyway</em> and has improved drastically
+  (although whether enough is <a href="#maps">still in question</a>).
+</p>
+<p>
+  Google's reputation for killing products causes a negative feedback loop. When
+  Google releases a product that relies on market buy-in -- say, a watch OS
+  (needs app developer buy-in) or a chat app (needs consumer buy-in) -- it's an
+  uphill battle to get the market on board, because it knows Google may turn
+  around and kill the product anyway. This lack of buy-in seals the product's
+  fate, and it goes to the graveyard.
+</p>
+<p>
+  In contrast, Apple's reputation for <em>not</em> killing products causes the
+  market to embrace it with open arms, kicking off a positive feedback loop that
+  ensures its success. iPad needed developers to design for a different form
+  factor to be successful, and they did. Apple Watch needed developers to design
+  watch flows for their app to be successful, and they did.
+</p>
+<p>
+  There are more factors at play than reputation, like developer experience and
+  user experience, but the point stands -- a reputation for killing products
+  contributes to more product deaths.
+</p>
+
 <h2>Specific Notes</h2>
 
 Below are my notes on moving between the ecosystems at specific touchpoints.
@@ -245,6 +290,7 @@ Below are my notes on moving between the ecosystems at specific touchpoints.
       <li><a href="#imessage">iMessage</a></li>
     </ul>
   </li>
+  <li><a href="#watch">Moto 360 &rarr; Apple Watch</a></li>
   <li>
     <a href="#appletv">Chromecast &rarr; Apple TV</a>
     <ul>
@@ -302,6 +348,20 @@ Below are my notes on moving between the ecosystems at specific touchpoints.
   security (click yes) and Linux (type your password). It's good enough that it
   stops me from using clamshell mode more, knowing I'll have to type my password
   to unlock 1Password here and there.
+</p>
+<p>
+  The app ethos on macOS is that all apps are self-contained `.app` files, and
+  uninstalling an app is defined as `rm`ing that file. It's spoiled me to
+  hesitation when I encounter the rare app that needs an installer.
+</p>
+<p>
+  Roughly half the apps I use are available on the macOS App Store. For apps it
+  manages, it handles updates, payments, and even
+  <a
+    href="https://developer.apple.com/documentation/storekit/requesting_app_store_reviews"
+    >prompts for reviews</a
+  >. I generally look there first when searching for an app, then Homebrew (if I
+  know what I'm looking for), then Google.
 </p>
 
 <a name="ipad"></a>
@@ -513,6 +573,47 @@ Below are my notes on moving between the ecosystems at specific touchpoints.
   I recently changed my email address but I need to keep my old one in my Apple
   account indefinitely so my friends’ threads with me won’t retroactively split
   into two.
+</p>
+
+<a name="watch"></a>
+<h4>Moto 360 &rarr; Apple Watch</h4>
+<p>
+  My relationship with the Moto 360 was on and off. To me it served two
+  functions:
+</p>
+<ul>
+  <li>Let me check the time without taking out my phone</li>
+  <li>Let me check a notification without taking out my phone</li>
+</ul>
+<p>
+  These were helpful functions, but the work of managing an extra battery to
+  charge and an extra device to put on and take off made me fluctuate every six
+  months or so between wearing it every day and not wearing it at all.
+</p>
+<p>
+  Apple Watch adds enough bullet points that I've had no such fluctuations -- I
+  wear it daily:
+</p>
+<ul>
+  <li>Unlock macOS/iOS when nearby, in lieu of entering a password/passcode</li>
+  <li>
+    Vibrate in patterns for Apple Maps navigation directions (e.g. one pattern
+    for upcoming left, another for upcoming right)
+  </li>
+  <li>Pay using Apple Pay by tapping</li>
+  <li>Shazam a song without taking out your phone</li>
+  <li>Show popped reminders or upcoming calendar events on the watch face</li>
+  <li>Control Keynote presentations (e.g. tap for next slide)</li>
+  <li>
+    View your phone's camera viewfinder live and tap to snap (e.g. for group
+    photos)
+  </li>
+  <li>Control media playback</li>
+  <li>"Walkie-talkie" with a close friend</li>
+</ul>
+<p>
+  Apart from the above, the third-party app ecosystem plays ball with Apple
+  Watch a lot more than the Android app ecosystem does with Wear OS.
 </p>
 
 <a name="appletv"></a>
