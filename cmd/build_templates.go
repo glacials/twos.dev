@@ -69,6 +69,14 @@ func NewTemplateBuilder() (templateBuilder, error) {
 			)
 		}
 
+		var createdAt, updatedAt string
+		if !matter.CreatedAt.IsZero() {
+			createdAt = matter.CreatedAt.Format("2006 January")
+		}
+		if !matter.UpdatedAt.IsZero() {
+			updatedAt = matter.CreatedAt.Format("2006 January")
+		}
+
 		v := htmlFileVars{
 			Body:  template.HTML(body),
 			Title: filepath.Base(src)[0 : len(filepath.Base(src))-len(".md")],
@@ -77,8 +85,8 @@ func NewTemplateBuilder() (templateBuilder, error) {
 				src,
 			),
 
-			CreatedAt: matter.CreatedAt.Format("2006 January"),
-			UpdatedAt: matter.UpdatedAt.Format("2006 January"),
+			CreatedAt: createdAt,
+			UpdatedAt: updatedAt,
 		}
 
 		if err := essay.Execute(htmlFile, v); err != nil {

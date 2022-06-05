@@ -32,10 +32,10 @@
     <div class="container">
       <header>
         &larr; <a href="index.html">twos.dev</a>
-        {{if .CreatedAt}} / {{.CreatedAt}}{{if .UpdatedAt}} (updated
+        {{if .CreatedAt}} / {{.CreatedAt}} {{if .UpdatedAt}} (updated
         {{.UpdatedAt}}){{end}} {{end}}
       </header>
-      {{.Body}}
+      <article>{{.Body}}</article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
         <a href="{{.SourceURL}}">Source</a>
