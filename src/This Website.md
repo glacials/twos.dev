@@ -1,6 +1,6 @@
 ---
 filename: meta.html
-date: 2022-05-01
+date: 2022-05
 ---
 
 # The twos.dev CI/CD Pipeline
@@ -59,7 +59,8 @@ date: 2022-05-01
    │ A ───□ B   A invokes B           │
    │                                  │
    └──────────────────────────────────┘
-```
+   ```
+
 
 The twos.dev CI/CD pipeline has a unique advantage against anything I’ve ever worked on: it has just one user, me. I can therefore design it in obnoxious and unintuitive ways to serve my peculiarities.
 
@@ -74,9 +75,9 @@ To fulfill these goals I divide my content into two types, warm and cold.
 
 I previously wrote in my note-taking app during the draft phase, then manually migrated the draft into an HTML file committed to the twos.dev repository (more on why later). From then until publishing, I would work directly in the HTML. This method had three problems that worked against my first goal:
 
--  Once transferred to HTML, context switching to that piece of writing became much more effortful
--  Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
--  A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
+- Once transferred to HTML, context switching to that piece of writing became much more effortful
+- Writing was slowed down by paper cuts like typing `<p>` tags, using `gqj` to wrap lines, etc.
+- A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
 
 To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.
 
@@ -89,7 +90,7 @@ iOS and macOS devices ship with a first-party app called [Shortcuts](https://app
 Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:
 
 1. Adds default frontmatter to iA Writer documents in the `published/` directory without any
-2.
+2. 
 
 behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
 
@@ -100,7 +101,7 @@ behave as an API gateway into iA Writer. I can set up a shortcut to run after I 
 1. (Working Copy) Pull from `twos.dev` remote
 2. (Files) Get contents of folder `Published`
 3. Repeat with each item in `Contents of Folder`
-   1. (Working Copy) Write `Repeat Item` to `src` in `twos.dev`
+    1. (Working Copy) Write `Repeat Item` to `src` in `twos.dev`
 4. (Working Copy) Commit `twos.dev` with `Automatic commit by iA Writer sync job`
 5. (Working Copy) Push `twos.dev` to remote
 
@@ -120,11 +121,11 @@ We’ve got our Markdown pipeline set up, but not everything fits neatly into Ma
 
 To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:
 
--  I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
--  When it’s time to write code I want to use `$EDITOR`, not iA Writer
--  twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
+- I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
+- When it’s time to write code I want to use `$EDITOR`, not iA Writer
+- twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
 
-For these not-quite-Markdown situations, then, **the right option is to hardcode**. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.
+For these not-quite-Markdown situations, then, **the right option  is to hardcode**. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.
 
 #### Implementation
 
@@ -137,9 +138,9 @@ To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow t
 
 Allowing myself this escape hatch is freeing. It has three effects:
 
--  I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
--  Twos.dev is uniformly structured by default, but I’m allowed case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
--  TODO
+- I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
+- Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
+- TODO
 
 ## On URLs
 
