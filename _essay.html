@@ -16,7 +16,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="_essay.h" />
+    <meta name="description" content="_essay" />
     <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
@@ -24,7 +24,7 @@
       title="twos.dev"
       href="/feed.rss"
     />
-    <title>_essay.h</title>
+    <title>_essay</title>
     <link rel="stylesheet" href="style.css" />
   </head>
 
@@ -32,10 +32,9 @@
     <div class="container">
       <header>
         &larr; <a href="index.html">twos.dev</a>
-         / 0001 January (updated
-        0001 January) 
+        
       </header>
-      <!DOCTYPE html>
+      <article><!DOCTYPE html>
 <html lang="en">
   <head>
     <script
@@ -69,10 +68,10 @@
     <div class="container">
       <header>
         &larr; <a href="index.html">twos.dev</a>
-        {{if .CreatedAt}} / {{.CreatedAt}}{{if .UpdatedAt}} (updated
+        {{if .CreatedAt}} / {{.CreatedAt}} {{if .UpdatedAt}} (updated
         {{.UpdatedAt}}){{end}} {{end}}
       </header>
-      {{.Body}}
+      <article>{{.Body}}</article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
         <a href="{{.SourceURL}}">Source</a>
@@ -83,7 +82,7 @@
     </div>
   </body>
 </html>
-
+</article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / 
         <a href="https://github.com/glacials/twos.dev/blob/main/src/templates/_essay.html">Source</a>

@@ -32,24 +32,266 @@
     <div class="container">
       <header>
         &larr; <a href="index.html">twos.dev</a>
-         / 2022 June (updated
-        0001 January) 
+         / 2022 June  
       </header>
-      <article><h1>When the April Fool's Day Prank is Real</h1><p>I love it when companies call their own bluffs on April Fool's Day. I like to click into their pranks to see where the seam is. Are they &quot;launching a new product&quot; but the only page to be found is a press release? Or, is there a product page with a disabled Buy button? If they go far the Buy button works, but brings you to a page that says &quot;Fooled you!&quot;.</p><p>I was never satisfied by these seams after witnessing first-hand the gold standard: On April 1, 2004, a popular search engine pranked that it was pivoting into becoming an email service -- and then <a href="http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html">it did</a>. This was especially surprising in the age before every startup was a data company.</p><p>Of course, Gmail was not created to remove a seam in an April Fool's Day prank. It was made independently for April Fool’s, and someone decided it would be funny to disguise its launch as a prank. But as a witness the effect was the same; the bluff gets called again and again. There's never a &quot;Fooled you!&quot; page.</p><h2>Calling Your Bluffs</h2><p>I always wanted more experiences like this, so I built one. I run a website called <a href="https://splits.io">Splits.io</a> whose goal is to help speedrunners (people who time themselves playing video games) play faster. It's a niche site, but we have paying customers and about 10k monthly active users.</p><p>For April Fool's Day in 2020, we launched a full-page takeover introducing a feature to help people speedrun faster: the urgent need to use the bathroom.</p><p>We joked that we would ship them a spicy hot sauce which they could use as a sort of gastrointestinal negative reinforcement. But when people clicked Buy, they did not see &quot;Fooled you!&quot;, but a form to enter their payment information. And when they entered their payment information and pressed submit, they received a receipt in their inbox.  And a charge to their card. A week later, a package would show up at their door.</p><p>We called all our bluffs.</p><h2>The Set Up</h2><p>I knew I wanted people to receive real hot sauce, and I knew it couldn't just be any hot sauce from the grocery store. The April Fool's takeover was going to advertise a Splits.io-branded hot sauce, and we were going to give it to them. I called it <em>Race to the Bottom</em>.</p><h3>The Sauce</h3><p>If you don't know anything about making or bottling hot sauce but you still want one branded with your own logo or whatever, you probably want to work with a <em>white label company</em>, a company that already sources ingredients, creates recipes, cooks, and bottles hot sauce, but stops just short of slapping a label on it.</p><p>A surprising number of brands you use every day operate via white label companies like this, namely store brands. The customers in these relationships are often large businesses, so there's not as much self-service as consumer retail enjoys. That means phone calls and email threads to get things hammered down.</p><p>Luckily this is starting to change; swag vendors are the farthest ahead here, but for hot sauces the best we could hope for was partial automation. I engaged with several vendors and ordered sample packs from two -- one self-service for $25 and one via phone call for free.</p><p>Next I made some fries, invited some friends over (pre-pandemic), and got to work.</p><p>[insert image - see favorites in Photos]</p><p>The hot sauce we selected was called Pale Ale Chipotle and had an 8/10 heat score (scoville rating nowhere to be found).</p><h3>The Label</h3><p>We're a small team with no designer, so I cracked open Acorn and spent way too long making way too ugly a label.</p><p>[todo - label pic]</p><h2>Launch Day</h2><p>[todo: show tweets from others]</p><h3>Shipping</h3><p>I went into this expecting to make bulk trips to the post office, but I actually never had to leave the house -- usps.com allows you to schedule a mail carrier to pick up packages during their mail route. I ordered padded flat-rate envelopes from their website. On April 1st, here was my pipeline:</p><ol><li>(Trigger) Receive “payment completed” email from Stripe</li><li>Pay for a shipping label at usps.com (~$9)</li><li>Print shipping label, affix to a padded envelope with scotch tape</li><li>Pack in hot sauce and extra packing material</li><li>Schedule a pickup at usps.com</li><li>(On pickup day) Put queued package(s) on the porch</li></ol><h2>Final Surprises</h2><p>I built the full-page takeover to check if the day was April 1 when deciding whether to take over or lie dormant, but I didn't think about checking the year. So one year later, we suddenly got another influx of orders. Luckily I still had plenty of stock with expiration dates still over a year away, so spent a little surprise day packing hot sauce again -- and again a third time, another year later.</p><h1>Finances</h1><p>After the sample packs and the bulk order of 48 bottles (the minimum), upfront costs came to $192.05. Shipping was $9 per package. Over three April Fool's Days we sold 28 bottles among 25 packages at $15 / bottle.</p><p>The cost of my labor and the boon to the brand are harder to calculate. I'll call them a wash.</p><pre data-language="plain">Revenue
-Orders: $15*28 =    $420.00
+      <article>
+<h1>When the April Fool's Day Prank is Real</h1>
+<p>
+  I love it when companies call their own bluffs on April Fool's Day. I like to
+  click into their pranks to see where the seam is. Are they &quot;launching a
+  new product&quot; but the only page to be found is a press release? Or, is
+  there a product page with a disabled Buy button? Sometimes the Buy button
+  works, but brings you to a page that says &quot;Fooled you!&quot;.
+</p>
+<p>
+  I was never satisfied by these seams after witnessing first-hand the gold
+  standard: On April 1, 2004, a popular search engine pranked that it was
+  pivoting into becoming an email service -- and then
+  <a
+    href="http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html"
+    >it did</a
+  >. This was especially surprising in the age before every startup was a data
+  company.
+</p>
+<p>
+  Of course, Gmail was not created to remove a seam from an April Fool's Day
+  prank. It was made independently from April Fool’s Day, and someone decided it
+  would be funny to disguise its launch as a prank. But as a bystander the
+  effect is the same; the bluffs gets called again and again (or rather, there
+  were never any bluffs). There's no &quot;Fooled you!&quot; page.
+</p>
+
+<h2>Calling Your Own Bluffs</h2>
+<p>
+  I always wanted more experiences like this, so I built one. I run a website
+  called <a href="https://splits.io">Splits.io</a> whose goal is to help
+  speedrunners (people who time themselves playing video games) play faster.
+  It's a niche site, but we have paying customers and about 10k monthly active
+  users.
+</p>
+<p>
+  For April Fool's Day in 2020, we launched a full-page takeover introducing a
+  feature to help people speedrun faster: the urgent need to use the bathroom.
+</p>
+<p>
+  We joked that we would ship them a spicy hot sauce which they could use as a
+  sort of gastrointestinal negative reinforcement. But when people clicked Buy,
+  they did not see &quot;Fooled you!&quot;, but a form to enter their payment
+  information. And when they entered their payment information and pressed
+  submit, they received a receipt in their inbox. And a charge to their card. A
+  week later, a package would show up at their door.
+</p>
+<p>We called all our bluffs.</p>
+
+<h2>The Set Up</h2>
+<p>
+  I knew I wanted people to receive real hot sauce, and I knew it couldn't just
+  be any hot sauce from the grocery store. The April Fool's takeover was going
+  to advertise a Splits.io-branded hot sauce, and we were going to give it to
+  them. I called it <em>Race to the Bottom</em>.
+</p>
+
+<h3>The Sauce</h3>
+<p>
+  If you don't know anything about making or bottling hot sauce but you still
+  want one branded with your own logo or whatever, you probably want to work
+  with a <em>white label company</em>, a company that already sources
+  ingredients, creates recipes, cooks, and bottles hot sauce, but stops just
+  short of slapping a label on it.
+</p>
+<p>
+  A surprising number of brands you use every day operate via white label
+  companies like this, namely store brands. The customers in these relationships
+  are often large businesses, so there's not as much self-service as consumer
+  retail enjoys. That means phone calls and email threads to get things hammered
+  down. But still, it works -- 19% of the US economy is made up of white label
+  goods (<a
+    href="https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper"
+    >source</a
+  >).
+</p>
+<p>
+  Luckily this is starting to change; swag vendors are the farthest ahead here,
+  but for hot sauces the best we could hope for was partial automation. I
+  engaged with several vendors and ordered sample packs from two -- one
+  self-service for $25 and one via phone call for free.
+</p>
+<p>
+  Next I made some chips, invited some friends over (pre-pandemic), and got to
+  work.
+</p>
+<p style="text-align: center">
+  <img
+    src="img/hotsauce-trialing.jpg"
+    style="max-height: 40em; max-width: 100%; margin: auto"
+    alt="several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
+  />
+</p>
+<p>
+  Ultimately, the hot sauce we selected was called Pale Ale Chipotle and the
+  company rated its spiciness as 8/10 (no Scoville rating).
+</p>
+
+<h3>The Label</h3>
+<p>
+  We're a small team with no designer, so I cracked open Acorn and spent way too
+  long making way too ugly a label.
+</p>
+<p style="text-align: center">
+  <img
+    src="img/hotsauce-label.jpeg"
+    style="max-height: 40em; max-width: 100%; margin: auto"
+    alt="a hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors"
+  />
+</p>
+<p style="text-align: center">
+  <i>
+    The final label for <i>Race to the Bottom</i>. The blank spot on the right
+    holds the nutritional facts. (Originally, we were going to pair this with an
+    equivalent energy drink called <i>Race to the Top</i>, but quickly realized
+    we should start small.)
+  </i>
+</p>
+<p>
+  The white label company sent me a template with requirements such as volume
+  and size. They took care of the nutrition facts and bar code.
+</p>
+
+<h2>Launch Day</h2>
+<p>
+  We set up everything to happen automatically. The code had been deployed days
+  earlier, with JavaScript just waiting for the day to tick over before doing
+  the takeover. The announcement tweet was scheduled ahead of time as well.
+</p>
+<p>The response when the clock struck midnight was exactly as we hoped.</p>
+<div class="dark-only" style="text-align: center">
+  <blockquote
+    class="twitter-tweet tw-align-center"
+    data-conversation="none"
+    data-theme="dark"
+  >
+    <p lang="en" dir="ltr">its actually real wtf</p> -- Dark (@DarkRTA)
+    <a
+      href="https://twitter.com/DarkRTA/status/1245495897875759108?ref_src=twsrc%5Etfw"
+      >April 1, 2020</a
+    >
+  </blockquote>
+</div>
+<div class="light-only" style="text-align: center">
+  <blockquote
+    class="twitter-tweet tw-align-center"
+    data-conversation="none"
+    data-theme="light"
+  >
+    <p lang="en" dir="ltr">its actually real wtf</p> -- Dark (@DarkRTA)
+    <a
+      href="https://twitter.com/DarkRTA/status/1245495897875759108?ref_src=twsrc%5Etfw"
+      >April 1, 2020</a
+    >
+  </blockquote>
+</div>
+<script
+  async
+  src="https://platform.twitter.com/widgets.js"
+  charset="utf-8"
+></script>
+<p style="text-align: center">
+  <picture>
+    <source
+      srcset="img/hotsauce-feedback-1-dark.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      alt="Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'"
+      src="img/hotsauce-feedback-1-light.png"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+</p>
+<p style="text-align: center">
+  <picture>
+    <source
+      srcset="img/hotsauce-feedback-2-dark.png"
+      media="(prefers-color-scheme: dark)"
+    />
+    <img
+      alt="Screenshot a Discord channel where someone asks 'did anyone get the item' and then someone else replies with a photo of their hot sauce bottle saying 'Yep lmao'. A third person says 'whoa you got yours already? nice. i can't believe it's real lol. @Glacials the madman'"
+      src="img/hotsauce-feedback-2-light.png"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+</p>
+<p style="text-align: center">
+  <i>Feedback during and after launch.</i>
+</p>
+
+<h3>Shipping</h3>
+<p>
+  I went into this expecting to make bulk trips to the post office, but I
+  actually never had to leave the house -- usps.com allows you to schedule a
+  mail carrier to pick up packages during their mail route. I had padded
+  flat-rate envelopes ready, also delivered from their website. On April 1st,
+  here was my pipeline:
+</p>
+<ol>
+  <li>(Trigger) Receive “payment completed” email from Stripe</li>
+  <li>Pay for a shipping label at usps.com (~$9)</li>
+  <li>Print shipping label, affix to a padded envelope with scotch tape</li>
+  <li>Pack in hot sauce and extra packing material</li>
+  <li>Schedule a pickup at usps.com</li>
+  <li>(On pickup day) Put queued package(s) on the porch</li>
+</ol>
+
+<h2>Final Surprises</h2>
+<p>
+  I built the full-page takeover to check if the day was April 1 when deciding
+  whether to take over or lie dormant, but I didn't think about checking the
+  year. So one year later, we suddenly got another influx of orders. Luckily I
+  still had plenty of stock with expiration dates still over a year away, so
+  spent a little surprise day packing hot sauce again -- and again a third time,
+  another year later.
+</p>
+
+<h2>Finances</h2>
+<p>
+  After the sample packs and the bulk order of 48 bottles (the minimum), upfront
+  costs came to $192.05. Over three April Fool's Days we sold 28 bottles in 25
+  orders at $15 / bottle.
+</p>
+<p>
+  The cost of my labor and the boon to the brand are harder to calculate. I'll
+  call them a wash.
+</p>
+<pre data-language="plain">
+Revenue
+Orders: $15*28   =  $ 420.00
 
 Costs
-Samples:           ($ 25.00)
-Hot sauce:         ($167.05)
-Shipping: $9*25  = ($225.00)
+Samples:           ($  25.00)
+Hot sauce:         ($ 167.05)
+Shipping: $9*25  = ($ 225.00)
 
 Profit/loss ----------------
-                    $  2.95
-</pre><p>I'll take it.</p></article>
+                    $   2.95
+</pre>
+<p>I'll take it.</p>
 
+<h2>Conclusion</h2>
+<p>
+  Getting paid $2.95 to live out my dream of building a seamless April Fool's
+  Day joke was a great deal. I'd have paid a lot more just for the joy of seeing
+  people's reactions in real time.
+</p>
+<p>
+  And on the way, I learned how how white labels work and how big a slice of the
+  economy they make up, which will change how I think about brands forever.
+  Sometimes you have to do something wacky to learn something new about the
+  world.
+</p>
+</article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / 
-        <a href="https://github.com/glacials/twos.dev/blob/main/src/hotsauce.md">Source</a>
+        <a href="https://github.com/glacials/twos.dev/blob/main/src/hotsauce.html">Source</a>
         
       </footer>
     </div>
