@@ -14,6 +14,7 @@ require (
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
 	github.com/bamiaux/rez v0.0.0-20170731184118-29f4463c688b // indirect
+	github.com/gomarkdown/markdown v0.0.0-20220603122033-8f3b341fef32 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.0.0-20220531201128-c960675eff93 // indirect

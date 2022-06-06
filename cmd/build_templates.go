@@ -8,10 +8,11 @@ import (
 	"io/ioutil"
 	"log"
 	"os"
-	"os/exec"
 	"path/filepath"
 
 	"github.com/glacials/twos.dev/cmd/frontmatter"
+	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/parser"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -71,15 +72,6 @@ func NewTemplateBuilder() (templateBuilder, error) {
 	}
 
 	buildMarkdownFile := func(src, dst string) error {
-		renderedHTML := bytes.NewBuffer([]byte{})
-		renderCmd := exec.Command("src/js/build.js", "body", src)
-		renderCmd.Stdout = renderedHTML
-		renderCmd.Stderr = os.Stderr
-
-		if err := renderCmd.Run(); err != nil {
-			return fmt.Errorf("can't run `src/js/build.js body '%s'`: %w", src, err)
-		}
-
 		f, err := os.Open(src)
 		if err != nil {
 			return fmt.Errorf(
@@ -88,17 +80,31 @@ func NewTemplateBuilder() (templateBuilder, error) {
 				err,
 			)
 		}
+		defer f.Close()
 
-		matter, _, err := frontmatter.Parse(f)
+		matter, body, err := frontmatter.Parse(f)
 		if err != nil {
 			return fmt.Errorf("can't get frontmatter from Markdown file: %w", err)
 		}
+
+		// Markdown parser cannot be reused :(
+		renderedHTML := markdown.ToHTML(body, parser.NewWithExtensions(
+			parser.Tables|
+				parser.FencedCode|
+				parser.Autolink|
+				parser.Strikethrough|
+				parser.Footnotes|
+				parser.HeadingIDs|
+				parser.Attributes|
+				parser.SuperSubscript|
+				parser.Includes,
+		), nil)
 
 		if err := os.MkdirAll(dst, 0755); err != nil {
 			return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
 		}
 
-		if err := builder.buildHTMLStream(renderedHTML, src, dst, matter); err != nil {
+		if err := builder.buildHTMLStream(bytes.NewBuffer(renderedHTML), src, dst, matter); err != nil {
 			return fmt.Errorf("can't build HTML stream: %w", err)
 		}
 

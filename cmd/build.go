@@ -41,14 +41,6 @@ var (
 	}
 )
 
-type essayFrontmatter struct {
-	Filename string `yaml:"filename"`
-	// Date is an alias for CreatedAt.
-	Date      string `yaml:"date"`
-	CreatedAt string `yaml:"created"`
-	UpdatedAt string `yaml:"updated"`
-}
-
 type htmlFileVars struct {
 	Body      template.HTML
 	Title     string
