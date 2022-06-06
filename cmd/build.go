@@ -37,7 +37,6 @@ const (
 var (
 	ignoreSrcDirs = map[string]struct{}{
 		"src/asciiart": {},
-		"src/js":       {},
 	}
 )
 

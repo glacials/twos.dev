@@ -17,9 +17,6 @@ jobs:
       - name: Install and Build 🔧
         run: |
           rm -rf dist
-          cd src/js
-          npm install
-          cd ../..
           go build
           ./twos.dev build
           find dist -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'

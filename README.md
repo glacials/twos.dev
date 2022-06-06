@@ -13,7 +13,6 @@ random things here.
 ### Starting a dev server
 
 ```sh
-cd src/js && npm install && cd ../..
 go install
 twos.dev serve
 ```
