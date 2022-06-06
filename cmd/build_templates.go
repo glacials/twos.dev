@@ -89,7 +89,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 			)
 		}
 
-		matter, body, err := frontmatter.Parse(f)
+		matter, _, err := frontmatter.Parse(f)
 		if err != nil {
 			return fmt.Errorf("can't get frontmatter from Markdown file: %w", err)
 		}
@@ -98,7 +98,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 			return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
 		}
 
-		if err := builder.buildHTMLStream(bytes.NewBuffer(body), src, dst, matter); err != nil {
+		if err := builder.buildHTMLStream(renderedHTML, src, dst, matter); err != nil {
 			return fmt.Errorf("can't build HTML stream: %w", err)
 		}
 
