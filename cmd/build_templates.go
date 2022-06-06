@@ -106,7 +106,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 		}
 
 		if matter.Filename == "" {
-			matter.Filename = filepath.Base(src)[0 : len(filepath.Base(src))-len(".html")]
+			matter.Filename = filepath.Base(src)
 		}
 
 		if err := buildHTMLStream(bytes.NewBuffer(body), dst, matter); err != nil {
