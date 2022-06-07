@@ -39,6 +39,8 @@ type essayPageVars struct {
 // src/templates/_video.html to render a video inline. At least one of its
 // fields must be set.
 type videoPartialVars struct {
+	PageShortname string
+
 	LightMOV string
 	LightMP4 string
 	DarkMOV  string
@@ -221,12 +223,28 @@ func (builder templateBuilder) buildHTMLStream(
 	}
 
 	t.Funcs(template.FuncMap{
-		"videos": func(page, video string) (videoPartialVars, error) {
+		"videos": func(video string) (videoPartialVars, error) {
 			v := videoPartialVars{
-				DarkMOV:  fmt.Sprintf("img/%s-%s-dark.mov", page, video),
-				LightMOV: fmt.Sprintf("img/%s-%s-dark.mov", page, video),
-				DarkMP4:  fmt.Sprintf("img/%s-%s-dark.mp4", page, video),
-				LightMP4: fmt.Sprintf("img/%s-%s-dark.mp4", page, video),
+				DarkMOV: fmt.Sprintf(
+					"img/%s-%s-dark.mov",
+					v.Shortname,
+					video,
+				),
+				LightMOV: fmt.Sprintf(
+					"img/%s-%s-dark.mov",
+					v.Shortname,
+					video,
+				),
+				DarkMP4: fmt.Sprintf(
+					"img/%s-%s-dark.mp4",
+					v.Shortname,
+					video,
+				),
+				LightMP4: fmt.Sprintf(
+					"img/%s-%s-dark.mp4",
+					v.Shortname,
+					video,
+				),
 			}
 
 			if _, err := os.Stat(filepath.Join("dist", v.DarkMOV)); err != nil {
