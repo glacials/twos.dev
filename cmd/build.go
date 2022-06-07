@@ -23,38 +23,15 @@ package cmd
 
 import (
 	"fmt"
-	"html/template"
 
 	"github.com/spf13/cobra"
 )
 
 const (
-	imageContainerTemplatePath = "src/templates/_imgcontainer.html"
+	imageContainerTemplatePath = "src/templates/imgcontainer.html"
 	staticAssetsDir            = "public"
 	sourceDir                  = "src"
 )
-
-var (
-	ignoreSrcDirs = map[string]struct{}{
-		"src/asciiart": {},
-	}
-)
-
-type htmlFileVars struct {
-	Body      template.HTML
-	Title     string
-	SourceURL string
-
-	CreatedAt string
-	UpdatedAt string
-}
-
-type imageContainerVars struct {
-	PrevLink  string
-	CurImage  string
-	NextLink  string
-	SourceURL string
-}
 
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{

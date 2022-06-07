@@ -55,26 +55,27 @@ var serveCmd = &cobra.Command{
 			return fmt.Errorf("can't build template builder: %w", err)
 		}
 
-		distributer := builders.NewDistributer(map[string]func(src, dst string) error{
-			"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
-			"./src/*.html":               templater.htmlBuilder,
-			"./src/*.md":                 templater.markdownBuilder,
-			"./src/templates/*.html": func(_, _ string) error {
-				if err := buildTheWorld(); err != nil {
-					return err
-				}
+		distributer := builders.NewDistributer(
+			map[string]func(src, dst string) error{
+				"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
+				"./src/*.html":               templater.htmlBuilder,
+				"./src/*.md":                 templater.markdownBuilder,
+				"./src/templates/*.html": func(_, _ string) error {
+					if err := buildTheWorld(); err != nil {
+						return err
+					}
 
-				return nil
-			},
-			"./*.css": func(_, _ string) error {
-				if err := buildTheWorld(); err != nil {
-					return err
-				}
+					return nil
+				},
+				"./*.css": func(_, _ string) error {
+					if err := buildTheWorld(); err != nil {
+						return err
+					}
 
-				return nil
+					return nil
+				},
+				"./public": staticFileBuilder,
 			},
-			"./public": staticFileBuilder,
-		},
 		)
 
 		watcher, err := fsnotify.NewWatcher()
@@ -149,5 +150,6 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
-	noBuild = serveCmd.Flags().Bool("no-build", false, "don't continually rebuild while serving")
+	noBuild = serveCmd.Flags().
+		Bool("no-build", false, "don't continually rebuild while serving")
 }

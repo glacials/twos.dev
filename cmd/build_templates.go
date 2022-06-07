@@ -2,13 +2,14 @@ package cmd
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"html/template"
 	"io"
-	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 
 	"github.com/glacials/twos.dev/cmd/frontmatter"
 	"github.com/gomarkdown/markdown"
@@ -18,33 +19,53 @@ import (
 )
 
 type templateBuilder struct {
-	essayTemplate *template.Template
-
 	htmlBuilder     func(src, dest string) error
 	markdownBuilder func(src, dest string) error
 	templateBuilder func(src, dest string) error
 }
 
+type essayPageVars struct {
+	pageVars
+
+	Body      template.HTML
+	Title     string
+	Shortname string
+
+	CreatedAt string
+	UpdatedAt string
+}
+
+// videoPartialVars are the template variables given to
+// src/templates/_video.html to render a video inline. At least one of its
+// fields must be set.
+type videoPartialVars struct {
+	LightMOV string
+	LightMP4 string
+	DarkMOV  string
+	DarkMP4  string
+}
+
+type galleryPageVars struct {
+	pageVars
+
+	PrevLink string
+	CurImage string
+	NextLink string
+}
+
+type pageVars struct {
+	// SourceURL is the GitHub URL to the source code for the page being rendered.
+	SourceURL string
+}
+
 func NewTemplateBuilder() (templateBuilder, error) {
-	templateHTML, err := ioutil.ReadFile("src/templates/_essay.html")
-	if err != nil {
-		return templateBuilder{}, fmt.Errorf("can't read essay template: %w", err)
-	}
-
-	essay, err := template.New("essay").Parse(string(templateHTML))
-	if err != nil {
-		return templateBuilder{}, fmt.Errorf("can't create essay template: %w", err)
-	}
-
-	builder := templateBuilder{
-		essayTemplate: essay,
-	}
+	builder := templateBuilder{}
 
 	buildHTMLFile := func(src, dst string) error {
 		f, err := os.Open(src)
 		if err != nil {
-			// TODO: Clean this up; Prettier autoformatting seems to remove the file
-			// and quickly place it back, so ignore th error.
+			// TODO: Clean this up. Prettier autoformatting seems to remove the file
+			// and quickly place it back, so for now we ignore the error.
 			log.Printf(
 				fmt.Errorf(
 					"can't open HTML file at `%s` for building: %w",
@@ -57,7 +78,10 @@ func NewTemplateBuilder() (templateBuilder, error) {
 
 		matter, body, err := frontmatter.Parse(f)
 		if err != nil {
-			return fmt.Errorf("can't get frontmatter from Markdown file: %w", err)
+			return fmt.Errorf(
+				"can't get frontmatter from Markdown file: %w",
+				err,
+			)
 		}
 
 		if matter.Filename == "" {
@@ -84,7 +108,10 @@ func NewTemplateBuilder() (templateBuilder, error) {
 
 		matter, body, err := frontmatter.Parse(f)
 		if err != nil {
-			return fmt.Errorf("can't get frontmatter from Markdown file: %w", err)
+			return fmt.Errorf(
+				"can't get frontmatter from Markdown file: %w",
+				err,
+			)
 		}
 
 		// Markdown parser cannot be reused :(
@@ -101,7 +128,11 @@ func NewTemplateBuilder() (templateBuilder, error) {
 		), nil)
 
 		if err := os.MkdirAll(dst, 0755); err != nil {
-			return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
+			return fmt.Errorf(
+				"can't make destination directory `%s`: %w",
+				dst,
+				err,
+			)
 		}
 
 		if err := builder.buildHTMLStream(bytes.NewBuffer(renderedHTML), src, dst, matter); err != nil {
@@ -112,8 +143,6 @@ func NewTemplateBuilder() (templateBuilder, error) {
 	}
 
 	return templateBuilder{
-		essayTemplate: essay,
-
 		htmlBuilder:     buildHTMLFile,
 		markdownBuilder: buildMarkdownFile,
 		templateBuilder: func(src, dst string) error {
@@ -127,7 +156,12 @@ func NewTemplateBuilder() (templateBuilder, error) {
 	}, nil
 }
 
-func (builder templateBuilder) buildHTMLStream(r io.Reader, src string, dst string, matter frontmatter.Matter) error {
+func (builder templateBuilder) buildHTMLStream(
+	r io.Reader,
+	src string,
+	dst string,
+	matter frontmatter.Matter,
+) error {
 	if err := os.MkdirAll(dst, 0755); err != nil {
 		return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
 	}
@@ -165,20 +199,104 @@ func (builder templateBuilder) buildHTMLStream(r io.Reader, src string, dst stri
 		return fmt.Errorf("can't get title from HTML: %w", err)
 	}
 
-	v := htmlFileVars{
-		Body:  template.HTML(body),
-		Title: title,
-		SourceURL: fmt.Sprintf(
-			"https://github.com/glacials/twos.dev/blob/main/%s",
-			src,
-		),
+	v := essayPageVars{
+		Body:      template.HTML(body),
+		Title:     title,
+		Shortname: strings.TrimSuffix(matter.Filename, ".html"),
 
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
+
+		pageVars: pageVars{
+			SourceURL: fmt.Sprintf(
+				"https://github.com/glacials/twos.dev/blob/main/%s",
+				src,
+			),
+		},
 	}
 
-	if err := builder.essayTemplate.Execute(htmlFile, v); err != nil {
-		return fmt.Errorf("can't execute essay template: %w", err)
+	t, err := template.ParseFiles("src/templates/essay.html")
+	if err != nil {
+		return fmt.Errorf("can't parse essay template: %w", err)
+	}
+
+	t.Funcs(template.FuncMap{
+		"videos": func(page, video string) (videoPartialVars, error) {
+			v := videoPartialVars{
+				DarkMOV:  fmt.Sprintf("img/%s-%s-dark.mov", page, video),
+				LightMOV: fmt.Sprintf("img/%s-%s-dark.mov", page, video),
+				DarkMP4:  fmt.Sprintf("img/%s-%s-dark.mp4", page, video),
+				LightMP4: fmt.Sprintf("img/%s-%s-dark.mp4", page, video),
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.DarkMOV)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.DarkMOV = ""
+				} else {
+					return videoPartialVars{}, fmt.Errorf(
+						"couldn't stat video `%s`: %w",
+						v.DarkMOV,
+						err,
+					)
+				}
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.LightMOV)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.LightMOV = ""
+				} else {
+					return videoPartialVars{}, fmt.Errorf(
+						"couldn't stat video `%s`: %w",
+						v.LightMOV,
+						err,
+					)
+				}
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.DarkMP4)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.DarkMP4 = ""
+				} else {
+					return videoPartialVars{}, fmt.Errorf(
+						"couldn't stat video `%s`: %w",
+						v.DarkMP4,
+						err,
+					)
+				}
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.LightMP4)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.LightMP4 = ""
+				} else {
+					return videoPartialVars{}, fmt.Errorf(
+						"couldn't stat video `%s`: %w",
+						v.LightMP4,
+						err,
+					)
+				}
+			}
+
+			return v, nil
+		}})
+
+	_, err = t.ParseGlob("src/templates/_*.html")
+	if err != nil {
+		return fmt.Errorf("can't parse the rest of templates: %w", err)
+	}
+
+	bodyTemplate := t.New(src)
+	_, err = bodyTemplate.Parse(strings.Join(
+		[]string{"{{define \"body\"}}", string(body), "{{end}}"},
+		"\n",
+	),
+	)
+	if err != nil {
+		return fmt.Errorf("can't parse template `%s`: %w", src, err)
+	}
+
+	if err := t.Execute(htmlFile, v); err != nil {
+		return fmt.Errorf("can't execute essay template `%s`: %w", src, err)
 	}
 
 	return nil

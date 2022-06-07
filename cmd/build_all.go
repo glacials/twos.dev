@@ -7,6 +7,13 @@ import (
 	"strings"
 )
 
+var (
+	ignoreSrcDirs = map[string]struct{}{
+		"src/asciiart":  {},
+		"src/templates": {},
+	}
+)
+
 func buildTheWorld() error {
 	templater, err := NewTemplateBuilder()
 	if err != nil {

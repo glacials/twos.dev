@@ -113,36 +113,7 @@ themes I've witnessed during them.
   another sign-in flow and database table. As a user, this means I get a native,
   one-tap, FaceID sign-in.
 </p>
-<video
-  autoplay
-  loop
-  muted
-  style="max-height: 40em; max-width: 100%; text-align: center"
->
-  <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-signin-light.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-signin-light.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-signin-dark.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:dark)"
-          />
-          <source
-            src="/img/apple-signin-dark.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:dark)"
-          /> -->
-  <source src="/img/apple-signin-dark.mov" type="video/quicktime" />
-  <source src="/img/apple-signin-dark.mp4" type="video/mp4" />
-</video>
+{{template "_video.html" videos "apple" "signin"}}
 <p><i>Signing in with Apple.</i></p>
 <p>
   These examples continue throughout the ecosystem, and the more I see the more

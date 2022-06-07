@@ -35,7 +35,7 @@
         {{if .CreatedAt}} / {{.CreatedAt}} {{if .UpdatedAt}} (updated
         {{.UpdatedAt}}){{end}} {{end}}
       </header>
-      <article>{{.Body}}</article>
+      <article>{{template "body" .}}</article>
       <footer>
         &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
         <a href="{{.SourceURL}}">Source</a>

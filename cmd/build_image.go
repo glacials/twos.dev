@@ -142,11 +142,17 @@ func genGalleryPage(src, dst string) error {
 		nextLink = fmt.Sprintf("%s.html", filepath.Base(files[i+1]))
 	}
 
-	v := imageContainerVars{
-		PrevLink:  prevLink,
-		CurImage:  filepath.Base(src),
-		NextLink:  nextLink,
-		SourceURL: fmt.Sprintf("https://github.com/glacials/twos.dev/blob/main/%s", src),
+	v := galleryPageVars{
+		PrevLink: prevLink,
+		CurImage: filepath.Base(src),
+		NextLink: nextLink,
+
+		pageVars: pageVars{
+			SourceURL: fmt.Sprintf(
+				"https://github.com/glacials/twos.dev/blob/main/%s",
+				src,
+			),
+		},
 	}
 
 	if err := t.Execute(f, v); err != nil {
