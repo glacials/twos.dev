@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"io/ioutil"
 	"log"
 	"os"
 	"path/filepath"
@@ -231,17 +232,17 @@ func (builder templateBuilder) buildHTMLStream(
 					video,
 				),
 				LightMOV: fmt.Sprintf(
-					"img/%s-%s-dark.mov",
+					"img/%s-%s-light.mov",
 					v.Shortname,
 					video,
 				),
 				DarkMP4: fmt.Sprintf(
-					"img/%s-%s-dark.mp4",
+					"img/%s-%s-light.mp4",
 					v.Shortname,
 					video,
 				),
 				LightMP4: fmt.Sprintf(
-					"img/%s-%s-dark.mp4",
+					"img/%s-%s-light.mp4",
 					v.Shortname,
 					video,
 				),
@@ -298,9 +299,27 @@ func (builder templateBuilder) buildHTMLStream(
 			return v, nil
 		}})
 
-	_, err = t.ParseGlob("src/templates/_*.html")
+	partials, err := filepath.Glob("src/templates/_*.html")
 	if err != nil {
-		return fmt.Errorf("can't parse the rest of templates: %w", err)
+		return fmt.Errorf("can't glob for partial templates: %w", err)
+	}
+
+	for _, partial := range partials {
+		p := t.New(
+			strings.TrimPrefix(
+				strings.TrimSuffix(filepath.Base(partial), ".html"),
+				"_",
+			),
+		)
+
+		s, err := ioutil.ReadFile(partial)
+		if err != nil {
+			return fmt.Errorf("can't read partial `%s`: %w", partial, err)
+		}
+
+		if _, err := p.Parse(string(s)); err != nil {
+			return fmt.Errorf("can't parse partial `%s`: %w", partial, err)
+		}
 	}
 
 	bodyTemplate := t.New(src)

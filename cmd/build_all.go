@@ -15,6 +15,10 @@ var (
 )
 
 func buildTheWorld() error {
+	if err := buildStaticDir(staticAssetsDir, dst); err != nil {
+		return fmt.Errorf("can't build static assets: %w", err)
+	}
+
 	templater, err := NewTemplateBuilder()
 	if err != nil {
 		return fmt.Errorf("can't make template builder: %w", err)
@@ -69,10 +73,6 @@ func buildTheWorld() error {
 		return fmt.Errorf("don't know what to do with file `%s`", src)
 	}); err != nil {
 		return fmt.Errorf("can't watch file: %w", err)
-	}
-
-	if err := buildStaticDir(staticAssetsDir, dst); err != nil {
-		return fmt.Errorf("can't build static assets: %w", err)
 	}
 
 	if err := buildFormatting(dst); err != nil {
