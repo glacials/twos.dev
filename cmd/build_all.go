@@ -39,10 +39,9 @@ var (
 )
 
 func buildTheWorld() error {
-	if err := buildStaticDir(staticAssetsDir, dst); err != nil {
-		return fmt.Errorf("can't build static assets: %w", err)
+	if err := os.MkdirAll(dst, 0755); err != nil {
+		return fmt.Errorf("can't mkdir `%s`: %w", dst, err)
 	}
-
 	if err := filepath.WalkDir(".", func(src string, d os.DirEntry, err error) error {
 		if err != nil {
 			return fmt.Errorf("can't walk towards `%s`: %w", src, err)
@@ -69,7 +68,7 @@ func buildTheWorld() error {
 
 		return nil
 	}); err != nil {
-		return fmt.Errorf("can't walk src/warm: %w", err)
+		return fmt.Errorf("can't walk to build the world: %w", err)
 	}
 
 	if err := buildFormatting(dst); err != nil {

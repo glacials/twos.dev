@@ -23,6 +23,8 @@ package cmd
 
 import (
 	"fmt"
+	"io"
+	"log"
 	"os"
 	"path/filepath"
 
@@ -40,19 +42,30 @@ func staticFileBuilder(rel string) func(src, dst string) error {
 			return fmt.Errorf("can't get `%s` relative to `%s`: %w", src, rel, err)
 		}
 
+		if err := os.MkdirAll(filepath.Dir(filepath.Join(dst, rel)), 0755); err != nil {
+			return fmt.Errorf("can't make static asset dir `%s`: %w", dst, err)
+		}
+
 		s, err := os.Open(src)
 		if err != nil {
-			return fmt.Errorf("can't read static file `%s`: %w", src, err)
+			log.Printf("can't read static file `%s`: %s", src, err)
+			// TODO: This happens sometimes
+			return nil
 		}
 		defer s.Close()
 
-		d, err := os.Create(filepath.Join(dst, filepath.Base(src)))
+		d, err := os.Create(filepath.Join(dst, rel))
 		if err != nil {
-			return fmt.Errorf("can't write static file `%s`: %w", src, err)
+			return fmt.Errorf(
+				"can't write static file `%s` to `%s`: %w",
+				src,
+				filepath.Join(dst, rel),
+				err,
+			)
 		}
 		defer d.Close()
 
-		if err := copy.Copy(src, filepath.Join(dst, filepath.Base(src))); err != nil {
+		if _, err := io.Copy(d, s); err != nil {
 			return fmt.Errorf("can't build static asset %s: %w", src, err)
 		}
 
