@@ -124,8 +124,8 @@
 <p>Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:</p>
 
 <ol>
-<li>Adds default frontmatter to iA Writer documents in the <code>published/</code> directory without any
-2.</li>
+<li>Adds default frontmatter to iA Writer documents in the <code>published/</code> directory without any</li>
+<li></li>
 </ol>
 
 <p>behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.</p>
@@ -168,15 +168,15 @@
 <li>twos.dev has a low volume of content -- I don’t want to write new templating code for small features that may only be used once</li>
 </ul>
 
-<p>For these not-quite-Markdown situations, then, <strong>the right option is to hardcode</strong>. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.</p>
+<p>For these not-quite-Markdown situations, then, <strong>the right option  is to hardcode</strong>. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.</p>
 
 <h4>Implementation</h4>
 
 <p>To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow to explicitly allow it:</p>
 
 <ol>
-<li>Render <code>src/warm/*.md</code> files → <code>dist/*.html</code></li>
-<li>Copy <code>src/cold/*.html</code> files → <code>dist/*.html</code>, overwriting existing files</li>
+<li>Render <code>src/*.md</code> files → <code>dist/*.html</code></li>
+<li>Copy <code>src/*.html</code> files → <code>dist/</code>, overwriting existing files</li>
 </ol>
 
 <h4>Results</h4>
@@ -185,7 +185,7 @@
 
 <ul>
 <li>I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX</li>
-<li>Twos.dev is uniformly structured by default, but I’m allowed case-by-case to break that uniformity when I see fit (e.g. a <a href="cv.html">CV</a> has a unique need for bicolumnar content)</li>
+<li>Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a <a href="cv.html">CV</a> has a unique need for bicolumnar content)</li>
 <li>TODO</li>
 </ul>
 
