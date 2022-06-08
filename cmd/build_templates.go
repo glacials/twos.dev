@@ -38,14 +38,22 @@ type essayPageVars struct {
 
 // videoPartialVars are the template variables given to
 // src/templates/_video.html to render a video inline. At least one of its
-// fields must be set.
+// {Light,Dark}{MOV,MP4} fields must be set to a video path.
 type videoPartialVars struct {
-	PageShortname string
-
 	LightMOV string
 	LightMP4 string
 	DarkMOV  string
 	DarkMP4  string
+}
+
+// imgPartialVars are the template variables given to src/templates/_img.html to
+// render an image inline. At least one of its {Light,Dark} fields must be set
+// to an image path.
+type imgPartialVars struct {
+	Alt string
+
+	Light string
+	Dark  string
 }
 
 type galleryPageVars struct {
@@ -79,6 +87,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 			)
 			return nil
 		}
+		defer f.Close()
 
 		matter, body, err := frontmatter.Parse(f)
 		if err != nil {
@@ -89,15 +98,15 @@ func NewTemplateBuilder() (templateBuilder, error) {
 		}
 
 		if matter.Filename == "" {
-			rel, err := filepath.Rel("src/cold", src)
-			if err != nil {
-				return fmt.Errorf("can't get rel path of `%s`: %w", src, err)
-			}
-
-			matter.Filename = rel
+			matter.Filename = filepath.Base(src)
 		}
 
-		if err := builder.buildHTMLStream(bytes.NewBuffer(body), src, dst, matter); err != nil {
+		if err := builder.buildHTMLStream(
+			bytes.NewBuffer(body),
+			src,
+			filepath.Join(dst, matter.Filename),
+			matter,
+		); err != nil {
 			return fmt.Errorf("can't build HTML stream: %w", err)
 		}
 
@@ -132,8 +141,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 				parser.Footnotes|
 				parser.HeadingIDs|
 				parser.Attributes|
-				parser.SuperSubscript|
-				parser.Includes,
+				parser.SuperSubscript,
 		), nil)
 
 		if err := os.MkdirAll(dst, 0755); err != nil {
@@ -144,7 +152,12 @@ func NewTemplateBuilder() (templateBuilder, error) {
 			)
 		}
 
-		if err := builder.buildHTMLStream(bytes.NewBuffer(renderedHTML), src, dst, matter); err != nil {
+		if err := builder.buildHTMLStream(
+			bytes.NewBuffer(renderedHTML),
+			src,
+			filepath.Join(dst, matter.Filename),
+			matter,
+		); err != nil {
 			return fmt.Errorf("can't build HTML stream: %w", err)
 		}
 
@@ -171,7 +184,7 @@ func (builder templateBuilder) buildHTMLStream(
 	dst string,
 	matter frontmatter.Matter,
 ) error {
-	if err := os.MkdirAll(dst, 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
 		return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
 	}
 
@@ -179,16 +192,15 @@ func (builder templateBuilder) buildHTMLStream(
 		return fmt.Errorf("file frontmatter has no filename attribute")
 	}
 
-	destinationFilePath := filepath.Join(dst, matter.Filename)
-	htmlFile, err := os.Create(destinationFilePath)
+	htmlFile, err := os.Create(dst)
 	if err != nil {
 		return fmt.Errorf(
-			"can't render HTML to `%s` from template for `%s`: %w",
-			destinationFilePath,
-			r,
+			"can't render HTML to `%s` from template: %w",
+			dst,
 			err,
 		)
 	}
+	defer htmlFile.Close()
 
 	var createdAt, updatedAt string
 	if !matter.CreatedAt.IsZero() {
@@ -202,6 +214,9 @@ func (builder templateBuilder) buildHTMLStream(
 	if err != nil {
 		return fmt.Errorf("can't read body from stream: %w", err)
 	}
+
+	body = bytes.ReplaceAll(body, []byte("“"), []byte("\""))
+	body = bytes.ReplaceAll(body, []byte("”"), []byte("\""))
 
 	title, err := titleFromHTML(bytes.NewBuffer(body))
 	if err != nil {
@@ -303,7 +318,57 @@ func (builder templateBuilder) buildHTMLStream(
 			}
 
 			return v, nil
-		}})
+		},
+		"imgs": func(img string) (imgPartialVars, error) {
+			if !strings.Contains(img, ".") {
+				return imgPartialVars{}, fmt.Errorf(
+					"fake image path %s has no extension",
+					img,
+				)
+			}
+
+			v := imgPartialVars{
+				Dark: fmt.Sprintf(
+					"img/%s-%s-dark.%s",
+					v.Shortname,
+					strings.TrimSuffix(img, filepath.Ext(img)),
+					filepath.Ext(img),
+				),
+				Light: fmt.Sprintf(
+					"img/%s-%s-light.%s",
+					v.Shortname,
+					strings.TrimSuffix(img, filepath.Ext(img)),
+					filepath.Ext(img),
+				),
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.Dark)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.Dark = ""
+				} else {
+					return imgPartialVars{}, fmt.Errorf(
+						"couldn't stat img `%s`: %w",
+						v.Dark,
+						err,
+					)
+				}
+			}
+
+			if _, err := os.Stat(filepath.Join("dist", v.Light)); err != nil {
+				if errors.Is(err, os.ErrNotExist) {
+					v.Light = ""
+				} else {
+					return imgPartialVars{}, fmt.Errorf(
+						"couldn't stat img `%s`: %w",
+						v.Light,
+						err,
+					)
+				}
+			}
+
+			return v, nil
+		},
+	})
 
 	partials, err := filepath.Glob("src/templates/_*.html")
 	if err != nil {

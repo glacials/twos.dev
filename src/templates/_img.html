@@ -1,0 +1,10 @@
+{{with imgs .}}
+<picture>
+  <source srcset="{{.Dark}}" media="(prefers-color-scheme: dark)" />
+  <img
+    alt="{{.Alt}}"
+    src="{{.Light}}"
+    style="max-height: 40em; max-width: 100%"
+  />
+</picture>
+{{end}}

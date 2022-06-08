@@ -37,11 +37,13 @@ func imageBuilder(src, dst string) error {
 	if err != nil {
 		return fmt.Errorf("can't read `%s`: %w", src, err)
 	}
+	defer srcf.Close()
 
 	dstf, err := os.Create(imgdst)
 	if err != nil {
 		return fmt.Errorf("can't write image `%s`: %w", imgdst, err)
 	}
+	defer dstf.Close()
 
 	if _, err := io.Copy(dstf, srcf); err != nil {
 		return fmt.Errorf("can't copy `%s` to `%s`: %w", src, imgdst, err)
@@ -69,10 +71,15 @@ func genThumbnail(src, dst string, width int) error {
 	if err != nil {
 		return fmt.Errorf("can't open image at path `%s`: %w", src, err)
 	}
+	defer sourceFile.Close()
 
 	sourceImage, err := jpeg.Decode(sourceFile)
 	if err != nil {
-		return fmt.Errorf("can't decode image at path `%s` (maybe not an image?): %w", src, err)
+		return fmt.Errorf(
+			"can't decode image at path `%s` (maybe not an image?): %w",
+			src,
+			err,
+		)
 	}
 	p := sourceImage.Bounds().Size()
 	w, h := width, ((width*p.X/p.Y)+1)&-1
@@ -88,17 +95,29 @@ func genThumbnail(src, dst string, width int) error {
 	)
 
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf("can't make thumbnail directory in path `%s`: %w", dst, err)
+		return fmt.Errorf(
+			"can't make thumbnail directory in path `%s`: %w",
+			dst,
+			err,
+		)
 	}
 
 	destinationFile, err := os.Create(dst)
 	if err != nil {
-		return fmt.Errorf("can't create thumbnail file for image at path `%s`: %w", src, err)
+		return fmt.Errorf(
+			"can't create thumbnail file for image at path `%s`: %w",
+			src,
+			err,
+		)
 	}
 	defer destinationFile.Close()
 
 	if err := jpeg.Encode(destinationFile, destinationImage, nil); err != nil {
-		return fmt.Errorf("can't encode to destination file at path `%s`: %w", dst, err)
+		return fmt.Errorf(
+			"can't encode to destination file at path `%s`: %w",
+			dst,
+			err,
+		)
 	}
 
 	return nil
@@ -116,17 +135,28 @@ func genGalleryPage(src, dst string) error {
 	}
 
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf("can't create imgcontainer directory `%s`: %w", filepath.Dir(dst), err)
+		return fmt.Errorf(
+			"can't create imgcontainer directory `%s`: %w",
+			filepath.Dir(dst),
+			err,
+		)
 	}
 
 	f, err := os.Create(dst)
 	if err != nil {
 		return fmt.Errorf("can't create imgcontainer file for `%s`: %w", src, err)
 	}
+	defer f.Close()
 
-	files, err := filepath.Glob(filepath.Join(filepath.Dir(src), "*.[jJ][pP][gG]"))
+	files, err := filepath.Glob(
+		filepath.Join(filepath.Dir(src), "*.[jJ][pP][gG]"),
+	)
 	if err != nil {
-		return fmt.Errorf("can't look into image directory `%s` for ordering: %w", filepath.Dir(src), err)
+		return fmt.Errorf(
+			"can't look into image directory `%s` for ordering: %w",
+			filepath.Dir(src),
+			err,
+		)
 	}
 
 	i := slices.IndexFunc(
