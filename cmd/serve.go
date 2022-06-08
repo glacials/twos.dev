@@ -41,7 +41,7 @@ var (
 		"src/cold/*.html":          htmlBuilder,
 		"src/cold/*.md":            markdownBuilder,
 		"src/warm/*.md":            markdownBuilder,
-		"public/*":                 staticFileBuilder,
+		"public/*":                 staticFileBuilder("public"),
 	}
 
 	buildTheWorldTriggers = map[string]struct{}{
