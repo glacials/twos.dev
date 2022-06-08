@@ -20,9 +20,6 @@ import (
 )
 
 type templateBuilder struct {
-	htmlBuilder     func(src, dest string) error
-	markdownBuilder func(src, dest string) error
-	templateBuilder func(src, dest string) error
 }
 
 type essayPageVars struct {
@@ -70,112 +67,99 @@ type pageVars struct {
 }
 
 func NewTemplateBuilder() (templateBuilder, error) {
-	builder := templateBuilder{}
+	return templateBuilder{}, nil
+}
 
-	buildHTMLFile := func(src, dst string) error {
-		log.Println("  building", src)
-		f, err := os.Open(src)
-		if err != nil {
-			// TODO: Clean this up. Prettier autoformatting seems to remove the file
-			// and quickly place it back, so for now we ignore the error.
-			log.Printf(
-				fmt.Errorf(
-					"can't open HTML file at `%s` for building: %w",
-					src,
-					err,
-				).Error(),
-			)
-			return nil
-		}
-		defer f.Close()
-
-		matter, body, err := frontmatter.Parse(f)
-		if err != nil {
-			return fmt.Errorf(
-				"can't get frontmatter from Markdown file: %w",
-				err,
-			)
-		}
-
-		if matter.Filename == "" {
-			matter.Filename = filepath.Base(src)
-		}
-
-		if err := builder.buildHTMLStream(
-			bytes.NewBuffer(body),
-			src,
-			filepath.Join(dst, matter.Filename),
-			matter,
-		); err != nil {
-			return fmt.Errorf("can't build HTML stream: %w", err)
-		}
-
-		return nil
-	}
-
-	buildMarkdownFile := func(src, dst string) error {
-		f, err := os.Open(src)
-		if err != nil {
-			return fmt.Errorf(
-				"can't open Markdown file at `%s` for building: %w",
+func (builder templateBuilder) htmlBuilder(src, dst string) error {
+	log.Println("  building", src)
+	f, err := os.Open(src)
+	if err != nil {
+		// TODO: Clean this up. Prettier autoformatting seems to remove the file
+		// and quickly place it back, so for now we ignore the error.
+		log.Printf(
+			fmt.Errorf(
+				"can't open HTML file at `%s` for building: %w",
 				src,
 				err,
-			)
-		}
-		defer f.Close()
-
-		matter, body, err := frontmatter.Parse(f)
-		if err != nil {
-			return fmt.Errorf(
-				"can't get frontmatter from Markdown file: %w",
-				err,
-			)
-		}
-
-		// Markdown parser cannot be reused :(
-		renderedHTML := markdown.ToHTML(body, parser.NewWithExtensions(
-			parser.Tables|
-				parser.FencedCode|
-				parser.Autolink|
-				parser.Strikethrough|
-				parser.Footnotes|
-				parser.HeadingIDs|
-				parser.Attributes|
-				parser.SuperSubscript,
-		), nil)
-
-		if err := os.MkdirAll(dst, 0755); err != nil {
-			return fmt.Errorf(
-				"can't make destination directory `%s`: %w",
-				dst,
-				err,
-			)
-		}
-
-		if err := builder.buildHTMLStream(
-			bytes.NewBuffer(renderedHTML),
-			src,
-			filepath.Join(dst, matter.Filename),
-			matter,
-		); err != nil {
-			return fmt.Errorf("can't build HTML stream: %w", err)
-		}
-
+			).Error(),
+		)
 		return nil
 	}
+	defer f.Close()
 
-	return templateBuilder{
-		htmlBuilder:     buildHTMLFile,
-		markdownBuilder: buildMarkdownFile,
-		templateBuilder: func(src, dst string) error {
-			// TODO: Selectively build files that use this template
-			if err := buildTheWorld(); err != nil {
-				return fmt.Errorf("can't build the world: %w", err)
-			}
+	matter, body, err := frontmatter.Parse(f)
+	if err != nil {
+		return fmt.Errorf(
+			"can't get frontmatter from Markdown file: %w",
+			err,
+		)
+	}
 
-			return nil
-		},
-	}, nil
+	if matter.Filename == "" {
+		matter.Filename = filepath.Base(src)
+	}
+
+	if err := builder.buildHTMLStream(
+		bytes.NewBuffer(body),
+		src,
+		filepath.Join(dst, matter.Filename),
+		matter,
+	); err != nil {
+		return fmt.Errorf("can't build HTML stream: %w", err)
+	}
+
+	return nil
+}
+
+func (builder templateBuilder) markdownBuilder(src, dst string) error {
+	f, err := os.Open(src)
+	if err != nil {
+		return fmt.Errorf(
+			"can't open Markdown file at `%s` for building: %w",
+			src,
+			err,
+		)
+	}
+	defer f.Close()
+
+	matter, body, err := frontmatter.Parse(f)
+	if err != nil {
+		return fmt.Errorf(
+			"can't get frontmatter from Markdown file: %w",
+			err,
+		)
+	}
+
+	// Markdown parser cannot be reused :(
+	renderedHTML := markdown.ToHTML(body, parser.NewWithExtensions(
+		parser.Tables|
+			parser.FencedCode|
+			parser.Autolink|
+			parser.Strikethrough|
+			parser.Footnotes|
+			parser.HeadingIDs|
+			parser.Attributes|
+			parser.SuperSubscript,
+	), nil)
+
+	if err := os.MkdirAll(dst, 0755); err != nil {
+		return fmt.Errorf(
+			"can't make destination directory `%s`: %w",
+			dst,
+			err,
+		)
+	}
+
+	if err := builder.buildHTMLStream(
+		bytes.NewBuffer(renderedHTML),
+		src,
+		filepath.Join(dst, matter.Filename),
+		matter,
+	); err != nil {
+		return fmt.Errorf("can't build HTML stream: %w", err)
+	}
+
+	return nil
 }
 
 func (builder templateBuilder) buildHTMLStream(
@@ -405,6 +389,14 @@ func (builder templateBuilder) buildHTMLStream(
 
 	if err := t.Execute(htmlFile, v); err != nil {
 		return fmt.Errorf("can't execute essay template `%s`: %w", src, err)
+	}
+
+	return nil
+}
+
+func (builder templateBuilder) buildTemplate(src, dst string) error {
+	if err := buildTheWorld(); err != nil {
+		return fmt.Errorf("can't \"build\" template `%s`: %w", src, err)
 	}
 
 	return nil

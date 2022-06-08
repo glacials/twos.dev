@@ -59,22 +59,11 @@ var serveCmd = &cobra.Command{
 			map[string]func(src, dst string) error{
 				"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
 				"./src/cold/*.html":          templater.htmlBuilder,
+				"./src/cold/*.md":            templater.markdownBuilder,
 				"./src/warm/*.md":            templater.markdownBuilder,
-				"./src/templates/*.html": func(_, _ string) error {
-					if err := buildTheWorld(); err != nil {
-						return err
-					}
-
-					return nil
-				},
-				"./*.css": func(_, _ string) error {
-					if err := buildTheWorld(); err != nil {
-						return err
-					}
-
-					return nil
-				},
-				"./public/*": staticFileBuilder,
+				"./src/templates/*.html":     templater.buildTemplate,
+				"./*.css":                    templater.buildTemplate,
+				"./public/*":                 staticFileBuilder,
 			},
 		)
 
