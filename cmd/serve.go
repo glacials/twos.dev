@@ -37,13 +37,13 @@ var (
 	noBuild *bool
 
 	builders = map[string]func(src, dst string) error{
-		"src/img/*/*.[jJ][pP][gG]": imageBuilder,
-		"src/cold/*.html":          htmlBuilder,
-		"src/cold/*.md":            markdownBuilder,
-		"src/warm/*.md":            markdownBuilder,
-		"public/*":                 staticFileBuilder("public"),
-		"public/*/*":               staticFileBuilder("public"),
-		"public/*/*/*":             staticFileBuilder("public"),
+		"src/img/*/*/*.[jJ][pP][gG]": imageBuilder,
+		"src/cold/*.html":            htmlBuilder,
+		"src/cold/*.md":              markdownBuilder,
+		"src/warm/*.md":              markdownBuilder,
+		"public/*":                   staticFileBuilder("public"),
+		"public/*/*":                 staticFileBuilder("public"),
+		"public/*/*/*":               staticFileBuilder("public"),
 	}
 
 	buildTheWorldTriggers = map[string]struct{}{

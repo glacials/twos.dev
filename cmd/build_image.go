@@ -42,16 +42,16 @@ func imageBuilder(src, dst string) error {
 		return fmt.Errorf("can't get relpath for image `%s`: %w", src, err)
 	}
 
-	imgdst := filepath.Join(dst, relsrc)
+	dst = filepath.Join(dst, relsrc)
 	thmdst := strings.Replace(
-		imgdst,
+		dst,
 		filepath.FromSlash("/img/"),
 		filepath.FromSlash("/img/thumb/"),
 		1,
 	)
 
-	if err := os.MkdirAll(filepath.Dir(imgdst), 0755); err != nil {
-		return fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdst), err)
+	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
+		return fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(dst), err)
 	}
 
 	srcf, err := os.Open(src)
@@ -60,14 +60,14 @@ func imageBuilder(src, dst string) error {
 	}
 	defer srcf.Close()
 
-	dstf, err := os.Create(imgdst)
+	dstf, err := os.Create(dst)
 	if err != nil {
-		return fmt.Errorf("can't write image `%s`: %w", imgdst, err)
+		return fmt.Errorf("can't write image `%s`: %w", dst, err)
 	}
 	defer dstf.Close()
 
 	if _, err := io.Copy(dstf, srcf); err != nil {
-		return fmt.Errorf("can't copy `%s` to `%s`: %w", src, imgdst, err)
+		return fmt.Errorf("can't copy `%s` to `%s`: %w", src, dst, err)
 	}
 
 	// Generate thumbnails and place into build dir
@@ -75,7 +75,7 @@ func imageBuilder(src, dst string) error {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	if err := genGalleryPage(src, fmt.Sprintf("%s.html", imgdst)); err != nil {
+	if err := genGalleryPage(src, fmt.Sprintf("%s.html", dst)); err != nil {
 		return fmt.Errorf("can't generate image container pages: %w", err)
 	}
 
