@@ -74,7 +74,7 @@ var serveCmd = &cobra.Command{
 
 					return nil
 				},
-				"./public": staticFileBuilder,
+				"./public/*": staticFileBuilder,
 			},
 		)
 
