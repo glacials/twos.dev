@@ -65,6 +65,7 @@ func NewTemplateBuilder() (templateBuilder, error) {
 	builder := templateBuilder{}
 
 	buildHTMLFile := func(src, dst string) error {
+		log.Println("  building", src)
 		f, err := os.Open(src)
 		if err != nil {
 			// TODO: Clean this up. Prettier autoformatting seems to remove the file

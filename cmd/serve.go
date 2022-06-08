@@ -97,7 +97,7 @@ var serveCmd = &cobra.Command{
 							return
 						}
 						if event.Op&(fsnotify.Write|fsnotify.Rename|fsnotify.Create) > 0 {
-							log.Println("event:", event)
+							log.Println("changed:", event.Name)
 							for path, builder := range distributer.Assignments {
 								if ok, err := filepath.Match(path, event.Name); err != nil {
 									log.Fatalf("can't match `%s`: %s", path, err)
