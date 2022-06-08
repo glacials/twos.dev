@@ -207,7 +207,7 @@ func (builder templateBuilder) buildHTMLStream(
 		createdAt = matter.CreatedAt.Format("2006 January")
 	}
 	if !matter.UpdatedAt.IsZero() {
-		updatedAt = matter.CreatedAt.Format("2006 January")
+		updatedAt = matter.UpdatedAt.Format("2006 January")
 	}
 
 	body, err := io.ReadAll(r)
