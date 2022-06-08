@@ -34,7 +34,13 @@ func buildTheWorld() error {
 		if ok, err := filepath.Match("*.md", d.Name()); err != nil {
 			return fmt.Errorf("can't match `%s` to *.md: %w", src, err)
 		} else if ok {
-			if err := templater.markdownBuilder(src, dst); err != nil {
+			relsrc, err := filepath.Rel("src/warm", src)
+			if err != nil {
+				return fmt.Errorf("can't get relpath to `%s`: %w", src, err)
+			}
+			reldst := filepath.Join(dst, relsrc)
+
+			if err := templater.markdownBuilder(src, filepath.Dir(reldst)); err != nil {
 				return fmt.Errorf("can't build Markdown in `%s`: %w", src, err)
 			}
 
@@ -60,7 +66,13 @@ func buildTheWorld() error {
 		if ok, err := filepath.Match("*.html", d.Name()); err != nil {
 			return fmt.Errorf("can't match `%s` to *.html: %w", src, err)
 		} else if ok {
-			if err := templater.htmlBuilder(src, dst); err != nil {
+			relsrc, err := filepath.Rel("src/cold", src)
+			if err != nil {
+				return fmt.Errorf("can't get relpath to `%s`: %w", src, err)
+			}
+
+			reldst := filepath.Join(dst, relsrc)
+			if err := templater.htmlBuilder(src, filepath.Dir(reldst)); err != nil {
 				return fmt.Errorf("can't build HTML in `%s`: %w", src, err)
 			}
 

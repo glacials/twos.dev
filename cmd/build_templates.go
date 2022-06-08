@@ -88,7 +88,12 @@ func NewTemplateBuilder() (templateBuilder, error) {
 		}
 
 		if matter.Filename == "" {
-			matter.Filename = filepath.Base(src)
+			rel, err := filepath.Rel("src/cold", src)
+			if err != nil {
+				return fmt.Errorf("can't get rel path of `%s`: %w", src, err)
+			}
+
+			matter.Filename = rel
 		}
 
 		if err := builder.buildHTMLStream(bytes.NewBuffer(body), src, dst, matter); err != nil {
