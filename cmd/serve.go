@@ -28,7 +28,6 @@ import (
 	"path/filepath"
 
 	"github.com/fsnotify/fsnotify"
-	"github.com/glacials/twos.dev/cmd/builders"
 	"github.com/spf13/cobra"
 )
 
@@ -36,6 +35,19 @@ const dst = "dist"
 
 var (
 	noBuild *bool
+
+	builders = map[string]func(src, dst string) error{
+		"src/img/*/*.[jJ][pP][gG]": imageBuilder,
+		"src/cold/*.html":          htmlBuilder,
+		"src/cold/*.md":            markdownBuilder,
+		"src/warm/*.md":            markdownBuilder,
+		"public/*":                 staticFileBuilder,
+	}
+
+	buildTheWorldTriggers = map[string]struct{}{
+		"src/templates/*.html": {},
+		"*.css":                {},
+	}
 )
 
 // serveCmd represents the serve command
@@ -49,23 +61,6 @@ var serveCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		port := 8100
 		http.Handle("/", http.FileServer(http.Dir("dist/")))
-
-		templater, err := NewTemplateBuilder()
-		if err != nil {
-			return fmt.Errorf("can't build template builder: %w", err)
-		}
-
-		distributer := builders.NewDistributer(
-			map[string]func(src, dst string) error{
-				"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
-				"./src/cold/*.html":          templater.htmlBuilder,
-				"./src/cold/*.md":            templater.markdownBuilder,
-				"./src/warm/*.md":            templater.markdownBuilder,
-				"./src/templates/*.html":     templater.buildTemplate,
-				"./*.css":                    templater.buildTemplate,
-				"./public/*":                 staticFileBuilder,
-			},
-		)
 
 		watcher, err := fsnotify.NewWatcher()
 		if err != nil {
@@ -87,12 +82,21 @@ var serveCmd = &cobra.Command{
 						}
 						if event.Op&(fsnotify.Write|fsnotify.Rename|fsnotify.Create) > 0 {
 							log.Println("changed:", event.Name)
-							for path, builder := range distributer.Assignments {
-								if ok, err := filepath.Match(path, event.Name); err != nil {
-									log.Fatalf("can't match `%s`: %s", path, err)
+							for pattern, builder := range builders {
+								if ok, err := filepath.Match(pattern, event.Name); err != nil {
+									log.Fatalf("can't match `%s`: %s", pattern, err)
 								} else if ok {
 									if err := builder(event.Name, dst); err != nil {
-										log.Fatalf("can't build `%s`: %s", path, err)
+										log.Fatalf("can't build `%s`: %s", pattern, err)
+									}
+								}
+							}
+							for pattern := range buildTheWorldTriggers {
+								if ok, err := filepath.Match(pattern, event.Name); err != nil {
+									log.Fatalf("can't match `%s`: %s", pattern, err)
+								} else if ok {
+									if err := buildTheWorld(); err != nil {
+										log.Fatalf("can't build the world: %s", err)
 									}
 								}
 							}
@@ -109,7 +113,7 @@ var serveCmd = &cobra.Command{
 			}()
 
 			watched := map[string]struct{}{}
-			for pattern := range distributer.Assignments {
+			for pattern := range builders {
 				paths, err := filepath.Glob(pattern)
 				if err != nil {
 					return fmt.Errorf("can't glob `%s`: %w", pattern, err)

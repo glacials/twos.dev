@@ -19,9 +19,6 @@ import (
 	"golang.org/x/net/html/atom"
 )
 
-type templateBuilder struct {
-}
-
 type essayPageVars struct {
 	pageVars
 
@@ -66,11 +63,7 @@ type pageVars struct {
 	SourceURL string
 }
 
-func NewTemplateBuilder() (templateBuilder, error) {
-	return templateBuilder{}, nil
-}
-
-func (builder templateBuilder) htmlBuilder(src, dst string) error {
+func htmlBuilder(src, dst string) error {
 	log.Println("  building", src)
 	f, err := os.Open(src)
 	if err != nil {
@@ -99,7 +92,7 @@ func (builder templateBuilder) htmlBuilder(src, dst string) error {
 		matter.Filename = filepath.Base(src)
 	}
 
-	if err := builder.buildHTMLStream(
+	if err := buildHTMLStream(
 		bytes.NewBuffer(body),
 		src,
 		filepath.Join(dst, matter.Filename),
@@ -111,7 +104,7 @@ func (builder templateBuilder) htmlBuilder(src, dst string) error {
 	return nil
 }
 
-func (builder templateBuilder) markdownBuilder(src, dst string) error {
+func markdownBuilder(src, dst string) error {
 	f, err := os.Open(src)
 	if err != nil {
 		return fmt.Errorf(
@@ -142,15 +135,7 @@ func (builder templateBuilder) markdownBuilder(src, dst string) error {
 			parser.SuperSubscript,
 	), nil)
 
-	if err := os.MkdirAll(dst, 0755); err != nil {
-		return fmt.Errorf(
-			"can't make destination directory `%s`: %w",
-			dst,
-			err,
-		)
-	}
-
-	if err := builder.buildHTMLStream(
+	if err := buildHTMLStream(
 		bytes.NewBuffer(renderedHTML),
 		src,
 		filepath.Join(dst, matter.Filename),
@@ -162,16 +147,12 @@ func (builder templateBuilder) markdownBuilder(src, dst string) error {
 	return nil
 }
 
-func (builder templateBuilder) buildHTMLStream(
+func buildHTMLStream(
 	r io.Reader,
 	src string,
 	dst string,
 	matter frontmatter.Matter,
 ) error {
-	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf("can't make destination directory `%s`: %w", dst, err)
-	}
-
 	if matter.Filename == "" {
 		return fmt.Errorf("file frontmatter has no filename attribute")
 	}
@@ -394,7 +375,7 @@ func (builder templateBuilder) buildHTMLStream(
 	return nil
 }
 
-func (builder templateBuilder) buildTemplate(src, dst string) error {
+func buildTemplate(src, dst string) error {
 	if err := buildTheWorld(); err != nil {
 		return fmt.Errorf("can't \"build\" template `%s`: %w", src, err)
 	}

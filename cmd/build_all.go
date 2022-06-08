@@ -7,7 +7,14 @@ import (
 )
 
 var (
-	ignoreFilenames = map[string]struct{}{"README.md": {}, ".DS_Store": {}}
+	ignoreFiles = map[string]struct{}{
+		"README.md": {},
+	}
+	ignoreDirectories = map[string]struct{}{
+		".git":         {},
+		".github":      {},
+		"node_modules": {},
+	}
 )
 
 func buildTheWorld() error {
@@ -15,99 +22,33 @@ func buildTheWorld() error {
 		return fmt.Errorf("can't build static assets: %w", err)
 	}
 
-	templater, err := NewTemplateBuilder()
-	if err != nil {
-		return fmt.Errorf("can't make template builder: %w", err)
-	}
-
-	if err := filepath.WalkDir("src/warm", func(src string, d os.DirEntry, err error) error {
+	if err := filepath.WalkDir(".", func(src string, d os.DirEntry, err error) error {
 		if err != nil {
-			return fmt.Errorf("can't walk src/warm to build `%s`: %w", src, err)
+			return fmt.Errorf("can't walk towards `%s`: %w", src, err)
+		}
+		if _, ok := ignoreFiles[d.Name()]; ok {
+			return nil
+		}
+		if _, ok := ignoreDirectories[d.Name()]; ok {
+			return filepath.SkipDir
 		}
 		if d.IsDir() {
 			return nil
 		}
-		if _, ok := ignoreFilenames[d.Name()]; ok {
-			return nil
+
+		for pattern, builder := range builders {
+			if ok, err := filepath.Match(pattern, src); err != nil {
+				return fmt.Errorf("can't match `%s` to %s: %w", src, pattern, err)
+			} else if ok {
+				if err := builder(src, dst); err != nil {
+					return fmt.Errorf("can't build `%s`: %w", src, err)
+				}
+			}
 		}
 
-		if ok, err := filepath.Match("*.md", d.Name()); err != nil {
-			return fmt.Errorf("can't match `%s` to *.md: %w", src, err)
-		} else if ok {
-			relsrc, err := filepath.Rel("src/warm", src)
-			if err != nil {
-				return fmt.Errorf("can't get relpath to `%s`: %w", src, err)
-			}
-			reldst := filepath.Join(dst, relsrc)
-
-			if err := templater.markdownBuilder(src, filepath.Dir(reldst)); err != nil {
-				return fmt.Errorf("can't build Markdown in `%s`: %w", src, err)
-			}
-
-			return nil
-		}
-
-		return fmt.Errorf("don't know what to do with `%s`", src)
+		return nil
 	}); err != nil {
 		return fmt.Errorf("can't walk src/warm: %w", err)
-	}
-
-	if err := filepath.WalkDir("src/cold", func(src string, d os.DirEntry, err error) error {
-		if err != nil {
-			return fmt.Errorf("can't walk src/cold to build `%s`: %w", src, err)
-		}
-		if d.IsDir() {
-			return nil
-		}
-		if _, ok := ignoreFilenames[d.Name()]; ok {
-			return nil
-		}
-
-		if ok, err := filepath.Match("*.html", d.Name()); err != nil {
-			return fmt.Errorf("can't match `%s` to *.html: %w", src, err)
-		} else if ok {
-			relsrc, err := filepath.Rel("src/cold", src)
-			if err != nil {
-				return fmt.Errorf("can't get relpath to `%s`: %w", src, err)
-			}
-
-			reldst := filepath.Join(dst, relsrc)
-			if err := templater.htmlBuilder(src, filepath.Dir(reldst)); err != nil {
-				return fmt.Errorf("can't build HTML in `%s`: %w", src, err)
-			}
-
-			return nil
-		}
-
-		return fmt.Errorf("don't know what to do with `%s`", src)
-	}); err != nil {
-		return fmt.Errorf("can't walk src/cold: %w", err)
-	}
-
-	if err := filepath.WalkDir("src/img", func(src string, d os.DirEntry, err error) error {
-		if err != nil {
-			return fmt.Errorf("can't walk src/img to build `%s`: %w", src, err)
-		}
-		if d.IsDir() {
-			return nil
-		}
-		if _, ok := ignoreFilenames[d.Name()]; ok {
-			return nil
-		}
-
-		if ok, err := filepath.Match("*.[jJ][pP][gG]", d.Name()); err != nil {
-			return fmt.Errorf("can't match `%s` to *.jpg: %w", src, err)
-		} else if ok {
-			if err := imageBuilder(src, dst); err != nil {
-				return fmt.Errorf("can't build JPEG `%s`: %w", src, err)
-			}
-
-			return nil
-		}
-
-		return fmt.Errorf("don't know what to do with `%s`", src)
-	}); err != nil {
-		return fmt.Errorf("can't walk src/img: %w", err)
 	}
 
 	if err := buildFormatting(dst); err != nil {
