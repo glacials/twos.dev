@@ -58,8 +58,8 @@ var serveCmd = &cobra.Command{
 		distributer := builders.NewDistributer(
 			map[string]func(src, dst string) error{
 				"./src/img/*/*.[jJ][pP][gG]": imageBuilder,
-				"./src/*.html":               templater.htmlBuilder,
-				"./src/*.md":                 templater.markdownBuilder,
+				"./src/cold/*.html":          templater.htmlBuilder,
+				"./src/warm/*.md":            templater.markdownBuilder,
 				"./src/templates/*.html": func(_, _ string) error {
 					if err := buildTheWorld(); err != nil {
 						return err
