@@ -23,6 +23,7 @@ package cmd
 
 import (
 	"fmt"
+	"log"
 	"os"
 	"path/filepath"
 )
@@ -60,6 +61,7 @@ func buildTheWorld() error {
 			if ok, err := filepath.Match(pattern, src); err != nil {
 				return fmt.Errorf("can't match `%s` to %s: %w", src, pattern, err)
 			} else if ok {
+				log.Println("building", src)
 				if err := builder(src, dst); err != nil {
 					return fmt.Errorf("can't build `%s`: %w", src, err)
 				}

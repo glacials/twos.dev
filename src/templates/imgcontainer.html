@@ -32,27 +32,34 @@
   <body>
     <div class="container">
       <header>&larr; <a href="/">twos.dev</a></header>
-      <center>
+      <p style="text-align: center">
         {{if .Prev}}
         <a href="{{.Prev}}">&larr; prev</a>
         {{if .Next}}/{{end}} {{end}} {{if .Next}}
         <a href="{{.Next}}">next &rarr;</a>
         {{end}}
-      </center>
-      <center>
-        <a href="{{.Cur}}">
-          <img src="{{.Cur}}" style="max-width: 100%; max-height: 75vh" />
+      </p>
+      <p style="text-align: center; margin-bottom: 0">
+        <a href="{{.URL}}">
+          <img
+            alt="{{.Alt}}"
+            src="{{.URL}}"
+            style="max-width: 100%; max-height: 75vh"
+          />
         </a>
-      </center>
-      <footer>
-        <span style="text-align: center">
-          &copy; 2021-2022 Benjamin Carlsson
-        </span>
-        &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
-        <a href="{{.SourceURL}}">Source</a>
-        {{else}}
-        <a href="https://github.com/glacials/twos.dev">Source</a>
-        {{end}}
+      </p>
+      <p style="text-align: center; margin-top: 0">
+        <i>{{.Camera}}</i>
+      </p>
+      <p style="text-align: center">&copy; 2021-2022 Benjamin Carlsson</p>
+      <footer style="margin-top: 1em">
+        <p>
+          &larr; <a href="index.html">twos.dev</a> / {{if .SourceURL}}
+          <a href="{{.SourceURL}}">Source</a>
+          {{else}}
+          <a href="https://github.com/glacials/twos.dev">Source</a>
+          {{end}}
+        </p>
       </footer>
     </div>
   </body>

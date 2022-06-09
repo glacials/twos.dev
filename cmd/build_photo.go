@@ -30,8 +30,11 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"strconv"
 	"strings"
 
+	"github.com/rwcarlsen/goexif/exif"
+	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
 )
@@ -193,9 +196,17 @@ func genGalleryPage(src, dst string) error {
 		nextLink = fmt.Sprintf("%s.html", filepath.Base(files[i+1]))
 	}
 
+	camera, err := camera(src)
+	if err != nil {
+		return fmt.Errorf("can't get camera for `%s`: %w", src, err)
+	}
+
 	v := galleryPageVars{
+		Alt:    "testing",
+		Camera: camera,
+		URL:    filepath.Base(src),
+
 		Prev: prevLink,
-		Cur:  filepath.Base(src),
 		Next: nextLink,
 
 		pageVars: pageVars{
@@ -211,4 +222,96 @@ func genGalleryPage(src, dst string) error {
 	}
 
 	return nil
+}
+
+// camera extracts the camera string (including lens, etc.) from the image at
+// the given path.
+func camera(src string) (string, error) {
+	f, err := os.Open(src)
+	if err != nil {
+		return "", fmt.Errorf("can't open photo: %w", err)
+	}
+	defer f.Close()
+
+	exif.RegisterParsers(mknote.All...)
+
+	x, err := exif.Decode(f)
+	if err != nil {
+		return "", fmt.Errorf("can't read exif data: %w", err)
+	}
+
+	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
+	if err != nil {
+		return "", fmt.Errorf("can't get focal length: %w", err)
+	}
+
+	camModel, err := x.Get(exif.Model) // normally, don't ignore errors!
+	if err != nil {
+		return "", fmt.Errorf("can't get camera model: %w", err)
+	}
+
+	cam, err := camModel.StringVal()
+	if err != nil {
+		return "", fmt.Errorf("can't render camera as string: %w", err)
+	}
+
+	fnum, err := exifFractionToDecimal(x, exif.FNumber)
+	if err != nil {
+		return "", fmt.Errorf("can't get focal length: %w", err)
+	}
+
+	exposure, err := x.Get(exif.ExposureTime)
+	if err != nil {
+		return "", fmt.Errorf("can't get exposure: %w", err)
+	}
+
+	iso, err := x.Get(exif.ISOSpeedRatings)
+	if err != nil {
+		return "", fmt.Errorf("can't get ISO: %w", err)
+	}
+
+	return fmt.Sprintf(
+		"%s • %.0fmm • ƒ%.1f • %ss • ISO %s",
+		cam,
+		focalLength,
+		fnum,
+		strings.Replace(exposure.String(), "\"", "", 2),
+		iso,
+	), nil
+}
+
+func exifFractionToDecimal(
+	x *exif.Exif,
+	field exif.FieldName,
+) (float64, error) {
+	fraction, err := x.Get(field)
+	if err != nil {
+		return 0, fmt.Errorf("can't get field %s: %w", field, err)
+	}
+	parts := strings.Split(
+		strings.Replace(fraction.String(), "\"", "", 2),
+		"/",
+	)
+	numer, err := strconv.Atoi(parts[0])
+	if err != nil {
+		return 0, fmt.Errorf(
+			"can't convert %s (numerator of %s, %s) to int: %w",
+			parts[0],
+			field,
+			fraction,
+			err,
+		)
+	}
+	denom, err := strconv.Atoi(parts[1])
+	if err != nil {
+		return 0, fmt.Errorf(
+			"can't convert %s (denominator of %s, %s) to int: %w",
+			parts[0],
+			field,
+			fraction,
+			err,
+		)
+	}
+
+	return float64(numer) / float64(denom), nil
 }

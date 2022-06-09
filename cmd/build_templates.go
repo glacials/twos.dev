@@ -74,8 +74,11 @@ type imgPartialVars struct {
 type galleryPageVars struct {
 	pageVars
 
+	URL    string
+	Alt    string
+	Camera string
+
 	Prev string
-	Cur  string
 	Next string
 }
 
@@ -85,7 +88,6 @@ type pageVars struct {
 }
 
 func htmlBuilder(src, dst string) error {
-	log.Println("  building", src)
 	f, err := os.Open(src)
 	if err != nil {
 		// TODO: Clean this up. Prettier autoformatting seems to remove the file

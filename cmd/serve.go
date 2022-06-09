@@ -132,6 +132,23 @@ var serveCmd = &cobra.Command{
 					}
 				}
 			}
+			for pattern := range buildTheWorldTriggers {
+				paths, err := filepath.Glob(pattern)
+				if err != nil {
+					return fmt.Errorf("can't glob `%s`: %w", pattern, err)
+				}
+
+				for _, path := range paths {
+					for p := path; p != "."; p = filepath.Dir(p) {
+						if _, ok := watched[p]; !ok {
+							if err := watcher.Add(p); err != nil {
+								return fmt.Errorf("cannot watch file %s: %w", path, err)
+							}
+						}
+						watched[p] = struct{}{}
+					}
+				}
+			}
 		}
 
 		log.Printf("Serving %s on http://localhost:%d\n", dst, port)
