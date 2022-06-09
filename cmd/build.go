@@ -28,9 +28,9 @@ import (
 )
 
 const (
-	imageContainerTemplatePath = "src/templates/imgcontainer.html"
-	staticAssetsDir            = "public"
-	sourceDir                  = "src"
+	photoGalleryTemplatePath = "src/templates/imgcontainer.html"
+	staticAssetsDir          = "public"
+	sourceDir                = "src"
 )
 
 // buildCmd represents the build command

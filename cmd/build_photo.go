@@ -36,10 +36,10 @@ import (
 	"golang.org/x/image/draw"
 )
 
-func imageBuilder(src, dst string) error {
+func photoBuilder(src, dst string) error {
 	relsrc, err := filepath.Rel("src", src)
 	if err != nil {
-		return fmt.Errorf("can't get relpath for image `%s`: %w", src, err)
+		return fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
 	}
 
 	dst = filepath.Join(dst, relsrc)
@@ -62,7 +62,7 @@ func imageBuilder(src, dst string) error {
 
 	dstf, err := os.Create(dst)
 	if err != nil {
-		return fmt.Errorf("can't write image `%s`: %w", dst, err)
+		return fmt.Errorf("can't write photo `%s`: %w", dst, err)
 	}
 	defer dstf.Close()
 
@@ -76,13 +76,13 @@ func imageBuilder(src, dst string) error {
 	}
 
 	if err := genGalleryPage(src, fmt.Sprintf("%s.html", dst)); err != nil {
-		return fmt.Errorf("can't generate image container pages: %w", err)
+		return fmt.Errorf("can't generate photo container pages: %w", err)
 	}
 
 	return nil
 }
 
-// genThumbnail makes thumbnails from every image (recursively) in src, copying
+// genThumbnail makes thumbnails from every photo (recursively) in src, copying
 // them to equivalent paths in a "thumb" subdirectory of dst.
 //
 // The thumbnails have the given width. Height is automatically calculated to
@@ -90,27 +90,27 @@ func imageBuilder(src, dst string) error {
 func genThumbnail(src, dst string, width int) error {
 	sourceFile, err := os.Open(src)
 	if err != nil {
-		return fmt.Errorf("can't open image at path `%s`: %w", src, err)
+		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
 	}
 	defer sourceFile.Close()
 
-	sourceImage, err := jpeg.Decode(sourceFile)
+	srcPhoto, err := jpeg.Decode(sourceFile)
 	if err != nil {
 		return fmt.Errorf(
-			"can't decode image at path `%s` (maybe not an image?): %w",
+			"can't decode photo at path `%s` (maybe not an image?): %w",
 			src,
 			err,
 		)
 	}
-	p := sourceImage.Bounds().Size()
+	p := srcPhoto.Bounds().Size()
 	w, h := width, ((width*p.X/p.Y)+1)&-1
-	destinationImage := image.NewRGBA(image.Rect(0, 0, w, h))
+	dstPhoto := image.NewRGBA(image.Rect(0, 0, w, h))
 
 	draw.CatmullRom.Scale(
-		destinationImage,
+		dstPhoto,
 		image.Rectangle{image.Point{0, 0}, image.Point{width, width}},
-		sourceImage,
-		image.Rectangle{image.Point{0, 0}, sourceImage.Bounds().Size()},
+		srcPhoto,
+		image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
 		draw.Over,
 		nil,
 	)
@@ -126,14 +126,14 @@ func genThumbnail(src, dst string, width int) error {
 	destinationFile, err := os.Create(dst)
 	if err != nil {
 		return fmt.Errorf(
-			"can't create thumbnail file for image at path `%s`: %w",
+			"can't create thumbnail file for photo at path `%s`: %w",
 			src,
 			err,
 		)
 	}
 	defer destinationFile.Close()
 
-	if err := jpeg.Encode(destinationFile, destinationImage, nil); err != nil {
+	if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
 		return fmt.Errorf(
 			"can't encode to destination file at path `%s`: %w",
 			dst,
@@ -145,9 +145,9 @@ func genThumbnail(src, dst string, width int) error {
 }
 
 func genGalleryPage(src, dst string) error {
-	templateHTML, err := ioutil.ReadFile(imageContainerTemplatePath)
+	templateHTML, err := ioutil.ReadFile(photoGalleryTemplatePath)
 	if err != nil {
-		return fmt.Errorf("can't read image container template: %w", err)
+		return fmt.Errorf("can't read photo gallery template: %w", err)
 	}
 
 	t, err := template.New("imgcontainer").Parse(string(templateHTML))
@@ -174,7 +174,7 @@ func genGalleryPage(src, dst string) error {
 	)
 	if err != nil {
 		return fmt.Errorf(
-			"can't look into image directory `%s` for ordering: %w",
+			"can't look into photo directory `%s` for ordering: %w",
 			filepath.Dir(src),
 			err,
 		)
@@ -194,9 +194,9 @@ func genGalleryPage(src, dst string) error {
 	}
 
 	v := galleryPageVars{
-		PrevLink: prevLink,
-		CurImage: filepath.Base(src),
-		NextLink: nextLink,
+		Prev: prevLink,
+		Cur:  filepath.Base(src),
+		Next: nextLink,
 
 		pageVars: pageVars{
 			SourceURL: fmt.Sprintf(

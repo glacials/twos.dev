@@ -74,9 +74,9 @@ type imgPartialVars struct {
 type galleryPageVars struct {
 	pageVars
 
-	PrevLink string
-	CurImage string
-	NextLink string
+	Prev string
+	Cur  string
+	Next string
 }
 
 type pageVars struct {

@@ -37,7 +37,7 @@ var (
 	noBuild *bool
 
 	builders = map[string]func(src, dst string) error{
-		"src/img/*/*/*.[jJ][pP][gG]": imageBuilder,
+		"src/img/*/*/*.[jJ][pP][gG]": photoBuilder,
 		"src/cold/*.html":            htmlBuilder,
 		"src/cold/*.md":              markdownBuilder,
 		"src/warm/*.md":              markdownBuilder,

@@ -33,15 +33,15 @@
     <div class="container">
       <header>&larr; <a href="/">twos.dev</a></header>
       <center>
-        {{if .PrevLink}}
-        <a href="{{.PrevLink}}">&larr; prev</a>
-        {{if .NextLink}}/{{end}} {{end}} {{if .NextLink}}
-        <a href="{{.NextLink}}">next &rarr;</a>
+        {{if .Prev}}
+        <a href="{{.Prev}}">&larr; prev</a>
+        {{if .Next}}/{{end}} {{end}} {{if .Next}}
+        <a href="{{.Next}}">next &rarr;</a>
         {{end}}
       </center>
       <center>
-        <a href="{{.CurImage}}">
-          <img src="{{.CurImage}}" style="max-width: 100%; max-height: 75vh" />
+        <a href="{{.Cur}}">
+          <img src="{{.Cur}}" style="max-width: 100%; max-height: 75vh" />
         </a>
       </center>
       <footer>
