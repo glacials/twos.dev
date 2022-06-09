@@ -46,7 +46,13 @@ updated: 2022-06-08
       </li>
       <li><a href="#home">Google Home &rarr; Apple Home</a></li>
       <li><a href="#airpods">Pixel Buds &rarr; AirPods Pro</a></li>
-      <li><a href="#mail">Gmail &rarr; iCloud Mail</a></li>
+      <li>
+        <a href="#mail">Gmail &rarr; iCloud Mail</a>
+        <ol>
+          <li><a href="#migrating">Migrating</a></li>
+          <li><a href="#daily">Daily Use</a></li>
+        </ol>
+      </li>
       <li><a href="#calendar">Google Calendar &rarr; Apple Calendar</a></li>
       <li>
         <a href="#maps">Google Maps &rarr; Apple Maps</a>
@@ -679,12 +685,47 @@ Below are my notes on moving between the ecosystems at specific touchpoints.
   The big one. I’ve been wanting to switch my email to a domain I control
   anyway, and iCloud+ supports that.
 </p>
+
+<a name="migrating"></a>
+<h4>Migrating</h4>
 <p>
   I don’t recommend importing Gmail archives into iCloud Mail; the experience
   was fraught with landmines and didn’t achieve the desired result. After
-  starting from scratch several times, I’ve chosen to live the life of searching
-  in two places when I need something.
+  starting from scratch several times and hitting new issues every time, I’ve
+  chosen to live the life of searching in two places when I need something.
 </p>
+<p>
+  To migrate, I coopted ben@twos.dev from Google Workspace which I had only used
+  for a little consulting. This caused a few minor issues and UX hiccups because
+  Workspace Gmail behaved as if it were still my provider, but DNS wasn't
+  delivering it anything.
+</p>
+<p>
+  I wanted my main Google account to match my main email address, so I tried to
+  use this Google Workspace account as my new primary Google account. But many
+  Google features don't support Workspace accounts, like Google One, family
+  sharing, some security features, and (for better and worse) some types of data
+  harvesting and therefore ad targeting.
+</p>
+<p>
+  So, I tried sticking with my classic Google account and accepting that its
+  email would always be different from my preferred email. I finally snagged my
+  leg on Google Groups, as Groups does not recognize alternative email addresses
+  on Google accounts; I was forced to be presented as my old email address.
+  (Though I did not test if posting via email from ben@twos.dev worked.)
+</p>
+<p>
+  I've now landed on creating a new personal Google account with ben@twos.dev as
+  its primary email address. I needed to delete the twos.dev Google Workspace
+  organization to do this, as it had claim to ben@twos.dev already. Signing up
+  to Google without an @gmail.com address is a somewhat hidden option when
+  signing up for Google. Beware that you can later "upgrade" to an @gmail.com
+  account, but you can never change back.
+</p>
+<p>The best</p>
+
+<a name="daily"></a>
+<h4>Daily Use</h4>
 <p>
   The iCloud web interface is bad. On my Windows gaming computer I’ve installed
   Thunderbird to get by.
