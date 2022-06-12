@@ -71,17 +71,6 @@ type imgPartialVars struct {
 	Dark  string
 }
 
-type galleryPageVars struct {
-	pageVars
-
-	URL    string
-	Alt    string
-	Camera string
-
-	Prev string
-	Next string
-}
-
 type pageVars struct {
 	// SourceURL is the GitHub URL to the source code for the page being rendered.
 	SourceURL string

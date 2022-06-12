@@ -39,6 +39,22 @@ import (
 	"golang.org/x/image/draw"
 )
 
+type galleryPageVars struct {
+	pageVars
+
+	ImageSRC string
+	Alt      string
+	Camera   string
+
+	Prev *galleryImageVars
+	Next *galleryImageVars
+}
+
+type galleryImageVars struct {
+	PageLink string
+	ImageSRC string
+}
+
 func photoBuilder(src, dst string) error {
 	relsrc, err := filepath.Rel("src", src)
 	if err != nil {
@@ -188,12 +204,20 @@ func genGalleryPage(src, dst string) error {
 		func(file string) bool { return filepath.Base(file) == filepath.Base(src) },
 	)
 
-	var prevLink, nextLink string
+	var prev, next *galleryImageVars
 	if i > 0 {
-		prevLink = fmt.Sprintf("%s.html", filepath.Base(files[i-1]))
+		img := filepath.Base(files[i-1])
+		prev = &galleryImageVars{
+			ImageSRC: img,
+			PageLink: fmt.Sprintf("%s.html", img),
+		}
 	}
 	if i < len(files)-1 {
-		nextLink = fmt.Sprintf("%s.html", filepath.Base(files[i+1]))
+		img := filepath.Base(files[i+1])
+		next = &galleryImageVars{
+			ImageSRC: img,
+			PageLink: fmt.Sprintf("%s.html", img),
+		}
 	}
 
 	camera, err := camera(src)
@@ -202,12 +226,12 @@ func genGalleryPage(src, dst string) error {
 	}
 
 	v := galleryPageVars{
-		Alt:    "testing",
-		Camera: camera,
-		URL:    filepath.Base(src),
+		Alt:      "",
+		Camera:   camera,
+		ImageSRC: filepath.Base(src),
 
-		Prev: prevLink,
-		Next: nextLink,
+		Prev: prev,
+		Next: next,
 
 		pageVars: pageVars{
 			SourceURL: fmt.Sprintf(

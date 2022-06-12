@@ -25,6 +25,11 @@
       title="twos.dev"
       href="/feed.rss"
     />
+    {{with .Prev}}
+    <link rel="preload" as="image" href="{{.ImageSRC}}" />
+    {{end}} {{with .Next}}
+    <link rel="preload" as="image" href="{{.ImageSRC}}" />
+    {{end}}
     <title>twos.dev Photo Viewer</title>
     <link rel="stylesheet" href="/style.css" />
   </head>
@@ -33,17 +38,17 @@
     <div class="container">
       <header>&larr; <a href="/">twos.dev</a></header>
       <p style="text-align: center">
-        {{if .Prev}}
-        <a href="{{.Prev}}">&larr; prev</a>
-        {{if .Next}}/{{end}} {{end}} {{if .Next}}
-        <a href="{{.Next}}">next &rarr;</a>
+        {{with .Prev}}
+        <a href="{{.PageLink}}">&larr; prev</a>
+        {{end}} {{if and .Next .Prev}}/{{end}} {{with .Next}}
+        <a href="{{.PageLink}}">next &rarr;</a>
         {{end}}
       </p>
       <p style="text-align: center; margin-bottom: 0">
-        <a href="{{.URL}}" class="img">
+        <a href="{{.ImageSRC}}" class="img">
           <img
             alt="{{.Alt}}"
-            src="{{.URL}}"
+            src="{{.ImageSRC}}"
             style="max-width: 100%; max-height: 75vh"
           />
         </a>
