@@ -25,10 +25,14 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"os"
+	"os/signal"
 	"path/filepath"
+	"syscall"
 
 	"github.com/fsnotify/fsnotify"
 	"github.com/spf13/cobra"
+	"golang.org/x/net/websocket"
 )
 
 const dst = "dist"
@@ -63,6 +67,7 @@ var serveCmd = &cobra.Command{
 	RunE: func(cmd *cobra.Command, args []string) error {
 		port := 8100
 		http.Handle("/", http.FileServer(http.Dir("dist/")))
+		var refreshListeners []chan struct{}
 
 		watcher, err := fsnotify.NewWatcher()
 		if err != nil {
@@ -70,10 +75,24 @@ var serveCmd = &cobra.Command{
 		}
 		stop := make(chan struct{})
 
+		c := make(chan os.Signal)
+		signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+		go func() {
+			select {
+			case <-c:
+				stop <- struct{}{}
+			case <-stop:
+			}
+			os.Exit(0)
+		}()
+
 		if !*noBuild {
 			go func() {
 				if err := buildTheWorld(); err != nil {
 					log.Fatalf("can't build: %s", err.Error())
+				}
+				for _, ch := range refreshListeners {
+					ch <- struct{}{}
 				}
 			}()
 
@@ -103,6 +122,9 @@ var serveCmd = &cobra.Command{
 										log.Fatalf("can't build the world: %s", err)
 									}
 								}
+							}
+							for _, ch := range refreshListeners {
+								ch <- struct{}{}
 							}
 						}
 					case err, ok := <-watcher.Errors:
@@ -151,6 +173,18 @@ var serveCmd = &cobra.Command{
 					}
 				}
 			}
+
+			http.Handle("/ws", websocket.Handler(func(conn *websocket.Conn) {
+				// TODO: This works sometimes because multiple ws connecions are open
+				// (not timed out yet, or just multiple pages) and so these consumers
+				// fight to receive the message.
+				c := make(chan struct{})
+				refreshListeners = append(refreshListeners, c)
+				for {
+					<-c
+					conn.Write([]byte("refresh"))
+				}
+			}))
 		}
 
 		log.Printf("Serving %s on http://localhost:%d\n", dst, port)
