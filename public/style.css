@@ -3,35 +3,21 @@
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
     --bg-a: rgba(255, 255, 219, 1);
     --fg-a-a: rgba(76, 68, 66, 1);
-    --fg-a-b: rgba(255, 122, 120, 1);
-    --fg-a-c: rgba(94, 188, 255, 1);
-    --fg-a-d: rgba(75, 135, 179, 1);
-    --fg-a-e: rgba(179, 68, 66, 1);
+    --fg-a-b: rgba(179, 68, 66, 1);
 
-    --bg-b: rgba(255, 122, 120, 1);
+    --bg-b: rgba(179, 68, 66, 1);
     --fg-b-a: rgba(255, 255, 219, 1);
-    --fg-a-a: rgba(76, 68, 66, 1);
-
-    --bg-c: rgba(75, 135, 179, 1);
-    --fg-c-a: rgba(255, 255, 219, 1);
-
-    --bg-d: rgba(179, 68, 66, 1);
-    --fg-d-a: rgba(255, 255, 219, 1);
-
-    --bg-e: rgba(76, 68, 66, 1);
-    --fg-e-a: rgba(255, 255, 219, 1);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --background-a: rgba(51, 51, 54, 1);
-    --background-b: rgba(60, 60, 66, 1);
+    --bg-a: rgba(76, 68, 66, 1);
+    --fg-a-a: rgba(255, 255, 219, 1);
+    --fg-a-b: rgba(255, 122, 120, 1);
 
-    --foreground-a: rgba(230, 230, 230, 1);
-    --foreground-b: rgba(255, 122, 120, 1);
-    --foreground-c: rgba(94, 188, 255, 1);
-    --foreground-d: rgba(75, 135, 179, 1);
+    --bg-b: rgba(179, 68, 66, 1);
+    --fg-b-a: rgba(255, 255, 219, 1);
   }
 }
 
@@ -80,11 +66,11 @@ h3,
 h4,
 h5,
 h6 {
-  background-color: var(--bg-d);
-  color: var(--fg-d-a);
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
   margin-top: 2em;
   padding: 0.1em 1rem 0 1rem;
-  display: inline;
+  display: inline-block;
 }
 
 h1 {
@@ -93,8 +79,8 @@ h1 {
 
 h1,
 h2 {
-  background-color: var(--bg-d);
-  color: var(--fg-d-a);
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
 }
 
 h1 {
@@ -117,25 +103,27 @@ body {
 
 a,
 a:visited {
-  color: var(--fg-a-e);
+  color: var(--fg-a-b);
   text-transform: lowercase;
 }
 
 a:hover {
-  background-color: var(--fg-a-e);
+  background-color: var(--fg-a-b);
   color: var(--bg-a);
   text-decoration: none;
   text-transform: none;
 }
 
+a:hover.img {
+  background: none;
+}
+a:hover.img > img {
+  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
+}
+
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
-}
-
-.photo-grid a {
-  /* Otherwise we get gaps for having spaces between </a> and <a ... */
-  font-size: 0;
 }
 
 .photo-grid img {
