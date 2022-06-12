@@ -195,7 +195,7 @@ updated: 2022-06-08
   another sign-in flow and database table. As a user, this means I get a native,
   one-tap, FaceID sign-in.
 </p>
-{{template "video" "signin"}}
+<p style="text-align: center">{{template "video" "signin"}}</p>
 <p style="text-align: center"><i>Signing in with Apple.</i></p>
 <p>
   These examples continue throughout the ecosystem, and the more I see the more
@@ -435,61 +435,12 @@ updated: 2022-06-08
   can use multi-touch to drag-and-drop items between apps. Third-party apps only
   implement this functionality sometimes.
 </p>
-<center>
-  <video autoplay loop muted style="max-height: 30em; max-width: 100%">
-    <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-drag-photos-light.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-drag-photos-light.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-drag-photos-dark.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:dark)"
-          />
-          <source
-            src="/img/apple-drag-photos-dark.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:dark)"
-          /> -->
-    <source src="/img/apple-drag-photos-light.mov" type="video/quicktime" />
-    <source src="/img/apple-drag-photos-light.mp4" type="video/mp4" />
-  </video>
-  <video autoplay loop muted style="max-height: 30em; max-width: 100%">
-    <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-drag-text-light.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-drag-text-light.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-drag-text-dark.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:dark)"
-          />
-          <source
-            src="/img/apple-drag-text-dark.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:dark)"
-          /> -->
-    <source src="/img/apple-drag-text-light.mov" type="video/quicktime" />
-    <source src="/img/apple-drag-text-light.mp4" type="video/mp4" />
-  </video>
-  <p>
-    <i>Using multi-touch to drag and drop items between apps.</i>
-  </p>
-</center>
+<p style="text-align: center">
+  {{template "video" "drag-photos"}} {{template "video" "drag-text"}}
+</p>
+<p style="text-align: center">
+  <i>Using multi-touch to drag and drop items between apps.</i>
+</p>
 <p>
   FaceID is about on par with fingerprint unlock on Pixel. They each encounter
   their own situational troubles, but both are great overall and I'm no more or
@@ -852,33 +803,12 @@ p>
   with the sender’s event, where <code>invite.ics</code> seems to be a local
   copy.
 </p>
-<center>
-  <video
-    autoplay
-    loop
-    muted
-    type="video/mp4"
-    style="max-height: 57em; max-width: 100%"
+<p style="text-align: center">{{template "video" "mail"}}</p>
+<p style="text-align: center">
+  <i
+    >Opening a Google Calendar invitation from within in the Apple ecosystem.</i
   >
-    <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-mail-light.mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-mail-dark.mp4"
-            media="(prefers-color-scheme:dark)"
-          />
-          -->
-    <source src="/img/apple-mail-dark.mp4" />
-  </video>
-  <p>
-    <i
-      >Opening a Google Calendar invitation from within in the Apple
-      ecosystem.</i
-    >
-  </p>
-</center>
+</p>
 <p>
   Google Calendar is the stickiest part of the Google ecosystem due to the
   features they’ve built on top of vanilla calendaring and their ubiquity.
@@ -974,39 +904,13 @@ p>
 <p>
   When it works it's beautiful and useful, but when it doesn't it's jarring.
 </p>
-<center>
-  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-    <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-back-light.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-back-light.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-back-dark.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:dark)"
-          />
-          <source
-            src="/img/apple-back-dark.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:dark)"
-          /> -->
-    <source src="/img/apple-back-dark.mov" type="video/quicktime" />
-    <source src="/img/apple-back-dark.mp4" type="video/mp4" />
-  </video>
-  <p>
-    <i>
-      Navigating through history in Safari. The back-and-forth motions are me
-      poorly demonstrating that the page moves with my fingers, not on rails.
-    </i>
-  </p>
-</center>
+<p style="text-align: center">{{template "video" "back"}}</p>
+<p style="text-align: center">
+  <i>
+    Navigating through history in Safari. The back-and-forth motions are me
+    poorly demonstrating that the page moves with my fingers, not on rails.
+  </i>
+</p>
 
 <p>
   I tend to switch back to Chrome for Meet meetings, as I’ve experienced some
@@ -1269,36 +1173,10 @@ p>
   card experience that feels like it was made this century. The app is
   beautiful, snappy, and simple.
 </p>
-<center>
-  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-    <!-- video->source->media queries not supportd :( commented for now
-          <source
-            src="/img/apple-card-light.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-card-light.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:light)"
-          />
-          <source
-            src="/img/apple-card-dark.mov"
-            type="video/quicktime"
-            media="(prefers-color-scheme:dark)"
-          />
-          <source
-            src="/img/apple-card-dark.mp4"
-            type="video/mp4"
-            media="(prefers-color-scheme:dark)"
-          /> -->
-    <source src="/img/apple-card-dark.mov" type="video/quicktime" />
-    <source src="/img/apple-card-dark.mp4" type="video/mp4" />
-  </video>
-  <p>
-    <i>Diving into Apple Card transactions using the Wallet app.</i>
-  </p>
-</center>
+<p style="text-align: center">{{template "video" "card"}}</p>
+<p style="text-align: center">
+  <i>Diving into Apple Card transactions using the Wallet app.</i>
+</p>
 
 <h2>Conclusion</h2>
 
