@@ -1,20 +1,55 @@
+@media (prefers-color-scheme: light) {
+  :root {
+    /* All fg-x-y colors should look good on their equivalent bg-x color. */
+    --bg-a: rgba(255, 255, 219, 1);
+    --fg-a-a: rgba(76, 68, 66, 1);
+    --fg-a-b: rgba(179, 68, 66, 1);
+
+    --bg-b: rgba(179, 68, 66, 1);
+    --fg-b-a: rgba(255, 255, 219, 1);
+  }
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg-a: rgba(76, 68, 66, 1);
+    --fg-a-a: rgba(255, 255, 219, 1);
+    --fg-a-b: rgba(255, 122, 120, 1);
+
+    --bg-b: rgba(179, 68, 66, 1);
+    --fg-b-a: rgba(255, 255, 219, 1);
+  }
+}
+
 html {
   font-family: Oxygen, monospace;
   font-size: 14px;
+  line-height: 1.75em;
+  letter-spacing: -0.05em;
+  text-align: justify;
+
   font-smoothing: antialiased;
   -webkit-font-smoothing: antialiased;
+
   hyphens: auto;
   -webkit-hyphens: auto;
-  letter-spacing: -0.5px;
-  line-height: 1.75em;
-  margin: 0.5em;
-  text-align: justify;
+}
+
+body {
+  margin: 0;
 }
 
 .container {
   margin: auto;
   max-width: 75em;
-  filter: hue-rotate(-25deg);
+}
+
+header,
+footer,
+ol,
+p,
+ul {
+  margin: 1rem;
 }
 
 ul {
@@ -31,7 +66,26 @@ h3,
 h4,
 h5,
 h6 {
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
   margin-top: 2em;
+  padding: 0.1em 1rem 0 1rem;
+  display: inline-block;
+}
+
+h1 {
+  display: block;
+}
+
+h1,
+h2 {
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
 }
 
 footer {
@@ -42,35 +96,34 @@ img {
   transform: rotate(-0.5deg);
 }
 
-@media (prefers-color-scheme: light) {
-  body {
-    background: #f2f3f5;
-    color: #2e3137;
-  }
+body {
+  background: var(--bg-a);
+  color: var(--fg-a-a);
 }
-@media (prefers-color-scheme: dark) {
-  body {
-    background: #2e3137;
-    color: #f2f3f5;
-  }
 
-  a {
-    color: lightblue;
-  }
+a,
+a:visited {
+  color: var(--fg-a-b);
+  text-transform: lowercase;
+}
 
-  a:visited {
-    color: plum;
-  }
+a:hover {
+  background-color: var(--fg-a-b);
+  color: var(--bg-a);
+  text-decoration: none;
+  text-transform: none;
+}
+
+a:hover.img {
+  background: none;
+}
+a:hover.img > img {
+  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
 }
 
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
-}
-
-.photo-grid a {
-  /* Otherwise we get gaps for having spaces between </a> and <a ... */
-  font-size: 0;
 }
 
 .photo-grid img {
