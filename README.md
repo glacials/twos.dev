@@ -14,8 +14,10 @@ random things here.
 
 ```sh
 go install
-twos.dev serve
+gow run . serve
 ```
+
+`gow` will watch files for changes and restart the server as needed.
 
 ## Architecture
 

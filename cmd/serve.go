@@ -71,9 +71,11 @@ var serveCmd = &cobra.Command{
 		stop := make(chan struct{})
 
 		if !*noBuild {
-			if err := buildTheWorld(); err != nil {
-				log.Fatalf("can't build: %s", err.Error())
-			}
+			go func() {
+				if err := buildTheWorld(); err != nil {
+					log.Fatalf("can't build: %s", err.Error())
+				}
+			}()
 
 			go func() {
 				for {
