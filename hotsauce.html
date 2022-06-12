@@ -12,6 +12,11 @@
       }
       gtag("js", new Date());
       gtag("config", "UA-2876079-11");
+
+      const socket = new WebSocket("ws://localhost:8100/ws");
+      socket.addEventListener("message", function (event) {
+        location.reload();
+      });
     </script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
