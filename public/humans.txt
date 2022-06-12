@@ -1,5 +1,5 @@
 /* TEAM */
-	Me: Ben Carlsson
+	Me: Benjamin Carlsson
 	Contact: ben@twos.dev
 	Twitter: @glcls
 	Location: Seattle, WA
