@@ -92,8 +92,13 @@ footer {
   margin-top: 4em;
 }
 
-img {
+img,
+video {
   transform: rotate(-0.5deg);
+}
+
+video + video {
+  margin-left: 1em;
 }
 
 body {
