@@ -44,6 +44,12 @@ import (
 
 const htmlExtension = "html.tmpl"
 
+func stripHTMLExtension(filename string) string {
+	filename = strings.TrimSuffix(filename, ".html")
+	filename = strings.TrimSuffix(filename, ".html.tmpl")
+	return filename
+}
+
 type essayPageVars struct {
 	pageVars
 
@@ -116,13 +122,16 @@ func htmlBuilder(src, dst string) error {
 	matter, body, err := frontmatter.Parse(f)
 	if err != nil {
 		return fmt.Errorf(
-			"can't get frontmatter from Markdown file: %w",
+			"can't get frontmatter from HTML file: %w",
 			err,
 		)
 	}
 
 	if matter.Filename == "" {
-		matter.Filename = filepath.Base(src)
+		matter.Filename = fmt.Sprintf(
+			"%s.html",
+			stripHTMLExtension(filepath.Base(src)),
+		)
 	}
 
 	if err := buildHTMLStream(
@@ -236,15 +245,9 @@ func buildHTMLStream(
 	}
 
 	v := essayPageVars{
-		Body:  template.HTML(body),
-		Title: title,
-		Shortname: strings.TrimSuffix(
-			strings.TrimSuffix(
-				matter.Filename,
-				".tmpl",
-			),
-			fmt.Sprintf(".html"),
-		),
+		Body:      template.HTML(body),
+		Title:     title,
+		Shortname: stripHTMLExtension(matter.Filename),
 
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
@@ -418,13 +421,7 @@ func buildHTMLStream(
 
 	for _, partial := range partials {
 		p := t.New(
-			strings.TrimPrefix(
-				strings.TrimSuffix(
-					filepath.Base(partial),
-					fmt.Sprintf(".%s", htmlExtension),
-				),
-				"_",
-			),
+			strings.TrimPrefix(stripHTMLExtension(filepath.Base(partial)), "_"),
 		)
 
 		s, err := ioutil.ReadFile(partial)
