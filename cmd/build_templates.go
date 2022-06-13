@@ -348,19 +348,21 @@ func buildHTMLStream(
 
 			return template.HTML(buf.String()), nil
 		},
-		"img": func(image, caption, alt string) (template.HTML, error) {
+		"img": func(image, alt, caption string) (template.HTML, error) {
 			light, dark, err := img.LightDark(v.Shortname, image)
 			if err != nil {
 				return "", fmt.Errorf("can't process image: %w", err)
 			}
 
-			v := imgPartialVars{
-				imageVars: imageVars{
-					Alt:   alt,
-					Dark:  dark,
-					Light: light,
-				},
+			v := imgsPartialVars{
 				Caption: caption,
+				Images: []imageVars{
+					{
+						Alt:   alt,
+						Dark:  dark,
+						Light: light,
+					},
+				},
 			}
 
 			buf := bytes.NewBuffer([]byte{})
