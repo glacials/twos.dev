@@ -1,23 +1,23 @@
 @media (prefers-color-scheme: light) {
   :root {
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
-    --bg-a: rgba(255, 255, 219, 1);
+    --bg-a: rgba(255, 255, 230, 1);
     --fg-a-a: rgba(76, 68, 66, 1);
     --fg-a-b: rgba(179, 68, 66, 1);
 
     --bg-b: rgba(179, 68, 66, 1);
-    --fg-b-a: rgba(255, 255, 219, 1);
+    --fg-b-a: rgba(255, 255, 230, 1);
   }
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-a: rgba(76, 68, 66, 1);
-    --fg-a-a: rgba(255, 255, 219, 1);
+    --fg-a-a: rgba(255, 255, 230, 1);
     --fg-a-b: rgba(255, 122, 120, 1);
 
     --bg-b: rgba(179, 68, 66, 1);
-    --fg-b-a: rgba(255, 255, 219, 1);
+    --fg-b-a: rgba(255, 255, 230, 1);
   }
 }
 
