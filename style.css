@@ -60,6 +60,10 @@ li {
   margin: 0.5em 0;
 }
 
+figcaption {
+  font-style: italic;
+}
+
 h1,
 h2,
 h3,
@@ -92,8 +96,13 @@ footer {
   margin-top: 4em;
 }
 
-img {
+img,
+video {
   transform: rotate(-0.5deg);
+}
+
+video + video {
+  margin-left: 1em;
 }
 
 body {
