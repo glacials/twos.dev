@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-2876079-11");
+
+      // TODO: Move to static generation
+      if (document.location.hostname == "localhost") {
+        const socket = new WebSocket("ws://localhost:8100/ws");
+        socket.addEventListener("message", function (event) {
+          location.reload();
+        });
+      }
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="{{ .Title }}" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>{{ .Title }}</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        {{ if .Parent }}
+          &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+        {{ else }}
+          &larr; <a href="/">twos.dev</a>
+        {{ end }}
+        {{ if .CreatedAt }}
+          /
+          {{ .CreatedAt }}
+          {{ if .UpdatedAt }}(updated {{ .UpdatedAt }}){{ end }}
+        {{ end }}
+      </header>
+      <article>{{ template "body" . }}</article>
+      <footer>
+        {{ if .Parent }}
+          &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+        {{ else }}
+          &larr; <a href="/">twos.dev</a>
+        {{ end }}
+        /
+        {{ if .SourceURL }}
+          <a href="{{ .SourceURL }}">Source</a>
+        {{ else }}
+          <a href="https://github.com/glacials/twos.dev">Source</a>
+        {{ end }}
+      </footer>
+    </div>
+  </body>
+</html>

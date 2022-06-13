@@ -92,6 +92,16 @@ h1 {
   text-transform: uppercase;
 }
 
+hr {
+  border: none;
+}
+
+hr::before {
+  content: "* * *";
+  display: block;
+  text-align: center;
+}
+
 footer {
   margin-top: 4em;
 }

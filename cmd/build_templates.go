@@ -31,6 +31,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 
 	"github.com/glacials/twos.dev/cmd/frontmatter"
@@ -87,6 +88,11 @@ type imgsPartialVars struct {
 type pageVars struct {
 	// SourceURL is the GitHub URL to the source code for the page being rendered.
 	SourceURL string
+
+	// Parent, if nonempty, is a path to the page that "owns" this one. For
+	// example, tattoo.html owns tattoo_symbols.html. (index.html does not own any
+	// pages.)
+	Parent string
 }
 
 func htmlBuilder(src, dst string) error {
@@ -208,6 +214,20 @@ func buildHTMLStream(
 	body = bytes.ReplaceAll(body, []byte("“"), []byte("\""))
 	body = bytes.ReplaceAll(body, []byte("”"), []byte("\""))
 
+	var parent string
+	if strings.Contains(filepath.Base(src), "_") {
+		// An underscore means we're in a "sub-page", e.g. tattoo.html links to
+		// tattoo_symbols.html.
+		re, err := regexp.Compile("(.+)_(.+)\\.(.+)")
+		if err != nil {
+			return fmt.Errorf("can't compile base/sub-page regex: %w", err)
+		}
+		matches := re.FindStringSubmatch(filepath.Base(src))
+		if len(matches) > 0 {
+			parent = fmt.Sprintf("%s.html", matches[1])
+		}
+	}
+
 	title, err := titleFromHTML(bytes.NewBuffer(body))
 	if err != nil {
 		return fmt.Errorf("can't get title from HTML: %w", err)
@@ -222,6 +242,7 @@ func buildHTMLStream(
 		UpdatedAt: updatedAt,
 
 		pageVars: pageVars{
+			Parent: parent,
 			SourceURL: fmt.Sprintf(
 				"https://github.com/glacials/twos.dev/blob/main/%s",
 				src,
@@ -229,7 +250,7 @@ func buildHTMLStream(
 		},
 	}
 
-	t, err := template.ParseFiles("src/templates/essay.html")
+	t, err := template.ParseFiles("src/templates/essay.html.tmpl")
 	if err != nil {
 		return fmt.Errorf("can't parse essay template: %w", err)
 	}
