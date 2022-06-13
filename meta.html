@@ -13,10 +13,13 @@
       gtag("js", new Date());
       gtag("config", "UA-2876079-11");
 
-      const socket = new WebSocket("ws://localhost:8100/ws");
-      socket.addEventListener("message", function (event) {
-        location.reload();
-      });
+      
+      if (document.location.hostname == "localhost") {
+        const socket = new WebSocket("ws://localhost:8100/ws");
+        socket.addEventListener("message", function (event) {
+          location.reload();
+        });
+      }
     </script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
@@ -36,8 +39,14 @@
   <body>
     <div class="container">
       <header>
-        &larr; <a href="/">twos.dev</a>
-         / 2022 June  
+        
+          &larr; <a href="/">twos.dev</a>
+        
+        
+          /
+          2022 June
+          
+        
       </header>
       <article>
 <h1>How I Write</h1>
@@ -208,8 +217,12 @@
 
 </article>
       <footer>
-        &larr; <a href="index.html">twos.dev</a> / 
-        <a href="https://github.com/glacials/twos.dev/blob/main/src/warm/This%20Website.md">Source</a>
+        
+          &larr; <a href="/">twos.dev</a>
+        
+        /
+        
+          <a href="https://github.com/glacials/twos.dev/blob/main/src/warm/This%20Website.md">Source</a>
         
       </footer>
     </div>
