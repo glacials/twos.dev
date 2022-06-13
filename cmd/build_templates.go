@@ -239,7 +239,10 @@ func buildHTMLStream(
 		Body:  template.HTML(body),
 		Title: title,
 		Shortname: strings.TrimSuffix(
-			matter.Filename,
+			strings.TrimSuffix(
+				matter.Filename,
+				".tmpl",
+			),
 			fmt.Sprintf(".html"),
 		),
 
