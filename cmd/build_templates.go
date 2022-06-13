@@ -34,6 +34,7 @@ import (
 	"strings"
 
 	"github.com/glacials/twos.dev/cmd/frontmatter"
+	"github.com/glacials/twos.dev/cmd/img"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
 	"golang.org/x/net/html"
@@ -61,14 +62,26 @@ type videoPartialVars struct {
 	DarkMP4  string
 }
 
+type imageVars struct {
+	Alt   string
+	Light string
+	Dark  string
+}
+
 // imgPartialVars are the template variables given to src/templates/_img.html to
 // render an image inline. At least one of its {Light,Dark} fields must be set
 // to an image path.
 type imgPartialVars struct {
-	Alt string
+	imageVars
+	Caption string
+}
 
-	Light string
-	Dark  string
+// imgsPartialVars are the template variables given to src/templates/_imgs.html
+// to render multiple images inline. At least one of its {Light,Dark} fields
+// must be set to an image path.
+type imgsPartialVars struct {
+	Images  []imageVars
+	Caption string
 }
 
 type pageVars struct {
@@ -296,54 +309,70 @@ func buildHTMLStream(
 
 			return v, nil
 		},
-		"imgs": func(img string) (imgPartialVars, error) {
-			if !strings.Contains(img, ".") {
-				return imgPartialVars{}, fmt.Errorf(
-					"fake image path %s has no extension",
-					img,
+		"imgs": func(imageA, altA, imageB, altB, caption string) (template.HTML, error) {
+			lightA, darkA, err := img.LightDark(v.Shortname, imageA)
+			if err != nil {
+				return "", fmt.Errorf("can't process image: %w", err)
+			}
+
+			lightB, darkB, err := img.LightDark(v.Shortname, imageB)
+			if err != nil {
+				return "", fmt.Errorf("can't process image: %w", err)
+			}
+
+			v := imgsPartialVars{
+				Caption: caption,
+				Images: []imageVars{
+					{
+						Alt:   altA,
+						Dark:  darkA,
+						Light: lightA,
+					},
+					{
+						Alt:   altB,
+						Dark:  darkB,
+						Light: lightB,
+					},
+				},
+			}
+
+			buf := bytes.NewBuffer([]byte{})
+			if err := t.Lookup("imgs").Execute(buf, v); err != nil {
+				return "", fmt.Errorf(
+					"can't execute imgs template for `%s`/`%s`: %w",
+					imageA,
+					imageB,
+					err,
 				)
 			}
 
+			return template.HTML(buf.String()), nil
+		},
+		"img": func(image, caption, alt string) (template.HTML, error) {
+			light, dark, err := img.LightDark(v.Shortname, image)
+			if err != nil {
+				return "", fmt.Errorf("can't process image: %w", err)
+			}
+
 			v := imgPartialVars{
-				Dark: fmt.Sprintf(
-					"img/%s-%s-dark.%s",
-					v.Shortname,
-					strings.TrimSuffix(img, filepath.Ext(img)),
-					filepath.Ext(img),
-				),
-				Light: fmt.Sprintf(
-					"img/%s-%s-light.%s",
-					v.Shortname,
-					strings.TrimSuffix(img, filepath.Ext(img)),
-					filepath.Ext(img),
-				),
+				imageVars: imageVars{
+					Alt:   alt,
+					Dark:  dark,
+					Light: light,
+				},
+				Caption: caption,
 			}
 
-			if _, err := os.Stat(filepath.Join("dist", v.Dark)); err != nil {
-				if errors.Is(err, os.ErrNotExist) {
-					v.Dark = ""
-				} else {
-					return imgPartialVars{}, fmt.Errorf(
-						"couldn't stat img `%s`: %w",
-						v.Dark,
-						err,
-					)
-				}
+			buf := bytes.NewBuffer([]byte{})
+			if err := t.Lookup("imgs").Execute(buf, v); err != nil {
+				return "", fmt.Errorf(
+					"can't execute img template for `%s`: %w",
+					image,
+					err,
+				)
 			}
 
-			if _, err := os.Stat(filepath.Join("dist", v.Light)); err != nil {
-				if errors.Is(err, os.ErrNotExist) {
-					v.Light = ""
-				} else {
-					return imgPartialVars{}, fmt.Errorf(
-						"couldn't stat img `%s`: %w",
-						v.Light,
-						err,
-					)
-				}
-			}
-
-			return v, nil
+			return template.HTML(buf.String()), nil
 		},
 	})
 
