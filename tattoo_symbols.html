@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-2876079-11");
+
+      
+      if (document.location.hostname == "localhost") {
+        const socket = new WebSocket("ws://localhost:8100/ws");
+        socket.addEventListener("message", function (event) {
+          location.reload();
+        });
+      }
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="twos.dev" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>twos.dev</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        
+          &larr; <a href="tattoo.html.tmpl">tattoo.html.tmpl</a>
+        
+        
+          /
+          2021 December
+          
+        
+      </header>
+      <article>
+
+<figure>
+  <img src="img/tattoo.webp" height="512" width="512" /><br />
+  <figcaption>
+    (artist: <a href="https://www.instagram.com/trejen_jamal/">Trejen</a>)
+  </figcaption>
+</figure>
+
+<p>There are three components. Top to bottom:</p>
+
+<ol>
+  <li>
+    <a href="https://en.wikipedia.org/wiki/Helm_of_Awe">Aegishjalmer</a>, a
+    protection sigil
+  </li>
+  <li>
+    <a href="https://en.wikipedia.org/wiki/Yggdrasil">Yggdrasil</a>, the worlds
+    tree
+  </li>
+  <li>
+    <a href="https://en.wikipedia.org/wiki/Jörmungandr">Jörmungandr</a>, the
+    world serpent
+  </li>
+</ol>
+<p>Givens, by Viking mythology:</p>
+<ul>
+  <li>Yggrassil holds the worlds together</li>
+  <li>
+    Jörmungandr is biting its own tail; if it releases, it is an indicator of a
+    coming
+    <a href="https://en.wikipedia.org/wiki/Ragnarök">Ragnarök</a>
+    (drowning of the world)
+  </li>
+</ul>
+<p>Tattoo key points:</p>
+<ul>
+  <li>Yggrassil is on fire</li>
+  <li>A jailed Jörmungandr is at its roots</li>
+</ul>
+<p>The rest is left to the reader.</p>
+
+</article>
+      <footer>
+        
+          &larr; <a href="tattoo.html.tmpl">tattoo.html.tmpl</a>
+        
+        /
+        
+          <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/tattoo_symbols.html.tmpl">Source</a>
+        
+      </footer>
+    </div>
+  </body>
+</html>
