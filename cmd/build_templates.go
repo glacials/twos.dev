@@ -42,6 +42,8 @@ import (
 	"golang.org/x/net/html/atom"
 )
 
+const htmlExtension = "html.tmpl"
+
 type essayPageVars struct {
 	pageVars
 
@@ -54,7 +56,7 @@ type essayPageVars struct {
 }
 
 // videoPartialVars are the template variables given to
-// src/templates/_video.html to render a video inline. At least one of its
+// src/templates/_video.html.tmpl to render a video inline. At least one of its
 // {Light,Dark}{MOV,MP4} fields must be set to a video path.
 type videoPartialVars struct {
 	LightMOV string
@@ -69,17 +71,17 @@ type imageVars struct {
 	Dark  string
 }
 
-// imgPartialVars are the template variables given to src/templates/_img.html to
-// render an image inline. At least one of its {Light,Dark} fields must be set
-// to an image path.
+// imgPartialVars are the template variables given to
+// src/templates/_img.html.tmpl to render an image inline. At least one of its
+// {Light,Dark} fields must be set to an image path.
 type imgPartialVars struct {
 	imageVars
 	Caption string
 }
 
-// imgsPartialVars are the template variables given to src/templates/_imgs.html
-// to render multiple images inline. At least one of its {Light,Dark} fields
-// must be set to an image path.
+// imgsPartialVars are the template variables given to
+// src/templates/_imgs.html.tmpl to render multiple images inline. At least one
+// of its {Light,Dark} fields must be set to an image path.
 type imgsPartialVars struct {
 	Images  []imageVars
 	Caption string
@@ -224,7 +226,7 @@ func buildHTMLStream(
 		}
 		matches := re.FindStringSubmatch(filepath.Base(src))
 		if len(matches) > 0 {
-			parent = fmt.Sprintf("%s.html", matches[1])
+			parent = fmt.Sprintf("%s.%s", matches[1], htmlExtension)
 		}
 	}
 
@@ -234,9 +236,12 @@ func buildHTMLStream(
 	}
 
 	v := essayPageVars{
-		Body:      template.HTML(body),
-		Title:     title,
-		Shortname: strings.TrimSuffix(matter.Filename, ".html"),
+		Body:  template.HTML(body),
+		Title: title,
+		Shortname: strings.TrimSuffix(
+			matter.Filename,
+			fmt.Sprintf(".html"),
+		),
 
 		CreatedAt: createdAt,
 		UpdatedAt: updatedAt,
@@ -250,7 +255,9 @@ func buildHTMLStream(
 		},
 	}
 
-	t, err := template.ParseFiles("src/templates/essay.html.tmpl")
+	t, err := template.ParseFiles(
+		fmt.Sprintf("src/templates/essay.%s", htmlExtension),
+	)
 	if err != nil {
 		return fmt.Errorf("can't parse essay template: %w", err)
 	}
@@ -399,7 +406,9 @@ func buildHTMLStream(
 		},
 	})
 
-	partials, err := filepath.Glob("src/templates/_*.html")
+	partials, err := filepath.Glob(
+		fmt.Sprintf("src/templates/_*.%s", htmlExtension),
+	)
 	if err != nil {
 		return fmt.Errorf("can't glob for partial templates: %w", err)
 	}
@@ -407,7 +416,10 @@ func buildHTMLStream(
 	for _, partial := range partials {
 		p := t.New(
 			strings.TrimPrefix(
-				strings.TrimSuffix(filepath.Base(partial), ".html"),
+				strings.TrimSuffix(
+					filepath.Base(partial),
+					fmt.Sprintf(".%s", htmlExtension),
+				),
 				"_",
 			),
 		)
