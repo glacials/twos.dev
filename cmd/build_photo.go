@@ -39,6 +39,11 @@ import (
 	"golang.org/x/image/draw"
 )
 
+type pageVars struct {
+	SourceURL string
+	Parent    string
+}
+
 type galleryPageVars struct {
 	pageVars
 

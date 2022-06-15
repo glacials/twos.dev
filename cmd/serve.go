@@ -42,10 +42,10 @@ var (
 
 	builders = map[string]func(src, dst string) error{
 		"src/img/*/*/*.[jJ][pP][gG]": photoBuilder,
-		"src/cold/*.html.tmpl":       htmlBuilder,
-		"src/cold/*.html":            htmlBuilder,
-		"src/cold/*.md":              markdownBuilder,
-		"src/warm/*.md":              markdownBuilder,
+		"src/cold/*.html.tmpl":       buildDocument,
+		"src/cold/*.html":            buildDocument,
+		"src/cold/*.md":              buildDocument,
+		"src/warm/*.md":              buildDocument,
 		"public/*":                   staticFileBuilder("public"),
 		"public/*/*":                 staticFileBuilder("public"),
 		"public/*/*/*":               staticFileBuilder("public"),

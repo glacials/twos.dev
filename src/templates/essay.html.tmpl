@@ -44,10 +44,12 @@
         {{ else }}
           &larr; <a href="/">twos.dev</a>
         {{ end }}
-        {{ if .CreatedAt }}
+        {{ if not .CreatedAt.IsZero }}
           /
-          {{ .CreatedAt }}
-          {{ if .UpdatedAt }}(updated {{ .UpdatedAt }}){{ end }}
+          {{ .CreatedAt.Format "2006 January" }}
+          {{ if not .UpdatedAt.IsZero }}
+            (updated {{ .UpdatedAt.Format "2006 January" }})
+          {{ end }}
         {{ end }}
       </header>
       <article>{{ template "body" . }}</article>
