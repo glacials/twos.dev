@@ -31,6 +31,10 @@ type Caption string
 // have any extension in exts. If err is non-nil, at least one path is
 // guaranteed nonempty.
 //
+// If neither a light nor a dark version is found but a neutral (unspecified)
+// version is, the neutral version is returned as an unspecified one of the
+// light or dark graphics; the other is empty.
+//
 // Graphics MUST be built before this is called, because it looks in dist/ for
 // light and dark copies. TODO: Fix this, perhaps by processing graphics
 // just-in-time if a page that references one is built.
@@ -50,7 +54,7 @@ func LightDark(
 		if errors.Is(err, os.ErrNotExist) {
 			light = ""
 		} else {
-			return "", "", fmt.Errorf("can't discover graphic: %w", err)
+			return "", "", fmt.Errorf("can't discover light graphic: %w", err)
 		}
 	}
 
@@ -59,19 +63,27 @@ func LightDark(
 		if errors.Is(err, os.ErrNotExist) {
 			dark = ""
 		} else {
-			return "", "", fmt.Errorf("can't discover graphic: %w", err)
+			return "", "", fmt.Errorf("can't discover dark graphic: %w", err)
 		}
 	}
 
-	if light == "" && dark == "" {
-		return "", "", fmt.Errorf(
-			"found neither light nor dark version of %s-%s",
-			pageShortname,
-			graphicShortname,
-		)
+	if light != "" || dark != "" {
+		return light, dark, nil
 	}
 
-	return light, dark, nil
+	neutral, err := discover(pageShortname, graphicShortname, "", exts)
+	if err != nil {
+		if errors.Is(err, os.ErrNotExist) {
+			return "", "", fmt.Errorf(
+				"found neither light, dark, nor neutral version of %s-%s",
+				pageShortname,
+				graphicShortname,
+			)
+		}
+		return "", "", fmt.Errorf("can't discover neutral graphic: %w", err)
+	}
+
+	return neutral, "", nil
 }
 
 var (
@@ -86,15 +98,22 @@ var (
 	}
 )
 
+// Discover tries to find a graphic on the filesystem with the given arguments
+// embedded in its filename, under any of the given extensions.
 func discover(
 	page string,
 	graphic Shortname,
 	suffix string,
 	exts map[string]struct{},
 ) (SRC, error) {
+	// Allow suffix to be blank without needing a trailing hyphen
+	if suffix != "" {
+		suffix = fmt.Sprintf("-%s", suffix)
+	}
+
 	for ext := range exts {
 		path := filepath.Join(
-			"img", fmt.Sprintf("%s-%s-%s.%s", page, graphic, suffix, ext),
+			"img", fmt.Sprintf("%s-%s%s.%s", page, graphic, suffix, ext),
 		)
 		if _, err := os.Stat(filepath.Join("dist", path)); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
@@ -110,7 +129,7 @@ func discover(
 	for ext := range exts {
 		path := filepath.Join(
 			"img",
-			fmt.Sprintf("%s-%s-%s.%s", page, graphic, suffix, strings.ToUpper(ext)),
+			fmt.Sprintf("%s-%s%s.%s", page, graphic, suffix, strings.ToUpper(ext)),
 		)
 		if _, err := os.Stat(filepath.Join("dist", path)); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
