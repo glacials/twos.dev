@@ -44,10 +44,14 @@ body {
   max-width: 75em;
 }
 
+/* Anything that could possibly be an immediate child of .container. Don't want
+ * a margin on .container because I want the headings' backgrounds to extend to
+ * the left page edge. */
 header,
 footer,
 ol,
 p,
+pre,
 ul {
   margin: 1rem;
 }
