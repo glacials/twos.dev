@@ -6,8 +6,15 @@ import (
 	"github.com/glacials/twos.dev/cmd/document"
 )
 
+var smartquotes = map[string]string{
+	"“":       "\"",
+	"”":       "\"",
+	"&ldquo;": "\"",
+	"&rdquo;": "\"",
+}
+
 // ReplaceSmartQuotes returns a reader identical to the given reader but with
-// smart quotes replaced with dumb quotes.
+// smart quotes et al. replaced with dumb quotes.
 //
 // ReplaceSmartQuotes implements document.Transformation.
 func ReplaceSmartQuotes(d document.Document) (document.Document, error) {
@@ -17,8 +24,9 @@ func ReplaceSmartQuotes(d document.Document) (document.Document, error) {
 	}
 
 	byts := buf.Bytes()
-	byts = bytes.ReplaceAll(byts, []byte("“"), []byte("\""))
-	byts = bytes.ReplaceAll(byts, []byte("”"), []byte("\""))
+	for old, nw := range smartquotes {
+		byts = bytes.ReplaceAll(byts, []byte(old), []byte(nw))
+	}
 	d.Body = bytes.NewBuffer(byts)
 
 	return d, nil

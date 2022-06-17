@@ -19,12 +19,17 @@ var transformations = []document.Transformation{
 	transform.DiscoverShortname,
 	transform.StripFrontmatter,
 
+	// English-based transformations that must happen before Markdown
+	transform.ReplaceEmDashes,
+
 	// Markdown-based transformations
 	transform.MarkdownToHTML,
 
+	// English-based transformations that must happen after Markdown
+	transform.ReplaceSmartQuotes,
+
 	// HTML-based transformations
 	transform.DiscoverTitle,
-	transform.ReplaceSmartQuotes,
 
 	// Template-based transformations
 	transform.PrepareTemplateVars,

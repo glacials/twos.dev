@@ -19,7 +19,6 @@ jobs:
           rm -rf dist
           go build
           ./twos.dev build
-          find dist -type f -name "*.html" -print0 | xargs -0 sed -i 's/&mdash;/ -- /g'
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3

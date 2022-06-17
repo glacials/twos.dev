@@ -53,7 +53,13 @@ ol,
 p,
 pre,
 ul {
+  margin-left: 1rem;
+}
+
+code {
+  display: block;
   margin: 1rem;
+  padding: 1rem;
 }
 
 ul {

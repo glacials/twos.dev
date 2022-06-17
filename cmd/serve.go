@@ -90,7 +90,7 @@ var serveCmd = &cobra.Command{
 									log.Fatalf("can't match `%s`: %s", pattern, err)
 								} else if ok {
 									if err := builder(event.Name, dst); err != nil {
-										log.Fatalf("can't build `%s`: %s", pattern, err)
+										log.Printf("can't build `%s`: %s", pattern, err)
 									}
 								}
 							}
