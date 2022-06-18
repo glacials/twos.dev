@@ -11,10 +11,13 @@ var smartquotes = map[string]string{
 	"”":       "\"",
 	"&ldquo;": "\"",
 	"&rdquo;": "\"",
+	"&quot;":  "\"",
 }
 
 // ReplaceSmartQuotes returns a reader identical to the given reader but with
-// smart quotes et al. replaced with dumb quotes.
+// smart quotes et al. replaced with dumb quotes. This must happen after
+// Markdown parsing, as go-markdown replaces dumb quotes with smart quotes even
+// when used to indicate template string literals.
 //
 // ReplaceSmartQuotes implements document.Transformation.
 func ReplaceSmartQuotes(d document.Document) (document.Document, error) {

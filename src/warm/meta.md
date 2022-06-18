@@ -40,7 +40,7 @@ Technically at this point the page is now published, just not linked to from any
 
 There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.
 
-Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). I prefer to write code in `$EDITOR`, not iA Writer. 
+Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). I prefer to write code in `$EDITOR`, not iA Writer.
 
 One great way to accomplish both of these needs is to simply remove the file from the iA Writer sync directory:
 

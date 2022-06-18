@@ -17,6 +17,8 @@ require (
 
 require (
 	github.com/BurntSushi/toml v0.3.1 // indirect
+	github.com/alecthomas/chroma/v2 v2.2.0 // indirect
+	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/mitranim/gg v0.0.13 // indirect
 	github.com/rjeczalik/notify v0.9.2 // indirect

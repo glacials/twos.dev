@@ -16,7 +16,9 @@ var emdashes = map[string]string{
 
 // ReplaceEmDashes returns a reader identical to the given reader but with em
 // dashes and their common substitutions replaced with monospace-friendly em
-// dashes.
+// dashes. This must happen before Markdown parsing because go-markdown uses
+// LaTeX-style en and em dash syntax: "--" is an en dash while "---" is an em
+// dash.
 //
 // ReplaceEmDashes implements document.Transformation.
 func ReplaceEmDashes(d document.Document) (document.Document, error) {
