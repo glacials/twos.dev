@@ -1,34 +1,34 @@
 ---
 filename: meta.html
-date: 2022-06-17
+date: 2022-06-18
 ---
 
-# How I Write
+# Inside twos.dev
 
-twos.dev has a unique advantage over anything I’ve ever worked on: it has just one developer, me, so I can design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.
+There's a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.
 
-With this in mind, I decided to ruthlessly optimize it around two goals:
+With this in mind, I decided to ruthlessly optimize for two goals:
 
-1. Make it easy to publish
-2. URLs must never change
+1. It must be easy to publish writing
+2. As long as I'm alive, URLs must not change
 
-To fulfill these goals I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.
+In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.
 
 ## Warm Content
 
-I previously wrote in my notes app while drafting, then manually migrated the draft to HTML when the piece started getting serious. From then until publish I would work directly in the HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
+I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
 
-- Writing HTML has a higher context switch cost (sitting at my computer in my editor vs. scribbling quick drafts from my phone).
+- Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in `$EDITOR`)
 - Writing was slowed down by cruft like `<p>` and `<li>`
-- The reading experience may flow differently on a web page than in my notes app, leading to sometimes large rewrites right after transferring
+- The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring
 
-To solve these issues and work towards my first goal, I needed to close the gap in tooling between the draft phase and the publish phase.
+To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.
 
-I found [iA Writer](https://ia.net/writer) to replace my note-taking app for draft writing. It gets my thoughts out quickly, has helpful tools for e.g. reducing filler words, and looks nice to boot. Importantly, it stores writing as Markdown files.
+I first focused on changing my drafting app to something with more robust exporting tools. I found [iA Writer](https://ia.net/writer), which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.
 
 ### Shortcuts
 
-iOS and macOS ship with a first-party app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), which is a no-code, event-driven automation framework. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the `src/warm` directory in the twos.dev Git repository by invoking [Working Copy](https://workingcopyapp.com).
+iOS and macOS ship with [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the `src/warm` directory in the twos.dev Git repository by invoking [Working Copy](https://workingcopyapp.com).
 
 ### Preprocessing
 
