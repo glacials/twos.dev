@@ -1,68 +1,11 @@
 ---
 filename: meta.html
-date: 2022-06-04
+date: 2022-06-17
 ---
 
 # How I Write
 
-```
-             ┌─────┐
-      ┌──────│ Me  │─────┐
-      ▣      └─────┘     ▣
-   ┌─────┐         ┌───────────┐
-   │ Vim │  ┌──────│ iA Writer │
-   ├─────┤  │      └───────────┘
-┌──│ Git │  │            │
-│  └─────┘  │            □
-│           ■      ┌───────────┐
-│      ┌────────┐  │ Shortcuts │
-│   ┌──│ iCloud │  │  for iOS  │──┐
-│   │  └────────┘  └───────────┘  │
-│   │                             │
-│   │           Shortcuts         │
-│   │  ┌───────────────────────┐  │
-│   ├─■│ Backfill frontmatter  │□─┤
-│   │  ├───────────────────────┤  │
-│   └─■│ Git add, commit, push │□─┘
-│      └───────────────────────┘
-│                  │
-│                  ▣
-│          ┌──────────────┐
-│          │ Working Copy │
-│          │   for iOS    │
-│          │              │
-│          └──────────────┘
-│                  │
-│                  ▣
-│  ┌──────────────────────────────┐
-└─▣│ github.com/glacials/twos.dev │──┐
-   └──────────────────────────────┘  │
-                                     │
-            GitHub Actions           │
-     ┌──────────────────────────┐    │
-     │ Render Markdown to HTML  │▣───┤
-     ├──────────────────────────┤    │
-     │ Copy in high touch pages │▣───┤
-     ├──────────────────────────┤    │
-     │  Deploy to GitHub Pages  │▣───┘
-     └──────────────────────────┘
-                   │
-                   ■
-            ┌────────────┐
-            │  twos.dev  │
-            └────────────┘
-
-   ┌──────────────────────────────────┐
-   │ Key                              │
-   │                                  │
-   │ A ───■ B   Data flows from A → B │
-   │ A ───□ B   A invokes B           │
-   │                                  │
-   └──────────────────────────────────┘
-   ```
-
-
-twos.dev has a unique advantage over anything I’ve ever worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.
+twos.dev has a unique advantage over anything I’ve ever worked on: it has just one developer, me, so I can design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.
 
 With this in mind, I decided to ruthlessly optimize it around two goals:
 
@@ -73,74 +16,52 @@ To fulfill these goals I divide my content into two types, warm and cold. Warm c
 
 ## Warm Content
 
-I previously wrote in my notes app while drafting, then manually migrated the draft into an HTML file when the piece started getting serious. From then until publish time I would work directly in HTML. This method had three problems that worked against my first goal:
+I previously wrote in my notes app while drafting, then manually migrated the draft to HTML when the piece started getting serious. From then until publish I would work directly in the HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
 
-- Context switching to writing HTML is high cost (e.g. hard to do from my phone)
-- Writing was slowed down by paper cuts like typing `<p>`, `<ul>`, etc.
-- A paragraph may flow differently on a web page than in my notes, leading to refactors at the time of transfer
+- Writing HTML has a higher context switch cost (sitting at my computer in my editor vs. scribbling quick drafts from my phone).
+- Writing was slowed down by cruft like `<p>` and `<li>`
+- The reading experience may flow differently on a web page than in my notes app, leading to sometimes large rewrites right after transferring
 
-To solve these issues and work towards my first goal, I needed to close the gap between the draft phase and publishing.
+To solve these issues and work towards my first goal, I needed to close the gap in tooling between the draft phase and the publish phase.
 
 I found [iA Writer](https://ia.net/writer) to replace my note-taking app for draft writing. It gets my thoughts out quickly, has helpful tools for e.g. reducing filler words, and looks nice to boot. Importantly, it stores writing as Markdown files.
 
 ### Shortcuts
 
-iOS and macOS devices ship with a first-party app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752). If you’re from Android like I am, Shortcuts is like Tasker if it were built into the operating system and had buy-in from third parties. They're like event-driven shell scripts for the masses, and they run on iOS natively.
+iOS and macOS ship with a first-party app called [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), which is a no-code, event-driven automation framework. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the `src/warm` directory in the twos.dev Git repository by invoking [Working Copy](https://workingcopyapp.com).
 
-Using Shortcuts, I set up an automation that triggers when I exit iA Writer. This automation runs a series of shortcuts that:
+### Preprocessing
 
-1. Adds default frontmatter to iA Writer documents in the `published/` directory without any
-2. 
+On push, GitHub Actions builds the Markdown file into HTML with all the [right preprocessing](https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go) required to make it look like twos.dev. I use a small subset of [`html/template`](https://pkg.go.dev/html/template) to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.
 
-behave as an API gateway into iA Writer. I can set up a shortcut to run after I switch away from a specific app. It can inspect a directory in iCloud Drive (let’s make a “Published” directory), and do… something with it.
-
-### Working Copy
-
-[Working Copy](https://apps.apple.com/us/app/working-copy-git-client/id896694807) is a Git client for iOS that exposes Shortcuts hooks. Using it, we can build a shortcut that does what we need:
-
-1. (Working Copy) Pull from `twos.dev` remote
-2. (Files) Get contents of folder `Published`
-3. Repeat with each item in `Contents of Folder`
-    1. (Working Copy) Write `Repeat Item` to `src` in `twos.dev`
-4. (Working Copy) Commit `twos.dev` with `Automatic commit by iA Writer sync job`
-5. (Working Copy) Push `twos.dev` to remote
-
-([see the shortcut](https://www.icloud.com/shortcuts/6580819cd24041a1b7e093cf6cbe5888))
-
-My iPhone runs this each time I switch away from iA Writer, so changes are immediately published. If I switch to another iPhone later, it will inherit the behavior without any action on my part.
-
-We now have glue between iCloud Drive and GitHub Actions.
-
-### Markdown → HTML
-
-This step is straightforward. Using Stripe’s Markdoc library (more on why later), a GitHub Actions workflow renders the Markdown documents into HTML at build time.
+Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.
 
 ## Cold Content
 
-We’ve got our Markdown pipeline set up, but not everything fits neatly into Markdown. For example, [Anonymously Autistic](autism.html) uses CSS gradients to render a spectrum. [The Pop-In](thepopin.html) uses media queries to show a different image in dark mode.
+There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.
 
-To handle these edge cases, we could run superset of Markdown, such as with templating or Markdoc, but that brings up its own issues:
+Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). I prefer to write code in `$EDITOR`, not iA Writer. 
 
-- I’ll inevitably rewrite this infrastructure some years later, and won’t want to rehandle every edge case I’ve ever handled
-- When it’s time to write code I want to use `$EDITOR`, not iA Writer
-- twos.dev has a low volume of content—I don’t want to write new templating code for small features that may only be used once
+One great way to accomplish both of these needs is to simply remove the file from the iA Writer sync directory:
 
-For these not-quite-Markdown situations, then, **the right option  is to hardcode**. Render the Markdown to HTML once, then edit the HTML by hand and commit it. Chances are good I’ll never touch it again.
+```sh
+git mv src/{warm,cold}/DOCUMENT.md
+```
 
-#### Implementation
+From here, I may also take one final step of permanently converting the document to HTML, if I find it will be easier to write code like that than embedding it in the Markdown.
 
-To grease the wheels of hardcoding, we’ll set up our GitHub Actions workflow to explicitly allow it:
+```sh
+twos.dev build
+git rm src/cold/DOCUMENT.md
+cp dist/DOCUMENT.html src/cold/DOCUMENT.html
+git add !$
+```
 
-1. Render `src/*.md` files → `dist/*.html`
-2. Copy `src/*.html` files → `dist/`, overwriting existing files
+This brings back the weight of editing prose in HTML, but by this point most of the writing is done.
 
 #### Results
 
-Allowing myself this escape hatch is freeing. It has three effects:
-
-- I’m more encouraged to write interactive or otherwise bespoke components, e.g. to prove a point about button animation UX
-- Twos.dev is uniformly structured by default, but I’m allowed  case-by-case to break that uniformity when I see fit (e.g. a [CV](cv.html) has a unique need for bicolumnar content)
-- TODO
+Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. my [CV](cv.html)'s bicolumnar layout)
 
 ## On URLs
 
@@ -148,8 +69,4 @@ I use my website as a test bed for interesting technology. As a side effect, con
 
 It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: [cool URLs don’t change](https://www.w3.org/Provider/Style/URI). I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply `cp -r` these files into the `public` directory.
 
-If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die—[and then some](death.html).
-
-### Extra Credit
-
-TODO: Frontmatter œ
+If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die [and then some](death.html).
