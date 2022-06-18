@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <script
+      async
+      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+    ></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag() {
+        dataLayer.push(arguments);
+      }
+      gtag("js", new Date());
+      gtag("config", "UA-2876079-11");
+
+      
+      if (document.location.hostname == "localhost") {
+        const socket = new WebSocket("ws://localhost:8100/ws");
+        socket.addEventListener("message", function (event) {
+          location.reload();
+        });
+      }
+    </script>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+    <meta name="description" content="Dashes over the Years" />
+    <link rel="icon" href="favicon.ico" />
+    <link
+      rel="alternate"
+      type="application/rss+xml"
+      title="twos.dev"
+      href="/feed.rss"
+    />
+    <title>Dashes over the Years</title>
+    <link rel="stylesheet" href="/style.css" />
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        
+          &larr; <a href="/">twos.dev</a>
+        
+        
+          /
+          2022 June
+          
+        
+      </header>
+      <article><h1>Dashes over the Years</h1>
+
+<p>There are three common dashes in English written language:</p>
+
+<ul>
+<li>Hyphen (-)</li>
+<li>En dash ( -- )</li>
+<li>Em dash ( -- )</li>
+</ul>
+
+<p>The en dash and em dash are so named after their widths, which are equal to the widths of <code>N</code> and <code>M</code> respectively. "Hyphen" comes from ὑφέν (huphén) meaning "together". [<sup>https://en.wiktionary.org/wiki/en_dash][</sup><a href="https://en.wiktionary.org/wiki/em_dash][^https://en.wiktionary.org/wiki/hyphen">https://en.wiktionary.org/wiki/em_dash][^https://en.wiktionary.org/wiki/hyphen</a>].</p>
+
+<h2>Usage</h2>
+
+<p>The hyphen is used to hyphenate words or otherwise join parts of a whole, like father-in-law.</p>
+
+<p>The en dash is used to create ranges, like 2020 -- 2030.</p>
+
+<p>The em dash is used like a parenthetical -- to separate one thought from another -- when the thought needs to stand out (more than a typical parenthetical).</p>
+
+<h3>A Note About the Em Dash</h3>
+
+<p>Em dashes tend to be a trap when a writer first learns to jive with them. They cause a piece of text to flow like speech, without such sudden endings as periods. For those whose writings spring from internal monologues, this seems to be a blessing, a way to avoid molding thoughts into a comparatively non-fluid format. This is true, but it can backfire if overused.</p>
+
+<p>For readers, long flowing thoughts connected by em dashes take mental effort to keep up with. The reader must keep the grammar and meaning of the current sentence in an internal buffer until the very end, which -- for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it -- can be hard to do. Additionally, the em dash is a large glyph and its impact to the sentence structure is even larger. Its use is obvious even through squinting eyes, so its overuse becomes a stain on the page even before reading it.</p>
+
+<h2>Hidden Complexities</h2>
+
+<p>Within each usage pattern above are small issues.</p>
+
+<h3>Spaces Overpower Hyphens</h3>
+
+<p>When one side of a hyphen is a compound word like "ice cream break", its spaces visually overpower the hyphen: <code>pre-ice cream break</code> looks like <code>[pre-ice] cream break</code>, not <code>pre-[ice cream break]</code>.</p>
+
+<p>One solution replaces the spaces with hyphens (<code>pre-ice-cream-break</code>), but this removes the ability to distinguish the original parts. Another removes the hyphens altogether (<code>pre ice cream break</code>), which has a similar problem but may be better for specific situations.</p>
+
+<p>Those using LaTeX can replace the spaces with <a href="https://en.wikipedia.org/wiki/Thin_space">thin spaces</a> (\LaTeX: <code>\thinspace</code>) to de-emphasize their separation:</p>
+
+<pre><code>pre-ice\thinspace{}cream\thinspace{}break
+</code></pre>
+
+<p>Personally, I&rsquo;ve found it best to restructure the sentence to avoid the problem:</p>
+
+<pre><code>before the ice cream break
+</code></pre>
+
+<p>It&rsquo;s crude, but for 90% of cases there&rsquo;s no loss of meaning.</p>
+
+<h3>Line Breaks Interfering with Dashes</h3>
+
+<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It&rsquo;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being used to join two parts of a non-hyphenated word. En and em dashes are a little harder to parse.</p>
+
+<pre><code class="language-plain">v left page edge             v right page edge
+|                            |
+I am looking at dates about 20
+---30 days out.
+</code></pre>
+
+<pre><code class="language-plain">|                            |
+I'm looking at dates about 20---
+30 days out.
+</code></pre>
+
+<pre><code class="language-plain">|                            |
+I am pleased they thought that -- however odd it may be.
+</code></pre>
+
+<pre><code class="language-plain">|                            |
+I'm pleased they thought that -- however odd it may be.
+</code></pre>
+
+<p>Generally it&rsquo;s recommended to either give them the same treatment as hyphens or to treat their left and right neighbors as one inseparable "word", as backwards as it may sound considering our treatment of hyphens.</p>
+
+<h3>Justified Text Messes with Proportions</h3>
+
+<p>Whatever dash one is using, when using justified text (where spaces are elongated to make both the left and right edges of a page straight vertical lines) elongated spaces can overpower dashes where non-elongated spaces would not have.</p>
+
+<p>For example, see this simulation of left-aligned text:</p>
+
+<pre><code class="language-plain">v left page edge             v right page edge
+|                            |
+I said they were -- wolf
+playdates don't last forever!
+</code></pre>
+
+<p>versus this simulation of justified text:</p>
+
+<pre><code class="language-plain">v left page edge             v right page edge
+|                            |
+I    said    they    were -- wolf
+playdates don't last forever!
+</code></pre>
+
+<p>wherein "were-wolf" reads hyphenated because the spaces are proportionally larger than the em dash, making it appear as a hyphen.</p>
+
+<p>One solution surrounds parenthetical em dashes with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
+
+<pre><code class="language-plain">v left page edge             v right page edge
+|                            |
+I   said   they  were -- wolf
+playdates don't last forever!
+</code></pre>
+
+<h3>Input Difficulties</h3>
+
+<p>Standard US keyboards support only the hyphen without more advanced knowledge, so many en and em dash users simply compose them from hyphens and spaces.</p>
+
+<h4>The Hyphen-Powered En Dash</h4>
+
+<p>The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen. \LaTeX requires two (<code>--</code>) for the en dash, however.</p>
+
+<h4>The Hyphen-Powered Em Dash</h4>
+
+<p>A common replacement for the em dash is a space on either end of two hyphens (<code>---</code>) or simply two hyphens (<code>--</code>). Because \LaTeX reserves two hyphens (<code>--</code>) for the en dash, it requires three (<code>---</code>) for the em.</p>
+
+<h3>Output Difficulties</h3>
+
+<p>At the time of writing, twos.dev renders in a monospace font. Monospace fonts have only a single glyph used for all hyphen types, so it becomes impossible to differentiate. Currently, I use a bespoke text preprocessor  [insert link once pushed] to replace em dashes with a multi-glyph hyphen-based em dash, but I&rsquo;m not satisfied with this solution. Because I use monospace for aesthetic only reasons, I&rsquo;m curious to find or build a monospace-with-exceptions font that allows for a small number of double-width glyphs.</p>
+
+<h2>Debate</h2>
+
+<p>Every usage rule above is in some level of turmoil [better word?] among writers, both within the rules and between them.</p>
+
+<h2>Esoteric Dashes</h2>
+
+<p>The <strong>swung dash</strong> (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary. [<sup>http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=000000000000]</sup></p>
+
+<blockquote>
+<p>boot (n)</p>
+
+<p>ex: Let me put on my other ⁓.</p>
+</blockquote>
+</article>
+      <footer>
+        
+          &larr; <a href="/">twos.dev</a>
+        
+        /
+        
+          <a href="https://github.com/glacials/twos.dev/blob/main/src/warm/dashes.md">Source</a>
+        
+      </footer>
+    </div>
+  </body>
+</html>
