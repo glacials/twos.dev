@@ -48,15 +48,15 @@
           
         
       </header>
-      <article><h1>Inside twos.dev</h1>
+      <article><html><head></head><body><h1>Inside twos.dev</h1>
 
-<p>There&rsquo;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
+<p>There&#39;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
 
 <p>With this in mind, I decided to ruthlessly optimize for two goals:</p>
 
 <ol>
 <li>It must be easy to publish writing</li>
-<li>As long as I&rsquo;m alive, URLs must not change</li>
+<li>As long as I&#39;m alive, URLs must not change</li>
 </ol>
 
 <p>In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.</p>
@@ -87,28 +87,28 @@
 
 <h2>Cold Content</h2>
 
-<p>There are 2-3 needs warm content doesn&rsquo;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&rsquo;d like to limit its exposure.</p>
+<p>There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.</p>
 
 <p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. I prefer to write code in <code>$EDITOR</code>, not iA Writer.</p>
 
 <p>One great way to accomplish both of these needs is to simply remove the file from the iA Writer sync directory:</p>
 
-<pre><code class="language-sh">git mv src/{warm,cold}/DOCUMENT.md
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
+</span></span></code></pre></body></html>
 
 <p>From here, I may also take one final step of permanently converting the document to HTML, if I find it will be easier to write code like that than embedding it in the Markdown.</p>
 
-<pre><code class="language-sh">twos.dev build
-git rm src/cold/DOCUMENT.md
-cp dist/DOCUMENT.html src/cold/DOCUMENT.html
-git add !$
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
+</span></span><span class="line"><span class="ln">2</span><span class="cl">git rm src/cold/DOCUMENT.md
+</span></span><span class="line"><span class="ln">3</span><span class="cl">cp dist/DOCUMENT.html src/cold/DOCUMENT.html
+</span></span><span class="line"><span class="ln">4</span><span class="cl">git add !$
+</span></span></code></pre></body></html>
 
 <p>This brings back the weight of editing prose in HTML, but by this point most of the writing is done.</p>
 
 <h4>Results</h4>
 
-<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. my <a href="cv.html">CV</a>&rsquo;s bicolumnar layout)</p>
+<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. my <a href="cv.html">CV</a>&#39;s bicolumnar layout)</p>
 
 <h2>On URLs</h2>
 
@@ -117,7 +117,7 @@ git add !$
 <p>It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply <code>cp -r</code> these files into the <code>public</code> directory.</p>
 
 <p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die <a href="death.html">and then some</a>.</p>
-</article>
+</body></html></article>
       <footer>
         
           &larr; <a href="/">twos.dev</a>

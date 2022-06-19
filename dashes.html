@@ -48,25 +48,29 @@
           
         
       </header>
-      <article><h1>Dashes over the Years</h1>
+      <article><html><head></head><body><h1>Dashes over the Years</h1>
 
 <p>There are three common dashes in English written language:</p>
 
 <ul>
-<li>Hyphen (-)</li>
-<li>En dash ( -- )</li>
-<li>Em dash ( -- )</li>
+<li>Hyphen : <span style="font-family: sans-serif">-</span></li>
+<li>En dash: <span style="font-family: sans-serif">–</span></li>
+<li>Em dash: <span style="font-family: sans-serif">—</span></li>
 </ul>
 
-<p>The en dash and em dash are so named after their widths, which are equal to the widths of <code>N</code> and <code>M</code> respectively. "Hyphen" comes from ὑφέν (huphén) meaning "together". [<sup>https://en.wiktionary.org/wiki/en_dash][</sup><a href="https://en.wiktionary.org/wiki/em_dash][^https://en.wiktionary.org/wiki/hyphen">https://en.wiktionary.org/wiki/em_dash][^https://en.wiktionary.org/wiki/hyphen</a>].</p>
+<p>A myth states the em dash is so named because its width is exactly one <code>M</code>, but this is not quite correct. An em dash is so named because its width is exactly <code>1em</code>.</p>
+
+<p>An <a href="https://en.wikipedia.org/wiki/Em_(typography)">em</a> is the current font point size, e.g. <code>16pt</code>. The point size determines the height of the character bounding box in pixels. Because the em dash&#39;s length is defined as <code>1em</code>, its bounding box will always be an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.<sup class="footnote-ref" id="fnref:emorigins"><a href="#fn:emorigins">1</a></sup></p>
+
+<p>One en is defined as half the width of one em.</p>
 
 <h2>Usage</h2>
 
 <p>The hyphen is used to hyphenate words or otherwise join parts of a whole, like father-in-law.</p>
 
-<p>The en dash is used to create ranges, like 2020 -- 2030.</p>
+<p>The en dash is used to create ranges, like 2020<span style="font-family: sans-serif">–</span>2030.</p>
 
-<p>The em dash is used like a parenthetical -- to separate one thought from another -- when the thought needs to stand out (more than a typical parenthetical).</p>
+<p>The em dash is used like a parenthetical<span style="font-family: sans-serif">—</span>to separate one thought from another<span style="font-family: sans-serif">—</span>when the thought needs to stand out (more than a typical parenthetical).</p>
 
 <h3>A Note About the Em Dash</h3>
 
@@ -86,40 +90,42 @@
 
 <p>Those using LaTeX can replace the spaces with <a href="https://en.wikipedia.org/wiki/Thin_space">thin spaces</a> (\LaTeX: <code>\thinspace</code>) to de-emphasize their separation:</p>
 
-<pre><code>pre-ice\thinspace{}cream\thinspace{}break
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">pre-ice\thinspace{}cream\thinspace{}break
+</span></span></code></pre></body></html>
 
-<p>Personally, I&rsquo;ve found it best to restructure the sentence to avoid the problem:</p>
+<p>Personally, I&#39;ve found it best to restructure the sentence to avoid the problem:</p>
 
-<pre><code>before the ice cream break
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">before the ice cream break
+</span></span></code></pre></body></html>
 
-<p>It&rsquo;s crude, but for 90% of cases there&rsquo;s no loss of meaning.</p>
+<p>It&#39;s crude, but for 90% of cases there&#39;s no loss of meaning.</p>
 
 <h3>Line Breaks Interfering with Dashes</h3>
 
-<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It&rsquo;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being used to join two parts of a non-hyphenated word. En and em dashes are a little harder to parse.</p>
+<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It&#39;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being used to join two parts of a non-hyphenated word. En and em dashes are a little harder to parse.</p>
 
-<pre><code class="language-plain">v left page edge             v right page edge
-|                            |
-I am looking at dates about 20
----30 days out.
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I am looking at dates about 20
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span style="font-family: sans-serif">–</span>30 days out.
+</span></span></code></pre></body></html>
 
-<pre><code class="language-plain">|                            |
-I'm looking at dates about 20---
-30 days out.
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I&#39;m looking at dates about 20<span style="font-family: sans-serif">–</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
+</span></span></code></pre></body></html>
 
-<pre><code class="language-plain">|                            |
-I am pleased they thought that -- however odd it may be.
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I am pleased they thought that
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span style="font-family: sans-serif">—</span>however odd it may be.
+</span></span></code></pre></body></html>
 
-<pre><code class="language-plain">|                            |
-I'm pleased they thought that -- however odd it may be.
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I&#39;m pleased they thought that<span style="font-family: sans-serif">—</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
+</span></span></code></pre></body></html>
 
-<p>Generally it&rsquo;s recommended to either give them the same treatment as hyphens or to treat their left and right neighbors as one inseparable "word", as backwards as it may sound considering our treatment of hyphens.</p>
+<p>Generally it&#39;s recommended to either give them the same treatment as hyphens or to treat their left and right neighbors as one inseparable "word", as backwards as it may sound considering our treatment of hyphens.</p>
 
 <h3>Justified Text Messes with Proportions</h3>
 
@@ -127,29 +133,29 @@ I'm pleased they thought that -- however odd it may be.
 
 <p>For example, see this simulation of left-aligned text:</p>
 
-<pre><code class="language-plain">v left page edge             v right page edge
-|                            |
-I said they were -- wolf
-playdates don't last forever!
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I said they were<span style="font-family: sans-serif">—</span>wolf
+</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don&#39;t last forever!
+</span></span></code></pre></body></html>
 
 <p>versus this simulation of justified text:</p>
 
-<pre><code class="language-plain">v left page edge             v right page edge
-|                            |
-I    said    they    were -- wolf
-playdates don't last forever!
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I    said    they    were<span style="font-family: sans-serif">—</span>wolf
+</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don&#39;t last forever!
+</span></span></code></pre></body></html>
 
 <p>wherein "were-wolf" reads hyphenated because the spaces are proportionally larger than the em dash, making it appear as a hyphen.</p>
 
 <p>One solution surrounds parenthetical em dashes with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
 
-<pre><code class="language-plain">v left page edge             v right page edge
-|                            |
-I   said   they  were -- wolf
-playdates don't last forever!
-</code></pre>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I   said   they  were  <span style="font-family: sans-serif">—</span>  wolf
+</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don&#39;t last forever!
+</span></span></code></pre></body></html>
 
 <h3>Input Difficulties</h3>
 
@@ -161,26 +167,38 @@ playdates don't last forever!
 
 <h4>The Hyphen-Powered Em Dash</h4>
 
-<p>A common replacement for the em dash is a space on either end of two hyphens (<code>---</code>) or simply two hyphens (<code>--</code>). Because \LaTeX reserves two hyphens (<code>--</code>) for the en dash, it requires three (<code>---</code>) for the em.</p>
+<p>A common replacement for the em dash is a space on either end of two hyphens (<code>--</code>) or simply two hyphens (<code>--</code>). Because \LaTeX reserves two hyphens (<code>--</code>) for the en dash, it requires three (<code>---</code>) for the em.</p>
 
 <h3>Output Difficulties</h3>
 
-<p>At the time of writing, twos.dev renders in a monospace font. Monospace fonts have only a single glyph used for all hyphen types, so it becomes impossible to differentiate. Currently, I use a bespoke text preprocessor  [insert link once pushed] to replace em dashes with a multi-glyph hyphen-based em dash, but I&rsquo;m not satisfied with this solution. Because I use monospace for aesthetic only reasons, I&rsquo;m curious to find or build a monospace-with-exceptions font that allows for a small number of double-width glyphs.</p>
+<p>At the time of writing, twos.dev renders in a monospace font for aesthetic reasons. But, the glyphs for these three dashes in monospace fonts are virtually---sometimes literally---indistinguishable. To make the differences visible on twos.dev, particularly this page, I use <a href="https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go">some bespoke preprocessing</a> to substitute them out for their variable-width cousins.</p>
+
+<p>I&#39;d love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
 
 <h2>Debate</h2>
 
 <p>Every usage rule above is in some level of turmoil [better word?] among writers, both within the rules and between them.</p>
 
-<h2>Esoteric Dashes</h2>
+<h2>Epilogue: Esoteric Dashes</h2>
 
-<p>The <strong>swung dash</strong> (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary. [<sup>http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=000000000000]</sup></p>
+<p>The <strong>swung dash</strong> (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary. [^<a href="http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&amp;sub=Search+WordNet&amp;o2=&amp;o0=1&amp;o8=1&amp;o1=1&amp;o7=&amp;o5=&amp;o9=&amp;o6=&amp;o3=&amp;o4=&amp;h=000000000000">http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&amp;sub=Search+WordNet&amp;o2=&amp;o0=1&amp;o8=1&amp;o1=1&amp;o7=&amp;o5=&amp;o9=&amp;o6=&amp;o3=&amp;o4=&amp;h=000000000000</a>]</p>
 
 <blockquote>
 <p>boot (n)</p>
 
 <p>ex: Let me put on my other ⁓.</p>
 </blockquote>
-</article>
+
+<div class="footnotes">
+
+<hr/>
+
+<ol>
+<li id="fn:emorigins">The origins of the em can be traced to the square shape of the <code>M</code> point in a printing press, so the rumor is not too far off. Still, the two are independent today.</li>
+</ol>
+
+</div>
+</body></html></article>
       <footer>
         
           &larr; <a href="/">twos.dev</a>
