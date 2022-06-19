@@ -40,33 +40,32 @@ Technically at this point the page is now published, just not linked to from any
 
 There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.
 
-Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). I prefer to write code in `$EDITOR`, not iA Writer.
+Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`. 
 
-One great way to accomplish both of these needs is to simply remove the file from the iA Writer sync directory:
+To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":
 
 ```sh
 git mv src/{warm,cold}/DOCUMENT.md
 ```
 
-From here, I may also take one final step of permanently converting the document to HTML, if I find it will be easier to write code like that than embedding it in the Markdown.
+From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.
 
 ```sh
 twos.dev build
-git rm src/cold/DOCUMENT.md
-cp dist/DOCUMENT.html src/cold/DOCUMENT.html
-git add !$
+mv dist/DOCUMENT.html src/cold/DOCUMENT.md
+git mv src/cold/DOCUMENT.{md,html}
 ```
 
-This brings back the weight of editing prose in HTML, but by this point most of the writing is done.
+This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.
 
 #### Results
 
-Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. my [CV](cv.html)'s bicolumnar layout)
+Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a [CV](cv.html)'s bicolumnar layout).
 
-## On URLs
+## On URLs Not Changing
 
-I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.
+I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.
 
-It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: [cool URLs don’t change](https://www.w3.org/Provider/Style/URI). I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply `cp -r` these files into the `public` directory.
+It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: [cool URLs don’t change](https://www.w3.org/Provider/Style/URI). I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply `cp -r dist` to my next crazy system's web root.
 
-If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die [and then some](death.html).
+If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.
