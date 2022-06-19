@@ -22,6 +22,10 @@ var emdashes = map[string]string{
 //
 // ReplaceEmDashes implements document.Transformation.
 func ReplaceEmDashes(d document.Document) (document.Document, error) {
+	if d.Shortname == "dashes" {
+		// dashes.html is a post specifically about dashes; let it do its thing
+		return d, nil
+	}
 	var buf bytes.Buffer
 	if _, err := buf.ReadFrom(d.Body); err != nil {
 		return document.Document{}, err

@@ -11,6 +11,7 @@ import (
 	"io"
 	"io/ioutil"
 	"os"
+	"path/filepath"
 	"reflect"
 	"runtime"
 	"strings"
@@ -81,6 +82,7 @@ type Document struct {
 	UpdatedAt time.Time
 
 	transformations []Transformation
+	debug           bool
 }
 
 // Transformation represents a change to be applied to a document, such as
@@ -91,9 +93,15 @@ type Transformation func(Document) (Document, error)
 
 // New returns a document with path as its source file, and with transformations
 // to be applied in renderers.
-func New(path string, transformations []Transformation) (Document, error) {
+func New(path string, trs []Transformation, debug bool) (Document, error) {
 	f, err := os.Open(path)
 	if err != nil {
+		return Document{}, err
+	}
+	defer f.Close()
+
+	var buf bytes.Buffer
+	if _, err := buf.ReadFrom(f); err != nil {
 		return Document{}, err
 	}
 
@@ -113,7 +121,7 @@ func New(path string, transformations []Transformation) (Document, error) {
 	}
 
 	return Document{
-		Body:     f,
+		Body:     &buf,
 		Template: *t,
 		SourceURL: fmt.Sprintf(
 			"https://github.com/glacials/twos.dev/blob/main/%s",
@@ -121,7 +129,8 @@ func New(path string, transformations []Transformation) (Document, error) {
 		),
 		Stat: stat,
 
-		transformations: transformations,
+		transformations: trs,
+		debug:           debug,
 	}, nil
 }
 
@@ -132,7 +141,7 @@ func New(path string, transformations []Transformation) (Document, error) {
 // The original document is not changed; the transformed copy is returned.
 func (d Document) Transform() (Document, error) {
 	var err error
-	for _, transformation := range d.transformations {
+	for tindex, transformation := range d.transformations {
 		// The transformation may read data from d.Body, which advances the cursor.
 		// If the transformation then replaces d.Body with some transformed data
 		// this is fine, but if not it will leave a partially-advanced reader behind
@@ -142,13 +151,23 @@ func (d Document) Transform() (Document, error) {
 		tee := io.TeeReader(d.Body, &readData)
 		d.Body = tee
 
+		tname := runtime.FuncForPC(reflect.ValueOf(transformation).Pointer()).
+			Name()
+		_, tshortname, ok := strings.Cut(tname, "transform.")
+		if !ok {
+			return Document{}, fmt.Errorf(
+				"unexpected transformation package name in %s",
+				tname,
+			)
+		}
+
 		// Warning: do not to replace this = with :=! Otherwise we're not inheriting
 		// the transformed d from the previous loop iteration.
 		d, err = transformation(d)
 		if err != nil {
 			return Document{}, fmt.Errorf(
 				"can't apply transformation %v: %w",
-				runtime.FuncForPC(reflect.ValueOf(transformation).Pointer()).Name(),
+				tshortname,
 				err,
 			)
 		}
@@ -157,6 +176,34 @@ func (d Document) Transform() (Document, error) {
 		if d.Body == tee {
 			d.Body = io.MultiReader(&readData, d.Body)
 		}
+
+		if d.debug {
+			var debugDupe bytes.Buffer
+			debugTee := io.TeeReader(d.Body, &debugDupe)
+
+			path := filepath.Join(
+				"dist",
+				"debug",
+				d.Stat.Name(),
+				fmt.Sprintf("%02d_%s.html", tindex, tshortname),
+			)
+			if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+				return Document{}, err
+			}
+
+			f, err := os.Create(path)
+			if err != nil {
+				return Document{}, err
+			}
+			defer f.Close()
+
+			if _, err := io.Copy(f, debugTee); err != nil {
+				return Document{}, err
+			}
+
+			d.Body = &debugDupe
+		}
+
 	}
 	return d, nil
 }

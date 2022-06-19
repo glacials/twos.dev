@@ -19,17 +19,18 @@ var transformations = []document.Transformation{
 	transform.DiscoverShortname,
 	transform.StripFrontmatter,
 
-	// English-based transformations that must happen before Markdown
-	transform.ReplaceEmDashes,
-
 	// Markdown-based transformations
 	transform.MarkdownToHTML,
 
-	// English-based transformations that must happen after Markdown
-	transform.ReplaceSmartQuotes,
-
 	// HTML-based transformations
 	transform.DiscoverTitle,
+	transform.HighlightSyntax, // Beware, re-renders entire doc
+
+	// English-based transformations
+	transform.ReplaceSmartQuotes, // Must come after all HTML re-renders
+
+	// Document-specific peculiarities
+	transform.LengthenDashes,
 
 	// Template-based transformations
 	transform.PrepareTemplateVars,
@@ -41,7 +42,7 @@ var transformations = []document.Transformation{
 }
 
 func buildDocument(src, dst string) error {
-	d, err := document.New(src, transformations)
+	d, err := document.New(src, transformations, *debug)
 	if err != nil {
 		return err
 	}

@@ -6,11 +6,18 @@ date: 2022-06-17
 
 There are three common dashes in English written language:
 
-- Hyphen (-)
-- En dash (–)
-- Em dash (—)
+- Hyphen : <span style="font-family: sans-serif">-</style>
+- En dash: –
+- Em dash: —
 
-The en dash and em dash are so named after their widths, which are equal to the widths of `N` and `M` respectively. "Hyphen" comes from ὑφέν (huphén) meaning "together". [^https://en.wiktionary.org/wiki/en_dash][^https://en.wiktionary.org/wiki/em_dash][^https://en.wiktionary.org/wiki/hyphen].
+A myth states the em dash is so named because its width is exactly one `M`, but this is not quite correct. An em dash is so named because its width is exactly `1em`.
+    
+An [em](https://en.wikipedia.org/wiki/Em_(typography)) is the current font point size, e.g. `16pt`. The point size determines the height of the character bounding box in pixels. Because the em dash's length is defined as `1em`, its bounding box will always be an exact square—in any font, at any size.[^emorigins]
+
+[^emorigins]: The origins of the em can be traced to the square shape of the `M` point in a printing press, so the rumor is not too far off. Still, the two are independent today.
+
+One en is defined as half the width of one em.
+
 
 ## Usage
 
@@ -126,13 +133,15 @@ A common replacement for the em dash is a space on either end of two hyphens (` 
 
 ### Output Difficulties
 
-At the time of writing, twos.dev renders in a monospace font. Monospace fonts have only a single glyph used for all hyphen types, so it becomes impossible to differentiate. Currently, I use a bespoke text preprocessor  [insert link once pushed] to replace em dashes with a multi-glyph hyphen-based em dash, but I'm not satisfied with this solution. Because I use monospace for aesthetic only reasons, I'm curious to find or build a monospace-with-exceptions font that allows for a small number of double-width glyphs.
+At the time of writing, twos.dev renders in a monospace font for aesthetic reasons. But, the glyphs for these three dashes in monospace fonts are virtually---sometimes literally---indistinguishable. To make the differences visible on twos.dev, particularly this page, I use [some bespoke preprocessing](https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go) to substitute them out for their variable-width cousins.
+
+I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.
 
 ## Debate
 
 Every usage rule above is in some level of turmoil [better word?] among writers, both within the rules and between them.
 
-## Esoteric Dashes
+## Epilogue: Esoteric Dashes
 
 The **swung dash** (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary. [^http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&sub=Search+WordNet&o2=&o0=1&o8=1&o1=1&o7=&o5=&o9=&o6=&o3=&o4=&h=000000000000]
 

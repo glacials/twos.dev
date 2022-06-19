@@ -12,6 +12,7 @@ var smartquotes = map[string]string{
 	"&ldquo;": "\"",
 	"&rdquo;": "\"",
 	"&quot;":  "\"",
+	"&#34;":   "\"",
 }
 
 // ReplaceSmartQuotes returns a reader identical to the given reader but with
@@ -27,8 +28,8 @@ func ReplaceSmartQuotes(d document.Document) (document.Document, error) {
 	}
 
 	byts := buf.Bytes()
-	for old, nw := range smartquotes {
-		byts = bytes.ReplaceAll(byts, []byte(old), []byte(nw))
+	for old, new := range smartquotes {
+		byts = bytes.ReplaceAll(byts, []byte(old), []byte(new))
 	}
 	d.Body = bytes.NewBuffer(byts)
 

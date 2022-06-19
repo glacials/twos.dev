@@ -8,7 +8,7 @@
     --bg-b: rgba(179, 68, 66, 1);
     --fg-b-a: rgba(255, 255, 230, 1);
 
-    --bg-c: rgba(210, 235, 239, 1);
+    --bg-c: rgba(240, 235, 210, 1);
     --fg-c-a: rgba(56, 48, 46, 1);
   }
 }
@@ -28,7 +28,7 @@
 }
 
 html {
-  font-family: Oxygen, "Menlo", monospace;
+  font-family: Menlo, Monaco, Oxygen, monospace;
   font-size: 14px;
   line-height: 1.75em;
   letter-spacing: -0.05em;
@@ -187,13 +187,19 @@ em em {
   }
 }
 
-/* Syntax highlighting classes
+/* Code + syntax highlighting styles
  *
  * See https://github.com/alecthomas/chroma
  */
 
-pre {
-  display: inline-block;
+code {
+  background-color: var(--bg-c);
+  color: var(--fg-c-a);
+  padding: 0.25em 0.5em;
+}
+
+pre code {
+  display: block;
   padding: 1rem 0;
 
   background-color: var(--bg-c);
@@ -220,10 +226,12 @@ pre .line {
   margin-right: 2rem;
 }
 
-code,
 pre {
+  color: var(--fg-c-a);
+  background-color: var(--bg-c);
   font-family: "PT Mono", monospace;
   letter-spacing: 0;
+  padding: 1rem;
 }
 
 /* Background */

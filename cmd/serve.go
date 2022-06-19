@@ -18,6 +18,7 @@ const dst = "dist"
 
 var (
 	noBuild *bool
+	debug   *bool
 
 	builders = map[string]func(src, dst string) error{
 		"src/img/*/*/*.[jJ][pP][gG]": photoBuilder,
@@ -178,6 +179,10 @@ var serveCmd = &cobra.Command{
 
 func init() {
 	rootCmd.AddCommand(serveCmd)
+
 	noBuild = serveCmd.Flags().
 		Bool("no-build", false, "don't continually rebuild while serving")
+
+	debug = serveCmd.Flags().
+		Bool("debug", false, "output to dist/debug/ results of each transformation")
 }

@@ -5,6 +5,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 )
 
 var (
@@ -19,6 +20,8 @@ var (
 )
 
 func buildTheWorld() error {
+	seen := map[string]struct{}{}
+
 	if err := os.MkdirAll(dst, 0755); err != nil {
 		return fmt.Errorf("can't mkdir `%s`: %w", dst, err)
 	}
@@ -41,6 +44,14 @@ func buildTheWorld() error {
 				return fmt.Errorf("can't match `%s` to %s: %w", src, pattern, err)
 			} else if ok {
 				log.Println("building", src)
+
+				if built(src, seen) {
+					return fmt.Errorf(
+						"a file like %s was already built from another dir",
+						src,
+					)
+				}
+
 				if err := builder(src, dst); err != nil {
 					return fmt.Errorf("can't build `%s`: %w", src, err)
 				}
@@ -52,9 +63,29 @@ func buildTheWorld() error {
 		return fmt.Errorf("can't walk to build the world: %w", err)
 	}
 
-	if err := buildFormatting(dst); err != nil {
-		return fmt.Errorf("can't post-process build dir: %w", err)
+	return nil
+}
+
+func built(src string, seen map[string]struct{}) bool {
+	ext := strings.ToLower(filepath.Ext(src))
+
+	if ext == ".mov" || ext == ".mp4" {
+		// Free pass; we have multiple formats of the same video
+		return false
 	}
 
-	return nil
+	filename := filepath.Base(src)
+
+	if filename == "tattoo.webp" {
+		// Historical exception
+		return false
+	}
+
+	filename, _, _ = strings.Cut(filename, ".")
+	if _, ok := seen[filename]; ok {
+		return true
+	}
+
+	seen[filename] = struct{}{}
+	return false
 }
