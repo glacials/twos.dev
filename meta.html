@@ -89,34 +89,33 @@
 
 <p>There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.</p>
 
-<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. I prefer to write code in <code>$EDITOR</code>, not iA Writer.</p>
+<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. iA Writer is great for prose, but when it&#39;s time to write code I need to be back in <code>$EDITOR</code>.</p>
 
-<p>One great way to accomplish both of these needs is to simply remove the file from the iA Writer sync directory:</p>
+<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
 </span></span></code></pre></body></html>
 
-<p>From here, I may also take one final step of permanently converting the document to HTML, if I find it will be easier to write code like that than embedding it in the Markdown.</p>
+<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
-</span></span><span class="line"><span class="ln">2</span><span class="cl">git rm src/cold/DOCUMENT.md
-</span></span><span class="line"><span class="ln">3</span><span class="cl">cp dist/DOCUMENT.html src/cold/DOCUMENT.html
-</span></span><span class="line"><span class="ln">4</span><span class="cl">git add !$
+</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
+</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
 </span></span></code></pre></body></html>
 
-<p>This brings back the weight of editing prose in HTML, but by this point most of the writing is done.</p>
+<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
 
 <h4>Results</h4>
 
-<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. my <a href="cv.html">CV</a>&#39;s bicolumnar layout)</p>
+<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>&#39;s bicolumnar layout).</p>
 
-<h2>On URLs</h2>
+<h2>On URLs Not Changing</h2>
 
-<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to newly-overhauled versions.</p>
+<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
 
-<p>It so happens that by keeping my writing in these two formats, Markdown and raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I’ll never migrate JavaScript frameworks and be too lazy to move things forward, or move to a database-backed writing system while being unable to simply <code>cp -r</code> these files into the <code>public</code> directory.</p>
+<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I&#39;ve removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I&#39;ll simply <code>cp -r dist</code> to my next crazy system&#39;s web root.</p>
 
-<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html until the day I die <a href="death.html">and then some</a>.</p>
+<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
 </body></html></article>
       <footer>
         
