@@ -16,7 +16,7 @@ import (
 // HighlightSyntax hunts for <code> tags and does its best to syntax highlight
 // any code inside.
 func HighlightSyntax(d document.Document) (document.Document, error) {
-	root, err := html.Parse(d.Body)
+	root, err := html.Parse(bytes.NewBuffer(d.Body))
 	if err != nil {
 		return document.Document{}, err
 	}
@@ -44,7 +44,7 @@ func HighlightSyntax(d document.Document) (document.Document, error) {
 		return document.Document{}, err
 	}
 
-	d.Body = &buf
+	d.Body = buf.Bytes()
 
 	return d, nil
 }

@@ -22,16 +22,9 @@ var smartquotes = map[string]string{
 //
 // ReplaceSmartQuotes implements document.Transformation.
 func ReplaceSmartQuotes(d document.Document) (document.Document, error) {
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
-
-	byts := buf.Bytes()
 	for old, new := range smartquotes {
-		byts = bytes.ReplaceAll(byts, []byte(old), []byte(new))
+		d.Body = bytes.ReplaceAll(d.Body, []byte(old), []byte(new))
 	}
-	d.Body = bytes.NewBuffer(byts)
 
 	return d, nil
 }

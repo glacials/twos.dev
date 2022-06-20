@@ -47,7 +47,7 @@ func buildTheWorld() error {
 
 				if built(src, seen) {
 					return fmt.Errorf(
-						"a file like %s was already built from another dir",
+						"a file like %s was already built from another directory",
 						src,
 					)
 				}

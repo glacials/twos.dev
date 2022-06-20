@@ -1,6 +1,7 @@
 package transform
 
 import (
+	"bytes"
 	"strings"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -13,7 +14,7 @@ import (
 //
 // DiscoverShortname implements document.Transformation.
 func DiscoverShortname(d document.Document) (document.Document, error) {
-	matter, _, err := frontmatter.Parse(d.Body)
+	matter, _, err := frontmatter.Parse(bytes.NewBuffer(d.Body))
 	if err != nil {
 		return document.Document{}, err
 	}

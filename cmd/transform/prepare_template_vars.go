@@ -1,7 +1,6 @@
 package transform
 
 import (
-	"bytes"
 	"html/template"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -13,12 +12,7 @@ import (
 //
 // PrepareTemplateVars implements document.Transformation.
 func PrepareTemplateVars(d document.Document) (document.Document, error) {
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
-
-	d.TemplateVars.Body = template.HTML(buf.String())
+	d.TemplateVars.Body = template.HTML(string(d.Body))
 	d.TemplateVars.Parent = d.Parent
 	d.TemplateVars.SourceURL = d.SourceURL
 	d.TemplateVars.Shortname = d.Shortname

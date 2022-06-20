@@ -1,6 +1,7 @@
 package transform
 
 import (
+	"bytes"
 	"fmt"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -13,7 +14,7 @@ import (
 //
 // DiscoverTitle implements document.Transformation.
 func DiscoverTitle(d document.Document) (document.Document, error) {
-	h, err := html.Parse(d.Body)
+	h, err := html.Parse(bytes.NewBuffer(d.Body))
 	if err != nil {
 		return document.Document{}, fmt.Errorf("can't parse HTML: %w", err)
 	}

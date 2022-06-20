@@ -1,6 +1,8 @@
 package transform
 
 import (
+	"bytes"
+
 	"github.com/glacials/twos.dev/cmd/document"
 	"github.com/glacials/twos.dev/cmd/frontmatter"
 )
@@ -12,7 +14,7 @@ import (
 //
 // StripFrontmatter implements document.Transformation.
 func StripFrontmatter(d document.Document) (document.Document, error) {
-	if _, body, err := frontmatter.Parse(d.Body); err != nil {
+	if _, body, err := frontmatter.Parse(bytes.NewBuffer(d.Body)); err != nil {
 		return document.Document{}, err
 	} else {
 		d.Body = body

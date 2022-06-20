@@ -17,23 +17,16 @@ const (
 //
 // LengthenDashes implements document.Transformation.
 func LengthenDashes(d document.Document) (document.Document, error) {
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
-
-	byts := buf.Bytes()
-	byts = bytes.ReplaceAll(
-		byts,
+	d.Body = bytes.ReplaceAll(
+		d.Body,
 		[]byte("–"),
 		[]byte(fmt.Sprintf(styleWrapper, "–")),
 	)
-	byts = bytes.ReplaceAll(
-		byts,
+	d.Body = bytes.ReplaceAll(
+		d.Body,
 		[]byte("—"),
 		[]byte(fmt.Sprintf(styleWrapper, "—")),
 	)
-	d.Body = bytes.NewBuffer(byts)
 
 	return d, nil
 }

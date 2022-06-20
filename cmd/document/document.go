@@ -5,10 +5,8 @@
 package document
 
 import (
-	"bytes"
 	"fmt"
 	"html/template"
-	"io"
 	"io/ioutil"
 	"os"
 	"path/filepath"
@@ -26,6 +24,14 @@ func stripHTMLExtension(filename string) string {
 	return filename
 }
 
+type Type int
+
+const (
+	DraftType = iota
+	PostType
+	PageType
+)
+
 // Document is a file that is sent down a pipeline of transformations in order,
 // starting from reading a file and ending in writing a static .html file ready
 // for distribution. Each transformation is a function that implements
@@ -35,8 +41,10 @@ func stripHTMLExtension(filename string) string {
 // (read: rendered) into a .html file, then by setting its title to the first
 // heading in its contents, then by executing it as a template.
 type Document struct {
-	// Body is a reader into the current state of the body of the document.
-	Body io.Reader
+	Type Type
+
+	// Body is the current state of the body of the document.
+	Body []byte
 
 	// Parent is the name of this document's parent document, if any. For
 	// example, tattoo_symbols.html has a parent of tattoo.html. This is a lexical
@@ -100,8 +108,8 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 	}
 	defer f.Close()
 
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(f); err != nil {
+	body, err := ioutil.ReadAll(f)
+	if err != nil {
 		return Document{}, err
 	}
 
@@ -121,7 +129,7 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 	}
 
 	return Document{
-		Body:     &buf,
+		Body:     body,
 		Template: *t,
 		SourceURL: fmt.Sprintf(
 			"https://github.com/glacials/twos.dev/blob/main/%s",
@@ -142,15 +150,6 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 func (d Document) Transform() (Document, error) {
 	var err error
 	for tindex, transformation := range d.transformations {
-		// The transformation may read data from d.Body, which advances the cursor.
-		// If the transformation then replaces d.Body with some transformed data
-		// this is fine, but if not it will leave a partially-advanced reader behind
-		// for the next transformation. So we'll keep track of any read data and
-		// replenish it if the reader is not replaced.
-		var readData bytes.Buffer
-		tee := io.TeeReader(d.Body, &readData)
-		d.Body = tee
-
 		tname := runtime.FuncForPC(reflect.ValueOf(transformation).Pointer()).
 			Name()
 		_, tshortname, ok := strings.Cut(tname, "transform.")
@@ -172,15 +171,7 @@ func (d Document) Transform() (Document, error) {
 			)
 		}
 
-		// Replenish any read data, if the transformation didn't replace the body
-		if d.Body == tee {
-			d.Body = io.MultiReader(&readData, d.Body)
-		}
-
 		if d.debug {
-			var debugDupe bytes.Buffer
-			debugTee := io.TeeReader(d.Body, &debugDupe)
-
 			path := filepath.Join(
 				"dist",
 				"debug",
@@ -197,11 +188,9 @@ func (d Document) Transform() (Document, error) {
 			}
 			defer f.Close()
 
-			if _, err := io.Copy(f, debugTee); err != nil {
+			if err := ioutil.WriteFile(path, d.Body, 0644); err != nil {
 				return Document{}, err
 			}
-
-			d.Body = &debugDupe
 		}
 
 	}

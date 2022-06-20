@@ -1,7 +1,6 @@
 package transform
 
 import (
-	"bytes"
 	"fmt"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -13,12 +12,7 @@ import (
 //
 // AttachBodyTemplate implements document.Transformation.
 func AttachBodyTemplate(d document.Document) (document.Document, error) {
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
-
-	if _, err := d.Template.New("body").Parse(buf.String()); err != nil {
+	if _, err := d.Template.New("body").Parse(string(d.Body)); err != nil {
 		return document.Document{}, fmt.Errorf("can't parse template (%s", err)
 	}
 

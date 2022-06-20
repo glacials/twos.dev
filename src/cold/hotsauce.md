@@ -1,6 +1,7 @@
 ---
 date: 2022-06-05
 filename: hotsauce.html
+type: post
 ---
 
 # When the April Fool's Day Prank is Real

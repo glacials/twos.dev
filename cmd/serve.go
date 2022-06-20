@@ -155,10 +155,8 @@ var serveCmd = &cobra.Command{
 				}
 			}
 
+			// Auto refresh the page when a change is made
 			http.Handle("/ws", websocket.Handler(func(conn *websocket.Conn) {
-				// TODO: This works sometimes because multiple ws connecions are open
-				// (not timed out yet, or just multiple pages) and so these consumers
-				// fight to receive the message.
 				c := make(chan struct{})
 				refreshListeners = append(refreshListeners, c)
 				for {

@@ -1,7 +1,6 @@
 package transform
 
 import (
-	"bytes"
 	"path/filepath"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -19,24 +18,17 @@ func MarkdownToHTML(d document.Document) (document.Document, error) {
 		return d, nil
 	}
 
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
-
-	d.Body = bytes.NewBuffer(
-		markdown.ToHTML(buf.Bytes(), parser.NewWithExtensions(
-			parser.Tables|
-				parser.FencedCode|
-				parser.Autolink|
-				parser.Strikethrough|
-				parser.Footnotes|
-				parser.HeadingIDs|
-				parser.Attributes,
-		), html.NewRenderer(
-			html.RendererOptions{Flags: html.FlagsNone},
-		),
-		),
+	d.Body = markdown.ToHTML(d.Body, parser.NewWithExtensions(
+		parser.Tables|
+			parser.FencedCode|
+			parser.Autolink|
+			parser.Strikethrough|
+			parser.Footnotes|
+			parser.HeadingIDs|
+			parser.Attributes,
+	), html.NewRenderer(
+		html.RendererOptions{Flags: html.FlagsNone},
+	),
 	)
 
 	return d, nil

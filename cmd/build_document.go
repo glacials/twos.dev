@@ -2,8 +2,7 @@ package cmd
 
 import (
 	"fmt"
-	"io"
-	"os"
+	"io/ioutil"
 	"path/filepath"
 
 	"github.com/glacials/twos.dev/cmd/document"
@@ -16,6 +15,7 @@ var transformations = []document.Transformation{
 
 	// Frontmatter-based transformations
 	transform.DiscoverDates,
+	transform.DiscoverType,
 	transform.DiscoverShortname,
 	transform.StripFrontmatter,
 
@@ -52,19 +52,11 @@ func buildDocument(src, dst string) error {
 		return err
 	}
 
-	htmlFile, err := os.Create(
-		filepath.Join(dst, fmt.Sprintf("%s.html", d.Shortname)),
-	)
-	if err != nil {
-		return fmt.Errorf(
-			"can't render HTML to `%s` from template: %w",
-			dst,
-			err,
-		)
+	if err := ioutil.WriteFile(filepath.Join(dst, fmt.Sprintf("%s.html", d.Shortname)), d.Body, 0644); err != nil {
+		return err
 	}
-	defer htmlFile.Close()
 
-	if _, err := io.Copy(htmlFile, d.Body); err != nil {
+	if err := buildFeed(d); err != nil {
 		return err
 	}
 

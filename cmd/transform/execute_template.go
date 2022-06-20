@@ -47,7 +47,7 @@ func ExecuteTemplates(d document.Document) (document.Document, error) {
 		return document.Document{}, err
 	}
 
-	d.Body = &buf
+	d.Body = buf.Bytes()
 	return d, nil
 }
 

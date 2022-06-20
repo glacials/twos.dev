@@ -26,16 +26,10 @@ func ReplaceEmDashes(d document.Document) (document.Document, error) {
 		// dashes.html is a post specifically about dashes; let it do its thing
 		return d, nil
 	}
-	var buf bytes.Buffer
-	if _, err := buf.ReadFrom(d.Body); err != nil {
-		return document.Document{}, err
-	}
 
-	byts := buf.Bytes()
 	for old, nw := range emdashes {
-		byts = bytes.ReplaceAll(byts, []byte(old), []byte(nw))
+		d.Body = bytes.ReplaceAll(d.Body, []byte(old), []byte(nw))
 	}
-	d.Body = bytes.NewBuffer(byts)
 
 	return d, nil
 }

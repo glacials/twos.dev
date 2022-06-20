@@ -1,6 +1,8 @@
 package transform
 
 import (
+	"bytes"
+
 	"github.com/glacials/twos.dev/cmd/document"
 	"github.com/glacials/twos.dev/cmd/frontmatter"
 )
@@ -10,7 +12,7 @@ import (
 //
 // DiscoverDates implements document.Transformation.
 func DiscoverDates(d document.Document) (document.Document, error) {
-	matter, _, err := frontmatter.Parse(d.Body)
+	matter, _, err := frontmatter.Parse(bytes.NewBuffer(d.Body))
 	if err != nil {
 		return document.Document{}, err
 	}
