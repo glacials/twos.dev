@@ -1,4 +1,4 @@
-package cmd
+package transform
 
 import (
 	"fmt"
@@ -29,12 +29,16 @@ var (
 	}
 )
 
-func buildFeed(d document.Document) error {
+// UpdateFeeds re-builds RSS and ATOM feeds with the new information from the
+// document.
+//
+// UpdateFeeds implements document.Transformation.
+func UpdateFeeds(d document.Document) (document.Document, error) {
 	if d.Type != document.PostType {
-		return nil
+		return d, nil
 	}
 	if d.Title == "" {
-		return fmt.Errorf(
+		return document.Document{}, fmt.Errorf(
 			"can't generate RSS for document without title (%s)",
 			d.Shortname,
 		)
@@ -54,6 +58,7 @@ func buildFeed(d document.Document) error {
 	item.Id = d.Shortname
 	item.Title = d.Title
 	item.Author = feed.Author
+	item.Content = string(d.Body)
 	item.Description = string(d.Body)
 	item.Link = &feeds.Link{
 		Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, d.Shortname),
@@ -63,19 +68,19 @@ func buildFeed(d document.Document) error {
 
 	atom, err := feed.ToAtom()
 	if err != nil {
-		return err
+		return document.Document{}, err
 	}
 	if err := ioutil.WriteFile("dist/feed.atom", []byte(atom), 0644); err != nil {
-		return err
+		return document.Document{}, err
 	}
 
 	rss, err := feed.ToRss()
 	if err != nil {
-		return err
+		return document.Document{}, err
 	}
 	if err := ioutil.WriteFile("dist/feed.rss", []byte(rss), 0644); err != nil {
-		return err
+		return document.Document{}, err
 	}
 
-	return nil
+	return d, nil
 }

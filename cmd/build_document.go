@@ -24,6 +24,7 @@ var transformations = []document.Transformation{
 
 	// HTML-based transformations
 	transform.DiscoverTitle,
+	transform.UpdateFeeds,
 	transform.HighlightSyntax, // Beware, re-renders entire doc
 
 	// English-based transformations
@@ -39,6 +40,8 @@ var transformations = []document.Transformation{
 	transform.AttachPartials,
 	transform.AttachBodyTemplate,
 	transform.ExecuteTemplates,
+
+	// Publish-based transformations
 }
 
 func buildDocument(src, dst string) error {
@@ -53,10 +56,6 @@ func buildDocument(src, dst string) error {
 	}
 
 	if err := ioutil.WriteFile(filepath.Join(dst, fmt.Sprintf("%s.html", d.Shortname)), d.Body, 0644); err != nil {
-		return err
-	}
-
-	if err := buildFeed(d); err != nil {
 		return err
 	}
 
