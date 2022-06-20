@@ -1,6 +1,7 @@
 ---
 date: 2022-06-04
 filename: death.html
+type: draft
 ---
 
 # Death Planning for Engineers

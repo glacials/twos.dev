@@ -1,7 +1,8 @@
 ---
 filename: guide.html
 date: 2021-05-04
-updated: 2022-06-04
+updated: 2022-06-20
+type: page
 ---
 
 
@@ -21,7 +22,7 @@ This page describes things I value at work. This is descriptive, not prescriptiv
 
 ## Warnings
 
-- **My brain is all backburners.** I can't immediately answer complex questions. I can temporarily get past this by asking a flurry of questions. This means I'm excited about the problem, but sometimes stresses people out; see #7 above :)
+- **My brain is all backburners.** I can't immediately answer complex questions. I can temporarily get past this by asking a flurry of questions about the question. This means I'm excited about the problem, but sometimes stresses people out; see #7 above :)
 - **I go rogue.** Sometimes I care about fixing or building something that I'll do it without tracking it, because the overhead is bigger than the job itself. [Loved features](https://twitter.com/search?q=https%3A%2F%2Ftwitter.com%2Fglcls%2Fstatus%2F720689621466619904&src=typed_query) have come out of having the freedom to do this; see #2 above :)
 - **I work weird hours.** Motivation strikes me randomly. Sometimes that's during a workday but sometimes it's on a Sunday or at 4 AM or for 16 hours straight. To counterbalance, I shorten my workdays and the math roughly works out. If you see emails or commits from me with unhealthy-feeling timestamps, keep in mind my default workday is at ~70% capacity.
 

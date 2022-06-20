@@ -1,6 +1,7 @@
 ---
 filename: meta.html
 date: 2022-06-18
+type: draft
 ---
 
 # Inside twos.dev
