@@ -24,7 +24,6 @@ var transformations = []document.Transformation{
 
 	// HTML-based transformations
 	transform.DiscoverTitle,
-	transform.UpdateFeeds,
 	transform.HighlightSyntax, // Beware, re-renders entire doc
 
 	// English-based transformations
@@ -42,6 +41,7 @@ var transformations = []document.Transformation{
 	transform.ExecuteTemplates,
 
 	// Publish-based transformations
+	transform.UpdateFeeds,
 }
 
 func buildDocument(src, dst string) error {
