@@ -10,6 +10,8 @@
 
     --bg-c: rgba(240, 235, 210, 1);
     --fg-c-a: rgba(56, 48, 46, 1);
+
+    --bg-c-a: rgba(130, 130, 130, 1); /* Darker version of bg-c, for shadows */
   }
 }
 
@@ -24,6 +26,8 @@
 
     --bg-c: rgba(86, 78, 76, 1);
     --fg-c-a: rgba(248, 248, 242, 1);
+
+    --bg-c-a: rgba(56, 56, 56, 1); /* Darker version of bg-c, for shadows */
   }
 }
 
@@ -226,10 +230,12 @@ pre .line {
 }
 
 pre {
-  color: var(--fg-c-a);
   background-color: var(--bg-c);
+  box-shadow: 0.5em 0.5em 0em var(--bg-c-a);
+  color: var(--fg-c-a);
   font-family: "PT Mono", monospace;
   letter-spacing: 0;
+  margin-bottom: 2em;
   padding: 1rem;
 }
 
