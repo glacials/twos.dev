@@ -57,7 +57,7 @@ context: requested size (calculation = final size)
 ```
 
 ### The Point
-The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on `1/72in` per point. It's no coincidence if 72 dots per inch rings a bell for screen density. `1pt` = 1 dot.
+The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on 1/72 in per point. It's no coincidence if 72 dots per inch rings a bell for screen density. `1pt` = 1 dot.
 
 That said, super high resolution displays have caused organizations to invent their own ways of scaling on behalf of softwares that expect 72 dpi displays, like Android's [density-independent pixels](https://developer.android.com/training/multiscreen/screendensities#TaskUseDP) or `dp`, and Windows's [effective pixels](https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor) or `ep`/`epx`. The tumultuous history, as it happens, hasn't ended.
 
@@ -75,23 +75,27 @@ Separately, the em dash is a large glyph and hard to go unnoticed. Its use is ob
 
 ### Belittled Hyphens
 
-When one side of a hyphen is a compound word like "ice cream break" the spaces visually overpower the hyphen: `pre-ice cream break` looks like `[pre-ice] cream break`, not `pre-[ice cream break]`.
+When one side of a hyphen is a compound word like "frozen yogurt" its spaces can visually overpower the hyphen: `pre-frozen yogurt` looks like `[pre-frozen] yogurt`, not `pre-[frozen yogurt]`.
 
-One solution replaces spaces with hyphens (`pre-ice-cream-break`) or vice versa (`pre ice cream break`), becoming partially lossy and potentially ambiguous in the process.
+One solution replaces spaces with hyphens (`pre-frozen-yogurt`), which may or may not suit the hyphenation. The opposite (`pre frozen yogurt`) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.
 
-\LaTeX users can replace the spaces with [thin spaces](https://en.wikipedia.org/wiki/Thin_space) (\LaTeX: `\thinspace`) to de-emphasize them relative to hyphens:
+$\LaTeX$ users can replace each space with a [`\thinspace`](https://en.wikipedia.org/wiki/Thin_space) to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:
 
-```
-pre-ice\thinspace{}cream\thinspace{}break
-```
-
-Personally, I've found it best to restructure the sentence to avoid the problem:
-
-```
-before the ice cream break
+```latex
+a pre-frozen\thinspace{}yogurt time
+a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time
 ```
 
-It's crude, but for 90% of cases there's no loss of meaning.
+$$\text{a pre-frozen\thinspace{}yogurt time}$$
+$$\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}$$
+
+Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:
+
+```
+before frozen yogurt
+```
+
+It's crude, but dependable.
 
 ### Broken Dashes
 
@@ -169,11 +173,11 @@ For all others, read on.
 
 #### The Hyphen-Powered En Dash
 
-The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: `2020-2030`. \LaTeX requires two (`--`) for the en dash.
+The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: `2020-2030`. $\LaTeX$ requires two (`--`) for the en dash.
 
 #### The Hyphen-Powered Em Dash
 
-A common replacement for the em dash is a space on either end of two hyphens (`  --  `). Because \LaTeX reserves two hyphens for the en dash, it requires three (`---`) for the em.
+A common replacement for the em dash is a space on either end of two hyphens (`  --  `). Because $\LaTeX$ reserves two hyphens for the en dash, it requires three (`---`) for the em.
 
 ### Output Difficulties
 

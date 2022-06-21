@@ -9,3 +9,6 @@ build:
 
 serve: install-tools
 	gow run . serve
+
+debug: install-tools
+	gow run . serve --debug

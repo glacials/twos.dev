@@ -9,11 +9,11 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
-// MarkdownToHTML converts the body of the document from Markdown to HTML. Any
+// RenderMarkdown converts the body of the document from Markdown to HTML. Any
 // frontmatter must already have been stripped.
 //
-// MarkdownToHTML implements document.Transformation.
-func MarkdownToHTML(d document.Document) (document.Document, error) {
+// RenderMarkdown implements document.Transformation.
+func RenderMarkdown(d document.Document) (document.Document, error) {
 	if filepath.Ext(d.Stat.Name()) != ".md" {
 		return d, nil
 	}
@@ -26,6 +26,7 @@ func MarkdownToHTML(d document.Document) (document.Document, error) {
 			parser.Footnotes|
 			parser.HeadingIDs|
 			parser.Footnotes|
+			parser.MathJax|
 			parser.Attributes,
 	), html.NewRenderer(
 		html.RendererOptions{Flags: html.FlagsNone},

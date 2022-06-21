@@ -19,8 +19,9 @@ var transformations = []document.Transformation{
 	transform.DiscoverShortname,
 	transform.StripFrontmatter,
 
-	// Markdown-based transformations
-	transform.MarkdownToHTML,
+	// Markup-based transformations
+	transform.RenderMarkdown,
+	transform.RenderLaTeX,
 
 	// HTML-based transformations
 	transform.DiscoverTitle,
