@@ -8,4 +8,4 @@ build:
 	@go build
 
 serve: install-tools
-	@gow run . serve
+	gow run . serve

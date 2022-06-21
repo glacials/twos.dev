@@ -25,6 +25,7 @@ func MarkdownToHTML(d document.Document) (document.Document, error) {
 			parser.Strikethrough|
 			parser.Footnotes|
 			parser.HeadingIDs|
+			parser.Footnotes|
 			parser.Attributes,
 	), html.NewRenderer(
 		html.RendererOptions{Flags: html.FlagsNone},
