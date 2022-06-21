@@ -110,6 +110,13 @@ h1 {
   text-transform: uppercase;
 }
 
+/* Hero image */
+h1 + figure,
+h1 + p + figure {
+  margin: auto;
+  max-width: 40em;
+}
+
 hr {
   border: none;
 }

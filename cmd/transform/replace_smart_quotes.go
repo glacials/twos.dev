@@ -13,6 +13,7 @@ var smartquotes = map[string]string{
 	"&rdquo;": "\"",
 	"&quot;":  "\"",
 	"&#34;":   "\"",
+	"&#39;":   "'",
 }
 
 // ReplaceSmartQuotes returns a reader identical to the given reader but with

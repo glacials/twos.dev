@@ -3,15 +3,15 @@ type: draft
 date: 2022-06-17
 ---
 
-# Dashes
+# Advanced Dashes
+
+{{img "supreme" "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen" "I love pizza-liquor, but I've never had it New York style."}}
 
 There are three common dashes in written English:
 
 - Hyphen : -
 - En dash: –
 - Em dash: —
-
-## Usage
 
 The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.
 
