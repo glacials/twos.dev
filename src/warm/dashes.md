@@ -25,7 +25,9 @@ A myth states the em dash is so named because it is "one `M` wide", and the en d
 
 ### The Em
     
-To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible bounding box every character is designed within[^"Bounding box" is strong; font designers are free to design outside it.] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *character-heighth* long. It is a unitless measurement that allows us to speak in relatives.
+To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *character-heighth* long. It is a unitless measurement that allows us to speak in relatives.
+
+[^boundingbox]: "Bounding box" is strong; font designers are free to design outside it.
 
 When dealing with font sizes, it follows, speaking in ems is functionally equivalent to speaking in percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration `font-size: 1em` is equivalent to `font-size: 100%`, while `1.5em` is equivalent to `150%`, and so on.
 
@@ -183,13 +185,15 @@ I'd love for there to be a "monospace with exceptions" font that takes this chor
 
 The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don't often get to see the light of day.
 
-The **swung dash** (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary.[^http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash\]
+The **swung dash** (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary.[^swung]
+
+[^swung]: http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash
 
 > boot (n)
 >
 > ex: Let me put on my other ⁓.
 
-The **horizontal bar** is a way to introduce quotations.[^ ] Confusingly, its length is almost always identical to the em dash.
+The **horizontal bar** is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.
 
 > ― O Miss Douce! Miss Kennedy protested. You horrid thing!
 > 
