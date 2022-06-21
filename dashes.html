@@ -40,6 +40,26 @@
     />
     <title>Dashes</title>
     <link rel="stylesheet" href="/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+      integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+      integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
   </head>
 
   <body>
@@ -108,7 +128,7 @@
 
 <h3>The Point</h3>
 
-<p>The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on <code>1/72in</code> per point. It&#39;s no coincidence if 72 dots per inch rings a bell for screen density. <code>1pt</code> = 1 dot.</p>
+<p>The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on 1/72 in per point. It&#39;s no coincidence if 72 dots per inch rings a bell for screen density. <code>1pt</code> = 1 dot.</p>
 
 <p>That said, super high resolution displays have caused organizations to invent their own ways of scaling on behalf of softwares that expect 72 dpi displays, like Android&#39;s <a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP">density-independent pixels</a> or <code>dp</code>, and Windows&#39;s <a href="https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor">effective pixels</a> or <code>ep</code>/<code>epx</code>. The tumultuous history, as it happens, hasn&#39;t ended.</p>
 
@@ -126,21 +146,21 @@
 
 <h3>Belittled Hyphens</h3>
 
-<p>When one side of a hyphen is a compound word like "ice cream break" the spaces visually overpower the hyphen: <code>pre-ice cream break</code> looks like <code>[pre-ice] cream break</code>, not <code>pre-[ice cream break]</code>.</p>
+<p>When one side of a hyphen is a compound word like "frozen yogurt" its spaces can visually overpower the hyphen: <code>pre-frozen yogurt</code> looks like <code>[pre-frozen] yogurt</code>, not <code>pre-[frozen yogurt]</code>.</p>
 
-<p>One solution replaces spaces with hyphens (<code>pre-ice-cream-break</code>) or vice versa (<code>pre ice cream break</code>), becoming partially lossy and potentially ambiguous in the process.</p>
+<p>One solution replaces spaces with hyphens (<code>pre-frozen-yogurt</code>), which may or may not suit the hyphenation. The opposite (<code>pre frozen yogurt</code>) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.</p>
 
-<p>\LaTeX users can replace the spaces with <a href="https://en.wikipedia.org/wiki/Thin_space">thin spaces</a> (\LaTeX: <code>\thinspace</code>) to de-emphasize them relative to hyphens:</p>
+<p><span class="math inline">\(\LaTeX\)</span> users can replace each space with a <a href="https://en.wikipedia.org/wiki/Thin_space"><code>\thinspace</code></a> to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">pre-ice\thinspace{}cream\thinspace{}break
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt time
+</span></span><span class="line"><span class="ln">2</span><span class="cl">a<span class="k">\enspace</span><span class="nb">{}</span>pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt<span class="k">\enspace</span><span class="nb">{}</span>time
+</span></span></code></pre></body></html>
+<p><span class="math display">\[\text{a pre-frozen\thinspace{}yogurt time}\]</span></p><p><span class="math display">\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]</span></p><p>Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">before frozen yogurt
 </span></span></code></pre></body></html>
 
-<p>Personally, I&#39;ve found it best to restructure the sentence to avoid the problem:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">before the ice cream break
-</span></span></code></pre></body></html>
-
-<p>It&#39;s crude, but for 90% of cases there&#39;s no loss of meaning.</p>
+<p>It&#39;s crude, but dependable.</p>
 
 <h3>Broken Dashes</h3>
 
@@ -222,11 +242,11 @@
 
 <h4>The Hyphen-Powered En Dash</h4>
 
-<p>The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: <code>2020-2030</code>. \LaTeX requires two (<code>--</code>) for the en dash.</p>
+<p>The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: <code>2020-2030</code>. <span class="math inline">\(\LaTeX\)</span> requires two (<code>--</code>) for the en dash.</p>
 
 <h4>The Hyphen-Powered Em Dash</h4>
 
-<p>A common replacement for the em dash is a space on either end of two hyphens (<code>--</code>). Because \LaTeX reserves two hyphens for the en dash, it requires three (<code>---</code>) for the em.</p>
+<p>A common replacement for the em dash is a space on either end of two hyphens (<code>--</code>). Because <span class="math inline">\(\LaTeX\)</span> reserves two hyphens for the en dash, it requires three (<code>---</code>) for the em.</p>
 
 <h3>Output Difficulties</h3>
 
