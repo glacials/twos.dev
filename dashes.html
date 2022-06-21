@@ -24,7 +24,7 @@
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="Dashes" />
+    <meta name="description" content="Advanced Dashes" />
     <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
@@ -38,7 +38,7 @@
       title="twos.dev"
       href="/feed.atom"
     />
-    <title>Dashes</title>
+    <title>Advanced Dashes</title>
     <link rel="stylesheet" href="/style.css" />
 
     <link
@@ -74,7 +74,22 @@
           
         
       </header>
-      <article><html><head></head><body><h1>Dashes</h1>
+      <article><html><head></head><body><h1>Advanced Dashes</h1>
+
+<p><figure style="text-align: center">
+  
+  <picture>
+    <source srcset="" media="(prefers-color-scheme: dark)" />
+    <img
+      alt="A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
+      src="img/dashes-supreme.jpeg"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+  
+  <figcaption>I love pizza-liquor, but I&#39;ve never had it New York style.</figcaption>
+</figure>
+</p>
 
 <p>There are three common dashes in written English:</p>
 
@@ -84,15 +99,13 @@
 <li>Em dash: <span style="font-family: sans-serif">—</span></li>
 </ul>
 
-<h2>Usage</h2>
-
 <p>The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.</p>
 
 <p>The en dash is used to create ranges, like 2020<span style="font-family: sans-serif">–</span>2030.</p>
 
 <p>The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.</p>
 
-<h2>One Size Doesn&#39;t Fit All</h2>
+<h2>One Size Doesn't Fit All</h2>
 
 <p>A myth states the em dash is so named because it is "one <code>M</code> wide", and the en dash "one <code>N</code> wide". This is... almost true. The confusing correction is that an em dash is so named because it is <code>1em</code> wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.</p>
 
@@ -102,17 +115,17 @@
 
 <p>Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration <code>font-size: 1em</code> is equivalent to <code>font-size: 100%</code>, while <code>1.5em</code> is equivalent to <code>150%</code>, and so on.</p>
 
-<p>The em&#39;s eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text&#39;s changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.</p>
+<p>The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.</p>
 
 <p>The em came about in the times of the printing press, when every <code>M</code> type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the <code>M</code> type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. Practically this was a non-change, but the updated definition allowed the <code>M</code> and the em to be decoupled<span style="font-family: sans-serif">—</span>in the same way the SI second was decoupled from the Earth by defining it in terms of <a href="https://en.wikipedia.org/wiki/Caesium_standard">radioactive decay</a>.</p>
 
 <h4>The Em Dash</h4>
 
-<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash&#39;s bounding box is an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.</p>
+<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash's bounding box is an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.</p>
 
 <h4>The Root Em</h4>
 
-<p>The <code>rem</code> or <strong>root em</strong> is a twist on the em. It is relative not to the parent context&#39;s font size, but to the root context&#39;s; in a web page, this is <code>&lt;html&gt;</code>. This allows one to escape relativity hell without reverting to absolutes:</p>
+<p>The <code>rem</code> or <strong>root em</strong> is a twist on the em. It is relative not to the parent context's font size, but to the root context's; in a web page, this is <code>&lt;html&gt;</code>. This allows one to escape relativity hell without reverting to absolutes:</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">html: 16pt              (default     = 16pt)
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">  → body: 1.5em         (16pt * 1.5  = 24pt)
@@ -128,9 +141,9 @@
 
 <h3>The Point</h3>
 
-<p>The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on 1/72 in per point. It&#39;s no coincidence if 72 dots per inch rings a bell for screen density. <code>1pt</code> = 1 dot.</p>
+<p>The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on 1/72 in per point. It's no coincidence if 72 dots per inch rings a bell for screen density. <code>1pt</code> = 1 dot.</p>
 
-<p>That said, super high resolution displays have caused organizations to invent their own ways of scaling on behalf of softwares that expect 72 dpi displays, like Android&#39;s <a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP">density-independent pixels</a> or <code>dp</code>, and Windows&#39;s <a href="https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor">effective pixels</a> or <code>ep</code>/<code>epx</code>. The tumultuous history, as it happens, hasn&#39;t ended.</p>
+<p>That said, super high resolution displays have caused organizations to invent their own ways of scaling on behalf of softwares that expect 72 dpi displays, like Android's <a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP">density-independent pixels</a> or <code>dp</code>, and Windows's <a href="https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor">effective pixels</a> or <code>ep</code>/<code>epx</code>. The tumultuous history, as it happens, hasn't ended.</p>
 
 <h2>Advanced Usage</h2>
 
@@ -160,11 +173,11 @@
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">before frozen yogurt
 </span></span></code></pre></body></html>
 
-<p>It&#39;s crude, but dependable.</p>
+<p>It's crude, but dependable.</p>
 
 <h3>Broken Dashes</h3>
 
-<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It&#39;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.</p>
+<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It's accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
@@ -173,7 +186,7 @@
 </span></span></code></pre></body></html>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I&#39;m looking at dates about 20<span style="font-family: sans-serif">–</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20<span style="font-family: sans-serif">–</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
 </span></span></code></pre></body></html>
 
@@ -183,7 +196,7 @@
 </span></span></code></pre></body></html>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I&#39;m pleased they thought that<span style="font-family: sans-serif">—</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that<span style="font-family: sans-serif">—</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
 </span></span></code></pre></body></html>
 
@@ -198,14 +211,14 @@
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
 </span></span><span class="line"><span class="ln">3</span><span class="cl">I said they were<span style="font-family: sans-serif">—</span>wolf
-</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don&#39;t last forever!
+</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don't last forever!
 </span></span></code></pre></body></html>
 
 <p>And this simulation of justified text:</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were<span style="font-family: sans-serif">—</span>wolf
-</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don&#39;t last forever!
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
 </span></span></code></pre></body></html>
 
 <p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.</p>
@@ -214,7 +227,7 @@
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  <span style="font-family: sans-serif">—</span>  wolf
-</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don&#39;t last forever!
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
 </span></span></code></pre></body></html>
 
 <h3>Input Difficulties</h3>
@@ -250,13 +263,13 @@
 
 <h3>Output Difficulties</h3>
 
-<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote <a href="https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go">a bespoke preprocessing step</a> to switch twos.dev&#39;s dashes<span style="font-family: sans-serif">—</span>and dashes only<span style="font-family: sans-serif">—</span>to variable width fonts.</p>
+<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote <a href="https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go">a bespoke preprocessing step</a> to switch twos.dev's dashes<span style="font-family: sans-serif">—</span>and dashes only<span style="font-family: sans-serif">—</span>to variable width fonts.</p>
 
-<p>I&#39;d love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
+<p>I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
 
 <h2>Bonus Round: Esoteric Dashes</h2>
 
-<p>The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don&#39;t often get to see the light of day.</p>
+<p>The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don't often get to see the light of day.</p>
 
 <p>The <strong>swung dash</strong> (⁓) is an elongated tilde used to stand in for a word being defined in a dictionary.<sup class="footnote-ref" id="fnref:swung"><a href="#fn:swung">2</a></sup></p>
 
@@ -271,7 +284,7 @@
 <blockquote>
 <p>― O Miss Douce! Miss Kennedy protested. You horrid thing!</p>
 
-<p><em>James Joyce&#39;s Ulysses p. 335</em></p>
+<p><em>James Joyce's Ulysses p. 335</em></p>
 </blockquote>
 
 <p>The <strong>hyphen bullet</strong> is a hyphen to be used in place of a bullet point.</p>
@@ -295,7 +308,7 @@
 </span></span><span class="line"><span class="ln">4</span><span class="cl">Supercalifragilisticexpialid-
 </span></span><span class="line"><span class="ln">5</span><span class="cl">ocious
 </span></span><span class="line"><span class="ln">6</span><span class="cl">
-</span></span><span class="line"><span class="ln">7</span><span class="cl">Soft hyphen after &#39;istic&#39;:
+</span></span><span class="line"><span class="ln">7</span><span class="cl">Soft hyphen after 'istic':
 </span></span><span class="line"><span class="ln">8</span><span class="cl">Supercalifragilistic-
 </span></span><span class="line"><span class="ln">9</span><span class="cl">expialidocious
 </span></span></code></pre></body></html>
