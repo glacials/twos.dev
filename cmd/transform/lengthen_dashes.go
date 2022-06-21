@@ -11,8 +11,8 @@ const (
 	styleWrapper = "<span style=\"font-family: sans-serif\">%s</span>"
 )
 
-// LengthenDashes updates dashes.html to use a variable-width font for dashes
-// so that its examples of en dash, em dash, and hyphen look different enough
+// LengthenDashes updates dashes to use a variable-width fonts
+// en dashes, em dashes, and hyphens look different
 // from each other.
 //
 // LengthenDashes implements document.Transformation.
