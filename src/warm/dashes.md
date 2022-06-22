@@ -33,7 +33,7 @@ Speaking in ems, it follows, is functionally equivalent to speaking in font size
 
 The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.
 
-The em came about in the times of the printing press, when every `M` type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the `M` type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. Practically this was a non-change, but the updated definition allowed the `M` and the em to be decoupled—in the same way the SI second was decoupled from the Earth by defining it in terms of [radioactive decay](https://en.wikipedia.org/wiki/Caesium_standard).
+The em came about in the times of the printing press, when every `M` type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the `M` type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. At the time this was effectively a non-change, but the updated definition allowed the `M` and the em to be decoupled.
 
 #### The Em Dash
 
@@ -41,7 +41,7 @@ With the tailwind given by the definition of the em, the em dash is easily defin
 
 #### The Root Em
 
-The `rem` or **root em** is a twist on the em. It is relative not to the parent context's font size, but to the root context's; in a web page, this is `<html>`. This allows one to escape relativity hell without reverting to absolutes:
+The `rem` or **root em** is a twist on the em. It is relative not to the parent context's font size, but to the root context's (in a web page, `<html>`). This allows one to escape relativity hell without reverting to absolutes:
 
 ```plain
 html: 16pt              (default     = 16pt)
@@ -56,10 +56,11 @@ context: requested size (calculation = final size)
   → child element
 ```
 
-### The Point
-The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on 1/72 in per point. It's no coincidence if 72 dots per inch rings a bell for screen density. `1pt` = 1 dot.
+#### Aside: The Point
 
-That said, super high resolution displays have caused organizations to invent their own ways of scaling on behalf of softwares that expect 72 dpi displays, like Android's [density-independent pixels](https://developer.android.com/training/multiscreen/screendensities#TaskUseDP) or `dp`, and Windows's [effective pixels](https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor) or `ep`/`epx`. The tumultuous history, as it happens, hasn't ended.
+It’s hard to define the em in terms of points without defining the point. The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on `1/72in` per point. This varies greatly among displays, devices, and assistive technologies; for example, a 21” 1440p display has more pixels per inch than a 27” 1440p display. To wrangle the variability, there exist new unstandardized concepts like [density-independent pixels](https://developer.android.com/training/multiscreen/screendensities#TaskUseDP) on Android and [effective pixels](https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor) on Windows. The tumultuous history, as it happens, hasn't ended.
+
+Based on the displays I develop on, I’ve settled on a rough mental framework of “1px of em length per pt” because it’s close enough to true and easy to remember: a 16pt font has a 16px em and is therefore 16px high.
 
 ## Advanced Usage
 
