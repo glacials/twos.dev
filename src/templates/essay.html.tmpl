@@ -15,9 +15,17 @@
 
       // TODO: Move to static generation
       if (document.location.hostname == "localhost") {
-        const socket = new WebSocket("ws://localhost:8100/ws");
-        socket.addEventListener("message", function (event) {
-          location.reload();
+        const wsurl = "ws://localhost:8100/ws";
+        const socket = new WebSocket(wsurl);
+        socket.addEventListener("message", (event) => location.reload());
+        socket.addEventListener("close", (event) => {
+          console.log("backup initiating");
+          setInterval(() => {
+            const sock = new WebSocket("ws://localhost:8100/ws");
+            sock.addEventListener("open", (event) => {
+              location.reload();
+            });
+          }, 1000);
         });
       }
     </script>
