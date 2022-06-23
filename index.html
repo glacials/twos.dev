@@ -11,14 +11,29 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-2876079-11");
+
+      
+      if (document.location.hostname == "localhost") {
+        const wsurl = "ws://localhost:8100/ws";
+        const socket = new WebSocket(wsurl);
+        socket.addEventListener("message", (event) => location.reload());
+        socket.addEventListener("close", (event) => {
+          console.log("backup initiating");
+          setInterval(() => {
+            const sock = new WebSocket("ws://localhost:8100/ws");
+            sock.addEventListener("open", (event) => {
+              location.reload();
+            });
+          }, 1000);
+        });
+      }
     </script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="Portfolio for Benjamin Carlsson" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content="Benjamin Carlsson" />
+    <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -32,118 +47,135 @@
       href="/feed.atom"
     />
     <title>Benjamin Carlsson</title>
-    <link rel="stylesheet" href="style.css" />
+    <link rel="stylesheet" href="/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+      integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+      integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
   </head>
 
   <body>
     <div class="container">
-      <header>&#9825; <a href="index.html">twos.dev</a></header>
-      <div style="margin: auto; text-align: center">
-        <h1>Benjamin Carlsson</h1>
-        <p>an engineer in Seattle, WA</p>
-        <p>
-          <a href="benjamincarlsson.vcf">Contact card</a>
-        </p>
-        <a href="mailto:ben@twos.dev" style="white-space: nowrap"
-          >ben@twos.dev</a
-        >,
-        <a href="https://twitter.com/glcls" style="white-space: nowrap"
-          >@glcls</a
-        >,
-        <a href="https://github.com/glacials" style="white-space: nowrap"
-          >github.com/glacials</a
-        >,
-        <a href="https://linkedin.com/in/ben" style="white-space: nowrap"
-          >linkedin.com/in/ben</a
-        >
-      </div>
+      <header>
+        <p style="text-align:center">
+  ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+</p>
+<p style="text-align:center">
+  &rarr;
+  <a href="/">Writing</a>
+  
+    &larr;
+  
+  <a href="/cv.html">CV</a>
+  
+    &larr;
+  
+  <a href="/guide.html">User Guide</a>
+  
+    &larr;
+  
+  <a href="/software.html">Software</a>
+  
+    &larr;
+  
+</p>
+<p style="text-align:center">
+  
+</p>
 
-      <h2>About me</h2>
-      <ul>
-        <li>Working with me? See my <a href="guide.html">user guide</a></li>
-        <li>Thinking about working with me? See my <a href="cv.html">CV</a></li>
-      </ul>
+        
+      </header>
+      <article>
+        
+        <html><head></head><body><div style="margin: auto; text-align: center">
+  <h1>Benjamin Carlsson</h1>
+  <p>an engineer in Seattle, WA</p>
+  <p>
+    <a href="benjamincarlsson.vcf">Contact card</a>
+  </p>
+  <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>,
+  <a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a>,
+  <a href="https://github.com/glacials" style="white-space: nowrap">github.com/glacials</a>,
+  <a href="https://linkedin.com/in/ben" style="white-space: nowrap">linkedin.com/in/ben</a>
+</div>
 
-      <h2>Writing</h2>
-      <ul>
-        <li>
-          <a href="hotsauce.html">When the April Fool's Day Prank is Real</a>
-        </li>
-        <li><a href="apple.html">From Google to Apple</a></li>
-        <li><a href="autism.html">Anonymously Autistic</a></li>
-        <li><a href="tattoo.html">Tattoos as Moral Contracts</a> (2021)</li>
-        <li><a href="thepopin.html">The Remote Pop-In</a> (2021)</li>
-      </ul>
+<h2>Writing</h2>
+<ul>
+  <li>
+    <a href="hotsauce.html">When the April Fool's Day Prank is Real</a>
+  </li>
+  <li><a href="apple.html">From Google to Apple</a></li>
+  <li><a href="autism.html">Anonymously Autistic</a></li>
+  <li><a href="tattoo.html">Tattoos as Moral Contracts</a> (2021)</li>
+  <li><a href="thepopin.html">The Remote Pop-In</a> (2021)</li>
+</ul>
 
-      <h2>Projects</h2>
-      <ul>
-        <li><a href="https://license.land">Licenseland</a> (S)</li>
-        <li><a href="https://pricegun.twos.dev">Pricegun</a> (S)</li>
-        <li>
-          <a href="https://whatsinstandard.com">What's in Standard?</a> (M)
-        </li>
-        <li><a href="https://splits.io">Splits.io</a> (L)</li>
-      </ul>
 
-      <!-- draft
-      <h2>2022</h2>
-      <p>
-        In 2022 I came out as autistic, continued with my photography hobby, and
-        started writing more.
-      </p>
-      -->
 
-      <h2>2021</h2>
-      <p>In 2021 I started learning interior design and photography.</p>
+<h2>2021</h2>
+<p>In 2021 I started learning interior design and photography.</p>
 
-      <div class="photo-grid">
-        <a href="/img/photography/2021/IMG_0385.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0385.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0501.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0501.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0597.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0597.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0602.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0602.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0615.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0615.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0629.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0629.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0638.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0638.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0644.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0644.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0661.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0661.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0711.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0711.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0818.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0818.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_0859.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_0859.JPG"
-        /></a>
-        <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"
-          ><img src="/img/thumb/photography/2021/IMG_1270.JPG"
-        /></a>
-      </div>
-
+<div class="photo-grid">
+  <a href="/img/photography/2021/IMG_0385.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0385.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0501.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0501.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0597.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0597.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0602.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0602.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0615.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0615.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0629.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0629.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0638.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0638.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0644.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0644.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0661.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0661.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0711.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0711.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0818.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0818.JPG"/></a>
+  <a href="/img/photography/2021/IMG_0859.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_0859.JPG"/></a>
+  <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"><img src="/img/thumb/photography/2021/IMG_1270.JPG"/></a>
+</div>
+</body></html>
+      </article>
       <footer>
-        &#9825; <a href="index.html">twos.dev</a> /
-        <a
-          href="https://github.com/glacials/twos.dev/blob/main/public/index.html"
-          >Source</a
-        >
+        <hr />
+        <p>
+          
+            &larr; <a href="/">twos.dev</a>
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/index.html.tmpl"
+                  >src/cold/index.html.tmpl</a
+                >
+              
+              <br />
+              
+                published
+                2021 April
+                  / last updated
+                  2022 June
+                
+              
+            </i>
+          </small>
+        </p>
       </footer>
     </div>
   </body>

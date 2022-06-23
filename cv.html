@@ -11,14 +11,29 @@
         dataLayer.push(arguments);
       }
       gtag("js", new Date());
-
       gtag("config", "UA-2876079-11");
+
+      
+      if (document.location.hostname == "localhost") {
+        const wsurl = "ws://localhost:8100/ws";
+        const socket = new WebSocket(wsurl);
+        socket.addEventListener("message", (event) => location.reload());
+        socket.addEventListener("close", (event) => {
+          console.log("backup initiating");
+          setInterval(() => {
+            const sock = new WebSocket("ws://localhost:8100/ws");
+            sock.addEventListener("open", (event) => {
+              location.reload();
+            });
+          }, 1000);
+        });
+      }
     </script>
     <meta charset="utf-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="CV for Benjamin Carlsson" />
-    <link rel="icon" href="/favicon.ico" />
+    <meta name="description" content="Benjamin Carlsson" />
+    <link rel="icon" href="favicon.ico" />
     <link
       rel="alternate"
       type="application/rss+xml"
@@ -31,217 +46,252 @@
       title="twos.dev"
       href="/feed.atom"
     />
-    <title>Benjamin Carlsson CV</title>
-    <link rel="stylesheet" href="style.css" />
-    <style>
-      h3.company {
-        margin-bottom: 0;
-        margin-top: 0;
-      }
-      .role {
-        padding-left: 1rem;
-      }
-      @media (min-width: 34em) {
-        }
-        .left {
-          float: left;
-          margin-top: 1em;
-        }
-        .right {
-          float: right;
-          text-align: right;
-          margin-top: 1em;
-          margin-right: 10px;
-        }
-      }
-    </style>
+    <title>Benjamin Carlsson</title>
+    <link rel="stylesheet" href="/style.css" />
+
+    <link
+      rel="stylesheet"
+      href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+      integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+      crossorigin="anonymous"
+    />
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+      integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+      crossorigin="anonymous"
+    ></script>
+    <script
+      defer
+      src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+      integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+      crossorigin="anonymous"
+      onload="renderMathInElement(document.body);"
+    ></script>
   </head>
 
   <body>
     <div class="container">
-      <header>&larr; <a href="index.html">twos.dev</a></header>
-      <div style="margin: auto; text-align: center">
-        <h1>Benjamin Carlsson</h1>
-        <p>Staff-level Backend Software Engineer</p>
-        <p>
-          <a
-            href="https://twos.dev/ben-carlsson-resume.pdf"
-            style="white-space: nowrap"
-          >
-            PDF version
-          </a>
-        </p>
-        <p>
-          <a href="mailto:ben@twos.dev" style="white-space: nowrap"
-            >ben@twos.dev</a
-          >,
-          <a href="https://twitter.com/glcls" style="white-space: nowrap"
-            >@glcls</a
-          >,
-          <a href="https://github.com/glacials" style="white-space: nowrap"
-            >github.com/glacials</a
-          >,
-          <a href="https://linkedin.com/in/ben" style="white-space: nowrap"
-            >linkedin.com/in/ben</a
-          >
-        </p>
-      </div>
-      <h2>Job history</h2>
-      <div>
-        <div class="left">
-          <h3 class="company">YourBase</h3>
-          <div class="role">Staff Software Engineer, Tech Lead</div>
-        </div>
-        <div class="right">
-          Remote (Seattle, WA)<br />
-          April 2020&ndash;Present
-        </div>
-        <div style="clear: both"></div>
-      </div>
-      <ul>
-        <li>
-          Proposed and led company-wide pivot from unsuccessful CI-based test
-          selection product to successful lightweight
-          <a href="https://vimeo.com/530517699">Python and Ruby libraries</a>,
-          which landed enterprise customers like Yelp and Venmo
-        </li>
-        <li>
-          Used packaged Go binary as a performant backend to trace and
-          understand code paths to skip tests that don't need to run, bringing
-          customer test times from 1+ hours to ~10 minutes, reducing carbon
-          footprint and speeding up engineers
-        </li>
-        <li>
-          Built and scaled team by 3x in a year, leading senior level engineers
-        </li>
-        <li>
-          Optimized the company's most expensive API endpoint from 12s+ to
-          &lt;50ms within four weeks of joining
-        </li>
-        <li>Python, Go, Ruby, Docker</li>
-      </ul>
-      <div class="left">
-        <h3 class="company">Splits.io</h3>
-        <div class="role">Founder & CEO</div>
-      </div>
-      <div class="right">
-        Remote (Seattle, WA)<br />
-        December 2018&ndash;April 2020
-      </div>
-      <div style="clear: both"></div>
-      <ul>
-        <li>
-          Improved a costly, unstable side project to a profitable, stable one
-          one.
-        </li>
-        <li>
-          Led a team of three in engineering, product, design, and marketing
-        </li>
-        <li>Ruby on Rails, JavaScript, Vue, WebSockets, Docker</li>
-        <li>
-          Today, serves 15k+ monthly active users with zero maintenance effort
-        </li>
-      </ul>
-      <div class="left">
-        <h3 class="company">Twitch</h3>
-        <div class="role">Senior Software Engineer</div>
-      </div>
-      <div class="right">
-        San Francisco → Remote (Seattle, WA)<br />
-        2014&ndash;2019
-      </div>
-      <div style="clear: both"></div>
-      <ul>
-        <li>
-          Built and scaled foundational products like Chat to 46B message
-          deliveries / day
-        </li>
-        <li>Migrated monolothic web app to microservices</li>
-        <li>Founded and bootstrapped internal authn/authz team</li>
-        <li>Designed and taught new-hire Go class</li>
-        <li>Mentored several engineers and interns</li>
-        <li>
-          Ran <a href="https://www.twitch.tv/videos/93570710">panels</a>; helped
-          creators and fans interact in socially healthy ways
-        </li>
-        <li>Ruby on Rails, Go, JavaScript, Terraform</li>
-        <li>Led to $1B acquisition by Amazon</li>
-      </ul>
-      <div class="left">
-        <h3 class="company">Lawrence Livermore National Laboratory</h3>
-        <div class="role">Software Engineering Intern</div>
-      </div>
-      <div class="right">
-        Livermore, CA<br />
-        2010&ndash;2013 (summers)
-      </div>
-      <div style="clear: both"></div>
-      <ul>
-        <li>
-          Built <a href="https://github.com/esgf">open source tools</a> for the
-          climate science community
-        </li>
-      </ul>
+      <header>
+        <p style="text-align:center">
+  ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+</p>
+<p style="text-align:center">
+  &rarr;
+  <a href="/">Writing</a>
+  
+    &rarr;
+  
+  <a href="/cv.html">CV</a>
+  
+    &larr;
+  
+  <a href="/guide.html">User Guide</a>
+  
+    &larr;
+  
+  <a href="/software.html">Software</a>
+  
+    &larr;
+  
+</p>
+<p style="text-align:center">
+  
+</p>
 
-      <h2>Projects</h2>
-      <ul>
-        <li>
-          <a href="https://license.land">Licenseland</a> (2019&ndash;present)
-          <ul>
-            <li>Dead simple dual-licensing for open source projects</li>
-            <li>Vue, Firebase, Stripe Connect</li>
-          </ul>
-        </li>
-        <li>
-          <a href="https://whatsinstandard.com">What's in Standard?</a>
-          (2013&ndash;present)
-          <ul>
-            <li>A reference tool for Magic: The Gathering players</li>
-            <li>Twitter bot, mobile app, and web app all powered by one API</li>
-            <li>Firebase, Flutter, and Vue respectively</li>
-          </ul>
-        </li>
-        <li>
-          <a href="https://github.com/glacials/housebot">Housebot</a>
-          (2014&ndash;2015)
-          <ul>
-            <li>
-              A Twitch bot that lets chat participants vote to control my lights
-            </li>
-            <li>Node.js, Z-Wave API, Phillips Hue API</li>
-            <li>
-              In retrospect I wouldn't recommend letting the internet control
-              pieces of your house :)
-            </li>
-          </ul>
-        </li>
-      </ul>
+        
+      </header>
+      <article>
+        
+        <html><head></head><body><div style="margin: auto; text-align: center">
+  <h1>Benjamin Carlsson</h1>
+  <p>Staff-level Backend Software Engineer</p>
+  <p>
+    <a href="https://twos.dev/ben-carlsson-resume.pdf" style="white-space: nowrap">
+      PDF version
+    </a>
+  </p>
+  <p>
+    <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>,
+    <a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a>,
+    <a href="https://github.com/glacials" style="white-space: nowrap">github.com/glacials</a>,
+    <a href="https://linkedin.com/in/ben" style="white-space: nowrap">linkedin.com/in/ben</a>
+  </p>
+</div>
+<h2>Job history</h2>
+<div>
+  <div class="left">
+    <h3 class="company">YourBase</h3>
+    <div class="role">Staff Software Engineer, Tech Lead</div>
+  </div>
+  <div class="right">
+    Remote (Seattle, WA)<br/>
+    April 2020<span style="font-family: sans-serif">–</span>Present
+  </div>
+  <div style="clear: both"></div>
+</div>
+<ul>
+  <li>
+    Proposed and led company-wide pivot from unsuccessful CI-based test
+    selection product to successful lightweight
+    <a href="https://vimeo.com/530517699">Python and Ruby libraries</a>, which
+    landed enterprise customers like Yelp and Venmo
+  </li>
+  <li>
+    Used packaged Go binary as a performant backend to trace and understand code
+    paths to skip tests that don't need to run, bringing customer test times
+    from 1+ hours to ~10 minutes, reducing carbon footprint and speeding up
+    engineers
+  </li>
+  <li>Built and scaled team by 3x in a year, leading senior level engineers</li>
+  <li>
+    Optimized the company's most expensive API endpoint from 12s+ to &lt;50ms
+    within four weeks of joining
+  </li>
+  <li>Python, Go, Ruby, Docker</li>
+</ul>
+<div class="left">
+  <h3 class="company">Splits.io</h3>
+  <div class="role">Founder &amp; CEO</div>
+</div>
+<div class="right">
+  Remote (Seattle, WA)<br/>
+  December 2018<span style="font-family: sans-serif">–</span>April 2020
+</div>
+<div style="clear: both"></div>
+<ul>
+  <li>
+    Improved a costly, unstable side project to a profitable, stable one one.
+  </li>
+  <li>Led a team of three in engineering, product, design, and marketing</li>
+  <li>Ruby on Rails, JavaScript, Vue, WebSockets, Docker</li>
+  <li>Today, serves 15k+ monthly active users with zero maintenance effort</li>
+</ul>
+<div class="left">
+  <h3 class="company">Twitch</h3>
+  <div class="role">Senior Software Engineer</div>
+</div>
+<div class="right">
+  San Francisco → Remote (Seattle, WA)<br/>
+  2014<span style="font-family: sans-serif">–</span>2019
+</div>
+<div style="clear: both"></div>
+<ul>
+  <li>
+    Built and scaled foundational products like Chat to 46B message deliveries /
+    day
+  </li>
+  <li>Migrated monolothic web app to microservices</li>
+  <li>Founded and bootstrapped internal authn/authz team</li>
+  <li>Designed and taught new-hire Go class</li>
+  <li>Mentored several engineers and interns</li>
+  <li>
+    Ran <a href="https://www.twitch.tv/videos/93570710">panels</a>; helped
+    creators and fans interact in socially healthy ways
+  </li>
+  <li>Ruby on Rails, Go, JavaScript, Terraform</li>
+  <li>Led to $1B acquisition by Amazon</li>
+</ul>
+<div class="left">
+  <h3 class="company">Lawrence Livermore National Laboratory</h3>
+  <div class="role">Software Engineering Intern</div>
+</div>
+<div class="right">
+  Livermore, CA<br/>
+  2010<span style="font-family: sans-serif">–</span>2013 (summers)
+</div>
+<div style="clear: both"></div>
+<ul>
+  <li>
+    Built <a href="https://github.com/esgf">open source tools</a> for the
+    climate science community
+  </li>
+</ul>
 
-      <h2>Skills</h2>
-      <ul>
-        <li>Soft: Community management, technical writing, open source</li>
-        <li>Code: Go, Ruby, Python, JavaScript, HTML/CSS, Vue</li>
-        <li>Tools: Docker, PostgreSQL, Terraform, Firebase, AWS</li>
-      </ul>
+<h2>Projects</h2>
+<ul>
+  <li>
+    <a href="https://license.land">Licenseland</a> (2019<span style="font-family: sans-serif">–</span>present)
+    <ul>
+      <li>Dead simple dual-licensing for open source projects</li>
+      <li>Vue, Firebase, Stripe Connect</li>
+    </ul>
+  </li>
+  <li>
+    <a href="https://whatsinstandard.com">What's in Standard?</a>
+    (2013<span style="font-family: sans-serif">–</span>present)
+    <ul>
+      <li>A reference tool for Magic: The Gathering players</li>
+      <li>Twitter bot, mobile app, and web app all powered by one API</li>
+      <li>Firebase, Flutter, and Vue respectively</li>
+    </ul>
+  </li>
+  <li>
+    <a href="https://github.com/glacials/housebot">Housebot</a>
+    (2014<span style="font-family: sans-serif">–</span>2015)
+    <ul>
+      <li>
+        A Twitch bot that lets chat participants vote to control my lights
+      </li>
+      <li>Node.js, Z-Wave API, Phillips Hue API</li>
+      <li>
+        In retrospect I wouldn't recommend letting the internet control pieces
+        of your house :)
+      </li>
+    </ul>
+  </li>
+</ul>
 
-      <h2>Education</h2>
-      <ul>
-        <li>B.Sc. in Computer science</li>
-        <li>California State University, Chico (2010&ndash;2013)</li>
-        <li>President of CSLUG, the Chico State Linux User Group</li>
-        <li>Member of the computer science honors society UPE</li>
-      </ul>
+<h2>Skills</h2>
+<ul>
+  <li>Soft: Community management, technical writing, open source</li>
+  <li>Code: Go, Ruby, Python, JavaScript, HTML/CSS, Vue</li>
+  <li>Tools: Docker, PostgreSQL, Terraform, Firebase, AWS</li>
+</ul>
 
-      <h2>Follow up</h2>
-      <p>
-        <a href="mailto:ben@twos.dev">Email me</a> or
-        <a href="https://twos.dev/ben-carlsson-resume.pdf">see a PDF version</a>
-      </p>
+<h2>Education</h2>
+<ul>
+  <li>B.Sc. in Computer science</li>
+  <li>California State University, Chico (2010<span style="font-family: sans-serif">–</span>2013)</li>
+  <li>President of CSLUG, the Chico State Linux User Group</li>
+  <li>Member of the computer science honors society UPE</li>
+</ul>
+
+<h2>Follow up</h2>
+<p>
+  <a href="mailto:ben@twos.dev">Email me</a> or
+  <a href="https://twos.dev/ben-carlsson-resume.pdf">see a PDF version</a>
+</p>
+</body></html>
+      </article>
       <footer>
-        &larr; <a href="index.html">twos.dev</a> /
-        <a href="https://github.com/glacials/twos.dev/blob/main/public/cv.html"
-          >Source</a
-        >
+        <hr />
+        <p>
+          
+            &larr; <a href="/">twos.dev</a>
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/cv.html.tmpl"
+                  >src/cold/cv.html.tmpl</a
+                >
+              
+              <br />
+              
+                published
+                2021 December
+                  / last updated
+                  2022 June
+                
+              
+            </i>
+          </small>
+        </p>
       </footer>
     </div>
   </body>
