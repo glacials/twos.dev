@@ -1,35 +1,33 @@
-<p style="text-align:center">
-  ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
-</p>
-<p style="text-align:center">
-  &rarr;
-  <a href="/">Writing</a>
-  {{ if lt .NavIndex 2 }}
-    &larr;
-  {{ else }}
-    &rarr;
-  {{ end }}
-  <a href="/cv.html">CV</a>
-  {{ if lt .NavIndex 3 }}
-    &larr;
-  {{ else }}
-    &rarr;
-  {{ end }}
-  <a href="/guide.html">User Guide</a>
-  {{ if lt .NavIndex 4 }}
-    &larr;
-  {{ else }}
-    &rarr;
-  {{ end }}
-  <a href="/software.html">Software</a>
-  {{ if lt .NavIndex 5 }}
-    &larr;
-  {{ else }}
-    &rarr;
-  {{ end }}
-</p>
-<p style="text-align:center">
-  {{ if .Parent }}
-    <a href="{{ .Parent }}">back to {{ .Parent }}</a>
-  {{ end }}
-</p>
+<nav>
+  <p style="text-align:center">
+    ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+  </p>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" {{ if eq .Shortname "index" }}class="selected"{{ end }}
+      >Writing</a
+    >
+    <span class="arrow"></span>
+    <a href="/cv.html" {{ if eq .Shortname "cv" }}class="selected"{{ end }}
+      >CV</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/guide.html"
+      {{ if eq .Shortname "guide" }}class="selected"{{ end }}
+      >User Guide</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/software.html"
+      {{ if eq .Shortname "software" }}class="selected"{{ end }}
+      >Software</a
+    >
+    <span class="arrow"></span>
+  </p>
+  <p style="text-align:center">
+    {{ if .Parent }}
+      <a href="{{ .Parent }}">back to {{ .Parent }}</a>
+    {{ end }}
+  </p>
+</nav>

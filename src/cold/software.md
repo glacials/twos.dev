@@ -16,12 +16,12 @@ type: page
   side project (React)
 - ♡ [Licenseland](https://license.land): Dual-license provider for open source
   developers (Vue)
-- ♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Library for
-  stateless UUID-based URL slugs (Ruby on Rails)
-- ♡ [Indenter](https://github.com/glacials/indenter): Library to supply
-  syntactic sugar for neatly-indented CLI output (Python)
+- ♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Library to add
+  zero-configuration stateless UUID-based URL slugs (Ruby on Rails)
+- ♡ [Indenter](https://github.com/glacials/indenter): Library to add syntactic
+  sugar for neatly-indented CLI output (Python)
 - [Housebot](https://github.com/glacials/housebot): Twitch chat bot that allows
-  viewers to control your smart home (Node, CoffeeScript)
+  viewers to vote to control smart lights (Node, CoffeeScript)
 - [Mainframe](https://github.com/glacials/mainframe): A bespoke home server running on an RPi in my closet
 - [kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)
 

@@ -41,10 +41,10 @@ func (t Type) IsGallery() bool { return t == GalleryType }
 // BaseVars is the set of variables present when executing the template for any
 // document.
 type BaseVars struct {
-	SourcePath string
 	Parent     string
+	Shortname  string
+	SourcePath string
 	Type       Type
-	NavIndex   int
 
 	Now time.Time
 }
@@ -57,7 +57,6 @@ type TextVars struct {
 	Body       template.HTML
 	Parent     string
 	SourcePath string
-	Shortname  string
 	Title      string
 
 	CreatedAt time.Time

@@ -54,6 +54,24 @@ body {
   max-width: 75em;
 }
 
+/* Hovered/selected nav links should make arrows on their right point left */
+nav a:hover ~ .arrow::before {
+  content: "←" !important;
+}
+
+nav a.selected ~ .arrow::before {
+  content: "←";
+}
+
+/* Hovere/selected  nav links should make arrows on their left point right */
+nav .arrow:has(~ a:hover)::before {
+  content: "→" !important;
+}
+
+nav .arrow:has(~ a.selected)::before {
+  content: "→";
+}
+
 /* Anything that could possibly be an immediate child of .container. Don't want
  * a margin on .container because I want the headings' backgrounds to extend to
  * the left page edge. */

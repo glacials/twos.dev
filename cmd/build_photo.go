@@ -222,8 +222,9 @@ func genGalleryPage(src, dst string) error {
 		Next: next,
 
 		BaseVars: document.BaseVars{
-			Type:       document.GalleryType,
+			Shortname:  "",
 			SourcePath: src,
+			Type:       document.GalleryType,
 		},
 	}
 
