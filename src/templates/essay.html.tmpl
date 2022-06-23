@@ -97,10 +97,12 @@
       <footer>
         <hr />
         <p>
-          {{ if .Parent }}
-            &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
-          {{ else }}
-            &larr; <a href="/">twos.dev</a>
+          {{ if ne .Shortname "index" }}
+            {{ if .Parent }}
+              &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+            {{ else }}
+              &larr; <a href="/">twos.dev</a>
+            {{ end }}
           {{ end }}
         </p>
         <p>
