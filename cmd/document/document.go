@@ -27,10 +27,42 @@ func stripHTMLExtension(filename string) string {
 type Type int
 
 const (
-	DraftType = iota
+	DraftType Type = iota
 	PostType
 	PageType
+	GalleryType
 )
+
+func (t Type) IsDraft() bool   { return t == DraftType }
+func (t Type) IsPost() bool    { return t == PostType }
+func (t Type) IsPage() bool    { return t == PageType }
+func (t Type) IsGallery() bool { return t == GalleryType }
+
+// BaseVars is the set of variables present when executing the template for any
+// document.
+type BaseVars struct {
+	SourcePath string
+	Parent     string
+	Type       Type
+	NavIndex   int
+
+	Now time.Time
+}
+
+// TextVars is a set of variables present when executing text-based documents
+// like PageType, PostType, or DraftType.
+type TextVars struct {
+	BaseVars
+
+	Body       template.HTML
+	Parent     string
+	SourcePath string
+	Shortname  string
+	Title      string
+
+	CreatedAt time.Time
+	UpdatedAt time.Time
+}
 
 // Document is a file that is sent down a pipeline of transformations in order,
 // starting from reading a file and ending in writing a static .html file ready
@@ -51,9 +83,9 @@ type Document struct {
 	// calculation; the parent is not guaranteed to exist.
 	Parent string
 
-	// SourceURL is the path to the source file for the document, relative to the
+	// SourcePath is the path to the source file for the document, relative to the
 	// repository root.
-	SourceURL string
+	SourcePath string
 
 	// Shortname is a human-readable, one-word, all-lowercase tag for the
 	// document. The shortname is the part of the filename before the extension. A
@@ -66,16 +98,7 @@ type Document struct {
 
 	// TemplateVars is the set of variables that will be passed to the
 	// template.Execute method when it's eventually called.
-	TemplateVars struct {
-		Body      template.HTML
-		Parent    string
-		SourceURL string
-		Shortname string
-		Title     string
-
-		CreatedAt time.Time
-		UpdatedAt time.Time
-	}
+	TemplateVars TextVars
 
 	// Title is the title of the document that should be displayed in the <title>
 	// tag, any relevant <meta> tags, etc. It may be blank, so a fallback should
@@ -129,13 +152,10 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 	}
 
 	return Document{
-		Body:     body,
-		Template: *t,
-		SourceURL: fmt.Sprintf(
-			"https://github.com/glacials/twos.dev/blob/main/%s",
-			path,
-		),
-		Stat: stat,
+		Body:       body,
+		Template:   *t,
+		SourcePath: path,
+		Stat:       stat,
 
 		transformations: trs,
 		debug:           debug,

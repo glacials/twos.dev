@@ -32,8 +32,8 @@ var (
 	}
 
 	buildTheWorldTriggers = map[string]struct{}{
-		"src/templates/*.html": {},
-		"*.css":                {},
+		"src/templates/*": {},
+		"*.css":           {},
 	}
 )
 

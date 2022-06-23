@@ -1,0 +1,35 @@
+<p style="text-align:center">
+  ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+</p>
+<p style="text-align:center">
+  &rarr;
+  <a href="/">Writing</a>
+  {{ if lt .NavIndex 2 }}
+    &larr;
+  {{ else }}
+    &rarr;
+  {{ end }}
+  <a href="/cv.html">CV</a>
+  {{ if lt .NavIndex 3 }}
+    &larr;
+  {{ else }}
+    &rarr;
+  {{ end }}
+  <a href="/guide.html">User Guide</a>
+  {{ if lt .NavIndex 4 }}
+    &larr;
+  {{ else }}
+    &rarr;
+  {{ end }}
+  <a href="/software.html">Software</a>
+  {{ if lt .NavIndex 5 }}
+    &larr;
+  {{ else }}
+    &rarr;
+  {{ end }}
+</p>
+<p style="text-align:center">
+  {{ if .Parent }}
+    <a href="{{ .Parent }}">back to {{ .Parent }}</a>
+  {{ end }}
+</p>

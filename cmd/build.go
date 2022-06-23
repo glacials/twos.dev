@@ -7,7 +7,7 @@ import (
 )
 
 const (
-	photoGalleryTemplatePath = "src/templates/imgcontainer.html"
+	photoGalleryTemplatePath = "src/templates/imgcontainer.html.tmpl"
 	staticAssetsDir          = "public"
 	sourceDir                = "src"
 )

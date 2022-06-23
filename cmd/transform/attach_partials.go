@@ -2,6 +2,7 @@ package transform
 
 import (
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
@@ -18,20 +19,29 @@ import (
 //
 // AttachPartials implements document.Transformation.
 func AttachPartials(d document.Document) (document.Document, error) {
+	err := LoadPartials(&d.Template)
+	if err != nil {
+		return document.Document{}, err
+	}
+
+	return d, nil
+}
+
+func LoadPartials(t *template.Template) error {
 	partials, err := filepath.Glob(fmt.Sprintf("src/templates/_*.html.tmpl"))
 	if err != nil {
-		return document.Document{}, fmt.Errorf("can't glob for partials: %w", err)
+		return fmt.Errorf("can't glob for partials: %w", err)
 	}
 
 	for _, partial := range partials {
 		name := filepath.Base(partial)
 		name = strings.TrimSuffix(name, ".html.tmpl")
 		name = strings.TrimPrefix(name, "_")
-		p := d.Template.New(name)
+		p := t.New(name)
 
 		s, err := ioutil.ReadFile(partial)
 		if err != nil {
-			return document.Document{}, fmt.Errorf(
+			return fmt.Errorf(
 				"can't read partial `%s`: %w",
 				partial,
 				err,
@@ -39,7 +49,7 @@ func AttachPartials(d document.Document) (document.Document, error) {
 		}
 
 		if _, err := p.Parse(string(s)); err != nil {
-			return document.Document{}, fmt.Errorf(
+			return fmt.Errorf(
 				"can't parse partial `%s`: %w",
 				partial,
 				err,
@@ -47,5 +57,5 @@ func AttachPartials(d document.Document) (document.Document, error) {
 		}
 	}
 
-	return d, nil
+	return nil
 }

@@ -1,12 +1,12 @@
 @media (prefers-color-scheme: light) {
   :root {
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
-    --bg-a: rgba(255, 255, 230, 1);
+    --bg-a: rgba(255, 255, 240, 1);
     --fg-a-a: rgba(76, 68, 66, 1);
-    --fg-a-b: rgba(179, 68, 66, 1);
+    --fg-a-b: rgba(149, 38, 36, 1);
 
-    --bg-b: rgba(179, 68, 66, 1);
-    --fg-b-a: rgba(255, 255, 230, 1);
+    --bg-b: rgba(48, 48, 78, 1);
+    --fg-b-a: rgba(255, 255, 240, 1);
 
     --bg-c: rgba(240, 235, 210, 1);
     --fg-c-a: rgba(56, 48, 46, 1);
@@ -18,11 +18,11 @@
 @media (prefers-color-scheme: dark) {
   :root {
     --bg-a: rgba(76, 68, 66, 1);
-    --fg-a-a: rgba(255, 255, 230, 1);
+    --fg-a-a: rgba(255, 255, 240, 1);
     --fg-a-b: rgba(255, 122, 120, 1);
 
     --bg-b: rgba(179, 68, 66, 1);
-    --fg-b-a: rgba(255, 255, 230, 1);
+    --fg-b-a: rgba(255, 255, 240, 1);
 
     --bg-c: rgba(86, 78, 76, 1);
     --fg-c-a: rgba(248, 248, 242, 1);
@@ -33,8 +33,9 @@
 
 html {
   font-family: Menlo, Monaco, Oxygen, monospace;
+  font-size: 0.9em;
   line-height: 1.75em;
-  letter-spacing: -0.05em;
+  letter-spacing: -0.07em;
   text-align: justify;
 
   font-smoothing: antialiased;
@@ -56,8 +57,6 @@ body {
 /* Anything that could possibly be an immediate child of .container. Don't want
  * a margin on .container because I want the headings' backgrounds to extend to
  * the left page edge. */
-header,
-footer,
 ol,
 p,
 ul {
@@ -94,7 +93,8 @@ h6 {
   text-align: center;
 }
 
-h1,
+h1 {
+}
 h2,
 h3,
 h4,
@@ -244,6 +244,27 @@ pre {
   letter-spacing: 0;
   margin-bottom: 2em;
   padding: 1rem;
+}
+
+/* CV-specific */
+h3.company {
+  margin-bottom: 0;
+  margin-top: 0;
+}
+.role {
+  padding-left: 1rem;
+}
+@media (min-width: 34em) {
+  .left {
+    float: left;
+    margin-top: 1em;
+  }
+  .right {
+    float: right;
+    text-align: right;
+    margin-top: 1em;
+    margin-right: 10px;
+  }
 }
 
 /* Background */

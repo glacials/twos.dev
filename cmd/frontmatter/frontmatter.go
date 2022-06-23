@@ -11,20 +11,17 @@ import (
 )
 
 type internalMatter struct {
-	Type     string
-	Filename string `yaml:"filename"`
-	// Date is an alias for CreatedAt.
-	Date      time.Time `yaml:"date"`
-	CreatedAt time.Time `yaml:"created"`
+	Type      string    `yaml:"type"`
+	Filename  string    `yaml:"filename"`
+	CreatedAt time.Time `yaml:"date"`
 	UpdatedAt time.Time `yaml:"updated"`
 }
 
 type Matter struct {
-	Type        document.Type
-	Shortname   string
-	CreatedAt   time.Time
-	UpdatedAt   time.Time
-	PublishedAt time.Time
+	Type      document.Type
+	Shortname string
+	CreatedAt time.Time
+	UpdatedAt time.Time
 }
 
 // Parse returns the parsed frontmatter and the remaining non-frontmatter
@@ -45,12 +42,10 @@ func Parse(r io.Reader) (Matter, []byte, error) {
 		t = document.PostType
 	case "page":
 		t = document.PageType
+	case "gallery":
+		t = document.GalleryType
 	default:
 		return Matter{}, nil, fmt.Errorf("invalid document type %s", matter.Type)
-	}
-
-	if matter.CreatedAt.IsZero() {
-		matter.CreatedAt = matter.Date
 	}
 
 	filenameParts := strings.Split(matter.Filename, ".")

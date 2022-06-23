@@ -73,32 +73,59 @@
   <body>
     <div class="container">
       <header>
-        {{ if .Parent }}
-          &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
-        {{ else }}
-          &larr; <a href="/">twos.dev</a>
-        {{ end }}
-        {{ if not .CreatedAt.IsZero }}
-          /
-          {{ .CreatedAt.Format "2006 January" }}
-          {{ if not .UpdatedAt.IsZero }}
-            (updated {{ .UpdatedAt.Format "2006 January" }})
-          {{ end }}
+        {{ template "nav" . }}
+        {{ if and (.Type.IsPost)  (not .CreatedAt.IsZero) }}
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
+                | last updated
+                {{ .UpdatedAt.Format "2006 January" }}
+              {{ end }}</i
+            >
+          </small>
         {{ end }}
       </header>
-      <article>{{ template "body" . }}</article>
+      <article>
+        {{ if .Type.IsDraft }}
+          <div style="text-align:center; background-color: var(--bg-c)">
+            DRAFT
+          </div>
+        {{ end }}
+        {{ template "body" . }}
+      </article>
       <footer>
-        {{ if .Parent }}
-          &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
-        {{ else }}
-          &larr; <a href="/">twos.dev</a>
-        {{ end }}
-        /
-        {{ if .SourceURL }}
-          <a href="{{ .SourceURL }}">Source</a>
-        {{ else }}
-          <a href="https://github.com/glacials/twos.dev">Source</a>
-        {{ end }}
+        <hr />
+        <p>
+          {{ if .Parent }}
+            &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+          {{ else }}
+            &larr; <a href="/">twos.dev</a>
+          {{ end }}
+        </p>
+        <p>
+          <small>
+            <i>
+              {{ if .SourcePath }}
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/{{ .SourcePath }}"
+                  >{{ .SourcePath }}</a
+                >
+              {{ else }}
+                <a href="https://github.com/glacials/twos.dev">Source</a>
+              {{ end }}
+              <br />
+              {{ if not .CreatedAt.IsZero }}
+                published
+                {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
+                  / last updated
+                  {{ .UpdatedAt.Format "2006 January" }}
+                {{ end }}
+              {{ end }}
+            </i>
+          </small>
+        </p>
       </footer>
     </div>
   </body>

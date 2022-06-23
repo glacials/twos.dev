@@ -12,29 +12,26 @@ import (
 	"strconv"
 	"strings"
 
+	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/cmd/transform"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
 )
 
-type pageVars struct {
-	SourceURL string
-	Parent    string
-}
-
-type galleryPageVars struct {
-	pageVars
+type galleryVars struct {
+	document.BaseVars
 
 	ImageSRC string
 	Alt      string
 	Camera   string
 
-	Prev *galleryImageVars
-	Next *galleryImageVars
+	Prev *imageVars
+	Next *imageVars
 }
 
-type galleryImageVars struct {
+type imageVars struct {
 	PageLink string
 	ImageSRC string
 }
@@ -111,7 +108,10 @@ func genThumbnail(src, dst string, width int) error {
 
 	draw.CatmullRom.Scale(
 		dstPhoto,
-		image.Rectangle{image.Point{0, 0}, image.Point{width, width}},
+		image.Rectangle{
+			image.Point{0, 0},
+			image.Point{width, width},
+		},
 		srcPhoto,
 		image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
 		draw.Over,
@@ -158,6 +158,10 @@ func genGalleryPage(src, dst string) error {
 		return fmt.Errorf("can't create imgcontainer template: %w", err)
 	}
 
+	if err = transform.LoadPartials(t); err != nil {
+		return err
+	}
+
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
 		return fmt.Errorf(
 			"can't create imgcontainer directory `%s`: %w",
@@ -188,17 +192,17 @@ func genGalleryPage(src, dst string) error {
 		func(file string) bool { return filepath.Base(file) == filepath.Base(src) },
 	)
 
-	var prev, next *galleryImageVars
+	var prev, next *imageVars
 	if i > 0 {
 		img := filepath.Base(files[i-1])
-		prev = &galleryImageVars{
+		prev = &imageVars{
 			ImageSRC: img,
 			PageLink: fmt.Sprintf("%s.html", img),
 		}
 	}
 	if i < len(files)-1 {
 		img := filepath.Base(files[i+1])
-		next = &galleryImageVars{
+		next = &imageVars{
 			ImageSRC: img,
 			PageLink: fmt.Sprintf("%s.html", img),
 		}
@@ -209,7 +213,7 @@ func genGalleryPage(src, dst string) error {
 		return fmt.Errorf("can't get camera for `%s`: %w", src, err)
 	}
 
-	v := galleryPageVars{
+	v := galleryVars{
 		Alt:      "",
 		Camera:   camera,
 		ImageSRC: filepath.Base(src),
@@ -217,11 +221,9 @@ func genGalleryPage(src, dst string) error {
 		Prev: prev,
 		Next: next,
 
-		pageVars: pageVars{
-			SourceURL: fmt.Sprintf(
-				"https://github.com/glacials/twos.dev/blob/main/%s",
-				src,
-			),
+		BaseVars: document.BaseVars{
+			Type:       document.GalleryType,
+			SourcePath: src,
 		},
 	}
 

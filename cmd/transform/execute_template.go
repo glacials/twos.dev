@@ -11,8 +11,9 @@ import (
 )
 
 type pageVars struct {
-	// SourceURL is the GitHub URL to the source code for the page being rendered.
-	SourceURL string
+	// SourcePath is the path to the source code for the page being rendered,
+	// relative to the repository root.
+	SourcePath string
 
 	// Parent, if nonempty, is a path to the page that "owns" this one. For
 	// example, tattoo.html owns tattoo_symbols.html. (index.html does not own any
