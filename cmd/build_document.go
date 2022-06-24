@@ -26,6 +26,7 @@ var transformations = []document.Transformation{
 	transform.BuildTOC,        // Beware, re-renders entire doc
 
 	// English-based transformations
+	transform.UnescapeHTML,
 	transform.ReplaceSmartQuotes, // Must come after all HTML re-renders
 
 	// Document-specific peculiarities

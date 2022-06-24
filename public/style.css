@@ -159,6 +159,15 @@ video {
   transform: rotate(-0.5deg);
 }
 
+a img.silly {
+  transition: 1s;
+}
+
+a:hover img.silly {
+  transform: rotate(360deg);
+  transition: 300s;
+}
+
 video + video {
   margin-left: 1em;
 }
