@@ -14,10 +14,7 @@ var transformations = []document.Transformation{
 	transform.DiscoverParent,
 
 	// Frontmatter-based transformations
-	transform.DiscoverDates,
-	transform.DiscoverType,
-	transform.DiscoverShortname,
-	transform.StripFrontmatter,
+	transform.ExtractFrontmatter,
 
 	// Markup-based transformations
 	transform.RenderMarkdown,
