@@ -65,7 +65,9 @@
       <p style="text-align: center; margin-top: 0">
         <i>{{ .Camera }}</i>
       </p>
-      <p style="text-align: center">&copy; 2021-2022 Benjamin Carlsson</p>
+      <p style="text-align: center">
+        &copy; {{ .TakenAt.Year }} Benjamin Carlsson
+      </p>
       <footer style="margin-top: 1em">
         <p>
           {{ if .Parent }}

@@ -1,6 +1,7 @@
 package cmd
 
 import (
+	"errors"
 	"fmt"
 	"html/template"
 	"image"
@@ -11,6 +12,7 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"time"
 
 	"github.com/glacials/twos.dev/cmd/document"
 	"github.com/glacials/twos.dev/cmd/transform"
@@ -26,6 +28,7 @@ type galleryVars struct {
 	ImageSRC string
 	Alt      string
 	Camera   string
+	TakenAt  time.Time
 
 	Prev *imageVars
 	Next *imageVars
@@ -208,7 +211,7 @@ func genGalleryPage(src, dst string) error {
 		}
 	}
 
-	camera, err := camera(src)
+	camera, datetime, err := photodata(src)
 	if err != nil {
 		return fmt.Errorf("can't get camera for `%s`: %w", src, err)
 	}
@@ -217,6 +220,7 @@ func genGalleryPage(src, dst string) error {
 		Alt:      "",
 		Camera:   camera,
 		ImageSRC: filepath.Base(src),
+		TakenAt:  datetime,
 
 		Prev: prev,
 		Next: next,
@@ -235,12 +239,12 @@ func genGalleryPage(src, dst string) error {
 	return nil
 }
 
-// camera extracts the camera string (including lens, etc.) from the image at
-// the given path.
-func camera(src string) (string, error) {
+// photodata extracts the EXIF string (including lens, etc.) and timestamp from
+// the image at the given path.
+func photodata(src string) (string, time.Time, error) {
 	f, err := os.Open(src)
 	if err != nil {
-		return "", fmt.Errorf("can't open photo: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't open photo: %w", err)
 	}
 	defer f.Close()
 
@@ -248,37 +252,53 @@ func camera(src string) (string, error) {
 
 	x, err := exif.Decode(f)
 	if err != nil {
-		return "", fmt.Errorf("can't read exif data: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't read exif data: %w", err)
 	}
 
 	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
 	if err != nil {
-		return "", fmt.Errorf("can't get focal length: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't get focal length: %w", err)
 	}
 
 	camModel, err := x.Get(exif.Model) // normally, don't ignore errors!
 	if err != nil {
-		return "", fmt.Errorf("can't get camera model: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't get camera model: %w", err)
 	}
 
 	cam, err := camModel.StringVal()
 	if err != nil {
-		return "", fmt.Errorf("can't render camera as string: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't render camera as string: %w", err)
 	}
 
 	fnum, err := exifFractionToDecimal(x, exif.FNumber)
 	if err != nil {
-		return "", fmt.Errorf("can't get focal length: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't get focal length: %w", err)
 	}
 
 	exposure, err := x.Get(exif.ExposureTime)
 	if err != nil {
-		return "", fmt.Errorf("can't get exposure: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't get exposure: %w", err)
 	}
 
 	iso, err := x.Get(exif.ISOSpeedRatings)
 	if err != nil {
-		return "", fmt.Errorf("can't get ISO: %w", err)
+		return "", time.Time{}, fmt.Errorf("can't get ISO: %w", err)
+	}
+
+	timestamp, err := x.DateTime()
+	if err != nil {
+		if errors.Is(err, exif.TagNotPresentError("")) {
+			return "", time.Time{}, fmt.Errorf(
+				"photo has no EXIF timestamp... what do?",
+			)
+		}
+		return "", time.Time{}, fmt.Errorf("can't get photo datetime: %w", err)
+	}
+
+	_, err = x.Get(exif.GPSInfoIFDPointer)
+	if err == nil {
+		// location data is set! no no no!
+		panic(fmt.Sprintf("photo %s has location data! please strip it.", src))
 	}
 
 	return fmt.Sprintf(
@@ -288,7 +308,7 @@ func camera(src string) (string, error) {
 		fnum,
 		strings.Replace(exposure.String(), "\"", "", 2),
 		iso,
-	), nil
+	), timestamp, nil
 }
 
 func exifFractionToDecimal(
