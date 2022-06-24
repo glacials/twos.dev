@@ -11,37 +11,42 @@ import (
 )
 
 const (
-	videoPartial = "video"
+	videoPartial = "videos"
 )
 
 // videoPartialVars are the template variables given to
 // src/templates/_video.html.tmpl to render a video inline. At least one of its
 // {Light,Dark}{MOV,MP4} fields must be set to a video path.
-type videoPartialVars struct {
+type videosPartialVars struct {
+	Videos  []videoVars
+	Caption graphic.Caption
+}
+
+type videoVars struct {
 	LightMOV graphic.SRC
 	LightMP4 graphic.SRC
 	DarkMOV  graphic.SRC
 	DarkMP4  graphic.SRC
 }
 
-// AttachVideoTemplateFuncs makes the img and imgs functions available to the
-// document's templates.
+// AttachVideoTemplateFuncs makes the video and videos functions available to
+// the document's templates. video is an alias for videos.
 func AttachVideoTemplateFuncs(d document.Document) (document.Document, error) {
-	video, err := video(d.Shortname)
+	videos, err := videos(d.Shortname)
 	if err != nil {
 		return document.Document{}, err
 	}
 
 	_ = d.Template.Funcs(
-		template.FuncMap{"video": video},
+		template.FuncMap{"video": videos, "videos": videos},
 	)
 
 	return d, nil
 }
 
-func video(
+func videos(
 	pageShortname string,
-) (func(graphic.Shortname, graphic.Caption) (template.HTML, error), error) {
+) (func(graphic.Caption, ...graphic.Shortname) (template.HTML, error), error) {
 	partial, err := ioutil.ReadFile(partialPath(videoPartial))
 	if err != nil {
 		return nil, err
@@ -52,30 +57,37 @@ func video(
 		return nil, err
 	}
 
-	return func(videoShortname graphic.Shortname, caption graphic.Caption) (template.HTML, error) {
-		lightMP4, darkMP4, err := graphic.LightDark(
-			pageShortname,
-			videoShortname,
-			map[string]struct{}{"mp4": {}},
-		)
-		if err != nil {
-			return "", fmt.Errorf("can't process video: %w", err)
+	return func(videoCaption graphic.Caption, videoShortnames ...graphic.Shortname) (template.HTML, error) {
+		v := videosPartialVars{
+			Caption: videoCaption,
 		}
 
-		lightMOV, darkMOV, err := graphic.LightDark(
-			pageShortname,
-			videoShortname,
-			map[string]struct{}{"mp4": {}},
-		)
-		if err != nil {
-			return "", fmt.Errorf("can't process video: %w", err)
-		}
+		for _, videoShortname := range videoShortnames {
+			lightMP4, darkMP4, err := graphic.LightDark(
+				pageShortname,
+				videoShortname,
+				map[string]struct{}{"mp4": {}},
+			)
+			if err != nil {
+				return "", fmt.Errorf("can't process video: %w", err)
+			}
 
-		v := videoPartialVars{
-			DarkMOV:  darkMOV,
-			DarkMP4:  darkMP4,
-			LightMOV: lightMOV,
-			LightMP4: lightMP4,
+			lightMOV, darkMOV, err := graphic.LightDark(
+				pageShortname,
+				videoShortname,
+				map[string]struct{}{"mp4": {}},
+			)
+			if err != nil {
+				return "", fmt.Errorf("can't process video: %w", err)
+			}
+
+			v.Videos = append(v.Videos, videoVars{
+				DarkMOV:  darkMOV,
+				DarkMP4:  darkMP4,
+				LightMOV: lightMOV,
+				LightMP4: lightMP4,
+			},
+			)
 		}
 
 		var buf bytes.Buffer
@@ -83,7 +95,7 @@ func video(
 			return "", fmt.Errorf(
 				"can't execute video template for `%s`/`%s`: %w",
 				pageShortname,
-				videoShortname,
+				videoShortnames,
 				err,
 			)
 		}

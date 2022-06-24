@@ -1,3 +1,5 @@
+<figure style="text-align: center">
+  {{range .Videos}}
 <video autoplay loop muted style="max-height: 40em; max-width: 100%">
   <!-- video->source->media queries not supportd :( commented for now
   <source
@@ -36,3 +38,6 @@
     {{ end }}
   {{ end }}
 </video>
+{{end}}
+  <figcaption>{{.Caption}}</figcaption>
+</figure>
