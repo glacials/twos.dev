@@ -8,7 +8,7 @@
     --bg-b: rgba(48, 48, 78, 1);
     --fg-b-a: rgba(255, 255, 240, 1);
 
-    --bg-c: rgba(240, 235, 210, 1);
+    --bg-c: rgba(240, 240, 225, 1);
     --fg-c-a: rgba(56, 48, 46, 1);
 
     --bg-c-a: rgba(130, 130, 130, 1); /* Darker version of bg-c, for shadows */
@@ -55,8 +55,16 @@ body {
 }
 
 /* In case none of the below rules trigger, display a backup */
-nav .arrow::before {
+nav .arrow:not(.first):not(.last)::before {
   content: "↔";
+}
+
+nav .arrow.first::before {
+  content: "→";
+}
+
+nav .arrow.last::before {
+  content: "←";
 }
 
 /* Hovered/selected nav links should make arrows on their right point left */
@@ -261,7 +269,6 @@ pre .line {
 
 pre {
   background-color: var(--bg-c);
-  box-shadow: 0.5em 0.5em 0em var(--bg-c-a);
   color: var(--fg-c-a);
   font-family: "PT Mono", monospace;
   letter-spacing: 0;
