@@ -15,6 +15,7 @@ import (
 	"time"
 
 	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/cmd/frontmatter"
 	"github.com/glacials/twos.dev/cmd/transform"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
@@ -228,7 +229,7 @@ func genGalleryPage(src, dst string) error {
 		BaseVars: document.BaseVars{
 			Shortname:  "",
 			SourcePath: src,
-			Type:       document.GalleryType,
+			Type:       frontmatter.GalleryType,
 		},
 	}
 

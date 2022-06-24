@@ -6,6 +6,7 @@ import (
 	"time"
 
 	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/cmd/frontmatter"
 	"github.com/gorilla/feeds"
 )
 
@@ -34,7 +35,7 @@ var (
 //
 // UpdateFeeds implements document.Transformation.
 func UpdateFeeds(d document.Document) (document.Document, error) {
-	if d.Type != document.PostType {
+	if d.Type != frontmatter.PostType {
 		return d, nil
 	}
 	if d.Title == "" {

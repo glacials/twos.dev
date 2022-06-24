@@ -7,7 +7,6 @@ import (
 	"time"
 
 	fm "github.com/adrg/frontmatter"
-	"github.com/glacials/twos.dev/cmd/document"
 )
 
 type internalMatter struct {
@@ -17,8 +16,38 @@ type internalMatter struct {
 	UpdatedAt time.Time `yaml:"updated"`
 }
 
+type Type int
+
+const (
+	// DraftType designates a document that should not be linked to from anywhere.
+	DraftType Type = iota
+
+	// PostType designates a document with a front-facing post date and listed by
+	// recency in a blog-style page.
+	PostType
+
+	// PageType designates a document that is manually linked to from somewhere on
+	// the site. It has a publish date, but it is less pronounced in display than
+	// posts.
+	PageType
+
+	// GaleryType designates a document whose sole purpose is to display a large
+	// image.
+	GalleryType
+)
+
+func (t Type) IsDraft() bool   { return t == DraftType }
+func (t Type) IsPost() bool    { return t == PostType }
+func (t Type) IsPage() bool    { return t == PageType }
+func (t Type) IsGallery() bool { return t == GalleryType }
+
 type Matter struct {
-	Type      document.Type
+	// Type is the class of document, specified by the author.
+	Type Type
+
+	// Shortname is a human-readable, one-word, all-lowercase tag for the
+	// document. The shortname is the part of the filename before the extension. A
+	// document's shortname must never change after it is published.
 	Shortname string
 	CreatedAt time.Time
 	UpdatedAt time.Time
@@ -34,16 +63,16 @@ func Parse(r io.Reader) (Matter, []byte, error) {
 		return Matter{}, nil, fmt.Errorf("can't parse frontmatter: %w", err)
 	}
 
-	var t document.Type
+	var t Type
 	switch matter.Type {
 	case "", "draft":
-		t = document.DraftType
+		t = DraftType
 	case "post":
-		t = document.PostType
+		t = PostType
 	case "page":
-		t = document.PageType
+		t = PageType
 	case "gallery":
-		t = document.GalleryType
+		t = GalleryType
 	default:
 		return Matter{}, nil, fmt.Errorf("invalid document type %s", matter.Type)
 	}

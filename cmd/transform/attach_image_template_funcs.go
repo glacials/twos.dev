@@ -14,20 +14,18 @@ const (
 	imgPartial = "imgs"
 )
 
-// imgPartialVars are the template variables given to
-// src/templates/_img.html.tmpl to render an image inline. At least one of its
-// {Light,Dark} fields must be set to an image path.
-type imgPartialVars struct {
-	imageVars
-	Caption string
-}
-
 // imgsPartialVars are the template variables given to
 // src/templates/_imgs.html.tmpl to render multiple images inline. At least one
 // of its {Light,Dark} fields must be set to an image path.
 type imgsPartialVars struct {
 	Images  []imageVars
 	Caption graphic.Caption
+}
+
+type imageVars struct {
+	Alt   graphic.Alt
+	Light graphic.SRC
+	Dark  graphic.SRC
 }
 
 // AttachImageTemplateFuncs makes the img and imgs functions available to the

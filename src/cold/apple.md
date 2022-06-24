@@ -724,7 +724,7 @@ a Calendar float to add the event; I’ve learned to use
 with the sender’s event, where <code>invite.ics</code> seems to be a local
 copy.
 
-{{ video  "Opening a Google Calendar invitation from within the Apple ecosystem." "mail"}}
+{{ video "Opening a Google Calendar invitation from within the Apple ecosystem." "mail"}}
 
 
 Google Calendar is the stickiest part of the Google ecosystem due to the

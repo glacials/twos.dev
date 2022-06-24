@@ -7,7 +7,6 @@ import (
 	"path/filepath"
 
 	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/graphic"
 )
 
 type pageVars struct {
@@ -30,12 +29,6 @@ type essayPageVars struct {
 
 	CreatedAt string
 	UpdatedAt string
-}
-
-type imageVars struct {
-	Alt   graphic.Alt
-	Light graphic.SRC
-	Dark  graphic.SRC
 }
 
 // ExecuteTemplate executes the essay template with the document's template

@@ -14,6 +14,8 @@ import (
 	"runtime"
 	"strings"
 	"time"
+
+	"github.com/glacials/twos.dev/cmd/frontmatter"
 )
 
 const htmlExtension = "html.tmpl"
@@ -24,27 +26,13 @@ func stripHTMLExtension(filename string) string {
 	return filename
 }
 
-type Type int
-
-const (
-	DraftType Type = iota
-	PostType
-	PageType
-	GalleryType
-)
-
-func (t Type) IsDraft() bool   { return t == DraftType }
-func (t Type) IsPost() bool    { return t == PostType }
-func (t Type) IsPage() bool    { return t == PageType }
-func (t Type) IsGallery() bool { return t == GalleryType }
-
 // BaseVars is the set of variables present when executing the template for any
 // document.
 type BaseVars struct {
 	Parent     string
 	Shortname  string
 	SourcePath string
-	Type       Type
+	Type       frontmatter.Type
 
 	Now time.Time
 }
@@ -72,7 +60,7 @@ type TextVars struct {
 // (read: rendered) into a .html file, then by setting its title to the first
 // heading in its contents, then by executing it as a template.
 type Document struct {
-	Type Type
+	frontmatter.Matter
 
 	// Body is the current state of the body of the document.
 	Body []byte
@@ -86,9 +74,6 @@ type Document struct {
 	// repository root.
 	SourcePath string
 
-	// Shortname is a human-readable, one-word, all-lowercase tag for the
-	// document. The shortname is the part of the filename before the extension. A
-	// document's shortname must never change after it is published.
 	Shortname string
 
 	// Template is the set of templates this file needs to execute (perhaps more).
@@ -107,9 +92,6 @@ type Document struct {
 	// Stat holds filesystem information about the original source file for this
 	// document.
 	Stat os.FileInfo
-
-	CreatedAt time.Time
-	UpdatedAt time.Time
 
 	transformations []Transformation
 	debug           bool
