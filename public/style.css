@@ -55,8 +55,16 @@ body {
 }
 
 /* In case none of the below rules trigger, display a backup */
-nav .arrow::before {
+nav .arrow:not(.first):not(.last)::before {
   content: "↔";
+}
+
+nav .arrow.first::before {
+  content: "→";
+}
+
+nav .arrow.last::before {
+  content: "←";
 }
 
 /* Hovered/selected nav links should make arrows on their right point left */

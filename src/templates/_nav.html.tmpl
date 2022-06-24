@@ -3,12 +3,16 @@
     ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
   </p>
   <p style="text-align:center">
-    <span class="arrow"></span>
-    <a href="/" {{ if eq .Shortname "index" }}class="selected"{{ end }}
+    <span class="arrow first"></span>
+    <a
+      href="/"
+      {{ if eq .Shortname "index" }}class="selected"{{ end }}
       >Writing</a
     >
     <span class="arrow"></span>
-    <a href="/cv.html" {{ if eq .Shortname "cv" }}class="selected"{{ end }}
+    <a
+      href="/cv.html"
+      {{ if eq .Shortname "cv" }}class="selected"{{ end }}
       >CV</a
     >
     <span class="arrow"></span>
@@ -23,7 +27,7 @@
       {{ if eq .Shortname "software" }}class="selected"{{ end }}
       >Software</a
     >
-    <span class="arrow"></span>
+    <span class="arrow last"></span>
   </p>
   <p style="text-align:center">
     {{ if .Parent }}
