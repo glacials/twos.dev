@@ -19,7 +19,6 @@ func ExtractFrontmatter(d document.Document) (document.Document, error) {
 	} else {
 		d.Matter = matter
 		d.Shortname = matterToShortname(matter, d.Stat.Name())
-		d.Type = matter.Type
 
 		d.Body = body
 	}

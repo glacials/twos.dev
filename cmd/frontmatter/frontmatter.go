@@ -10,6 +10,7 @@ import (
 )
 
 type internalMatter struct {
+	TOC       bool      `yaml:"toc"`
 	Type      string    `yaml:"type"`
 	Filename  string    `yaml:"filename"`
 	CreatedAt time.Time `yaml:"date"`
@@ -49,6 +50,10 @@ type Matter struct {
 	// document. The shortname is the part of the filename before the extension. A
 	// document's shortname must never change after it is published.
 	Shortname string
+
+	// TOC causes a table of contents to be generated if true.
+	TOC bool
+
 	CreatedAt time.Time
 	UpdatedAt time.Time
 }
@@ -80,6 +85,7 @@ func Parse(r io.Reader) (Matter, []byte, error) {
 	filenameParts := strings.Split(matter.Filename, ".")
 
 	return Matter{
+		TOC:       matter.TOC,
 		Type:      t,
 		Shortname: filenameParts[0],
 		CreatedAt: matter.CreatedAt,

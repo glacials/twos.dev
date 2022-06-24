@@ -19,7 +19,7 @@ func DiscoverTitle(d document.Document) (document.Document, error) {
 		return document.Document{}, fmt.Errorf("can't parse HTML: %w", err)
 	}
 
-	if h1, ok := firstH1(h); ok {
+	if h1, ok := firstOfType(h, atom.H1); ok {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
 				d.Title = child.Data
@@ -31,14 +31,15 @@ func DiscoverTitle(d document.Document) (document.Document, error) {
 	return d, nil
 }
 
-func firstH1(n *html.Node) (*html.Node, bool) {
-	if n.DataAtom == atom.H1 {
+// firstOfType returns the first node inside n with the given type.
+func firstOfType(n *html.Node, t atom.Atom) (*html.Node, bool) {
+	if n.DataAtom == t {
 		return n, true
 	}
 
 	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		if h1, ok := firstH1(child); ok {
-			return h1, true
+		if el, ok := firstOfType(child, t); ok {
+			return el, true
 		}
 	}
 

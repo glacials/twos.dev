@@ -23,6 +23,7 @@ var transformations = []document.Transformation{
 	// HTML-based transformations
 	transform.DiscoverTitle,
 	transform.HighlightSyntax, // Beware, re-renders entire doc
+	transform.BuildTOC,        // Beware, re-renders entire doc
 
 	// English-based transformations
 	transform.ReplaceSmartQuotes, // Must come after all HTML re-renders
