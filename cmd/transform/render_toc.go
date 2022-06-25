@@ -10,6 +10,8 @@ import (
 )
 
 type heading struct {
+	node *html.Node
+
 	level       atom.Atom
 	id          string
 	title       string
@@ -31,6 +33,15 @@ func RenderTOC(d document.Document) (document.Document, error) {
 	headings := findHeadings(root, 2, 4)
 	if err != nil {
 		return document.Document{}, fmt.Errorf("can't find headings: %w", err)
+	}
+
+	for _, heading := range headings {
+		if err := addReturnToTopLinks(heading); err != nil {
+			return document.Document{}, fmt.Errorf(
+				"can't add return to top links: %w",
+				err,
+			)
+		}
 	}
 
 	ul := buildTOC(headings)
@@ -88,6 +99,7 @@ func findHeadings(start *html.Node, biggest, smallest int) []heading {
 			headings = append(
 				headings,
 				heading{
+					node:        el,
 					id:          id(el),
 					level:       levels[biggest],
 					title:       el.FirstChild.Data,
@@ -101,6 +113,65 @@ func findHeadings(start *html.Node, biggest, smallest int) []heading {
 	}
 
 	return headings
+}
+
+func addReturnToTopLinks(heading heading) error {
+	totop := html.Node{
+		Type:     html.ElementNode,
+		Data:     atom.A.String(),
+		DataAtom: atom.A,
+		Attr: []html.Attribute{
+			{Key: atom.Href.String(), Val: "#toc"},
+			{
+				Key: atom.Style.String(),
+				Val: "text-decoration: none;",
+			},
+		},
+	}
+	totop.AppendChild(&html.Node{
+		Type: html.TextNode,
+		Data: "↑",
+	})
+
+	tohere := html.Node{
+		Type:     html.ElementNode,
+		Data:     atom.A.String(),
+		DataAtom: atom.A,
+		Attr: []html.Attribute{
+			{Key: atom.Href.String(), Val: fmt.Sprintf("#%s", heading.id)},
+			{
+				Key: atom.Style.String(),
+				Val: "text-decoration: none;",
+			},
+		},
+	}
+	tohere.AppendChild(&html.Node{
+		Type: html.TextNode,
+		Data: "#",
+	})
+
+	span := html.Node{
+		Type:     html.ElementNode,
+		Data:     atom.Span.String(),
+		DataAtom: atom.Span,
+		Attr: []html.Attribute{
+			{Key: atom.Style.String(), Val: "margin-left: 0.5em;"},
+		},
+	}
+
+	span.AppendChild(&tohere)
+	span.AppendChild(&totop)
+
+	heading.node.Parent.InsertBefore(&span, heading.node.NextSibling)
+
+	// Recurse through subheadings
+	for _, heading := range heading.subheadings {
+		if err := addReturnToTopLinks(heading); err != nil {
+			return fmt.Errorf("can't add return to top link: %w", err)
+		}
+	}
+
+	return nil
 }
 
 func headingToText(heading *html.Node) (string, error) {
@@ -128,21 +199,24 @@ func buildTOC(headings []heading) *html.Node {
 	list := html.Node{
 		Type:     html.ElementNode,
 		DataAtom: atom.Ul,
-		Data:     "ol",
+		Data:     atom.Ol.String(),
+		Attr: []html.Attribute{
+			{Key: atom.Id.String(), Val: "toc"},
+		},
 	}
 
 	for _, heading := range headings {
 		li := html.Node{
 			Type:     html.ElementNode,
 			DataAtom: atom.Li,
-			Data:     "li",
+			Data:     atom.Li.String(),
 		}
 		a := html.Node{
 			Type:     html.ElementNode,
 			DataAtom: atom.A,
-			Data:     "a",
+			Data:     atom.A.String(),
 			Attr: []html.Attribute{
-				{Key: "href", Val: fmt.Sprintf("#%s", heading.id)},
+				{Key: atom.Href.String(), Val: fmt.Sprintf("#%s", heading.id)},
 			},
 		}
 		text := html.Node{
@@ -170,7 +244,7 @@ func id(node *html.Node) string {
 	}
 
 	for _, attr := range node.Attr {
-		if attr.Key == "id" {
+		if attr.Key == atom.Id.String() {
 			return attr.Val
 		}
 	}
