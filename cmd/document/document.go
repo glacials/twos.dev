@@ -122,12 +122,12 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 		return Document{}, err
 	}
 
-	essay, err := ioutil.ReadFile("src/templates/essay.html.tmpl")
+	text_document, err := ioutil.ReadFile("src/templates/text_document.html.tmpl")
 	if err != nil {
 		return Document{}, err
 	}
 
-	t, err := template.New("essay").Parse(string(essay))
+	t, err := template.New("text_document").Parse(string(text_document))
 	if err != nil {
 		return Document{}, err
 	}

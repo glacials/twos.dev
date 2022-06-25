@@ -8,7 +8,7 @@ import (
 
 // AttachBodyTemplate defines the a template called body in d.Template with the
 // contents of d.Body, so that it can be included by a page-scoped template like
-// essay.html.tmpl.
+// document.html.tmpl.
 //
 // AttachBodyTemplate implements document.Transformation.
 func AttachBodyTemplate(d document.Document) (document.Document, error) {

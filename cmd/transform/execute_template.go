@@ -20,7 +20,7 @@ type pageVars struct {
 	Parent string
 }
 
-type essayPageVars struct {
+type textDocumentVars struct {
 	pageVars
 
 	Body      template.HTML
@@ -31,8 +31,8 @@ type essayPageVars struct {
 	UpdatedAt string
 }
 
-// ExecuteTemplate executes the essay template with the document's template
-// variables and attached templates as input.
+// ExecuteTemplate executes the text document template with the document's
+// template variables and attached templates as input.
 //
 // ExecuteTemplate implements document.Transformation.
 func ExecuteTemplates(d document.Document) (document.Document, error) {

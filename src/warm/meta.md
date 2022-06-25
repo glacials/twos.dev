@@ -20,7 +20,7 @@ In some ways these goals work against each other; easy creation usually means ea
 I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
 
 - Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in `$EDITOR`)
-- Writing was slowed down by cruft like `<p>` and `<li>`
+- Writing was slowed down by cruft like `&lt;p&gt;` and `<li>`
 - The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring
 
 To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.
