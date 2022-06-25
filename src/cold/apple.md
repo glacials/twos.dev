@@ -177,7 +177,7 @@ There are more factors at play than reputation, like developer experience and
 user experience, but the point stands -- a reputation for killing products
 contributes to more product deaths.
 
-## Specific Notes {#notes}
+## Specific Notes {#specifics}
 
 Below are my notes on moving between the ecosystems at specific touchpoints.
 
@@ -740,9 +740,11 @@ a vital part of my CI/CD pipeline.
 ### Google Drive &rarr; iCloud Drive {#drive}
 
 Most Dropbox-esque apps are the same and iCloud Drive is no exception. Use it
-if you're in the Apple ecosystem, and don't if you're not. Otherwise, the only
-benefit it has over Google Drive is that it synchronizes everything to disk
-instead of mounting a network drive.
+if you're in the Apple ecosystem, and don't if you're not. The biggest downside
+I've witnessed is that iCloud Drive does not have an API. This is not a problem
+when running software on a persistent macOS or Windows machine, but for Linux or
+for ephemeral machines (e.g. CI) the only option is an unofficial
+reverse-engineered solution.
 
 Ecosystem effects of iCloud Drive include a more native sharing flow between
 your drive and apps (in both directions) and a tendancy for first-party and
