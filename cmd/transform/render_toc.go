@@ -16,9 +16,9 @@ type heading struct {
 	subheadings []heading
 }
 
-// BuildTOC checks if the document requested a table of contents (via
+// RenderTOC checks if the document requested a table of contents (via
 // frontmatter) and builds one into it if so.
-func BuildTOC(d document.Document) (document.Document, error) {
+func RenderTOC(d document.Document) (document.Document, error) {
 	if !d.TOC {
 		return d, nil
 	}
