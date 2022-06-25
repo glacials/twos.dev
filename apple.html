@@ -134,7 +134,7 @@ you please.</p>
 
 <h3>Topics</h3>
 
-<ol><li><a href="#why">Why?</a></li><li><a href="#themes">Broad Themes</a><ol><li><a href="#safety">Safety vs. Freedom</a></li><li><a href="#offline">Offline-first vs. Online-first Design</a></li><li><a href="#committment">Committment vs. Experimentation</a></li></ol></li><li><a href="#notes">Specific Notes</a><ol><li><a href="#macos">ArchLinux → macOS</a></li><li><a href="#ipad">Nexus 7 → iPad</a></li><li><a href="#iphone">Pixel → iPhone</a><ol><li><a href="#fi">Google Fi</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#imessage">iMessage</a></li><li><a href="#watch">Moto 360 &rarr; Apple Watch</a></li></ol></li><li><a href="#appletv">Chromecast/Google TV → Apple TV</a><ol><li><a href="#remote">The Remote</a></li></ol></li><li><a href="#home">Google Home → Apple Home</a></li><li><a href="#airpods">Pixel Buds → AirPods Pro</a></li><li><a href="#mail">Gmail → iCloud Mail</a><ol><li><a href="#migrating">Migrating</a></li><li><a href="#daily">Daily Use</a></li></ol></li><li><a href="#calendar">Google Calendar → Apple Calendar</a></li><li><a href="#maps">Google Maps → Apple Maps</a><ol><li><a href="#findmy">Location Sharing &rarr; Find My</a></li></ol></li><li><a href="#safari">Chrome → Safari</a><ol><li><a href="#keychain">iCloud Keychain</a></li></ol></li><li><a href="#numbers">Google Sheets → Numbers</a></li><li><a href="#pages">Google Docs → Pages</a></li><li><a href="#notes-1">Keep → Notes</a></li><li><a href="#reminders">Tasks → Reminders</a></li><li><a href="#siri">Google Assistant → Siri</a></li><li><a href="#shortcuts">Google Assistant Routines / Tasker → Shortcuts</a></li><li><a href="#drive">Google Drive &rarr; iCloud Drive</a></li><li><a href="#music">YouTube Music → Apple Music</a></li><li><a href="#pay">Google Pay → Apple Pay</a></li></ol></li><li><a href="#conclusion">Conclusion</a></li></ol><h2 id="why">Why?</h2>
+<ol><li><a href="#why">Why?</a></li><li><a href="#themes">Broad Themes</a><ol><li><a href="#safety">Safety vs. Freedom</a></li><li><a href="#offline">Offline-first vs. Online-first Design</a></li><li><a href="#committment">Committment vs. Experimentation</a></li></ol></li><li><a href="#specifics">Specific Notes</a><ol><li><a href="#macos">ArchLinux → macOS</a></li><li><a href="#ipad">Nexus 7 → iPad</a></li><li><a href="#iphone">Pixel → iPhone</a><ol><li><a href="#fi">Google Fi</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#imessage">iMessage</a></li><li><a href="#watch">Moto 360 &rarr; Apple Watch</a></li></ol></li><li><a href="#appletv">Chromecast/Google TV → Apple TV</a><ol><li><a href="#remote">The Remote</a></li></ol></li><li><a href="#home">Google Home → Apple Home</a></li><li><a href="#airpods">Pixel Buds → AirPods Pro</a></li><li><a href="#mail">Gmail → iCloud Mail</a><ol><li><a href="#migrating">Migrating</a></li><li><a href="#daily">Daily Use</a></li></ol></li><li><a href="#calendar">Google Calendar → Apple Calendar</a></li><li><a href="#maps">Google Maps → Apple Maps</a><ol><li><a href="#findmy">Location Sharing &rarr; Find My</a></li></ol></li><li><a href="#safari">Chrome → Safari</a><ol><li><a href="#keychain">iCloud Keychain</a></li></ol></li><li><a href="#numbers">Google Sheets → Numbers</a></li><li><a href="#pages">Google Docs → Pages</a></li><li><a href="#notes">Keep → Notes</a></li><li><a href="#reminders">Tasks → Reminders</a></li><li><a href="#siri">Google Assistant → Siri</a></li><li><a href="#shortcuts">Google Assistant Routines / Tasker → Shortcuts</a></li><li><a href="#drive">Google Drive &rarr; iCloud Drive</a></li><li><a href="#music">YouTube Music → Apple Music</a></li><li><a href="#pay">Google Pay → Apple Pay</a></li></ol></li><li><a href="#conclusion">Conclusion</a></li></ol><h2 id="why">Why?</h2>
 
 <p>My life is in Google more than anyone I know. The usual suspects sure --
 Gmail, Photos, Chrome, etc. -- but also the ones people stay away from --
@@ -328,7 +328,7 @@ for their app to be successful, and they did.</p>
 user experience, but the point stands -- a reputation for killing products
 contributes to more product deaths.</p>
 
-<h2 id="notes">Specific Notes</h2>
+<h2 id="specifics">Specific Notes</h2>
 
 <p>Below are my notes on moving between the ecosystems at specific touchpoints.</p>
 
@@ -904,7 +904,7 @@ is nice until headers get long and multiworded. Overall it’s a wash.</p>
 
 <p>(To be filled in; I have not had much Pages experience.)</p>
 
-<h3 id="notes-1">Keep → Notes</h3>
+<h3 id="notes">Keep → Notes</h3>
 
 <p>I value simplicity and elasticity in notetaking -- get out of my way and let
 me write, then let me deal with it later. Keep supplies that. Its layout is
@@ -1004,9 +1004,11 @@ a vital part of my CI/CD pipeline.</p>
 <h3 id="drive">Google Drive &rarr; iCloud Drive</h3>
 
 <p>Most Dropbox-esque apps are the same and iCloud Drive is no exception. Use it
-if you're in the Apple ecosystem, and don't if you're not. Otherwise, the only
-benefit it has over Google Drive is that it synchronizes everything to disk
-instead of mounting a network drive.</p>
+if you're in the Apple ecosystem, and don't if you're not. The biggest downside
+I've witnessed is that iCloud Drive does not have an API. This is not a problem
+when running software on a persistent macOS or Windows machine, but for Linux or
+for ephemeral machines (e.g. CI) the only option is an unofficial
+reverse-engineered solution.</p>
 
 <p>Ecosystem effects of iCloud Drive include a more native sharing flow between
 your drive and apps (in both directions) and a tendancy for first-party and
