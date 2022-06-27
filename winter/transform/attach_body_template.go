@@ -3,7 +3,7 @@ package transform
 import (
 	"fmt"
 
-	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/winter/document"
 )
 
 // AttachBodyTemplate defines the a template called body in d.Template with the

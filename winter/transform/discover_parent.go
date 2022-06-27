@@ -5,7 +5,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/winter/document"
 )
 
 // DiscoverParent determines whether d has a parent document, and attaches it if

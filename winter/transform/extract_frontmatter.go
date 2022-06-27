@@ -5,8 +5,8 @@ import (
 	"strings"
 	"time"
 
-	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/frontmatter"
+	"github.com/glacials/twos.dev/winter/document"
+	"github.com/glacials/twos.dev/winter/frontmatter"
 )
 
 // ExtractFrontmatter slurps the document's frontmatter and saves it to the

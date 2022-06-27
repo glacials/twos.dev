@@ -14,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/frontmatter"
-	"github.com/glacials/twos.dev/cmd/transform"
+	"github.com/glacials/twos.dev/winter/document"
+	"github.com/glacials/twos.dev/winter/frontmatter"
+	"github.com/glacials/twos.dev/winter/transform"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"

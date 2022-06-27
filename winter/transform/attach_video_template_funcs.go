@@ -6,8 +6,8 @@ import (
 	"html/template"
 	"io/ioutil"
 
-	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/graphic"
+	"github.com/glacials/twos.dev/winter/document"
+	"github.com/glacials/twos.dev/winter/graphic"
 )
 
 const (

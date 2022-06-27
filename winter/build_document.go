@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/transform"
+	"github.com/glacials/twos.dev/winter/document"
+	"github.com/glacials/twos.dev/winter/transform"
 )
 
 var transformations = []document.Transformation{

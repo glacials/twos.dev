@@ -5,8 +5,8 @@ import (
 	"io/ioutil"
 	"time"
 
-	"github.com/glacials/twos.dev/cmd/document"
-	"github.com/glacials/twos.dev/cmd/frontmatter"
+	"github.com/glacials/twos.dev/winter/document"
+	"github.com/glacials/twos.dev/winter/frontmatter"
 	"github.com/gorilla/feeds"
 )
 

@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"html"
 
-	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/winter/document"
 )
 
 // UnescapeHTML converts any escaped characters back to unescaped.

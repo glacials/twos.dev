@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
-	"github.com/glacials/twos.dev/cmd/document"
+	"github.com/glacials/twos.dev/winter/document"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )

@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	live "github.com/glacials/twos.dev/cmd/livereload"
+	live "github.com/glacials/twos.dev/winter/livereload"
 	"github.com/spf13/cobra"
 )
 
