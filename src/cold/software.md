@@ -22,7 +22,7 @@ type: page
   sugar for neatly-indented CLI output (Python)
 - [Housebot](https://github.com/glacials/housebot): Twitch chat bot that allows
   viewers to vote to control smart lights (Node, CoffeeScript)
-- [Mainframe](https://github.com/glacials/mainframe): A bespoke home server running on an RPi in my closet
+- [Mainframe](https://github.com/glacials/mainframe): A bespoke home server running on an RPi in my closet (Go)
 - [kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)
 
 ## Contributions
