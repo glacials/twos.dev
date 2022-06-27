@@ -1,36 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <script
-      async
-      src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
-    ></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag() {
-        dataLayer.push(arguments);
-      }
-      gtag("js", new Date());
-
-      gtag("config", "UA-2876079-11");
-    </script>
-    <meta charset="utf-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-    <meta name="description" content="twos.dev Photo Viewer" />
-    <link rel="icon" href="favicon.ico" />
-    <link
-      rel="alternate"
-      type="application/rss+xml"
-      title="twos.dev"
-      href="/feed.rss"
-    />
-    <link
-      rel="alternate"
-      type="application/atom+xml"
-      title="twos.dev"
-      href="/feed.atom"
-    />
+    {{ template "head" }}
     {{ with .Prev }}
       <link rel="preload" as="image" href="{{ .ImageSRC }}" />
     {{ end }}
@@ -38,7 +9,6 @@
       <link rel="preload" as="image" href="{{ .ImageSRC }}" />
     {{ end }}
     <title>twos.dev Photo Viewer</title>
-    <link rel="stylesheet" href="/style.css" />
   </head>
 
   <body>

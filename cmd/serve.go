@@ -25,6 +25,7 @@ var (
 		"src/cold/*.html.tmpl":       buildDocument,
 		"src/cold/*.html":            buildDocument,
 		"src/cold/*.md":              buildDocument,
+		"src/favicon/*":              staticFileBuilder("src/favicon"),
 		"src/warm/*.md":              buildDocument,
 		"public/*":                   staticFileBuilder("public"),
 		"public/*/*":                 staticFileBuilder("public"),

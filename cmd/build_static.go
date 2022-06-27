@@ -13,7 +13,8 @@ import (
 // staticFileBuilder returns a builder (it is not one itself) that will build
 // src into a rel-relative mirrored directory in dst. For example,
 // staticFileBuilder("public") returns a builder func(src, dst string) which
-// when called with f("public/a/b/c", "dist") puts the file in dist/a/b/c.
+// when called with f("public/a/b/c", "dist") puts the built result in
+// dist/a/b/c.
 func staticFileBuilder(rel string) func(src, dst string) error {
 	return func(src, dst string) error {
 		rel, err := filepath.Rel(rel, src)
