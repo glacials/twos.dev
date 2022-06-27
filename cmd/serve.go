@@ -1,17 +1,17 @@
 package cmd
 
 import (
+	"context"
+	"errors"
 	"fmt"
 	"log"
 	"net/http"
 	"os"
 	"os/signal"
-	"path/filepath"
 	"syscall"
 
-	"github.com/fsnotify/fsnotify"
+	live "github.com/glacials/twos.dev/cmd/livereload"
 	"github.com/spf13/cobra"
-	"golang.org/x/net/websocket"
 )
 
 const dst = "dist"
@@ -20,7 +20,7 @@ var (
 	noBuild *bool
 	debug   *bool
 
-	builders = map[string]func(src, dst string) error{
+	builders = map[string]live.Builder{
 		"src/img/*/*/*.[jJ][pP][gG]": photoBuilder,
 		"src/cold/*.html.tmpl":       buildDocument,
 		"src/cold/*.html":            buildDocument,
@@ -31,9 +31,11 @@ var (
 		"public/*/*/*":               staticFileBuilder("public"),
 	}
 
-	buildTheWorldTriggers = map[string]struct{}{
-		"src/templates/*": {},
-		"*.css":           {},
+	// globalBuilders must be separate from builders because buildTheWorld depends
+	// on builders being populated.
+	globalBuilders = map[string]live.Builder{
+		"src/templates/*": func(_, _ string) error { return buildTheWorld() },
+		"*.css":           func(_, _ string) error { return buildTheWorld() },
 	}
 )
 
@@ -47,129 +49,55 @@ var serveCmd = &cobra.Command{
 	),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		port := 8100
-		http.Handle("/", http.FileServer(http.Dir("dist/")))
-		var refreshListeners []chan struct{}
-
-		watcher, err := fsnotify.NewWatcher()
-		if err != nil {
-			return fmt.Errorf("cannot initialize fsnotify watcher: %s", err)
+		mergedbuilders := map[string]live.Builder{}
+		for pattern, builder := range builders {
+			mergedbuilders[pattern] = builder
 		}
-		stop := make(chan struct{})
+		for pattern, builder := range globalBuilders {
+			mergedbuilders[pattern] = builder
+		}
 
-		c := make(chan os.Signal, 1)
-		signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+		stop := make(chan struct{})
+		reloader := live.Reloader{
+			Builders: mergedbuilders,
+			Ignore:   ignoreDirectories,
+		}
+
+		var mux http.ServeMux
+		mux.Handle("/", http.FileServer(http.Dir(dst)))
+		mux.Handle("/ws", reloader.Handler())
+
+		server := http.Server{
+			Addr:    fmt.Sprintf(":%d", port),
+			Handler: &mux,
+		}
+		server.RegisterOnShutdown(reloader.ShutdownFunc())
+
+		go listenForCtrlC(stop, &server, &reloader)
+
 		go func() {
-			select {
-			case <-c:
-				stop <- struct{}{}
-			case <-stop:
+			if err := server.ListenAndServe(); err != nil {
+				if errors.Is(err, http.ErrServerClosed) {
+					// Expected when we call server.Shutdown()
+					return
+				}
+				log.Fatal(err)
 			}
-			os.Exit(0)
 		}()
 
 		if !*noBuild {
-			go func() {
-				if err := buildTheWorld(); err != nil {
-					log.Fatalf("can't build: %s", err.Error())
-				}
-				for _, ch := range refreshListeners {
-					ch <- struct{}{}
-				}
-			}()
-
-			go func() {
-				for {
-					select {
-					case event, ok := <-watcher.Events:
-						if !ok {
-							return
-						}
-						if event.Op&(fsnotify.Write|fsnotify.Rename|fsnotify.Create) > 0 {
-							log.Println("changed:", event.Name)
-							for pattern, builder := range builders {
-								if ok, err := filepath.Match(pattern, event.Name); err != nil {
-									log.Fatalf("can't match `%s`: %s", pattern, err)
-								} else if ok {
-									if err := builder(event.Name, dst); err != nil {
-										log.Printf("can't build `%s`: %s", pattern, err)
-									}
-								}
-							}
-							for pattern := range buildTheWorldTriggers {
-								if ok, err := filepath.Match(pattern, event.Name); err != nil {
-									log.Fatalf("can't match `%s`: %s", pattern, err)
-								} else if ok {
-									if err := buildTheWorld(); err != nil {
-										log.Fatalf("can't build the world: %s", err)
-									}
-								}
-							}
-							for _, ch := range refreshListeners {
-								ch <- struct{}{}
-							}
-						}
-					case err, ok := <-watcher.Errors:
-						if !ok {
-							return
-						}
-						log.Println("error:", err)
-					case <-stop:
-						return
-					}
-				}
-			}()
-
-			watched := map[string]struct{}{}
-			for pattern := range builders {
-				paths, err := filepath.Glob(pattern)
-				if err != nil {
-					return fmt.Errorf("can't glob `%s`: %w", pattern, err)
-				}
-
-				for _, path := range paths {
-					for p := path; p != "."; p = filepath.Dir(p) {
-						if _, ok := watched[p]; !ok {
-							if err := watcher.Add(p); err != nil {
-								return fmt.Errorf("cannot watch file %s: %w", path, err)
-							}
-						}
-						watched[p] = struct{}{}
-					}
-				}
-			}
-			for pattern := range buildTheWorldTriggers {
-				paths, err := filepath.Glob(pattern)
-				if err != nil {
-					return fmt.Errorf("can't glob `%s`: %w", pattern, err)
-				}
-
-				for _, path := range paths {
-					for p := path; p != "."; p = filepath.Dir(p) {
-						if _, ok := watched[p]; !ok {
-							if err := watcher.Add(p); err != nil {
-								return fmt.Errorf("cannot watch file %s: %w", path, err)
-							}
-						}
-						watched[p] = struct{}{}
-					}
-				}
+			if err := buildTheWorld(); err != nil {
+				log.Fatalf("can't build: %s", err.Error())
 			}
 
-			// Auto refresh the page when a change is made
-			http.Handle("/ws", websocket.Handler(func(conn *websocket.Conn) {
-				c := make(chan struct{})
-				refreshListeners = append(refreshListeners, c)
-				for {
-					<-c
-					conn.Write([]byte("refresh"))
-				}
-			}))
+			err := reloader.Watch()
+			if err != nil {
+				return err
+			}
 		}
 
 		log.Printf("Serving %s on http://localhost:%d\n", dst, port)
-		log.Fatal(http.ListenAndServe(fmt.Sprintf(":%d", port), nil))
-
-		stop <- struct{}{}
+		<-stop
 
 		return nil
 	},
@@ -183,4 +111,19 @@ func init() {
 
 	debug = serveCmd.Flags().
 		Bool("debug", false, "output to dist/debug/ results of each transformation")
+}
+
+func listenForCtrlC(
+	stop chan struct{},
+	server *http.Server,
+	reloader *live.Reloader,
+) {
+	c := make(chan os.Signal, 1)
+	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
+	<-c
+	log.Println("Ctrl+C detected, stopping...")
+	if err := server.Shutdown(context.TODO()); err != nil {
+		log.Fatal(err)
+	}
+	stop <- struct{}{}
 }

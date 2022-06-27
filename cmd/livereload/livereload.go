@@ -1,0 +1,134 @@
+package livereload
+
+import (
+	"errors"
+	"fmt"
+	"io/fs"
+	"log"
+	"os"
+	"path/filepath"
+
+	"github.com/fsnotify/fsnotify"
+	"golang.org/x/net/websocket"
+)
+
+// Builder is a function that builds the src file into the dst directory.
+type Builder func(src, dst string) error
+
+// Reloader watches the filesystem for changes to relevant files so it can
+// reload the browser using WebSockets.
+type Reloader struct {
+	Builders map[string]Builder
+	Ignore   map[string]struct{}
+
+	listeners    []*websocket.Conn
+	watcher      *fsnotify.Watcher
+	stop         chan struct{}
+	closeSockets chan struct{}
+}
+
+// Handler returns a function that handles incoming WebSocket connections which
+// implements http.Handler.
+func (r *Reloader) Handler() websocket.Handler {
+	return websocket.Handler(func(conn *websocket.Conn) {
+		r.listeners = append(r.listeners, conn)
+		<-r.closeSockets
+	})
+}
+
+func (r *Reloader) Reload() {
+	for _, conn := range r.listeners {
+		conn.Write([]byte("refresh"))
+	}
+}
+
+// Watch starts watching the filesystem for changes asynchronously, building any
+// changes based on the contents of Builders and then reloading any connected
+// browser.
+func (r *Reloader) Watch() error {
+	watcher, err := fsnotify.NewWatcher()
+	if err != nil {
+		return fmt.Errorf("cannot initialize fsnotify watcher: %s", err)
+	}
+
+	r.watcher = watcher
+	r.stop = make(chan struct{})
+
+	if err := filepath.WalkDir(
+		".",
+		func(path string, info fs.DirEntry, err error) error {
+			if err != nil {
+				return err
+			}
+			for pattern := range r.Ignore {
+				if ok, err := filepath.Match(pattern, path); err != nil {
+					return err
+				} else if ok {
+					return filepath.SkipDir
+				}
+			}
+			if info.IsDir() {
+				log.Printf("Started watching %s", path)
+				if err := r.watcher.Add(path); err != nil {
+					return fmt.Errorf("can't watch %s: %w", path, err)
+				}
+				return nil
+			}
+			return nil
+		},
+	); err != nil {
+		return err
+	}
+
+	go r.listen()
+
+	return nil
+}
+
+func (r *Reloader) listen() {
+	for {
+		select {
+		case event, ok := <-r.watcher.Events:
+			if !ok {
+				log.Println("fsnotify watcher closed")
+				return
+			}
+			for pattern, builder := range r.Builders {
+				if ok, err := filepath.Match(pattern, event.Name); err != nil {
+					panic(err)
+				} else if ok {
+					log.Printf("%s changed", event.Name)
+					if err := builder(event.Name, "dist"); err != nil {
+						if errors.Is(err, os.ErrNotExist) {
+							// Happens sometimes, not sure why
+							log.Printf("%s doesn't exist, ignoring", event.Name)
+							continue
+						}
+						panic(fmt.Errorf("can't build %s: %w", event.Name, err))
+					}
+					r.Reload()
+				}
+			}
+		case err := <-r.watcher.Errors:
+			if err != nil {
+				panic(err)
+			}
+		case <-r.stop:
+			r.watcher.Close()
+			return
+		}
+	}
+}
+
+// ShutdownFunc returns a function that, when called, stops watching the
+// filesystem for changes and gracefully closes any open WebSockets connections.
+func (r *Reloader) ShutdownFunc() func() {
+	return func() {
+		for _, conn := range r.listeners {
+			conn.Close()
+		}
+		r.listeners = []*websocket.Conn{}
+		r.stop <- struct{}{}
+		r.closeSockets <- struct{}{}
+	}
+}

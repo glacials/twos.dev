@@ -16,6 +16,7 @@ var (
 	ignoreDirectories = map[string]struct{}{
 		".git":         {},
 		".github":      {},
+		"dist":         {},
 		"node_modules": {},
 	}
 )
