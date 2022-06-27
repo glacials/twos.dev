@@ -134,7 +134,7 @@ you please.</p>
 
 <h3>Topics</h3>
 
-<ol id="toc"><li><a href="#why">Why?</a></li><li><a href="#themes">Broad Themes</a><ol id="toc"><li><a href="#safety">Safety vs. Freedom</a></li><li><a href="#offline">Offline-first vs. Online-first Design</a></li><li><a href="#committment">Committment vs. Experimentation</a></li></ol></li><li><a href="#specifics">Specific Notes</a><ol id="toc"><li><a href="#macos">ArchLinux → macOS</a></li><li><a href="#ipad">Nexus 7 → iPad</a></li><li><a href="#iphone">Pixel → iPhone</a><ol id="toc"><li><a href="#fi">Google Fi</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#imessage">iMessage</a></li><li><a href="#watch">Moto 360 &rarr; Apple Watch</a></li></ol></li><li><a href="#appletv">Chromecast/Google TV → Apple TV</a><ol id="toc"><li><a href="#remote">The Remote</a></li></ol></li><li><a href="#home">Google Home → Apple Home</a></li><li><a href="#airpods">Pixel Buds → AirPods Pro</a></li><li><a href="#mail">Gmail → iCloud Mail</a><ol id="toc"><li><a href="#migrating">Migrating</a></li><li><a href="#daily">Daily Use</a></li></ol></li><li><a href="#calendar">Google Calendar → Apple Calendar</a></li><li><a href="#maps">Google Maps → Apple Maps</a><ol id="toc"><li><a href="#findmy">Location Sharing &rarr; Find My</a></li></ol></li><li><a href="#safari">Chrome → Safari</a><ol id="toc"><li><a href="#keychain">iCloud Keychain</a></li></ol></li><li><a href="#numbers">Google Sheets → Numbers</a></li><li><a href="#pages">Google Docs → Pages</a></li><li><a href="#notes">Keep → Notes</a></li><li><a href="#reminders">Tasks → Reminders</a></li><li><a href="#siri">Google Assistant → Siri</a></li><li><a href="#shortcuts">Google Assistant Routines / Tasker → Shortcuts</a></li><li><a href="#drive">Google Drive &rarr; iCloud Drive</a></li><li><a href="#music">YouTube Music → Apple Music</a></li><li><a href="#pay">Google Pay → Apple Pay</a></li></ol></li><li><a href="#conclusion">Conclusion</a></li></ol><h2 id="why">Why?</h2><span style="margin-left: 0.5em;"><a href="#why" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
+<ol id="toc"><li><a href="#why">Why?</a></li><li><a href="#themes">Broad Themes</a><ol id="toc"><li><a href="#safety">Safety vs. Freedom</a></li><li><a href="#offline">Offline-first vs. Online-first Design</a></li><li><a href="#committment">Committment vs. Experimentation</a></li></ol></li><li><a href="#specifics">Specific Notes</a><ol id="toc"><li><a href="#macos">ArchLinux → macOS</a></li><li><a href="#ipad">Nexus 7 → iPad</a></li><li><a href="#iphone">Pixel → iPhone</a><ol id="toc"><li><a href="#fi">Google Fi</a></li><li><a href="#notifications">Notifications</a></li><li><a href="#imessage">iMessage</a></li><li><a href="#watch">Moto 360 &rarr; Apple Watch</a></li></ol></li><li><a href="#appletv">Chromecast/Google TV → Apple TV</a><ol id="toc"><li><a href="#remote">The Remote</a></li></ol></li><li><a href="#home">Google Home → Apple Home</a></li><li><a href="#airpods">Pixel Buds → AirPods Pro</a></li><li><a href="#mail">Gmail → iCloud Mail</a><ol id="toc"><li><a href="#migrating">Migrating</a></li><li><a href="#daily">Daily Use</a></li></ol></li><li><a href="#calendar">Google Calendar → Apple Calendar</a></li><li><a href="#maps">Google Maps → Apple Maps</a><ol id="toc"><li><a href="#findmy">Location Sharing &rarr; Find My</a></li></ol></li><li><a href="#photos">Google Photos &rarr; Apple Photos</a></li><li><a href="#safari">Chrome → Safari</a><ol id="toc"><li><a href="#keychain">iCloud Keychain</a></li></ol></li><li><a href="#numbers">Google Sheets → Numbers</a></li><li><a href="#pages">Google Docs → Pages</a></li><li><a href="#notes">Keep → Notes</a></li><li><a href="#reminders">Tasks → Reminders</a></li><li><a href="#siri">Google Assistant → Siri</a></li><li><a href="#shortcuts">Google Assistant Routines → Shortcuts</a></li><li><a href="#drive">Google Drive &rarr; iCloud Drive</a></li><li><a href="#music">YouTube Music → Apple Music</a></li><li><a href="#pay">Google Pay → Apple Pay</a></li></ol></li><li><a href="#conclusion">Conclusion</a></li></ol><h2 id="why">Why?</h2><span style="margin-left: 0.5em;"><a href="#why" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
 
 <p>My life is in Google more than anyone I know. The usual suspects sure --
 Gmail, Photos, Chrome, etc. -- but also the ones people stay away from --
@@ -827,6 +827,30 @@ have peace of mind. The app sends a notification when I leave <code>$DEVICE</cod
 <code>$LOCATION</code>, with easy controls to disable future notifications for any such
 combination.</p>
 
+<h3 id="photos">Google Photos &rarr; Apple Photos</h3><span style="margin-left: 0.5em;"><a href="#photos" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
+
+<p>Mostly, these two products are equivalent. Apple Photos has more powerful
+editing tools but Google Photos has more powerful search. Both have similar
+tooling around memories, viewing photos on maps or by year, etc.</p>
+
+<p>Classically, Google has a better web experience and Apple has a better native
+experience, meaning sharing photos with others is better if and only if you're
+sharing with other iOS users.</p>
+
+<p>The migration was simple, but long. Google Takeout produced hundreds of
+gigabytes of exports, which I downloaded onto a Mac and then imported with
+Photos.app. Due to Apple's offline-first approach synchronization took place
+in the background at reduced speeds. This meant it tried to take place while the
+laptop was closed and charging (even if Photos.app wasn't open). This was
+jarring at first when trying to babysit the process, as by design it stops
+performing well when you start using the machine. When I learned to let go, it
+showed its colors.</p>
+
+<p>Ecosystem effects include unified conversations: when you share content from
+Google Photos with someone, you and they can comment on photos and albums; when
+you share content from Apple Photos using Messages, the photos appear inline in
+Messages. If you want to "comment" on one, you simply Reply to that message.</p>
+
 <h3 id="safari">Chrome → Safari</h3><span style="margin-left: 0.5em;"><a href="#safari" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
 
 <p>This was a far less noticeable change than I expected. Everything from
@@ -866,8 +890,7 @@ webcam freezing in Safari of myself or others (local only); Meet also supports
 more types of screen sharing in Chrome, like sharing one tab.</p>
 
 <p>Ecosystem effects of Safari include Handoff (move a browsing session between
-devices smoothly) and the downright insane power efficiency of Safari on
-macOS.</p>
+devices smoothly) and the downright bonkers power efficiency of Safari on macOS.</p>
 
 <h4 id="keychain">iCloud Keychain</h4><span style="margin-left: 0.5em;"><a href="#keychain" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
 
@@ -960,7 +983,7 @@ Tron Legacy?".</p>
 <p>Ecosystem effects of Siri include surface-level interaction with native apps:
 setting reminders, playing music, controlling Home devices, etc.</p>
 
-<h3 id="shortcuts">Google Assistant Routines / Tasker → Shortcuts</h3><span style="margin-left: 0.5em;"><a href="#shortcuts" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
+<h3 id="shortcuts">Google Assistant Routines → Shortcuts</h3><span style="margin-left: 0.5em;"><a href="#shortcuts" style="text-decoration: none;">#</a><a href="#toc" style="text-decoration: none;">↑</a></span>
 
 <p>I can’t say enough good things about Shortcuts. It is the most
 power-user-friendly thing about iOS and goes against all expectations I had
