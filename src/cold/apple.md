@@ -1,6 +1,6 @@
 ---
 date: 2022-05-25
-updated: 2022-06-18
+updated: 2022-06-27
 filename: apple.html
 type: post
 toc: true
@@ -590,6 +590,30 @@ have peace of mind. The app sends a notification when I leave `$DEVICE` at
 `$LOCATION`, with easy controls to disable future notifications for any such
 combination.
 
+### Google Photos &rarr; Apple Photos {#photos}
+
+Mostly, these two products are equivalent. Apple Photos has more powerful
+editing tools but Google Photos has more powerful search. Both have similar
+tooling around memories, viewing photos on maps or by year, etc.
+
+Classically, Google has a better web experience and Apple has a better native
+experience, meaning sharing photos with others is better if and only if you're
+sharing with other iOS users.
+
+The migration was simple, but long. Google Takeout produced hundreds of
+gigabytes of exports, which I downloaded onto a Mac and then imported with
+Photos.app. Due to Apple's offline-first approach synchronization took place
+in the background at reduced speeds. This meant it tried to take place while the
+laptop was closed and charging (even if Photos.app wasn't open). This was
+jarring at first when trying to babysit the process, as by design it stops
+performing well when you start using the machine. When I learned to let go, it
+showed its colors.
+
+Ecosystem effects include unified conversations: when you share content from
+Google Photos with someone, you and they can comment on photos and albums; when
+you share content from Apple Photos using Messages, the photos appear inline in
+Messages. If you want to "comment" on one, you simply Reply to that message.
+
 ### Chrome → Safari {#safari}
 
 This was a far less noticeable change than I expected. Everything from
@@ -613,8 +637,7 @@ webcam freezing in Safari of myself or others (local only); Meet also supports
 more types of screen sharing in Chrome, like sharing one tab.
 
 Ecosystem effects of Safari include Handoff (move a browsing session between
-devices smoothly) and the downright insane power efficiency of Safari on
-macOS.
+devices smoothly) and the downright bonkers power efficiency of Safari on macOS.
 
 #### iCloud Keychain {#keychain}
 
@@ -707,7 +730,7 @@ Tron Legacy?".
 Ecosystem effects of Siri include surface-level interaction with native apps:
 setting reminders, playing music, controlling Home devices, etc.
 
-### Google Assistant Routines / Tasker → Shortcuts {#shortcuts}
+### Google Assistant Routines → Shortcuts {#shortcuts}
 
 I can’t say enough good things about Shortcuts. It is the most
 power-user-friendly thing about iOS and goes against all expectations I had
