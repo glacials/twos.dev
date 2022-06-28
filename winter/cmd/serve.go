@@ -17,7 +17,6 @@ const dst = "dist"
 
 var (
 	noBuild *bool
-	debug   *bool
 
 	builders = map[string]Builder{
 		"src/img/*/*/*.[jJ][pP][gG]": buildPhoto,
@@ -34,8 +33,8 @@ var (
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
 	globalBuilders = map[string]Builder{
-		"src/templates/*": func(_, _ string, _ Config) error { return buildAll(dst, builders) },
-		"*.css":           func(_, _ string, _ Config) error { return buildAll(dst, builders) },
+		"src/templates/*": func(_, _ string, cfg Config) error { return buildAll(dst, builders, cfg) },
+		"*.css":           func(_, _ string, cfg Config) error { return buildAll(dst, builders, cfg) },
 	}
 )
 
@@ -45,7 +44,6 @@ var serveCmd = &cobra.Command{
 	Short: "Build and serve the static website",
 	Long: fmt.Sprintf(
 		`Start a local Winter server by continually building and serving files.`,
-		dst,
 	),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		port := 8100
@@ -86,7 +84,7 @@ var serveCmd = &cobra.Command{
 		}()
 
 		if !*noBuild {
-			if err := buildAll(dst, builders); err != nil {
+			if err := buildAll(dst, builders, Config{Debug: *debug}); err != nil {
 				log.Fatalf("can't build: %s", err.Error())
 			}
 
@@ -108,9 +106,6 @@ func init() {
 
 	noBuild = serveCmd.Flags().
 		Bool("no-build", false, "don't continually rebuild while serving")
-
-	debug = serveCmd.Flags().
-		Bool("debug", false, "output to dist/debug/ results of each transformation")
 }
 
 func listenForCtrlC(

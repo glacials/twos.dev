@@ -3,10 +3,10 @@ package transform
 import (
 	"path/filepath"
 
-	"twos.dev/winter/document"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
+	"twos.dev/winter/document"
 )
 
 // RenderMarkdown converts the body of the document from Markdown to HTML. Any

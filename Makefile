@@ -8,7 +8,7 @@ build:
 	@go build -o w twos.dev/winter
 
 serve: install-tools
-	@cd winter && gow run . serve
+	@gow run twos.dev/winter serve
 
 debug: install-tools
-	@cd winter && gow run . serve --debug
+	@gow run twos.dev/winter serve --debug

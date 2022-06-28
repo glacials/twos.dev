@@ -111,39 +111,11 @@ earlier, with JavaScript just waiting for the day to tick over before doing
 the takeover. The announcement tweet was scheduled ahead of time as well.
 The response when the clock struck midnight was exactly as we hoped.
 
-<div class="dark-only" style="text-align: center">
-  <blockquote
-    class="twitter-tweet tw-align-center"
-    data-conversation="none"
-    data-theme="dark"
-  >
-    <p lang="en" dir="ltr">its actually real wtf
-    &mdash; Dark (@DarkRTA)
-    <a
-      href="https://twitter.com/DarkRTA/status/1245495897875759108?ref_src=twsrc%5Etfw"
-      >April 1, 2020</a
-    >
-  </blockquote>
-</div>
-<div class="light-only" style="text-align: center">
-  <blockquote
-    class="twitter-tweet tw-align-center"
-    data-conversation="none"
-    data-theme="light"
-  >
-    <p lang="en" dir="ltr">its actually real wtf
-    &mdash; Dark (@DarkRTA)
-    <a
-      href="https://twitter.com/DarkRTA/status/1245495897875759108?ref_src=twsrc%5Etfw"
-      >April 1, 2020</a
-    >
-  </blockquote>
-</div>
-<script
-  async
-  src="https://platform.twitter.com/widgets.js"
-  charset="utf-8"
-></script>
+> its actually real wtf
+
+&mdash; Dark (@DarkRTA)
+[April 1, 2020](https://twitter.com/DarkRTA/status/1245495897875759108)
+
 {{ imgs
   "feedback-1"
   "Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'"

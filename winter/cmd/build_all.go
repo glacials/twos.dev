@@ -21,7 +21,7 @@ var (
 	}
 )
 
-func buildAll(dst string, builders map[string]Builder) error {
+func buildAll(dst string, builders map[string]Builder, cfg Config) error {
 	seen := map[string]struct{}{}
 
 	if err := os.MkdirAll(dst, 0755); err != nil {
@@ -54,7 +54,7 @@ func buildAll(dst string, builders map[string]Builder) error {
 					)
 				}
 
-				if err := builder(src, dst, Config{Debug: *debug}); err != nil {
+				if err := builder(src, dst, cfg); err != nil {
 					return fmt.Errorf("can't build `%s`: %w", src, err)
 				}
 			}
