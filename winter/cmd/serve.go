@@ -1,4 +1,4 @@
-package winter
+package cmd
 
 import (
 	"context"
@@ -10,7 +10,6 @@ import (
 	"os/signal"
 	"syscall"
 
-	live "twos.dev/winter/livereload"
 	"github.com/spf13/cobra"
 )
 
@@ -20,37 +19,37 @@ var (
 	noBuild *bool
 	debug   *bool
 
-	builders = map[string]live.Builder{
-		"src/img/*/*/*.[jJ][pP][gG]": photoBuilder,
+	builders = map[string]Builder{
+		"src/img/*/*/*.[jJ][pP][gG]": buildPhoto,
 		"src/cold/*.html.tmpl":       buildDocument,
 		"src/cold/*.html":            buildDocument,
 		"src/cold/*.md":              buildDocument,
-		"src/favicon/*":              staticFileBuilder("src/favicon"),
 		"src/warm/*.md":              buildDocument,
-		"public/*":                   staticFileBuilder("public"),
-		"public/*/*":                 staticFileBuilder("public"),
-		"public/*/*/*":               staticFileBuilder("public"),
+		"src/favicon/*":              buildStaticFile("src/favicon"),
+		"public/*":                   buildStaticFile("public"),
+		"public/*/*":                 buildStaticFile("public"),
+		"public/*/*/*":               buildStaticFile("public"),
 	}
 
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
-	globalBuilders = map[string]live.Builder{
-		"src/templates/*": func(_, _ string) error { return buildTheWorld() },
-		"*.css":           func(_, _ string) error { return buildTheWorld() },
+	globalBuilders = map[string]Builder{
+		"src/templates/*": func(_, _ string, _ Config) error { return buildAll(dst, builders) },
+		"*.css":           func(_, _ string, _ Config) error { return buildAll(dst, builders) },
 	}
 )
 
 // serveCmd represents the serve command
 var serveCmd = &cobra.Command{
 	Use:   "serve",
-	Short: "Start a local twos.dev server",
+	Short: "Build and serve the static website",
 	Long: fmt.Sprintf(
-		`Start a local twos.dev server by serving files from %s.`,
+		`Start a local Winter server by continually building and serving files.`,
 		dst,
 	),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		port := 8100
-		mergedbuilders := map[string]live.Builder{}
+		mergedbuilders := map[string]Builder{}
 		for pattern, builder := range builders {
 			mergedbuilders[pattern] = builder
 		}
@@ -59,7 +58,7 @@ var serveCmd = &cobra.Command{
 		}
 
 		stop := make(chan struct{})
-		reloader := live.Reloader{
+		reloader := Reloader{
 			Builders: mergedbuilders,
 			Ignore:   ignoreDirectories,
 		}
@@ -87,7 +86,7 @@ var serveCmd = &cobra.Command{
 		}()
 
 		if !*noBuild {
-			if err := buildTheWorld(); err != nil {
+			if err := buildAll(dst, builders); err != nil {
 				log.Fatalf("can't build: %s", err.Error())
 			}
 
@@ -117,7 +116,7 @@ func init() {
 func listenForCtrlC(
 	stop chan struct{},
 	server *http.Server,
-	reloader *live.Reloader,
+	reloader *Reloader,
 ) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)

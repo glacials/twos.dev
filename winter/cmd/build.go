@@ -1,4 +1,4 @@
-package winter
+package cmd
 
 import (
 	"fmt"
@@ -15,10 +15,10 @@ const (
 // buildCmd represents the build command
 var buildCmd = &cobra.Command{
 	Use:   "build",
-	Short: "Build twos.dev",
-	Long:  `Build twos.dev into dist/.`,
+	Short: "Build the website",
+	Long:  `Build the website into dist/.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := buildTheWorld(); err != nil {
+		if err := buildAll(dst, builders); err != nil {
 			return fmt.Errorf("can't build the world: %w", err)
 		}
 

@@ -1,4 +1,4 @@
-package livereload
+package cmd
 
 import (
 	"errors"
@@ -11,9 +11,6 @@ import (
 	"github.com/fsnotify/fsnotify"
 	"golang.org/x/net/websocket"
 )
-
-// Builder is a function that builds the src file into the dst directory.
-type Builder func(src, dst string) error
 
 // Reloader watches the filesystem for changes to relevant files so it can
 // reload the browser using WebSockets.
@@ -98,7 +95,7 @@ func (r *Reloader) listen() {
 					panic(err)
 				} else if ok {
 					log.Printf("%s changed", event.Name)
-					if err := builder(event.Name, "dist"); err != nil {
+					if err := builder(event.Name, dst, Config{}); err != nil {
 						if errors.Is(err, os.ErrNotExist) {
 							// Happens sometimes, not sure why
 							log.Printf("%s doesn't exist, ignoring", event.Name)
