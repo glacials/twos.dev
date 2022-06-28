@@ -3,7 +3,7 @@ package transform
 import (
 	"bytes"
 
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 )
 
 var emdashes = map[string]string{

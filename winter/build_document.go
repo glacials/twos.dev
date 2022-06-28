@@ -1,12 +1,12 @@
-package cmd
+package winter
 
 import (
 	"fmt"
 	"io/ioutil"
 	"path/filepath"
 
-	"github.com/glacials/twos.dev/winter/document"
-	"github.com/glacials/twos.dev/winter/transform"
+	"twos.dev/winter/document"
+	"twos.dev/winter/transform"
 )
 
 var transformations = []document.Transformation{

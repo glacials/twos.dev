@@ -3,7 +3,7 @@ package transform
 import (
 	"path/filepath"
 
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"

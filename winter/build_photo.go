@@ -1,4 +1,4 @@
-package cmd
+package winter
 
 import (
 	"errors"
@@ -14,9 +14,9 @@ import (
 	"strings"
 	"time"
 
-	"github.com/glacials/twos.dev/winter/document"
-	"github.com/glacials/twos.dev/winter/frontmatter"
-	"github.com/glacials/twos.dev/winter/transform"
+	"twos.dev/winter/document"
+	"twos.dev/winter/frontmatter"
+	"twos.dev/winter/transform"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"

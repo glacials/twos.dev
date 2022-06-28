@@ -1,7 +1,7 @@
 package main
 
-import "github.com/glacials/twos.dev/cmd"
+import "twos.dev/winter"
 
 func main() {
-	cmd.Execute()
+	winter.Execute()
 }

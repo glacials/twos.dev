@@ -6,7 +6,7 @@ import (
 	"html/template"
 	"path/filepath"
 
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 )
 
 type pageVars struct {

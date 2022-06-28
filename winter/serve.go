@@ -1,4 +1,4 @@
-package cmd
+package winter
 
 import (
 	"context"
@@ -10,7 +10,7 @@ import (
 	"os/signal"
 	"syscall"
 
-	live "github.com/glacials/twos.dev/winter/livereload"
+	live "twos.dev/winter/livereload"
 	"github.com/spf13/cobra"
 )
 

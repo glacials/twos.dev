@@ -3,7 +3,7 @@ package transform
 import (
 	"regexp"
 
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 )
 
 var inlineLaTeX = regexp.MustCompile("\\\\\\(.*?\\\\\\)")

@@ -2,7 +2,7 @@ download:
 	@go mod download
 
 install-tools: download
-	@go list -f '{{range .Imports}}{{.}} {{end}}' cmd/tools.go | xargs go install
+	@go list -f '{{range .Imports}}{{.}} {{end}}' winter/tools.go | xargs go install
 
 build:
 	@go build

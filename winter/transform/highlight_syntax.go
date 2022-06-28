@@ -8,7 +8,7 @@ import (
 	chromahtml "github.com/alecthomas/chroma/formatters/html"
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )

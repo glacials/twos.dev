@@ -15,7 +15,7 @@ import (
 	"strings"
 	"time"
 
-	"github.com/glacials/twos.dev/winter/frontmatter"
+	"twos.dev/winter/frontmatter"
 )
 
 const htmlExtension = "html.tmpl"

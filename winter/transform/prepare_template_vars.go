@@ -4,7 +4,7 @@ import (
 	"html/template"
 	"time"
 
-	"github.com/glacials/twos.dev/winter/document"
+	"twos.dev/winter/document"
 )
 
 // PrepareTemplateVars massages and converts various variables on the document
