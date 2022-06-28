@@ -17,8 +17,10 @@ jobs:
       - name: Install and Build 🔧
         run: |
           rm -rf dist
+          cd winter
           go build
-          ./twos.dev build
+          cd ../
+          ./winter/winter build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
