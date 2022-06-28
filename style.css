@@ -49,6 +49,10 @@ body {
   margin: 0;
 }
 
+blockquote {
+  border-left: 1px solid var(--fg-a-a);
+}
+
 .container {
   margin: auto;
   max-width: 75em;
