@@ -2,13 +2,13 @@ download:
 	@go mod download
 
 install-tools: download
-	@go list -f '{{range .Imports}}{{.}} {{end}}' winter/tools.go | xargs go install
+	@go list -f '{{range .Imports}}{{.}}{{end}}' winter/tools.go | xargs go install
 
 build:
-	@cd winter; go build
+	@go build -o w twos.dev/winter
 
 serve: install-tools
-	@gow run . serve
+	@cd winter && gow run . serve
 
 debug: install-tools
-	@gow run . serve --debug
+	@cd winter && gow run . serve --debug
