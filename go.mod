@@ -1,4 +1,4 @@
-module twos.dev/winter
+module twos.dev
 
 go 1.18
 
