@@ -8,14 +8,14 @@ other random things here.
 twos.dev is a low-tech website. It does not require JavaScript and it is
 composed entirely of static files served by GitHub Pages.
 
-It is built by a bespoke static website generator called Winter, which is
-embedded in this repository. The generator is written in Go and is located in
-`./winter`.
+These static files are built by a bespoke static website generator called
+Winter, which is written in Go and embedded in this repository at `winter/`.
+Winter executes a list of transformation functions on each document in order,
+each performing a simple task like converting Markdown to HTML or extracting
+metadata for later use.
 
-The general build step is a series of transformation functions applied to a
-document, each editing the body (e.g. converting Markdown to HTML) or scraping
-and storing metadata for use by other transformations. The transformations are
-listed in [`winter/build_document.go`](./winter/build_document.go).
+The transformations built into Winter are listed in
+[`winter/build_document.go`](./winter/build_document.go).
 
 ## First run
 

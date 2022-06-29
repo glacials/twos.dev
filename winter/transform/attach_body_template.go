@@ -6,7 +6,7 @@ import (
 	"twos.dev/winter/document"
 )
 
-// AttachBodyTemplate defines the a template called body in d.Template with the
+// AttachBodyTemplate defines a template called body in d.Template with the
 // contents of d.Body, so that it can be included by a page-scoped template like
 // document.html.tmpl.
 //
