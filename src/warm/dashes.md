@@ -1,6 +1,7 @@
 ---
-type: draft
 date: 2022-06-17
+filename: dashes.html
+type: post
 ---
 
 # Advanced Dashes
