@@ -95,6 +95,7 @@ type Document struct {
 
 	transformations []Transformation
 	debug           bool
+	version         int
 }
 
 // Transformation represents a change to be applied to a document, such as
@@ -104,7 +105,7 @@ type Document struct {
 type Transformation func(Document) (Document, error)
 
 // New returns a document with path as its source file, and with transformations
-// to be applied in renderers.
+// to be applied in trs.
 func New(path string, trs []Transformation, debug bool) (Document, error) {
 	f, err := os.Open(path)
 	if err != nil {
@@ -141,6 +142,62 @@ func New(path string, trs []Transformation, debug bool) (Document, error) {
 		transformations: trs,
 		debug:           debug,
 	}, nil
+}
+
+// StepTransform applies the next transformation in the list to the document and
+// returns the result.
+func (d Document) StepTransform() (Document, error) {
+	if len(d.transformations) == 0 {
+		return Document{}, nil
+	}
+	transformation := d.transformations[0]
+
+	tname := runtime.FuncForPC(reflect.ValueOf(transformation).Pointer()).
+		Name()
+	_, tshortname, ok := strings.Cut(tname, "transform.")
+	if !ok {
+		return Document{}, fmt.Errorf(
+			"unexpected transformation package name in %s",
+			tname,
+		)
+	}
+
+	// Warning: do not to replace this = with :=! Otherwise we're not inheriting
+	// the transformed d from the previous loop iteration.
+	d, err := transformation(d)
+	if err != nil {
+		return Document{}, fmt.Errorf(
+			"can't apply transformation %v: %w",
+			tshortname,
+			err,
+		)
+	}
+	d.version += 1
+
+	if d.debug {
+		path := filepath.Join(
+			"dist",
+			"debug",
+			d.Stat.Name(),
+			fmt.Sprintf("%02d_%s.html", d.version, tshortname),
+		)
+		if err := os.MkdirAll(filepath.Dir(path), 0755); err != nil {
+			return Document{}, err
+		}
+
+		f, err := os.Create(path)
+		if err != nil {
+			return Document{}, err
+		}
+		defer f.Close()
+
+		if err := ioutil.WriteFile(path, d.Body, 0644); err != nil {
+			return Document{}, err
+		}
+	}
+
+	d.transformations = d.transformations[1:]
+	return d, nil
 }
 
 // Transform applies all transformations in order to the document body, and

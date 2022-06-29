@@ -1,4 +1,4 @@
-package cmd
+package main
 
 // Builder represents a function that builds a source file src into a
 // destination directory dst.

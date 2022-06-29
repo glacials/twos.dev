@@ -29,17 +29,15 @@ type videoVars struct {
 	DarkMP4  graphic.SRC
 }
 
-// AttachVideoTemplateFuncs makes the video and videos functions available to
+// AttachVideoTemplateFunc makes the video and videos functions available to
 // the document's templates. video is an alias for videos.
-func AttachVideoTemplateFuncs(d document.Document) (document.Document, error) {
+func AttachVideoTemplateFunc(d document.Document) (document.Document, error) {
 	videos, err := videos(d.Shortname)
 	if err != nil {
 		return document.Document{}, err
 	}
 
-	_ = d.Template.Funcs(
-		template.FuncMap{"video": videos, "videos": videos},
-	)
+	_ = d.Template.Funcs(template.FuncMap{"video": videos, "videos": videos})
 
 	return d, nil
 }

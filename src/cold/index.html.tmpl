@@ -22,6 +22,9 @@ type: page
 
 <h2>Writing</h2>
 <ul>
+  {{ range posts }}
+    <li><a href="{{ .Path }}">{{ .Title }}</a></li>
+  {{ end }}
   <li><a href="meta.html">Inside twos.dev</a></li>
   <li><a href="hotsauce.html">When the April Fool's Day Prank is Real</a></li>
   <li><a href="apple.html">From Google to Apple</a></li>

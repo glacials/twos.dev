@@ -1,4 +1,4 @@
-package cmd
+package main
 
 import (
 	"fmt"
@@ -33,7 +33,8 @@ var transformations = []document.Transformation{
 	// Template-based transformations
 	transform.PrepareTemplateVars,
 	transform.AttachImageTemplateFuncs,
-	transform.AttachVideoTemplateFuncs,
+	transform.AttachVideoTemplateFunc,
+	transform.AttachPostsTemplateFunc,
 	transform.AttachPartials,
 	transform.AttachBodyTemplate,
 	transform.ExecuteTemplates,
