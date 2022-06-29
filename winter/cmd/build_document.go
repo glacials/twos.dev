@@ -20,14 +20,12 @@ var transformations = []document.Transformation{
 	transform.RenderMarkdown,
 	transform.RenderLaTeX,
 
-	// HTML-based transformations
+	// Pre-tempalte HTML-based transformations
 	transform.DiscoverTitle,
-	transform.HighlightSyntax, // Beware, re-renders entire doc
-	transform.RenderTOC,       // Beware, re-renders entire doc
+	transform.RenderTOC, // Beware, re-renders entire doc
 
 	// English-based transformations
 	transform.UnescapeHTML,
-	transform.ReplaceSmartQuotes, // Must come after all HTML re-renders
 
 	// Document-specific peculiarities
 	transform.LengthenDashes,
@@ -39,6 +37,10 @@ var transformations = []document.Transformation{
 	transform.AttachPartials,
 	transform.AttachBodyTemplate,
 	transform.ExecuteTemplates,
+
+	// Post-template HTML-based transformations
+	transform.HighlightSyntax,    // Beware, re-renders entire doc
+	transform.ReplaceSmartQuotes, // Must come after all HTML re-renders
 
 	// Publish-based transformations
 	transform.UpdateFeeds,
