@@ -30,6 +30,8 @@ type imageVars struct {
 
 // AttachImageTemplateFuncs makes the img and imgs functions available to the
 // document's templates.
+//
+// AttachImageTemplateFuncs implements document.Transformation.
 func AttachImageTemplateFuncs(d document.Document) (document.Document, error) {
 	img, err := img(d.Shortname)
 	if err != nil {
