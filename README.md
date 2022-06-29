@@ -15,7 +15,7 @@ each performing a simple task like converting Markdown to HTML or extracting
 metadata for later use.
 
 The transformations built into Winter are listed in
-[`winter/build_document.go`](./winter/build_document.go).
+[`winter/cmd/build_document.go`](./winter/cmd/build_document.go).
 
 ## First run
 
