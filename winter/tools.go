@@ -1,5 +1,5 @@
 //go:build tools
 
-package main
+package winter
 
 import _ "github.com/mitranim/gow"

@@ -6,6 +6,8 @@ import (
 	"os"
 	"path/filepath"
 	"strings"
+
+	"twos.dev/winter"
 )
 
 var (
@@ -21,7 +23,11 @@ var (
 	}
 )
 
-func buildAll(dst string, builders map[string]Builder, cfg Config) error {
+func buildAll(
+	dst string,
+	builders map[string]Builder,
+	cfg winter.Config,
+) error {
 	seen := map[string]struct{}{}
 
 	if err := os.MkdirAll(dst, 0755); err != nil {

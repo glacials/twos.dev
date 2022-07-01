@@ -5,39 +5,19 @@ import (
 	"io/ioutil"
 	"path/filepath"
 
+	"twos.dev/winter"
 	"twos.dev/winter/document"
 	"twos.dev/winter/transform"
 )
 
 var transformations = []document.Transformation{
-	// Filename-based transformations
-	transform.DiscoverParent,
-
-	// Frontmatter-based transformations
-	transform.ExtractFrontmatter,
-
-	// Markup-based transformations
-	transform.RenderMarkdown,
-	transform.RenderLaTeX,
-
-	// Pre-tempalte HTML-based transformations
-	transform.DiscoverTitle,
-	transform.RenderTOC, // Beware, re-renders entire doc
-
 	// English-based transformations
 	transform.UnescapeHTML,
 
-	// Document-specific peculiarities
-	transform.LengthenDashes,
-
 	// Template-based transformations
-	transform.PrepareTemplateVars,
 	transform.AttachImageTemplateFuncs,
 	transform.AttachVideoTemplateFunc,
 	transform.AttachPostsTemplateFunc,
-	transform.AttachPartials,
-	transform.AttachBodyTemplate,
-	transform.ExecuteTemplates,
 
 	// Post-template HTML-based transformations
 	transform.HighlightSyntax,    // Beware, re-renders entire doc
@@ -47,7 +27,7 @@ var transformations = []document.Transformation{
 	transform.UpdateFeeds,
 }
 
-func buildDocument(src, dst string, cfg Config) error {
+func buildDocument(src, dst string, cfg winter.Config) error {
 	d, err := document.New(src, transformations, cfg.Debug)
 	if err != nil {
 		return err

@@ -10,10 +10,6 @@ import (
 	"twos.dev/winter/graphic"
 )
 
-const (
-	imgPartial = "imgs"
-)
-
 // imgsPartialVars are the template variables given to
 // src/templates/_imgs.html.tmpl to render multiple images inline. At least one
 // of its {Light,Dark} fields must be set to an image path.
@@ -70,12 +66,12 @@ func img(
 	graphic.Alt,
 	graphic.Caption,
 ) (template.HTML, error), error) {
-	partial, err := ioutil.ReadFile(partialPath(imgPartial))
+	partial, err := ioutil.ReadFile("src/templates/_imgs.html.tmpl")
 	if err != nil {
 		return nil, err
 	}
 
-	t := template.New(imgPartial)
+	t := template.New("imgs")
 	if _, err := t.Parse(string(partial)); err != nil {
 		return nil, err
 	}
@@ -140,12 +136,12 @@ func imgs(
 	graphic.Alt,
 	graphic.Caption,
 ) (template.HTML, error), error) {
-	partial, err := ioutil.ReadFile(partialPath(imgPartial))
+	partial, err := ioutil.ReadFile("src/templates/_imgs.html.tmpl")
 	if err != nil {
 		return nil, err
 	}
 
-	t := template.New(imgPartial)
+	t := template.New("imgs")
 	if _, err := t.Parse(string(partial)); err != nil {
 		return nil, err
 	}

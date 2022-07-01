@@ -8,6 +8,7 @@ import (
 	"path/filepath"
 
 	"github.com/otiai10/copy"
+	"twos.dev/winter"
 )
 
 // staticFileBuilder returns a builder (it is not one itself) that will build
@@ -15,8 +16,8 @@ import (
 // staticFileBuilder("public") returns a builder func(src, dst string) which
 // when called with f("public/a/b/c", "dist") puts the built result in
 // dist/a/b/c.
-func buildStaticFile(rel string) func(src, dst string, _ Config) error {
-	return func(src, dst string, _ Config) error {
+func buildStaticFile(rel string) func(src, dst string, _ winter.Config) error {
+	return func(src, dst string, _ winter.Config) error {
 		rel, err := filepath.Rel(rel, src)
 		if err != nil {
 			return fmt.Errorf("can't get `%s` relative to `%s`: %w", src, rel, err)

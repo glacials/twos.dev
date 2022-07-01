@@ -11,6 +11,7 @@ import (
 	"syscall"
 
 	"github.com/spf13/cobra"
+	"twos.dev/winter"
 )
 
 const dst = "dist"
@@ -33,8 +34,8 @@ var (
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
 	globalBuilders = map[string]Builder{
-		"src/templates/*": func(_, _ string, cfg Config) error { return buildAll(dst, builders, cfg) },
-		"*.css":           func(_, _ string, cfg Config) error { return buildAll(dst, builders, cfg) },
+		"src/templates/*": func(_, _ string, cfg winter.Config) error { return buildAll(dst, builders, cfg) },
+		"*.css":           func(_, _ string, cfg winter.Config) error { return buildAll(dst, builders, cfg) },
 	}
 )
 
@@ -84,7 +85,7 @@ var serveCmd = &cobra.Command{
 		}()
 
 		if !*noBuild {
-			if err := buildAll(dst, builders, Config{Debug: *debug}); err != nil {
+			if err := buildAll(dst, builders, cfg); err != nil {
 				log.Fatalf("can't build: %s", err.Error())
 			}
 

@@ -13,7 +13,6 @@ import (
 	"reflect"
 	"runtime"
 	"strings"
-	"time"
 
 	"twos.dev/winter/frontmatter"
 )
@@ -24,31 +23,6 @@ func stripHTMLExtension(filename string) string {
 	filename = strings.TrimSuffix(filename, ".html")
 	filename = strings.TrimSuffix(filename, ".html.tmpl")
 	return filename
-}
-
-// BaseVars is the set of variables present when executing the template for any
-// document.
-type BaseVars struct {
-	Parent     string
-	Shortname  string
-	SourcePath string
-	Type       frontmatter.Type
-
-	Now time.Time
-}
-
-// TextVars is a set of variables present when executing text-based documents
-// like PageType, PostType, or DraftType.
-type TextVars struct {
-	BaseVars
-
-	Body       template.HTML
-	Parent     string
-	SourcePath string
-	Title      string
-
-	CreatedAt time.Time
-	UpdatedAt time.Time
 }
 
 // Document is a file that is sent down a pipeline of transformations in order,
@@ -79,10 +53,6 @@ type Document struct {
 	// Template is the set of templates this file needs to execute (perhaps more).
 	// It starts containing nothing, and must be added to by transformations.
 	Template template.Template
-
-	// TemplateVars is the set of variables that will be passed to the
-	// template.Execute method when it's eventually called.
-	TemplateVars TextVars
 
 	// Title is the title of the document that should be displayed in the <title>
 	// tag, any relevant <meta> tags, etc. It may be blank, so a fallback should

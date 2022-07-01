@@ -1,8 +1,6 @@
 package main
 
 import (
-	"fmt"
-
 	"github.com/spf13/cobra"
 )
 
@@ -18,11 +16,11 @@ var buildCmd = &cobra.Command{
 	Short: "Build the website",
 	Long:  `Build the website into dist/.`,
 	RunE: func(cmd *cobra.Command, args []string) error {
-		if err := buildAll(dst, builders, Config{Debug: *debug}); err != nil {
-			return fmt.Errorf("can't build the world: %w", err)
-		}
-
-		return nil
+		return buildAll(
+			dst,
+			builders,
+			cfg,
+		)
 	},
 }
 

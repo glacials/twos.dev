@@ -18,6 +18,7 @@ import (
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
+	"twos.dev/winter"
 	"twos.dev/winter/document"
 	"twos.dev/winter/frontmatter"
 	"twos.dev/winter/transform"
@@ -40,7 +41,7 @@ type imageVars struct {
 	ImageSRC string
 }
 
-func buildPhoto(src, dst string, _ Config) error {
+func buildPhoto(src, dst string, _ winter.Config) error {
 	relsrc, err := filepath.Rel("src", src)
 	if err != nil {
 		return fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
