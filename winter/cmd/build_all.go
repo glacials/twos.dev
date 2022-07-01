@@ -28,11 +28,12 @@ func buildAll(
 	builders map[string]Builder,
 	cfg winter.Config,
 ) error {
-	s, err := discover()
+	s, err := winter.Discover(cfg)
 	if err != nil {
 		return err
 	}
-	fmt.Println(s.posts())
+
+	s.Execute(s.Get("index"))
 
 	seen := map[string]struct{}{}
 

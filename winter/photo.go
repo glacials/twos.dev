@@ -1,9 +1,8 @@
-package main
+package winter
 
 import (
 	"errors"
 	"fmt"
-	"html/template"
 	"image"
 	"image/jpeg"
 	"io"
@@ -12,20 +11,17 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
+	"text/template"
 	"time"
 
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
-	"twos.dev/winter"
-	"twos.dev/winter/document"
-	"twos.dev/winter/frontmatter"
-	"twos.dev/winter/transform"
 )
 
 type galleryVars struct {
-	document.BaseVars
+	*Document
 
 	ImageSRC string
 	Alt      string
@@ -41,7 +37,7 @@ type imageVars struct {
 	ImageSRC string
 }
 
-func buildPhoto(src, dst string, _ winter.Config) error {
+func BuildPhoto(src, dst string, cfg Config) error {
 	relsrc, err := filepath.Rel("src", src)
 	if err != nil {
 		return fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
@@ -80,80 +76,15 @@ func buildPhoto(src, dst string, _ winter.Config) error {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	if err := genGalleryPage(src, fmt.Sprintf("%s.html", dst)); err != nil {
+	if err := genGalleryPage(src, fmt.Sprintf("%s.html", dst), cfg); err != nil {
 		return fmt.Errorf("can't generate photo container pages: %w", err)
 	}
 
 	return nil
 }
 
-// genThumbnail makes thumbnails from every photo (recursively) in src, copying
-// them to equivalent paths in a "thumb" subdirectory of dst.
-//
-// The thumbnails have the given width. Height is automatically calculated to
-// maintain ratio.
-func genThumbnail(src, dst string, width int) error {
-	sourceFile, err := os.Open(src)
-	if err != nil {
-		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
-	}
-	defer sourceFile.Close()
-
-	srcPhoto, err := jpeg.Decode(sourceFile)
-	if err != nil {
-		return fmt.Errorf(
-			"can't decode photo at path `%s` (maybe not an image?): %w",
-			src,
-			err,
-		)
-	}
-	p := srcPhoto.Bounds().Size()
-	w, h := width, ((width*p.X/p.Y)+1)&-1
-	dstPhoto := image.NewRGBA(image.Rect(0, 0, w, h))
-
-	draw.CatmullRom.Scale(
-		dstPhoto,
-		image.Rectangle{
-			image.Point{0, 0},
-			image.Point{width, width},
-		},
-		srcPhoto,
-		image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
-		draw.Over,
-		nil,
-	)
-
-	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf(
-			"can't make thumbnail directory in path `%s`: %w",
-			dst,
-			err,
-		)
-	}
-
-	destinationFile, err := os.Create(dst)
-	if err != nil {
-		return fmt.Errorf(
-			"can't create thumbnail file for photo at path `%s`: %w",
-			src,
-			err,
-		)
-	}
-	defer destinationFile.Close()
-
-	if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
-		return fmt.Errorf(
-			"can't encode to destination file at path `%s`: %w",
-			dst,
-			err,
-		)
-	}
-
-	return nil
-}
-
-func genGalleryPage(src, dst string) error {
-	templateHTML, err := ioutil.ReadFile(photoGalleryTemplatePath)
+func genGalleryPage(src, dst string, cfg Config) error {
+	templateHTML, err := ioutil.ReadFile("src/templates/imgcontainer.html.tmpl")
 	if err != nil {
 		return fmt.Errorf("can't read photo gallery template: %w", err)
 	}
@@ -163,8 +94,8 @@ func genGalleryPage(src, dst string) error {
 		return fmt.Errorf("can't create imgcontainer template: %w", err)
 	}
 
-	if err = transform.LoadPartials(t); err != nil {
-		return err
+	if err := loadTemplates(t); err != nil {
+		return fmt.Errorf("can't load templates: %w", err)
 	}
 
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
@@ -218,7 +149,19 @@ func genGalleryPage(src, dst string) error {
 		return fmt.Errorf("can't get camera for `%s`: %w", src, err)
 	}
 
+	shortname := filepath.Base(src)
+	shortname, _, _ = strings.Cut(shortname, ".")
+
 	v := galleryVars{
+		Document: &Document{
+			SourcePath: src,
+			meta: metadata{
+				shortname: shortname,
+				title:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
+				kind:      gallery,
+			},
+		},
+
 		Alt:      "",
 		Camera:   camera,
 		ImageSRC: filepath.Base(src),
@@ -226,12 +169,6 @@ func genGalleryPage(src, dst string) error {
 
 		Prev: prev,
 		Next: next,
-
-		BaseVars: document.BaseVars{
-			Shortname:  "",
-			SourcePath: src,
-			Type:       frontmatter.GalleryType,
-		},
 	}
 
 	if err := t.Execute(f, v); err != nil {
@@ -347,4 +284,69 @@ func exifFractionToDecimal(
 	}
 
 	return float64(numer) / float64(denom), nil
+}
+
+// genThumbnail makes thumbnails from every photo (recursively) in src, copying
+// them to equivalent paths in a "thumb" subdirectory of dst.
+//
+// The thumbnails have the given width. Height is automatically calculated to
+// maintain ratio.
+func genThumbnail(src, dst string, width int) error {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
+	}
+	defer sourceFile.Close()
+
+	srcPhoto, err := jpeg.Decode(sourceFile)
+	if err != nil {
+		return fmt.Errorf(
+			"can't decode photo at path `%s` (maybe not an image?): %w",
+			src,
+			err,
+		)
+	}
+	p := srcPhoto.Bounds().Size()
+	w, h := width, ((width*p.X/p.Y)+1)&-1
+	dstPhoto := image.NewRGBA(image.Rect(0, 0, w, h))
+
+	draw.CatmullRom.Scale(
+		dstPhoto,
+		image.Rectangle{
+			image.Point{0, 0},
+			image.Point{width, width},
+		},
+		srcPhoto,
+		image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
+		draw.Over,
+		nil,
+	)
+
+	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
+		return fmt.Errorf(
+			"can't make thumbnail directory in path `%s`: %w",
+			dst,
+			err,
+		)
+	}
+
+	destinationFile, err := os.Create(dst)
+	if err != nil {
+		return fmt.Errorf(
+			"can't create thumbnail file for photo at path `%s`: %w",
+			src,
+			err,
+		)
+	}
+	defer destinationFile.Close()
+
+	if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
+		return fmt.Errorf(
+			"can't encode to destination file at path `%s`: %w",
+			dst,
+			err,
+		)
+	}
+
+	return nil
 }

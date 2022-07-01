@@ -31,20 +31,21 @@ var (
 	tocheadings = map[atom.Atom]struct{}{atom.H2: {}, atom.H3: {}}
 )
 
-type document struct {
-	src  string
-	meta metadata
-	root *html.Node
-
-	incoming []*document
-	outgoing []*document
+type Document struct {
+	SourcePath string
+	root       *html.Node
+	incoming   []*Document
+	outgoing   []*Document
+	meta       metadata
 }
 
 type metadata struct {
-	title     string    `yaml:"title"`
-	toc       bool      `yaml:"toc"`
-	kind      kind      `yaml:"type"`
-	shortname string    `yaml:"filename"`
+	shortname string `yaml:"filename"`
+	parent    string `yaml:"parent"`
+	kind      kind   `yaml:"type"`
+	title     string `yaml:"title"`
+	toc       bool   `yaml:"toc"`
+
 	createdAt time.Time `yaml:"date"`
 	updatedAt time.Time `yaml:"updated"`
 }
@@ -58,7 +59,7 @@ const (
 	gallery
 )
 
-func (k kind) UnmarshalJSON(b []byte) error {
+func (k kind) UnmarshalYAML(b []byte) error {
 	switch string(b) {
 	case "draft", "":
 		k = draft
@@ -74,14 +75,14 @@ func (k kind) UnmarshalJSON(b []byte) error {
 	return nil
 }
 
-func htmlDoc(src string) (d *document, err error) {
+func fromHTML(src string) (d *Document, err error) {
 	f, err := os.Open(src)
 	if err != nil {
 		return
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d.meta)
+	htm, err := frontmatter.Parse(f, &d)
 	if err != nil {
 		return
 	}
@@ -92,12 +93,12 @@ func htmlDoc(src string) (d *document, err error) {
 	}
 
 	d.root = root
-	d.src = src
+	d.SourcePath = src
 	return
 }
 
-func fromMarkdown(src string) (*document, error) {
-	var d document
+func fromMarkdown(src string) (*Document, error) {
+	var d Document
 
 	f, err := os.Open(src)
 	if err != nil {
@@ -105,7 +106,7 @@ func fromMarkdown(src string) (*document, error) {
 	}
 	defer f.Close()
 
-	md, err := frontmatter.Parse(f, &d.meta)
+	md, err := frontmatter.Parse(f, &d)
 	if err != nil {
 		return nil, err
 	}
@@ -133,11 +134,11 @@ func fromMarkdown(src string) (*document, error) {
 	}
 
 	d.root = root
-	d.src = src
+	d.SourcePath = src
 	return &d, nil
 }
 
-func (d *document) render() ([]byte, error) {
+func (d *Document) render() ([]byte, error) {
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, err
@@ -145,7 +146,7 @@ func (d *document) render() ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func (d *document) linksout() (hrfs []string, err error) {
+func (d *Document) linksout() (hrfs []string, err error) {
 	var f func(*html.Node)
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.DataAtom == atom.A {
@@ -170,7 +171,7 @@ func (d *document) linksout() (hrfs []string, err error) {
 	return
 }
 
-func (d *document) title() (string, error) {
+func (d *Document) Title() (string, error) {
 	if d.meta.title != "" {
 		return d.meta.title, nil
 	}
@@ -184,10 +185,33 @@ func (d *document) title() (string, error) {
 		}
 	}
 
-	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.meta.shortname)
+	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.Shortname())
 }
 
-func (d *document) toc() error {
+func (d *Document) Shortname() string {
+	if d.meta.shortname != "" {
+		return d.meta.shortname
+	}
+
+	n := filepath.Base(d.SourcePath)
+	n, _, _ = strings.Cut(n, ".")
+	return n
+}
+
+func (d *Document) Parent() string {
+	if d.meta.parent != "" {
+		return d.meta.parent
+	}
+
+	p, _, ok := strings.Cut(d.Shortname(), "_")
+	if !ok {
+		return ""
+	}
+
+	return p
+}
+
+func (d *Document) fillTOC() error {
 	toc := html.Node{
 		Attr:     []html.Attribute{{Key: "id", Val: "toc"}},
 		Data:     toctype.String(),

@@ -20,7 +20,7 @@ var (
 	noBuild *bool
 
 	builders = map[string]Builder{
-		"src/img/*/*/*.[jJ][pP][gG]": buildPhoto,
+		"src/img/*/*/*.[jJ][pP][gG]": winter.BuildPhoto,
 		"src/cold/*.html.tmpl":       func(_, _ string, _ winter.Config) error { return nil },
 		"src/cold/*.html":            func(_, _ string, _ winter.Config) error { return nil },
 		"src/cold/*.md":              func(_, _ string, _ winter.Config) error { return nil },
