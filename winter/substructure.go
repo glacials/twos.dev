@@ -183,7 +183,8 @@ func (s substructure) execute(d *document) error {
 		}
 		s.t.New("body").Parse(string(b))
 		var buf bytes.Buffer
-		if err := s.t.Execute(&buf, d); err != nil {
+
+		if err := s.t.Execute(&buf, templateVars{d, &s}); err != nil {
 			return fmt.Errorf(
 				"can't execute document `%s`: %w",
 				d.meta.shortname,

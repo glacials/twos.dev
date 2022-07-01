@@ -21,10 +21,10 @@ var (
 
 	builders = map[string]Builder{
 		"src/img/*/*/*.[jJ][pP][gG]": buildPhoto,
-		"src/cold/*.html.tmpl":       buildDocument,
-		"src/cold/*.html":            buildDocument,
-		"src/cold/*.md":              buildDocument,
-		"src/warm/*.md":              buildDocument,
+		"src/cold/*.html.tmpl":       func(_, _ string, _ winter.Config) error { return nil },
+		"src/cold/*.html":            func(_, _ string, _ winter.Config) error { return nil },
+		"src/cold/*.md":              func(_, _ string, _ winter.Config) error { return nil },
+		"src/warm/*.md":              func(_, _ string, _ winter.Config) error { return nil },
 		"src/favicon/*":              buildStaticFile("src/favicon"),
 		"public/*":                   buildStaticFile("public"),
 		"public/*/*":                 buildStaticFile("public"),

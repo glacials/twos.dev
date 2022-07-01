@@ -45,7 +45,7 @@ func AttachVideoTemplateFunc(d document.Document) (document.Document, error) {
 func videos(
 	pageShortname string,
 ) (func(graphic.Caption, ...graphic.Shortname) (template.HTML, error), error) {
-	partial, err := ioutil.ReadFile(partialPath(videoPartial))
+	partial, err := ioutil.ReadFile("src/templates/_video.html.tmpl")
 	if err != nil {
 		return nil, err
 	}

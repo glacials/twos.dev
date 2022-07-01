@@ -28,6 +28,12 @@ func buildAll(
 	builders map[string]Builder,
 	cfg winter.Config,
 ) error {
+	s, err := discover()
+	if err != nil {
+		return err
+	}
+	fmt.Println(s.posts())
+
 	seen := map[string]struct{}{}
 
 	if err := os.MkdirAll(dst, 0755); err != nil {
