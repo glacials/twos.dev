@@ -33,7 +33,9 @@ func buildAll(
 		return err
 	}
 
-	s.Execute(s.Get("index"))
+	if err := s.Execute(s.Get("index")); err != nil {
+		return err
+	}
 
 	seen := map[string]struct{}{}
 

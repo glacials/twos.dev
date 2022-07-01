@@ -3,6 +3,7 @@ package winter
 import (
 	"errors"
 	"fmt"
+	"html/template"
 	"image"
 	"image/jpeg"
 	"io"
@@ -11,7 +12,6 @@ import (
 	"path/filepath"
 	"strconv"
 	"strings"
-	"text/template"
 	"time"
 
 	"github.com/rwcarlsen/goexif/exif"
@@ -28,11 +28,11 @@ type galleryVars struct {
 	Camera   string
 	TakenAt  time.Time
 
-	Prev *imageVars
-	Next *imageVars
+	Prev *galleryImageVars
+	Next *galleryImageVars
 }
 
-type imageVars struct {
+type galleryImageVars struct {
 	PageLink string
 	ImageSRC string
 }
@@ -128,17 +128,17 @@ func genGalleryPage(src, dst string, cfg Config) error {
 		func(file string) bool { return filepath.Base(file) == filepath.Base(src) },
 	)
 
-	var prev, next *imageVars
+	var prev, next *galleryImageVars
 	if i > 0 {
 		img := filepath.Base(files[i-1])
-		prev = &imageVars{
+		prev = &galleryImageVars{
 			ImageSRC: img,
 			PageLink: fmt.Sprintf("%s.html", img),
 		}
 	}
 	if i < len(files)-1 {
 		img := filepath.Base(files[i+1])
-		next = &imageVars{
+		next = &galleryImageVars{
 			ImageSRC: img,
 			PageLink: fmt.Sprintf("%s.html", img),
 		}

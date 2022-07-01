@@ -52,6 +52,22 @@ type metadata struct {
 
 type kind int
 
+// IsDraft returns whether the document type is DraftType. This function exists
+// to be used by templates.
+func (t kind) IsDraft() bool { return t == draft }
+
+// IsPost returns whether the document type is PostType. This function exists to
+// be used by templates.
+func (t kind) IsPost() bool { return t == post }
+
+// IsPage returns whether the document type is PageType. This function exists to
+// be used by templates.
+func (t kind) IsPage() bool { return t == page }
+
+// IsGallery returns whether the document type is GalleryType. This function
+// exists to be used by templates.
+func (t kind) IsGallery() bool { return t == gallery }
+
 const (
 	draft kind = iota
 	post
@@ -75,26 +91,27 @@ func (k kind) UnmarshalYAML(b []byte) error {
 	return nil
 }
 
-func fromHTML(src string) (d *Document, err error) {
+func fromHTML(src string) (*Document, error) {
+	var d Document
 	f, err := os.Open(src)
 	if err != nil {
-		return
+		return nil, err
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d)
+	htm, err := frontmatter.Parse(f, &d.meta)
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	root, err := html.Parse(bytes.NewBuffer(htm))
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	d.root = root
 	d.SourcePath = src
-	return
+	return &d, nil
 }
 
 func fromMarkdown(src string) (*Document, error) {
@@ -209,6 +226,10 @@ func (d *Document) Parent() string {
 	}
 
 	return p
+}
+
+func (d *Document) Kind() kind {
+	return d.meta.kind
 }
 
 func (d *Document) fillTOC() error {

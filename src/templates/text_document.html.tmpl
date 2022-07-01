@@ -8,7 +8,7 @@
     <div class="container">
       <header>
         {{ template "nav" . }}
-        {{ if and (.Type.IsPost)  (not .CreatedAt.IsZero) }}
+        {{ if and (.Kind.IsPost)  (not .CreatedAt.IsZero) }}
           <small style="text-align:center; display: block">
             <i>
               published
@@ -21,7 +21,7 @@
         {{ end }}
       </header>
       <article>
-        {{ if .Type.IsDraft }}
+        {{ if .Kind.IsDraft }}
           <div style="text-align:center; background-color: var(--bg-c)">
             DRAFT
           </div>

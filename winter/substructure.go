@@ -3,14 +3,21 @@ package winter
 import (
 	"bytes"
 	"fmt"
+	"html/template"
 	"io/ioutil"
 	"path/filepath"
 	"strings"
-	"text/template"
 	"time"
 
 	"github.com/gorilla/feeds"
 	"github.com/yargevad/filepathx"
+)
+
+var (
+	ignoreFiles = map[string]struct{}{
+		"README.md": {},
+		".DS_Store": {},
+	}
 )
 
 // substructure is a graph of documents on the website, generated with read-only
@@ -27,12 +34,15 @@ type substructure struct {
 // It then learns what it can about each file and stores the information in
 // a substructure.
 func Discover(cfg Config) (s substructure, err error) {
-	md, err := filepathx.Glob("**/*.md")
+	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
 		return
 	}
 
 	for _, m := range md {
+		if _, ok := ignoreFiles[filepath.Base(m)]; ok {
+			continue
+		}
 		doc, err := fromMarkdown(m)
 		if err != nil {
 			return substructure{}, err
@@ -40,12 +50,31 @@ func Discover(cfg Config) (s substructure, err error) {
 		s.docs = append(s.docs, doc)
 	}
 
-	html, err := filepathx.Glob("**/*.html")
+	html, err := filepathx.Glob("src/**/*.html")
 	if err != nil {
 		return
 	}
 
 	for _, h := range html {
+		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
+			continue
+		}
+		doc, err := fromHTML(h)
+		if err != nil {
+			return substructure{}, err
+		}
+		s.docs = append(s.docs, doc)
+	}
+
+	htmltmpl, err := filepathx.Glob("src/**/*.html.tmpl")
+	if err != nil {
+		return
+	}
+
+	for _, h := range htmltmpl {
+		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
+			continue
+		}
 		doc, err := fromHTML(h)
 		if err != nil {
 			return substructure{}, err
@@ -149,15 +178,25 @@ func (s substructure) Execute(d *Document) error {
 		return err
 	}
 
+	imgsfunc, err := imgs(d.Shortname())
+	if err != nil {
+		return err
+	}
+
+	_ = s.t.Funcs(template.FuncMap{"imgs": imgsfunc})
+
 	for _, d := range s.docs {
 		b, err := d.render()
 		if err != nil {
 			return err
 		}
-		s.t.New("body").Parse(string(b))
-		var buf bytes.Buffer
+		if _, err := s.t.New("body").Parse(string(b)); err != nil {
+			return fmt.Errorf("failed to parse template: %w", err)
+		}
 
-		if err := s.t.Lookup("text_document").Execute(&buf, templateVars{d, &s}); err != nil {
+		var buf bytes.Buffer
+		err = s.t.Lookup("text_document").Execute(&buf, templateVars{d, &s})
+		if err != nil {
 			return fmt.Errorf(
 				"can't execute document `%s`: %w",
 				d.Shortname(),
