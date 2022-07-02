@@ -28,6 +28,7 @@ var (
 		//"–": fmt.Sprintf(styleWrapper, "–"),
 		//"—": fmt.Sprintf(styleWrapper, "—"),
 		"&#34;": "\"",
+		"&#39;": "'",
 	}
 	tocheadings = map[atom.Atom]struct{}{atom.H2: {}, atom.H3: {}}
 )
@@ -48,8 +49,8 @@ type metadata struct {
 	title     string `yaml:"title"`
 	toc       bool   `yaml:"toc"`
 
-	createdAt time.Time `yaml:"date"`
-	updatedAt time.Time `yaml:"updated"`
+	CreatedAt time.Time `yaml:"date"`
+	UpdatedAt time.Time `yaml:"updated"`
 }
 
 type kind int
@@ -101,7 +102,7 @@ func fromHTML(src string) (*Document, error) {
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d.meta)
+	htm, err := frontmatter.Parse(f, &d)
 	if err != nil {
 		return nil, err
 	}
@@ -195,14 +196,14 @@ func (d *Document) linksout() (hrfs []string, err error) {
 }
 
 func (d *Document) Title() (string, error) {
-	if d.meta.title != "" {
-		return d.meta.title, nil
+	if d.title != "" {
+		return d.title, nil
 	}
 
 	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
-				d.meta.title = child.Data
+				d.title = child.Data
 				return child.Data, nil
 			}
 		}
@@ -212,8 +213,8 @@ func (d *Document) Title() (string, error) {
 }
 
 func (d *Document) Shortname() string {
-	if d.meta.shortname != "" {
-		return d.meta.shortname
+	if d.shortname != "" {
+		return d.shortname
 	}
 
 	n := filepath.Base(d.SourcePath)
@@ -222,8 +223,8 @@ func (d *Document) Shortname() string {
 }
 
 func (d *Document) Parent() string {
-	if d.meta.parent != "" {
-		return d.meta.parent
+	if d.parent != "" {
+		return d.parent
 	}
 
 	p, _, ok := strings.Cut(d.Shortname(), "_")
@@ -235,7 +236,7 @@ func (d *Document) Parent() string {
 }
 
 func (d *Document) Kind() kind {
-	return d.meta.kind
+	return d.kind
 }
 
 func (d *Document) fillTOC() error {

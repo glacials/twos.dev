@@ -24,7 +24,6 @@ var (
 // operations. It will later be fed into a renderer.
 type substructure struct {
 	docs []*Document
-	t    *template.Template
 }
 
 // Discover is the first step of the static website build process. It crawls the
@@ -96,7 +95,7 @@ func (s substructure) Get(shortname string) *Document {
 
 func (s substructure) posts() (u []*Document) {
 	for _, d := range s.docs {
-		if d.meta.kind == post {
+		if d.kind == post {
 			u = append(u, d)
 		}
 	}
@@ -143,8 +142,8 @@ func (s substructure) writefeed(cfg Config) error {
 			Link: &feeds.Link{
 				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, post.Shortname()),
 			},
-			Created: post.meta.createdAt,
-			Updated: post.meta.updatedAt,
+			Created: post.CreatedAt,
+			Updated: post.UpdatedAt,
 		})
 	}
 
@@ -171,14 +170,12 @@ func (s substructure) setlinks() error {
 }
 
 func (s substructure) Execute() error {
-	if s.t == nil {
-		s.t = template.New("")
-	}
-	if err := loadTemplates(s.t); err != nil {
-		return err
-	}
-
 	for _, d := range s.docs {
+		t := template.New("")
+		if err := loadTemplates(t); err != nil {
+			return err
+		}
+
 		imgsfunc, err := imgs(d.Shortname())
 		if err != nil {
 			return err
@@ -189,7 +186,7 @@ func (s substructure) Execute() error {
 			return err
 		}
 
-		_ = s.t.Funcs(template.FuncMap{
+		_ = t.Funcs(template.FuncMap{
 			"img":    imgsfunc,
 			"imgs":   imgsfunc,
 			"video":  videoFunc,
@@ -200,12 +197,14 @@ func (s substructure) Execute() error {
 		if err != nil {
 			return err
 		}
-		if _, err := s.t.New("body").Parse(string(b)); err != nil {
+
+		if _, err := t.New("body").Parse(string(b)); err != nil {
+			fmt.Println(string(b))
 			return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
 		}
 
 		var buf bytes.Buffer
-		err = s.t.Lookup("text_document").Execute(&buf, templateVars{d, &s})
+		err = t.Lookup("text_document").Execute(&buf, templateVars{d, &s})
 		if err != nil {
 			return fmt.Errorf(
 				"can't execute document `%s`: %w",
