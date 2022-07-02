@@ -15,7 +15,6 @@ var transformations = []document.Transformation{
 	transform.UnescapeHTML,
 
 	// Template-based transformations
-	transform.AttachImageTemplateFuncs,
 	transform.AttachVideoTemplateFunc,
 	transform.AttachPostsTemplateFunc,
 

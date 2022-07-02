@@ -18,7 +18,7 @@ var (
 	ignoreDirectories = map[string]struct{}{
 		".git":         {},
 		".github":      {},
-		"dist":         {},
+		dist:           {},
 		"node_modules": {},
 	}
 )
@@ -28,12 +28,16 @@ func buildAll(
 	builders map[string]Builder,
 	cfg winter.Config,
 ) error {
+	if err := os.RemoveAll(dist); err != nil {
+		return err
+	}
+
 	s, err := winter.Discover(cfg)
 	if err != nil {
 		return err
 	}
 
-	if err := s.Execute(s.Get("index")); err != nil {
+	if err := s.Execute(); err != nil {
 		return err
 	}
 

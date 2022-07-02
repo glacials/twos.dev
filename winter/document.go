@@ -27,6 +27,7 @@ var (
 		// TODO: Do we need this now that we have LaTeX?
 		//"–": fmt.Sprintf(styleWrapper, "–"),
 		//"—": fmt.Sprintf(styleWrapper, "—"),
+		"&#34;": "\"",
 	}
 	tocheadings = map[atom.Atom]struct{}{atom.H2: {}, atom.H3: {}}
 )
@@ -160,7 +161,11 @@ func (d *Document) render() ([]byte, error) {
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	b := buf.Bytes()
+	for old, new := range replacements {
+		b = bytes.ReplaceAll(b, []byte(old), []byte(new))
+	}
+	return b, nil
 }
 
 func (d *Document) linksout() (hrfs []string, err error) {

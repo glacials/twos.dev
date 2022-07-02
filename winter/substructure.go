@@ -170,28 +170,38 @@ func (s substructure) setlinks() error {
 	return nil
 }
 
-func (s substructure) Execute(d *Document) error {
+func (s substructure) Execute() error {
 	if s.t == nil {
-		s.t = &template.Template{}
+		s.t = template.New("")
 	}
 	if err := loadTemplates(s.t); err != nil {
 		return err
 	}
 
-	imgsfunc, err := imgs(d.Shortname())
-	if err != nil {
-		return err
-	}
-
-	_ = s.t.Funcs(template.FuncMap{"imgs": imgsfunc})
-
 	for _, d := range s.docs {
+		imgsfunc, err := imgs(d.Shortname())
+		if err != nil {
+			return err
+		}
+
+		videoFunc, err := videos(d.Shortname())
+		if err != nil {
+			return err
+		}
+
+		_ = s.t.Funcs(template.FuncMap{
+			"img":    imgsfunc,
+			"imgs":   imgsfunc,
+			"video":  videoFunc,
+			"videos": videoFunc,
+		})
+
 		b, err := d.render()
 		if err != nil {
 			return err
 		}
 		if _, err := s.t.New("body").Parse(string(b)); err != nil {
-			return fmt.Errorf("failed to parse template: %w", err)
+			return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
 		}
 
 		var buf bytes.Buffer

@@ -81,9 +81,9 @@ Then I made some chips, invited some friends over (pre-pandemic), and got to
 work.
 
 {{ img
+  "Taste testing hot sauces."
   "trialing"
   "several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
-  "Taste testing hot sauces."
 }}
 
 We selected a hot sauce called Pale Ale Chipotle and the company rated its
@@ -95,9 +95,9 @@ We're a small team with no designer, so I cracked open Acorn and spent way too
 long making way too ugly a label.
 
 {{ img
+  "The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute."
   "label"
   "a hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors"
-  "The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute."
 }}
 
 The white label company sent me a template with requirements such as how to
