@@ -22,7 +22,7 @@ var (
 		Short: "Build the website",
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			return buildAll(dst, builders, cfg)
+			return buildAll(dist, builders, cfg)
 		},
 	}
 )

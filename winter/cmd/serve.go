@@ -14,17 +14,11 @@ import (
 	"twos.dev/winter"
 )
 
-const dst = "dist"
-
 var (
 	noBuild *bool
 
 	builders = map[string]Builder{
 		"src/img/*/*/*.[jJ][pP][gG]": winter.BuildPhoto,
-		"src/cold/*.html.tmpl":       func(_, _ string, _ winter.Config) error { return nil },
-		"src/cold/*.html":            func(_, _ string, _ winter.Config) error { return nil },
-		"src/cold/*.md":              func(_, _ string, _ winter.Config) error { return nil },
-		"src/warm/*.md":              func(_, _ string, _ winter.Config) error { return nil },
 		"src/favicon/*":              buildStaticFile("src/favicon"),
 		"public/*":                   buildStaticFile("public"),
 		"public/*/*":                 buildStaticFile("public"),
@@ -34,8 +28,8 @@ var (
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
 	globalBuilders = map[string]Builder{
-		"src/templates/*": func(_, _ string, cfg winter.Config) error { return buildAll(dst, builders, cfg) },
-		"*.css":           func(_, _ string, cfg winter.Config) error { return buildAll(dst, builders, cfg) },
+		"src/templates/*": func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
+		"*.css":           func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
 	}
 )
 
@@ -63,7 +57,7 @@ var serveCmd = &cobra.Command{
 		}
 
 		var mux http.ServeMux
-		mux.Handle("/", http.FileServer(http.Dir(dst)))
+		mux.Handle("/", http.FileServer(http.Dir(dist)))
 		mux.Handle("/ws", reloader.Handler())
 
 		server := http.Server{
@@ -85,7 +79,7 @@ var serveCmd = &cobra.Command{
 		}()
 
 		if !*noBuild {
-			if err := buildAll(dst, builders, cfg); err != nil {
+			if err := buildAll(dist, builders, cfg); err != nil {
 				log.Fatalf("can't build: %s", err.Error())
 			}
 
@@ -95,7 +89,7 @@ var serveCmd = &cobra.Command{
 			}
 		}
 
-		log.Printf("Serving %s on http://localhost:%d\n", dst, port)
+		log.Printf("Serving %s on http://localhost:%d\n", dist, port)
 		<-stop
 
 		return nil

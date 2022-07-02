@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 	"time"
@@ -171,7 +171,7 @@ func (s substructure) setlinks() error {
 	return nil
 }
 
-func (s substructure) Execute() error {
+func (s substructure) Execute(dist string) error {
 	for _, d := range s.docs {
 		t := template.New("")
 		if err := loadTemplates(t); err != nil {
@@ -204,7 +204,6 @@ func (s substructure) Execute() error {
 		}
 
 		if _, err := t.New("body").Parse(string(b)); err != nil {
-			fmt.Println(string(b))
 			return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
 		}
 
@@ -214,8 +213,9 @@ func (s substructure) Execute() error {
 			return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
 		}
 
-		path := filepath.Join("dist", d.Shortname()+".html")
-		if ioutil.WriteFile(path, buf.Bytes(), 0644); err != nil {
+		fmt.Println("writing to", filepath.Join(dist, d.Shortname()+".html"))
+		path := filepath.Join(dist, d.Shortname()+".html")
+		if os.WriteFile(path, buf.Bytes(), 0644); err != nil {
 			return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
 		}
 	}
