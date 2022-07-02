@@ -33,11 +33,12 @@ var (
 )
 
 type Document struct {
+	metadata
+
 	SourcePath string
 	root       *html.Node
 	incoming   []*Document
 	outgoing   []*Document
-	meta       metadata
 }
 
 type metadata struct {
