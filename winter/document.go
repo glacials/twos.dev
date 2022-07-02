@@ -19,7 +19,15 @@ import (
 
 const (
 	styleWrapper = "<span style=\"font-family: sans-serif\">%s</span>"
-	toctype      = atom.Ol
+	tocEl        = atom.Ol
+	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
+	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
+	tocReturn    = `
+<span style="margin-left:0.5em">
+	<a href="#{{.Anchor}}" style="text-decoration:none">#</a>
+	<a href="#toc" style="text-decoration:none">&uarr;</a>
+</span>
+`
 )
 
 var (
@@ -34,42 +42,39 @@ var (
 )
 
 type Document struct {
-	metadata
-
 	SourcePath string
 	root       *html.Node
 	incoming   []*Document
 	outgoing   []*Document
-}
 
-type metadata struct {
-	Kind      kind   `yaml:"type"`
-	Parent    string `yaml:"parent"`
-	Shortname string `yaml:"filename"`
-	Title     string `yaml:"title"`
-	TOC       bool   `yaml:"toc"`
+	Kind kind `yaml:"type"`
+	TOC  bool `yaml:"toc"`
 
 	CreatedAt time.Time `yaml:"date"`
 	UpdatedAt time.Time `yaml:"updated"`
+
+	FrontmatterParent    string `yaml:"parent"`
+	FrontmatterShortname string `yaml:"filename"`
+	FrontmatterTitle     string `yaml:"title"`
 }
 
 type kind int
 
 // IsDraft returns whether the document type is DraftType. This function exists
 // to be used by templates.
-func (t kind) IsDraft() bool { return t == draft }
+func (k kind) IsDraft() bool { return k == draft }
 
 // IsPost returns whether the document type is PostType. This function exists to
 // be used by templates.
-func (t kind) IsPost() bool { return t == post }
+func (k kind) IsPost() bool { return k == post }
 
 // IsPage returns whether the document type is PageType. This function exists to
 // be used by templates.
-func (t kind) IsPage() bool { return t == page }
+func (k kind) IsPage() bool { return k == page }
 
 // IsGallery returns whether the document type is GalleryType. This function
 // exists to be used by templates.
-func (t kind) IsGallery() bool { return t == gallery }
+func (k kind) IsGallery() bool { return k == gallery }
 
 const (
 	draft kind = iota
@@ -107,12 +112,12 @@ func fromHTML(src string) (*Document, error) {
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d.metadata)
+	htm, err := frontmatter.Parse(f, &d)
 	if err != nil {
 		return nil, err
 	}
 
-	d.metadata.Shortname, _, _ = strings.Cut(d.metadata.Shortname, ".")
+	d.FrontmatterShortname, _, _ = strings.Cut(d.FrontmatterShortname, ".")
 
 	root, err := html.Parse(bytes.NewBuffer(htm))
 	if err != nil {
@@ -174,6 +179,11 @@ func (d *Document) render() ([]byte, error) {
 	for old, new := range replacements {
 		b = bytes.ReplaceAll(b, []byte(old), []byte(new))
 	}
+	if d.TOC {
+		if err := d.fillTOC(); err != nil {
+			return nil, err
+		}
+	}
 	return b, nil
 }
 
@@ -203,14 +213,14 @@ func (d *Document) linksout() (hrfs []string, err error) {
 }
 
 func (d *Document) Title() (string, error) {
-	if d.metadata.Title != "" {
-		return d.metadata.Title, nil
+	if d.FrontmatterTitle != "" {
+		return d.FrontmatterTitle, nil
 	}
 
 	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
-				d.metadata.Title = child.Data
+				d.FrontmatterTitle = child.Data
 				return child.Data, nil
 			}
 		}
@@ -220,8 +230,10 @@ func (d *Document) Title() (string, error) {
 }
 
 func (d *Document) Shortname() string {
-	if d.metadata.Shortname != "" {
-		return d.metadata.Shortname
+	if d.FrontmatterShortname != "" {
+		s, _, _ := strings.Cut(d.FrontmatterShortname, ".")
+		d.FrontmatterShortname = s
+		return d.FrontmatterShortname
 	}
 
 	n := filepath.Base(d.SourcePath)
@@ -230,8 +242,8 @@ func (d *Document) Shortname() string {
 }
 
 func (d *Document) Parent() string {
-	if d.metadata.Parent != "" {
-		return d.metadata.Parent
+	if d.FrontmatterParent != "" {
+		return d.FrontmatterParent
 	}
 
 	p, _, ok := strings.Cut(d.Shortname(), "_")
@@ -245,8 +257,8 @@ func (d *Document) Parent() string {
 func (d *Document) fillTOC() error {
 	toc := html.Node{
 		Attr:     []html.Attribute{{Key: "id", Val: "toc"}},
-		Data:     toctype.String(),
-		DataAtom: toctype,
+		Data:     tocEl.String(),
+		DataAtom: tocEl,
 		Type:     html.ElementNode,
 	}
 	var f func(*html.Node) error
@@ -312,6 +324,12 @@ func (d *Document) fillTOC() error {
 	}
 
 	firstH2 := firstOfType(d.root, atom.H2)
+	if firstH2 == nil {
+		return fmt.Errorf(
+			"don't know how to build TOC without any H2 headings in %s",
+			d.SourcePath,
+		)
+	}
 	firstH2.Parent.InsertBefore(&toc, firstH2)
 	return nil
 }

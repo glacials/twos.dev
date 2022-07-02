@@ -15,8 +15,6 @@ ecosystem. It is occasionally updated.
 Do not read this in order. Do not read this in its entirety. Skip around as
 you please.
 
-### Topics
-
 ## Why? {#why}
 
 My life is in Google more than anyone I know. The usual suspects sure --

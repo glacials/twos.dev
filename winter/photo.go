@@ -145,12 +145,10 @@ func genGalleryPage(src, dst string, cfg Config) error {
 
 	v := galleryVars{
 		Document: &Document{
-			SourcePath: src,
-			metadata: metadata{
-				Kind:      gallery,
-				Shortname: shortname,
-				Title:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
-			},
+			SourcePath:           src,
+			Kind:                 gallery,
+			FrontmatterShortname: shortname,
+			FrontmatterTitle:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
 		},
 
 		Alt:      "",
