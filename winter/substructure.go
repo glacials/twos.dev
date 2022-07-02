@@ -49,28 +49,30 @@ func Discover(cfg Config) (s substructure, err error) {
 		s.docs = append(s.docs, doc)
 	}
 
-	html, err := filepathx.Glob("src/**/*.html")
+	coldhtml, err := filepath.Glob("src/cold/*.html")
 	if err != nil {
 		return
 	}
 
-	for _, h := range html {
-		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
-			continue
-		}
-		doc, err := fromHTML(h)
-		if err != nil {
-			return substructure{}, err
-		}
-		s.docs = append(s.docs, doc)
-	}
-
-	htmltmpl, err := filepathx.Glob("src/**/*.html.tmpl")
+	warmhtml, err := filepath.Glob("src/warm/*.html")
 	if err != nil {
 		return
 	}
 
-	for _, h := range htmltmpl {
+	coldtmpl, err := filepath.Glob("src/cold/*.tmpl")
+	if err != nil {
+		return
+	}
+
+	warmtmpl, err := filepath.Glob("src/warm/*.tmpl")
+	if err != nil {
+		return
+	}
+
+	html := append(coldhtml, warmhtml...)
+	tmpl := append(coldtmpl, warmtmpl...)
+
+	for _, h := range append(html, tmpl...) {
 		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
 			continue
 		}
@@ -95,7 +97,7 @@ func (s substructure) Get(shortname string) *Document {
 
 func (s substructure) posts() (u []*Document) {
 	for _, d := range s.docs {
-		if d.kind == post {
+		if d.Kind == post {
 			u = append(u, d)
 		}
 	}
@@ -176,7 +178,7 @@ func (s substructure) Execute() error {
 			return err
 		}
 
-		imgsfunc, err := imgs(d.Shortname())
+		imgsFunc, err := imgs(d.Shortname())
 		if err != nil {
 			return err
 		}
@@ -186,11 +188,14 @@ func (s substructure) Execute() error {
 			return err
 		}
 
+		postsFunc := posts(s)
+
 		_ = t.Funcs(template.FuncMap{
-			"img":    imgsfunc,
-			"imgs":   imgsfunc,
+			"img":    imgsFunc,
+			"imgs":   imgsFunc,
 			"video":  videoFunc,
 			"videos": videoFunc,
+			"posts":  postsFunc,
 		})
 
 		b, err := d.render()
@@ -206,20 +211,12 @@ func (s substructure) Execute() error {
 		var buf bytes.Buffer
 		err = t.Lookup("text_document").Execute(&buf, templateVars{d, &s})
 		if err != nil {
-			return fmt.Errorf(
-				"can't execute document `%s`: %w",
-				d.Shortname(),
-				err,
-			)
+			return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
 		}
 
 		path := filepath.Join("dist", d.Shortname()+".html")
 		if ioutil.WriteFile(path, buf.Bytes(), 0644); err != nil {
-			return fmt.Errorf(
-				"can't write document `%s`: %w",
-				d.Shortname(),
-				err,
-			)
+			return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
 		}
 	}
 

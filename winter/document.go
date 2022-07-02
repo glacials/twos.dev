@@ -43,11 +43,11 @@ type Document struct {
 }
 
 type metadata struct {
-	shortname string `yaml:"filename"`
-	parent    string `yaml:"parent"`
-	kind      kind   `yaml:"type"`
-	title     string `yaml:"title"`
-	toc       bool   `yaml:"toc"`
+	Kind      kind   `yaml:"type"`
+	Parent    string `yaml:"parent"`
+	Shortname string `yaml:"filename"`
+	Title     string `yaml:"title"`
+	TOC       bool   `yaml:"toc"`
 
 	CreatedAt time.Time `yaml:"date"`
 	UpdatedAt time.Time `yaml:"updated"`
@@ -78,8 +78,13 @@ const (
 	gallery
 )
 
-func (k kind) UnmarshalYAML(b []byte) error {
-	switch string(b) {
+func (k kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	var s string
+	if err := unmarshal(&s); err != nil {
+		return err
+	}
+
+	switch s {
 	case "draft", "":
 		k = draft
 	case "post":
@@ -89,7 +94,7 @@ func (k kind) UnmarshalYAML(b []byte) error {
 	case "gallery":
 		k = gallery
 	default:
-		return fmt.Errorf("unknown kind %q", string(b))
+		return fmt.Errorf("unknown kind %q", s)
 	}
 	return nil
 }
@@ -102,10 +107,12 @@ func fromHTML(src string) (*Document, error) {
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d)
+	htm, err := frontmatter.Parse(f, &d.metadata)
 	if err != nil {
 		return nil, err
 	}
+
+	d.metadata.Shortname, _, _ = strings.Cut(d.metadata.Shortname, ".")
 
 	root, err := html.Parse(bytes.NewBuffer(htm))
 	if err != nil {
@@ -196,14 +203,14 @@ func (d *Document) linksout() (hrfs []string, err error) {
 }
 
 func (d *Document) Title() (string, error) {
-	if d.title != "" {
-		return d.title, nil
+	if d.metadata.Title != "" {
+		return d.metadata.Title, nil
 	}
 
 	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
-				d.title = child.Data
+				d.metadata.Title = child.Data
 				return child.Data, nil
 			}
 		}
@@ -213,8 +220,8 @@ func (d *Document) Title() (string, error) {
 }
 
 func (d *Document) Shortname() string {
-	if d.shortname != "" {
-		return d.shortname
+	if d.metadata.Shortname != "" {
+		return d.metadata.Shortname
 	}
 
 	n := filepath.Base(d.SourcePath)
@@ -223,8 +230,8 @@ func (d *Document) Shortname() string {
 }
 
 func (d *Document) Parent() string {
-	if d.parent != "" {
-		return d.parent
+	if d.metadata.Parent != "" {
+		return d.metadata.Parent
 	}
 
 	p, _, ok := strings.Cut(d.Shortname(), "_")
@@ -233,10 +240,6 @@ func (d *Document) Parent() string {
 	}
 
 	return p
-}
-
-func (d *Document) Kind() kind {
-	return d.kind
 }
 
 func (d *Document) fillTOC() error {

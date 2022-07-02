@@ -214,3 +214,11 @@ func videos(
 		return template.HTML(buf.String()), nil
 	}, nil
 }
+
+type postsfunc func() []*Document
+
+func posts(s substructure) postsfunc {
+	return func() []*Document {
+		return s.posts()
+	}
+}

@@ -7,7 +7,6 @@ import (
 	"image"
 	"image/jpeg"
 	"io"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strconv"
@@ -84,15 +83,7 @@ func BuildPhoto(src, dst string, cfg Config) error {
 }
 
 func genGalleryPage(src, dst string, cfg Config) error {
-	templateHTML, err := ioutil.ReadFile("src/templates/imgcontainer.html.tmpl")
-	if err != nil {
-		return fmt.Errorf("can't read photo gallery template: %w", err)
-	}
-
-	t, err := template.New("imgcontainer").Parse(string(templateHTML))
-	if err != nil {
-		return fmt.Errorf("can't create imgcontainer template: %w", err)
-	}
+	t := template.New("")
 
 	if err := loadTemplates(t); err != nil {
 		return fmt.Errorf("can't load templates: %w", err)
@@ -156,9 +147,9 @@ func genGalleryPage(src, dst string, cfg Config) error {
 		Document: &Document{
 			SourcePath: src,
 			metadata: metadata{
-				shortname: shortname,
-				title:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
-				kind:      gallery,
+				Kind:      gallery,
+				Shortname: shortname,
+				Title:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
 			},
 		},
 
@@ -171,7 +162,8 @@ func genGalleryPage(src, dst string, cfg Config) error {
 		Next: next,
 	}
 
-	if err := t.Execute(f, v); err != nil {
+	if err := t.Lookup("imgcontainer").Execute(f, v); err != nil {
+		fmt.Println(t)
 		return fmt.Errorf("can't execute imgcontainer template: %w", err)
 	}
 
