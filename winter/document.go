@@ -182,6 +182,20 @@ func fromMarkdown(src string) (*Document, error) {
 	return &d, nil
 }
 
+type documents []*Document
+
+func (d documents) Len() int {
+	return len(d)
+}
+
+func (d documents) Less(i, j int) bool {
+	return d[i].CreatedAt.After(d[j].CreatedAt)
+}
+
+func (d documents) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+
 func (d *Document) render() ([]byte, error) {
 	if d.TOC {
 		if err := d.fillTOC(); err != nil {

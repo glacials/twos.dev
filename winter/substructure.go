@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"os"
 	"path/filepath"
+	"sort"
 	"strings"
 	"time"
 
@@ -23,7 +24,7 @@ var (
 // substructure is a graph of documents on the website, generated with read-only
 // operations. It will later be fed into a renderer.
 type substructure struct {
-	docs []*Document
+	docs documents
 }
 
 // Discover is the first step of the static website build process. It crawls the
@@ -96,6 +97,7 @@ func (s substructure) Get(shortname string) *Document {
 }
 
 func (s substructure) posts() (u []*Document) {
+	sort.Sort(s.docs)
 	for _, d := range s.docs {
 		if d.Kind == post {
 			u = append(u, d)
