@@ -12,12 +12,13 @@
 package main
 
 import (
-	"net/url"
 	"os"
-	"time"
 
 	"github.com/spf13/cobra"
-	"twos.dev/winter"
+)
+
+const (
+	dist = "dist"
 )
 
 // rootCmd represents the base command when called without any subcommands
@@ -27,8 +28,6 @@ var (
 		Short: "Build or serve a static website locally",
 		Long:  `Build or serve a static website from source.`,
 	}
-
-	cfg winter.Config
 
 	authorEmail string
 	authorName  string
@@ -47,27 +46,10 @@ func main() {
 }
 
 func init() {
-	f := *buildCmd.PersistentFlags()
+	f := rootCmd.PersistentFlags()
 
 	d := f.Bool("debug", false, "output results of transformations to dist/debug")
 	if d != nil {
 		debug = *d
-	}
-
-	cfg = winter.Config{
-		AuthorEmail: *f.StringP("author-email", "e", "", "site author email"),
-		AuthorName:  *f.StringP("author-name", "a", "", "site author name"),
-		Desc:        *f.StringP("desc", "d", "", "site description"),
-		Domain: url.URL{
-			Scheme: "https",
-			Host:   *f.StringP("domain", "h", "", "site root domain (e.g. twos.dev)"),
-		},
-		Name: *f.StringP("name", "n", "", "site name"),
-		Since: *f.IntP(
-			"since",
-			"y",
-			time.Now().Year(),
-			"site year of creation (for copyright)",
-		),
 	}
 }

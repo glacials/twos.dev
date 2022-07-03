@@ -115,7 +115,7 @@ func discover(
 		path := filepath.Join(
 			"img", fmt.Sprintf("%s-%s%s.%s", page, graphic, suffix, ext),
 		)
-		if _, err := os.Stat(filepath.Join("dist", path)); err != nil {
+		if _, err := os.Stat(filepath.Join("public", path)); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
 				continue
 			}
@@ -131,7 +131,7 @@ func discover(
 			"img",
 			fmt.Sprintf("%s-%s%s.%s", page, graphic, suffix, strings.ToUpper(ext)),
 		)
-		if _, err := os.Stat(filepath.Join("dist", path)); err != nil {
+		if _, err := os.Stat(filepath.Join("public", path)); err != nil {
 			if errors.Is(err, os.ErrNotExist) {
 				continue
 			}

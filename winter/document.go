@@ -3,6 +3,8 @@ package winter
 import (
 	"bytes"
 	"fmt"
+	"html/template"
+	"io/ioutil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -10,6 +12,10 @@ import (
 	"time"
 
 	"github.com/adrg/frontmatter"
+	"github.com/alecthomas/chroma"
+	chromahtml "github.com/alecthomas/chroma/formatters/html"
+	"github.com/alecthomas/chroma/lexers"
+	"github.com/alecthomas/chroma/styles"
 	"github.com/gomarkdown/markdown"
 	mdhtml "github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
@@ -19,7 +25,15 @@ import (
 
 const (
 	styleWrapper = "<span style=\"font-family: sans-serif\">%s</span>"
-	toctype      = atom.Ol
+	tocEl        = atom.Ol
+	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
+	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
+	tocReturn    = `
+<span style="margin-left:0.5em">
+	<a href="#{{.Anchor}}" style="text-decoration:none">#</a>
+	<a href="#toc" style="text-decoration:none">&uarr;</a>
+</span>
+`
 )
 
 var (
@@ -27,29 +41,55 @@ var (
 		// TODO: Do we need this now that we have LaTeX?
 		//"–": fmt.Sprintf(styleWrapper, "–"),
 		//"—": fmt.Sprintf(styleWrapper, "—"),
+		"&#34;": "\"",
+		"&#39;": "'",
 	}
-	tocheadings = map[atom.Atom]struct{}{atom.H2: {}, atom.H3: {}}
+	tocmin = atom.H2
+	tocmax = atom.H3
+	hi     = map[atom.Atom]int{
+		atom.H1: 1,
+		atom.H2: 2,
+		atom.H3: 3,
+		atom.H4: 4,
+		atom.H5: 5,
+		atom.H6: 6,
+	}
 )
 
-type document struct {
-	src  string
-	meta metadata
-	root *html.Node
+type Document struct {
+	SourcePath string
+	root       *html.Node
+	incoming   []*Document
+	outgoing   []*Document
 
-	incoming []*document
-	outgoing []*document
-}
+	Kind kind `yaml:"type"`
+	TOC  bool `yaml:"toc"`
 
-type metadata struct {
-	title     string    `yaml:"title"`
-	toc       bool      `yaml:"toc"`
-	kind      kind      `yaml:"type"`
-	shortname string    `yaml:"filename"`
-	createdAt time.Time `yaml:"date"`
-	updatedAt time.Time `yaml:"updated"`
+	CreatedAt time.Time `yaml:"date"`
+	UpdatedAt time.Time `yaml:"updated"`
+
+	FrontmatterParent    string `yaml:"parent"`
+	FrontmatterShortname string `yaml:"filename"`
+	FrontmatterTitle     string `yaml:"title"`
 }
 
 type kind int
+
+// IsDraft returns whether the document type is DraftType. This function exists
+// to be used by templates.
+func (k kind) IsDraft() bool { return k == draft }
+
+// IsPost returns whether the document type is PostType. This function exists to
+// be used by templates.
+func (k kind) IsPost() bool { return k == post }
+
+// IsPage returns whether the document type is PageType. This function exists to
+// be used by templates.
+func (k kind) IsPage() bool { return k == page }
+
+// IsGallery returns whether the document type is GalleryType. This function
+// exists to be used by templates.
+func (k kind) IsGallery() bool { return k == gallery }
 
 const (
 	draft kind = iota
@@ -58,46 +98,55 @@ const (
 	gallery
 )
 
-func (k kind) UnmarshalJSON(b []byte) error {
-	switch string(b) {
-	case "draft", "":
-		k = draft
-	case "post":
-		k = post
-	case "page":
-		k = page
-	case "gallery":
-		k = gallery
-	default:
-		return fmt.Errorf("unknown kind %q", string(b))
+func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
+	var s string
+	if err := unmarshal(&s); err != nil {
+		return err
 	}
+
+	switch s {
+	case "draft", "":
+		*k = draft
+	case "post":
+		*k = post
+	case "page":
+		*k = page
+	case "gallery":
+		*k = gallery
+	default:
+		return fmt.Errorf("unknown kind %q", s)
+	}
+
 	return nil
 }
 
-func htmlDoc(src string) (d *document, err error) {
+func fromHTML(src string) (*Document, error) {
+	var d Document
 	f, err := os.Open(src)
 	if err != nil {
-		return
+		return nil, err
 	}
 	defer f.Close()
 
-	htm, err := frontmatter.Parse(f, &d.meta)
+	htm, err := frontmatter.Parse(f, &d)
 	if err != nil {
-		return
+		return nil, err
 	}
+
+	d.FrontmatterShortname, _, _ = strings.Cut(d.FrontmatterShortname, ".")
 
 	root, err := html.Parse(bytes.NewBuffer(htm))
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	d.root = root
-	d.src = src
-	return
+	d.SourcePath = src
+	return &d, nil
 }
 
-func fromMarkdown(src string) (*document, error) {
-	var d document
+func fromMarkdown(src string) (*Document, error) {
+	var d Document
 
 	f, err := os.Open(src)
 	if err != nil {
@@ -105,7 +154,7 @@ func fromMarkdown(src string) (*document, error) {
 	}
 	defer f.Close()
 
-	md, err := frontmatter.Parse(f, &d.meta)
+	md, err := frontmatter.Parse(f, &d)
 	if err != nil {
 		return nil, err
 	}
@@ -133,19 +182,45 @@ func fromMarkdown(src string) (*document, error) {
 	}
 
 	d.root = root
-	d.src = src
+	d.SourcePath = src
 	return &d, nil
 }
 
-func (d *document) render() ([]byte, error) {
+type documents []*Document
+
+func (d documents) Len() int {
+	return len(d)
+}
+
+func (d documents) Less(i, j int) bool {
+	return d[i].CreatedAt.After(d[j].CreatedAt)
+}
+
+func (d documents) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
+}
+
+func (d *Document) render() ([]byte, error) {
+	if d.TOC {
+		if err := d.fillTOC(); err != nil {
+			return nil, err
+		}
+	}
+	if err := d.highlightCode(); err != nil {
+		return nil, err
+	}
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, err
 	}
-	return buf.Bytes(), nil
+	b := buf.Bytes()
+	for old, new := range replacements {
+		b = bytes.ReplaceAll(b, []byte(old), []byte(new))
+	}
+	return b, nil
 }
 
-func (d *document) linksout() (hrfs []string, err error) {
+func (d *Document) linksout() (hrfs []string, err error) {
 	var f func(*html.Node)
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.DataAtom == atom.A {
@@ -170,93 +245,193 @@ func (d *document) linksout() (hrfs []string, err error) {
 	return
 }
 
-func (d *document) title() (string, error) {
-	if d.meta.title != "" {
-		return d.meta.title, nil
+func (d *Document) Title() (string, error) {
+	if d.FrontmatterTitle != "" {
+		return d.FrontmatterTitle, nil
 	}
 
 	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
-				d.meta.title = child.Data
+				d.FrontmatterTitle = child.Data
 				return child.Data, nil
 			}
 		}
 	}
 
-	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.meta.shortname)
+	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.Shortname())
 }
 
-func (d *document) toc() error {
-	toc := html.Node{
-		Attr:     []html.Attribute{{Key: "id", Val: "toc"}},
-		Data:     toctype.String(),
-		DataAtom: toctype,
-		Type:     html.ElementNode,
+func (d *Document) Shortname() string {
+	if d.FrontmatterShortname != "" {
+		s, _, _ := strings.Cut(d.FrontmatterShortname, ".")
+		d.FrontmatterShortname = s
+		return d.FrontmatterShortname
 	}
-	var f func(*html.Node) error
-	f = func(n *html.Node) error {
-		if _, ok := tocheadings[n.DataAtom]; ok && n.Type == html.ElementNode {
-			a := html.Node{
-				Attr:     []html.Attribute{{Key: atom.Href.String(), Val: "#" + id(n)}},
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Type:     html.ElementNode,
-			}
-			a.AppendChild(&html.Node{Type: html.TextNode, Data: n.FirstChild.Data})
-			li := html.Node{
-				Data:     atom.Li.String(),
-				DataAtom: atom.Li,
-				Type:     html.ElementNode,
-			}
-			toc.AppendChild(&li)
 
-			totop := html.Node{
-				Attr: []html.Attribute{
-					{Key: atom.Href.String(), Val: "#toc"},
-					{Key: atom.Style.String(), Val: "text-decoration:none"},
-				},
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Type:     html.ElementNode,
-			}
-			totop.AppendChild(&html.Node{Type: html.TextNode, Data: "↑"})
+	n := filepath.Base(d.SourcePath)
+	n, _, _ = strings.Cut(n, ".")
+	return n
+}
 
-			tohere := html.Node{
-				Type:     html.ElementNode,
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Attr: []html.Attribute{
-					{Key: atom.Href.String(), Val: "#" + id(n)},
-					{Key: atom.Style.String(), Val: "text-decoration:none"},
-				},
-			}
-			tohere.AppendChild(&html.Node{Type: html.TextNode, Data: "#"})
+func (d *Document) Parent() string {
+	if d.FrontmatterParent != "" {
+		return d.FrontmatterParent
+	}
 
-			span := html.Node{
-				Type:     html.ElementNode,
-				Data:     atom.Span.String(),
-				DataAtom: atom.Span,
-				Attr: []html.Attribute{
-					{Key: atom.Style.String(), Val: "margin-left: 0.5em;"},
-				},
-			}
-			span.AppendChild(&tohere)
-			span.AppendChild(&totop)
+	p, _, ok := strings.Cut(d.Shortname(), "_")
+	if !ok {
+		return ""
+	}
 
-			n.Parent.InsertBefore(&a, n.NextSibling)
+	return p
+}
+
+// fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
+// and makes a reflective table of contents.
+func (d *Document) fillTOC() error {
+	var (
+		f func(*html.Node)
+		v tocPartialVars
+	)
+	f = func(n *html.Node) {
+		if n.DataAtom >= tocmin && n.DataAtom <= tocmax {
+			grp := &v.Items
+			for i := hi[tocmin]; i < hi[n.DataAtom] && i < hi[tocmax]; i += 1 {
+				if len(*grp) > 0 {
+					grp = &((*grp)[len(*grp)-1].Items)
+				}
+			}
+			*grp = append(*grp, tocVars{Anchor: id(n), Title: n.FirstChild.Data})
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
 		}
-
-		return nil
 	}
-	if err := f(d.root); err != nil {
+	f(d.root)
+
+	toctmpl, err := ioutil.ReadFile("src/templates/_toc.html.tmpl")
+	if err != nil {
+		return err
+	}
+	t, err := template.New("toc").Parse(string(toctmpl))
+	if err != nil {
+		return err
+	}
+
+	subtoctmpl, err := ioutil.ReadFile("src/templates/_subtoc.html.tmpl")
+	if err != nil {
+		return err
+	}
+	_, err = t.New("subtoc").Parse(string(subtoctmpl))
+	if err != nil {
+		return err
+	}
+
+	var buf bytes.Buffer
+	if err := t.Execute(&buf, v); err != nil {
+		return err
+	}
+	toc, err := html.Parse(&buf)
+	if err != nil {
 		return err
 	}
 
 	firstH2 := firstOfType(d.root, atom.H2)
-	firstH2.Parent.InsertBefore(&toc, firstH2)
+	if firstH2 == nil {
+		return fmt.Errorf(
+			"don't know how to build TOC without any H2 headings in %s",
+			d.SourcePath,
+		)
+	}
+	firstH2.Parent.InsertBefore(toc, firstH2)
 	return nil
+}
+
+func (d *Document) highlightCode() error {
+	for codeBlock := range codeBlocks(d.root) {
+		lang := lang(codeBlock)
+		formatted, err := syntaxHighlight(lang, codeBlock.FirstChild.Data)
+		if err != nil {
+			return err
+		}
+
+		pre, err := html.Parse(strings.NewReader(formatted))
+		if err != nil {
+			return err
+		}
+
+		originalPre := codeBlock.Parent
+		originalPre.Parent.InsertBefore(pre, originalPre)
+		originalPre.Parent.RemoveChild(originalPre)
+	}
+
+	return nil
+}
+
+func codeBlocks(root *html.Node) map[*html.Node]struct{} {
+	found := map[*html.Node]struct{}{}
+
+	if root.Type == html.ElementNode && root.DataAtom == atom.Code &&
+		root.Parent.DataAtom == atom.Pre {
+		return map[*html.Node]struct{}{root: {}}
+	}
+
+	for c := root.FirstChild; c != nil; c = c.NextSibling {
+		for block := range codeBlocks(c) {
+			found[block] = struct{}{}
+		}
+	}
+
+	return found
+}
+
+func lang(code *html.Node) string {
+	for _, attr := range code.Attr {
+		if attr.Key == "class" {
+			for _, class := range strings.Fields(attr.Val) {
+				if _, l, ok := strings.Cut(class, "language-"); ok {
+					return l
+				}
+			}
+		}
+	}
+
+	return ""
+}
+
+func syntaxHighlight(lang, code string) (string, error) {
+	// Determine lexer.
+	l := lexers.Get(lang)
+	if l == nil {
+		l = lexers.Analyse(code)
+	}
+	if l == nil {
+		l = lexers.Fallback
+	}
+	l = chroma.Coalesce(l)
+
+	f := chromahtml.New(
+		chromahtml.WithClasses(true),
+		chromahtml.WithLineNumbers(true),
+	)
+
+	// This has ~no effect because we specify colors in style.css manually, and
+	// pass chromahtml.WithClasses(true) above, meaning no inline styles get added
+	s := styles.Get("dracula")
+	if s == nil {
+		s = styles.Fallback
+	}
+
+	it, err := l.Tokenise(nil, code)
+	if err != nil {
+		return "", err
+	}
+
+	var buf bytes.Buffer
+	if err := f.Format(&buf, s, it); err != nil {
+		return "", err
+	}
+
+	return buf.String(), nil
 }

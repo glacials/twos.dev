@@ -18,21 +18,22 @@ var (
 	ignoreDirectories = map[string]struct{}{
 		".git":         {},
 		".github":      {},
-		"dist":         {},
+		dist:           {},
 		"node_modules": {},
 	}
 )
 
 func buildAll(
-	dst string,
+	dist string,
 	builders map[string]Builder,
 	cfg winter.Config,
 ) error {
+	if err := os.MkdirAll(dist, 0755); err != nil {
+		return fmt.Errorf("can't mkdir `%s`: %w", dist, err)
+	}
+
 	seen := map[string]struct{}{}
 
-	if err := os.MkdirAll(dst, 0755); err != nil {
-		return fmt.Errorf("can't mkdir `%s`: %w", dst, err)
-	}
 	if err := filepath.WalkDir(".", func(src string, d os.DirEntry, err error) error {
 		if err != nil {
 			return fmt.Errorf("can't walk towards `%s`: %w", src, err)
@@ -60,7 +61,7 @@ func buildAll(
 					)
 				}
 
-				if err := builder(src, dst, cfg); err != nil {
+				if err := builder(src, dist, cfg); err != nil {
 					return fmt.Errorf("can't build `%s`: %w", src, err)
 				}
 			}
@@ -69,6 +70,15 @@ func buildAll(
 		return nil
 	}); err != nil {
 		return fmt.Errorf("can't walk to build the world: %w", err)
+	}
+
+	s, err := winter.Discover(cfg)
+	if err != nil {
+		return err
+	}
+
+	if err := s.Execute(dist); err != nil {
+		return err
 	}
 
 	return nil

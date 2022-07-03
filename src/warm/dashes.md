@@ -6,7 +6,11 @@ type: post
 
 # Advanced Dashes
 
-{{img "supreme" "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen" "I love pizza-liquor, but I've never had it New York style."}}
+{{ img
+   "I love pizza-liquor, but I've never had it New York style."
+   "supreme"
+   "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
+}}
 
 There are three common dashes in written English:
 
@@ -25,8 +29,8 @@ The em dash can be used as a more powerful parenthetical, a replacement for a co
 A myth states the em dash is so named because it is "one `M` wide", and the en dash "one `N` wide". This is... almost true. The confusing correction is that an em dash is so named because it is `1em` wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.
 
 ### The Em
-    
-To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *font-heighth* long. It is a unitless measurement that allows us to speak in relatives.
+
+To talk about the em dash necessitates talk about the [em](<https://en.wikipedia.org/wiki/Em_(typography)>). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one _font-heighth_ long. It is a unitless measurement that allows us to speak in relatives.
 
 [^boundingbox]: "Bounding box" is strong; font designers are free to design outside it.
 
@@ -51,7 +55,7 @@ html: 16pt              (default     = 16pt)
       → h1: 4em         (18pt * 4    = 72pt)
       → p: 1em          (18pt * 1    = 18pt)
     → footer: 0.5rem    (16pt * 0.5  =  8pt)
-      
+
 key:
 context: requested size (calculation = final size)
   → child element
@@ -109,16 +113,19 @@ v left page edge             v right page edge
 I am looking at dates about 20
 –30 days out.
 ```
+
 ```plain
 |                            |
 I'm looking at dates about 20–
 30 days out.
 ```
+
 ```plain
 |                            |
 I am pleased they thought that
 —however odd it may be.
 ```
+
 ```plain
 |                            |
 I'm pleased they thought that—
@@ -165,11 +172,11 @@ Standard US keyboards support only the hyphen without more advanced knowledge, s
 No one should ever fault that, but for those who are willing to commit something new to memory:
 
 - macOS
-	- En dash: `⌥ + -`
-	- Em dash: `⌥ + Shift + -`
+  - En dash: `⌥ + -`
+  - Em dash: `⌥ + Shift + -`
 - Windows
-	- En dash: `Alt + 0150`
-	- Em dash: `Alt + 0151`
+  - En dash: `Alt + 0150`
+  - Em dash: `Alt + 0151`
 
 For all others, read on.
 
@@ -179,7 +186,7 @@ The en dash looks similar enough to the hyphen in most fonts that people often s
 
 #### The Hyphen-Powered Em Dash
 
-A common replacement for the em dash is a space on either end of two hyphens (`  --  `). Because $\LaTeX$ reserves two hyphens for the en dash, it requires three (`---`) for the em.
+A common replacement for the em dash is a space on either end of two hyphens (` -- `). Because $\LaTeX$ reserves two hyphens for the en dash, it requires three (`---`) for the em.
 
 ### Output Difficulties
 
@@ -202,8 +209,8 @@ The **swung dash** (⁓) is an elongated tilde used to stand in for a word being
 The **horizontal bar** is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.
 
 > ― O Miss Douce! Miss Kennedy protested. You horrid thing!
-> 
-> *James Joyce's Ulysses p. 335*
+>
+> _James Joyce's Ulysses p. 335_
 
 The **hyphen bullet** is a hyphen to be used in place of a bullet point.
 
@@ -220,7 +227,7 @@ En dash:     867–5309
 Hyphen:      867-5309
 ```
 
-Lastly, my favorite: the **soft hyphen** is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is *welcome* to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
+Lastly, my favorite: the **soft hyphen** is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is _welcome_ to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
 
 ```plain
 v left page edge            v right page edge

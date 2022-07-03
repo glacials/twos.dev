@@ -1,0 +1,10 @@
+<ol>
+  {{ range . }}
+    <li>
+      <a href="#{{ .Anchor }}">{{ .Title }}</a>
+      {{ if .Items }}
+        {{ template "subtoc" .Items }}
+      {{ end }}
+    </li>
+  {{ end }}
+</ol>

@@ -22,15 +22,13 @@ type: page
 
 <h2>Writing</h2>
 <ul>
+  {{ $now := .Now }}
   {{ range posts }}
-    <li><a href="{{ .Path }}">{{ .Title }}</a></li>
+    <li>
+      <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+      {{ if ne .CreatedAt.Year $now.Year }}({{ .CreatedAt.Year }}){{ end }}
+    </li>
   {{ end }}
-  <li><a href="meta.html">Inside twos.dev</a></li>
-  <li><a href="hotsauce.html">When the April Fool's Day Prank is Real</a></li>
-  <li><a href="apple.html">From Google to Apple</a></li>
-  <li><a href="autism.html">Anonymously Autistic</a></li>
-  <li><a href="tattoo.html">Tattoos as Moral Contracts</a> (2021)</li>
-  <li><a href="thepopin.html">The Remote Pop-In</a> (2021)</li>
 </ul>
 
 <!-- draft

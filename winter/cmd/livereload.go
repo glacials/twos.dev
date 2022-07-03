@@ -96,7 +96,7 @@ func (r *Reloader) listen() {
 					panic(err)
 				} else if ok {
 					log.Printf("%s changed", event.Name)
-					if err := builder(event.Name, dst, winter.Config{}); err != nil {
+					if err := builder(event.Name, dist, winter.Config{}); err != nil {
 						if errors.Is(err, os.ErrNotExist) {
 							// Happens sometimes, not sure why
 							log.Printf("%s doesn't exist, ignoring", event.Name)

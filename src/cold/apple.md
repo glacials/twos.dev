@@ -15,8 +15,6 @@ ecosystem. It is occasionally updated.
 Do not read this in order. Do not read this in its entirety. Skip around as
 you please.
 
-### Topics
-
 ## Why? {#why}
 
 My life is in Google more than anyone I know. The usual suspects sure --
@@ -83,11 +81,11 @@ of everything. As a user, this means one central place where I can manage
 customer service agents.
 
 {{ imgs
-"subscriptions"
-"Screenshot of iOS App Store showing multiple active subscriptions"
-"subscription"
-"iOS App Store showing options to change or cancel a subscription"
-"The App Store's subscriptions management menus."
+   "The App Store's subscriptions management menus."
+   "subscriptions"
+   "Screenshot of iOS App Store showing multiple active subscriptions"
+   "subscription"
+   "iOS App Store showing options to change or cancel a subscription"
 }}
 
 Another example: If your app allows signing in with any third party auth
@@ -229,11 +227,11 @@ extra horizontal space is used to persistently display a nav menu or the
 previous screen.
 
 {{ imgs
-"iphone"
-"A screenshot of the Wikipedia app on iPhone"
-"ipad"
-"A screenshot of the Wikipedia app on iPad, using extra space for navigation"
-"Wikipedia on iPhone vs. iPad."
+   "Wikipedia on iPhone vs. iPad."
+   "iphone"
+   "A screenshot of the Wikipedia app on iPhone"
+   "ipad"
+   "A screenshot of the Wikipedia app on iPad, using extra space for navigation"
 }}
 
 A bit ago, Apple rebranded iOS-on-iPad to iPadOS. At the time I saw this as a
@@ -329,9 +327,9 @@ Ecosystem effects of iMessage include automatically entering SMS 2FA codes on
 any device.
 
 {{ img
-"2fa"
-"Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
-"Signing into a website on macOS using the SMS 2FA code from iPhone."
+   "Signing into a website on macOS using the SMS 2FA code from iPhone."
+   "2fa"
+   "Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
 }}
 
 #### Moto 360 &rarr; Apple Watch {#watch}
@@ -486,9 +484,9 @@ macOS Mail has horrible keyboard shortcuts by default, e.g. ⌘^A to archive.
 Thankfully macOS natively supports rebinding shortcuts for any app.
 
 {{ img
-"rebind"
-"A screenshot of macOS's Settings.app rebinding a key for Mail.app"
-"Any app's menu actions (e.g. File &rarr; Save) can be [re]bound."
+   "Any app's menu actions (e.g. File &rarr; Save) can be [re]bound."
+   "rebind"
+   "A screenshot of macOS's Settings.app rebinding a key for Mail.app"
 }}
 
 If you want a Mail-like experience with Gmail as a backend, instead of using
@@ -511,9 +509,9 @@ this bar extends 100% of the width of the week, and does not do a good job
 showing you which day today is.
 
 {{ img
-"calendar"
-"A screenshot of Calendar.app on macOS showing a week with a red line across it."
-"Week view in Apple Calendar. At a glance, can you tell what day it is?"
+   "Week view in Apple Calendar. At a glance, can you tell what day it is?"
+   "calendar"
+   "A screenshot of Calendar.app on macOS showing a week with a red line across it."
 }}
 
 This has led me to misread the current day multiple times, inducing panic
@@ -738,9 +736,9 @@ around Apple and power users. For life automation, I prefer it to shell
 scripts.
 
 {{ img
-"shortcuts"
-"A screenshot of a shortcut on iOS"
-"I use Shortcuts.app to block times on my work calendar based on personal events."
+   "I use Shortcuts.app to block times on my work calendar based on personal events."
+   "shortcuts"
+   "A screenshot of a shortcut on iOS"
 }}
 
 As one example, I like to write in an app called iA Writer. I use Shortcuts to
