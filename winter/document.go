@@ -12,6 +12,10 @@ import (
 	"time"
 
 	"github.com/adrg/frontmatter"
+	"github.com/alecthomas/chroma"
+	chromahtml "github.com/alecthomas/chroma/formatters/html"
+	"github.com/alecthomas/chroma/lexers"
+	"github.com/alecthomas/chroma/styles"
 	"github.com/gomarkdown/markdown"
 	mdhtml "github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
@@ -202,6 +206,9 @@ func (d *Document) render() ([]byte, error) {
 			return nil, err
 		}
 	}
+	if err := d.highlightCode(); err != nil {
+		return nil, err
+	}
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, err
@@ -339,4 +346,92 @@ func (d *Document) fillTOC() error {
 	}
 	firstH2.Parent.InsertBefore(toc, firstH2)
 	return nil
+}
+
+func (d *Document) highlightCode() error {
+	for codeBlock := range codeBlocks(d.root) {
+		lang := lang(codeBlock)
+		formatted, err := syntaxHighlight(lang, codeBlock.FirstChild.Data)
+		if err != nil {
+			return err
+		}
+
+		pre, err := html.Parse(strings.NewReader(formatted))
+		if err != nil {
+			return err
+		}
+
+		originalPre := codeBlock.Parent
+		originalPre.Parent.InsertBefore(pre, originalPre)
+		originalPre.Parent.RemoveChild(originalPre)
+	}
+
+	return nil
+}
+
+func codeBlocks(root *html.Node) map[*html.Node]struct{} {
+	found := map[*html.Node]struct{}{}
+
+	if root.Type == html.ElementNode && root.DataAtom == atom.Code &&
+		root.Parent.DataAtom == atom.Pre {
+		return map[*html.Node]struct{}{root: {}}
+	}
+
+	for c := root.FirstChild; c != nil; c = c.NextSibling {
+		for block := range codeBlocks(c) {
+			found[block] = struct{}{}
+		}
+	}
+
+	return found
+}
+
+func lang(code *html.Node) string {
+	for _, attr := range code.Attr {
+		if attr.Key == "class" {
+			for _, class := range strings.Fields(attr.Val) {
+				if _, l, ok := strings.Cut(class, "language-"); ok {
+					return l
+				}
+			}
+		}
+	}
+
+	return ""
+}
+
+func syntaxHighlight(lang, code string) (string, error) {
+	// Determine lexer.
+	l := lexers.Get(lang)
+	if l == nil {
+		l = lexers.Analyse(code)
+	}
+	if l == nil {
+		l = lexers.Fallback
+	}
+	l = chroma.Coalesce(l)
+
+	f := chromahtml.New(
+		chromahtml.WithClasses(true),
+		chromahtml.WithLineNumbers(true),
+	)
+
+	// This has ~no effect because we specify colors in style.css manually, and
+	// pass chromahtml.WithClasses(true) above, meaning no inline styles get added
+	s := styles.Get("dracula")
+	if s == nil {
+		s = styles.Fallback
+	}
+
+	it, err := l.Tokenise(nil, code)
+	if err != nil {
+		return "", err
+	}
+
+	var buf bytes.Buffer
+	if err := f.Format(&buf, s, it); err != nil {
+		return "", err
+	}
+
+	return buf.String(), nil
 }
