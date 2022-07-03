@@ -38,9 +38,14 @@ const (
 
 var (
 	replacements = map[string]string{
-		// TODO: Do we need this now that we have LaTeX?
-		//"–": fmt.Sprintf(styleWrapper, "–"),
-		//"—": fmt.Sprintf(styleWrapper, "—"),
+		// Break dashes out of monospace homogeneity
+		"–": fmt.Sprintf(styleWrapper, "–"), // En dash
+		"—": fmt.Sprintf(styleWrapper, "—"), // Em dash
+		"⁓": fmt.Sprintf(styleWrapper, "⁓"), // Swung dash
+		"―": fmt.Sprintf(styleWrapper, "―"), // Horizontal bar
+		"⁃": fmt.Sprintf(styleWrapper, "⁃"), // Hyphen bullet
+		"‒": fmt.Sprintf(styleWrapper, "‒"), // Figure dash
+
 		"&#34;": "\"",
 		"&#39;": "'",
 	}

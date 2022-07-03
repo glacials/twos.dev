@@ -20,12 +20,12 @@ In some ways these goals work against each other; easy creation usually means ea
 I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
 
 - Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in `$EDITOR`)
-- Writing was slowed down by cruft like `&lt;p&gt;` and `&lt;li&gt;`
+- Writing was slowed down by cruft like `<p>` and `<li>`
 - The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring
 
 To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.
 
-I first focused on changing my drafting app to something with more robust exporting tools. I found [iA Writer](https://ia.net/writer), which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.
+I first focused on changing my drafting app to something with more robust exporting tools. I found [iA Writer](https://ia.net/writer), which has been great to get my thoughts out quickly. It looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.
 
 ### Shortcuts
 
@@ -41,7 +41,7 @@ Technically at this point the page is now published, just not linked to from any
 
 There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.
 
-Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`. 
+Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`.
 
 To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":
 
