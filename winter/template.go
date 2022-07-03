@@ -50,6 +50,16 @@ type videoVars struct {
 	DarkMP4  graphic.SRC
 }
 
+type tocPartialVars struct {
+	Items []tocVars
+}
+
+type tocVars struct {
+	Anchor string
+	Items  []tocVars
+	Title  string
+}
+
 func loadTemplates(t *template.Template) error {
 	if t == nil {
 		return fmt.Errorf("nil template")

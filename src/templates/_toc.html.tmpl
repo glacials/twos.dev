@@ -1,0 +1,8 @@
+<ol id="toc">
+  {{ range .Items }}
+    <li><a href="#{{ .Anchor }}">{{ .Title }}</a></li>
+    {{ if .Items }}
+      {{ template "subtoc" .Items }}
+    {{ end }}
+  {{ end }}
+</ol>

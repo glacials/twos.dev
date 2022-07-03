@@ -3,6 +3,8 @@ package winter
 import (
 	"bytes"
 	"fmt"
+	"html/template"
+	"io/ioutil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -38,7 +40,24 @@ var (
 		"&#34;": "\"",
 		"&#39;": "'",
 	}
-	tocheadings = map[atom.Atom]struct{}{atom.H2: {}, atom.H3: {}}
+	tocmin = atom.H2
+	tocmax = atom.H3
+	ih     = map[int]atom.Atom{
+		1: atom.H1,
+		2: atom.H2,
+		3: atom.H3,
+		4: atom.H4,
+		5: atom.H5,
+		6: atom.H6,
+	}
+	hi = map[atom.Atom]int{
+		atom.H1: 1,
+		atom.H2: 2,
+		atom.H3: 3,
+		atom.H4: 4,
+		atom.H5: 5,
+		atom.H6: 6,
+	}
 )
 
 type Document struct {
@@ -171,6 +190,11 @@ func fromMarkdown(src string) (*Document, error) {
 }
 
 func (d *Document) render() ([]byte, error) {
+	if d.TOC {
+		if err := d.fillTOC(); err != nil {
+			return nil, err
+		}
+	}
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, err
@@ -178,11 +202,6 @@ func (d *Document) render() ([]byte, error) {
 	b := buf.Bytes()
 	for old, new := range replacements {
 		b = bytes.ReplaceAll(b, []byte(old), []byte(new))
-	}
-	if d.TOC {
-		if err := d.fillTOC(); err != nil {
-			return nil, err
-		}
 	}
 	return b, nil
 }
@@ -255,71 +274,53 @@ func (d *Document) Parent() string {
 }
 
 func (d *Document) fillTOC() error {
-	toc := html.Node{
-		Attr:     []html.Attribute{{Key: "id", Val: "toc"}},
-		Data:     tocEl.String(),
-		DataAtom: tocEl,
-		Type:     html.ElementNode,
-	}
-	var f func(*html.Node) error
-	f = func(n *html.Node) error {
-		if _, ok := tocheadings[n.DataAtom]; ok && n.Type == html.ElementNode {
-			a := html.Node{
-				Attr:     []html.Attribute{{Key: atom.Href.String(), Val: "#" + id(n)}},
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Type:     html.ElementNode,
+	var (
+		f   func(*html.Node)
+		v   = tocPartialVars{Items: []tocVars{}}
+		buf bytes.Buffer
+	)
+	f = func(n *html.Node) {
+		if n.DataAtom >= tocmin && n.DataAtom <= tocmax {
+			grp := &v.Items
+			for i := hi[tocmin]; i < hi[n.DataAtom] && i < hi[tocmax]; i += 1 {
+				fmt.Printf(" ")
+				if len(*grp) > 0 {
+					grp = &((*grp)[len(*grp)-1].Items)
+				}
 			}
-			a.AppendChild(&html.Node{Type: html.TextNode, Data: n.FirstChild.Data})
-			li := html.Node{
-				Data:     atom.Li.String(),
-				DataAtom: atom.Li,
-				Type:     html.ElementNode,
-			}
-			toc.AppendChild(&li)
-
-			totop := html.Node{
-				Attr: []html.Attribute{
-					{Key: atom.Href.String(), Val: "#toc"},
-					{Key: atom.Style.String(), Val: "text-decoration:none"},
-				},
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Type:     html.ElementNode,
-			}
-			totop.AppendChild(&html.Node{Type: html.TextNode, Data: "↑"})
-
-			tohere := html.Node{
-				Type:     html.ElementNode,
-				Data:     atom.A.String(),
-				DataAtom: atom.A,
-				Attr: []html.Attribute{
-					{Key: atom.Href.String(), Val: "#" + id(n)},
-					{Key: atom.Style.String(), Val: "text-decoration:none"},
-				},
-			}
-			tohere.AppendChild(&html.Node{Type: html.TextNode, Data: "#"})
-
-			span := html.Node{
-				Type:     html.ElementNode,
-				Data:     atom.Span.String(),
-				DataAtom: atom.Span,
-				Attr: []html.Attribute{
-					{Key: atom.Style.String(), Val: "margin-left: 0.5em;"},
-				},
-			}
-			span.AppendChild(&tohere)
-			span.AppendChild(&totop)
-
-			n.Parent.InsertBefore(&a, n.NextSibling)
+			*grp = append(*grp, tocVars{Anchor: id(n), Title: n.FirstChild.Data})
+			fmt.Printf("Added h%d: %s\n", hi[n.DataAtom], n.FirstChild.Data)
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
 		}
-
-		return nil
 	}
-	if err := f(d.root); err != nil {
+	f(d.root)
+
+	toctmpl, err := ioutil.ReadFile("src/templates/_toc.html.tmpl")
+	if err != nil {
+		return err
+	}
+	t, err := template.New("toc").Parse(string(toctmpl))
+	if err != nil {
+		return err
+	}
+
+	subtoctmpl, err := ioutil.ReadFile("src/templates/_subtoc.html.tmpl")
+	if err != nil {
+		return err
+	}
+	_, err = t.New("subtoc").Parse(string(subtoctmpl))
+	if err != nil {
+		return err
+	}
+
+	if err := t.Execute(&buf, v); err != nil {
+		return err
+	}
+
+	toc, err := html.Parse(&buf)
+	if err != nil {
 		return err
 	}
 
@@ -330,6 +331,6 @@ func (d *Document) fillTOC() error {
 			d.SourcePath,
 		)
 	}
-	firstH2.Parent.InsertBefore(&toc, firstH2)
+	firstH2.Parent.InsertBefore(toc, firstH2)
 	return nil
 }
