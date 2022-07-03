@@ -10,12 +10,6 @@ composed entirely of static files served by GitHub Pages.
 
 These static files are built by a bespoke static website generator called
 Winter, which is written in Go and embedded in this repository at `winter/`.
-Winter executes a list of transformation functions on each document in order,
-each performing a simple task like converting Markdown to HTML or extracting
-metadata for later use.
-
-The transformations built into Winter are listed in
-[`winter/cmd/build_document.go`](./winter/cmd/build_document.go).
 
 ## First run
 
@@ -35,22 +29,17 @@ itself will trigger a program recompilation and restart. In both cases, a
 WebSocket connection on the local page will listen for the change and trigger a
 refresh automatically.
 
-#### Debugging Transformations
+## Using Winter
 
-If your documents are coming out of the transformation gauntlet wrong and you
-don't know which transformation is misbehaving, instead run:
+Winter is written to be used with twos.dev, but if you want to use it elsewhere
+you can:
 
 ```sh
-make debug
+# Use the `winter cmd`
+go install twos.dev/winter/cmd@latest
+
+# Use the twos.dev/winter library
+go get -u twos.dev/winter@latest
 ```
 
-which will dump the document state after each transformation to
-
-```
-dist/debug/DOCUMENT/XX_TRANSFORMATION.html
-```
-
-where `DOCUMENT` is the filename of the source document (e.g. `guide.md`),
-`TRANSFORMATION` is the name of the transformation function, and `XX` is a
-two-digit number representing the order of the transformation among all
-transformations.
+[See documentation](https://pkg.go.dev/twos.dev/winter)
