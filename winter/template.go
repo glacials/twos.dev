@@ -13,7 +13,7 @@ import (
 )
 
 type templateVars struct {
-	*Document
+	*document
 	*substructure
 
 	Now time.Time
@@ -228,10 +228,10 @@ func videos(
 	}, nil
 }
 
-type postsfunc func() []*Document
+type postsfunc func() []*document
 
 func posts(s substructure) postsfunc {
-	return func() []*Document {
+	return func() []*document {
 		return s.posts()
 	}
 }

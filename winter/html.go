@@ -30,12 +30,13 @@ func allOfTypes(n *html.Node, t map[atom.Atom]struct{}) (m []*html.Node) {
 	for child := n.FirstChild; child != nil; child = child.NextSibling {
 		m = append(m, allOfTypes(child, t)...)
 	}
-	return m
+	return
 }
 
-func id(n *html.Node) string {
+// attr returns the attr attribute of the given element node.
+func attr(n *html.Node, attr atom.Atom) string {
 	for _, a := range n.Attr {
-		if a.Key == atom.Id.String() {
+		if a.Key == attr.String() {
 			return a.Val
 		}
 	}

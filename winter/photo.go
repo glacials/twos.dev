@@ -20,7 +20,7 @@ import (
 )
 
 type galleryVars struct {
-	*Document
+	*document
 
 	ImageSRC string
 	Alt      string
@@ -144,7 +144,7 @@ func genGalleryPage(src, dst string, cfg Config) error {
 	shortname, _, _ = strings.Cut(shortname, ".")
 
 	v := galleryVars{
-		Document: &Document{
+		document: &document{
 			SourcePath:           src,
 			Kind:                 gallery,
 			FrontmatterShortname: shortname,

@@ -6,31 +6,31 @@
     <span class="arrow"></span>
     <a
       href="/"
-      {{ if eq .Document.Shortname "index" }}class="selected"{{ end }}
+      {{ if eq .Shortname "index" }}class="selected"{{ end }}
       >Writing</a
     >
     <span class="arrow"></span>
     <a
       href="/cv.html"
-      {{ if eq .Document.Shortname "cv" }}class="selected"{{ end }}
+      {{ if eq .Shortname "cv" }}class="selected"{{ end }}
       >CV</a
     >
     <span class="arrow"></span>
     <a
       href="/guide.html"
-      {{ if eq .Document.Shortname "guide" }}class="selected"{{ end }}
+      {{ if eq .Shortname "guide" }}class="selected"{{ end }}
       >User Guide</a
     >
     <span class="arrow"></span>
     <a
       href="/software.html"
-      {{ if eq .Document.Shortname "software" }}class="selected"{{ end }}
+      {{ if eq .Shortname "software" }}class="selected"{{ end }}
       >Software</a
     >
     <span class="arrow"></span>
   </p>
   <p style="text-align:center">
-    {{ if .Document.Parent }}
+    {{ if .Parent }}
       <a href="{{ .Parent }}">back to {{ .Parent }}</a>
     {{ end }}
   </p>

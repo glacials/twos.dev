@@ -61,11 +61,13 @@ var (
 	}
 )
 
-type Document struct {
+// document is a single HTML or Markdown file that will be compiled into a
+// static HTML file.
+type document struct {
 	SourcePath string
 	root       *html.Node
-	incoming   []*Document
-	outgoing   []*Document
+	incoming   []*document
+	outgoing   []*document
 
 	Kind kind `yaml:"type"`
 	TOC  bool `yaml:"toc"`
@@ -125,8 +127,8 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-func fromHTML(src string) (*Document, error) {
-	var d Document
+func fromHTML(src string) (*document, error) {
+	var d document
 	f, err := os.Open(src)
 	if err != nil {
 		return nil, err
@@ -150,8 +152,8 @@ func fromHTML(src string) (*Document, error) {
 	return &d, nil
 }
 
-func fromMarkdown(src string) (*Document, error) {
-	var d Document
+func fromMarkdown(src string) (*document, error) {
+	var d document
 
 	f, err := os.Open(src)
 	if err != nil {
@@ -191,7 +193,7 @@ func fromMarkdown(src string) (*Document, error) {
 	return &d, nil
 }
 
-type documents []*Document
+type documents []*document
 
 func (d documents) Len() int {
 	return len(d)
@@ -205,7 +207,7 @@ func (d documents) Swap(i, j int) {
 	d[i], d[j] = d[j], d[i]
 }
 
-func (d *Document) render() ([]byte, error) {
+func (d *document) render() ([]byte, error) {
 	if d.TOC {
 		if err := d.fillTOC(); err != nil {
 			return nil, err
@@ -225,7 +227,7 @@ func (d *Document) render() ([]byte, error) {
 	return b, nil
 }
 
-func (d *Document) linksout() (hrfs []string, err error) {
+func (d *document) linksout() (hrfs []string, err error) {
 	var f func(*html.Node)
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.DataAtom == atom.A {
@@ -250,7 +252,7 @@ func (d *Document) linksout() (hrfs []string, err error) {
 	return
 }
 
-func (d *Document) Title() (string, error) {
+func (d *document) Title() (string, error) {
 	if d.FrontmatterTitle != "" {
 		return d.FrontmatterTitle, nil
 	}
@@ -267,7 +269,7 @@ func (d *Document) Title() (string, error) {
 	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.Shortname())
 }
 
-func (d *Document) Shortname() string {
+func (d *document) Shortname() string {
 	if d.FrontmatterShortname != "" {
 		s, _, _ := strings.Cut(d.FrontmatterShortname, ".")
 		d.FrontmatterShortname = s
@@ -279,7 +281,7 @@ func (d *Document) Shortname() string {
 	return n
 }
 
-func (d *Document) Parent() string {
+func (d *document) Parent() string {
 	if d.FrontmatterParent != "" {
 		return d.FrontmatterParent
 	}
@@ -294,7 +296,7 @@ func (d *Document) Parent() string {
 
 // fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
 // and makes a reflective table of contents.
-func (d *Document) fillTOC() error {
+func (d *document) fillTOC() error {
 	var (
 		f func(*html.Node)
 		v tocPartialVars
@@ -307,7 +309,10 @@ func (d *Document) fillTOC() error {
 					grp = &((*grp)[len(*grp)-1].Items)
 				}
 			}
-			*grp = append(*grp, tocVars{Anchor: id(n), Title: n.FirstChild.Data})
+			*grp = append(*grp, tocVars{
+				Anchor: attr(n, atom.Id),
+				Title:  n.FirstChild.Data,
+			})
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
@@ -353,7 +358,7 @@ func (d *Document) fillTOC() error {
 	return nil
 }
 
-func (d *Document) highlightCode() error {
+func (d *document) highlightCode() error {
 	for codeBlock := range codeBlocks(d.root) {
 		lang := lang(codeBlock)
 		formatted, err := syntaxHighlight(lang, codeBlock.FirstChild.Data)
@@ -374,31 +379,22 @@ func (d *Document) highlightCode() error {
 	return nil
 }
 
+// codeBlocks returns all code blocks in the document. A code block is defined
+// as a <code> tag which is a directy child of a <pre> tag.
 func codeBlocks(root *html.Node) map[*html.Node]struct{} {
-	found := map[*html.Node]struct{}{}
-
-	if root.Type == html.ElementNode && root.DataAtom == atom.Code &&
-		root.Parent.DataAtom == atom.Pre {
-		return map[*html.Node]struct{}{root: {}}
-	}
-
-	for c := root.FirstChild; c != nil; c = c.NextSibling {
-		for block := range codeBlocks(c) {
-			found[block] = struct{}{}
+	blocks := map[*html.Node]struct{}{}
+	for _, node := range allOfTypes(root, map[atom.Atom]struct{}{atom.Code: {}}) {
+		if node.Parent.DataAtom == atom.Pre {
+			blocks[node] = struct{}{}
 		}
 	}
-
-	return found
+	return blocks
 }
 
 func lang(code *html.Node) string {
-	for _, attr := range code.Attr {
-		if attr.Key == "class" {
-			for _, class := range strings.Fields(attr.Val) {
-				if _, l, ok := strings.Cut(class, "language-"); ok {
-					return l
-				}
-			}
+	for _, class := range strings.Fields(attr(code, atom.Class)) {
+		if _, l, ok := strings.Cut(class, "language-"); ok {
+			return l
 		}
 	}
 
@@ -415,7 +411,6 @@ func syntaxHighlight(lang, code string) (string, error) {
 		l = lexers.Fallback
 	}
 	l = chroma.Coalesce(l)
-
 	f := chromahtml.New(
 		chromahtml.WithClasses(true),
 		chromahtml.WithLineNumbers(true),
@@ -424,10 +419,6 @@ func syntaxHighlight(lang, code string) (string, error) {
 	// This has ~no effect because we specify colors in style.css manually, and
 	// pass chromahtml.WithClasses(true) above, meaning no inline styles get added
 	s := styles.Get("dracula")
-	if s == nil {
-		s = styles.Fallback
-	}
-
 	it, err := l.Tokenise(nil, code)
 	if err != nil {
 		return "", err
@@ -437,6 +428,5 @@ func syntaxHighlight(lang, code string) (string, error) {
 	if err := f.Format(&buf, s, it); err != nil {
 		return "", err
 	}
-
 	return buf.String(), nil
 }

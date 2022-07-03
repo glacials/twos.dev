@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io/ioutil"
 	"os"
 	"path/filepath"
 	"sort"
@@ -25,6 +26,7 @@ var (
 // operations. It will later be fed into a renderer.
 type substructure struct {
 	docs documents
+	cfg  Config
 }
 
 // Discover is the first step of the static website build process. It crawls the
@@ -34,6 +36,7 @@ type substructure struct {
 // It then learns what it can about each file and stores the information in
 // a substructure.
 func Discover(cfg Config) (s substructure, err error) {
+	s.cfg = cfg
 	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
 		return
@@ -87,7 +90,7 @@ func Discover(cfg Config) (s substructure, err error) {
 	return
 }
 
-func (s substructure) Get(shortname string) *Document {
+func (s substructure) Get(shortname string) *document {
 	for _, d := range s.docs {
 		if d.Shortname() == shortname {
 			return d
@@ -96,7 +99,7 @@ func (s substructure) Get(shortname string) *Document {
 	return nil
 }
 
-func (s substructure) posts() (u []*Document) {
+func (s substructure) posts() (u []*document) {
 	sort.Sort(s.docs)
 	for _, d := range s.docs {
 		if d.Kind == post {
@@ -106,21 +109,21 @@ func (s substructure) posts() (u []*Document) {
 	return
 }
 
-func (s substructure) writefeed(cfg Config) error {
+func (s substructure) writefeed() error {
 	now := time.Now()
 	feed := feeds.Feed{
-		Title:       cfg.Name,
-		Description: cfg.Desc,
+		Title:       s.cfg.Name,
+		Description: s.cfg.Desc,
 		Author: &feeds.Author{
-			Name:  cfg.AuthorName,
-			Email: cfg.AuthorEmail,
+			Name:  s.cfg.AuthorName,
+			Email: s.cfg.AuthorEmail,
 		},
-		Link: &feeds.Link{Href: cfg.Domain.String()},
+		Link: &feeds.Link{Href: s.cfg.Domain.String()},
 		Copyright: fmt.Sprintf(
 			"Copyright %d–%d %s",
-			cfg.Since,
+			s.cfg.Since,
 			now.Year(),
-			cfg.AuthorName,
+			s.cfg.AuthorName,
 		),
 		Items: []*feeds.Item{},
 
@@ -149,6 +152,22 @@ func (s substructure) writefeed(cfg Config) error {
 			Created: post.CreatedAt,
 			Updated: post.UpdatedAt,
 		})
+	}
+
+	atom, err := feed.ToAtom()
+	if err != nil {
+		return err
+	}
+	if err := ioutil.WriteFile("dist/feed.atom", []byte(atom), 0644); err != nil {
+		return err
+	}
+
+	rss, err := feed.ToRss()
+	if err != nil {
+		return err
+	}
+	if err := ioutil.WriteFile("dist/feed.rss", []byte(rss), 0644); err != nil {
+		return err
 	}
 
 	return nil
@@ -221,6 +240,8 @@ func (s substructure) Execute(dist string) error {
 			return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
 		}
 	}
+
+	s.writefeed()
 
 	return nil
 }
