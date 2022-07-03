@@ -214,7 +214,6 @@ func (s substructure) Execute(dist string) error {
 			return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
 		}
 
-		fmt.Println("writing to", filepath.Join(dist, d.Shortname()+".html"))
 		path := filepath.Join(dist, d.Shortname()+".html")
 		if os.WriteFile(path, buf.Bytes(), 0644); err != nil {
 			return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
