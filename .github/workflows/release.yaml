@@ -17,7 +17,7 @@ jobs:
       - name: Install and Build 🔧
         run: |
           rm -rf dist
-          go build -o w twos.dev/winter
+          go build -o w twos.dev/winter/cmd
           ./w build
 
       - name: Deploy 🚀
