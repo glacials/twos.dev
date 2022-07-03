@@ -208,7 +208,8 @@ func (s substructure) Execute(dist string) error {
 		}
 
 		var buf bytes.Buffer
-		err = t.Lookup("text_document").Execute(&buf, templateVars{d, &s})
+		err = t.Lookup("text_document").
+			Execute(&buf, templateVars{d, &s, time.Now()})
 		if err != nil {
 			return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
 		}

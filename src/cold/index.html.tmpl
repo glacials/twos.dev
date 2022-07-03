@@ -22,8 +22,12 @@ type: page
 
 <h2>Writing</h2>
 <ul>
+  {{ $now := .Now }}
   {{ range posts }}
-    <li><a href="{{ .Path }}">{{ .Title }}</a></li>
+    <li>
+      <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+      {{ if ne .CreatedAt.Year $now.Year }}({{ .CreatedAt.Year }}){{ end }}
+    </li>
   {{ end }}
 </ul>
 

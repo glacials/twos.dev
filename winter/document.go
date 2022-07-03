@@ -42,15 +42,7 @@ var (
 	}
 	tocmin = atom.H2
 	tocmax = atom.H3
-	ih     = map[int]atom.Atom{
-		1: atom.H1,
-		2: atom.H2,
-		3: atom.H3,
-		4: atom.H4,
-		5: atom.H5,
-		6: atom.H6,
-	}
-	hi = map[atom.Atom]int{
+	hi     = map[atom.Atom]int{
 		atom.H1: 1,
 		atom.H2: 2,
 		atom.H3: 3,
@@ -102,7 +94,7 @@ const (
 	gallery
 )
 
-func (k kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
+func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var s string
 	if err := unmarshal(&s); err != nil {
 		return err
@@ -110,16 +102,17 @@ func (k kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 
 	switch s {
 	case "draft", "":
-		k = draft
+		*k = draft
 	case "post":
-		k = post
+		*k = post
 	case "page":
-		k = page
+		*k = page
 	case "gallery":
-		k = gallery
+		*k = gallery
 	default:
 		return fmt.Errorf("unknown kind %q", s)
 	}
+
 	return nil
 }
 
@@ -273,23 +266,22 @@ func (d *Document) Parent() string {
 	return p
 }
 
+// fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
+// and makes a reflective table of contents.
 func (d *Document) fillTOC() error {
 	var (
-		f   func(*html.Node)
-		v   = tocPartialVars{Items: []tocVars{}}
-		buf bytes.Buffer
+		f func(*html.Node)
+		v tocPartialVars
 	)
 	f = func(n *html.Node) {
 		if n.DataAtom >= tocmin && n.DataAtom <= tocmax {
 			grp := &v.Items
 			for i := hi[tocmin]; i < hi[n.DataAtom] && i < hi[tocmax]; i += 1 {
-				fmt.Printf(" ")
 				if len(*grp) > 0 {
 					grp = &((*grp)[len(*grp)-1].Items)
 				}
 			}
 			*grp = append(*grp, tocVars{Anchor: id(n), Title: n.FirstChild.Data})
-			fmt.Printf("Added h%d: %s\n", hi[n.DataAtom], n.FirstChild.Data)
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
 			f(c)
@@ -315,10 +307,10 @@ func (d *Document) fillTOC() error {
 		return err
 	}
 
+	var buf bytes.Buffer
 	if err := t.Execute(&buf, v); err != nil {
 		return err
 	}
-
 	toc, err := html.Parse(&buf)
 	if err != nil {
 		return err

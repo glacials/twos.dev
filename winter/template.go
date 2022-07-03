@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+	"time"
 
 	"twos.dev/winter/graphic"
 )
@@ -14,6 +15,8 @@ import (
 type templateVars struct {
 	*Document
 	*substructure
+
+	Now time.Time
 }
 
 // imgsPartialVars are the template variables given to

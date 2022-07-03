@@ -28,9 +28,6 @@ func buildAll(
 	builders map[string]Builder,
 	cfg winter.Config,
 ) error {
-	if err := os.RemoveAll(dist); err != nil {
-		return err
-	}
 	if err := os.MkdirAll(dist, 0755); err != nil {
 		return fmt.Errorf("can't mkdir `%s`: %w", dist, err)
 	}
