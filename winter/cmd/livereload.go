@@ -43,6 +43,9 @@ func (r *Reloader) Reload() {
 // Watch starts watching the filesystem for changes asynchronously, building any
 // changes based on the contents of Builders and then reloading any connected
 // browser.
+//
+// Watch returns once the goroutine has been spun off successfully. Any errors
+// enountered while watching the filesystem are printed to stderr.
 func (r *Reloader) Watch() error {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {

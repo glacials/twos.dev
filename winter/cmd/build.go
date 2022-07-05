@@ -19,8 +19,9 @@ import (
 const (
 	photoGalleryTemplatePath = "src/templates/imgcontainer.html.tmpl"
 	port                     = 8100
-	staticAssetsDir          = "public"
+	serveFlag                = "serve"
 	sourceDir                = "src"
+	staticAssetsDir          = "public"
 )
 
 var (
@@ -32,6 +33,11 @@ var (
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
 			if err := buildAll(dist, builders, cfg); err != nil {
+				return err
+			}
+
+			serve, err := cmd.Flags().GetBool(serveFlag)
+			if err != nil {
 				return err
 			}
 
@@ -61,16 +67,8 @@ var (
 				server.RegisterOnShutdown(reloader.ShutdownFunc())
 
 				go listenForCtrlC(stop, &server, &reloader)
+				go startFileServer(&server)
 
-				go func() {
-					if err := server.ListenAndServe(); err != nil {
-						if errors.Is(err, http.ErrServerClosed) {
-							// Expected when we call server.Shutdown()
-							return
-						}
-						log.Fatal(err)
-					}
-				}()
 				if err := reloader.Watch(); err != nil {
 					return err
 				}
@@ -83,7 +81,6 @@ var (
 			return nil
 		},
 	}
-
 	builders = map[string]Builder{
 		"src/img/*/*/*.[jJ][pP][gG]": winter.BuildPhoto,
 		"src/favicon/*":              buildStaticFile("src/favicon"),
@@ -91,14 +88,12 @@ var (
 		"public/*/*":                 buildStaticFile("public"),
 		"public/*/*/*":               buildStaticFile("public"),
 	}
-
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
 	globalBuilders = map[string]Builder{
 		"src/templates/*": func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
 		"*.css":           func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
 	}
-
 	serve bool
 )
 
@@ -132,22 +127,28 @@ func init() {
 		),
 	}
 
-	serve = *f.BoolP("serve", "s", false, "start a webserver and rebuild on file changes")
+	serve = *f.BoolP(serveFlag, "s", false, "start a webserver and rebuild on file changes")
 
 	rootCmd.AddCommand(buildCmd)
 }
 
-func listenForCtrlC(
-	stop chan struct{},
-	server *http.Server,
-	reloader *Reloader,
-) {
+func listenForCtrlC(stop chan struct{}, srvr *http.Server, reloader *Reloader) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	<-c
 	log.Println("Ctrl+C detected, stopping...")
-	if err := server.Shutdown(context.TODO()); err != nil {
+	if err := srvr.Shutdown(context.TODO()); err != nil {
 		log.Fatal(err)
 	}
 	stop <- struct{}{}
+}
+
+func startFileServer(server *http.Server) {
+	if err := server.ListenAndServe(); err != nil {
+		if errors.Is(err, http.ErrServerClosed) {
+			// Expected when we call server.Shutdown()
+			return
+		}
+		log.Fatal(err)
+	}
 }
