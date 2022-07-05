@@ -285,6 +285,9 @@ func (d *document) Parent() string {
 	if d.FrontmatterParent != "" {
 		return d.FrontmatterParent
 	}
+	if d.Kind == gallery {
+		return ""
+	}
 
 	p, _, ok := strings.Cut(d.Shortname(), "_")
 	if !ok {
