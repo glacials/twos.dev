@@ -102,6 +102,8 @@ footer {
 }
 
 h1 {
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
   display: block;
   text-align: center;
   text-transform: uppercase;
@@ -114,7 +116,6 @@ h1 + p + figure {
   max-width: 40em;
 }
 
-h1,
 h2,
 h3 {
   background-color: var(--bg-b);
