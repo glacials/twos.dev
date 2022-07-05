@@ -28,14 +28,6 @@ var (
 		Short: "Build or serve a static website locally",
 		Long:  `Build or serve a static website from source.`,
 	}
-
-	authorEmail string
-	authorName  string
-	debug       bool
-	desc        string
-	domain      string
-	name        string
-	since       string
 )
 
 func main() {
@@ -46,10 +38,4 @@ func main() {
 }
 
 func init() {
-	f := rootCmd.PersistentFlags()
-
-	d := f.Bool("debug", false, "output results of transformations to dist/debug")
-	if d != nil {
-		debug = *d
-	}
 }

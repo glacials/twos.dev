@@ -101,34 +101,6 @@ footer {
   margin-top: 4em;
 }
 
-h1,
-h2,
-h3 {
-  background-color: var(--bg-b);
-  color: var(--fg-b-a);
-  display: inline-block;
-}
-
-h4,
-h5,
-h6 {
-  color: var(--fg-a-b);
-  display: block;
-  margin: auto;
-  text-align: center;
-}
-
-h1 {
-}
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 2em;
-  padding: 0.1em 1rem 0 1rem;
-}
-
 h1 {
   display: block;
   text-align: center;
@@ -140,6 +112,32 @@ h1 + figure,
 h1 + p + figure {
   margin: auto;
   max-width: 40em;
+}
+
+h1,
+h2,
+h3 {
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
+  display: inline-block;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2em;
+  padding: 0.1em 1rem 0 1rem;
+}
+
+h4,
+h5,
+h6 {
+  color: var(--fg-a-b);
+  display: block;
+  margin: auto;
+  text-align: center;
 }
 
 hr {

@@ -22,9 +22,9 @@ var (
 	}
 )
 
-// substructure is a graph of documents on the website, generated with read-only
+// Substructure is a graph of documents on the website, generated with read-only
 // operations. It will later be fed into a renderer.
-type substructure struct {
+type Substructure struct {
 	docs documents
 	cfg  Config
 }
@@ -35,42 +35,38 @@ type substructure struct {
 //
 // It then learns what it can about each file and stores the information in
 // a substructure.
-func Discover(cfg Config) (s substructure, err error) {
-	s.cfg = cfg
+func Discover(cfg Config) (*Substructure, error) {
+	s := &Substructure{cfg: cfg}
 	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	for _, m := range md {
 		if _, ok := ignoreFiles[filepath.Base(m)]; ok {
 			continue
 		}
-		doc, err := fromMarkdown(m)
-		if err != nil {
-			return substructure{}, err
-		}
-		s.docs = append(s.docs, doc)
+		s.docs = append(s.docs, fromMarkdown(m))
 	}
 
 	coldhtml, err := filepath.Glob("src/cold/*.html")
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	warmhtml, err := filepath.Glob("src/warm/*.html")
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	coldtmpl, err := filepath.Glob("src/cold/*.tmpl")
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	warmtmpl, err := filepath.Glob("src/warm/*.tmpl")
 	if err != nil {
-		return
+		return nil, err
 	}
 
 	html := append(coldhtml, warmhtml...)
@@ -80,17 +76,13 @@ func Discover(cfg Config) (s substructure, err error) {
 		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
 			continue
 		}
-		doc, err := fromHTML(h)
-		if err != nil {
-			return substructure{}, err
-		}
-		s.docs = append(s.docs, doc)
+		s.docs = append(s.docs, fromHTML(h))
 	}
 
-	return
+	return s, err
 }
 
-func (s substructure) Get(shortname string) *document {
+func (s *Substructure) DocByShortname(shortname string) *document {
 	for _, d := range s.docs {
 		if d.Shortname() == shortname {
 			return d
@@ -99,7 +91,16 @@ func (s substructure) Get(shortname string) *document {
 	return nil
 }
 
-func (s substructure) posts() (u []*document) {
+func (s *Substructure) DocBySrc(path string) *document {
+	for _, d := range s.docs {
+		if d.SourcePath == path {
+			return d
+		}
+	}
+	return nil
+}
+
+func (s *Substructure) posts() (u []*document) {
 	sort.Sort(s.docs)
 	for _, d := range s.docs {
 		if d.Kind == post {
@@ -109,7 +110,7 @@ func (s substructure) posts() (u []*document) {
 	return
 }
 
-func (s substructure) writefeed() error {
+func (s *Substructure) writefeed() error {
 	now := time.Now()
 	feed := feeds.Feed{
 		Title:       s.cfg.Name,
@@ -132,7 +133,7 @@ func (s substructure) writefeed() error {
 	}
 
 	for _, post := range s.posts() {
-		body, err := post.render()
+		body, err := post.build()
 		if err != nil {
 			return err
 		}
@@ -173,7 +174,7 @@ func (s substructure) writefeed() error {
 	return nil
 }
 
-func (s substructure) setlinks() error {
+func (s *Substructure) setlinks() error {
 	for _, out := range s.docs {
 		linksout, err := out.linksout()
 		if err != nil {
@@ -182,7 +183,7 @@ func (s substructure) setlinks() error {
 
 		for _, l := range linksout {
 			l = strings.TrimSuffix(l, filepath.Ext(l))
-			if in := s.Get(l); in != nil {
+			if in := s.DocByShortname(l); in != nil {
 				out.outgoing = append(out.outgoing, in)
 				in.incoming = append(in.incoming, out)
 			}
@@ -192,56 +193,67 @@ func (s substructure) setlinks() error {
 	return nil
 }
 
-func (s substructure) Execute(dist string) error {
+// ExecuteAll builds all documents known to the substructure, as well as any
+// site-scoped non-documents such as RSS feeds.
+func (s *Substructure) ExecuteAll(dist string) error {
 	for _, d := range s.docs {
-		t := template.New("")
-		if err := loadTemplates(t); err != nil {
+		if err := s.Execute(d, dist); err != nil {
 			return err
-		}
-
-		imgsFunc, err := imgs(d.Shortname())
-		if err != nil {
-			return err
-		}
-
-		videoFunc, err := videos(d.Shortname())
-		if err != nil {
-			return err
-		}
-
-		postsFunc := posts(s)
-
-		_ = t.Funcs(template.FuncMap{
-			"img":    imgsFunc,
-			"imgs":   imgsFunc,
-			"video":  videoFunc,
-			"videos": videoFunc,
-			"posts":  postsFunc,
-		})
-
-		b, err := d.render()
-		if err != nil {
-			return err
-		}
-
-		if _, err := t.New("body").Parse(string(b)); err != nil {
-			return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
-		}
-
-		var buf bytes.Buffer
-		err = t.Lookup("text_document").
-			Execute(&buf, templateVars{d, &s, time.Now()})
-		if err != nil {
-			return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
-		}
-
-		path := filepath.Join(dist, d.Shortname()+".html")
-		if os.WriteFile(path, buf.Bytes(), 0644); err != nil {
-			return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
 		}
 	}
 
 	s.writefeed()
+
+	return nil
+}
+
+// Execute builds the given document into the given directory.
+func (s *Substructure) Execute(d *document, dist string) error {
+	t := template.New("")
+	if err := loadTemplates(t); err != nil {
+		return err
+	}
+
+	imgsFunc, err := imgs(d.Shortname())
+	if err != nil {
+		return err
+	}
+
+	videoFunc, err := videos(d.Shortname())
+	if err != nil {
+		return err
+	}
+
+	postsFunc := posts(s)
+
+	_ = t.Funcs(template.FuncMap{
+		"img":    imgsFunc,
+		"imgs":   imgsFunc,
+		"video":  videoFunc,
+		"videos": videoFunc,
+		"posts":  postsFunc,
+	})
+
+	b, err := d.build()
+	if err != nil {
+		return err
+	}
+
+	if _, err := t.New("body").Parse(string(b)); err != nil {
+		return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
+	}
+
+	var buf bytes.Buffer
+	err = t.Lookup("text_document").
+		Execute(&buf, templateVars{d, s, time.Now()})
+	if err != nil {
+		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
+	}
+
+	path := filepath.Join(dist, d.Shortname()+".html")
+	if os.WriteFile(path, buf.Bytes(), 0644); err != nil {
+		return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
+	}
 
 	return nil
 }

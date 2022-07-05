@@ -24,6 +24,16 @@ import (
 )
 
 const (
+	draft kind = iota
+	post
+	page
+	gallery
+)
+
+const (
+	encodingHTML encoding = iota
+	encodingMarkdown
+
 	styleWrapper = "<span style=\"font-family: sans-serif\">%s</span>"
 	tocEl        = atom.Ol
 	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
@@ -65,9 +75,6 @@ var (
 // static HTML file.
 type document struct {
 	SourcePath string
-	root       *html.Node
-	incoming   []*document
-	outgoing   []*document
 
 	Kind kind `yaml:"type"`
 	TOC  bool `yaml:"toc"`
@@ -78,7 +85,14 @@ type document struct {
 	FrontmatterParent    string `yaml:"parent"`
 	FrontmatterShortname string `yaml:"filename"`
 	FrontmatterTitle     string `yaml:"title"`
+
+	encoding encoding
+	root     *html.Node
+	incoming []*document
+	outgoing []*document
 }
+
+type encoding int
 
 type kind int
 
@@ -98,12 +112,7 @@ func (k kind) IsPage() bool { return k == page }
 // exists to be used by templates.
 func (k kind) IsGallery() bool { return k == gallery }
 
-const (
-	draft kind = iota
-	post
-	page
-	gallery
-)
+const ()
 
 func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var s string
@@ -127,43 +136,58 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-func fromHTML(src string) (*document, error) {
-	var d document
-	f, err := os.Open(src)
+func fromHTML(src string) *document {
+	return &document{encoding: encodingHTML, SourcePath: src}
+}
+
+func fromMarkdown(src string) *document {
+	return &document{encoding: encodingMarkdown, SourcePath: src}
+}
+
+func (d *document) parse() error {
+	switch d.encoding {
+	case encodingHTML:
+		return d.parseHTML()
+	case encodingMarkdown:
+		return d.parseMarkdown()
+	default:
+		return fmt.Errorf("unknown encoding %d", d.encoding)
+	}
+}
+
+func (d *document) parseHTML() error {
+	f, err := os.Open(d.SourcePath)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer f.Close()
 
 	htm, err := frontmatter.Parse(f, &d)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	d.FrontmatterShortname, _, _ = strings.Cut(d.FrontmatterShortname, ".")
 
 	root, err := html.Parse(bytes.NewBuffer(htm))
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	d.root = root
-	d.SourcePath = src
-	return &d, nil
+	return nil
 }
 
-func fromMarkdown(src string) (*document, error) {
-	var d document
-
-	f, err := os.Open(src)
+func (d *document) parseMarkdown() error {
+	f, err := os.Open(d.SourcePath)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer f.Close()
 
 	md, err := frontmatter.Parse(f, &d)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	root, err := html.Parse(
@@ -185,29 +209,17 @@ func fromMarkdown(src string) (*document, error) {
 		),
 	)
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	d.root = root
-	d.SourcePath = src
-	return &d, nil
+	return nil
 }
 
-type documents []*document
-
-func (d documents) Len() int {
-	return len(d)
-}
-
-func (d documents) Less(i, j int) bool {
-	return d[i].CreatedAt.After(d[j].CreatedAt)
-}
-
-func (d documents) Swap(i, j int) {
-	d[i], d[j] = d[j], d[i]
-}
-
-func (d *document) render() ([]byte, error) {
+func (d *document) build() ([]byte, error) {
+	if err := d.parse(); err != nil {
+		return nil, err
+	}
 	if d.TOC {
 		if err := d.fillTOC(); err != nil {
 			return nil, err
@@ -432,4 +444,18 @@ func syntaxHighlight(lang, code string) (string, error) {
 		return "", err
 	}
 	return buf.String(), nil
+}
+
+type documents []*document
+
+func (d documents) Len() int {
+	return len(d)
+}
+
+func (d documents) Less(i, j int) bool {
+	return d[i].CreatedAt.After(d[j].CreatedAt)
+}
+
+func (d documents) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
 }

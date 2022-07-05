@@ -24,6 +24,10 @@ const (
 	staticAssetsDir          = "public"
 )
 
+// Builder is a function that builds a source file src into a destination
+// directory dst.
+type Builder func(src, dst string, cfg winter.Config) error
+
 var (
 	authorPattern = regexp.MustCompile(`^(.*) <(.*)>$`)
 	cfg           winter.Config
@@ -32,7 +36,8 @@ var (
 		Short: "Build the website",
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			if err := buildAll(dist, builders, cfg); err != nil {
+			s, err := buildAll(dist, builders, cfg)
+			if err != nil {
 				return err
 			}
 
@@ -46,14 +51,17 @@ var (
 				for pattern, builder := range builders {
 					mergedbuilders[pattern] = builder
 				}
-				for pattern, builder := range globalBuilders {
-					mergedbuilders[pattern] = builder
+				for pattern := range globalBuilders {
+					mergedbuilders[pattern] = func(_, _ string, cfg winter.Config) error {
+						return s.ExecuteAll(dist)
+					}
 				}
 
 				stop := make(chan struct{})
 				reloader := Reloader{
-					Builders: mergedbuilders,
-					Ignore:   ignoreDirectories,
+					Builders:     mergedbuilders,
+					Ignore:       ignoreDirectories,
+					Substructure: s,
 				}
 
 				var mux http.ServeMux
@@ -90,9 +98,9 @@ var (
 	}
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
-	globalBuilders = map[string]Builder{
-		"src/templates/*": func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
-		"*.css":           func(_, _ string, cfg winter.Config) error { return buildAll(dist, builders, cfg) },
+	globalBuilders = map[string]struct{}{
+		"src/templates/*": {},
+		"*.css":           {},
 	}
 	serve bool
 )

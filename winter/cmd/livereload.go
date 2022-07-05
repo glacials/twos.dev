@@ -16,13 +16,14 @@ import (
 // Reloader watches the filesystem for changes to relevant files so it can
 // reload the browser using WebSockets.
 type Reloader struct {
-	Builders map[string]Builder
-	Ignore   map[string]struct{}
+	Builders     map[string]Builder
+	Ignore       map[string]struct{}
+	Substructure *winter.Substructure
 
-	listeners    []*websocket.Conn
-	watcher      *fsnotify.Watcher
-	stop         chan struct{}
 	closeSockets chan struct{}
+	listeners    []*websocket.Conn
+	stop         chan struct{}
+	watcher      *fsnotify.Watcher
 }
 
 // Handler returns a function that handles incoming WebSocket connections which
@@ -90,9 +91,17 @@ func (r *Reloader) listen() {
 	for {
 		select {
 		case event, ok := <-r.watcher.Events:
+			fmt.Println("event:", event)
 			if !ok {
 				log.Println("fsnotify watcher closed")
 				return
+			}
+			if d := r.Substructure.DocBySrc(event.Name); d != nil {
+				if err := r.Substructure.Execute(d, dist); err != nil {
+					log.Fatalf("error executing %s: %s", d.Shortname(), err.Error())
+					return
+				}
+				r.Reload()
 			}
 			for pattern, builder := range r.Builders {
 				if ok, err := filepath.Match(pattern, event.Name); err != nil {

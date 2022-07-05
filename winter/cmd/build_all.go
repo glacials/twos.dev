@@ -27,9 +27,9 @@ func buildAll(
 	dist string,
 	builders map[string]Builder,
 	cfg winter.Config,
-) error {
+) (*winter.Substructure, error) {
 	if err := os.MkdirAll(dist, 0755); err != nil {
-		return fmt.Errorf("can't mkdir `%s`: %w", dist, err)
+		return nil, fmt.Errorf("can't mkdir `%s`: %w", dist, err)
 	}
 
 	seen := map[string]struct{}{}
@@ -69,19 +69,19 @@ func buildAll(
 
 		return nil
 	}); err != nil {
-		return fmt.Errorf("can't walk to build the world: %w", err)
+		return nil, fmt.Errorf("can't walk to build the world: %w", err)
 	}
 
 	s, err := winter.Discover(cfg)
 	if err != nil {
-		return err
+		return nil, err
 	}
 
-	if err := s.Execute(dist); err != nil {
-		return err
+	if err := s.ExecuteAll(dist); err != nil {
+		return nil, err
 	}
 
-	return nil
+	return s, nil
 }
 
 func built(src string, seen map[string]struct{}) bool {
