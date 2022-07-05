@@ -73,7 +73,7 @@ Advanced usage of dashes unfortunately revolves around avoiding common issues.
 
 ### Em Dash Overuse
 
-As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode—thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a blessing: a way to avoid adding structure to organic thoughts.
+As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode—thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.
 
 Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which—for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it—can be hard to do.
 
@@ -98,7 +98,7 @@ $$\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}$$
 Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:
 
 ```
-before frozen yogurt
+a time before frozen yogurt
 ```
 
 It's crude, but dependable.
@@ -154,7 +154,7 @@ playdates don't last forever!
 
 In the justified simulation, "were—wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.
 
-One solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:
+A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:
 
 ```plain
 |                            |
@@ -164,7 +164,7 @@ playdates don't last forever!
 
 ### Input Difficulties
 
-Standard US keyboards support only the hyphen without more advanced knowledge, so many en and em dash users simply compose them from hyphens and spaces.
+Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.
 
 No one should ever fault that, but for those who are willing to commit something new to memory:
 
@@ -187,7 +187,7 @@ A common replacement for the em dash is a space on either end of two hyphens (` 
 
 ### Output Difficulties
 
-At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step](https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go) to switch twos.dev's dashes—and dashes only—to variable width fonts.
+At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47) to render twos.dev's dashes in a variable width font.
 
 I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.
 
@@ -220,6 +220,7 @@ The **figure dash** is a variant of the en dash having the same width as digits 
 
 ```plain
 Figure dash: 867‒5309
+Number:      86705309
 En dash:     867–5309
 Hyphen:      867-5309
 ```
