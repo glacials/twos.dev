@@ -217,7 +217,7 @@
 
 <h3>Em Dash Overuse</h3>
 
-<p>As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode<span style="font-family: sans-serif">—</span>thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a blessing: a way to avoid adding structure to organic thoughts.</p>
+<p>As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode<span style="font-family: sans-serif">—</span>thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.</p>
 
 <p>Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which<span style="font-family: sans-serif">—</span>for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it<span style="font-family: sans-serif">—</span>can be hard to do.</p>
 
@@ -236,7 +236,7 @@
 </span></span></code></pre></body></html>
 <p><span class="math display">\[\text{a pre-frozen\thinspace{}yogurt time}\]</span></p><p><span class="math display">\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]</span></p><p>Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">before frozen yogurt
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a time before frozen yogurt
 </span></span></code></pre></body></html>
 
 <p>It's crude, but dependable.</p>
@@ -289,7 +289,7 @@
 
 <p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.</p>
 
-<p>One solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
+<p>A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  <span style="font-family: sans-serif">—</span>  wolf
@@ -298,7 +298,7 @@
 
 <h3>Input Difficulties</h3>
 
-<p>Standard US keyboards support only the hyphen without more advanced knowledge, so many en and em dash users simply compose them from hyphens and spaces.</p>
+<p>Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.</p>
 
 <p>No one should ever fault that, but for those who are willing to commit something new to memory:</p>
 
@@ -329,7 +329,7 @@
 
 <h3>Output Difficulties</h3>
 
-<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote <a href="https://github.com/glacials/twos.dev/blob/main/cmd/transform/lengthen_dashes.go">a bespoke preprocessing step</a> to switch twos.dev's dashes<span style="font-family: sans-serif">—</span>and dashes only<span style="font-family: sans-serif">—</span>to variable width fonts.</p>
+<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(<a href="https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47">https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47</a>) to render twos.dev's dashes in a variable width font.</p>
 
 <p>I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
 
@@ -362,8 +362,9 @@
 <p>The <strong>figure dash</strong> is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">Figure dash: 867‒5309
-</span></span><span class="line"><span class="ln">2</span><span class="cl">En dash:     867<span style="font-family: sans-serif">–</span>5309
-</span></span><span class="line"><span class="ln">3</span><span class="cl">Hyphen:      867-5309
+</span></span><span class="line"><span class="ln">2</span><span class="cl">Number:      86705309
+</span></span><span class="line"><span class="ln">3</span><span class="cl">En dash:     867<span style="font-family: sans-serif">–</span>5309
+</span></span><span class="line"><span class="ln">4</span><span class="cl">Hyphen:      867-5309
 </span></span></code></pre></body></html>
 
 <p>Lastly, my favorite: the <strong>soft hyphen</strong> is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is <em>welcome</em> to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.</p>
