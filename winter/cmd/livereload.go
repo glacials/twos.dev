@@ -91,7 +91,6 @@ func (r *Reloader) listen() {
 	for {
 		select {
 		case event, ok := <-r.watcher.Events:
-			fmt.Println("event:", event)
 			if !ok {
 				log.Println("fsnotify watcher closed")
 				return

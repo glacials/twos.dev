@@ -54,7 +54,6 @@ var (
 		"⁓": fmt.Sprintf(styleWrapper, "⁓"), // Swung dash
 		"―": fmt.Sprintf(styleWrapper, "―"), // Horizontal bar
 		"⁃": fmt.Sprintf(styleWrapper, "⁃"), // Hyphen bullet
-		"‒": fmt.Sprintf(styleWrapper, "‒"), // Figure dash
 
 		"&#34;": "\"",
 		"&#39;": "'",
