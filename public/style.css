@@ -1,3 +1,5 @@
+/* Start root elements */
+
 @media (prefers-color-scheme: light) {
   :root {
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
@@ -46,11 +48,9 @@ html {
 }
 
 body {
+  background: var(--bg-a);
+  color: var(--fg-a-a);
   margin: 0;
-}
-
-blockquote {
-  border-left: 1px solid var(--fg-a-a);
 }
 
 .container {
@@ -58,49 +58,47 @@ blockquote {
   max-width: 75em;
 }
 
-/* In case none of the below rules trigger, display a backup */
-nav .arrow::before {
-  content: "-";
+/* End root elements */
+/* Start naked elements */
+
+a,
+a:visited {
+  color: var(--fg-a-b);
+  text-transform: lowercase;
 }
 
-/* Hovered/selected nav links should make arrows on their right point left */
-nav a:hover ~ .arrow::before {
-  content: "←" !important;
+a:hover {
+  background-color: var(--fg-a-b);
+  color: var(--bg-a);
+  text-decoration: none;
+  text-transform: none;
 }
 
-nav a.selected ~ .arrow::before {
-  content: "←" !important;
+a:hover.img {
+  background: none;
 }
 
-/* Hovere/selected  nav links should make arrows on their left point right */
-nav .arrow:has(~ a:hover)::before {
-  content: "→" !important;
+a:hover.img > img {
+  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
 }
 
-nav .arrow:has(~ a.selected)::before {
-  content: "→";
+blockquote {
+  border-left: 1px solid var(--fg-a-a);
 }
 
-/* Anything that could possibly be an immediate child of .container. Don't want
- * a margin on .container because I want the headings' backgrounds to extend to
- * the left page edge. */
-ol,
-p,
-ul {
-  margin-left: 1rem;
-  margin-right: 1rem;
+/* Nesting em/i should drop styling. Extend nesting levels as needed. */
+em em,
+em i,
+i em,
+i i {
+  font-style: normal;
 }
-
-ul {
-  list-style-type: "- ";
-}
-
-li {
-  margin: 0.5em 0;
-}
-
 figcaption {
   font-style: italic;
+}
+
+footer {
+  margin-top: 4em;
 }
 
 h1,
@@ -154,13 +152,70 @@ hr::before {
   text-align: center;
 }
 
-footer {
-  margin-top: 4em;
-}
-
 img,
 video {
   transform: rotate(-0.5deg);
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+/* Anything that could possibly be an immediate child of .container. Don't want
+ * a margin on .container because I want the headings' backgrounds to extend to
+ * the left page edge. */
+ol,
+p,
+ul {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+video + video {
+  margin-left: 1em;
+}
+
+/* End naked elements */
+/* Start nav */
+
+/* In case none of the below rules trigger, display a backup */
+nav .arrow::before {
+  content: "-";
+}
+
+/* Hovered/selected nav links should make arrows on their right point left */
+nav a:hover ~ .arrow::before {
+  content: "←" !important;
+}
+
+nav a.selected ~ .arrow::before {
+  content: "←" !important;
+}
+
+/* Hovere/selected  nav links should make arrows on their left point right */
+nav .arrow:has(~ a:hover)::before {
+  content: "→" !important;
+}
+
+nav .arrow:has(~ a.selected)::before {
+  content: "→";
+}
+
+/* End nav */
+/* Start classes */
+
+@media (prefers-color-scheme: dark) {
+  .dark-only {
+    display: block;
+  }
+
+  .light-only {
+    display: none;
+  }
 }
 
 a img.silly {
@@ -172,33 +227,8 @@ a:hover img.silly {
   transition: 300s;
 }
 
-video + video {
-  margin-left: 1em;
-}
-
-body {
-  background: var(--bg-a);
-  color: var(--fg-a-a);
-}
-
-a,
-a:visited {
-  color: var(--fg-a-b);
-  text-transform: lowercase;
-}
-
-a:hover {
-  background-color: var(--fg-a-b);
-  color: var(--bg-a);
-  text-decoration: none;
-  text-transform: none;
-}
-
-a:hover.img {
-  background: none;
-}
-a:hover.img > img {
-  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
+.dark-only {
+  display: none;
 }
 
 .photo-grid {
@@ -211,32 +241,9 @@ a:hover.img > img {
   width: 100%;
 }
 
-/* Nesting em/i should drop styling. Extend nesting levels as needed. */
-i i,
-i em,
-em i,
-em em {
-  font-style: normal;
-}
+/* End classes */
 
-.dark-only {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .dark-only {
-    display: block;
-  }
-
-  .light-only {
-    display: none;
-  }
-}
-
-/* Code + syntax highlighting styles
- *
- * See https://github.com/alecthomas/chroma
- */
+/* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
 code {
   background-color: var(--bg-c);
@@ -888,3 +895,5 @@ h3.company {
     text-decoration: underline;
   }
 }
+
+/* End syntax highlighting (see https://github.com/alecthomas/chroma) */
