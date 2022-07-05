@@ -39,6 +39,7 @@ used to power your static website as well, as a CLI or Go library:
 ```sh
 # CLI
 go install twos.dev/winter/cmd@latest
+winter --help
 
 # Go library
 go get -u twos.dev/winter@latest
