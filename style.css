@@ -1,3 +1,5 @@
+/* Start root elements */
+
 @media (prefers-color-scheme: light) {
   :root {
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
@@ -46,17 +48,137 @@ html {
 }
 
 body {
+  background: var(--bg-a);
+  color: var(--fg-a-a);
   margin: 0;
-}
-
-blockquote {
-  border-left: 1px solid var(--fg-a-a);
 }
 
 .container {
   margin: auto;
   max-width: 75em;
 }
+
+/* End root elements */
+/* Start naked elements */
+
+a,
+a:visited {
+  color: var(--fg-a-b);
+  text-transform: lowercase;
+}
+
+a:hover {
+  background-color: var(--fg-a-b);
+  color: var(--bg-a);
+  text-decoration: none;
+  text-transform: none;
+}
+
+a:hover.img {
+  background: none;
+}
+
+a:hover.img > img {
+  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
+}
+
+blockquote {
+  border-left: 1px solid var(--fg-a-a);
+}
+
+/* Nesting em/i should drop styling. Extend nesting levels as needed. */
+em em,
+em i,
+i em,
+i i {
+  font-style: normal;
+}
+figcaption {
+  font-style: italic;
+}
+
+footer {
+  margin-top: 4em;
+}
+
+h1 {
+  display: block;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+/* Hero image */
+h1 + figure,
+h1 + p + figure {
+  margin: auto;
+  max-width: 40em;
+}
+
+h1,
+h2,
+h3 {
+  background-color: var(--bg-b);
+  color: var(--fg-b-a);
+  display: inline-block;
+}
+
+h2,
+h3,
+h4,
+h5,
+h6 {
+  margin-top: 2em;
+  padding: 0.1em 1rem 0 1rem;
+}
+
+h4,
+h5,
+h6 {
+  color: var(--fg-a-b);
+  display: block;
+  margin: auto;
+  text-align: center;
+}
+
+hr {
+  border: none;
+}
+
+hr::before {
+  content: "* * *";
+  display: block;
+  text-align: center;
+}
+
+img,
+video {
+  transform: rotate(-0.5deg);
+}
+
+li {
+  margin: 0.5em 0;
+}
+
+/* Anything that could possibly be an immediate child of .container. Don't want
+ * a margin on .container because I want the headings' backgrounds to extend to
+ * the left page edge. */
+ol,
+p,
+ul {
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+video + video {
+  margin-left: 1em;
+}
+
+/* End naked elements */
+/* Start nav */
 
 /* In case none of the below rules trigger, display a backup */
 nav .arrow::before {
@@ -81,86 +203,17 @@ nav .arrow:has(~ a.selected)::before {
   content: "→";
 }
 
-/* Anything that could possibly be an immediate child of .container. Don't want
- * a margin on .container because I want the headings' backgrounds to extend to
- * the left page edge. */
-ol,
-p,
-ul {
-  margin-left: 1rem;
-  margin-right: 1rem;
-}
+/* End nav */
+/* Start classes */
 
-ul {
-  list-style-type: "- ";
-}
+@media (prefers-color-scheme: dark) {
+  .dark-only {
+    display: block;
+  }
 
-li {
-  margin: 0.5em 0;
-}
-
-figcaption {
-  font-style: italic;
-}
-
-h1,
-h2,
-h3 {
-  background-color: var(--bg-b);
-  color: var(--fg-b-a);
-  display: inline-block;
-}
-
-h4,
-h5,
-h6 {
-  color: var(--fg-a-b);
-  display: block;
-  margin: auto;
-  text-align: center;
-}
-
-h1 {
-}
-h2,
-h3,
-h4,
-h5,
-h6 {
-  margin-top: 2em;
-  padding: 0.1em 1rem 0 1rem;
-}
-
-h1 {
-  display: block;
-  text-align: center;
-  text-transform: uppercase;
-}
-
-/* Hero image */
-h1 + figure,
-h1 + p + figure {
-  margin: auto;
-  max-width: 40em;
-}
-
-hr {
-  border: none;
-}
-
-hr::before {
-  content: "* * *";
-  display: block;
-  text-align: center;
-}
-
-footer {
-  margin-top: 4em;
-}
-
-img,
-video {
-  transform: rotate(-0.5deg);
+  .light-only {
+    display: none;
+  }
 }
 
 a img.silly {
@@ -172,33 +225,8 @@ a:hover img.silly {
   transition: 300s;
 }
 
-video + video {
-  margin-left: 1em;
-}
-
-body {
-  background: var(--bg-a);
-  color: var(--fg-a-a);
-}
-
-a,
-a:visited {
-  color: var(--fg-a-b);
-  text-transform: lowercase;
-}
-
-a:hover {
-  background-color: var(--fg-a-b);
-  color: var(--bg-a);
-  text-decoration: none;
-  text-transform: none;
-}
-
-a:hover.img {
-  background: none;
-}
-a:hover.img > img {
-  box-shadow: 0.5em 0.5em 0 var(--fg-a-b);
+.dark-only {
+  display: none;
 }
 
 .photo-grid {
@@ -211,32 +239,9 @@ a:hover.img > img {
   width: 100%;
 }
 
-/* Nesting em/i should drop styling. Extend nesting levels as needed. */
-i i,
-i em,
-em i,
-em em {
-  font-style: normal;
-}
+/* End classes */
 
-.dark-only {
-  display: none;
-}
-
-@media (prefers-color-scheme: dark) {
-  .dark-only {
-    display: block;
-  }
-
-  .light-only {
-    display: none;
-  }
-}
-
-/* Code + syntax highlighting styles
- *
- * See https://github.com/alecthomas/chroma
- */
+/* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
 code {
   background-color: var(--bg-c);
@@ -888,3 +893,5 @@ h3.company {
     text-decoration: underline;
   }
 }
+
+/* End syntax highlighting (see https://github.com/alecthomas/chroma) */
