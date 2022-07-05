@@ -7,9 +7,9 @@ type: post
 # Advanced Dashes
 
 {{ img 
+   "I love pizza-liquor, but I've never had it New York style."
    "supreme"
    "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
-   "I love pizza-liquor, but I've never had it New York style."
 }}
 
 There are three common dashes in written English:
