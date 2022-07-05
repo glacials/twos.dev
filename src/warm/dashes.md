@@ -14,7 +14,7 @@ type: post
 
 There are three common dashes in written English:
 
-- Hyphen : -
+- Hyphen : <span style=“font-family:sans-serif”>-</span>
 - En dash: –
 - Em dash: —
 
