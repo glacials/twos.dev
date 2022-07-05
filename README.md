@@ -29,17 +29,17 @@ itself will trigger a program recompilation and restart. In both cases, a
 WebSocket connection on the local page will listen for the change and trigger a
 refresh automatically.
 
-## Using Winter
+## Winter
 
-Winter is written to be used with twos.dev, but if you want to use it elsewhere
-you can:
+[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
+
+Winter is the bespoke static website generator that powers twos.dev. It can be
+used to power your static website as well, as a CLI or Go library:
 
 ```sh
-# Use the `winter cmd`
+# CLI
 go install twos.dev/winter/cmd@latest
 
-# Use the twos.dev/winter library
+# Go library
 go get -u twos.dev/winter@latest
 ```
-
-[See documentation](https://pkg.go.dev/twos.dev/winter)
