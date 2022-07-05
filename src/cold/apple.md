@@ -17,18 +17,17 @@ you please.
 
 ## Why? {#why}
 
-My life is in Google more than anyone I know. The usual suspects sure --
-Gmail, Photos, Chrome, etc. -- but also the ones people stay away from --
-Tasks, Keep, YouTube Music, Fit, Pay, Play Books, Play Movies &amp; TV,
-Podcasts, etc. We have more Google Homes than rooms. I was a beta user for the
-first Chromebook, the Cr-48. I have more scar tissue than most from services
-being sent to the “Google graveyard”. And for a few years, I overlaid my
-Facebook profile picture with a Google+ logo and the text “I’ve moved”. Of
-course, it's no surprise I’ve been an Android user for 12 years, 10 of them on
-Nexus and Pixel devices.
+My life is in Google more than anyone I know. The usual suspects sure---Gmail,
+Photos, Chrome, etc.---but also the ones people stay away from---Tasks, Keep,
+YouTube Music, Fit, Pay, Play Books, Play Movies &amp; TV, Podcasts, etc. We
+have more Google Homes than rooms. I was a beta user for the first Chromebook,
+the Cr-48. I have more scar tissue than most from services being sent to the
+“Google graveyard”. And for a few years, I overlaid my Facebook profile picture
+with a Google+ logo and the text “I’ve moved”. Of course, it's no surprise I’ve
+been an Android user for 12 years, 10 of them on Nexus and Pixel devices.
 
 But once in a while I like to challenge my beliefs by changing seats. This is
-how I understand why -- or whether -- I prefer what I chose. For Android, that
+how I understand why---or whether---I prefer what I chose. For Android, that
 means trialing an iPhone. [I did
 this](https://twitter.com/glcls/status/880455300444176384?s=21&t=R2cM8pplLpZNEq6ju3Weaw)
 five years ago for a few months (thanks [bensw](https://bensw.com)), but
@@ -62,7 +61,7 @@ data feels like part of my device, not part of Google. And I trust my device
 to manage my payment, location, etc. data, because it is mine. I own it.
 
 That feeling is not strong enough that people will voice it, or fight for it.
-But it's a good feeling. And it only comes with control -- control by a
+But it's a good feeling. And it only comes with control---control by a
 representative I trust, over parties I don't. I don't know app developers,
 especially small ones. But I know Apple. Through them I can trust app
 developers, but only because Apple so heavily controls what they can publish.
@@ -77,8 +76,8 @@ I wouldn't know what I'm looking for, so I trust my local health department.
 For example, all purchases that enable new app functionality must go through
 the Apple in-app purchase flow. As a developer, this means Apple takes a cut
 of everything. As a user, this means one central place where I can manage
-(read: cancel) subscriptions -- no digging through menus or talking to
-customer service agents.
+(read: cancel) subscriptions---no digging through menus or talking to customer
+service agents.
 
 {{ imgs
    "The App Store's subscriptions management menus."
@@ -97,7 +96,7 @@ one-tap, FaceID sign-in.
 
 These examples continue throughout the ecosystem, and the more I see the more
 I believe Apple thinks of itself as a government providing "public goods",
-whereas Google optimizes for what increases ad clickthrough -- data, eyeballs,
+whereas Google optimizes for what increases ad clickthrough---data, eyeballs,
 and engagement. Of course, this has its problems. Apple is a private company,
 not elected officials, so is only as beholden to its end users as it wants to
 be. For now, the incentives seem aligned.
@@ -111,9 +110,9 @@ account. The device may have some caching and synchronization to remain useful
 offline, but ultimately Google's servers are the source of truth.
 
 To Apple, a user is a device first. iCloud exists to synchronize data between
-multiple devices, but it's just that -- synchronization. Apps usually wait
-until the device is plugged in to bother syncing, and you can even sync with a
-cable (or not at all) instead of iCloud.
+multiple devices, but it's just that---synchronization. Apps usually wait until
+the device is plugged in to bother syncing, and you can even sync with a cable
+(or not at all) instead of iCloud.
 
 Here are some ways these differences are expressed:
 
@@ -121,18 +120,18 @@ Here are some ways these differences are expressed:
   apps are going the way of PWAs and similar tech that can be deployed to web
   and app ~identically. In contrast Apple puts every major UX flow in a native
   app, from email and calendar to bug reporting and account management. Even
-  uploading apps to the App Store for publishing -- a fundamentally online
-  experience -- is a native app.
+  uploading apps to the App Store for publishing---a fundamentally online
+  experience--is a native app.
 - Google Docs documents are rows in a database, where Apple Pages documents
   are files on a filesystem; sharing and synchronization are handled by iCloud
   which is more akin to Dropbox in this mode. It does support 100 simultaneous
   writers, but I'm not sure how.
 - When you message someone with iMessage you are messaging a device (a phone
-  number or email), not an Apple account -- even if the bubble is blue. You
-  may be unknowingly using a combination of phone and email for one contact,
-  because iMessage silently interleaves them if they're owned by the same
-  Apple account. If that person later removes one from their Apple account,
-  your iMessage thread with them retroactively splits.
+  number or email), not an Apple account---even if the bubble is blue. You may
+  be unknowingly using a combination of phone and email for one contact, because
+  iMessage silently interleaves them if they're owned by the same Apple account.
+  If that person later removes one from their Apple account, your iMessage
+  thread with them retroactively splits.
 - In the Google ecosystem, when you take or make a Fi / Voice call from your
   computer, you're going through Google's servers. In the Apple ecosystem,
   when you take or make a call from your Mac or iPad, you're connecting
@@ -159,11 +158,11 @@ however _it's still around anyway_ and has improved drastically (although
 whether enough is [still in question](#maps)).
 
 Google's reputation for killing products causes a negative feedback loop. When
-Google releases a product that relies on market buy-in -- say, a watch OS
-(needs app developer buy-in) or a chat app (needs consumer buy-in) -- it's an
-uphill battle to get the market on board, because it knows Google may turn
-around and kill the product anyway. This lack of buy-in seals the product's
-fate, and it goes to the graveyard.
+Google releases a product that relies on market buy-in---say, a watch OS (needs
+app developer buy-in) or a chat app (needs consumer buy-in)---it's an uphill
+battle to get the market on board, because it knows Google may turn around and
+kill the product anyway. This lack of buy-in seals the product's fate, and it
+goes to the graveyard.
 
 In contrast, Apple's reputation for _not_ killing products causes the market to
 embrace it with open arms, kicking off a positive feedback loop that ensures its
@@ -172,7 +171,7 @@ successful, and they did. Apple Watch needed developers to design watch flows
 for their app to be successful, and they did.
 
 There are more factors at play than reputation, like developer experience and
-user experience, but the point stands -- a reputation for killing products
+user experience, but the point stands---a reputation for killing products
 contributes to more product deaths.
 
 ## Specific Notes {#specifics}
@@ -257,11 +256,10 @@ files, but now it’s two clicks with instant sync.
 I was initially surprised iPhone and iPad lack feature parity. This first came
 up trying to swipe-type on iPad. Another is iPad can show multiple apps on the
 screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt
-confused at first, but I see Apple’s angle -- none of these quite make sense
-on the other form factor. They’d rather deny you the feature than allow using
-it to be confusing or unintuitive. Infamously, there is no calculator app for
-iPad because Apple hasn’t found the time to adapt the iPhone calculator
-design.
+confused at first, but I see Apple’s angle---none of these quite make sense on
+the other form factor. They’d rather deny you the feature than allow using it to
+be confusing or unintuitive. Infamously, there is no calculator app for iPad
+because Apple hasn’t found the time to adapt the iPhone calculator design.
 
 The more native apps I use on iOS, the better the UX gets. For example, you
 can use multi-touch to drag-and-drop items between apps. Third-party apps only
@@ -314,7 +312,7 @@ substitute, although I still prefer Android’s notifications.
 #### iMessage {#imessage}
 
 I finally know why none of my iPhone friends were as excited as me about
-“solving” mobile chat -- it’s been solved for them for years. iMessage is the
+“solving” mobile chat---it’s been solved for them for years. iMessage is the
 gold standard of chat apps. I’m even feeling the guilty urge to nudge friends
 towards iPhone so I can use it with them.
 
@@ -344,7 +342,7 @@ These were helpful functions, but the work of managing an extra battery to
 charge and an extra device to put on and take off made me fluctuate every six
 months or so between wearing it every day and not wearing it at all.
 
-Apple Watch adds enough bullet points that I've had no such fluctuations -- I
+Apple Watch adds enough bullet points that I've had no such fluctuations---I
 wear it daily:
 
 - Unlock macOS/iOS when nearby, in lieu of entering a password/passcode
@@ -579,7 +577,7 @@ separate Find My app) are similar; anyone happy with one would be happy with
 the other.
 
 I can see why Apple decided to contain the feature in an app you must launch
-with intention, but it's a wash for me -- I've had serendipitous encounters
+with intention, but it's a wash for me---I've had serendipitous encounters
 enabled by seeing a friend is close by in Google Maps accidentally.
 
 AirTags and device tracking are the big Apple killer feature here, which work
@@ -674,9 +672,9 @@ is nice until headers get long and multiworded. Overall it’s a wash.
 
 ### Keep → Notes {#notes}
 
-I value simplicity and elasticity in notetaking -- get out of my way and let
-me write, then let me deal with it later. Keep supplies that. Its layout is
-hard to browse, but it makes up for it with great search.
+I value simplicity and elasticity in notetaking---get out of my way and let me
+write, then let me deal with it later. Keep supplies that. Its layout is hard to
+browse, but it makes up for it with great search.
 
 Notes is simple and elastic in a different way. Where Keep focuses on
 shortform sticky-style notes, Notes focuses on longform, with roughly the same
@@ -841,11 +839,11 @@ the long tail of ecosystem benefits that makes up most of that excess. Not the
 two or three things per product I’ve mentioned above, but the dozens that
 happen without me noticing that add up to make a more enjoyable experience.
 
-I equate it to working in a clean space vs. a messy space. There are
-functional benefits to working in a clean space -- it’s easier to find things,
-spilling a liquid is not as destructive, you breathe in less dust -- but the
-bulk of the benefit is in the hard-to-describe ways the space feels better and
-motivates more.
+I equate it to working in a clean space vs. a messy space. There are functional
+benefits to working in a clean space---it’s easier to find things, spilling a
+liquid is not as destructive, you breathe in less dust---but the bulk of the
+benefit is in the hard-to-describe ways the space feels better and motivates
+more.
 
 As of 2022 May, I’m overall happy with the Apple ecosystem and would not count
 it out from becoming my new preference. But, time will tell and I'll continue
