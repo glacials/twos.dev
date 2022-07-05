@@ -6,9 +6,7 @@ install-tools: download
 
 build:
 	@go build -o w twos.dev/winter/cmd
+	@./w --author "Benjamin Carlsson <ben@twos.dev>" --desc "misc thoughts" --domain twos.dev --name twos.dev --since 2021 build
 
 serve: install-tools
-	@gow run twos.dev/winter/cmd serve
-
-debug: install-tools
-	@gow run twos.dev/winter/cmd serve --debug
+	@gow run twos.dev/winter/cmd --author "Benjamin Carlsson <ben@twos.dev>" --desc "misc thoughts" --domain twos.dev --name twos.dev --since 2021 --serve build

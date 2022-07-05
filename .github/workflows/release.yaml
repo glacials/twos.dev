@@ -18,7 +18,7 @@ jobs:
         run: |
           rm -rf dist
           go build -o w twos.dev/winter/cmd
-          ./w build
+          ./w --author "Benjamin Carlsson <ben@twos.dev>" --desc "misc thoughts" --domain twos.dev --name twos.dev --since 2021 build
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
