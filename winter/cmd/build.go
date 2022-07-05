@@ -136,6 +136,7 @@ func init() {
 
 	rootCmd.AddCommand(buildCmd)
 }
+
 func listenForCtrlC(
 	stop chan struct{},
 	server *http.Server,
