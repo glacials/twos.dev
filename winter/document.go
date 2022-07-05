@@ -49,7 +49,6 @@ const (
 var (
 	replacements = map[string]string{
 		// Break dashes out of monospace homogeneity
-		"-": fmt.Sprintf(styleWrapper, "-"), // Hyphen
 		"–": fmt.Sprintf(styleWrapper, "–"), // En dash
 		"—": fmt.Sprintf(styleWrapper, "—"), // Em dash
 		"⁓": fmt.Sprintf(styleWrapper, "⁓"), // Swung dash
