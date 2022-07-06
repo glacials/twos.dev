@@ -180,6 +180,7 @@ func newRaw(src string) (*document, error) {
 		return nil, err
 	}
 	d.body = body
+	d.SrcPath = src
 	return &d, nil
 }
 

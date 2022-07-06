@@ -112,7 +112,6 @@ func (s *Substructure) DocBySrc(path string) *document {
 func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
 		if d.Kind == post {
-			fmt.Println("got post", d.Shortname)
 			docs = append(docs, d)
 		}
 	}
