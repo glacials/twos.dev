@@ -12,7 +12,7 @@ Synchrony grants speed, but asynchrony grants efficiency. Like debt each has the
 
 I've been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.[^1] In that room we built some of the fastest product I've ever had the pleasure of vomiting onto my keyboard.
 
-[^1]: Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.]
+[^1]: Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.
 
 It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.
 
