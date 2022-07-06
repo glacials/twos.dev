@@ -70,7 +70,6 @@ func (r *Reloader) Watch() error {
 				}
 			}
 			if info.IsDir() {
-				log.Printf("Started watching %s", path)
 				if err := r.watcher.Add(path); err != nil {
 					return fmt.Errorf("can't watch %s: %w", path, err)
 				}

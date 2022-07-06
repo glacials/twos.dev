@@ -2,7 +2,6 @@ package main
 
 import (
 	"fmt"
-	"log"
 	"os"
 	"path/filepath"
 	"strings"
@@ -52,8 +51,6 @@ func buildAll(
 			if ok, err := filepath.Match(pattern, src); err != nil {
 				return fmt.Errorf("can't match `%s` to %s: %w", src, pattern, err)
 			} else if ok {
-				log.Println("building", src)
-
 				if built(src, seen) {
 					return fmt.Errorf(
 						"a file like %s was already built from another directory",

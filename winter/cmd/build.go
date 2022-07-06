@@ -144,7 +144,7 @@ func listenForCtrlC(stop chan struct{}, srvr *http.Server, reloader *Reloader) {
 	c := make(chan os.Signal, 1)
 	signal.Notify(c, os.Interrupt, syscall.SIGTERM)
 	<-c
-	log.Println("Ctrl+C detected, stopping...")
+	log.Println("Stopping")
 	if err := srvr.Shutdown(context.TODO()); err != nil {
 		log.Fatal(err)
 	}
