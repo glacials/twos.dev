@@ -223,8 +223,6 @@ func (d *document) parse() error {
 }
 
 func (d *document) parseHTML(body []byte) error {
-	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
-
 	root, err := html.Parse(bytes.NewBuffer(body))
 	if err != nil {
 		return err
@@ -263,6 +261,9 @@ func (d *document) parseMarkdown(body []byte) error {
 
 func (d *document) build() ([]byte, error) {
 	if err := d.load(); err != nil {
+		return nil, err
+	}
+	if err := d.slurpHTML(); err != nil {
 		return nil, err
 	}
 	if err := d.parse(); err != nil {
