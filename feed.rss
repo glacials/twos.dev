@@ -5,32 +5,45 @@
     <description></description>
     <copyright>Copyright 0–2022 Anonymous</copyright>
     <managingEditor>unspecified (Anonymous)</managingEditor>
-    <pubDate>Wed, 06 Jul 2022 17:09:08 +0000</pubDate>
-    <lastBuildDate>Wed, 06 Jul 2022 17:09:08 +0000</lastBuildDate>
+    <pubDate>Wed, 06 Jul 2022 17:35:58 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2022 17:35:58 +0000</lastBuildDate>
     <item>
       <title>(A)synchrony</title>
       <link>https:/async.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;(A)synchrony&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc? Pair programming or code review? &lt;a href=&#34;thepopin.html&#34;&gt;Pop-in&lt;/a&gt; or Slack message?&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Synchrony grants speed, but asynchrony grants efficiency. Like debt each has their use, and each can be misused. As engineers we love to spout the good word of asynchrony so we can reclaim some time to actually build stuff, but there&#39;s nothing like a five-minute conversation to take the place of a weeklong email thread.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I&#39;ve been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; In that room we built some of the fastest product I&#39;ve ever had the pleasure of vomiting onto my keyboard.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Like tech debt, synchrony trades away future velocity for present velocity. Sometimes you need that. If you optimize too much for the future, you&#39;ll die before you get there. It&#39;s up to each project, team, org to find the right balance. I recommend asynchrony by default, with an eye trained on the efforts that really need to succeed in the present.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Employ synchrony when you need speed, but don’t call a 10-person meeting for anything that doesn&#39;t.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:1&#34;&gt;Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;(A)synchrony&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc?&#xA;Pair programming or code review? &lt;a href=&#34;thepopin.html&#34;&gt;Pop-in&lt;/a&gt; or Slack message?&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Synchrony grants speed, but asynchrony grants efficiency. Like debt each has&#xA;their use, and each can be misused. As engineers we love to spout the good word&#xA;of asynchrony so we can reclaim some time to actually build stuff, but there&#39;s&#xA;nothing like a five-minute conversation to take the place of a weeklong email&#xA;thread.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I&#39;ve been in a secure war room exactly once in my career, for a week minus sleep&#xA;handling a business-threatening emergency.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:Before-tech-OSHA&#34;&gt;&lt;a href=&#34;#fn:Before-tech-OSHA&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; In that room we built some of the fastest product&#xA;I&#39;ve ever had the pleasure of vomiting onto my keyboard.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It solved the problem well. And we spent six months cleaning it up. That both&#xA;those statements can be true is oft overlooked by engineers, junior and senior.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Like tech debt, synchrony trades away future velocity for present velocity.&#xA;Sometimes you need that. If you optimize too much for the future, you&#39;ll die&#xA;before you get there. It&#39;s up to each project, team, org to find the right&#xA;balance. I recommend asynchrony by default, with an eye trained on the efforts&#xA;that really need to succeed in the present.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Employ synchrony when you need speed, but don’t call a 10-person meeting for&#xA;anything that doesn&#39;t.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:Before-tech-OSHA&#34;&gt;Before tech OSHA jumps on me: I was young, we were treated like royalty, and looking back I have nothing but fond memories akin to a LAN party.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
       <content:encoded><![CDATA[<html><head></head><body><h1>(A)synchrony</h1>
 
-<p>Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc? Pair programming or code review? <a href="thepopin.html">Pop-in</a> or Slack message?</p>
+<p>Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc?
+Pair programming or code review? <a href="thepopin.html">Pop-in</a> or Slack message?</p>
 
-<p>Synchrony grants speed, but asynchrony grants efficiency. Like debt each has their use, and each can be misused. As engineers we love to spout the good word of asynchrony so we can reclaim some time to actually build stuff, but there's nothing like a five-minute conversation to take the place of a weeklong email thread.</p>
+<p>Synchrony grants speed, but asynchrony grants efficiency. Like debt each has
+their use, and each can be misused. As engineers we love to spout the good word
+of asynchrony so we can reclaim some time to actually build stuff, but there's
+nothing like a five-minute conversation to take the place of a weeklong email
+thread.</p>
 
-<p>I've been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.<sup class="footnote-ref" id="fnref:1"><a href="#fn:1">1</a></sup> In that room we built some of the fastest product I've ever had the pleasure of vomiting onto my keyboard.</p>
+<p>I've been in a secure war room exactly once in my career, for a week minus sleep
+handling a business-threatening emergency.<sup class="footnote-ref" id="fnref:Before-tech-OSHA"><a href="#fn:Before-tech-OSHA">1</a></sup> In that room we built some of the fastest product
+I've ever had the pleasure of vomiting onto my keyboard.</p>
 
-<p>It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.</p>
+<p>It solved the problem well. And we spent six months cleaning it up. That both
+those statements can be true is oft overlooked by engineers, junior and senior.</p>
 
-<p>Like tech debt, synchrony trades away future velocity for present velocity. Sometimes you need that. If you optimize too much for the future, you'll die before you get there. It's up to each project, team, org to find the right balance. I recommend asynchrony by default, with an eye trained on the efforts that really need to succeed in the present.</p>
+<p>Like tech debt, synchrony trades away future velocity for present velocity.
+Sometimes you need that. If you optimize too much for the future, you'll die
+before you get there. It's up to each project, team, org to find the right
+balance. I recommend asynchrony by default, with an eye trained on the efforts
+that really need to succeed in the present.</p>
 
-<p>Employ synchrony when you need speed, but don’t call a 10-person meeting for anything that doesn't.</p>
+<p>Employ synchrony when you need speed, but don’t call a 10-person meeting for
+anything that doesn't.</p>
 
 <div class="footnotes">
 
 <hr/>
 
 <ol>
-<li id="fn:1">Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.</li>
+<li id="fn:Before-tech-OSHA">Before tech OSHA jumps on me: I was young, we were treated like royalty, and looking back I have nothing but fond memories akin to a LAN party.</li>
 </ol>
 
 </div>
