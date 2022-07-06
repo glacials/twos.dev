@@ -75,16 +75,16 @@ var (
 type document struct {
 	SrcPath string
 
-	Kind kind `yaml:"type"`
-	TOC  bool `yaml:"toc"`
+	Kind      kind   `yaml:"type"`
+	Parent    string `yaml:"parent"`
+	Shortname string `yaml:"filename"`
+	Title     string `yaml:"title"`
+	TOC       bool   `yaml:"toc"`
 
 	CreatedAt time.Time `yaml:"date"`
 	UpdatedAt time.Time `yaml:"updated"`
 
-	FrontmatterParent    string `yaml:"parent"`
-	FrontmatterShortname string `yaml:"filename"`
-	FrontmatterTitle     string `yaml:"title"`
-
+	body     []byte
 	encoding encoding
 	root     *html.Node
 	incoming []*document
@@ -135,32 +135,97 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
+// NewHTMLDocument creates a new document from the HTML file at the given path.
+// High-level information about the document is parsed during this call, such as
+// frontmatter and structure. Heavier details like template execution are not
+// touched until Render is called.
+func NewHTMLDocument(src string) (*document, error) {
+	d, err := newRaw(src)
+	if err != nil {
+		return nil, err
+	}
+	d.encoding = encodingHTML
+	if err := d.parseHTML(d.body); err != nil {
+		return nil, err
+	}
+	return d, d.slurpHTML()
+}
+
+// NewMarkdownDocument creates a new document from the Markdown file at the
+// given path. High-level information about the document is parsed during this
+// call, such as frontmatter and structure. Heavier details like template
+// execution are not touched until Render is called.
+func NewMarkdownDocument(src string) (*document, error) {
+	d, err := newRaw(src)
+	if err != nil {
+		return nil, err
+	}
+	d.encoding = encodingMarkdown
+	if err := d.parseMarkdown(d.body); err != nil {
+		return nil, err
+	}
+	return d, d.slurpHTML()
+}
+
+func newRaw(src string) (*document, error) {
+	f, err := os.Open(src)
+	if err != nil {
+		return nil, err
+	}
+	defer f.Close()
+
+	var d document
+	body, err := frontmatter.Parse(f, &d)
+	if err != nil {
+		return nil, err
+	}
+	d.body = body
+	return &d, nil
+}
+
+func (d *document) slurpHTML() error {
+	if d.Title == "" {
+		if h1 := firstOfType(d.root, atom.H1); h1 != nil {
+			for child := h1.FirstChild; child != nil; child = child.NextSibling {
+				if child.Type == html.TextNode {
+					d.Title = child.Data
+				}
+			}
+			if d.Title == "" {
+				return fmt.Errorf("no title found in %s", d.SrcPath)
+			}
+		}
+	}
+
+	if d.Shortname == "" {
+		d.Shortname = filepath.Base(d.SrcPath)
+	}
+	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
+
+	if d.Parent == "" && d.Kind != gallery {
+		if p, _, ok := strings.Cut(d.Shortname, "_"); ok {
+			d.Parent = p
+		}
+	}
+
+	return nil
+}
+
 func (d *document) parse() error {
 	switch d.encoding {
 	case encodingHTML:
-		return d.parseHTML()
+		return d.parseHTML(d.body)
 	case encodingMarkdown:
-		return d.parseMarkdown()
+		return d.parseMarkdown(d.body)
 	default:
 		return fmt.Errorf("unknown encoding %d", d.encoding)
 	}
 }
 
-func (d *document) parseHTML() error {
-	f, err := os.Open(d.SrcPath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
+func (d *document) parseHTML(body []byte) error {
+	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
 
-	htm, err := frontmatter.Parse(f, &d)
-	if err != nil {
-		return err
-	}
-
-	d.FrontmatterShortname, _, _ = strings.Cut(d.FrontmatterShortname, ".")
-
-	root, err := html.Parse(bytes.NewBuffer(htm))
+	root, err := html.Parse(bytes.NewBuffer(body))
 	if err != nil {
 		return err
 	}
@@ -169,22 +234,11 @@ func (d *document) parseHTML() error {
 	return nil
 }
 
-func (d *document) parseMarkdown() error {
-	f, err := os.Open(d.SrcPath)
-	if err != nil {
-		return err
-	}
-	defer f.Close()
-
-	md, err := frontmatter.Parse(f, &d)
-	if err != nil {
-		return err
-	}
-
+func (d *document) parseMarkdown(body []byte) error {
 	root, err := html.Parse(
 		bytes.NewBuffer(
 			markdown.ToHTML(
-				md,
+				body,
 				parser.NewWithExtensions(
 					parser.Attributes|
 						parser.Autolink|
@@ -253,51 +307,6 @@ func (d *document) linksout() (hrfs []string, err error) {
 	}
 	f(d.root)
 	return
-}
-
-func (d *document) Title() (string, error) {
-	if d.FrontmatterTitle != "" {
-		return d.FrontmatterTitle, nil
-	}
-
-	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
-		for child := h1.FirstChild; child != nil; child = child.NextSibling {
-			if child.Type == html.TextNode {
-				d.FrontmatterTitle = child.Data
-				return child.Data, nil
-			}
-		}
-	}
-
-	return "", fmt.Errorf("h1 in %s nonexistent or nontextual", d.Shortname())
-}
-
-func (d *document) Shortname() string {
-	if d.FrontmatterShortname != "" {
-		s, _, _ := strings.Cut(d.FrontmatterShortname, ".")
-		d.FrontmatterShortname = s
-		return d.FrontmatterShortname
-	}
-
-	n := filepath.Base(d.SrcPath)
-	n, _, _ = strings.Cut(n, ".")
-	return n
-}
-
-func (d *document) Parent() string {
-	if d.FrontmatterParent != "" {
-		return d.FrontmatterParent
-	}
-	if d.Kind == gallery {
-		return ""
-	}
-
-	p, _, ok := strings.Cut(d.Shortname(), "_")
-	if !ok {
-		return ""
-	}
-
-	return p
 }
 
 // fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
@@ -446,14 +455,7 @@ func (d documents) Len() int {
 func (d documents) Less(i, j int) bool {
 	// Index must be rendered after others in order for all writing to show on
 	// index. TODO: Fix, maybe by having posts() lazily evaluate the rest.
-	if d[i].Shortname() == "index" {
-		return false
-	}
-	if d[j].Shortname() == "index" {
-		return true
-	}
-
-	return d[i].CreatedAt.After(d[j].CreatedAt)
+	return d[i].CreatedAt.Before(d[j].CreatedAt)
 }
 
 func (d documents) Swap(i, j int) {

@@ -29,10 +29,10 @@ type Substructure struct {
 	docs documents
 }
 
-// NewSubstructure returns the foundational step of the static website build
-// process. It crawls the website root looking for files that need to be wrapped
-// up in the build process, such as Markdown files, templates, and static
-// assets, and adds them to the substructure.
+// NewSubstructure returns a substructure with the given configuration. Upon
+// initialization, a substructure is the result of a discovery phase of content
+// on the filesystem. Further calls are needed to build the full graph of
+// content and render it to HTML.
 func NewSubstructure(cfg Config) (*Substructure, error) {
 	s := Substructure{cfg: cfg}
 	md, err := filepathx.Glob("src/**/*.md")
@@ -44,7 +44,11 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 		if _, ok := ignoreFiles[filepath.Base(src)]; ok {
 			continue
 		}
-		s.docs = append(s.docs, &document{encoding: encodingMarkdown, SrcPath: src})
+		doc, err := NewMarkdownDocument(src)
+		if err != nil {
+			return nil, err
+		}
+		s.docs = append(s.docs, doc)
 
 	}
 
@@ -75,7 +79,11 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 		if _, ok := ignoreFiles[filepath.Base(src)]; ok {
 			continue
 		}
-		s.docs = append(s.docs, &document{encoding: encodingHTML, SrcPath: src})
+		doc, err := NewHTMLDocument(src)
+		if err != nil {
+			return nil, err
+		}
+		s.docs = append(s.docs, doc)
 	}
 
 	sort.Sort(s.docs)
@@ -85,7 +93,7 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 
 func (s *Substructure) DocByShortname(shortname string) *document {
 	for _, d := range s.docs {
-		if d.Shortname() == shortname {
+		if d.Shortname == shortname {
 			return d
 		}
 	}
@@ -101,10 +109,11 @@ func (s *Substructure) DocBySrc(path string) *document {
 	return nil
 }
 
-func (s *Substructure) posts() (u documents) {
+func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
 		if d.Kind == post {
-			u = append(u, d)
+			fmt.Println("got post", d.Shortname)
+			docs = append(docs, d)
 		}
 	}
 	return
@@ -137,18 +146,14 @@ func (s *Substructure) writefeed() error {
 		if err != nil {
 			return err
 		}
-		title, err := post.Title()
-		if err != nil {
-			return err
-		}
 		feed.Items = append(feed.Items, &feeds.Item{
-			Id:          post.Shortname(),
-			Title:       title,
+			Id:          post.Shortname,
+			Title:       post.Title,
 			Author:      feed.Author,
 			Content:     string(body),
 			Description: string(body),
 			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, post.Shortname()),
+				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, post.Shortname),
 			},
 			Created: post.CreatedAt,
 			Updated: post.UpdatedAt,
@@ -214,12 +219,12 @@ func (s *Substructure) Execute(d *document, dist string) error {
 		return err
 	}
 
-	imgsFunc, err := imgs(d.Shortname())
+	imgsFunc, err := imgs(d.Shortname)
 	if err != nil {
 		return err
 	}
 
-	videoFunc, err := videos(d.Shortname())
+	videoFunc, err := videos(d.Shortname)
 	if err != nil {
 		return err
 	}
@@ -247,12 +252,12 @@ func (s *Substructure) Execute(d *document, dist string) error {
 	err = t.Lookup("text_document").
 		Execute(&buf, templateVars{d, s, time.Now()})
 	if err != nil {
-		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
+		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname, err)
 	}
 
-	path := filepath.Join(dist, d.Shortname()+".html")
+	path := filepath.Join(dist, d.Shortname+".html")
 	if os.WriteFile(path, buf.Bytes(), 0644); err != nil {
-		return fmt.Errorf("can't write document `%s`: %w", d.Shortname(), err)
+		return fmt.Errorf("can't write document `%s`: %w", d.Shortname, err)
 	}
 
 	return nil
