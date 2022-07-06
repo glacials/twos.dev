@@ -5,8 +5,501 @@
     <description></description>
     <copyright>Copyright 0–2022 Anonymous</copyright>
     <managingEditor>unspecified (Anonymous)</managingEditor>
-    <pubDate>Wed, 06 Jul 2022 01:29:37 +0000</pubDate>
-    <lastBuildDate>Wed, 06 Jul 2022 01:29:37 +0000</lastBuildDate>
+    <pubDate>Wed, 06 Jul 2022 06:30:03 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2022 06:30:03 +0000</lastBuildDate>
+    <item>
+      <title>The Remote Pop-In</title>
+      <link>https:/thepopin.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;The Remote Pop-In&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  This page describes a method of dealing with one of the missing features of&#xA;  fully remote teams: the pop-in.&#xA;&#xA;  &lt;!-- TODO: make another about social time re: hallway conversations --&gt;&#xA;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;The Pop-In&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  The pop-in, back before open floorplans, is when you physically walk into&#xA;  someone&#39;s office to ask them a question or spitball an idea. In an open&#xA;  floorplan you can instead swivel your chair or walk to their desk.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The pop-in is valuable because it&#39;s as informal as email, but as&#xA;  high-bandwidth and low-latency as meetings. It&#39;s interruptive to be popped in&#xA;  on, but that interruption power is self-limiting: the effort of physically&#xA;  going somewhere is high, and the tools available to the target like doors,&#xA;  signs, and social cues are numerous and don&#39;t require much thought to&#xA;  implement.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Slack DMs come close to replacing the pop-in, but they reduce the effort too&#xA;  much. This leads to more interruptions (a little lower in intensity, but a lot&#xA;  higher in number) and even to the replacement of trackers, emails, and wikis&#xA;  with DMs.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  There&#39;s a lot wrong with the pop-in, but like any tool it has its uses. Many&#xA;  great products&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;companies, even&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;have been built on the shoulders of&#xA;  the pop-in.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Remote Pop-In&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  There&#39;s really no remote equivalent to the pop-in. There are products that&#xA;  help you &#34;hang out&#34; like Facebook Portal, but nothing that implements the&#xA;  pop-in.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  At &lt;a href=&#34;https://yourbase.io&#34;&gt;YourBase&lt;/a&gt; we decided we needed one. Rather&#xA;  than build another tool, we experimented with Discord. I&#39;m happy to say we&#xA;  found something that works, and even solves the worst problem of the&#xA;  open-office pop-in: the inability to shut your damned door.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;The Setup&lt;/h3&gt;&#xA;{{ img&#xA;  &#34;The company Discord server on a workday.&#34;&#xA;  &#34;0&#34;&#xA;  &#34;A screenshot of a Discord server with several voice channels, some empty, some having one person in them&#34;&#xA;}}&#xA;&lt;p&gt;&#xA;  In our company Discord server, we give everyone one voice channel of their&#xA;  own. This is your &#34;office&#34;. When you are online and able to be disturbed, you&#xA;  join your office, alone. You stay in there as long as you are &#34;in&#34;.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Because of how Discord works, everyone can see who is in what office at all&#xA;  times. But you can only hear conversations for the room you&#39;re in, and you can&#xA;  only be in one room at a time. Joining a room plays an obvious audio chime and&#xA;  is not something you can do sneakily.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  When someone wants to pop in, they join your voice channel. The chime plays,&#xA;  they say hello, you unmute and turn on video if you like, and have your&#xA;  pop-in. And that&#39;s really it.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  If you&#39;re going to the restroom and will be AFK, you can join the restroom&#xA;  channel. You&#39;re in, but away. No one is actually wearing a headset on the&#xA;  toilet, it&#39;s just a fun way to feel like a real office.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;We&#39;ve even fallen into some typical office behaviors:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&#xA;    We&#39;ve started having meetings in people&#39;s offices, just because it&#39;s easier.&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    We have a &#34;cafeteria&#34; room where you can eat your lunch if you&#39;ve got&#xA;    nothing going on in real life. We also hold lunch-and-learns here.&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    We have a &#34;rooftop&#34; and other common spaces where some people chill, which&#xA;    signals that they&#39;re open for a chat.&#xA;  &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;  The oddest one is that when it&#39;s slow around the office, you can tell. You can&#xA;  almost hear how quiet it is when you&#39;re the first one in or the last one out.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The pop-in is valuable because it&#39;s informal, high bandwidth, and low latency.&#xA;  Enabling it using Discord has worked very well for us over the last six&#xA;  months, and we didn&#39;t even have to build anything.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Thanks to &lt;a href=&#34;https://discordapp.com&#34;&gt;Discord&lt;/a&gt; for making such a&#xA;  flexible platform. Thanks to &lt;a href=&#34;https://yourbase.io&#34;&gt;YourBase&lt;/a&gt; for&#xA;  being so open to crazy ideas. (Check us out if your CI is slow.)&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;a href=&#34;https://www.youtube.com/watch?v=KzOv2jrC1I8&#34;&gt;&#34;The Pop-In&#34;&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>The Remote Pop-In</h1>
+
+<p>
+  This page describes a method of dealing with one of the missing features of
+  fully remote teams: the pop-in.
+
+  <!-- TODO: make another about social time re: hallway conversations -->
+</p>
+
+<h2>The Pop-In</h2>
+<p>
+  The pop-in, back before open floorplans, is when you physically walk into
+  someone's office to ask them a question or spitball an idea. In an open
+  floorplan you can instead swivel your chair or walk to their desk.
+</p>
+<p>
+  The pop-in is valuable because it's as informal as email, but as
+  high-bandwidth and low-latency as meetings. It's interruptive to be popped in
+  on, but that interruption power is self-limiting: the effort of physically
+  going somewhere is high, and the tools available to the target like doors,
+  signs, and social cues are numerous and don't require much thought to
+  implement.
+</p>
+<p>
+  Slack DMs come close to replacing the pop-in, but they reduce the effort too
+  much. This leads to more interruptions (a little lower in intensity, but a lot
+  higher in number) and even to the replacement of trackers, emails, and wikis
+  with DMs.
+</p>
+<p>
+  There's a lot wrong with the pop-in, but like any tool it has its uses. Many
+  great products<span style="font-family: sans-serif">—</span>companies, even<span style="font-family: sans-serif">—</span>have been built on the shoulders of
+  the pop-in.
+</p>
+<h2>The Remote Pop-In</h2>
+<p>
+  There's really no remote equivalent to the pop-in. There are products that
+  help you "hang out" like Facebook Portal, but nothing that implements the
+  pop-in.
+</p>
+<p>
+  At <a href="https://yourbase.io">YourBase</a> we decided we needed one. Rather
+  than build another tool, we experimented with Discord. I'm happy to say we
+  found something that works, and even solves the worst problem of the
+  open-office pop-in: the inability to shut your damned door.
+</p>
+<h3>The Setup</h3>
+{{ img
+  "The company Discord server on a workday."
+  "0"
+  "A screenshot of a Discord server with several voice channels, some empty, some having one person in them"
+}}
+<p>
+  In our company Discord server, we give everyone one voice channel of their
+  own. This is your "office". When you are online and able to be disturbed, you
+  join your office, alone. You stay in there as long as you are "in".
+</p>
+<p>
+  Because of how Discord works, everyone can see who is in what office at all
+  times. But you can only hear conversations for the room you're in, and you can
+  only be in one room at a time. Joining a room plays an obvious audio chime and
+  is not something you can do sneakily.
+</p>
+<p>
+  When someone wants to pop in, they join your voice channel. The chime plays,
+  they say hello, you unmute and turn on video if you like, and have your
+  pop-in. And that's really it.
+</p>
+<p>
+  If you're going to the restroom and will be AFK, you can join the restroom
+  channel. You're in, but away. No one is actually wearing a headset on the
+  toilet, it's just a fun way to feel like a real office.
+</p>
+<p>We've even fallen into some typical office behaviors:</p>
+
+<ul>
+  <li>
+    We've started having meetings in people's offices, just because it's easier.
+  </li>
+  <li>
+    We have a "cafeteria" room where you can eat your lunch if you've got
+    nothing going on in real life. We also hold lunch-and-learns here.
+  </li>
+  <li>
+    We have a "rooftop" and other common spaces where some people chill, which
+    signals that they're open for a chat.
+  </li>
+</ul>
+<p>
+  The oddest one is that when it's slow around the office, you can tell. You can
+  almost hear how quiet it is when you're the first one in or the last one out.
+</p>
+<p>
+  The pop-in is valuable because it's informal, high bandwidth, and low latency.
+  Enabling it using Discord has worked very well for us over the last six
+  months, and we didn't even have to build anything.
+</p>
+<p>
+  Thanks to <a href="https://discordapp.com">Discord</a> for making such a
+  flexible platform. Thanks to <a href="https://yourbase.io">YourBase</a> for
+  being so open to crazy ideas. (Check us out if your CI is slow.)
+</p>
+<p>
+  <a href="https://www.youtube.com/watch?v=KzOv2jrC1I8">"The Pop-In"</a>
+</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>thepopin</guid>
+      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Tattoos as Moral Contracts</title>
+      <link>https:/tattoo.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Tattoos as Moral Contracts&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  This year, I got a tattoo. My morals had been at odds with my behaviors in a&#xA;  place very important to me&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;the climate crisis. It’s easy to think about how&#xA;  horrible the climate crisis is, and yes definitely someone should do something&#xA;  about it, yes probably those big corporations that sounds nice, now let’s&#xA;  forget about it for another year.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This isn’t a great way to get things done and I had the cognizance to&#xA;  recognize that, but it kept happening to me. So I tattooed a reminder on my&#xA;  forearm.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;/p&gt;&lt;figure&gt;&#xA;    &lt;img src=&#34;img/tattoo.webp&#34; height=&#34;512&#34; width=&#34;512&#34;/&gt;&lt;br/&gt;&#xA;    &lt;figcaption&gt;&#xA;      It’s a viking-inspired climate warning. [1] (artist:&#xA;      &lt;a href=&#34;https://www.instagram.com/trejen_jamal/&#34;&gt;Trejen&lt;/a&gt;)&#xA;    &lt;/figcaption&gt;&#xA;  &lt;/figure&gt;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;&lt;p&gt;After six months with this puppy, it’s done more than I thought it could.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  First, it’s a constant reminder. It’s not a checklist item I can mark off or&#xA;  that can fall to the bottom of my list. It can’t be forgotten about or left&#xA;  behind in an app change. It will be there as long as I will be, which is&#xA;  exactly how long I want to be conscious of the climate crisis.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Second, it’s a social forcing function to act within my morals. When people&#xA;  ask me about my tattoo, I know I need to “have my story straight”. I need to&#xA;  know everything about myself that’s not better than climate par and have a&#xA;  roadmap for fixing it ready. No one expects me to be Captain Planet, but if I&#xA;  have a methane stove and don’t at least have a plan for going induction, well,&#xA;  that’s an embarrassing moment for someone with a climate crisis tattoo.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  In just six months these two pressures together have motivated me into&#xA;  research, action, and activism on how to make my kids and grandkids not spite&#xA;  me. I’m better informed about policy, I&#39;m involved in local Seattle politics&#xA;  (actively pushing for more walk-friendly neighborhoods), and our house is&#xA;  running on 100% green energy. [2]&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  If you have a lifelong motivation, a few hundred dollars, and a decent&#xA;  tolerance for pain, I recommend getting an aspirational tattoo.&#xA;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&#xA;  [1]: Can you identify the symbols?&#xA;  &lt;a href=&#34;tattoo_symbols.html&#34;&gt;Click for answer.&lt;/a&gt;&lt;br/&gt;&#xA;  [2]: Puget Sound Energy&#39;s&#xA;  &lt;a href=&#34;https://www.pse.com/green-options/Renewable-Energy-Programs/greensolarcalculator&#34;&gt;Green Power&lt;/a&gt;&#xA;  program adds just a few bucks a month. Look up equivalents in your area!&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    Thanks to &lt;a href=&#34;https://jm.dev&#34;&gt;Jordan McQueen&lt;/a&gt; for early feedback on&#xA;    drafts of this.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Tattoos as Moral Contracts</h1>
+
+<p>
+  This year, I got a tattoo. My morals had been at odds with my behaviors in a
+  place very important to me<span style="font-family: sans-serif">—</span>the climate crisis. It’s easy to think about how
+  horrible the climate crisis is, and yes definitely someone should do something
+  about it, yes probably those big corporations that sounds nice, now let’s
+  forget about it for another year.
+</p>
+<p>
+  This isn’t a great way to get things done and I had the cognizance to
+  recognize that, but it kept happening to me. So I tattooed a reminder on my
+  forearm.
+</p>
+<p>
+  </p><figure>
+    <img src="img/tattoo.webp" height="512" width="512"/><br/>
+    <figcaption>
+      It’s a viking-inspired climate warning. [1] (artist:
+      <a href="https://www.instagram.com/trejen_jamal/">Trejen</a>)
+    </figcaption>
+  </figure>
+<p></p>
+<p>After six months with this puppy, it’s done more than I thought it could.</p>
+<p>
+  First, it’s a constant reminder. It’s not a checklist item I can mark off or
+  that can fall to the bottom of my list. It can’t be forgotten about or left
+  behind in an app change. It will be there as long as I will be, which is
+  exactly how long I want to be conscious of the climate crisis.
+</p>
+<p>
+  Second, it’s a social forcing function to act within my morals. When people
+  ask me about my tattoo, I know I need to “have my story straight”. I need to
+  know everything about myself that’s not better than climate par and have a
+  roadmap for fixing it ready. No one expects me to be Captain Planet, but if I
+  have a methane stove and don’t at least have a plan for going induction, well,
+  that’s an embarrassing moment for someone with a climate crisis tattoo.
+</p>
+<p>
+  In just six months these two pressures together have motivated me into
+  research, action, and activism on how to make my kids and grandkids not spite
+  me. I’m better informed about policy, I'm involved in local Seattle politics
+  (actively pushing for more walk-friendly neighborhoods), and our house is
+  running on 100% green energy. [2]
+</p>
+<p>
+  If you have a lifelong motivation, a few hundred dollars, and a decent
+  tolerance for pain, I recommend getting an aspirational tattoo.
+</p>
+<hr/>
+<p>
+  [1]: Can you identify the symbols?
+  <a href="tattoo_symbols.html">Click for answer.</a><br/>
+  [2]: Puget Sound Energy's
+  <a href="https://www.pse.com/green-options/Renewable-Energy-Programs/greensolarcalculator">Green Power</a>
+  program adds just a few bucks a month. Look up equivalents in your area!
+</p>
+<p>
+  <i>
+    Thanks to <a href="https://jm.dev">Jordan McQueen</a> for early feedback on
+    drafts of this.
+  </i>
+</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>tattoo</guid>
+      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Anonymously Autistic</title>
+      <link>https:/.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;style&gt;&#xA;  .spectrum {&#xA;    height: 10em;&#xA;    width: 10em;&#xA;    background: conic-gradient(&#xA;      hsl(0, 90%, 65%),&#xA;      hsl(36, 90%, 65%),&#xA;      hsl(72, 90%, 65%),&#xA;      hsl(108, 90%, 65%),&#xA;      hsl(144, 90%, 65%),&#xA;      hsl(180, 90%, 65%),&#xA;      hsl(216, 90%, 65%),&#xA;      hsl(252, 90%, 65%),&#xA;      hsl(288, 90%, 65%),&#xA;      hsl(324, 90%, 65%),&#xA;      hsl(360, 90%, 65%)&#xA;    );&#xA;    border: 1px solid;&#xA;    border-radius: 90%;&#xA;  }&#xA;  @media (prefers-color-scheme:light) {&#xA;    .spectrum {&#xA;      border-color: black;&#xA;    }&#xA;  @media (prefers-color-scheme:dark) {&#xA;    .spectrum {&#xA;      border-color: white;&#xA;    }&#xA;  }&#xA;&lt;/style&gt;&#xA;&#xA;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Anonymously Autistic&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    This is a more complete version of a&#xA;    &lt;a href=&#34;https://news.ycombinator.com/item?id=29686395&#34;&gt;comment&lt;/a&gt;&#xA;    I left on Hacker News. I recommend reading the subject article by C.L.&#xA;    Lynch,&#xA;    &lt;a href=&#34;https://neuroclastic.com/its-a-spectrum-doesnt-mean-what-you-think/&#34;&gt;&#xA;      &lt;i&gt;&#34;Autism is a Spectrum&#34; Doesn&#39;t Mean What You Think&lt;/i&gt;&lt;/a&gt;.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&#xA;  I have autism. If you know me, that might surprise you. I appear neurotypical.&#xA;  I have a career, a marriage, and a social life. I like playing video games and&#xA;  fighting climate change. I don&#39;t need support from others on a daily basis.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  And yet my psychologist, with 30 years of experience and a Ph.D. in clinical&#xA;  psychology, wrote it right there on my medical chart:&#xA;&lt;/p&gt;&#xA;&lt;blockquote&gt;Autism spectrum disorder&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;  This is because behind the scenes, there&#39;s a &#34;me&#34; hardly anyone sees. It&#39;s the&#xA;  me who can be paralyzed by a&#xA;  &lt;a href=&#34;https://news.ycombinator.com/item?id=29690399&#34;&gt;text&lt;/a&gt;&#xA;  &lt;a href=&#34;https://twitter.com/glcls/status/1273051092960440320&#34;&gt;message&lt;/a&gt;,&#xA;  whose day is ruined if teeth-brushing and showering happen out of order, and&#xA;  who spends ~an hour a day performing internal conversation planning and&#xA;  retrospectives. It&#39;s the me who was mute for nine years.&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&#xA;  It&#39;s also the me who was taught that all these qualities are just character&#xA;  flaws that can be willed away.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  You&#39;d never notice that me, because I hide him well. Of the folks with autism,&#xA;  I&#39;m not an outlier in doing that. In fact, 2% of all human beings have autism&#xA;  [1]. Statistically, you&#39;ve certainly met several of them without realizing it.&#xA;  Why is that, and what is it like to live that life?&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Infamous Spectrum&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  We&#39;ve all heard &#34;autism is a spectrum&#34;. But that word, &#34;spectrum&#34;, in that&#xA;  context, has had its meaning lost to time. Often people think of folks with&#xA;  autism as &#34;high functioning&#34; or &#34;low functioning&#34;, as if these are positions&#xA;  on the spectrum. But a spectrum is not a scale. This is how to actually think&#xA;  about the autism spectrum:&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;/p&gt;&lt;center&gt;&lt;div class=&#34;spectrum&#34;&gt; &lt;/div&gt;&lt;/center&gt;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  There is no &#34;more&#34; or &#34;less&#34;; no &#34;high&#34; or &#34;low&#34;. There is only &#34;different&#34;.&#xA;  And yet people often still feel they&#xA;  &lt;a href=&#34;https://en.wikipedia.org/wiki/I_know_it_when_I_see_it&#34;&gt;know it when they see it&lt;/a&gt;; that people with autism either act like Rain Man or don&#39;t, and that those&#xA;  are the two (if even that many) types of autism.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  What, really, is this subset of autism people think they can identify at a&#xA;  glance?&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Canary Symptom&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  Autism symptoms are a deck of cards, and not all folks are dealt the same&#xA;  hand. Of the many, the DSM-5 calls out a few examples:&#xA;&lt;/p&gt;&#xA;&lt;blockquote cite=&#34;https://www.cdc.gov/ncbddd/autism/hcp-dsm.html&#34;&gt;&#xA;  &lt;p&gt;&#xA;    Deficits in developing, maintaining, and understand [sic] relationships,&#xA;    ranging, for example, from difficulties adjusting behavior to suit various&#xA;    social contexts; to difficulties in sharing imaginative play or in making&#xA;    friends; to absence of interest in peers.&#xA;  &lt;/p&gt;&#xA;  &lt;a href=&#34;https://www.cdc.gov/ncbddd/autism/hcp-dsm.html&#34;&gt;DSM-5&lt;/a&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;  Pay special attention to that first example, which I&#39;ll paraphrase as&#xA;  &#34;inability to change behavior based on social feedback&#34;. We&#39;ll come back to&#xA;  that later.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;A Personal Example&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  One symptom I got dealt in my autism hand is a hearing hypersensitivity. As&#xA;  cool as it sounds, this is no superpower. My body&#39;s defense systems will&#xA;  sometimes malfunction and miscalibrate incoming volume.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Imagine you&#39;re in a coffee shop reading a book when someone walks up to you,&#xA;  takes out an air horn, points it in your ear and briefly squeezes the trigger.&#xA;  What would your brain and body do instinctively? Would it startle, flinch,&#xA;  recoil? What if the person didn&#39;t go away, and kept squeezing the trigger&#xA;  randomly every few seconds? What if you looked around and slowly realized in&#xA;  horror that everyone else had their own air horn and they have all started&#xA;  doing the same?&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Your instinctive responses escalate to stress, panic, confusion. You keep&#xA;  trying to read your book but the air horns keep sounding and your body keeps&#xA;  flinching. You can&#39;t concentrate; your eyes are moving over the words in your&#xA;  book but you&#39;re not understanding them. You start getting annoyed at all the&#xA;  people wielding air horns&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&lt;i&gt;could they just not?! I&#39;m trying to read!&lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This is a hearing hypersensitivity. At random times, my brain will think every&#xA;  little sound is as loud as an air horn and it will execute all these&#xA;  physiological responses involuntarily. Even when I know it&#39;s a&#xA;  malfunction&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;which took me 30 years to learn&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;it&#39;s still just as&#xA;  hard as ever to get through a paragraph in that book, to not flinch, to not&#xA;  become stressed, to not panic. Even when I can rationally tell myself in the&#xA;  moment &lt;i&gt;It&#39;s all in your head&lt;/i&gt;, it doesn&#39;t stop the involuntary response.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  You may understand then why I and many other people with autism would, as&#xA;  children, collapse to the floor in public, cover their ears, and scream.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;Killing the Canary&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  In many ways, I&#39;m one of the lucky ones. I didn&#39;t get dealt that &#34;inability to&#xA;  change behavior based on social feedback&#34; symptom, above. So when as a child I&#xA;  collapsed to the floor and screamed, and other people looked at me like I was&#xA;  losing it (reminder: I was) I can log that detail away, and work a little more&#xA;  towards avoiding it next time. I&#39;ve iterated on this quite a bit over 30&#xA;  years:&#xA;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;  &lt;li&gt;On the floor screaming&lt;/li&gt;&#xA;  &lt;li&gt;Ears covered, eyes shut, silent&lt;/li&gt;&#xA;  &lt;li&gt;On the floor cross-legged, teeth gritted, trying to dissociate&lt;/li&gt;&#xA;  &lt;li&gt;Fingers-in-ears, screaming interally&lt;/li&gt;&#xA;  &lt;li&gt;Inventing excuses to stay home&lt;/li&gt;&#xA;  &lt;li&gt;Going home&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&#xA;  My actions are more socially acceptable now, but the sensation is the same.&#xA;  During a hearing hypersensitivity, inside I&#39;m still that kid rolling on the&#xA;  floor screaming. The only difference is that I have learned to fake it away.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;When the Canary Lives&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  People dealt the &#34;inability to change behavior based on social feedback&#34; card&#xA;  get stuck on the rolling-on-the-floor-screaming phase. This, perhaps, is what&#xA;  the world thinks autism &#34;looks like&#34;; the canary symptom that reveals the&#xA;  rest.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The people with this symptom, who commit the cardinal sin of simply not faking&#xA;  it, often need more support because our world is not built to accomodate them&#xA;  or understand them well. But they are not any more &#34;low-functioning&#34; than I am&#xA;  &#34;high-functioning&#34;. Those words are descriptions of how &lt;em&gt;observers&lt;/em&gt;&#xA;  experience autism, not how autism-havers do. That&#39;s why those terms have&#xA;  fallen out of use since the DSM-5.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;Masking&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  This ability to fake not having autism is called &lt;b&gt;masking&lt;/b&gt;. Those of us&#xA;  who can mask&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;those without the canary symptom&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;mask in virtually&#xA;  every social situation.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This is not a temporary &#34;get to know me and I&#39;ll stop masking&#34; deal; I mask in&#xA;  front of my mom, my spouse, my psychologist. It&#39;s like an emulation layer that&#xA;  sits on top of my brain so I can run programs that let me communicate with&#xA;  others, programs like &#34;talking&#34; and &#34;facial expressions&#34; and &#34;not losing it&#34;.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  It&#39;s not that I feel forced to do these things. It&#39;s just that I am a human&#xA;  being, so I crave social interaction. I love my friends and family and I enjoy&#xA;  interacting with them, and this is how I have to do it. I just wish we ran the&#xA;  same architecture, because masking is&#xA;  &lt;em&gt;exhausting&lt;/em&gt; [2]. My brain overclocks itself just running this&#xA;  emulation layer. It reallocates important resources from other programs like&#xA;  reason and problem-solving. I literally become dumber when I am with others.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  For these reasons, people with autism generally agree the best part of every&#xA;  day is &#34;unmasking&#34;, which I&#39;d equate to the feeling of getting home from a&#xA;  long trip and flopping down on your own bed. Masking is a great tool and being&#xA;  able to use it is a blessing, but it means every day takes an&#xA;  &lt;a href=&#34;https://en.wikipedia.org/wiki/Spoon_theory&#34;&gt;extra toll&lt;/a&gt;.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;Flying Under the Radar&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  One risk of masking is going your whole life undiagnosed. You don&#39;t have to&#xA;  know you&#39;re masking to mask. Historically most autism diagnoses are in&#xA;  children, which is no coincidence&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;if you happen to slip past childhood&#xA;  without a diagnosis, chances are good that you&#39;re old enough to have learned&#xA;  masking, which can hide your autism forever. I narrowly avoided this fate. I&#xA;  missed diagnosis during my childhood window and it was 30 years until my&#xA;  eventual adult diagnosis, which happened more by chance than anything.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  It sounds silly in retrospect to spend so much effort masking and dealing with&#xA;  other issues without realizing that other people don&#39;t, but it&#39;s difficult to&#xA;  identify atypicality when you&#39;ve only ever piloted one brain.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;The Rough Self-Check&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  Medical help is the best way to find answers. But in the real world not&#xA;  everybody has access to it due to things like family, income, benefits, or&#xA;  location. It&#39;s therefore common to find people in the autism community who&#xA;  identify as self-diagnosed; they are pretty sure they have some form of autism&#xA;  based on how well others&#39; stories resonate with them, but they&#39;re either&#xA;  unwilling or unable to confirm that with a medical professional.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Even for those who are willing and able, going from ignorance to &#34;Oh! That&#xA;  happens to me too!&#34; is often the kick-start needed to seek professional&#xA;  attention. Therefore I present for your benefit a small list of&#xA;  non-professional, non-medical autism indicators that may warrant, at minimum,&#xA;  further investigation:&#xA;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&#xA;    Occasional or constant annoyance at typically unannoying things like touch,&#xA;    light, or sound (sensory hypersensitivies)&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    More than your peers, a need to dig into what people say by asking&#xA;    clarifying questions (difficulty dealing with ambiguity)&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;Eliminating all facial expression when exiting a room (masking)&lt;/li&gt;&#xA;  &lt;li&gt;More confusion about social conventions than your peers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;  If these resonate with you, consider it a starting point to slingshot yourself&#xA;  into more research and, if available to you, seek a professional.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;More People than You Think&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  Two percent of people have autism. There is no &#34;high-functioning&#34; or&#xA;  &#34;low-functioning&#34; autism, because autism is a deck of cards full of symptoms,&#xA;  and each hand is different. One possible symptom is a canary that reveals the&#xA;  others, but not everybody has this symptom. For those who don&#39;t, there is a&#xA;  different set of challenges, often had in private and unfortunately, often&#xA;  taken to the grave.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Be open about your own brain: what does it do well? What does it do poorly?&#xA;  Like sharing salary information, we can&#39;t know what our situation is until we&#xA;  normalize talking about it.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Because really, truly, the best part of my autism journey was just finding&#xA;  out.&#xA;&lt;/p&gt;&#xA;&lt;p style=&#34;text-align: center&#34;&gt;&#xA;  &lt;picture&gt;&#xA;    &lt;source srcset=&#34;img/autism-diagnosis-dark.png&#34; media=&#34;(prefers-color-scheme: dark)&#34;/&gt;&#xA;    &lt;img src=&#34;img/autism-diagnosis-light.png&#34; style=&#34;width: 50em; max-width: 100%&#34;/&gt;&#xA;  &lt;/picture&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  [1]:&#xA;  &lt;a href=&#34;https://www.cdc.gov/ncbddd/autism/data.html&#34;&gt;cdc.gov/ncbddd/autism/data.html&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  [2]:&#xA;  &lt;a href=&#34;https://www.healthline.com/health/autism/autism-masking#effects&#34;&gt;healthline.com/health/autism/autism-masking#effects&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    Thanks to &lt;a href=&#34;https://jm.dev&#34;&gt;Jordan McQueen&lt;/a&gt; for early feedback on&#xA;    drafts of this.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head><style>
+  .spectrum {
+    height: 10em;
+    width: 10em;
+    background: conic-gradient(
+      hsl(0, 90%, 65%),
+      hsl(36, 90%, 65%),
+      hsl(72, 90%, 65%),
+      hsl(108, 90%, 65%),
+      hsl(144, 90%, 65%),
+      hsl(180, 90%, 65%),
+      hsl(216, 90%, 65%),
+      hsl(252, 90%, 65%),
+      hsl(288, 90%, 65%),
+      hsl(324, 90%, 65%),
+      hsl(360, 90%, 65%)
+    );
+    border: 1px solid;
+    border-radius: 90%;
+  }
+  @media (prefers-color-scheme:light) {
+    .spectrum {
+      border-color: black;
+    }
+  @media (prefers-color-scheme:dark) {
+    .spectrum {
+      border-color: white;
+    }
+  }
+</style>
+
+</head><body><h1>Anonymously Autistic</h1>
+
+<p>
+  <i>
+    This is a more complete version of a
+    <a href="https://news.ycombinator.com/item?id=29686395">comment</a>
+    I left on Hacker News. I recommend reading the subject article by C.L.
+    Lynch,
+    <a href="https://neuroclastic.com/its-a-spectrum-doesnt-mean-what-you-think/">
+      <i>"Autism is a Spectrum" Doesn't Mean What You Think</i></a>.
+  </i>
+</p>
+<hr/>
+<p>
+  I have autism. If you know me, that might surprise you. I appear neurotypical.
+  I have a career, a marriage, and a social life. I like playing video games and
+  fighting climate change. I don't need support from others on a daily basis.
+</p>
+<p>
+  And yet my psychologist, with 30 years of experience and a Ph.D. in clinical
+  psychology, wrote it right there on my medical chart:
+</p>
+<blockquote>Autism spectrum disorder</blockquote>
+<p>
+  This is because behind the scenes, there's a "me" hardly anyone sees. It's the
+  me who can be paralyzed by a
+  <a href="https://news.ycombinator.com/item?id=29690399">text</a>
+  <a href="https://twitter.com/glcls/status/1273051092960440320">message</a>,
+  whose day is ruined if teeth-brushing and showering happen out of order, and
+  who spends ~an hour a day performing internal conversation planning and
+  retrospectives. It's the me who was mute for nine years.
+</p>
+
+<p>
+  It's also the me who was taught that all these qualities are just character
+  flaws that can be willed away.
+</p>
+<p>
+  You'd never notice that me, because I hide him well. Of the folks with autism,
+  I'm not an outlier in doing that. In fact, 2% of all human beings have autism
+  [1]. Statistically, you've certainly met several of them without realizing it.
+  Why is that, and what is it like to live that life?
+</p>
+<h2>The Infamous Spectrum</h2>
+<p>
+  We've all heard "autism is a spectrum". But that word, "spectrum", in that
+  context, has had its meaning lost to time. Often people think of folks with
+  autism as "high functioning" or "low functioning", as if these are positions
+  on the spectrum. But a spectrum is not a scale. This is how to actually think
+  about the autism spectrum:
+</p>
+<p>
+  </p><center><div class="spectrum"> </div></center>
+<p></p>
+<p>
+  There is no "more" or "less"; no "high" or "low". There is only "different".
+  And yet people often still feel they
+  <a href="https://en.wikipedia.org/wiki/I_know_it_when_I_see_it">know it when they see it</a>; that people with autism either act like Rain Man or don't, and that those
+  are the two (if even that many) types of autism.
+</p>
+<p>
+  What, really, is this subset of autism people think they can identify at a
+  glance?
+</p>
+<h2>The Canary Symptom</h2>
+<p>
+  Autism symptoms are a deck of cards, and not all folks are dealt the same
+  hand. Of the many, the DSM-5 calls out a few examples:
+</p>
+<blockquote cite="https://www.cdc.gov/ncbddd/autism/hcp-dsm.html">
+  <p>
+    Deficits in developing, maintaining, and understand [sic] relationships,
+    ranging, for example, from difficulties adjusting behavior to suit various
+    social contexts; to difficulties in sharing imaginative play or in making
+    friends; to absence of interest in peers.
+  </p>
+  <a href="https://www.cdc.gov/ncbddd/autism/hcp-dsm.html">DSM-5</a>
+</blockquote>
+<p>
+  Pay special attention to that first example, which I'll paraphrase as
+  "inability to change behavior based on social feedback". We'll come back to
+  that later.
+</p>
+<h3>A Personal Example</h3>
+<p>
+  One symptom I got dealt in my autism hand is a hearing hypersensitivity. As
+  cool as it sounds, this is no superpower. My body's defense systems will
+  sometimes malfunction and miscalibrate incoming volume.
+</p>
+<p>
+  Imagine you're in a coffee shop reading a book when someone walks up to you,
+  takes out an air horn, points it in your ear and briefly squeezes the trigger.
+  What would your brain and body do instinctively? Would it startle, flinch,
+  recoil? What if the person didn't go away, and kept squeezing the trigger
+  randomly every few seconds? What if you looked around and slowly realized in
+  horror that everyone else had their own air horn and they have all started
+  doing the same?
+</p>
+<p>
+  Your instinctive responses escalate to stress, panic, confusion. You keep
+  trying to read your book but the air horns keep sounding and your body keeps
+  flinching. You can't concentrate; your eyes are moving over the words in your
+  book but you're not understanding them. You start getting annoyed at all the
+  people wielding air horns<span style="font-family: sans-serif">—</span><i>could they just not?! I'm trying to read!</i>
+</p>
+<p>
+  This is a hearing hypersensitivity. At random times, my brain will think every
+  little sound is as loud as an air horn and it will execute all these
+  physiological responses involuntarily. Even when I know it's a
+  malfunction<span style="font-family: sans-serif">—</span>which took me 30 years to learn<span style="font-family: sans-serif">—</span>it's still just as
+  hard as ever to get through a paragraph in that book, to not flinch, to not
+  become stressed, to not panic. Even when I can rationally tell myself in the
+  moment <i>It's all in your head</i>, it doesn't stop the involuntary response.
+</p>
+<p>
+  You may understand then why I and many other people with autism would, as
+  children, collapse to the floor in public, cover their ears, and scream.
+</p>
+<h3>Killing the Canary</h3>
+<p>
+  In many ways, I'm one of the lucky ones. I didn't get dealt that "inability to
+  change behavior based on social feedback" symptom, above. So when as a child I
+  collapsed to the floor and screamed, and other people looked at me like I was
+  losing it (reminder: I was) I can log that detail away, and work a little more
+  towards avoiding it next time. I've iterated on this quite a bit over 30
+  years:
+</p>
+<ol>
+  <li>On the floor screaming</li>
+  <li>Ears covered, eyes shut, silent</li>
+  <li>On the floor cross-legged, teeth gritted, trying to dissociate</li>
+  <li>Fingers-in-ears, screaming interally</li>
+  <li>Inventing excuses to stay home</li>
+  <li>Going home</li>
+</ol>
+<p>
+  My actions are more socially acceptable now, but the sensation is the same.
+  During a hearing hypersensitivity, inside I'm still that kid rolling on the
+  floor screaming. The only difference is that I have learned to fake it away.
+</p>
+<h3>When the Canary Lives</h3>
+<p>
+  People dealt the "inability to change behavior based on social feedback" card
+  get stuck on the rolling-on-the-floor-screaming phase. This, perhaps, is what
+  the world thinks autism "looks like"; the canary symptom that reveals the
+  rest.
+</p>
+<p>
+  The people with this symptom, who commit the cardinal sin of simply not faking
+  it, often need more support because our world is not built to accomodate them
+  or understand them well. But they are not any more "low-functioning" than I am
+  "high-functioning". Those words are descriptions of how <em>observers</em>
+  experience autism, not how autism-havers do. That's why those terms have
+  fallen out of use since the DSM-5.
+</p>
+<h2>Masking</h2>
+<p>
+  This ability to fake not having autism is called <b>masking</b>. Those of us
+  who can mask<span style="font-family: sans-serif">—</span>those without the canary symptom<span style="font-family: sans-serif">—</span>mask in virtually
+  every social situation.
+</p>
+<p>
+  This is not a temporary "get to know me and I'll stop masking" deal; I mask in
+  front of my mom, my spouse, my psychologist. It's like an emulation layer that
+  sits on top of my brain so I can run programs that let me communicate with
+  others, programs like "talking" and "facial expressions" and "not losing it".
+</p>
+<p>
+  It's not that I feel forced to do these things. It's just that I am a human
+  being, so I crave social interaction. I love my friends and family and I enjoy
+  interacting with them, and this is how I have to do it. I just wish we ran the
+  same architecture, because masking is
+  <em>exhausting</em> [2]. My brain overclocks itself just running this
+  emulation layer. It reallocates important resources from other programs like
+  reason and problem-solving. I literally become dumber when I am with others.
+</p>
+<p>
+  For these reasons, people with autism generally agree the best part of every
+  day is "unmasking", which I'd equate to the feeling of getting home from a
+  long trip and flopping down on your own bed. Masking is a great tool and being
+  able to use it is a blessing, but it means every day takes an
+  <a href="https://en.wikipedia.org/wiki/Spoon_theory">extra toll</a>.
+</p>
+<h3>Flying Under the Radar</h3>
+<p>
+  One risk of masking is going your whole life undiagnosed. You don't have to
+  know you're masking to mask. Historically most autism diagnoses are in
+  children, which is no coincidence<span style="font-family: sans-serif">—</span>if you happen to slip past childhood
+  without a diagnosis, chances are good that you're old enough to have learned
+  masking, which can hide your autism forever. I narrowly avoided this fate. I
+  missed diagnosis during my childhood window and it was 30 years until my
+  eventual adult diagnosis, which happened more by chance than anything.
+</p>
+<p>
+  It sounds silly in retrospect to spend so much effort masking and dealing with
+  other issues without realizing that other people don't, but it's difficult to
+  identify atypicality when you've only ever piloted one brain.
+</p>
+<h3>The Rough Self-Check</h3>
+<p>
+  Medical help is the best way to find answers. But in the real world not
+  everybody has access to it due to things like family, income, benefits, or
+  location. It's therefore common to find people in the autism community who
+  identify as self-diagnosed; they are pretty sure they have some form of autism
+  based on how well others' stories resonate with them, but they're either
+  unwilling or unable to confirm that with a medical professional.
+</p>
+<p>
+  Even for those who are willing and able, going from ignorance to "Oh! That
+  happens to me too!" is often the kick-start needed to seek professional
+  attention. Therefore I present for your benefit a small list of
+  non-professional, non-medical autism indicators that may warrant, at minimum,
+  further investigation:
+</p>
+<ul>
+  <li>
+    Occasional or constant annoyance at typically unannoying things like touch,
+    light, or sound (sensory hypersensitivies)
+  </li>
+  <li>
+    More than your peers, a need to dig into what people say by asking
+    clarifying questions (difficulty dealing with ambiguity)
+  </li>
+  <li>Eliminating all facial expression when exiting a room (masking)</li>
+  <li>More confusion about social conventions than your peers</li>
+</ul>
+<p>
+  If these resonate with you, consider it a starting point to slingshot yourself
+  into more research and, if available to you, seek a professional.
+</p>
+<h2>More People than You Think</h2>
+<p>
+  Two percent of people have autism. There is no "high-functioning" or
+  "low-functioning" autism, because autism is a deck of cards full of symptoms,
+  and each hand is different. One possible symptom is a canary that reveals the
+  others, but not everybody has this symptom. For those who don't, there is a
+  different set of challenges, often had in private and unfortunately, often
+  taken to the grave.
+</p>
+<p>
+  Be open about your own brain: what does it do well? What does it do poorly?
+  Like sharing salary information, we can't know what our situation is until we
+  normalize talking about it.
+</p>
+<p>
+  Because really, truly, the best part of my autism journey was just finding
+  out.
+</p>
+<p style="text-align: center">
+  <picture>
+    <source srcset="img/autism-diagnosis-dark.png" media="(prefers-color-scheme: dark)"/>
+    <img src="img/autism-diagnosis-light.png" style="width: 50em; max-width: 100%"/>
+  </picture>
+</p>
+<p>
+  [1]:
+  <a href="https://www.cdc.gov/ncbddd/autism/data.html">cdc.gov/ncbddd/autism/data.html</a>
+</p>
+<p>
+  [2]:
+  <a href="https://www.healthline.com/health/autism/autism-masking#effects">healthline.com/health/autism/autism-masking#effects</a>
+</p>
+<p>
+  <i>
+    Thanks to <a href="https://jm.dev">Jordan McQueen</a> for early feedback on
+    drafts of this.
+  </i>
+</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>From Google to Apple</title>
       <link>https:/apple.html</link>
@@ -1526,500 +2019,6 @@ be a little wacky to learn something new about the world.</p>
       <author>Anonymous</author>
       <guid>meta</guid>
       <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Anonymously Autistic</title>
-      <link>https:/autism.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;style&gt;&#xA;  .spectrum {&#xA;    height: 10em;&#xA;    width: 10em;&#xA;    background: conic-gradient(&#xA;      hsl(0, 90%, 65%),&#xA;      hsl(36, 90%, 65%),&#xA;      hsl(72, 90%, 65%),&#xA;      hsl(108, 90%, 65%),&#xA;      hsl(144, 90%, 65%),&#xA;      hsl(180, 90%, 65%),&#xA;      hsl(216, 90%, 65%),&#xA;      hsl(252, 90%, 65%),&#xA;      hsl(288, 90%, 65%),&#xA;      hsl(324, 90%, 65%),&#xA;      hsl(360, 90%, 65%)&#xA;    );&#xA;    border: 1px solid;&#xA;    border-radius: 90%;&#xA;  }&#xA;  @media (prefers-color-scheme:light) {&#xA;    .spectrum {&#xA;      border-color: black;&#xA;    }&#xA;  @media (prefers-color-scheme:dark) {&#xA;    .spectrum {&#xA;      border-color: white;&#xA;    }&#xA;  }&#xA;&lt;/style&gt;&#xA;&#xA;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Anonymously Autistic&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    This is a more complete version of a&#xA;    &lt;a href=&#34;https://news.ycombinator.com/item?id=29686395&#34;&gt;comment&lt;/a&gt;&#xA;    I left on Hacker News. I recommend reading the subject article by C.L.&#xA;    Lynch,&#xA;    &lt;a href=&#34;https://neuroclastic.com/its-a-spectrum-doesnt-mean-what-you-think/&#34;&gt;&#xA;      &lt;i&gt;&#34;Autism is a Spectrum&#34; Doesn&#39;t Mean What You Think&lt;/i&gt;&lt;/a&gt;.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&#xA;  I have autism. If you know me, that might surprise you. I appear neurotypical.&#xA;  I have a career, a marriage, and a social life. I like playing video games and&#xA;  fighting climate change. I don&#39;t need support from others on a daily basis.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  And yet my psychologist, with 30 years of experience and a Ph.D. in clinical&#xA;  psychology, wrote it right there on my medical chart:&#xA;&lt;/p&gt;&#xA;&lt;blockquote&gt;Autism spectrum disorder&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;  This is because behind the scenes, there&#39;s a &#34;me&#34; hardly anyone sees. It&#39;s the&#xA;  me who can be paralyzed by a&#xA;  &lt;a href=&#34;https://news.ycombinator.com/item?id=29690399&#34;&gt;text&lt;/a&gt;&#xA;  &lt;a href=&#34;https://twitter.com/glcls/status/1273051092960440320&#34;&gt;message&lt;/a&gt;,&#xA;  whose day is ruined if teeth-brushing and showering happen out of order, and&#xA;  who spends ~an hour a day performing internal conversation planning and&#xA;  retrospectives. It&#39;s the me who was mute for nine years.&#xA;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&#xA;  It&#39;s also the me who was taught that all these qualities are just character&#xA;  flaws that can be willed away.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  You&#39;d never notice that me, because I hide him well. Of the folks with autism,&#xA;  I&#39;m not an outlier in doing that. In fact, 2% of all human beings have autism&#xA;  [1]. Statistically, you&#39;ve certainly met several of them without realizing it.&#xA;  Why is that, and what is it like to live that life?&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Infamous Spectrum&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  We&#39;ve all heard &#34;autism is a spectrum&#34;. But that word, &#34;spectrum&#34;, in that&#xA;  context, has had its meaning lost to time. Often people think of folks with&#xA;  autism as &#34;high functioning&#34; or &#34;low functioning&#34;, as if these are positions&#xA;  on the spectrum. But a spectrum is not a scale. This is how to actually think&#xA;  about the autism spectrum:&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;/p&gt;&lt;center&gt;&lt;div class=&#34;spectrum&#34;&gt; &lt;/div&gt;&lt;/center&gt;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  There is no &#34;more&#34; or &#34;less&#34;; no &#34;high&#34; or &#34;low&#34;. There is only &#34;different&#34;.&#xA;  And yet people often still feel they&#xA;  &lt;a href=&#34;https://en.wikipedia.org/wiki/I_know_it_when_I_see_it&#34;&gt;know it when they see it&lt;/a&gt;; that people with autism either act like Rain Man or don&#39;t, and that those&#xA;  are the two (if even that many) types of autism.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  What, really, is this subset of autism people think they can identify at a&#xA;  glance?&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Canary Symptom&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  Autism symptoms are a deck of cards, and not all folks are dealt the same&#xA;  hand. Of the many, the DSM-5 calls out a few examples:&#xA;&lt;/p&gt;&#xA;&lt;blockquote cite=&#34;https://www.cdc.gov/ncbddd/autism/hcp-dsm.html&#34;&gt;&#xA;  &lt;p&gt;&#xA;    Deficits in developing, maintaining, and understand [sic] relationships,&#xA;    ranging, for example, from difficulties adjusting behavior to suit various&#xA;    social contexts; to difficulties in sharing imaginative play or in making&#xA;    friends; to absence of interest in peers.&#xA;  &lt;/p&gt;&#xA;  &lt;a href=&#34;https://www.cdc.gov/ncbddd/autism/hcp-dsm.html&#34;&gt;DSM-5&lt;/a&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;&#xA;  Pay special attention to that first example, which I&#39;ll paraphrase as&#xA;  &#34;inability to change behavior based on social feedback&#34;. We&#39;ll come back to&#xA;  that later.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;A Personal Example&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  One symptom I got dealt in my autism hand is a hearing hypersensitivity. As&#xA;  cool as it sounds, this is no superpower. My body&#39;s defense systems will&#xA;  sometimes malfunction and miscalibrate incoming volume.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Imagine you&#39;re in a coffee shop reading a book when someone walks up to you,&#xA;  takes out an air horn, points it in your ear and briefly squeezes the trigger.&#xA;  What would your brain and body do instinctively? Would it startle, flinch,&#xA;  recoil? What if the person didn&#39;t go away, and kept squeezing the trigger&#xA;  randomly every few seconds? What if you looked around and slowly realized in&#xA;  horror that everyone else had their own air horn and they have all started&#xA;  doing the same?&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Your instinctive responses escalate to stress, panic, confusion. You keep&#xA;  trying to read your book but the air horns keep sounding and your body keeps&#xA;  flinching. You can&#39;t concentrate; your eyes are moving over the words in your&#xA;  book but you&#39;re not understanding them. You start getting annoyed at all the&#xA;  people wielding air horns&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&lt;i&gt;could they just not?! I&#39;m trying to read!&lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This is a hearing hypersensitivity. At random times, my brain will think every&#xA;  little sound is as loud as an air horn and it will execute all these&#xA;  physiological responses involuntarily. Even when I know it&#39;s a&#xA;  malfunction&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;which took me 30 years to learn&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;it&#39;s still just as&#xA;  hard as ever to get through a paragraph in that book, to not flinch, to not&#xA;  become stressed, to not panic. Even when I can rationally tell myself in the&#xA;  moment &lt;i&gt;It&#39;s all in your head&lt;/i&gt;, it doesn&#39;t stop the involuntary response.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  You may understand then why I and many other people with autism would, as&#xA;  children, collapse to the floor in public, cover their ears, and scream.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;Killing the Canary&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  In many ways, I&#39;m one of the lucky ones. I didn&#39;t get dealt that &#34;inability to&#xA;  change behavior based on social feedback&#34; symptom, above. So when as a child I&#xA;  collapsed to the floor and screamed, and other people looked at me like I was&#xA;  losing it (reminder: I was) I can log that detail away, and work a little more&#xA;  towards avoiding it next time. I&#39;ve iterated on this quite a bit over 30&#xA;  years:&#xA;&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;  &lt;li&gt;On the floor screaming&lt;/li&gt;&#xA;  &lt;li&gt;Ears covered, eyes shut, silent&lt;/li&gt;&#xA;  &lt;li&gt;On the floor cross-legged, teeth gritted, trying to dissociate&lt;/li&gt;&#xA;  &lt;li&gt;Fingers-in-ears, screaming interally&lt;/li&gt;&#xA;  &lt;li&gt;Inventing excuses to stay home&lt;/li&gt;&#xA;  &lt;li&gt;Going home&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;&#xA;  My actions are more socially acceptable now, but the sensation is the same.&#xA;  During a hearing hypersensitivity, inside I&#39;m still that kid rolling on the&#xA;  floor screaming. The only difference is that I have learned to fake it away.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;When the Canary Lives&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  People dealt the &#34;inability to change behavior based on social feedback&#34; card&#xA;  get stuck on the rolling-on-the-floor-screaming phase. This, perhaps, is what&#xA;  the world thinks autism &#34;looks like&#34;; the canary symptom that reveals the&#xA;  rest.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The people with this symptom, who commit the cardinal sin of simply not faking&#xA;  it, often need more support because our world is not built to accomodate them&#xA;  or understand them well. But they are not any more &#34;low-functioning&#34; than I am&#xA;  &#34;high-functioning&#34;. Those words are descriptions of how &lt;em&gt;observers&lt;/em&gt;&#xA;  experience autism, not how autism-havers do. That&#39;s why those terms have&#xA;  fallen out of use since the DSM-5.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;Masking&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  This ability to fake not having autism is called &lt;b&gt;masking&lt;/b&gt;. Those of us&#xA;  who can mask&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;those without the canary symptom&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;mask in virtually&#xA;  every social situation.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This is not a temporary &#34;get to know me and I&#39;ll stop masking&#34; deal; I mask in&#xA;  front of my mom, my spouse, my psychologist. It&#39;s like an emulation layer that&#xA;  sits on top of my brain so I can run programs that let me communicate with&#xA;  others, programs like &#34;talking&#34; and &#34;facial expressions&#34; and &#34;not losing it&#34;.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  It&#39;s not that I feel forced to do these things. It&#39;s just that I am a human&#xA;  being, so I crave social interaction. I love my friends and family and I enjoy&#xA;  interacting with them, and this is how I have to do it. I just wish we ran the&#xA;  same architecture, because masking is&#xA;  &lt;em&gt;exhausting&lt;/em&gt; [2]. My brain overclocks itself just running this&#xA;  emulation layer. It reallocates important resources from other programs like&#xA;  reason and problem-solving. I literally become dumber when I am with others.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  For these reasons, people with autism generally agree the best part of every&#xA;  day is &#34;unmasking&#34;, which I&#39;d equate to the feeling of getting home from a&#xA;  long trip and flopping down on your own bed. Masking is a great tool and being&#xA;  able to use it is a blessing, but it means every day takes an&#xA;  &lt;a href=&#34;https://en.wikipedia.org/wiki/Spoon_theory&#34;&gt;extra toll&lt;/a&gt;.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;Flying Under the Radar&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  One risk of masking is going your whole life undiagnosed. You don&#39;t have to&#xA;  know you&#39;re masking to mask. Historically most autism diagnoses are in&#xA;  children, which is no coincidence&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;if you happen to slip past childhood&#xA;  without a diagnosis, chances are good that you&#39;re old enough to have learned&#xA;  masking, which can hide your autism forever. I narrowly avoided this fate. I&#xA;  missed diagnosis during my childhood window and it was 30 years until my&#xA;  eventual adult diagnosis, which happened more by chance than anything.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  It sounds silly in retrospect to spend so much effort masking and dealing with&#xA;  other issues without realizing that other people don&#39;t, but it&#39;s difficult to&#xA;  identify atypicality when you&#39;ve only ever piloted one brain.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;The Rough Self-Check&lt;/h3&gt;&#xA;&lt;p&gt;&#xA;  Medical help is the best way to find answers. But in the real world not&#xA;  everybody has access to it due to things like family, income, benefits, or&#xA;  location. It&#39;s therefore common to find people in the autism community who&#xA;  identify as self-diagnosed; they are pretty sure they have some form of autism&#xA;  based on how well others&#39; stories resonate with them, but they&#39;re either&#xA;  unwilling or unable to confirm that with a medical professional.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Even for those who are willing and able, going from ignorance to &#34;Oh! That&#xA;  happens to me too!&#34; is often the kick-start needed to seek professional&#xA;  attention. Therefore I present for your benefit a small list of&#xA;  non-professional, non-medical autism indicators that may warrant, at minimum,&#xA;  further investigation:&#xA;&lt;/p&gt;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&#xA;    Occasional or constant annoyance at typically unannoying things like touch,&#xA;    light, or sound (sensory hypersensitivies)&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    More than your peers, a need to dig into what people say by asking&#xA;    clarifying questions (difficulty dealing with ambiguity)&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;Eliminating all facial expression when exiting a room (masking)&lt;/li&gt;&#xA;  &lt;li&gt;More confusion about social conventions than your peers&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;  If these resonate with you, consider it a starting point to slingshot yourself&#xA;  into more research and, if available to you, seek a professional.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;More People than You Think&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  Two percent of people have autism. There is no &#34;high-functioning&#34; or&#xA;  &#34;low-functioning&#34; autism, because autism is a deck of cards full of symptoms,&#xA;  and each hand is different. One possible symptom is a canary that reveals the&#xA;  others, but not everybody has this symptom. For those who don&#39;t, there is a&#xA;  different set of challenges, often had in private and unfortunately, often&#xA;  taken to the grave.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Be open about your own brain: what does it do well? What does it do poorly?&#xA;  Like sharing salary information, we can&#39;t know what our situation is until we&#xA;  normalize talking about it.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Because really, truly, the best part of my autism journey was just finding&#xA;  out.&#xA;&lt;/p&gt;&#xA;&lt;p style=&#34;text-align: center&#34;&gt;&#xA;  &lt;picture&gt;&#xA;    &lt;source srcset=&#34;img/autism-diagnosis-dark.png&#34; media=&#34;(prefers-color-scheme: dark)&#34;/&gt;&#xA;    &lt;img src=&#34;img/autism-diagnosis-light.png&#34; style=&#34;width: 50em; max-width: 100%&#34;/&gt;&#xA;  &lt;/picture&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  [1]:&#xA;  &lt;a href=&#34;https://www.cdc.gov/ncbddd/autism/data.html&#34;&gt;cdc.gov/ncbddd/autism/data.html&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  [2]:&#xA;  &lt;a href=&#34;https://www.healthline.com/health/autism/autism-masking#effects&#34;&gt;healthline.com/health/autism/autism-masking#effects&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    Thanks to &lt;a href=&#34;https://jm.dev&#34;&gt;Jordan McQueen&lt;/a&gt; for early feedback on&#xA;    drafts of this.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head><style>
-  .spectrum {
-    height: 10em;
-    width: 10em;
-    background: conic-gradient(
-      hsl(0, 90%, 65%),
-      hsl(36, 90%, 65%),
-      hsl(72, 90%, 65%),
-      hsl(108, 90%, 65%),
-      hsl(144, 90%, 65%),
-      hsl(180, 90%, 65%),
-      hsl(216, 90%, 65%),
-      hsl(252, 90%, 65%),
-      hsl(288, 90%, 65%),
-      hsl(324, 90%, 65%),
-      hsl(360, 90%, 65%)
-    );
-    border: 1px solid;
-    border-radius: 90%;
-  }
-  @media (prefers-color-scheme:light) {
-    .spectrum {
-      border-color: black;
-    }
-  @media (prefers-color-scheme:dark) {
-    .spectrum {
-      border-color: white;
-    }
-  }
-</style>
-
-</head><body><h1>Anonymously Autistic</h1>
-
-<p>
-  <i>
-    This is a more complete version of a
-    <a href="https://news.ycombinator.com/item?id=29686395">comment</a>
-    I left on Hacker News. I recommend reading the subject article by C.L.
-    Lynch,
-    <a href="https://neuroclastic.com/its-a-spectrum-doesnt-mean-what-you-think/">
-      <i>"Autism is a Spectrum" Doesn't Mean What You Think</i></a>.
-  </i>
-</p>
-<hr/>
-<p>
-  I have autism. If you know me, that might surprise you. I appear neurotypical.
-  I have a career, a marriage, and a social life. I like playing video games and
-  fighting climate change. I don't need support from others on a daily basis.
-</p>
-<p>
-  And yet my psychologist, with 30 years of experience and a Ph.D. in clinical
-  psychology, wrote it right there on my medical chart:
-</p>
-<blockquote>Autism spectrum disorder</blockquote>
-<p>
-  This is because behind the scenes, there's a "me" hardly anyone sees. It's the
-  me who can be paralyzed by a
-  <a href="https://news.ycombinator.com/item?id=29690399">text</a>
-  <a href="https://twitter.com/glcls/status/1273051092960440320">message</a>,
-  whose day is ruined if teeth-brushing and showering happen out of order, and
-  who spends ~an hour a day performing internal conversation planning and
-  retrospectives. It's the me who was mute for nine years.
-</p>
-
-<p>
-  It's also the me who was taught that all these qualities are just character
-  flaws that can be willed away.
-</p>
-<p>
-  You'd never notice that me, because I hide him well. Of the folks with autism,
-  I'm not an outlier in doing that. In fact, 2% of all human beings have autism
-  [1]. Statistically, you've certainly met several of them without realizing it.
-  Why is that, and what is it like to live that life?
-</p>
-<h2>The Infamous Spectrum</h2>
-<p>
-  We've all heard "autism is a spectrum". But that word, "spectrum", in that
-  context, has had its meaning lost to time. Often people think of folks with
-  autism as "high functioning" or "low functioning", as if these are positions
-  on the spectrum. But a spectrum is not a scale. This is how to actually think
-  about the autism spectrum:
-</p>
-<p>
-  </p><center><div class="spectrum"> </div></center>
-<p></p>
-<p>
-  There is no "more" or "less"; no "high" or "low". There is only "different".
-  And yet people often still feel they
-  <a href="https://en.wikipedia.org/wiki/I_know_it_when_I_see_it">know it when they see it</a>; that people with autism either act like Rain Man or don't, and that those
-  are the two (if even that many) types of autism.
-</p>
-<p>
-  What, really, is this subset of autism people think they can identify at a
-  glance?
-</p>
-<h2>The Canary Symptom</h2>
-<p>
-  Autism symptoms are a deck of cards, and not all folks are dealt the same
-  hand. Of the many, the DSM-5 calls out a few examples:
-</p>
-<blockquote cite="https://www.cdc.gov/ncbddd/autism/hcp-dsm.html">
-  <p>
-    Deficits in developing, maintaining, and understand [sic] relationships,
-    ranging, for example, from difficulties adjusting behavior to suit various
-    social contexts; to difficulties in sharing imaginative play or in making
-    friends; to absence of interest in peers.
-  </p>
-  <a href="https://www.cdc.gov/ncbddd/autism/hcp-dsm.html">DSM-5</a>
-</blockquote>
-<p>
-  Pay special attention to that first example, which I'll paraphrase as
-  "inability to change behavior based on social feedback". We'll come back to
-  that later.
-</p>
-<h3>A Personal Example</h3>
-<p>
-  One symptom I got dealt in my autism hand is a hearing hypersensitivity. As
-  cool as it sounds, this is no superpower. My body's defense systems will
-  sometimes malfunction and miscalibrate incoming volume.
-</p>
-<p>
-  Imagine you're in a coffee shop reading a book when someone walks up to you,
-  takes out an air horn, points it in your ear and briefly squeezes the trigger.
-  What would your brain and body do instinctively? Would it startle, flinch,
-  recoil? What if the person didn't go away, and kept squeezing the trigger
-  randomly every few seconds? What if you looked around and slowly realized in
-  horror that everyone else had their own air horn and they have all started
-  doing the same?
-</p>
-<p>
-  Your instinctive responses escalate to stress, panic, confusion. You keep
-  trying to read your book but the air horns keep sounding and your body keeps
-  flinching. You can't concentrate; your eyes are moving over the words in your
-  book but you're not understanding them. You start getting annoyed at all the
-  people wielding air horns<span style="font-family: sans-serif">—</span><i>could they just not?! I'm trying to read!</i>
-</p>
-<p>
-  This is a hearing hypersensitivity. At random times, my brain will think every
-  little sound is as loud as an air horn and it will execute all these
-  physiological responses involuntarily. Even when I know it's a
-  malfunction<span style="font-family: sans-serif">—</span>which took me 30 years to learn<span style="font-family: sans-serif">—</span>it's still just as
-  hard as ever to get through a paragraph in that book, to not flinch, to not
-  become stressed, to not panic. Even when I can rationally tell myself in the
-  moment <i>It's all in your head</i>, it doesn't stop the involuntary response.
-</p>
-<p>
-  You may understand then why I and many other people with autism would, as
-  children, collapse to the floor in public, cover their ears, and scream.
-</p>
-<h3>Killing the Canary</h3>
-<p>
-  In many ways, I'm one of the lucky ones. I didn't get dealt that "inability to
-  change behavior based on social feedback" symptom, above. So when as a child I
-  collapsed to the floor and screamed, and other people looked at me like I was
-  losing it (reminder: I was) I can log that detail away, and work a little more
-  towards avoiding it next time. I've iterated on this quite a bit over 30
-  years:
-</p>
-<ol>
-  <li>On the floor screaming</li>
-  <li>Ears covered, eyes shut, silent</li>
-  <li>On the floor cross-legged, teeth gritted, trying to dissociate</li>
-  <li>Fingers-in-ears, screaming interally</li>
-  <li>Inventing excuses to stay home</li>
-  <li>Going home</li>
-</ol>
-<p>
-  My actions are more socially acceptable now, but the sensation is the same.
-  During a hearing hypersensitivity, inside I'm still that kid rolling on the
-  floor screaming. The only difference is that I have learned to fake it away.
-</p>
-<h3>When the Canary Lives</h3>
-<p>
-  People dealt the "inability to change behavior based on social feedback" card
-  get stuck on the rolling-on-the-floor-screaming phase. This, perhaps, is what
-  the world thinks autism "looks like"; the canary symptom that reveals the
-  rest.
-</p>
-<p>
-  The people with this symptom, who commit the cardinal sin of simply not faking
-  it, often need more support because our world is not built to accomodate them
-  or understand them well. But they are not any more "low-functioning" than I am
-  "high-functioning". Those words are descriptions of how <em>observers</em>
-  experience autism, not how autism-havers do. That's why those terms have
-  fallen out of use since the DSM-5.
-</p>
-<h2>Masking</h2>
-<p>
-  This ability to fake not having autism is called <b>masking</b>. Those of us
-  who can mask<span style="font-family: sans-serif">—</span>those without the canary symptom<span style="font-family: sans-serif">—</span>mask in virtually
-  every social situation.
-</p>
-<p>
-  This is not a temporary "get to know me and I'll stop masking" deal; I mask in
-  front of my mom, my spouse, my psychologist. It's like an emulation layer that
-  sits on top of my brain so I can run programs that let me communicate with
-  others, programs like "talking" and "facial expressions" and "not losing it".
-</p>
-<p>
-  It's not that I feel forced to do these things. It's just that I am a human
-  being, so I crave social interaction. I love my friends and family and I enjoy
-  interacting with them, and this is how I have to do it. I just wish we ran the
-  same architecture, because masking is
-  <em>exhausting</em> [2]. My brain overclocks itself just running this
-  emulation layer. It reallocates important resources from other programs like
-  reason and problem-solving. I literally become dumber when I am with others.
-</p>
-<p>
-  For these reasons, people with autism generally agree the best part of every
-  day is "unmasking", which I'd equate to the feeling of getting home from a
-  long trip and flopping down on your own bed. Masking is a great tool and being
-  able to use it is a blessing, but it means every day takes an
-  <a href="https://en.wikipedia.org/wiki/Spoon_theory">extra toll</a>.
-</p>
-<h3>Flying Under the Radar</h3>
-<p>
-  One risk of masking is going your whole life undiagnosed. You don't have to
-  know you're masking to mask. Historically most autism diagnoses are in
-  children, which is no coincidence<span style="font-family: sans-serif">—</span>if you happen to slip past childhood
-  without a diagnosis, chances are good that you're old enough to have learned
-  masking, which can hide your autism forever. I narrowly avoided this fate. I
-  missed diagnosis during my childhood window and it was 30 years until my
-  eventual adult diagnosis, which happened more by chance than anything.
-</p>
-<p>
-  It sounds silly in retrospect to spend so much effort masking and dealing with
-  other issues without realizing that other people don't, but it's difficult to
-  identify atypicality when you've only ever piloted one brain.
-</p>
-<h3>The Rough Self-Check</h3>
-<p>
-  Medical help is the best way to find answers. But in the real world not
-  everybody has access to it due to things like family, income, benefits, or
-  location. It's therefore common to find people in the autism community who
-  identify as self-diagnosed; they are pretty sure they have some form of autism
-  based on how well others' stories resonate with them, but they're either
-  unwilling or unable to confirm that with a medical professional.
-</p>
-<p>
-  Even for those who are willing and able, going from ignorance to "Oh! That
-  happens to me too!" is often the kick-start needed to seek professional
-  attention. Therefore I present for your benefit a small list of
-  non-professional, non-medical autism indicators that may warrant, at minimum,
-  further investigation:
-</p>
-<ul>
-  <li>
-    Occasional or constant annoyance at typically unannoying things like touch,
-    light, or sound (sensory hypersensitivies)
-  </li>
-  <li>
-    More than your peers, a need to dig into what people say by asking
-    clarifying questions (difficulty dealing with ambiguity)
-  </li>
-  <li>Eliminating all facial expression when exiting a room (masking)</li>
-  <li>More confusion about social conventions than your peers</li>
-</ul>
-<p>
-  If these resonate with you, consider it a starting point to slingshot yourself
-  into more research and, if available to you, seek a professional.
-</p>
-<h2>More People than You Think</h2>
-<p>
-  Two percent of people have autism. There is no "high-functioning" or
-  "low-functioning" autism, because autism is a deck of cards full of symptoms,
-  and each hand is different. One possible symptom is a canary that reveals the
-  others, but not everybody has this symptom. For those who don't, there is a
-  different set of challenges, often had in private and unfortunately, often
-  taken to the grave.
-</p>
-<p>
-  Be open about your own brain: what does it do well? What does it do poorly?
-  Like sharing salary information, we can't know what our situation is until we
-  normalize talking about it.
-</p>
-<p>
-  Because really, truly, the best part of my autism journey was just finding
-  out.
-</p>
-<p style="text-align: center">
-  <picture>
-    <source srcset="img/autism-diagnosis-dark.png" media="(prefers-color-scheme: dark)"/>
-    <img src="img/autism-diagnosis-light.png" style="width: 50em; max-width: 100%"/>
-  </picture>
-</p>
-<p>
-  [1]:
-  <a href="https://www.cdc.gov/ncbddd/autism/data.html">cdc.gov/ncbddd/autism/data.html</a>
-</p>
-<p>
-  [2]:
-  <a href="https://www.healthline.com/health/autism/autism-masking#effects">healthline.com/health/autism/autism-masking#effects</a>
-</p>
-<p>
-  <i>
-    Thanks to <a href="https://jm.dev">Jordan McQueen</a> for early feedback on
-    drafts of this.
-  </i>
-</p>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>autism</guid>
-      <pubDate>Fri, 01 Apr 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Tattoos as Moral Contracts</title>
-      <link>https:/tattoo.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Tattoos as Moral Contracts&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  This year, I got a tattoo. My morals had been at odds with my behaviors in a&#xA;  place very important to me&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;the climate crisis. It’s easy to think about how&#xA;  horrible the climate crisis is, and yes definitely someone should do something&#xA;  about it, yes probably those big corporations that sounds nice, now let’s&#xA;  forget about it for another year.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  This isn’t a great way to get things done and I had the cognizance to&#xA;  recognize that, but it kept happening to me. So I tattooed a reminder on my&#xA;  forearm.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;/p&gt;&lt;figure&gt;&#xA;    &lt;img src=&#34;img/tattoo.webp&#34; height=&#34;512&#34; width=&#34;512&#34;/&gt;&lt;br/&gt;&#xA;    &lt;figcaption&gt;&#xA;      It’s a viking-inspired climate warning. [1] (artist:&#xA;      &lt;a href=&#34;https://www.instagram.com/trejen_jamal/&#34;&gt;Trejen&lt;/a&gt;)&#xA;    &lt;/figcaption&gt;&#xA;  &lt;/figure&gt;&#xA;&lt;p&gt;&lt;/p&gt;&#xA;&lt;p&gt;After six months with this puppy, it’s done more than I thought it could.&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  First, it’s a constant reminder. It’s not a checklist item I can mark off or&#xA;  that can fall to the bottom of my list. It can’t be forgotten about or left&#xA;  behind in an app change. It will be there as long as I will be, which is&#xA;  exactly how long I want to be conscious of the climate crisis.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Second, it’s a social forcing function to act within my morals. When people&#xA;  ask me about my tattoo, I know I need to “have my story straight”. I need to&#xA;  know everything about myself that’s not better than climate par and have a&#xA;  roadmap for fixing it ready. No one expects me to be Captain Planet, but if I&#xA;  have a methane stove and don’t at least have a plan for going induction, well,&#xA;  that’s an embarrassing moment for someone with a climate crisis tattoo.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  In just six months these two pressures together have motivated me into&#xA;  research, action, and activism on how to make my kids and grandkids not spite&#xA;  me. I’m better informed about policy, I&#39;m involved in local Seattle politics&#xA;  (actively pushing for more walk-friendly neighborhoods), and our house is&#xA;  running on 100% green energy. [2]&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  If you have a lifelong motivation, a few hundred dollars, and a decent&#xA;  tolerance for pain, I recommend getting an aspirational tattoo.&#xA;&lt;/p&gt;&#xA;&lt;hr/&gt;&#xA;&lt;p&gt;&#xA;  [1]: Can you identify the symbols?&#xA;  &lt;a href=&#34;tattoo_symbols.html&#34;&gt;Click for answer.&lt;/a&gt;&lt;br/&gt;&#xA;  [2]: Puget Sound Energy&#39;s&#xA;  &lt;a href=&#34;https://www.pse.com/green-options/Renewable-Energy-Programs/greensolarcalculator&#34;&gt;Green Power&lt;/a&gt;&#xA;  program adds just a few bucks a month. Look up equivalents in your area!&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;i&gt;&#xA;    Thanks to &lt;a href=&#34;https://jm.dev&#34;&gt;Jordan McQueen&lt;/a&gt; for early feedback on&#xA;    drafts of this.&#xA;  &lt;/i&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>Tattoos as Moral Contracts</h1>
-
-<p>
-  This year, I got a tattoo. My morals had been at odds with my behaviors in a
-  place very important to me<span style="font-family: sans-serif">—</span>the climate crisis. It’s easy to think about how
-  horrible the climate crisis is, and yes definitely someone should do something
-  about it, yes probably those big corporations that sounds nice, now let’s
-  forget about it for another year.
-</p>
-<p>
-  This isn’t a great way to get things done and I had the cognizance to
-  recognize that, but it kept happening to me. So I tattooed a reminder on my
-  forearm.
-</p>
-<p>
-  </p><figure>
-    <img src="img/tattoo.webp" height="512" width="512"/><br/>
-    <figcaption>
-      It’s a viking-inspired climate warning. [1] (artist:
-      <a href="https://www.instagram.com/trejen_jamal/">Trejen</a>)
-    </figcaption>
-  </figure>
-<p></p>
-<p>After six months with this puppy, it’s done more than I thought it could.</p>
-<p>
-  First, it’s a constant reminder. It’s not a checklist item I can mark off or
-  that can fall to the bottom of my list. It can’t be forgotten about or left
-  behind in an app change. It will be there as long as I will be, which is
-  exactly how long I want to be conscious of the climate crisis.
-</p>
-<p>
-  Second, it’s a social forcing function to act within my morals. When people
-  ask me about my tattoo, I know I need to “have my story straight”. I need to
-  know everything about myself that’s not better than climate par and have a
-  roadmap for fixing it ready. No one expects me to be Captain Planet, but if I
-  have a methane stove and don’t at least have a plan for going induction, well,
-  that’s an embarrassing moment for someone with a climate crisis tattoo.
-</p>
-<p>
-  In just six months these two pressures together have motivated me into
-  research, action, and activism on how to make my kids and grandkids not spite
-  me. I’m better informed about policy, I'm involved in local Seattle politics
-  (actively pushing for more walk-friendly neighborhoods), and our house is
-  running on 100% green energy. [2]
-</p>
-<p>
-  If you have a lifelong motivation, a few hundred dollars, and a decent
-  tolerance for pain, I recommend getting an aspirational tattoo.
-</p>
-<hr/>
-<p>
-  [1]: Can you identify the symbols?
-  <a href="tattoo_symbols.html">Click for answer.</a><br/>
-  [2]: Puget Sound Energy's
-  <a href="https://www.pse.com/green-options/Renewable-Energy-Programs/greensolarcalculator">Green Power</a>
-  program adds just a few bucks a month. Look up equivalents in your area!
-</p>
-<p>
-  <i>
-    Thanks to <a href="https://jm.dev">Jordan McQueen</a> for early feedback on
-    drafts of this.
-  </i>
-</p>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>tattoo</guid>
-      <pubDate>Wed, 01 Dec 2021 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>The Remote Pop-In</title>
-      <link>https:/thepopin.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;The Remote Pop-In&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;&#xA;  This page describes a method of dealing with one of the missing features of&#xA;  fully remote teams: the pop-in.&#xA;&#xA;  &lt;!-- TODO: make another about social time re: hallway conversations --&gt;&#xA;&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;The Pop-In&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  The pop-in, back before open floorplans, is when you physically walk into&#xA;  someone&#39;s office to ask them a question or spitball an idea. In an open&#xA;  floorplan you can instead swivel your chair or walk to their desk.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The pop-in is valuable because it&#39;s as informal as email, but as&#xA;  high-bandwidth and low-latency as meetings. It&#39;s interruptive to be popped in&#xA;  on, but that interruption power is self-limiting: the effort of physically&#xA;  going somewhere is high, and the tools available to the target like doors,&#xA;  signs, and social cues are numerous and don&#39;t require much thought to&#xA;  implement.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Slack DMs come close to replacing the pop-in, but they reduce the effort too&#xA;  much. This leads to more interruptions (a little lower in intensity, but a lot&#xA;  higher in number) and even to the replacement of trackers, emails, and wikis&#xA;  with DMs.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  There&#39;s a lot wrong with the pop-in, but like any tool it has its uses. Many&#xA;  great products&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;companies, even&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;have been built on the shoulders of&#xA;  the pop-in.&#xA;&lt;/p&gt;&#xA;&lt;h2&gt;The Remote Pop-In&lt;/h2&gt;&#xA;&lt;p&gt;&#xA;  There&#39;s really no remote equivalent to the pop-in. There are products that&#xA;  help you &#34;hang out&#34; like Facebook Portal, but nothing that implements the&#xA;  pop-in.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  At &lt;a href=&#34;https://yourbase.io&#34;&gt;YourBase&lt;/a&gt; we decided we needed one. Rather&#xA;  than build another tool, we experimented with Discord. I&#39;m happy to say we&#xA;  found something that works, and even solves the worst problem of the&#xA;  open-office pop-in: the inability to shut your damned door.&#xA;&lt;/p&gt;&#xA;&lt;h3&gt;The Setup&lt;/h3&gt;&#xA;{{ img&#xA;  &#34;The company Discord server on a workday.&#34;&#xA;  &#34;0&#34;&#xA;  &#34;A screenshot of a Discord server with several voice channels, some empty, some having one person in them&#34;&#xA;}}&#xA;&lt;p&gt;&#xA;  In our company Discord server, we give everyone one voice channel of their&#xA;  own. This is your &#34;office&#34;. When you are online and able to be disturbed, you&#xA;  join your office, alone. You stay in there as long as you are &#34;in&#34;.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Because of how Discord works, everyone can see who is in what office at all&#xA;  times. But you can only hear conversations for the room you&#39;re in, and you can&#xA;  only be in one room at a time. Joining a room plays an obvious audio chime and&#xA;  is not something you can do sneakily.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  When someone wants to pop in, they join your voice channel. The chime plays,&#xA;  they say hello, you unmute and turn on video if you like, and have your&#xA;  pop-in. And that&#39;s really it.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  If you&#39;re going to the restroom and will be AFK, you can join the restroom&#xA;  channel. You&#39;re in, but away. No one is actually wearing a headset on the&#xA;  toilet, it&#39;s just a fun way to feel like a real office.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;We&#39;ve even fallen into some typical office behaviors:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;  &lt;li&gt;&#xA;    We&#39;ve started having meetings in people&#39;s offices, just because it&#39;s easier.&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    We have a &#34;cafeteria&#34; room where you can eat your lunch if you&#39;ve got&#xA;    nothing going on in real life. We also hold lunch-and-learns here.&#xA;  &lt;/li&gt;&#xA;  &lt;li&gt;&#xA;    We have a &#34;rooftop&#34; and other common spaces where some people chill, which&#xA;    signals that they&#39;re open for a chat.&#xA;  &lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;p&gt;&#xA;  The oddest one is that when it&#39;s slow around the office, you can tell. You can&#xA;  almost hear how quiet it is when you&#39;re the first one in or the last one out.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  The pop-in is valuable because it&#39;s informal, high bandwidth, and low latency.&#xA;  Enabling it using Discord has worked very well for us over the last six&#xA;  months, and we didn&#39;t even have to build anything.&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  Thanks to &lt;a href=&#34;https://discordapp.com&#34;&gt;Discord&lt;/a&gt; for making such a&#xA;  flexible platform. Thanks to &lt;a href=&#34;https://yourbase.io&#34;&gt;YourBase&lt;/a&gt; for&#xA;  being so open to crazy ideas. (Check us out if your CI is slow.)&#xA;&lt;/p&gt;&#xA;&lt;p&gt;&#xA;  &lt;a href=&#34;https://www.youtube.com/watch?v=KzOv2jrC1I8&#34;&gt;&#34;The Pop-In&#34;&lt;/a&gt;&#xA;&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>The Remote Pop-In</h1>
-
-<p>
-  This page describes a method of dealing with one of the missing features of
-  fully remote teams: the pop-in.
-
-  <!-- TODO: make another about social time re: hallway conversations -->
-</p>
-
-<h2>The Pop-In</h2>
-<p>
-  The pop-in, back before open floorplans, is when you physically walk into
-  someone's office to ask them a question or spitball an idea. In an open
-  floorplan you can instead swivel your chair or walk to their desk.
-</p>
-<p>
-  The pop-in is valuable because it's as informal as email, but as
-  high-bandwidth and low-latency as meetings. It's interruptive to be popped in
-  on, but that interruption power is self-limiting: the effort of physically
-  going somewhere is high, and the tools available to the target like doors,
-  signs, and social cues are numerous and don't require much thought to
-  implement.
-</p>
-<p>
-  Slack DMs come close to replacing the pop-in, but they reduce the effort too
-  much. This leads to more interruptions (a little lower in intensity, but a lot
-  higher in number) and even to the replacement of trackers, emails, and wikis
-  with DMs.
-</p>
-<p>
-  There's a lot wrong with the pop-in, but like any tool it has its uses. Many
-  great products<span style="font-family: sans-serif">—</span>companies, even<span style="font-family: sans-serif">—</span>have been built on the shoulders of
-  the pop-in.
-</p>
-<h2>The Remote Pop-In</h2>
-<p>
-  There's really no remote equivalent to the pop-in. There are products that
-  help you "hang out" like Facebook Portal, but nothing that implements the
-  pop-in.
-</p>
-<p>
-  At <a href="https://yourbase.io">YourBase</a> we decided we needed one. Rather
-  than build another tool, we experimented with Discord. I'm happy to say we
-  found something that works, and even solves the worst problem of the
-  open-office pop-in: the inability to shut your damned door.
-</p>
-<h3>The Setup</h3>
-{{ img
-  "The company Discord server on a workday."
-  "0"
-  "A screenshot of a Discord server with several voice channels, some empty, some having one person in them"
-}}
-<p>
-  In our company Discord server, we give everyone one voice channel of their
-  own. This is your "office". When you are online and able to be disturbed, you
-  join your office, alone. You stay in there as long as you are "in".
-</p>
-<p>
-  Because of how Discord works, everyone can see who is in what office at all
-  times. But you can only hear conversations for the room you're in, and you can
-  only be in one room at a time. Joining a room plays an obvious audio chime and
-  is not something you can do sneakily.
-</p>
-<p>
-  When someone wants to pop in, they join your voice channel. The chime plays,
-  they say hello, you unmute and turn on video if you like, and have your
-  pop-in. And that's really it.
-</p>
-<p>
-  If you're going to the restroom and will be AFK, you can join the restroom
-  channel. You're in, but away. No one is actually wearing a headset on the
-  toilet, it's just a fun way to feel like a real office.
-</p>
-<p>We've even fallen into some typical office behaviors:</p>
-
-<ul>
-  <li>
-    We've started having meetings in people's offices, just because it's easier.
-  </li>
-  <li>
-    We have a "cafeteria" room where you can eat your lunch if you've got
-    nothing going on in real life. We also hold lunch-and-learns here.
-  </li>
-  <li>
-    We have a "rooftop" and other common spaces where some people chill, which
-    signals that they're open for a chat.
-  </li>
-</ul>
-<p>
-  The oddest one is that when it's slow around the office, you can tell. You can
-  almost hear how quiet it is when you're the first one in or the last one out.
-</p>
-<p>
-  The pop-in is valuable because it's informal, high bandwidth, and low latency.
-  Enabling it using Discord has worked very well for us over the last six
-  months, and we didn't even have to build anything.
-</p>
-<p>
-  Thanks to <a href="https://discordapp.com">Discord</a> for making such a
-  flexible platform. Thanks to <a href="https://yourbase.io">YourBase</a> for
-  being so open to crazy ideas. (Check us out if your CI is slow.)
-</p>
-<p>
-  <a href="https://www.youtube.com/watch?v=KzOv2jrC1I8">"The Pop-In"</a>
-</p>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>thepopin</guid>
-      <pubDate>Sat, 01 May 2021 00:00:00 +0000</pubDate>
     </item>
   </channel>
 </rss>
