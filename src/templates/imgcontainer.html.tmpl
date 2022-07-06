@@ -8,6 +8,22 @@
     {{ with .Next }}
       <link rel="preload" as="image" href="{{ .ImageSRC }}" />
     {{ end }}
+    <script>
+      document.addEventListener('keydown', event => {
+        switch (event.key) {
+          {{with .Prev}}
+            case "ArrowLeft":
+              window.location.href = "{{ .PageLink }}";
+              break;
+          {{end}}
+          {{with .Next}}
+            case "ArrowRight":
+              window.location.href = "{{ .PageLink }}";
+              break;
+          {{end}}
+        }
+      });
+    </script>
     <title>twos.dev Photo Viewer</title>
   </head>
 

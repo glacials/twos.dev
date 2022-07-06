@@ -141,15 +141,15 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 // frontmatter and structure. Heavier details like template execution are not
 // touched until Render is called.
 func NewHTMLDocument(src string) (*document, error) {
-	d, err := newRaw(src)
-	if err != nil {
+	d := document{SrcPath: src}
+	if err := d.load(); err != nil {
 		return nil, err
 	}
 	d.encoding = encodingHTML
 	if err := d.parseHTML(d.body); err != nil {
 		return nil, err
 	}
-	return d, d.slurpHTML()
+	return &d, d.slurpHTML()
 }
 
 // NewMarkdownDocument creates a new document from the Markdown file at the
@@ -157,32 +157,30 @@ func NewHTMLDocument(src string) (*document, error) {
 // call, such as frontmatter and structure. Heavier details like template
 // execution are not touched until Render is called.
 func NewMarkdownDocument(src string) (*document, error) {
-	d, err := newRaw(src)
-	if err != nil {
+	d := document{SrcPath: src}
+	if err := d.load(); err != nil {
 		return nil, err
 	}
 	d.encoding = encodingMarkdown
 	if err := d.parseMarkdown(d.body); err != nil {
 		return nil, err
 	}
-	return d, d.slurpHTML()
+	return &d, d.slurpHTML()
 }
 
-func newRaw(src string) (*document, error) {
-	f, err := os.Open(src)
+func (d *document) load() error {
+	f, err := os.Open(d.SrcPath)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	defer f.Close()
 
-	var d document
 	body, err := frontmatter.Parse(f, &d)
 	if err != nil {
-		return nil, err
+		return err
 	}
 	d.body = body
-	d.SrcPath = src
-	return &d, nil
+	return nil
 }
 
 func (d *document) slurpHTML() error {
@@ -264,6 +262,9 @@ func (d *document) parseMarkdown(body []byte) error {
 }
 
 func (d *document) build() ([]byte, error) {
+	if err := d.load(); err != nil {
+		return nil, err
+	}
 	if err := d.parse(); err != nil {
 		return nil, err
 	}
