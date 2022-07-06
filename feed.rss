@@ -5,527 +5,8 @@
     <description></description>
     <copyright>Copyright 0–2022 Anonymous</copyright>
     <managingEditor>unspecified (Anonymous)</managingEditor>
-    <pubDate>Tue, 05 Jul 2022 23:02:40 +0000</pubDate>
-    <lastBuildDate>Tue, 05 Jul 2022 23:02:40 +0000</lastBuildDate>
-    <item>
-      <title>Inside twos.dev</title>
-      <link>https:/meta.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Inside twos.dev&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;There&#39;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;With this in mind, I decided to ruthlessly optimize for two goals:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;It must be easy to publish writing&lt;/li&gt;&#xA;&lt;li&gt;As long as I&#39;m alive, URLs must not change&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Warm Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in &lt;code&gt;$EDITOR&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Writing was slowed down by cruft like &lt;code&gt;&amp;amp;lt;p&amp;amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;amp;lt;li&amp;amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I first focused on changing my drafting app to something with more robust exporting tools. I found &lt;a href=&#34;https://ia.net/writer&#34;&gt;iA Writer&lt;/a&gt;, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shortcuts&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;iOS and macOS ship with &lt;a href=&#34;https://apps.apple.com/us/app/shortcuts/id1462947752&#34;&gt;Shortcuts&lt;/a&gt;, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the &lt;code&gt;src/warm&lt;/code&gt; directory in the twos.dev Git repository by invoking &lt;a href=&#34;https://workingcopyapp.com&#34;&gt;Working Copy&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Preprocessing&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;On push, GitHub Actions builds the Markdown file into HTML with all the &lt;a href=&#34;https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go&#34;&gt;right preprocessing&lt;/a&gt; required to make it look like twos.dev. I use a small subset of &lt;a href=&#34;https://pkg.go.dev/html/template&#34;&gt;&lt;code&gt;html/template&lt;/code&gt;&lt;/a&gt; to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Cold Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in &lt;a href=&#34;autism.html&#34;&gt;Anonymously Autistic&lt;/a&gt; or the variable-width font requirements of &lt;a href=&#34;dashes.html&#34;&gt;Dashes&lt;/a&gt;. iA Writer is great for prose, but when it&#39;s time to write code I need to be back in &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have &#34;graduated&#34;:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;warm,cold&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;twos.dev build&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;mv dist/DOCUMENT.html src/cold/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/cold/DOCUMENT.&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;md,html&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;Results&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a &lt;a href=&#34;cv.html&#34;&gt;CV&lt;/a&gt;&#39;s bicolumnar layout).&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;On URLs Not Changing&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: &lt;a href=&#34;https://www.w3.org/Provider/Style/URI&#34;&gt;cool URLs don’t change&lt;/a&gt;. I&#39;ve removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I&#39;ll simply &lt;code&gt;cp -r dist&lt;/code&gt; to my next crazy system&#39;s web root.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>Inside twos.dev</h1>
-
-<p>There's a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
-
-<p>With this in mind, I decided to ruthlessly optimize for two goals:</p>
-
-<ol>
-<li>It must be easy to publish writing</li>
-<li>As long as I'm alive, URLs must not change</li>
-</ol>
-
-<p>In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.</p>
-
-<h2>Warm Content</h2>
-
-<p>I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:</p>
-
-<ul>
-<li>Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in <code>$EDITOR</code>)</li>
-<li>Writing was slowed down by cruft like <code>&amp;lt;p&amp;gt;</code> and <code>&amp;lt;li&amp;gt;</code></li>
-<li>The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring</li>
-</ul>
-
-<p>To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.</p>
-
-<p>I first focused on changing my drafting app to something with more robust exporting tools. I found <a href="https://ia.net/writer">iA Writer</a>, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.</p>
-
-<h3>Shortcuts</h3>
-
-<p>iOS and macOS ship with <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the <code>src/warm</code> directory in the twos.dev Git repository by invoking <a href="https://workingcopyapp.com">Working Copy</a>.</p>
-
-<h3>Preprocessing</h3>
-
-<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
-
-<p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
-
-<h2>Cold Content</h2>
-
-<p>There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.</p>
-
-<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
-
-<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
-</span></span></code></pre></body></html>
-
-<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
-</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
-</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
-</span></span></code></pre></body></html>
-
-<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
-
-<h4>Results</h4>
-
-<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
-
-<h2>On URLs Not Changing</h2>
-
-<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
-
-<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
-
-<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>meta</guid>
-      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>Advanced Dashes</title>
-      <link>https:/dashes.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Advanced Dashes&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;   &#34;I love pizza-liquor, but I&#39;ve never had it New York style.&#34;&#xA;   &#34;supreme&#34;&#xA;   &#34;A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;There are three common dashes in written English:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hyphen : &lt;span style=&#34;“font-family:sans-serif”&#34;&gt;-&lt;/span&gt;&lt;/li&gt;&#xA;&lt;li&gt;En dash: &lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The en dash is used to create ranges, like 2020&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;2030.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;One Size Doesn&#39;t Fit All&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;A myth states the em dash is so named because it is &#34;one &lt;code&gt;M&lt;/code&gt; wide&#34;, and the en dash &#34;one &lt;code&gt;N&lt;/code&gt; wide&#34;. This is... almost true. The confusing correction is that an em dash is so named because it is &lt;code&gt;1em&lt;/code&gt; wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Em&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;To talk about the em dash necessitates talk about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Em_(typography)&#34;&gt;em&lt;/a&gt;. The em (pronounced &lt;a href=&#34;https://en.wiktionary.org/wiki/Appendix:English_pronunciation&#34;&gt;/ɛm/&lt;/a&gt;) is an invisible bounding box every character is designed within&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:boundingbox&#34;&gt;&lt;a href=&#34;#fn:boundingbox&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: &lt;code&gt;1em&lt;/code&gt; is always one &lt;em&gt;font-heighth&lt;/em&gt; long. It is a unitless measurement that allows us to speak in relatives.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration &lt;code&gt;font-size: 1em&lt;/code&gt; is equivalent to &lt;code&gt;font-size: 100%&lt;/code&gt;, while &lt;code&gt;1.5em&lt;/code&gt; is equivalent to &lt;code&gt;150%&lt;/code&gt;, and so on.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em&#39;s eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text&#39;s changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em came about in the times of the printing press, when every &lt;code&gt;M&lt;/code&gt; type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the &lt;code&gt;M&lt;/code&gt; type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. At the time this was effectively a non-change, but the updated definition allowed the &lt;code&gt;M&lt;/code&gt; and the em to be decoupled.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Em Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is &lt;code&gt;1em&lt;/code&gt; long. In a way, the em dash took up the mantle of the square &lt;code&gt;M&lt;/code&gt; type. Because the em dash is &lt;code&gt;1em&lt;/code&gt; long, and the em is defined as the height of the font, the em dash&#39;s bounding box is an exact square&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;in any font, at any size.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Root Em&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;The &lt;code&gt;rem&lt;/code&gt; or &lt;strong&gt;root em&lt;/strong&gt; is a twist on the em. It is relative not to the parent context&#39;s font size, but to the root context&#39;s (in a web page, &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;). This allows one to escape relativity hell without reverting to absolutes:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;html: 16pt              (default     = 16pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  → body: 1.5em         (16pt * 1.5  = 24pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    → .container: .75em (24pt *  .75 = 18pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      → h1: 4em         (18pt * 4    = 72pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      → p: 1em          (18pt * 1    = 18pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    → footer: 0.5rem    (16pt * 0.5  =  8pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;key:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;context: requested size (calculation = final size)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  → child element&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;h4&gt;Aside: The Point&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;It’s hard to define the em in terms of points without defining the point. The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on &lt;code&gt;1/72in&lt;/code&gt; per point. This varies greatly among displays, devices, and assistive technologies; for example, a 21” 1440p display has more pixels per inch than a 27” 1440p display. To wrangle the variability, there exist new unstandardized concepts like &lt;a href=&#34;https://developer.android.com/training/multiscreen/screendensities#TaskUseDP&#34;&gt;density-independent pixels&lt;/a&gt; on Android and &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor&#34;&gt;effective pixels&lt;/a&gt; on Windows. The tumultuous history, as it happens, hasn&#39;t ended.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Based on the displays I develop on, I’ve settled on a rough mental framework of “1px of em length per pt” because it’s close enough to true and easy to remember: a 16pt font has a 16px em and is therefore 16px high.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Advanced Usage&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Advanced usage of dashes unfortunately revolves around avoiding common issues.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Em Dash Overuse&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in &#34;append-only&#34; mode&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;can be hard to do.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Separately, the em dash is a large glyph and hard to go unnoticed. Its use is obvious even in peripheral vision, so its overuse becomes a stain on the page before reading it.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Belittled Hyphens&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;When one side of a hyphen is a compound word like &#34;frozen yogurt&#34; its spaces can visually overpower the hyphen: &lt;code&gt;pre-frozen yogurt&lt;/code&gt; looks like &lt;code&gt;[pre-frozen] yogurt&lt;/code&gt;, not &lt;code&gt;pre-[frozen yogurt]&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;One solution replaces spaces with hyphens (&lt;code&gt;pre-frozen-yogurt&lt;/code&gt;), which may or may not suit the hyphenation. The opposite (&lt;code&gt;pre frozen yogurt&lt;/code&gt;) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; users can replace each space with a &lt;a href=&#34;https://en.wikipedia.org/wiki/Thin_space&#34;&gt;&lt;code&gt;\thinspace&lt;/code&gt;&lt;/a&gt; to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a pre-frozen&lt;span class=&#34;k&#34;&gt;\thinspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;yogurt time&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a&lt;span class=&#34;k&#34;&gt;\enspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;pre-frozen&lt;span class=&#34;k&#34;&gt;\thinspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;yogurt&lt;span class=&#34;k&#34;&gt;\enspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;time&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{a pre-frozen\thinspace{}yogurt time}\]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a time before frozen yogurt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;It&#39;s crude, but dependable.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Broken Dashes&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;If a line soft-wraps immediately before or after a dash, what should its behavior be? It&#39;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge             v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I am looking at dates about 20&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;30 days out.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I&#39;m looking at dates about 20&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;30 days out.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I am pleased they thought that&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;however odd it may be.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I&#39;m pleased they thought that&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;however odd it may be.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;Strangely, the hyphen is the only dash that has an option here: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens&#34;&gt;non-breaking hyphen&lt;/a&gt; or &#34;hard hyphen&#34; is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Drowned Dashes&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;When using &lt;a href=&#34;https://en.wikipedia.org/wiki/Typographic_alignment#Justified&#34;&gt;justified text&lt;/a&gt; elongated spaces can overpower dashes where non-elongated spaces would not have.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For example, see this simulation of left-aligned text:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge             v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I said they were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;And this simulation of justified text:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I    said    they   were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;In the justified simulation, &#34;were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#34; reads like the mythical creature &#34;were-wolf&#34; because the spaces are proportionally larger than the em dash.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I   said  they  were  &lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;  wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;h3&gt;Input Difficulties&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;No one should ever fault that, but for those who are willing to commit something new to memory:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;macOS&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;En dash: &lt;code&gt;⌥ + -&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;code&gt;⌥ + Shift + -&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;Windows&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;En dash: &lt;code&gt;Alt + 0150&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;code&gt;Alt + 0151&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;For all others, read on.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Hyphen-Powered En Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: &lt;code&gt;2020-2030&lt;/code&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; requires two (&lt;code&gt;--&lt;/code&gt;) for the en dash.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Hyphen-Powered Em Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;A common replacement for the em dash is a space on either end of two hyphens (&lt;code&gt;--&lt;/code&gt;). Because &lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; reserves two hyphens for the en dash, it requires three (&lt;code&gt;---&lt;/code&gt;) for the em.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Output Difficulties&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(&lt;a href=&#34;https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47&#34;&gt;https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47&lt;/a&gt;) to render twos.dev&#39;s dashes in a variable width font.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I&#39;d love for there to be a &#34;monospace with exceptions&#34; font that takes this chore out of my hands.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Bonus Round: Esoteric Dashes&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don&#39;t often get to see the light of day.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;swung dash&lt;/strong&gt; (&lt;span style=&#34;font-family: sans-serif&#34;&gt;⁓&lt;/span&gt;) is an elongated tilde used to stand in for a word being defined in a dictionary.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:swung&#34;&gt;&lt;a href=&#34;#fn:swung&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;boot (n)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ex: Let me put on my other &lt;span style=&#34;font-family: sans-serif&#34;&gt;⁓&lt;/span&gt;.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;horizontal bar&lt;/strong&gt; is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;―&lt;/span&gt; O Miss Douce! Miss Kennedy protested. You horrid thing!&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;James Joyce&#39;s Ulysses p. 335&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;hyphen bullet&lt;/strong&gt; is a hyphen to be used in place of a bullet point.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;- This is a hyphen&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;⁃&lt;/span&gt; This is a hyphen bullet&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;figure dash&lt;/strong&gt; is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Figure dash: 867‒5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Number:      86705309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;En dash:     867&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Hyphen:      867-5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;Lastly, my favorite: the &lt;strong&gt;soft hyphen&lt;/strong&gt; is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is &lt;em&gt;welcome&lt;/em&gt; to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge            v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                           |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;No soft hyphen:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Supercalifragilisticexpialid-&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;ocious&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Soft hyphen after &#39;istic&#39;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Supercalifragilistic-&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;expialidocious&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;How dashing!&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:boundingbox&#34;&gt;&#34;Bounding box&#34; is strong; font designers are free to design outside it.&lt;/li&gt;&#xA;&#xA;&lt;li id=&#34;fn:swung&#34;&gt;&lt;a href=&#34;http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&#34;&gt;http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>Advanced Dashes</h1>
-
-<p>{{ img
-   "I love pizza-liquor, but I've never had it New York style."
-   "supreme"
-   "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
-}}</p>
-
-<p>There are three common dashes in written English:</p>
-
-<ul>
-<li>Hyphen : <span style="“font-family:sans-serif”">-</span></li>
-<li>En dash: <span style="font-family: sans-serif">–</span></li>
-<li>Em dash: <span style="font-family: sans-serif">—</span></li>
-</ul>
-
-<p>The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.</p>
-
-<p>The en dash is used to create ranges, like 2020<span style="font-family: sans-serif">–</span>2030.</p>
-
-<p>The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.</p>
-
-<h2>One Size Doesn't Fit All</h2>
-
-<p>A myth states the em dash is so named because it is "one <code>M</code> wide", and the en dash "one <code>N</code> wide". This is... almost true. The confusing correction is that an em dash is so named because it is <code>1em</code> wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.</p>
-
-<h3>The Em</h3>
-
-<p>To talk about the em dash necessitates talk about the <a href="https://en.wikipedia.org/wiki/Em_(typography)">em</a>. The em (pronounced <a href="https://en.wiktionary.org/wiki/Appendix:English_pronunciation">/ɛm/</a>) is an invisible bounding box every character is designed within<sup class="footnote-ref" id="fnref:boundingbox"><a href="#fn:boundingbox">1</a></sup> whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: <code>1em</code> is always one <em>font-heighth</em> long. It is a unitless measurement that allows us to speak in relatives.</p>
-
-<p>Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration <code>font-size: 1em</code> is equivalent to <code>font-size: 100%</code>, while <code>1.5em</code> is equivalent to <code>150%</code>, and so on.</p>
-
-<p>The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.</p>
-
-<p>The em came about in the times of the printing press, when every <code>M</code> type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the <code>M</code> type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. At the time this was effectively a non-change, but the updated definition allowed the <code>M</code> and the em to be decoupled.</p>
-
-<h4>The Em Dash</h4>
-
-<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash's bounding box is an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.</p>
-
-<h4>The Root Em</h4>
-
-<p>The <code>rem</code> or <strong>root em</strong> is a twist on the em. It is relative not to the parent context's font size, but to the root context's (in a web page, <code>&lt;html&gt;</code>). This allows one to escape relativity hell without reverting to absolutes:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">html: 16pt              (default     = 16pt)
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  → body: 1.5em         (16pt * 1.5  = 24pt)
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    → .container: .75em (24pt *  .75 = 18pt)
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      → h1: 4em         (18pt * 4    = 72pt)
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">      → p: 1em          (18pt * 1    = 18pt)
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    → footer: 0.5rem    (16pt * 0.5  =  8pt)
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">key:
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">context: requested size (calculation = final size)
-</span></span><span class="line"><span class="ln">10</span><span class="cl">  → child element
-</span></span></code></pre></body></html>
-
-<h4>Aside: The Point</h4>
-
-<p>It’s hard to define the em in terms of points without defining the point. The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on <code>1/72in</code> per point. This varies greatly among displays, devices, and assistive technologies; for example, a 21” 1440p display has more pixels per inch than a 27” 1440p display. To wrangle the variability, there exist new unstandardized concepts like <a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP">density-independent pixels</a> on Android and <a href="https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor">effective pixels</a> on Windows. The tumultuous history, as it happens, hasn't ended.</p>
-
-<p>Based on the displays I develop on, I’ve settled on a rough mental framework of “1px of em length per pt” because it’s close enough to true and easy to remember: a 16pt font has a 16px em and is therefore 16px high.</p>
-
-<h2>Advanced Usage</h2>
-
-<p>Advanced usage of dashes unfortunately revolves around avoiding common issues.</p>
-
-<h3>Em Dash Overuse</h3>
-
-<p>As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode<span style="font-family: sans-serif">—</span>thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.</p>
-
-<p>Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which<span style="font-family: sans-serif">—</span>for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it<span style="font-family: sans-serif">—</span>can be hard to do.</p>
-
-<p>Separately, the em dash is a large glyph and hard to go unnoticed. Its use is obvious even in peripheral vision, so its overuse becomes a stain on the page before reading it.</p>
-
-<h3>Belittled Hyphens</h3>
-
-<p>When one side of a hyphen is a compound word like "frozen yogurt" its spaces can visually overpower the hyphen: <code>pre-frozen yogurt</code> looks like <code>[pre-frozen] yogurt</code>, not <code>pre-[frozen yogurt]</code>.</p>
-
-<p>One solution replaces spaces with hyphens (<code>pre-frozen-yogurt</code>), which may or may not suit the hyphenation. The opposite (<code>pre frozen yogurt</code>) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.</p>
-
-<p><span class="math inline">\(\LaTeX\)</span> users can replace each space with a <a href="https://en.wikipedia.org/wiki/Thin_space"><code>\thinspace</code></a> to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt time
-</span></span><span class="line"><span class="ln">2</span><span class="cl">a<span class="k">\enspace</span><span class="nb">{}</span>pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt<span class="k">\enspace</span><span class="nb">{}</span>time
-</span></span></code></pre></body></html>
-<p><span class="math display">\[\text{a pre-frozen\thinspace{}yogurt time}\]</span></p><p><span class="math display">\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]</span></p><p>Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a time before frozen yogurt
-</span></span></code></pre></body></html>
-
-<p>It's crude, but dependable.</p>
-
-<h3>Broken Dashes</h3>
-
-<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It's accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
-</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">3</span><span class="cl">I am looking at dates about 20
-</span></span><span class="line"><span class="ln">4</span><span class="cl"><span style="font-family: sans-serif">–</span>30 days out.
-</span></span></code></pre></body></html>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20<span style="font-family: sans-serif">–</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
-</span></span></code></pre></body></html>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I am pleased they thought that
-</span></span><span class="line"><span class="ln">3</span><span class="cl"><span style="font-family: sans-serif">—</span>however odd it may be.
-</span></span></code></pre></body></html>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that<span style="font-family: sans-serif">—</span>
-</span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
-</span></span></code></pre></body></html>
-
-<p>Strangely, the hyphen is the only dash that has an option here: the <a href="https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens">non-breaking hyphen</a> or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.</p>
-
-<h3>Drowned Dashes</h3>
-
-<p>When using <a href="https://en.wikipedia.org/wiki/Typographic_alignment#Justified">justified text</a> elongated spaces can overpower dashes where non-elongated spaces would not have.</p>
-
-<p>For example, see this simulation of left-aligned text:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
-</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">3</span><span class="cl">I said they were<span style="font-family: sans-serif">—</span>wolf
-</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body></html>
-
-<p>And this simulation of justified text:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were<span style="font-family: sans-serif">—</span>wolf
-</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body></html>
-
-<p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.</p>
-
-<p>A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  <span style="font-family: sans-serif">—</span>  wolf
-</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body></html>
-
-<h3>Input Difficulties</h3>
-
-<p>Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.</p>
-
-<p>No one should ever fault that, but for those who are willing to commit something new to memory:</p>
-
-<ul>
-<li>macOS
-
-<ul>
-<li>En dash: <code>⌥ + -</code></li>
-<li>Em dash: <code>⌥ + Shift + -</code></li>
-</ul></li>
-<li>Windows
-
-<ul>
-<li>En dash: <code>Alt + 0150</code></li>
-<li>Em dash: <code>Alt + 0151</code></li>
-</ul></li>
-</ul>
-
-<p>For all others, read on.</p>
-
-<h4>The Hyphen-Powered En Dash</h4>
-
-<p>The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: <code>2020-2030</code>. <span class="math inline">\(\LaTeX\)</span> requires two (<code>--</code>) for the en dash.</p>
-
-<h4>The Hyphen-Powered Em Dash</h4>
-
-<p>A common replacement for the em dash is a space on either end of two hyphens (<code>--</code>). Because <span class="math inline">\(\LaTeX\)</span> reserves two hyphens for the en dash, it requires three (<code>---</code>) for the em.</p>
-
-<h3>Output Difficulties</h3>
-
-<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(<a href="https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47">https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47</a>) to render twos.dev's dashes in a variable width font.</p>
-
-<p>I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
-
-<h2>Bonus Round: Esoteric Dashes</h2>
-
-<p>The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don't often get to see the light of day.</p>
-
-<p>The <strong>swung dash</strong> (<span style="font-family: sans-serif">⁓</span>) is an elongated tilde used to stand in for a word being defined in a dictionary.<sup class="footnote-ref" id="fnref:swung"><a href="#fn:swung">2</a></sup></p>
-
-<blockquote>
-<p>boot (n)</p>
-
-<p>ex: Let me put on my other <span style="font-family: sans-serif">⁓</span>.</p>
-</blockquote>
-
-<p>The <strong>horizontal bar</strong> is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.</p>
-
-<blockquote>
-<p><span style="font-family: sans-serif">―</span> O Miss Douce! Miss Kennedy protested. You horrid thing!</p>
-
-<p><em>James Joyce's Ulysses p. 335</em></p>
-</blockquote>
-
-<p>The <strong>hyphen bullet</strong> is a hyphen to be used in place of a bullet point.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">- This is a hyphen
-</span></span><span class="line"><span class="ln">2</span><span class="cl"><span style="font-family: sans-serif">⁃</span> This is a hyphen bullet
-</span></span></code></pre></body></html>
-
-<p>The <strong>figure dash</strong> is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">Figure dash: 867‒5309
-</span></span><span class="line"><span class="ln">2</span><span class="cl">Number:      86705309
-</span></span><span class="line"><span class="ln">3</span><span class="cl">En dash:     867<span style="font-family: sans-serif">–</span>5309
-</span></span><span class="line"><span class="ln">4</span><span class="cl">Hyphen:      867-5309
-</span></span></code></pre></body></html>
-
-<p>Lastly, my favorite: the <strong>soft hyphen</strong> is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is <em>welcome</em> to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge            v right page edge
-</span></span><span class="line"><span class="ln">2</span><span class="cl">|                           |
-</span></span><span class="line"><span class="ln">3</span><span class="cl">No soft hyphen:
-</span></span><span class="line"><span class="ln">4</span><span class="cl">Supercalifragilisticexpialid-
-</span></span><span class="line"><span class="ln">5</span><span class="cl">ocious
-</span></span><span class="line"><span class="ln">6</span><span class="cl">
-</span></span><span class="line"><span class="ln">7</span><span class="cl">Soft hyphen after 'istic':
-</span></span><span class="line"><span class="ln">8</span><span class="cl">Supercalifragilistic-
-</span></span><span class="line"><span class="ln">9</span><span class="cl">expialidocious
-</span></span></code></pre></body></html>
-
-<p>How dashing!</p>
-
-<div class="footnotes">
-
-<hr/>
-
-<ol>
-<li id="fn:boundingbox">"Bounding box" is strong; font designers are free to design outside it.</li>
-
-<li id="fn:swung"><a href="http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash">http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash</a></li>
-</ol>
-
-</div>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>dashes</guid>
-      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>When the April Fool&#39;s Day Prank is Real</title>
-      <link>https:/hotsauce.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;When the April Fool&#39;s Day Prank is Real&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;I love it when companies call their own bluffs on April Fool&#39;s Day. I like to&#xA;click into their pranks to see where the seam is. Are they &#34;launching a&#xA;new product&#34; but the only page to be found is a press release? Or, is&#xA;there a product page with a disabled Buy button? Sometimes the Buy button&#xA;works, but brings you to a page that says &#34;Fooled you!&#34;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I was never satisfied by these seams after witnessing first-hand the gold wacky&#xA;standard: On April 1, 2004, a popular search engine pranked that it was pivoting&#xA;into becoming an email service -- and then &lt;a href=&#34;http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html&#34;&gt;it&#xA;did&lt;/a&gt;.&#xA;This was especially surprising in the age before every startup was a data&#xA;company.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Of course, Gmail was not created to remove a seam from an April Fool&#39;s Day&#xA;prank. It was made independently from April Fool’s Day, and someone decided it&#xA;would be funny to disguise its launch as a prank. But as a bystander the&#xA;effect is the same: it seems that they are calling their own bluffs. There&#39;s&#xA;no &#34;Fooled you!&#34; page.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Calling Your Own Bluffs&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I always wanted more experiences like this, so I built one. I run a website&#xA;called &lt;a href=&#34;https://splits.io&#34;&gt;Splits.io&lt;/a&gt; whose goal is to help&#xA;speedrunners (people who time themselves playing video games) play faster.&#xA;It&#39;s a niche site, but we have paying customers and about 10k monthly active&#xA;users.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For April Fool&#39;s Day in 2020, we launched a full-page takeover introducing a&#xA;feature to help people speedrun faster: the urgent need to use the bathroom.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We joked that we would ship them a spicy hot sauce which they could use as a&#xA;sort of gastrointestinal negative reinforcement. But when people clicked Buy,&#xA;they did not see &#34;Fooled you!&#34;, but a form to enter their payment&#xA;information. And when they entered their payment information and pressed&#xA;submit, they received a receipt in their inbox. And a charge to their card. A&#xA;week later, a package would show up at their door.&#xA;We called all our bluffs.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;The Set Up&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I knew I wanted people to receive real hot sauce, and I knew it couldn&#39;t just&#xA;be any hot sauce from the grocery store. The April Fool&#39;s takeover was going&#xA;to advertise a Splits.io-branded hot sauce, and we were going to give it to&#xA;them. I called it &lt;em&gt;Race to the Bottom&lt;/em&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Sauce&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;If you don&#39;t want to deal with actually making or bottling a product like hot&#xA;sauce but you still want one sporting your own brand, the main option is to&#xA;work with a&#xA;&lt;strong&gt;white label&lt;/strong&gt; company, i.e. one that does every step of making a&#xA;traditional product except for the branding. Instead of selling to consumers&#xA;or retailers, they sell to those with a brand and nothing else. This could be&#xA;someone who&#39;s just amazing at branding and needs a supplier, or it could be&#xA;your employer making some commemorative swag, or it could be an engineer&#xA;trying to make a dumb April Fool&#39;s Day joke.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;A surprising number of household brands use white label products behind the&#xA;scenes, namely store brands. Because the customers of these white label&#xA;companies are often large businesses, there&#39;s not a pressing need for&#xA;self-service like in consumer retail. That means it can take some phone tag&#xA;and email threads to get the relationship hammered out. But still, it works --&#xA;19% of the US economy is made up of white label goods&#xA;(&lt;a href=&#34;https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper&#34;&gt;source&lt;/a&gt;).&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Luckily the last few years have seen some self-service white label products&#xA;enter the market, propelled I think by the demand for startup swag. For&#xA;something as niche as hot sauce, though, the best we could hope for was&#xA;partial automation. I engaged with several vendors and ordered sample packs&#xA;from two -- one via self-service for $25 and one via phone call for free.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Then I made some chips, invited some friends over (pre-pandemic), and got to&#xA;work.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;  &#34;Taste testing hot sauces.&#34;&#xA;  &#34;trialing&#34;&#xA;  &#34;several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We selected a hot sauce called Pale Ale Chipotle and the company rated its&#xA;spiciness as 8/10 (no Scoville rating).&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Label&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;We&#39;re a small team with no designer, so I cracked open Acorn and spent way too&#xA;long making way too ugly a label.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;  &#34;The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute.&#34;&#xA;  &#34;label&#34;&#xA;  &#34;a hot sauce label reading &#39;Race to the bottom: A speedrunner&#39;s hot sauce&#39; in the Splits.io colors&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The white label company sent me a template with requirements such as how to&#xA;print the volume of the sauce within compliance, and the right proportions for&#xA;the label. They took care of the nutrition facts and bar code.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Launch Day&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;We set up everything to happen automatically. The code had been deployed days&#xA;earlier, with JavaScript just waiting for the day to tick over before doing&#xA;the takeover. The announcement tweet was scheduled ahead of time as well.&#xA;The response when the clock struck midnight was exactly as we hoped.&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;its actually real wtf&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;mdash; Dark (@DarkRTA)&#xA;&lt;a href=&#34;https://twitter.com/DarkRTA/status/1245495897875759108&#34;&gt;April 1, 2020&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ imgs&#xA;  &#34;Feedback during and after launch.&#34;&#xA;  &#34;feedback-1&#34;&#xA;  &#34;Screenshot a Discord channel where someone asks &#39;it is at this point that I begin to wonder how far I&#39;ll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says &#39;Pay&#39;. Below that, they say &#39;I had to know&#39; and attached another screenshot of the order being completed. They then said &#39;this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn&#39;t it?&#39;&#34;&#xA;  &#34;feedback-2&#34;&#xA;  &#34;Screenshot a Discord channel where someone asks &#39;did anyone get the item&#39; and then someone else replies with a photo of their hot sauce bottle saying &#39;Yep lmao&#39;. A third person says &#39;whoa you got yours already? nice. i can&#39;t believe it&#39;s real lol. @Glacials the madman&#39;&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shipping&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;I went into this expecting to make bulk trips to the post office, but I&#xA;actually never had to leave the house -- usps.com allows you to schedule a&#xA;mail carrier to pick up packages during their mail route. I had padded&#xA;flat-rate envelopes ready, also delivered from their website. On April 1st,&#xA;here was my pipeline:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;(Trigger) Receive “payment completed” email from Stripe&lt;/li&gt;&#xA;&lt;li&gt;Pay for a shipping label at usps.com (~$9)&lt;/li&gt;&#xA;&lt;li&gt;Print shipping label, affix to a padded envelope with scotch tape&lt;/li&gt;&#xA;&lt;li&gt;Pack in hot sauce and extra packing material&lt;/li&gt;&#xA;&lt;li&gt;Schedule a pickup at usps.com&lt;/li&gt;&#xA;&lt;li&gt;(On pickup day) Put queued package(s) on the porch&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;h2&gt;Final Surprises&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I built the full-page takeover to check if the day was April 1 when deciding&#xA;whether to take over or lie dormant, but I didn&#39;t think about checking the&#xA;year. So one year later, we suddenly got another influx of orders. Luckily I&#xA;still had plenty of stock with expiration dates still over a year away, so&#xA;spent a little surprise day packing hot sauce again -- and again a third time,&#xA;another year later.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Finances&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;After the sample packs and the bulk order of 48 bottles (the minimum), upfront&#xA;costs came to &lt;span class=&#34;math inline&#34;&gt;\(192.05. Over three April Fool&#39;s Days we sold 28 bottles in 25&#xA;orders at \)&lt;/span&gt;15 / bottle.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The cost of my labor and the boon to the brand are harder to calculate. I&#39;ll&#xA;call them a wash.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Revenue&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Orders: $15*28   =  $ 420.00&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Costs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Samples:           ($  25.00)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Hot sauce:         ($ 167.05)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Shipping: $9*25  = ($ 225.00)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Profit/loss ----------------&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                    $   2.95&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;I&#39;ll take it.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Conclusion&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Getting paid $2.95 to live out a minor dream of building a seamless April Fool&#39;s&#xA;Day joke was a great deal. I&#39;d have paid a lot more just for the joy of seeing&#xA;people&#39;s reactions in real time.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;On the way, I learned how white labels work and how big a slice of the economy&#xA;they make up, which has changed how I think about brands. Sometimes you have to&#xA;be a little wacky to learn something new about the world.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>When the April Fool's Day Prank is Real</h1>
-
-<p>I love it when companies call their own bluffs on April Fool's Day. I like to
-click into their pranks to see where the seam is. Are they "launching a
-new product" but the only page to be found is a press release? Or, is
-there a product page with a disabled Buy button? Sometimes the Buy button
-works, but brings you to a page that says "Fooled you!".</p>
-
-<p>I was never satisfied by these seams after witnessing first-hand the gold wacky
-standard: On April 1, 2004, a popular search engine pranked that it was pivoting
-into becoming an email service -- and then <a href="http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html">it
-did</a>.
-This was especially surprising in the age before every startup was a data
-company.</p>
-
-<p>Of course, Gmail was not created to remove a seam from an April Fool's Day
-prank. It was made independently from April Fool’s Day, and someone decided it
-would be funny to disguise its launch as a prank. But as a bystander the
-effect is the same: it seems that they are calling their own bluffs. There's
-no "Fooled you!" page.</p>
-
-<h2>Calling Your Own Bluffs</h2>
-
-<p>I always wanted more experiences like this, so I built one. I run a website
-called <a href="https://splits.io">Splits.io</a> whose goal is to help
-speedrunners (people who time themselves playing video games) play faster.
-It's a niche site, but we have paying customers and about 10k monthly active
-users.</p>
-
-<p>For April Fool's Day in 2020, we launched a full-page takeover introducing a
-feature to help people speedrun faster: the urgent need to use the bathroom.</p>
-
-<p>We joked that we would ship them a spicy hot sauce which they could use as a
-sort of gastrointestinal negative reinforcement. But when people clicked Buy,
-they did not see "Fooled you!", but a form to enter their payment
-information. And when they entered their payment information and pressed
-submit, they received a receipt in their inbox. And a charge to their card. A
-week later, a package would show up at their door.
-We called all our bluffs.</p>
-
-<h2>The Set Up</h2>
-
-<p>I knew I wanted people to receive real hot sauce, and I knew it couldn't just
-be any hot sauce from the grocery store. The April Fool's takeover was going
-to advertise a Splits.io-branded hot sauce, and we were going to give it to
-them. I called it <em>Race to the Bottom</em>.</p>
-
-<h3>The Sauce</h3>
-
-<p>If you don't want to deal with actually making or bottling a product like hot
-sauce but you still want one sporting your own brand, the main option is to
-work with a
-<strong>white label</strong> company, i.e. one that does every step of making a
-traditional product except for the branding. Instead of selling to consumers
-or retailers, they sell to those with a brand and nothing else. This could be
-someone who's just amazing at branding and needs a supplier, or it could be
-your employer making some commemorative swag, or it could be an engineer
-trying to make a dumb April Fool's Day joke.</p>
-
-<p>A surprising number of household brands use white label products behind the
-scenes, namely store brands. Because the customers of these white label
-companies are often large businesses, there's not a pressing need for
-self-service like in consumer retail. That means it can take some phone tag
-and email threads to get the relationship hammered out. But still, it works --
-19% of the US economy is made up of white label goods
-(<a href="https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper">source</a>).</p>
-
-<p>Luckily the last few years have seen some self-service white label products
-enter the market, propelled I think by the demand for startup swag. For
-something as niche as hot sauce, though, the best we could hope for was
-partial automation. I engaged with several vendors and ordered sample packs
-from two -- one via self-service for $25 and one via phone call for free.</p>
-
-<p>Then I made some chips, invited some friends over (pre-pandemic), and got to
-work.</p>
-
-<p>{{ img
-  "Taste testing hot sauces."
-  "trialing"
-  "several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
-}}</p>
-
-<p>We selected a hot sauce called Pale Ale Chipotle and the company rated its
-spiciness as 8/10 (no Scoville rating).</p>
-
-<h3>The Label</h3>
-
-<p>We're a small team with no designer, so I cracked open Acorn and spent way too
-long making way too ugly a label.</p>
-
-<p>{{ img
-  "The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute."
-  "label"
-  "a hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors"
-}}</p>
-
-<p>The white label company sent me a template with requirements such as how to
-print the volume of the sauce within compliance, and the right proportions for
-the label. They took care of the nutrition facts and bar code.</p>
-
-<h2>Launch Day</h2>
-
-<p>We set up everything to happen automatically. The code had been deployed days
-earlier, with JavaScript just waiting for the day to tick over before doing
-the takeover. The announcement tweet was scheduled ahead of time as well.
-The response when the clock struck midnight was exactly as we hoped.</p>
-
-<blockquote>
-<p>its actually real wtf</p>
-</blockquote>
-
-<p>&amp;mdash; Dark (@DarkRTA)
-<a href="https://twitter.com/DarkRTA/status/1245495897875759108">April 1, 2020</a></p>
-
-<p>{{ imgs
-  "Feedback during and after launch."
-  "feedback-1"
-  "Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'"
-  "feedback-2"
-  "Screenshot a Discord channel where someone asks 'did anyone get the item' and then someone else replies with a photo of their hot sauce bottle saying 'Yep lmao'. A third person says 'whoa you got yours already? nice. i can't believe it's real lol. @Glacials the madman'"
-}}</p>
-
-<h3>Shipping</h3>
-
-<p>I went into this expecting to make bulk trips to the post office, but I
-actually never had to leave the house -- usps.com allows you to schedule a
-mail carrier to pick up packages during their mail route. I had padded
-flat-rate envelopes ready, also delivered from their website. On April 1st,
-here was my pipeline:</p>
-
-<ol>
-<li>(Trigger) Receive “payment completed” email from Stripe</li>
-<li>Pay for a shipping label at usps.com (~$9)</li>
-<li>Print shipping label, affix to a padded envelope with scotch tape</li>
-<li>Pack in hot sauce and extra packing material</li>
-<li>Schedule a pickup at usps.com</li>
-<li>(On pickup day) Put queued package(s) on the porch</li>
-</ol>
-
-<h2>Final Surprises</h2>
-
-<p>I built the full-page takeover to check if the day was April 1 when deciding
-whether to take over or lie dormant, but I didn't think about checking the
-year. So one year later, we suddenly got another influx of orders. Luckily I
-still had plenty of stock with expiration dates still over a year away, so
-spent a little surprise day packing hot sauce again -- and again a third time,
-another year later.</p>
-
-<h2>Finances</h2>
-
-<p>After the sample packs and the bulk order of 48 bottles (the minimum), upfront
-costs came to <span class="math inline">\(192.05. Over three April Fool's Days we sold 28 bottles in 25
-orders at \)</span>15 / bottle.</p>
-
-<p>The cost of my labor and the boon to the brand are harder to calculate. I'll
-call them a wash.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">Revenue
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">Orders: $15*28   =  $ 420.00
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">Costs
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">Samples:           ($  25.00)
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">Hot sauce:         ($ 167.05)
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">Shipping: $9*25  = ($ 225.00)
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">Profit/loss ----------------
-</span></span><span class="line"><span class="ln">10</span><span class="cl">                    $   2.95
-</span></span></code></pre></body></html>
-
-<p>I'll take it.</p>
-
-<h2>Conclusion</h2>
-
-<p>Getting paid $2.95 to live out a minor dream of building a seamless April Fool's
-Day joke was a great deal. I'd have paid a lot more just for the joy of seeing
-people's reactions in real time.</p>
-
-<p>On the way, I learned how white labels work and how big a slice of the economy
-they make up, which has changed how I think about brands. Sometimes you have to
-be a little wacky to learn something new about the world.</p>
-</body></html>]]></content:encoded>
-      <author>Anonymous</author>
-      <guid>hotsauce</guid>
-      <pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate>
-    </item>
+    <pubDate>Wed, 06 Jul 2022 01:29:37 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2022 01:29:37 +0000</lastBuildDate>
     <item>
       <title>From Google to Apple</title>
       <link>https:/apple.html</link>
@@ -1526,6 +1007,525 @@ to document my journey here.</p>
       <author>Anonymous</author>
       <guid>apple</guid>
       <pubDate>Wed, 25 May 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>When the April Fool&#39;s Day Prank is Real</title>
+      <link>https:/hotsauce.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;When the April Fool&#39;s Day Prank is Real&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;I love it when companies call their own bluffs on April Fool&#39;s Day. I like to&#xA;click into their pranks to see where the seam is. Are they &#34;launching a&#xA;new product&#34; but the only page to be found is a press release? Or, is&#xA;there a product page with a disabled Buy button? Sometimes the Buy button&#xA;works, but brings you to a page that says &#34;Fooled you!&#34;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I was never satisfied by these seams after witnessing first-hand the gold wacky&#xA;standard: On April 1, 2004, a popular search engine pranked that it was pivoting&#xA;into becoming an email service -- and then &lt;a href=&#34;http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html&#34;&gt;it&#xA;did&lt;/a&gt;.&#xA;This was especially surprising in the age before every startup was a data&#xA;company.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Of course, Gmail was not created to remove a seam from an April Fool&#39;s Day&#xA;prank. It was made independently from April Fool’s Day, and someone decided it&#xA;would be funny to disguise its launch as a prank. But as a bystander the&#xA;effect is the same: it seems that they are calling their own bluffs. There&#39;s&#xA;no &#34;Fooled you!&#34; page.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Calling Your Own Bluffs&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I always wanted more experiences like this, so I built one. I run a website&#xA;called &lt;a href=&#34;https://splits.io&#34;&gt;Splits.io&lt;/a&gt; whose goal is to help&#xA;speedrunners (people who time themselves playing video games) play faster.&#xA;It&#39;s a niche site, but we have paying customers and about 10k monthly active&#xA;users.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For April Fool&#39;s Day in 2020, we launched a full-page takeover introducing a&#xA;feature to help people speedrun faster: the urgent need to use the bathroom.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We joked that we would ship them a spicy hot sauce which they could use as a&#xA;sort of gastrointestinal negative reinforcement. But when people clicked Buy,&#xA;they did not see &#34;Fooled you!&#34;, but a form to enter their payment&#xA;information. And when they entered their payment information and pressed&#xA;submit, they received a receipt in their inbox. And a charge to their card. A&#xA;week later, a package would show up at their door.&#xA;We called all our bluffs.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;The Set Up&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I knew I wanted people to receive real hot sauce, and I knew it couldn&#39;t just&#xA;be any hot sauce from the grocery store. The April Fool&#39;s takeover was going&#xA;to advertise a Splits.io-branded hot sauce, and we were going to give it to&#xA;them. I called it &lt;em&gt;Race to the Bottom&lt;/em&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Sauce&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;If you don&#39;t want to deal with actually making or bottling a product like hot&#xA;sauce but you still want one sporting your own brand, the main option is to&#xA;work with a&#xA;&lt;strong&gt;white label&lt;/strong&gt; company, i.e. one that does every step of making a&#xA;traditional product except for the branding. Instead of selling to consumers&#xA;or retailers, they sell to those with a brand and nothing else. This could be&#xA;someone who&#39;s just amazing at branding and needs a supplier, or it could be&#xA;your employer making some commemorative swag, or it could be an engineer&#xA;trying to make a dumb April Fool&#39;s Day joke.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;A surprising number of household brands use white label products behind the&#xA;scenes, namely store brands. Because the customers of these white label&#xA;companies are often large businesses, there&#39;s not a pressing need for&#xA;self-service like in consumer retail. That means it can take some phone tag&#xA;and email threads to get the relationship hammered out. But still, it works --&#xA;19% of the US economy is made up of white label goods&#xA;(&lt;a href=&#34;https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper&#34;&gt;source&lt;/a&gt;).&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Luckily the last few years have seen some self-service white label products&#xA;enter the market, propelled I think by the demand for startup swag. For&#xA;something as niche as hot sauce, though, the best we could hope for was&#xA;partial automation. I engaged with several vendors and ordered sample packs&#xA;from two -- one via self-service for $25 and one via phone call for free.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Then I made some chips, invited some friends over (pre-pandemic), and got to&#xA;work.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;  &#34;Taste testing hot sauces.&#34;&#xA;  &#34;trialing&#34;&#xA;  &#34;several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We selected a hot sauce called Pale Ale Chipotle and the company rated its&#xA;spiciness as 8/10 (no Scoville rating).&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Label&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;We&#39;re a small team with no designer, so I cracked open Acorn and spent way too&#xA;long making way too ugly a label.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;  &#34;The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute.&#34;&#xA;  &#34;label&#34;&#xA;  &#34;a hot sauce label reading &#39;Race to the bottom: A speedrunner&#39;s hot sauce&#39; in the Splits.io colors&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The white label company sent me a template with requirements such as how to&#xA;print the volume of the sauce within compliance, and the right proportions for&#xA;the label. They took care of the nutrition facts and bar code.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Launch Day&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;We set up everything to happen automatically. The code had been deployed days&#xA;earlier, with JavaScript just waiting for the day to tick over before doing&#xA;the takeover. The announcement tweet was scheduled ahead of time as well.&#xA;The response when the clock struck midnight was exactly as we hoped.&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;its actually real wtf&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;&amp;amp;mdash; Dark (@DarkRTA)&#xA;&lt;a href=&#34;https://twitter.com/DarkRTA/status/1245495897875759108&#34;&gt;April 1, 2020&lt;/a&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;{{ imgs&#xA;  &#34;Feedback during and after launch.&#34;&#xA;  &#34;feedback-1&#34;&#xA;  &#34;Screenshot a Discord channel where someone asks &#39;it is at this point that I begin to wonder how far I&#39;ll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says &#39;Pay&#39;. Below that, they say &#39;I had to know&#39; and attached another screenshot of the order being completed. They then said &#39;this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn&#39;t it?&#39;&#34;&#xA;  &#34;feedback-2&#34;&#xA;  &#34;Screenshot a Discord channel where someone asks &#39;did anyone get the item&#39; and then someone else replies with a photo of their hot sauce bottle saying &#39;Yep lmao&#39;. A third person says &#39;whoa you got yours already? nice. i can&#39;t believe it&#39;s real lol. @Glacials the madman&#39;&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shipping&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;I went into this expecting to make bulk trips to the post office, but I&#xA;actually never had to leave the house -- usps.com allows you to schedule a&#xA;mail carrier to pick up packages during their mail route. I had padded&#xA;flat-rate envelopes ready, also delivered from their website. On April 1st,&#xA;here was my pipeline:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;(Trigger) Receive “payment completed” email from Stripe&lt;/li&gt;&#xA;&lt;li&gt;Pay for a shipping label at usps.com (~$9)&lt;/li&gt;&#xA;&lt;li&gt;Print shipping label, affix to a padded envelope with scotch tape&lt;/li&gt;&#xA;&lt;li&gt;Pack in hot sauce and extra packing material&lt;/li&gt;&#xA;&lt;li&gt;Schedule a pickup at usps.com&lt;/li&gt;&#xA;&lt;li&gt;(On pickup day) Put queued package(s) on the porch&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;h2&gt;Final Surprises&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I built the full-page takeover to check if the day was April 1 when deciding&#xA;whether to take over or lie dormant, but I didn&#39;t think about checking the&#xA;year. So one year later, we suddenly got another influx of orders. Luckily I&#xA;still had plenty of stock with expiration dates still over a year away, so&#xA;spent a little surprise day packing hot sauce again -- and again a third time,&#xA;another year later.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Finances&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;After the sample packs and the bulk order of 48 bottles (the minimum), upfront&#xA;costs came to &lt;span class=&#34;math inline&#34;&gt;\(192.05. Over three April Fool&#39;s Days we sold 28 bottles in 25&#xA;orders at \)&lt;/span&gt;15 / bottle.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The cost of my labor and the boon to the brand are harder to calculate. I&#39;ll&#xA;call them a wash.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Revenue&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Orders: $15*28   =  $ 420.00&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Costs&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Samples:           ($  25.00)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Hot sauce:         ($ 167.05)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Shipping: $9*25  = ($ 225.00)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Profit/loss ----------------&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;                    $   2.95&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;I&#39;ll take it.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Conclusion&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Getting paid $2.95 to live out a minor dream of building a seamless April Fool&#39;s&#xA;Day joke was a great deal. I&#39;d have paid a lot more just for the joy of seeing&#xA;people&#39;s reactions in real time.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;On the way, I learned how white labels work and how big a slice of the economy&#xA;they make up, which has changed how I think about brands. Sometimes you have to&#xA;be a little wacky to learn something new about the world.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>When the April Fool's Day Prank is Real</h1>
+
+<p>I love it when companies call their own bluffs on April Fool's Day. I like to
+click into their pranks to see where the seam is. Are they "launching a
+new product" but the only page to be found is a press release? Or, is
+there a product page with a disabled Buy button? Sometimes the Buy button
+works, but brings you to a page that says "Fooled you!".</p>
+
+<p>I was never satisfied by these seams after witnessing first-hand the gold wacky
+standard: On April 1, 2004, a popular search engine pranked that it was pivoting
+into becoming an email service -- and then <a href="http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html">it
+did</a>.
+This was especially surprising in the age before every startup was a data
+company.</p>
+
+<p>Of course, Gmail was not created to remove a seam from an April Fool's Day
+prank. It was made independently from April Fool’s Day, and someone decided it
+would be funny to disguise its launch as a prank. But as a bystander the
+effect is the same: it seems that they are calling their own bluffs. There's
+no "Fooled you!" page.</p>
+
+<h2>Calling Your Own Bluffs</h2>
+
+<p>I always wanted more experiences like this, so I built one. I run a website
+called <a href="https://splits.io">Splits.io</a> whose goal is to help
+speedrunners (people who time themselves playing video games) play faster.
+It's a niche site, but we have paying customers and about 10k monthly active
+users.</p>
+
+<p>For April Fool's Day in 2020, we launched a full-page takeover introducing a
+feature to help people speedrun faster: the urgent need to use the bathroom.</p>
+
+<p>We joked that we would ship them a spicy hot sauce which they could use as a
+sort of gastrointestinal negative reinforcement. But when people clicked Buy,
+they did not see "Fooled you!", but a form to enter their payment
+information. And when they entered their payment information and pressed
+submit, they received a receipt in their inbox. And a charge to their card. A
+week later, a package would show up at their door.
+We called all our bluffs.</p>
+
+<h2>The Set Up</h2>
+
+<p>I knew I wanted people to receive real hot sauce, and I knew it couldn't just
+be any hot sauce from the grocery store. The April Fool's takeover was going
+to advertise a Splits.io-branded hot sauce, and we were going to give it to
+them. I called it <em>Race to the Bottom</em>.</p>
+
+<h3>The Sauce</h3>
+
+<p>If you don't want to deal with actually making or bottling a product like hot
+sauce but you still want one sporting your own brand, the main option is to
+work with a
+<strong>white label</strong> company, i.e. one that does every step of making a
+traditional product except for the branding. Instead of selling to consumers
+or retailers, they sell to those with a brand and nothing else. This could be
+someone who's just amazing at branding and needs a supplier, or it could be
+your employer making some commemorative swag, or it could be an engineer
+trying to make a dumb April Fool's Day joke.</p>
+
+<p>A surprising number of household brands use white label products behind the
+scenes, namely store brands. Because the customers of these white label
+companies are often large businesses, there's not a pressing need for
+self-service like in consumer retail. That means it can take some phone tag
+and email threads to get the relationship hammered out. But still, it works --
+19% of the US economy is made up of white label goods
+(<a href="https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper">source</a>).</p>
+
+<p>Luckily the last few years have seen some self-service white label products
+enter the market, propelled I think by the demand for startup swag. For
+something as niche as hot sauce, though, the best we could hope for was
+partial automation. I engaged with several vendors and ordered sample packs
+from two -- one via self-service for $25 and one via phone call for free.</p>
+
+<p>Then I made some chips, invited some friends over (pre-pandemic), and got to
+work.</p>
+
+<p>{{ img
+  "Taste testing hot sauces."
+  "trialing"
+  "several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
+}}</p>
+
+<p>We selected a hot sauce called Pale Ale Chipotle and the company rated its
+spiciness as 8/10 (no Scoville rating).</p>
+
+<h3>The Label</h3>
+
+<p>We're a small team with no designer, so I cracked open Acorn and spent way too
+long making way too ugly a label.</p>
+
+<p>{{ img
+  "The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute."
+  "label"
+  "a hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors"
+}}</p>
+
+<p>The white label company sent me a template with requirements such as how to
+print the volume of the sauce within compliance, and the right proportions for
+the label. They took care of the nutrition facts and bar code.</p>
+
+<h2>Launch Day</h2>
+
+<p>We set up everything to happen automatically. The code had been deployed days
+earlier, with JavaScript just waiting for the day to tick over before doing
+the takeover. The announcement tweet was scheduled ahead of time as well.
+The response when the clock struck midnight was exactly as we hoped.</p>
+
+<blockquote>
+<p>its actually real wtf</p>
+</blockquote>
+
+<p>&amp;mdash; Dark (@DarkRTA)
+<a href="https://twitter.com/DarkRTA/status/1245495897875759108">April 1, 2020</a></p>
+
+<p>{{ imgs
+  "Feedback during and after launch."
+  "feedback-1"
+  "Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'"
+  "feedback-2"
+  "Screenshot a Discord channel where someone asks 'did anyone get the item' and then someone else replies with a photo of their hot sauce bottle saying 'Yep lmao'. A third person says 'whoa you got yours already? nice. i can't believe it's real lol. @Glacials the madman'"
+}}</p>
+
+<h3>Shipping</h3>
+
+<p>I went into this expecting to make bulk trips to the post office, but I
+actually never had to leave the house -- usps.com allows you to schedule a
+mail carrier to pick up packages during their mail route. I had padded
+flat-rate envelopes ready, also delivered from their website. On April 1st,
+here was my pipeline:</p>
+
+<ol>
+<li>(Trigger) Receive “payment completed” email from Stripe</li>
+<li>Pay for a shipping label at usps.com (~$9)</li>
+<li>Print shipping label, affix to a padded envelope with scotch tape</li>
+<li>Pack in hot sauce and extra packing material</li>
+<li>Schedule a pickup at usps.com</li>
+<li>(On pickup day) Put queued package(s) on the porch</li>
+</ol>
+
+<h2>Final Surprises</h2>
+
+<p>I built the full-page takeover to check if the day was April 1 when deciding
+whether to take over or lie dormant, but I didn't think about checking the
+year. So one year later, we suddenly got another influx of orders. Luckily I
+still had plenty of stock with expiration dates still over a year away, so
+spent a little surprise day packing hot sauce again -- and again a third time,
+another year later.</p>
+
+<h2>Finances</h2>
+
+<p>After the sample packs and the bulk order of 48 bottles (the minimum), upfront
+costs came to <span class="math inline">\(192.05. Over three April Fool's Days we sold 28 bottles in 25
+orders at \)</span>15 / bottle.</p>
+
+<p>The cost of my labor and the boon to the brand are harder to calculate. I'll
+call them a wash.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">Revenue
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">Orders: $15*28   =  $ 420.00
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">Costs
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">Samples:           ($  25.00)
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">Hot sauce:         ($ 167.05)
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">Shipping: $9*25  = ($ 225.00)
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">Profit/loss ----------------
+</span></span><span class="line"><span class="ln">10</span><span class="cl">                    $   2.95
+</span></span></code></pre></body></html>
+
+<p>I'll take it.</p>
+
+<h2>Conclusion</h2>
+
+<p>Getting paid $2.95 to live out a minor dream of building a seamless April Fool's
+Day joke was a great deal. I'd have paid a lot more just for the joy of seeing
+people's reactions in real time.</p>
+
+<p>On the way, I learned how white labels work and how big a slice of the economy
+they make up, which has changed how I think about brands. Sometimes you have to
+be a little wacky to learn something new about the world.</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>hotsauce</guid>
+      <pubDate>Sun, 05 Jun 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Advanced Dashes</title>
+      <link>https:/dashes.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Advanced Dashes&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;{{ img&#xA;   &#34;I love pizza-liquor, but I&#39;ve never had it New York style.&#34;&#xA;   &#34;supreme&#34;&#xA;   &#34;A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen&#34;&#xA;}}&lt;/p&gt;&#xA;&#xA;&lt;p&gt;There are three common dashes in written English:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Hyphen : &lt;span style=&#34;“font-family:sans-serif”&#34;&gt;-&lt;/span&gt;&lt;/li&gt;&#xA;&lt;li&gt;En dash: &lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The en dash is used to create ranges, like 2020&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;2030.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;One Size Doesn&#39;t Fit All&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;A myth states the em dash is so named because it is &#34;one &lt;code&gt;M&lt;/code&gt; wide&#34;, and the en dash &#34;one &lt;code&gt;N&lt;/code&gt; wide&#34;. This is... almost true. The confusing correction is that an em dash is so named because it is &lt;code&gt;1em&lt;/code&gt; wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;The Em&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;To talk about the em dash necessitates talk about the &lt;a href=&#34;https://en.wikipedia.org/wiki/Em_(typography)&#34;&gt;em&lt;/a&gt;. The em (pronounced &lt;a href=&#34;https://en.wiktionary.org/wiki/Appendix:English_pronunciation&#34;&gt;/ɛm/&lt;/a&gt;) is an invisible bounding box every character is designed within&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:boundingbox&#34;&gt;&lt;a href=&#34;#fn:boundingbox&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: &lt;code&gt;1em&lt;/code&gt; is always one &lt;em&gt;font-heighth&lt;/em&gt; long. It is a unitless measurement that allows us to speak in relatives.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration &lt;code&gt;font-size: 1em&lt;/code&gt; is equivalent to &lt;code&gt;font-size: 100%&lt;/code&gt;, while &lt;code&gt;1.5em&lt;/code&gt; is equivalent to &lt;code&gt;150%&lt;/code&gt;, and so on.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em&#39;s eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text&#39;s changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The em came about in the times of the printing press, when every &lt;code&gt;M&lt;/code&gt; type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the &lt;code&gt;M&lt;/code&gt; type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. At the time this was effectively a non-change, but the updated definition allowed the &lt;code&gt;M&lt;/code&gt; and the em to be decoupled.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Em Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is &lt;code&gt;1em&lt;/code&gt; long. In a way, the em dash took up the mantle of the square &lt;code&gt;M&lt;/code&gt; type. Because the em dash is &lt;code&gt;1em&lt;/code&gt; long, and the em is defined as the height of the font, the em dash&#39;s bounding box is an exact square&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;in any font, at any size.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Root Em&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;The &lt;code&gt;rem&lt;/code&gt; or &lt;strong&gt;root em&lt;/strong&gt; is a twist on the em. It is relative not to the parent context&#39;s font size, but to the root context&#39;s (in a web page, &lt;code&gt;&amp;lt;html&amp;gt;&lt;/code&gt;). This allows one to escape relativity hell without reverting to absolutes:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;html: 16pt              (default     = 16pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  → body: 1.5em         (16pt * 1.5  = 24pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    → .container: .75em (24pt *  .75 = 18pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      → h1: 4em         (18pt * 4    = 72pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      → p: 1em          (18pt * 1    = 18pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;    → footer: 0.5rem    (16pt * 0.5  =  8pt)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;      &#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;key:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt; 9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;context: requested size (calculation = final size)&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;  → child element&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;h4&gt;Aside: The Point&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;It’s hard to define the em in terms of points without defining the point. The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on &lt;code&gt;1/72in&lt;/code&gt; per point. This varies greatly among displays, devices, and assistive technologies; for example, a 21” 1440p display has more pixels per inch than a 27” 1440p display. To wrangle the variability, there exist new unstandardized concepts like &lt;a href=&#34;https://developer.android.com/training/multiscreen/screendensities#TaskUseDP&#34;&gt;density-independent pixels&lt;/a&gt; on Android and &lt;a href=&#34;https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor&#34;&gt;effective pixels&lt;/a&gt; on Windows. The tumultuous history, as it happens, hasn&#39;t ended.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Based on the displays I develop on, I’ve settled on a rough mental framework of “1px of em length per pt” because it’s close enough to true and easy to remember: a 16pt font has a 16px em and is therefore 16px high.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Advanced Usage&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;Advanced usage of dashes unfortunately revolves around avoiding common issues.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Em Dash Overuse&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in &#34;append-only&#34; mode&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;can be hard to do.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Separately, the em dash is a large glyph and hard to go unnoticed. Its use is obvious even in peripheral vision, so its overuse becomes a stain on the page before reading it.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Belittled Hyphens&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;When one side of a hyphen is a compound word like &#34;frozen yogurt&#34; its spaces can visually overpower the hyphen: &lt;code&gt;pre-frozen yogurt&lt;/code&gt; looks like &lt;code&gt;[pre-frozen] yogurt&lt;/code&gt;, not &lt;code&gt;pre-[frozen yogurt]&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;One solution replaces spaces with hyphens (&lt;code&gt;pre-frozen-yogurt&lt;/code&gt;), which may or may not suit the hyphenation. The opposite (&lt;code&gt;pre frozen yogurt&lt;/code&gt;) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; users can replace each space with a &lt;a href=&#34;https://en.wikipedia.org/wiki/Thin_space&#34;&gt;&lt;code&gt;\thinspace&lt;/code&gt;&lt;/a&gt; to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a pre-frozen&lt;span class=&#34;k&#34;&gt;\thinspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;yogurt time&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a&lt;span class=&#34;k&#34;&gt;\enspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;pre-frozen&lt;span class=&#34;k&#34;&gt;\thinspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;yogurt&lt;span class=&#34;k&#34;&gt;\enspace&lt;/span&gt;&lt;span class=&#34;nb&#34;&gt;{}&lt;/span&gt;time&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{a pre-frozen\thinspace{}yogurt time}\]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;&lt;span class=&#34;math display&#34;&gt;\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]&lt;/span&gt;&lt;/p&gt;&lt;p&gt;Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;a time before frozen yogurt&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;It&#39;s crude, but dependable.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Broken Dashes&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;If a line soft-wraps immediately before or after a dash, what should its behavior be? It&#39;s accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge             v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I am looking at dates about 20&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;30 days out.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I&#39;m looking at dates about 20&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;30 days out.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I am pleased they thought that&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;however odd it may be.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I&#39;m pleased they thought that&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;however odd it may be.&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;Strangely, the hyphen is the only dash that has an option here: the &lt;a href=&#34;https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens&#34;&gt;non-breaking hyphen&lt;/a&gt; or &#34;hard hyphen&#34; is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Drowned Dashes&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;When using &lt;a href=&#34;https://en.wikipedia.org/wiki/Typographic_alignment#Justified&#34;&gt;justified text&lt;/a&gt; elongated spaces can overpower dashes where non-elongated spaces would not have.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For example, see this simulation of left-aligned text:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge             v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I said they were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;And this simulation of justified text:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I    said    they   were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;In the justified simulation, &#34;were&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;wolf&#34; reads like the mythical creature &#34;were-wolf&#34; because the spaces are proportionally larger than the em dash.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                            |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;I   said  they  were  &lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;  wolf&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;playdates don&#39;t last forever!&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;h3&gt;Input Difficulties&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;No one should ever fault that, but for those who are willing to commit something new to memory:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;macOS&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;En dash: &lt;code&gt;⌥ + -&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;code&gt;⌥ + Shift + -&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;Windows&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;En dash: &lt;code&gt;Alt + 0150&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;Em dash: &lt;code&gt;Alt + 0151&lt;/code&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;For all others, read on.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Hyphen-Powered En Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: &lt;code&gt;2020-2030&lt;/code&gt;. &lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; requires two (&lt;code&gt;--&lt;/code&gt;) for the en dash.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;The Hyphen-Powered Em Dash&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;A common replacement for the em dash is a space on either end of two hyphens (&lt;code&gt;--&lt;/code&gt;). Because &lt;span class=&#34;math inline&#34;&gt;\(\LaTeX\)&lt;/span&gt; reserves two hyphens for the en dash, it requires three (&lt;code&gt;---&lt;/code&gt;) for the em.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Output Difficulties&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(&lt;a href=&#34;https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47&#34;&gt;https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47&lt;/a&gt;) to render twos.dev&#39;s dashes in a variable width font.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I&#39;d love for there to be a &#34;monospace with exceptions&#34; font that takes this chore out of my hands.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Bonus Round: Esoteric Dashes&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don&#39;t often get to see the light of day.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;swung dash&lt;/strong&gt; (&lt;span style=&#34;font-family: sans-serif&#34;&gt;⁓&lt;/span&gt;) is an elongated tilde used to stand in for a word being defined in a dictionary.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:swung&#34;&gt;&lt;a href=&#34;#fn:swung&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;boot (n)&lt;/p&gt;&#xA;&#xA;&lt;p&gt;ex: Let me put on my other &lt;span style=&#34;font-family: sans-serif&#34;&gt;⁓&lt;/span&gt;.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;horizontal bar&lt;/strong&gt; is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.&lt;/p&gt;&#xA;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;―&lt;/span&gt; O Miss Douce! Miss Kennedy protested. You horrid thing!&lt;/p&gt;&#xA;&#xA;&lt;p&gt;&lt;em&gt;James Joyce&#39;s Ulysses p. 335&lt;/em&gt;&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;hyphen bullet&lt;/strong&gt; is a hyphen to be used in place of a bullet point.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;- This is a hyphen&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span style=&#34;font-family: sans-serif&#34;&gt;⁃&lt;/span&gt; This is a hyphen bullet&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;The &lt;strong&gt;figure dash&lt;/strong&gt; is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Figure dash: 867‒5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Number:      86705309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;En dash:     867&lt;span style=&#34;font-family: sans-serif&#34;&gt;–&lt;/span&gt;5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Hyphen:      867-5309&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;Lastly, my favorite: the &lt;strong&gt;soft hyphen&lt;/strong&gt; is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is &lt;em&gt;welcome&lt;/em&gt; to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;v left page edge            v right page edge&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;|                           |&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;No soft hyphen:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;4&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Supercalifragilisticexpialid-&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;5&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;ocious&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;6&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Soft hyphen after &#39;istic&#39;:&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;8&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;Supercalifragilistic-&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;9&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;expialidocious&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;How dashing!&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:boundingbox&#34;&gt;&#34;Bounding box&#34; is strong; font designers are free to design outside it.&lt;/li&gt;&#xA;&#xA;&lt;li id=&#34;fn:swung&#34;&gt;&lt;a href=&#34;http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&#34;&gt;http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Advanced Dashes</h1>
+
+<p>{{ img
+   "I love pizza-liquor, but I've never had it New York style."
+   "supreme"
+   "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
+}}</p>
+
+<p>There are three common dashes in written English:</p>
+
+<ul>
+<li>Hyphen : <span style="“font-family:sans-serif”">-</span></li>
+<li>En dash: <span style="font-family: sans-serif">–</span></li>
+<li>Em dash: <span style="font-family: sans-serif">—</span></li>
+</ul>
+
+<p>The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.</p>
+
+<p>The en dash is used to create ranges, like 2020<span style="font-family: sans-serif">–</span>2030.</p>
+
+<p>The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.</p>
+
+<h2>One Size Doesn't Fit All</h2>
+
+<p>A myth states the em dash is so named because it is "one <code>M</code> wide", and the en dash "one <code>N</code> wide". This is... almost true. The confusing correction is that an em dash is so named because it is <code>1em</code> wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.</p>
+
+<h3>The Em</h3>
+
+<p>To talk about the em dash necessitates talk about the <a href="https://en.wikipedia.org/wiki/Em_(typography)">em</a>. The em (pronounced <a href="https://en.wiktionary.org/wiki/Appendix:English_pronunciation">/ɛm/</a>) is an invisible bounding box every character is designed within<sup class="footnote-ref" id="fnref:boundingbox"><a href="#fn:boundingbox">1</a></sup> whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: <code>1em</code> is always one <em>font-heighth</em> long. It is a unitless measurement that allows us to speak in relatives.</p>
+
+<p>Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration <code>font-size: 1em</code> is equivalent to <code>font-size: 100%</code>, while <code>1.5em</code> is equivalent to <code>150%</code>, and so on.</p>
+
+<p>The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.</p>
+
+<p>The em came about in the times of the printing press, when every <code>M</code> type was large and perfectly square, thus convenient to use as a proportional measurement for a given font and size. When the <code>M</code> type eventually rebelled against being square, the modern em shifted its definition to the remaining constant, the height. At the time this was effectively a non-change, but the updated definition allowed the <code>M</code> and the em to be decoupled.</p>
+
+<h4>The Em Dash</h4>
+
+<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash's bounding box is an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.</p>
+
+<h4>The Root Em</h4>
+
+<p>The <code>rem</code> or <strong>root em</strong> is a twist on the em. It is relative not to the parent context's font size, but to the root context's (in a web page, <code>&lt;html&gt;</code>). This allows one to escape relativity hell without reverting to absolutes:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">html: 16pt              (default     = 16pt)
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">  → body: 1.5em         (16pt * 1.5  = 24pt)
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">    → .container: .75em (24pt *  .75 = 18pt)
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">      → h1: 4em         (18pt * 4    = 72pt)
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">      → p: 1em          (18pt * 1    = 18pt)
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">    → footer: 0.5rem    (16pt * 0.5  =  8pt)
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">      
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">key:
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">context: requested size (calculation = final size)
+</span></span><span class="line"><span class="ln">10</span><span class="cl">  → child element
+</span></span></code></pre></body></html>
+
+<h4>Aside: The Point</h4>
+
+<p>It’s hard to define the em in terms of points without defining the point. The point has had a tumultuous and unstandardized history both physically and digitally, but today the world has predominantly settled on <code>1/72in</code> per point. This varies greatly among displays, devices, and assistive technologies; for example, a 21” 1440p display has more pixels per inch than a 27” 1440p display. To wrangle the variability, there exist new unstandardized concepts like <a href="https://developer.android.com/training/multiscreen/screendensities#TaskUseDP">density-independent pixels</a> on Android and <a href="https://docs.microsoft.com/en-us/windows/apps/design/layout/screen-sizes-and-breakpoints-for-responsive-design#effective-pixels-and-scale-factor">effective pixels</a> on Windows. The tumultuous history, as it happens, hasn't ended.</p>
+
+<p>Based on the displays I develop on, I’ve settled on a rough mental framework of “1px of em length per pt” because it’s close enough to true and easy to remember: a 16pt font has a 16px em and is therefore 16px high.</p>
+
+<h2>Advanced Usage</h2>
+
+<p>Advanced usage of dashes unfortunately revolves around avoiding common issues.</p>
+
+<h3>Em Dash Overuse</h3>
+
+<p>As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode<span style="font-family: sans-serif">—</span>thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.</p>
+
+<p>Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which<span style="font-family: sans-serif">—</span>for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it<span style="font-family: sans-serif">—</span>can be hard to do.</p>
+
+<p>Separately, the em dash is a large glyph and hard to go unnoticed. Its use is obvious even in peripheral vision, so its overuse becomes a stain on the page before reading it.</p>
+
+<h3>Belittled Hyphens</h3>
+
+<p>When one side of a hyphen is a compound word like "frozen yogurt" its spaces can visually overpower the hyphen: <code>pre-frozen yogurt</code> looks like <code>[pre-frozen] yogurt</code>, not <code>pre-[frozen yogurt]</code>.</p>
+
+<p>One solution replaces spaces with hyphens (<code>pre-frozen-yogurt</code>), which may or may not suit the hyphenation. The opposite (<code>pre frozen yogurt</code>) is another tool in the bag, but the best it can do is shift ambiguity, not remove it.</p>
+
+<p><span class="math inline">\(\LaTeX\)</span> users can replace each space with a <a href="https://en.wikipedia.org/wiki/Thin_space"><code>\thinspace</code></a> to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt time
+</span></span><span class="line"><span class="ln">2</span><span class="cl">a<span class="k">\enspace</span><span class="nb">{}</span>pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt<span class="k">\enspace</span><span class="nb">{}</span>time
+</span></span></code></pre></body></html>
+<p><span class="math display">\[\text{a pre-frozen\thinspace{}yogurt time}\]</span></p><p><span class="math display">\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]</span></p><p>Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a time before frozen yogurt
+</span></span></code></pre></body></html>
+
+<p>It's crude, but dependable.</p>
+
+<h3>Broken Dashes</h3>
+
+<p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It's accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I am looking at dates about 20
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span style="font-family: sans-serif">–</span>30 days out.
+</span></span></code></pre></body></html>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20<span style="font-family: sans-serif">–</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
+</span></span></code></pre></body></html>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I am pleased they thought that
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span style="font-family: sans-serif">—</span>however odd it may be.
+</span></span></code></pre></body></html>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that<span style="font-family: sans-serif">—</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
+</span></span></code></pre></body></html>
+
+<p>Strangely, the hyphen is the only dash that has an option here: the <a href="https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens">non-breaking hyphen</a> or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.</p>
+
+<h3>Drowned Dashes</h3>
+
+<p>When using <a href="https://en.wikipedia.org/wiki/Typographic_alignment#Justified">justified text</a> elongated spaces can overpower dashes where non-elongated spaces would not have.</p>
+
+<p>For example, see this simulation of left-aligned text:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge             v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">I said they were<span style="font-family: sans-serif">—</span>wolf
+</span></span><span class="line"><span class="ln">4</span><span class="cl">playdates don't last forever!
+</span></span></code></pre></body></html>
+
+<p>And this simulation of justified text:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were<span style="font-family: sans-serif">—</span>wolf
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
+</span></span></code></pre></body></html>
+
+<p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.</p>
+
+<p>A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">|                            |
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  <span style="font-family: sans-serif">—</span>  wolf
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
+</span></span></code></pre></body></html>
+
+<h3>Input Difficulties</h3>
+
+<p>Standard US keyboards support only the hyphen, so many en and em dash users simply compose them from hyphens and spaces.</p>
+
+<p>No one should ever fault that, but for those who are willing to commit something new to memory:</p>
+
+<ul>
+<li>macOS
+
+<ul>
+<li>En dash: <code>⌥ + -</code></li>
+<li>Em dash: <code>⌥ + Shift + -</code></li>
+</ul></li>
+<li>Windows
+
+<ul>
+<li>En dash: <code>Alt + 0150</code></li>
+<li>Em dash: <code>Alt + 0151</code></li>
+</ul></li>
+</ul>
+
+<p>For all others, read on.</p>
+
+<h4>The Hyphen-Powered En Dash</h4>
+
+<p>The en dash looks similar enough to the hyphen in most fonts that people often settle for a single hyphen: <code>2020-2030</code>. <span class="math inline">\(\LaTeX\)</span> requires two (<code>--</code>) for the en dash.</p>
+
+<h4>The Hyphen-Powered Em Dash</h4>
+
+<p>A common replacement for the em dash is a space on either end of two hyphens (<code>--</code>). Because <span class="math inline">\(\LaTeX\)</span> reserves two hyphens for the en dash, it requires three (<code>---</code>) for the em.</p>
+
+<h3>Output Difficulties</h3>
+
+<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(<a href="https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47">https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47</a>) to render twos.dev's dashes in a variable width font.</p>
+
+<p>I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
+
+<h2>Bonus Round: Esoteric Dashes</h2>
+
+<p>The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don't often get to see the light of day.</p>
+
+<p>The <strong>swung dash</strong> (<span style="font-family: sans-serif">⁓</span>) is an elongated tilde used to stand in for a word being defined in a dictionary.<sup class="footnote-ref" id="fnref:swung"><a href="#fn:swung">2</a></sup></p>
+
+<blockquote>
+<p>boot (n)</p>
+
+<p>ex: Let me put on my other <span style="font-family: sans-serif">⁓</span>.</p>
+</blockquote>
+
+<p>The <strong>horizontal bar</strong> is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.</p>
+
+<blockquote>
+<p><span style="font-family: sans-serif">―</span> O Miss Douce! Miss Kennedy protested. You horrid thing!</p>
+
+<p><em>James Joyce's Ulysses p. 335</em></p>
+</blockquote>
+
+<p>The <strong>hyphen bullet</strong> is a hyphen to be used in place of a bullet point.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">- This is a hyphen
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span style="font-family: sans-serif">⁃</span> This is a hyphen bullet
+</span></span></code></pre></body></html>
+
+<p>The <strong>figure dash</strong> is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">Figure dash: 867‒5309
+</span></span><span class="line"><span class="ln">2</span><span class="cl">Number:      86705309
+</span></span><span class="line"><span class="ln">3</span><span class="cl">En dash:     867<span style="font-family: sans-serif">–</span>5309
+</span></span><span class="line"><span class="ln">4</span><span class="cl">Hyphen:      867-5309
+</span></span></code></pre></body></html>
+
+<p>Lastly, my favorite: the <strong>soft hyphen</strong> is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is <em>welcome</em> to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge            v right page edge
+</span></span><span class="line"><span class="ln">2</span><span class="cl">|                           |
+</span></span><span class="line"><span class="ln">3</span><span class="cl">No soft hyphen:
+</span></span><span class="line"><span class="ln">4</span><span class="cl">Supercalifragilisticexpialid-
+</span></span><span class="line"><span class="ln">5</span><span class="cl">ocious
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span><span class="line"><span class="ln">7</span><span class="cl">Soft hyphen after 'istic':
+</span></span><span class="line"><span class="ln">8</span><span class="cl">Supercalifragilistic-
+</span></span><span class="line"><span class="ln">9</span><span class="cl">expialidocious
+</span></span></code></pre></body></html>
+
+<p>How dashing!</p>
+
+<div class="footnotes">
+
+<hr/>
+
+<ol>
+<li id="fn:boundingbox">"Bounding box" is strong; font designers are free to design outside it.</li>
+
+<li id="fn:swung"><a href="http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash">http://wordnetweb.princeton.edu/perl/webwn?s=swung+dash</a></li>
+</ol>
+
+</div>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>dashes</guid>
+      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Inside twos.dev</title>
+      <link>https:/meta.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Inside twos.dev&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;There&#39;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;With this in mind, I decided to ruthlessly optimize for two goals:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;It must be easy to publish writing&lt;/li&gt;&#xA;&lt;li&gt;As long as I&#39;m alive, URLs must not change&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Warm Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in &lt;code&gt;$EDITOR&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Writing was slowed down by cruft like &lt;code&gt;&amp;amp;lt;p&amp;amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;amp;lt;li&amp;amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I first focused on changing my drafting app to something with more robust exporting tools. I found &lt;a href=&#34;https://ia.net/writer&#34;&gt;iA Writer&lt;/a&gt;, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shortcuts&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;iOS and macOS ship with &lt;a href=&#34;https://apps.apple.com/us/app/shortcuts/id1462947752&#34;&gt;Shortcuts&lt;/a&gt;, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the &lt;code&gt;src/warm&lt;/code&gt; directory in the twos.dev Git repository by invoking &lt;a href=&#34;https://workingcopyapp.com&#34;&gt;Working Copy&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Preprocessing&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;On push, GitHub Actions builds the Markdown file into HTML with all the &lt;a href=&#34;https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go&#34;&gt;right preprocessing&lt;/a&gt; required to make it look like twos.dev. I use a small subset of &lt;a href=&#34;https://pkg.go.dev/html/template&#34;&gt;&lt;code&gt;html/template&lt;/code&gt;&lt;/a&gt; to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Cold Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in &lt;a href=&#34;autism.html&#34;&gt;Anonymously Autistic&lt;/a&gt; or the variable-width font requirements of &lt;a href=&#34;dashes.html&#34;&gt;Dashes&lt;/a&gt;. iA Writer is great for prose, but when it&#39;s time to write code I need to be back in &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have &#34;graduated&#34;:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;warm,cold&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;twos.dev build&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;mv dist/DOCUMENT.html src/cold/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/cold/DOCUMENT.&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;md,html&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;Results&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a &lt;a href=&#34;cv.html&#34;&gt;CV&lt;/a&gt;&#39;s bicolumnar layout).&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;On URLs Not Changing&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: &lt;a href=&#34;https://www.w3.org/Provider/Style/URI&#34;&gt;cool URLs don’t change&lt;/a&gt;. I&#39;ve removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I&#39;ll simply &lt;code&gt;cp -r dist&lt;/code&gt; to my next crazy system&#39;s web root.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Inside twos.dev</h1>
+
+<p>There's a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
+
+<p>With this in mind, I decided to ruthlessly optimize for two goals:</p>
+
+<ol>
+<li>It must be easy to publish writing</li>
+<li>As long as I'm alive, URLs must not change</li>
+</ol>
+
+<p>In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.</p>
+
+<h2>Warm Content</h2>
+
+<p>I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:</p>
+
+<ul>
+<li>Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in <code>$EDITOR</code>)</li>
+<li>Writing was slowed down by cruft like <code>&amp;lt;p&amp;gt;</code> and <code>&amp;lt;li&amp;gt;</code></li>
+<li>The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring</li>
+</ul>
+
+<p>To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.</p>
+
+<p>I first focused on changing my drafting app to something with more robust exporting tools. I found <a href="https://ia.net/writer">iA Writer</a>, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.</p>
+
+<h3>Shortcuts</h3>
+
+<p>iOS and macOS ship with <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the <code>src/warm</code> directory in the twos.dev Git repository by invoking <a href="https://workingcopyapp.com">Working Copy</a>.</p>
+
+<h3>Preprocessing</h3>
+
+<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
+
+<p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
+
+<h2>Cold Content</h2>
+
+<p>There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.</p>
+
+<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
+
+<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
+</span></span></code></pre></body></html>
+
+<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
+</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
+</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
+</span></span></code></pre></body></html>
+
+<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
+
+<h4>Results</h4>
+
+<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
+
+<h2>On URLs Not Changing</h2>
+
+<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
+
+<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
+
+<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>meta</guid>
+      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Anonymously Autistic</title>
