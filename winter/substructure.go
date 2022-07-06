@@ -25,28 +25,27 @@ var (
 // Substructure is a graph of documents on the website, generated with read-only
 // operations. It will later be fed into a renderer.
 type Substructure struct {
-	docs documents
 	cfg  Config
+	docs documents
 }
 
-// Discover is the first step of the static website build process. It crawls the
-// website root looking for files that need to be wrapped up in the build
-// process, such as Markdown files, templates, and static assets.
-//
-// It then learns what it can about each file and stores the information in
-// a substructure.
-func Discover(cfg Config) (*Substructure, error) {
-	s := &Substructure{cfg: cfg}
+// NewSubstructure returns the foundational step of the static website build
+// process. It crawls the website root looking for files that need to be wrapped
+// up in the build process, such as Markdown files, templates, and static
+// assets, and adds them to the substructure.
+func NewSubstructure(cfg Config) (*Substructure, error) {
+	s := Substructure{cfg: cfg}
 	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
 		return nil, err
 	}
 
-	for _, m := range md {
-		if _, ok := ignoreFiles[filepath.Base(m)]; ok {
+	for _, src := range md {
+		if _, ok := ignoreFiles[filepath.Base(src)]; ok {
 			continue
 		}
-		s.docs = append(s.docs, fromMarkdown(m))
+		s.docs = append(s.docs, &document{encoding: encodingMarkdown, SrcPath: src})
+
 	}
 
 	coldhtml, err := filepath.Glob("src/cold/*.html")
@@ -72,14 +71,16 @@ func Discover(cfg Config) (*Substructure, error) {
 	html := append(coldhtml, warmhtml...)
 	tmpl := append(coldtmpl, warmtmpl...)
 
-	for _, h := range append(html, tmpl...) {
-		if _, ok := ignoreFiles[filepath.Base(h)]; ok {
+	for _, src := range append(html, tmpl...) {
+		if _, ok := ignoreFiles[filepath.Base(src)]; ok {
 			continue
 		}
-		s.docs = append(s.docs, fromHTML(h))
+		s.docs = append(s.docs, &document{encoding: encodingHTML, SrcPath: src})
 	}
 
-	return s, err
+	sort.Sort(s.docs)
+
+	return &s, err
 }
 
 func (s *Substructure) DocByShortname(shortname string) *document {
@@ -93,15 +94,14 @@ func (s *Substructure) DocByShortname(shortname string) *document {
 
 func (s *Substructure) DocBySrc(path string) *document {
 	for _, d := range s.docs {
-		if d.SourcePath == path {
+		if d.SrcPath == path {
 			return d
 		}
 	}
 	return nil
 }
 
-func (s *Substructure) posts() (u []*document) {
-	sort.Sort(s.docs)
+func (s *Substructure) posts() (u documents) {
 	for _, d := range s.docs {
 		if d.Kind == post {
 			u = append(u, d)
@@ -224,7 +224,7 @@ func (s *Substructure) Execute(d *document, dist string) error {
 		return err
 	}
 
-	postsFunc := posts(s)
+	postsFunc := s.posts
 
 	_ = t.Funcs(template.FuncMap{
 		"img":    imgsFunc,
@@ -240,7 +240,7 @@ func (s *Substructure) Execute(d *document, dist string) error {
 	}
 
 	if _, err := t.New("body").Parse(string(b)); err != nil {
-		return fmt.Errorf("can't parse %s: %w", d.SourcePath, err)
+		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
 	}
 
 	var buf bytes.Buffer

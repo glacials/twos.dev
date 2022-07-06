@@ -229,9 +229,3 @@ func videos(
 }
 
 type postsfunc func() []*document
-
-func posts(s *Substructure) postsfunc {
-	return func() []*document {
-		return s.posts()
-	}
-}

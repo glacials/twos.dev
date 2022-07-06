@@ -73,7 +73,7 @@ var (
 // document is a single HTML or Markdown file that will be compiled into a
 // static HTML file.
 type document struct {
-	SourcePath string
+	SrcPath string
 
 	Kind kind `yaml:"type"`
 	TOC  bool `yaml:"toc"`
@@ -135,14 +135,6 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	return nil
 }
 
-func fromHTML(src string) *document {
-	return &document{encoding: encodingHTML, SourcePath: src}
-}
-
-func fromMarkdown(src string) *document {
-	return &document{encoding: encodingMarkdown, SourcePath: src}
-}
-
 func (d *document) parse() error {
 	switch d.encoding {
 	case encodingHTML:
@@ -155,7 +147,7 @@ func (d *document) parse() error {
 }
 
 func (d *document) parseHTML() error {
-	f, err := os.Open(d.SourcePath)
+	f, err := os.Open(d.SrcPath)
 	if err != nil {
 		return err
 	}
@@ -178,7 +170,7 @@ func (d *document) parseHTML() error {
 }
 
 func (d *document) parseMarkdown() error {
-	f, err := os.Open(d.SourcePath)
+	f, err := os.Open(d.SrcPath)
 	if err != nil {
 		return err
 	}
@@ -287,7 +279,7 @@ func (d *document) Shortname() string {
 		return d.FrontmatterShortname
 	}
 
-	n := filepath.Base(d.SourcePath)
+	n := filepath.Base(d.SrcPath)
 	n, _, _ = strings.Cut(n, ".")
 	return n
 }
@@ -365,7 +357,7 @@ func (d *document) fillTOC() error {
 	if firstH2 == nil {
 		return fmt.Errorf(
 			"don't know how to build TOC without any H2 headings in %s",
-			d.SourcePath,
+			d.SrcPath,
 		)
 	}
 	firstH2.Parent.InsertBefore(toc, firstH2)
@@ -452,6 +444,15 @@ func (d documents) Len() int {
 }
 
 func (d documents) Less(i, j int) bool {
+	// Index must be rendered after others in order for all writing to show on
+	// index. TODO: Fix, maybe by having posts() lazily evaluate the rest.
+	if d[i].Shortname() == "index" {
+		return false
+	}
+	if d[j].Shortname() == "index" {
+		return true
+	}
+
 	return d[i].CreatedAt.After(d[j].CreatedAt)
 }
 

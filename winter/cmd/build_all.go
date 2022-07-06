@@ -72,7 +72,7 @@ func buildAll(
 		return nil, fmt.Errorf("can't walk to build the world: %w", err)
 	}
 
-	s, err := winter.Discover(cfg)
+	s, err := winter.NewSubstructure(cfg)
 	if err != nil {
 		return nil, err
 	}
