@@ -456,7 +456,7 @@ func (d documents) Len() int {
 func (d documents) Less(i, j int) bool {
 	// Index must be rendered after others in order for all writing to show on
 	// index. TODO: Fix, maybe by having posts() lazily evaluate the rest.
-	return d[i].CreatedAt.Before(d[j].CreatedAt)
+	return d[i].CreatedAt.After(d[j].CreatedAt)
 }
 
 func (d documents) Swap(i, j int) {
