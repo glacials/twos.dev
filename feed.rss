@@ -5,84 +5,29 @@
     <description></description>
     <copyright>Copyright 0–2022 Anonymous</copyright>
     <managingEditor>unspecified (Anonymous)</managingEditor>
-    <pubDate>Wed, 06 Jul 2022 15:46:03 +0000</pubDate>
-    <lastBuildDate>Wed, 06 Jul 2022 15:46:03 +0000</lastBuildDate>
+    <pubDate>Wed, 06 Jul 2022 17:01:22 +0000</pubDate>
+    <lastBuildDate>Wed, 06 Jul 2022 17:01:22 +0000</lastBuildDate>
     <item>
-      <title>Inside twos.dev</title>
-      <link>https:/meta.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Inside twos.dev&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;There&#39;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;With this in mind, I decided to ruthlessly optimize for two goals:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;It must be easy to publish writing&lt;/li&gt;&#xA;&lt;li&gt;As long as I&#39;m alive, URLs must not change&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Warm Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in &lt;code&gt;$EDITOR&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Writing was slowed down by cruft like &lt;code&gt;&amp;amp;lt;p&amp;amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;amp;lt;li&amp;amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I first focused on changing my drafting app to something with more robust exporting tools. I found &lt;a href=&#34;https://ia.net/writer&#34;&gt;iA Writer&lt;/a&gt;, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shortcuts&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;iOS and macOS ship with &lt;a href=&#34;https://apps.apple.com/us/app/shortcuts/id1462947752&#34;&gt;Shortcuts&lt;/a&gt;, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the &lt;code&gt;src/warm&lt;/code&gt; directory in the twos.dev Git repository by invoking &lt;a href=&#34;https://workingcopyapp.com&#34;&gt;Working Copy&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Preprocessing&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;On push, GitHub Actions builds the Markdown file into HTML with all the &lt;a href=&#34;https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go&#34;&gt;right preprocessing&lt;/a&gt; required to make it look like twos.dev. I use a small subset of &lt;a href=&#34;https://pkg.go.dev/html/template&#34;&gt;&lt;code&gt;html/template&lt;/code&gt;&lt;/a&gt; to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Cold Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in &lt;a href=&#34;autism.html&#34;&gt;Anonymously Autistic&lt;/a&gt; or the variable-width font requirements of &lt;a href=&#34;dashes.html&#34;&gt;Dashes&lt;/a&gt;. iA Writer is great for prose, but when it&#39;s time to write code I need to be back in &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have &#34;graduated&#34;:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;warm,cold&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;twos.dev build&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;mv dist/DOCUMENT.html src/cold/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/cold/DOCUMENT.&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;md,html&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;Results&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a &lt;a href=&#34;cv.html&#34;&gt;CV&lt;/a&gt;&#39;s bicolumnar layout).&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;On URLs Not Changing&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: &lt;a href=&#34;https://www.w3.org/Provider/Style/URI&#34;&gt;cool URLs don’t change&lt;/a&gt;. I&#39;ve removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I&#39;ll simply &lt;code&gt;cp -r dist&lt;/code&gt; to my next crazy system&#39;s web root.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>Inside twos.dev</h1>
+      <title>(A)synchrony</title>
+      <link>https:/async.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;(A)synchrony&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc? Pair programming or code review? &lt;a href=&#34;thepopin.html&#34;&gt;Pop-in&lt;/a&gt; or Slack message?&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Synchrony grants speed, but asynchrony grants efficiency. Like debt each has their use, and each can be misused. As engineers we love to spout the good word of asynchrony so we can reclaim some time to actually build stuff, but there&#39;s nothing like a five-minute conversation to take the place of a weeklong email thread.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I&#39;ve been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.[^Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.] In that room we built some of the fastest product I&#39;ve ever had the pleasure of vomiting onto my keyboard.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Like tech debt, synchrony trades away future velocity for present velocity. Sometimes you need that. If you optimize too much for the future, you&#39;ll die before you get there. It&#39;s up to each project, team, org to find the right balance. I recommend asynchrony by default, with an eye trained on the efforts that really need to succeed in the present.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Employ synchrony when you need speed, but don’t call a 10-person meeting for anything that doesn&#39;t.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>(A)synchrony</h1>
 
-<p>There's a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
+<p>Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc? Pair programming or code review? <a href="thepopin.html">Pop-in</a> or Slack message?</p>
 
-<p>With this in mind, I decided to ruthlessly optimize for two goals:</p>
+<p>Synchrony grants speed, but asynchrony grants efficiency. Like debt each has their use, and each can be misused. As engineers we love to spout the good word of asynchrony so we can reclaim some time to actually build stuff, but there's nothing like a five-minute conversation to take the place of a weeklong email thread.</p>
 
-<ol>
-<li>It must be easy to publish writing</li>
-<li>As long as I'm alive, URLs must not change</li>
-</ol>
+<p>I've been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.[^Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.] In that room we built some of the fastest product I've ever had the pleasure of vomiting onto my keyboard.</p>
 
-<p>In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.</p>
+<p>It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.</p>
 
-<h2>Warm Content</h2>
+<p>Like tech debt, synchrony trades away future velocity for present velocity. Sometimes you need that. If you optimize too much for the future, you'll die before you get there. It's up to each project, team, org to find the right balance. I recommend asynchrony by default, with an eye trained on the efforts that really need to succeed in the present.</p>
 
-<p>I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:</p>
-
-<ul>
-<li>Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in <code>$EDITOR</code>)</li>
-<li>Writing was slowed down by cruft like <code>&amp;lt;p&amp;gt;</code> and <code>&amp;lt;li&amp;gt;</code></li>
-<li>The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring</li>
-</ul>
-
-<p>To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.</p>
-
-<p>I first focused on changing my drafting app to something with more robust exporting tools. I found <a href="https://ia.net/writer">iA Writer</a>, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.</p>
-
-<h3>Shortcuts</h3>
-
-<p>iOS and macOS ship with <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the <code>src/warm</code> directory in the twos.dev Git repository by invoking <a href="https://workingcopyapp.com">Working Copy</a>.</p>
-
-<h3>Preprocessing</h3>
-
-<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
-
-<p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
-
-<h2>Cold Content</h2>
-
-<p>There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.</p>
-
-<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
-
-<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
-</span></span></code></pre></body></html>
-
-<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
-</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
-</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
-</span></span></code></pre></body></html>
-
-<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
-
-<h4>Results</h4>
-
-<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
-
-<h2>On URLs Not Changing</h2>
-
-<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
-
-<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
-
-<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
+<p>Employ synchrony when you need speed, but don’t call a 10-person meeting for anything that doesn't.</p>
 </body></html>]]></content:encoded>
       <author>Anonymous</author>
-      <guid>meta</guid>
-      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
+      <guid>async</guid>
+      <pubDate>Wed, 06 Jul 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Advanced Dashes</title>
@@ -335,7 +280,84 @@
 </body></html>]]></content:encoded>
       <author>Anonymous</author>
       <guid>dashes</guid>
-      <pubDate>Fri, 17 Jun 2022 00:00:00 +0000</pubDate>
+      <pubDate>Tue, 05 Jul 2022 00:00:00 +0000</pubDate>
+    </item>
+    <item>
+      <title>Inside twos.dev</title>
+      <link>https:/meta.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Inside twos.dev&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;There&#39;s a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;With this in mind, I decided to ruthlessly optimize for two goals:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;It must be easy to publish writing&lt;/li&gt;&#xA;&lt;li&gt;As long as I&#39;m alive, URLs must not change&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Warm Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in &lt;code&gt;$EDITOR&lt;/code&gt;)&lt;/li&gt;&#xA;&lt;li&gt;Writing was slowed down by cruft like &lt;code&gt;&amp;amp;lt;p&amp;amp;gt;&lt;/code&gt; and &lt;code&gt;&amp;amp;lt;li&amp;amp;gt;&lt;/code&gt;&lt;/li&gt;&#xA;&lt;li&gt;The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&#xA;&lt;p&gt;To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I first focused on changing my drafting app to something with more robust exporting tools. I found &lt;a href=&#34;https://ia.net/writer&#34;&gt;iA Writer&lt;/a&gt;, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Shortcuts&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;iOS and macOS ship with &lt;a href=&#34;https://apps.apple.com/us/app/shortcuts/id1462947752&#34;&gt;Shortcuts&lt;/a&gt;, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the &lt;code&gt;src/warm&lt;/code&gt; directory in the twos.dev Git repository by invoking &lt;a href=&#34;https://workingcopyapp.com&#34;&gt;Working Copy&lt;/a&gt;.&lt;/p&gt;&#xA;&#xA;&lt;h3&gt;Preprocessing&lt;/h3&gt;&#xA;&#xA;&lt;p&gt;On push, GitHub Actions builds the Markdown file into HTML with all the &lt;a href=&#34;https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go&#34;&gt;right preprocessing&lt;/a&gt; required to make it look like twos.dev. I use a small subset of &lt;a href=&#34;https://pkg.go.dev/html/template&#34;&gt;&lt;code&gt;html/template&lt;/code&gt;&lt;/a&gt; to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Cold Content&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;There are 2-3 needs warm content doesn&#39;t cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I&#39;d like to limit its exposure.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in &lt;a href=&#34;autism.html&#34;&gt;Anonymously Autistic&lt;/a&gt; or the variable-width font requirements of &lt;a href=&#34;dashes.html&#34;&gt;Dashes&lt;/a&gt;. iA Writer is great for prose, but when it&#39;s time to write code I need to be back in &lt;code&gt;$EDITOR&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have &#34;graduated&#34;:&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;warm,cold&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.&lt;/p&gt;&#xA;&#xA;&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;twos.dev build&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;2&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;mv dist/DOCUMENT.html src/cold/DOCUMENT.md&#xA;&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;ln&#34;&gt;3&lt;/span&gt;&lt;span class=&#34;cl&#34;&gt;git mv src/cold/DOCUMENT.&lt;span class=&#34;o&#34;&gt;{&lt;/span&gt;md,html&lt;span class=&#34;o&#34;&gt;}&lt;/span&gt;&#xA;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/body&gt;&lt;/html&gt;&#xA;&#xA;&lt;p&gt;This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.&lt;/p&gt;&#xA;&#xA;&lt;h4&gt;Results&lt;/h4&gt;&#xA;&#xA;&lt;p&gt;Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a &lt;a href=&#34;cv.html&#34;&gt;CV&lt;/a&gt;&#39;s bicolumnar layout).&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;On URLs Not Changing&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: &lt;a href=&#34;https://www.w3.org/Provider/Style/URI&#34;&gt;cool URLs don’t change&lt;/a&gt;. I&#39;ve removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I&#39;ll simply &lt;code&gt;cp -r dist&lt;/code&gt; to my next crazy system&#39;s web root.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Inside twos.dev</h1>
+
+<p>There's a unique advantage in working on twos.dev over anything I’ve worked on: it has just one developer, me. I can therefore design the developer experience in obnoxious and unintuitive ways to serve my peculiarities.</p>
+
+<p>With this in mind, I decided to ruthlessly optimize for two goals:</p>
+
+<ol>
+<li>It must be easy to publish writing</li>
+<li>As long as I'm alive, URLs must not change</li>
+</ol>
+
+<p>In some ways these goals work against each other; easy creation usually means easy destruction. So I divide my content into two types, warm and cold. Warm content is easy to create and edit, while cold content is hard to break.</p>
+
+<h2>Warm Content</h2>
+
+<p>I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:</p>
+
+<ul>
+<li>Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in <code>$EDITOR</code>)</li>
+<li>Writing was slowed down by cruft like <code>&amp;lt;p&amp;gt;</code> and <code>&amp;lt;li&amp;gt;</code></li>
+<li>The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring</li>
+</ul>
+
+<p>To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.</p>
+
+<p>I first focused on changing my drafting app to something with more robust exporting tools. I found <a href="https://ia.net/writer">iA Writer</a>, which has been great to get my thoughts out quickly. It  looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.</p>
+
+<h3>Shortcuts</h3>
+
+<p>iOS and macOS ship with <a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the <code>src/warm</code> directory in the twos.dev Git repository by invoking <a href="https://workingcopyapp.com">Working Copy</a>.</p>
+
+<h3>Preprocessing</h3>
+
+<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
+
+<p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
+
+<h2>Cold Content</h2>
+
+<p>There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.</p>
+
+<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
+
+<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
+</span></span></code></pre></body></html>
+
+<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
+</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
+</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
+</span></span></code></pre></body></html>
+
+<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
+
+<h4>Results</h4>
+
+<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
+
+<h2>On URLs Not Changing</h2>
+
+<p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
+
+<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
+
+<p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
+</body></html>]]></content:encoded>
+      <author>Anonymous</author>
+      <guid>meta</guid>
+      <pubDate>Sat, 18 Jun 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>When the April Fool&#39;s Day Prank is Real</title>
