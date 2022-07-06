@@ -10,7 +10,9 @@ Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc? P
 
 Synchrony grants speed, but asynchrony grants efficiency. Like debt each has their use, and each can be misused. As engineers we love to spout the good word of asynchrony so we can reclaim some time to actually build stuff, but there's nothing like a five-minute conversation to take the place of a weeklong email thread.
 
-I've been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.[^Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.] In that room we built some of the fastest product I've ever had the pleasure of vomiting onto my keyboard.
+I've been in a secure war room exactly once in my career, for a week minus sleep handling a business-threatening emergency.[^1] In that room we built some of the fastest product I've ever had the pleasure of vomiting onto my keyboard.
+
+[^1]: Before tech OSHA jumps on me: I was young, we were treated like royalty during and after, and looking back I have nothing but fond camaraderic memories akin to a LAN party.]
 
 It solved the problem well. And we spent six months cleaning it up. That both those statements can be true is oft overlooked by engineers, junior and senior.
 
