@@ -8,6 +8,7 @@ import (
 	"net/url"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strings"
 	"time"
 
@@ -34,7 +35,7 @@ const (
 	encodingHTML encoding = iota
 	encodingMarkdown
 
-	styleWrapper = "<span style=\"font-family: sans-serif\">%s</span>"
+	styleWrapper = "<span style=\"font-family: sans-serif\">$0</span>"
 	tocEl        = atom.Ol
 	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
 	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
@@ -47,20 +48,7 @@ const (
 )
 
 var (
-	replacements = map[string]string{
-		// Break dashes out of monospace homogeneity
-		"–": fmt.Sprintf(styleWrapper, "–"), // En dash
-		"—": fmt.Sprintf(styleWrapper, "—"), // Em dash
-		"⁓": fmt.Sprintf(styleWrapper, "⁓"), // Swung dash
-		"―": fmt.Sprintf(styleWrapper, "―"), // Horizontal bar
-		"⁃": fmt.Sprintf(styleWrapper, "⁃"), // Hyphen bullet
-
-		"&#34;": "\"",
-		"&#39;": "'",
-	}
-	tocmin = atom.H2
-	tocmax = atom.H3
-	hi     = map[atom.Atom]int{
+	hi = map[atom.Atom]int{
 		atom.H1: 1,
 		atom.H2: 2,
 		atom.H3: 3,
@@ -68,6 +56,19 @@ var (
 		atom.H5: 5,
 		atom.H6: 6,
 	}
+	replacements = map[string]string{
+		// Break dashes out of monospace homogeneity
+		"–": styleWrapper, // En dash
+		"—": styleWrapper, // Em dash
+		"⁓": styleWrapper, // Swung dash
+		"―": styleWrapper, // Horizontal bar
+		"⁃": styleWrapper, // Hyphen bullet
+
+		"&#34;": "\"",
+		"&#39;": "'",
+	}
+	tocmin = atom.H2
+	tocmax = atom.H3
 )
 
 // document is a single HTML or Markdown file that will be compiled into a
@@ -280,7 +281,8 @@ func (d *document) build() ([]byte, error) {
 	}
 	b := buf.Bytes()
 	for old, new := range replacements {
-		b = bytes.ReplaceAll(b, []byte(old), []byte(new))
+		re := regexp.MustCompile(old)
+		b = re.ReplaceAll(b, []byte(new))
 	}
 	return b, nil
 }
