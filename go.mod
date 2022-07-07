@@ -18,10 +18,13 @@ require (
 )
 
 require (
+	gg-scm.io/pkg/git v0.10.0 // indirect
 	github.com/BurntSushi/toml v1.1.0 // indirect
 	github.com/alecthomas/chroma/v2 v2.2.0 // indirect
 	github.com/dlclark/regexp2 v1.4.0 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
+	github.com/lithammer/dedent v1.1.0 // indirect
+	github.com/mitchellh/go-wordwrap v1.0.1 // indirect
 	github.com/mitranim/gg v0.0.14 // indirect
 	github.com/rjeczalik/notify v0.9.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
