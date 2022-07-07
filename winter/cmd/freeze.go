@@ -41,8 +41,23 @@ var freezeCmd = &cobra.Command{
 		oldpath := document.SrcPath
 		newpath := filepath.Join("src", "cold", filepath.Base(document.SrcPath))
 
-		if oldpath == newpath {
-			fmt.Printf("%s is already frozen (%s)\n", shortname, oldpath)
+		// The directory to remove warm files from, in addition to src/warm, so that
+		// the file doesn't just sync back to src/warm after removal. TODO: Make
+		// configurable.
+		warmSourceOfTruth := "/Users/glacials/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/Published/"
+		if _, err := os.Stat(warmSourceOfTruth); err != nil {
+			// Allow dir to not exist, since it's hardcoded to my dir ;)
+			if !os.IsNotExist(err) {
+				return err
+			}
+		} else {
+			rel, err := filepath.Rel("src/warm", oldpath)
+			if err != nil {
+				return err
+			}
+			if err := os.Remove(filepath.Join(warmSourceOfTruth, rel)); err != nil {
+				return err
+			}
 		}
 
 		g, err := git.New(git.Options{})
