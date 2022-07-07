@@ -24,12 +24,17 @@ type: page
 <ul>
   {{ $now := .Now }}
   {{ range posts }}
+    {{ if lt (add .CreatedAt.Year 1) $now.Year }}
+      {{ break }}
+    {{ end }}
     <li>
       <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
       {{ if ne .CreatedAt.Year $now.Year }}({{ .CreatedAt.Year }}){{ end }}
     </li>
   {{ end }}
+  <li><a href="/archives.html">archives</a> &rarr;</li>
 </ul>
+<p></p>
 
 <!-- draft
       <h2>2022</h2>

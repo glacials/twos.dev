@@ -109,6 +109,27 @@ func (s *Substructure) DocBySrc(path string) *document {
 	return nil
 }
 
+// archives returns posts grouped by year.
+func (s *Substructure) archives() (archivesVars, error) {
+	m := map[int]documents{}
+	for _, d := range s.posts() {
+		year := d.CreatedAt.Year()
+		m[year] = append(m[year], d)
+	}
+
+	var archives archivesVars
+	for year, docs := range m {
+		sort.Sort(docs)
+		archives = append(archives, archiveVars{
+			Year:      year,
+			Documents: docs,
+		})
+	}
+	sort.Sort(archives)
+
+	return archives, nil
+}
+
 func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
 		if d.Kind == post {
@@ -228,14 +249,16 @@ func (s *Substructure) Execute(d *document, dist string) error {
 		return err
 	}
 
-	postsFunc := s.posts
-
 	_ = t.Funcs(template.FuncMap{
-		"img":    imgsFunc,
-		"imgs":   imgsFunc,
-		"video":  videoFunc,
-		"videos": videoFunc,
-		"posts":  postsFunc,
+		"add": add,
+		"sub": sub,
+
+		"archives": s.archives,
+		"img":      imgsFunc,
+		"imgs":     imgsFunc,
+		"posts":    s.posts,
+		"video":    videoFunc,
+		"videos":   videoFunc,
 	})
 
 	b, err := d.build()
@@ -249,7 +272,7 @@ func (s *Substructure) Execute(d *document, dist string) error {
 
 	var buf bytes.Buffer
 	err = t.Lookup("text_document").
-		Execute(&buf, templateVars{d, s, time.Now()})
+		Execute(&buf, textDocumentVars{d, s, time.Now()})
 	if err != nil {
 		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname, err)
 	}

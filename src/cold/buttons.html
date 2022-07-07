@@ -1,0 +1,48 @@
+---
+date: 2022-07-04
+type: draft
+---
+
+<style>
+  input[type="checkbox"] + label:after {
+    content: "Save";
+    display: block;
+  }
+
+  input[type="checkbox"]:checked {
+    display: block;
+  }
+  input[type="checkbox"]:checked + label:after {
+    content: "Saved";
+    display: block;
+  }
+</style>
+
+<h1>Use Buttons to Communicate With Your Users</h1>
+
+<p>
+  Buttons are the most undervalued communication tool we have with users. Users
+  are guaranteed to look at them when they want to perform an action, so the
+  button state captures the eye of a very specific group of users. We can use
+  this to target the right users without distracting others.
+</p>
+
+<h2>State</h2>
+<p>
+  <label
+    for="state"
+    style="
+      border: 1px white solid;
+      border-radius: 0.5em;
+      cursor: pointer;
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-align: center;
+      width: 3em;
+    "
+  >
+    <input type="checkbox" id="state" style="display: none" />
+  </label>
+</p>
+
+<h2>Location</h2>

@@ -12,12 +12,26 @@ import (
 	"twos.dev/winter/graphic"
 )
 
-type templateVars struct {
-	*document
-	*Substructure
+type archivesVars []archiveVars
 
-	Now time.Time
+func (a archivesVars) Less(i, j int) bool {
+	return a[i].Year > a[j].Year
 }
+
+func (a archivesVars) Len() int {
+	return len(a)
+}
+
+func (a archivesVars) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
+
+type archiveVars struct {
+	Year      int
+	Documents documents
+}
+
+type imgsfunc func(graphic.Caption, ...string) (template.HTML, error)
 
 // imgsPartialVars are the template variables given to
 // src/templates/_imgs.html.tmpl to render multiple images inline. At least one
@@ -36,6 +50,24 @@ type imageVars struct {
 	Dark  graphic.SRC
 }
 
+type textDocumentVars struct {
+	*document
+	*Substructure
+	Now time.Time
+}
+
+type tocPartialVars struct {
+	Items []tocVars
+}
+
+type tocVars struct {
+	Anchor string
+	Items  []tocVars
+	Title  string
+}
+
+type videosfunc func(graphic.Caption, ...string) (template.HTML, error)
+
 // videosPartialVars are the template variables given to
 // src/templates/_videos.html.tmpl to render any number of videos inline.
 type videosPartialVars struct {
@@ -51,16 +83,6 @@ type videoVars struct {
 	DarkMOV  graphic.SRC
 	LightMP4 graphic.SRC
 	DarkMP4  graphic.SRC
-}
-
-type tocPartialVars struct {
-	Items []tocVars
-}
-
-type tocVars struct {
-	Anchor string
-	Items  []tocVars
-	Title  string
 }
 
 func loadTemplates(t *template.Template) error {
@@ -98,7 +120,12 @@ func loadTemplates(t *template.Template) error {
 	return nil
 }
 
-type imgsfunc func(graphic.Caption, ...string) (template.HTML, error)
+func add(a, b int) int {
+	return a + b
+}
+func sub(a, b int) int {
+	return a - b
+}
 
 // imgs returns a function that can be inserted into a template's FuncMap for
 // calling by the template. The returned function takes a caption followed by
@@ -153,8 +180,6 @@ func imgs(shortname string) (imgsfunc, error) {
 		return template.HTML(buf.String()), nil
 	}, nil
 }
-
-type videosfunc func(graphic.Caption, ...string) (template.HTML, error)
 
 // videos returns a function that can be inserted into a template's FuncMap for
 // calling by the template. The returned function takes a caption followed by
@@ -227,5 +252,3 @@ func videos(
 		return template.HTML(buf.String()), nil
 	}, nil
 }
-
-type postsfunc func() []*document
