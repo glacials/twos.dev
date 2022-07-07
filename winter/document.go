@@ -177,7 +177,7 @@ func (d *document) load() error {
 
 	body, err := frontmatter.Parse(f, &d)
 	if err != nil {
-		return err
+		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
 	}
 	d.body = body
 	return nil
