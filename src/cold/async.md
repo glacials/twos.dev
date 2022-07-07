@@ -4,7 +4,7 @@ filename: async.html
 type: post
 ---
 
-# (A)synchrony
+# Why Be Synchronous?
 
 Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc?
 Pair programming or code review? [Pop-in](thepopin.html) or Slack message?
