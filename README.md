@@ -9,7 +9,8 @@ twos.dev is a low-tech website. It does not require JavaScript and it is
 composed entirely of static files served by GitHub Pages.
 
 These static files are built by a bespoke static website generator called
-Winter, which is written in Go and embedded in this repository at `winter/`.
+Winter, which is written in Go and embedded in this repository at `winter/`. See
+more about Winter below.
 
 ## First run
 
@@ -34,7 +35,11 @@ refresh automatically.
 [![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
 
 Winter is the bespoke static website generator that powers twos.dev. It can be
-used to power your static website as well, as a CLI or Go library:
+used to power your static website as well, as a CLI or Go library. Beware that
+although it is technically website-agnostic, its feature set is shaped to serve
+my peculiarities.
+
+### Installation
 
 ```sh
 # CLI
@@ -44,3 +49,32 @@ winter --help
 # Go library
 go get -u twos.dev/winter@latest
 ```
+
+### Philosophy
+
+The Winter CLI has three main commands:
+
+```sh
+winter build                # Build site once and stop
+winter build --serve        # Build site continuously and serve results
+winter freeze shortnames... # Convert the given documents from warm to cold
+```
+
+#### Warm vs. Cold Documents
+
+Winter's goals are to ease writing and editing of new content, and to harden
+existing content against breakages. Normally these goals work against each
+other. In Winter, the two types of content coexist and documents can flow easily
+from easy-to-edit ("warm") to hard-to-break ("cold").
+
+**Warm** content should be synchronized into the project directory from an
+outside tool---which specifically is up to the reader. I use [iA
+Writer](https://ia.net/writer) hooked up to an iCloud folder, with a Shortcut
+and/or cron job to copy files into the repository, then commit and push them.
+This makes creating content easy to do from any platform in any state of mind.
+
+**Cold** content must not be synchronized anywhere, because sync jobs are a
+great way to accidentally overwrite content. This is finished content you want
+to last for years or decades without needing to babysit its existence.
+
+Winter is very early software, so please use with caution.

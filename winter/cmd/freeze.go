@@ -27,6 +27,7 @@ var freezeCmd = &cobra.Command{
 	`),
 	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
+		// TODO: Allow an argument to also render .md to .html
 		for _, shortname := range args {
 			s, err := winter.NewSubstructure(winter.Config{})
 			if err != nil {
