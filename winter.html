@@ -1,24 +1,454 @@
-<html>
-    <head>
-        <meta
-            name="go-import"
-            content="twos.dev
-                     git https://github.com/glacials/twos.dev"
-        />
-        <meta
-            name="go-source"
-            content="twos.dev
-                     https://github.com/glacials/twos.dev
-                     https://github.com/glacials/twos.dev/tree/main{/dir}
-                     https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
-        />
-        <meta
-            http-equiv="refresh"
-            content="0;URL='https://github.com/glacials/twos.dev/blob/main/winter'"
-        />
-    </head>
-    <body>
-        Redirecting you to the
-        <a href="https://pkg.go.dev/twos.dev/winter">documentation</a>...
-    </body>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+  name="go-import"
+  content="twos.dev
+           git https://github.com/glacials/twos.dev"
+/>
+<meta
+  name="go-source"
+  content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
+/>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "UA-2876079-11");
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Winter" />
+<link rel="icon" href="favicon.ico" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="twos.dev"
+  href="/feed.rss"
+/>
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="twos.dev"
+  href="/feed.atom"
+/>
+<title>Winter</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"
+></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+  </p>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a
+      href="/"
+      
+      >Writing</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/cv.html"
+      
+      >CV</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <span class="arrow"></span>
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+      </header>
+      <article>
+        
+          <div style="text-align:center; background-color: var(--bg-c)">
+            DRAFT
+          </div>
+        
+        <html><head></head><body><p><meta name="go-import" content="twos.dev
+             git https://github.com/glacials/twos.dev"/>
+<meta name="go-source" content="twos.dev
+             https://github.com/glacials/twos.dev
+             https://github.com/glacials/twos.dev/tree/main{/dir}
+             https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"/></p>
+
+<h1>Winter</h1>
+
+<p><a href="https://pkg.go.dev/twos.dev/winter"><img src="https://pkg.go.dev/badge/twos.dev/winter.svg" alt="Go Reference"/></a></p>
+
+<p><em>Warning: Winter is in early alpha and so is this documentation. You may find
+inconsistencies or pieces of code present in twos.dev that have not yet been
+migrated to Winter.</em></p>
+
+<p><em>Winter</em> is the bespoke static website generator that powers twos.dev. It can
+power your static website as well, either as a CLI tool or Go library. Winter is
+strongly opinionated to serve my pecularities around building twos.dev.</p>
+
+<html><head></head><body><ol id="toc">
+  
+    <li><a href="#installation">Installation</a></li>
+    
+  
+    <li><a href="#documentation">Documentation</a></li>
+    
+      <ol>
+  
+    <li>
+      <a href="#layout">Directory Layout</a>
+      
+    </li>
+  
+    <li>
+      <a href="#commands">Commands</a>
+      
+    </li>
+  
+    <li>
+      <a href="#documents">Documents</a>
+      
+    </li>
+  
+</ol>
+
+    
+  
+</ol>
+</body></html><h2 id="installation">Installation</h2>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># CLI</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">go install twos.dev/winter/cmd@latest
+</span></span><span class="line"><span class="ln">3</span><span class="cl">winter --help
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1"># Go library</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl">go get -u twos.dev/winter@latest
+</span></span></code></pre></body></html>
+
+<h2 id="documentation">Documentation</h2>
+
+<p>This section details the <code>winter</code> CLI documentation. For Go library
+documentation, see
+<a href="https://pkg.go.dev/twos.dev/winter">pkg.go.dev/twos.dev/winter</a>.</p>
+
+<p>Winter's design goals are to allow content to be both easy to edit and hard to
+break. These goals work against each other by default, so Winter splits content
+into two modes: <strong>warm</strong> and <strong>cold</strong>.</p>
+
+<p><strong>Warm</strong> content should be synchronized into the project directory from an
+outside tool of your choice. Generally this is a writing program such as <a href="https://ia.net/writer">iA
+Writer</a> hooked up to a shared or cloud directory;
+simplistically, it can be a cron job that runs <code>rsync</code> followed by a Git add and
+push.</p>
+
+<p><strong>Cold</strong> content should not be touched by automated tools. This content must be
+preseved for years or decades, so less exposed surface area is better. When a
+piece of warm content is stable, it can be "frozen" into cold content using
+<code>winter freeze</code>.</p>
+
+<h3 id="layout">Directory Layout</h3>
+
+<ul>
+<li><code>./src</code><span style="font-family: sans-serif">—</span>Content to be built
+
+<ul>
+<li><code>./src/cold</code><span style="font-family: sans-serif">—</span>Stable content
+
+<ul>
+<li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
+<li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML files</li>
+<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML files compatible with Go <a href="https://pkg.go.dev/text/template"><code>text/template</code></a></li>
+</ul></li>
+<li><code>./src/warm</code>
+
+<ul>
+<li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
+<li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML files</li>
+<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML files compatible with Go <a href="https://pkg.go.dev/text/template"><code>text/template</code></a></li>
+</ul></li>
+<li><code>./src/templates</code>
+
+<ul>
+<li><code>text_document.html.tmpl</code><span style="font-family: sans-serif">—</span>Default page container</li>
+<li><code>imgcontainer.html.tmpl</code><span style="font-family: sans-serif">—</span>Gallery container</li>
+<li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML templates</li>
+<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML templates compatible with Go <a href="https://pkg.go.dev/text/template"><code>text/template</code></a></li>
+</ul></li>
+<li><code>./src/img</code><span style="font-family: sans-serif">—</span>Gallery images</li>
+</ul></li>
+<li><code>./public</code><span style="font-family: sans-serif">—</span>Static files copied directly to the build directory</li>
+<li><code>./dist</code><span style="font-family: sans-serif">—</span>Build directory</li>
+</ul>
+
+<h3 id="commands">Commands</h3>
+
+<h4 id="build"><code>winter build</code></h4>
+
+<p>Usage: <code>winter build [--serve]</code></p>
+
+<p>Build all content into <code>dist</code>. When <code>--serve</code> is passed, a fileserver is stood
+up afterwards pointing to <code>dist</code>, content is continually rebuilt as it changes,
+and the browser automatically refreshes.</p>
+
+<h4 id="freeze"><code>winter freeze</code></h4>
+
+<p>Usage: <code>winter freeze shortname...</code></p>
+
+<p>Freeze all arguments, specified by shortname. This moves the files from
+<code>src/warm</code> to <code>src/cold</code> and reflects the change in Git.</p>
+
+<h3 id="documents">Documents</h3>
+
+<p>A document is an HTML file or a Markdown file with optional frontmatter. This is
+an example document called <code>example.md</code>:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
+</span></span><span class="line"><span class="ln">2</span><span class="cl">date: 2022-07-07
+</span></span><span class="line"><span class="ln">3</span><span class="cl">filename: example.html
+</span></span><span class="line"><span class="ln">4</span><span class="cl">type: post
+</span></span><span class="line"><span class="ln">5</span><span class="cl">---
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="gh"># My Example Document
+</span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="ln">9</span><span class="cl">This is an example document.
+</span></span></code></pre></body></html>
+
+<h4 id="frontmatter">Frontmatter</h4>
+
+<p>Frontmatter is specified in YAML. All fields are optional.</p>
+
+<h5 id="filename"><code>filename</code></h5>
+
+<p>Filename specifies the desired final location of the built file in <code>dist</code>. This
+must end in <code>.html</code> and must not be in a subdirectory.</p>
+
+<p>When not set, the filename of the document minus extension is used in place. For
+example, <code>envy.html.tmpl</code> and <code>envy.md</code> would both become <code>envy.html</code>. In
+templates, the extension is stripped and the remainder is coalesced to <code>winter</code>.</p>
+
+<h5 id="date"><code>date</code></h5>
+
+<p>The publish date of the document as a Go
+<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a>. Coalesces to <code>2022-07-07 00:00:00 &#43;0000 UTC</code> in
+templates.</p>
+
+<p>Templates can format the time using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time) Format</code></a> function, which accepts a string
+of the reference time <code>01/02 03:04:05PM '06 -0700</code>. For example, for a document
+dated 2022-07-08:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">2022 July &lt;!-- Renders 2022 July  --&gt;
+</span></span><span class="line"><span class="ln">2</span><span class="cl">2022-07-07   &lt;!-- Renders 2022-07-08 --&gt;
+</span></span></code></pre></body></html>
+
+<p>Use <code>false</code> to see if the date was not set. You can use this
+to hide unset dates:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  published 2022 July
+</span></span><span class="line"><span class="ln">3</span><span class="cl">
+</span></span></code></pre></body></html>
+
+<h5 id="updated"><code>updated</code></h5>
+
+<p>The date the document was last meaningfully updated, if any, as a Go
+<a href="https://pkg.go.dev/time"><code>time.Time</code></a>. Coalesces to <code>0001-01-01 00:00:00 &#43;0000 UTC</code> in
+templates.</p>
+
+<p>Use <code>true</code> to see if the date was not set. You can use this
+to hide unset dates:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  published 2022 July
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  
+</span></span><span class="line"><span class="ln">6</span><span class="cl">
+</span></span></code></pre></body></html>
+
+<p>Renders:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">published 2022 July / last updated 2022 August
+</span></span></code></pre></body></html>
+
+<h5 id="type"><code>type</code></h5>
+
+<p>The kind of document. Possible values are <code>post</code>, <code>page</code>, <code>draft</code>.</p>
+
+<p><code>post</code> documents are programmatically included in template functions. <code>page</code> and
+<code>draft</code> documents have no programmatic action taken on them.</p>
+
+<h4 id="templates">Templates</h4>
+
+<p>Templates use the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
+library. Available variables are in flux so are not yet documented, but can be
+viewed in <a href="winter/template.go"><code>winter/template.go</code></a>.</p>
+
+<p>Template functions available are:</p>
+
+<h5 id="posts"><code>posts</code></h5>
+
+<p>Returns a list of all documents with type <code>post</code>, from most to least recent.</p>
+
+<h5 id="archives"><code>archives</code></h5>
+
+<p>Returns a list of <code>archive</code> types ordered from most to least recent. An
+<code>archive</code> is a struct with two fields, <code>.Year</code> (integer) and <code>.Documents</code> (array
+of <code>document</code>s). This allows you to display posts sectioned by year.</p>
+
+<h5 id="img"><code>img</code></h5>
+
+<p><em>Alias: <code>imgs</code></em></p>
+
+<p>Render an image or images with optional alt text and a caption.</p>
+
+<p>Usage: <code>{{ img caption &lt;imgname alt&gt;... }}</code></p>
+
+<p>For example, to render one image with a caption and alt text:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
+</span></span><span class="line"><span class="ln">2</span><span class="cl">filename: mypage.html
+</span></span><span class="line"><span class="ln">3</span><span class="cl">---
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl">{{ img
+</span></span><span class="line"><span class="ln">6</span><span class="cl">   "A caption."
+</span></span><span class="line"><span class="ln">7</span><span class="cl">   "myimg"
+</span></span><span class="line"><span class="ln">8</span><span class="cl">   "Descriptive alt text of what the image is of, for assistive tech"
+</span></span><span class="line"><span class="ln">9</span><span class="cl">}}
+</span></span></code></pre></body></html>
+
+<p>Images must be places in <code>public/img</code> in the form:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">pageshortname-imageshortname[-&lt;light|dark&gt;].&lt;png|jpg&gt;
+</span></span></code></pre></body></html>
+
+<p>When the <code>img</code> function is called from a template, <code>public/img</code> is searched for
+an image named in this format. In the example above, one possible image name
+that would be found is <code>public/img/mypage-myimg.jpg</code>.</p>
+
+<p>If both a <code>-light</code> and a <code>-dark</code> image exist, the correct one will be used for
+the user's dark mode preference.</p>
+
+<p>Any number of images can be rendered next to each other with one caption
+beneath the group:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">---
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">filename: example.html
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">---
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">{{ imgs
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">   "A pair of images."
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">   "imagename1"
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">   "Descriptive text of imagename1"
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">   "imagename2"
+</span></span><span class="line"><span class="ln">10</span><span class="cl">   "Descriptive text of imagename2"
+</span></span><span class="line"><span class="ln">11</span><span class="cl">}}
+</span></span></code></pre></body></html>
+
+<h5 id="video"><code>video</code></h5>
+
+<p><em>Alias: <code>videos</code></em></p>
+
+<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead. Note that
+most browsers do not currently support light or dark mode variations of
+<code>&lt;video&gt;</code> tags.</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/winter.md"
+                  >src/cold/winter.md</a
+                >
+              
+              <br />
+              
+                published
+                2022 July
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
 </html>
