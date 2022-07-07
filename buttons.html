@@ -44,7 +44,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="Benjamin Carlsson" />
+<meta name="description" content="Use Buttons to Communicate With Your Users" />
 <link rel="icon" href="favicon.ico" />
 <link
   rel="alternate"
@@ -58,7 +58,7 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Benjamin Carlsson</title>
+<title>Use Buttons to Communicate With Your Users</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
@@ -101,7 +101,7 @@
     <span class="arrow"></span>
     <a
       href="/"
-      class="selected"
+      
       >Writing</a
     >
     <span class="arrow"></span>
@@ -133,101 +133,59 @@
       </header>
       <article>
         
-        <html><head></head><body><div style="margin: auto; text-align: center">
-  <h1>Benjamin Carlsson</h1>
-  <p>happily experiencing clouds in Seattle, WA</p>
-  <p>
-    <a href="benjamincarlsson.vcf">Contact card</a>
-  </p>
-  <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>,
-  <a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a>,
-  <a href="https://github.com/glacials" style="white-space: nowrap">github.com/glacials</a>,
-  <a href="https://linkedin.com/in/ben" style="white-space: nowrap">linkedin.com/in/ben</a>
-</div>
+          <div style="text-align:center; background-color: var(--bg-c)">
+            DRAFT
+          </div>
+        
+        <html><head><style>
+  input[type="checkbox"] + label:after {
+    content: "Save";
+    display: block;
+  }
 
-<h2>Writing</h2>
-<ul>
-  
-  
-    
-    <li>
-      <a href="/async.html">(A)synchrony</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/dashes.html">Advanced Dashes</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/meta.html">Inside twos.dev</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/hotsauce.html">When the April Fool&#39;s Day Prank is Real</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/apple.html">From Google to Apple</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/autism.html">Anonymously Autistic</a>
-      
-    </li>
-  
-    
-    <li>
-      <a href="/tattoo.html">Tattoos as Moral Contracts</a>
-      (2021)
-    </li>
-  
-    
-    <li>
-      <a href="/thepopin.html">The Remote Pop-In</a>
-      (2021)
-    </li>
-  
-    
-      
-  <li><a href="/archives.html">archives</a> →</li>
-</ul>
-<p></p>
+  input[type="checkbox"]:checked {
+    display: block;
+  }
+  input[type="checkbox"]:checked + label:after {
+    content: "Saved";
+    display: block;
+  }
+</style>
 
+</head><body><h1>Use Buttons to Communicate With Your Users</h1>
 
+<p>
+  Buttons are the most undervalued communication tool we have with users. Users
+  are guaranteed to look at them when they want to perform an action, so the
+  button state captures the eye of a very specific group of users. We can use
+  this to target the right users without distracting others.
+</p>
 
-<h2>2021</h2>
-<p>In 2021 I started learning interior design and photography.</p>
+<h2>State</h2>
+<p>
+  <label for="state" style="
+      border: 1px white solid;
+      border-radius: 0.5em;
+      cursor: pointer;
+      display: inline-block;
+      padding: 0.5em 1em;
+      text-align: center;
+      width: 3em;
+    ">
+    <input type="checkbox" id="state" style="display: none"/>
+  </label>
+</p>
 
-<div class="photo-grid">
-  <a href="/img/photography/2021/IMG_0385.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0385.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0501.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0501.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0597.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0597.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0602.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0602.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0615.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0615.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0629.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0629.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0638.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0638.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0644.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0644.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0661.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0661.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0711.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0711.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0818.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0818.JPG"/></a>
-  <a href="/img/photography/2021/IMG_0859.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_0859.JPG"/></a>
-  <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_1270.JPG"/></a>
-</div>
+<h2>Location</h2>
 </body></html>
       </article>
       <footer>
         <hr />
         <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
           
         </p>
         <p>
@@ -236,17 +194,14 @@
               
                 source:
                 <a
-                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/index.html.tmpl"
-                  >src/cold/index.html.tmpl</a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/buttons.html"
+                  >src/cold/buttons.html</a
                 >
               
               <br />
               
                 published
-                2021 April
-                  / last updated
-                  2022 June
-                
+                2022 July
               
             </i>
           </small>

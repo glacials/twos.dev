@@ -1,0 +1,250 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta
+  name="go-import"
+  content="twos.dev
+           git https://github.com/glacials/twos.dev"
+/>
+<meta
+  name="go-source"
+  content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
+/>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "UA-2876079-11");
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Game loads: Overlord" />
+<link rel="icon" href="favicon.ico" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="twos.dev"
+  href="/feed.rss"
+/>
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="twos.dev"
+  href="/feed.atom"
+/>
+<title>Game loads: Overlord</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"
+></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    ╭──────〔❨┅ ⑅ <a href="/">twos.dev</a> ⑅ ┅❩〕───────╮
+  </p>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a
+      href="/"
+      
+      >Writing</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/cv.html"
+      
+      >CV</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <span class="arrow"></span>
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <span class="arrow"></span>
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2007 November</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/">I FEEL
+ASLEEP</a>, which was shared with
+Neverhitboxes.</em></p>
+
+<hr/>
+
+<h1>Game loads: Overlord</h1>
+
+<p>A second game I’ve been trying to play lately is
+<a href="http://en.wikipedia.org/wiki/Overlord_%282007_video_game%29">Overlord</a>, which,
+despite its lack of hype (that I’ve heard of, anyway), is actually a pretty
+great game (then again, it came out almost six months ago). I’ve been told by my
+fellow blogger that it’s extremely similar to Pikmin, which I, of course, never
+bought.In short, you play as a dark overlord (who would guess?), and you do
+battle by sending in your minions, who are a little like demonic gremlins, to
+fight for you. You have a huge axe you can fight with too, but according to your
+advisor, you’re too good for that.</p>
+
+<p>An appealing part of the game is the number of uses for the minions, and the
+awesome ways in which they’re applied. Aside from fighting (which can get pretty
+awesome, what with your minions jumping onto your enemies’ backs and pretty much
+riding them around), the minions can do things like move large obstacles out of
+the way (which will require x minions to do depending on the size of the object;
+this makes for the revelation of new areas pretty smooth as you can command more
+and more minions at once), turn big wheels to open doors or drop drawbridges,
+and fit through or across small areas like tunnels or coincidental bridges made
+of small tree branches.</p>
+
+<p>Your minions also pick up random stuff that can help them along their way,
+ranging from makeshift weapons (like pieces of fences, if I remember correctly)
+to pumpkin helms. That’s right; if you tell your minions to attack random things
+(which they will sometimes do on their own if they’re in the area) <span style="font-family: sans-serif">—</span> like
+pumpkins <span style="font-family: sans-serif">—</span> they’ll do crazy stuff like put them on their heads, even if it
+doesn’t help them one bit. That’s one of the things that really brings them to
+life: they’re not just mindless creatures who obey your every word and only your
+every word (although they are quite loyal) <span style="font-family: sans-serif">—</span> they like to have some fun, too.</p>
+
+<p>You also have a huge castle that you can customize with enough money <span style="font-family: sans-serif">—</span> a nice
+perk, but (so far for me) has served no super-meaningful purpose.</p>
+
+<p>And the last thing I’ll mention is paths. Lots of games have been adding this
+lately to dynam-ify storylines <span style="font-family: sans-serif">—</span> you can choose your character’s personal path
+through the the actions you perform. In most cases, your actions end up deciding
+whether you’re good or evil in the end (<a href="http://en.wikipedia.org/wiki/Dark_Messiah_of_Might_and_Magic">Dark
+Messiah</a> is an
+excellent example of this), but since <em>Overlord</em>‘s whole concept is pretty much
+based around being evil, you get to choose between evil and <em>really</em> evil.</p>
+
+<p>As you might guess, killing innocent people leans you towards the <em>really evil</em>
+side. Every time you kill someone who would otherwise befriend you, you get
+their life force, and 1 life force = 1 more minion you have available to summon.
+You also get some decent cash from their pockets.</p>
+
+<p>The disadvantage to doing this, as your advisor states, is that to rule an evil
+empire, you actually have to have <em>people</em> to rule over <span style="font-family: sans-serif">—</span> so killing everyone
+isn’t too much of an option. I have yet to complete the game, so I’m not sure of
+the gameplay differences between the two paths yet, but I’m sure there will be
+some.</p>
+
+<p>One last thing, because I know you’re waiting for it: graphics. They’re <em>very</em>
+decent. If you’re talking about sole graphics, they’re up there with Half-Life
+2, but that doesn’t take into account physics, the actual <em>use</em> of the graphics,
+and the cooperation between the two. And some unrelated things could use some
+work.</p>
+
+<p>For instance, you can set fields of dry grass on fire once you get the
+appropriate spell, and the trees in that field will switch to a dry and burnt
+model when the fire spreads to them (which all is very cool to see happen), but
+the trees just swap from one model to the other, and the instant change is very
+noticeable. At least cross-fade between the models or something.</p>
+
+<p>Definitely not something to cry over, though <span style="font-family: sans-serif">—</span> from the first time you set foot
+into non-evil lands, you can feel the happiness vibes emitting from everything
+from the sheep to the swaying grass <span style="font-family: sans-serif">—</span> one of which you will slaughter and the
+other of which you will set fire to.</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/overlord.md"
+                  >src/cold/overlord.md</a
+                >
+              
+              <br />
+              
+                published
+                2007 November
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
