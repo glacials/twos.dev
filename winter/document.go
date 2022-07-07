@@ -141,12 +141,8 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 // frontmatter and structure. Heavier details like template execution are not
 // touched until Render is called.
 func NewHTMLDocument(src string) (*document, error) {
-	d := document{SrcPath: src}
+	d := document{SrcPath: src, encoding: encodingHTML}
 	if err := d.load(); err != nil {
-		return nil, err
-	}
-	d.encoding = encodingHTML
-	if err := d.parseHTML(d.body); err != nil {
 		return nil, err
 	}
 	return &d, d.slurpHTML()
@@ -157,12 +153,8 @@ func NewHTMLDocument(src string) (*document, error) {
 // call, such as frontmatter and structure. Heavier details like template
 // execution are not touched until Render is called.
 func NewMarkdownDocument(src string) (*document, error) {
-	d := document{SrcPath: src}
+	d := document{SrcPath: src, encoding: encodingMarkdown}
 	if err := d.load(); err != nil {
-		return nil, err
-	}
-	d.encoding = encodingMarkdown
-	if err := d.parseMarkdown(d.body); err != nil {
 		return nil, err
 	}
 	return &d, d.slurpHTML()
@@ -180,6 +172,16 @@ func (d *document) load() error {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
 	}
 	d.body = body
+
+	switch d.encoding {
+	case encodingHTML:
+		return d.parseHTML()
+	case encodingMarkdown:
+		return d.parseMarkdown()
+	default:
+		return fmt.Errorf("unknown encoding %d", d.encoding)
+	}
+
 	return nil
 }
 
@@ -211,19 +213,8 @@ func (d *document) slurpHTML() error {
 	return nil
 }
 
-func (d *document) parse() error {
-	switch d.encoding {
-	case encodingHTML:
-		return d.parseHTML(d.body)
-	case encodingMarkdown:
-		return d.parseMarkdown(d.body)
-	default:
-		return fmt.Errorf("unknown encoding %d", d.encoding)
-	}
-}
-
-func (d *document) parseHTML(body []byte) error {
-	root, err := html.Parse(bytes.NewBuffer(body))
+func (d *document) parseHTML() error {
+	root, err := html.Parse(bytes.NewBuffer(d.body))
 	if err != nil {
 		return err
 	}
@@ -232,11 +223,11 @@ func (d *document) parseHTML(body []byte) error {
 	return nil
 }
 
-func (d *document) parseMarkdown(body []byte) error {
+func (d *document) parseMarkdown() error {
 	root, err := html.Parse(
 		bytes.NewBuffer(
 			markdown.ToHTML(
-				body,
+				d.body,
 				parser.NewWithExtensions(
 					parser.Attributes|
 						parser.Autolink|
@@ -264,9 +255,6 @@ func (d *document) build() ([]byte, error) {
 		return nil, err
 	}
 	if err := d.slurpHTML(); err != nil {
-		return nil, err
-	}
-	if err := d.parse(); err != nil {
 		return nil, err
 	}
 	if d.TOC {

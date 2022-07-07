@@ -95,6 +95,7 @@ func (r *Reloader) listen() {
 				return
 			}
 			if d := r.Substructure.DocBySrc(event.Name); d != nil {
+				log.Printf("%s changed", event.Name)
 				if err := r.Substructure.Execute(d, dist); err != nil {
 					log.Fatalf("error executing %s: %s", d.Shortname, err.Error())
 					return
