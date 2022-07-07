@@ -67,8 +67,8 @@ var (
 		"&#34;": "\"",
 		"&#39;": "'",
 	}
-	tocmin = atom.H2
-	tocmax = atom.H3
+	tocmin = 2
+	tocmax = 3
 )
 
 // document is a single HTML or Markdown file that will be compiled into a
@@ -310,9 +310,9 @@ func (d *document) fillTOC() error {
 		v tocPartialVars
 	)
 	f = func(n *html.Node) {
-		if n.DataAtom >= tocmin && n.DataAtom <= tocmax {
+		if hi[n.DataAtom] >= tocmin && hi[n.DataAtom] <= tocmax {
 			grp := &v.Items
-			for i := hi[tocmin]; i < hi[n.DataAtom] && i < hi[tocmax]; i += 1 {
+			for i := tocmin; i < hi[n.DataAtom] && i < tocmax; i += 1 {
 				if len(*grp) > 0 {
 					grp = &((*grp)[len(*grp)-1].Items)
 				}

@@ -12,9 +12,10 @@ require (
 	github.com/otiai10/copy v1.7.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/spf13/cobra v1.5.0
-	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d
+	github.com/yargevad/filepathx v1.0.0
+	golang.org/x/exp v0.0.0-20220706164943-b4a6d9510983
 	golang.org/x/image v0.0.0-20220617043117-41969df76e82
-	golang.org/x/net v0.0.0-20220624214902-1bab6f366d9e
+	golang.org/x/net v0.0.0-20220706163947-c90051bbdb60
 )
 
 require (
@@ -28,8 +29,7 @@ require (
 	github.com/mitranim/gg v0.0.14 // indirect
 	github.com/rjeczalik/notify v0.9.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	github.com/yargevad/filepathx v1.0.0 // indirect
-	golang.org/x/sys v0.0.0-20220627191245-f75cf1eec38b // indirect
+	golang.org/x/sys v0.0.0-20220704084225-05e143d24a9e // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	star-tex.org/x/tex v0.4.0 // indirect
 )
