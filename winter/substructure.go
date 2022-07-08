@@ -271,6 +271,11 @@ func (s *Substructure) Execute(d *document, dist string) error {
 	}
 
 	var buf bytes.Buffer
+	if t.Lookup("text_document") == nil {
+		if err := loadTemplates(t); err != nil {
+			return err
+		}
+	}
 	err = t.Lookup("text_document").
 		Execute(&buf, textDocumentVars{d, s, time.Now()})
 	if err != nil {

@@ -100,7 +100,7 @@ var (
 	// on builders being populated.
 	globalBuilders = map[string]struct{}{
 		"src/templates/*": {},
-		"*.css":           {},
+		"public/*.css":    {},
 	}
 	serve bool
 )
@@ -157,6 +157,6 @@ func startFileServer(server *http.Server) {
 			// Expected when we call server.Shutdown()
 			return
 		}
-		log.Fatal(err)
+		log.Fatal(fmt.Errorf("can't listen and serve: %w", err))
 	}
 }

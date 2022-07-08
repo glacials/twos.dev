@@ -181,8 +181,6 @@ func (d *document) load() error {
 	default:
 		return fmt.Errorf("unknown encoding %d", d.encoding)
 	}
-
-	return nil
 }
 
 func (d *document) slurpHTML() error {
