@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
-	"os"
 	"path/filepath"
 
 	"github.com/fsnotify/fsnotify"
@@ -94,30 +93,14 @@ func (r *Reloader) listen() {
 				log.Println("fsnotify watcher closed")
 				return
 			}
-			if d := r.Substructure.DocBySrc(event.Name); d != nil {
-				log.Printf("%s changed", event.Name)
-				if err := r.Substructure.Execute(d, dist); err != nil {
-					log.Fatalf("error executing %s: %s", d.Shortname, err.Error())
+			fmt.Println("event:", event)
+			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {
+				if !errors.Is(err, winter.ErrNotTracked{}) {
+					log.Println(err.Error())
 					return
 				}
-				r.Reload()
 			}
-			for pattern, builder := range r.Builders {
-				if ok, err := filepath.Match(pattern, event.Name); err != nil {
-					panic(err)
-				} else if ok {
-					log.Printf("%s changed", event.Name)
-					if err := builder(event.Name, dist, winter.Config{}); err != nil {
-						if errors.Is(err, os.ErrNotExist) {
-							// Happens sometimes, not sure why
-							log.Printf("%s doesn't exist, ignoring", event.Name)
-							continue
-						}
-						panic(fmt.Errorf("can't build %s: %w", event.Name, err))
-					}
-					r.Reload()
-				}
-			}
+			r.Reload()
 		case err := <-r.watcher.Errors:
 			if err != nil {
 				panic(err)

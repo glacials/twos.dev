@@ -90,6 +90,11 @@ type document struct {
 	root     *html.Node
 	incoming []*document
 	outgoing []*document
+	t        *template.Template
+
+	// dependencies is the set of files that building this document depends on,
+	// inferred automatically.
+	dependencies map[string]struct{}
 }
 
 type encoding int
@@ -141,7 +146,11 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 // frontmatter and structure. Heavier details like template execution are not
 // touched until Render is called.
 func NewHTMLDocument(src string) (*document, error) {
-	d := document{SrcPath: src, encoding: encodingHTML}
+	d := document{
+		SrcPath:      src,
+		encoding:     encodingHTML,
+		dependencies: make(map[string]struct{}),
+	}
 	if err := d.load(); err != nil {
 		return nil, err
 	}
@@ -153,7 +162,11 @@ func NewHTMLDocument(src string) (*document, error) {
 // call, such as frontmatter and structure. Heavier details like template
 // execution are not touched until Render is called.
 func NewMarkdownDocument(src string) (*document, error) {
-	d := document{SrcPath: src, encoding: encodingMarkdown}
+	d := document{
+		SrcPath:      src,
+		encoding:     encodingMarkdown,
+		dependencies: make(map[string]struct{}),
+	}
 	if err := d.load(); err != nil {
 		return nil, err
 	}
@@ -326,26 +339,30 @@ func (d *document) fillTOC() error {
 	}
 	f(d.root)
 
-	toctmpl, err := ioutil.ReadFile("src/templates/_toc.html.tmpl")
+	tocbody, err := ioutil.ReadFile("src/templates/_toc.html.tmpl")
 	if err != nil {
 		return err
 	}
-	t, err := template.New("toc").Parse(string(toctmpl))
+	toctmpl, err := template.New("toc").Parse(string(tocbody))
 	if err != nil {
 		return err
 	}
 
-	subtoctmpl, err := ioutil.ReadFile("src/templates/_subtoc.html.tmpl")
+	subtocbody, err := ioutil.ReadFile("src/templates/_subtoc.html.tmpl")
 	if err != nil {
 		return err
 	}
-	_, err = t.New("subtoc").Parse(string(subtoctmpl))
+	subtoctmpl, err := toctmpl.New("subtoc").Parse(string(subtocbody))
 	if err != nil {
 		return err
 	}
+
+	// Ensure updates to TOC templates cause rebuilds
+	d.dependencies[toctmpl.Name()] = struct{}{}
+	d.dependencies[subtoctmpl.Name()] = struct{}{}
 
 	var buf bytes.Buffer
-	if err := t.Execute(&buf, v); err != nil {
+	if err := toctmpl.Execute(&buf, v); err != nil {
 		return err
 	}
 	toc, err := html.Parse(&buf)

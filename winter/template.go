@@ -7,9 +7,15 @@ import (
 	"io/ioutil"
 	"path/filepath"
 	"strings"
+	"text/template/parse"
 	"time"
 
 	"twos.dev/winter/graphic"
+)
+
+const (
+	txtname = "text_document"
+	galname = "imgcontainer"
 )
 
 type archivesVars []archiveVars
@@ -85,39 +91,36 @@ type videoVars struct {
 	DarkMP4  graphic.SRC
 }
 
-func loadTemplates(t *template.Template) error {
-	if t == nil {
-		return fmt.Errorf("nil template")
-	}
-	partials, err := filepath.Glob("src/templates/*.html.tmpl")
+// tmplPathToName converts a template path to a template name.
+func tmplPathToName(src string) string {
+	name := filepath.Base(src)
+	name = strings.TrimPrefix(name, "_")
+	name, _, _ = strings.Cut(name, ".") // Trim extensions, even e.g. .html.tmpl
+	return name
+}
+
+// tmplNameToPath converts a template name to a path. If no such template
+// exists, returns an error.
+func tmplNameToPath(name string) (string, error) {
+	paths, err := filepath.Glob(
+		filepath.Join("src", "templates", fmt.Sprintf("*%s.*", name)),
+	)
 	if err != nil {
-		return fmt.Errorf("can't glob for partials: %w", err)
+		return "", fmt.Errorf("can't glob for templates: %w", err)
 	}
 
-	for _, partial := range partials {
-		name := filepath.Base(partial)
-		name = strings.TrimPrefix(name, "_")
-		name, _, _ = strings.Cut(name, ".") // Trim extensions, even e.g. .html.tmpl
-
-		p, err := ioutil.ReadFile(partial)
-		if err != nil {
-			return fmt.Errorf(
-				"can't read partial `%s`: %w",
-				partial,
-				err,
-			)
-		}
-
-		if _, err := t.New(name).Parse(string(p)); err != nil {
-			return fmt.Errorf(
-				"can't parse partial `%s`: %w",
-				partial,
-				err,
-			)
-		}
+	if len(paths) > 1 {
+		return "", fmt.Errorf("multiple files match template name `%s`", name)
+	}
+	if len(paths) == 0 {
+		return "", fmt.Errorf(
+			"no file for template `%s`; expected one at src/templates/[_]%s.html[.tmpl]",
+			name,
+			name,
+		)
 	}
 
-	return nil
+	return paths[0], nil
 }
 
 func add(a, b int) int {
@@ -251,4 +254,42 @@ func videos(
 
 		return template.HTML(buf.String()), nil
 	}, nil
+}
+
+// loadDependencies loads and parses the given template from disk if needed,
+// then searches its parse tree for templates it references, and loads and
+// parses those templates.
+func loadDependencies(t *template.Template) error {
+	if t.Tree == nil {
+		name, err := tmplNameToPath(t.Name())
+		if err != nil {
+			return err
+		}
+		b, err := ioutil.ReadFile(name)
+		if err != nil {
+			return err
+		}
+		if _, err := t.Parse(string(b)); err != nil {
+			return err
+		}
+	}
+	for _, node := range t.Tree.Root.Nodes {
+		if node.Type() == parse.NodeTemplate {
+			name := node.(*parse.TemplateNode).Name
+			if t.Lookup(name) == nil {
+				path, err := tmplNameToPath(name)
+				if err != nil {
+					return err
+				}
+				b, err := ioutil.ReadFile(path)
+				if err != nil {
+					return err
+				}
+				if _, err := t.New(name).Parse(string(b)); err != nil {
+					return err
+				}
+			}
+		}
+	}
+	return nil
 }

@@ -83,10 +83,9 @@ func BuildPhoto(src, dst string, cfg Config) error {
 }
 
 func genGalleryPage(src, dst string, cfg Config) error {
-	t := template.New("")
-
-	if err := loadTemplates(t); err != nil {
-		return fmt.Errorf("can't load templates: %w", err)
+	t := template.New(galname)
+	if err := loadDependencies(t); err != nil {
+		return fmt.Errorf("can't load dependencies: %w", err)
 	}
 
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {

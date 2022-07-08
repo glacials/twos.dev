@@ -99,8 +99,7 @@ var (
 	// globalBuilders must be separate from builders because buildTheWorld depends
 	// on builders being populated.
 	globalBuilders = map[string]struct{}{
-		"src/templates/*": {},
-		"public/*.css":    {},
+		"public/*.css": {},
 	}
 	serve bool
 )

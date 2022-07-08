@@ -91,6 +91,51 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 	return &s, err
 }
 
+type ErrNotTracked struct{ path string }
+
+func (err ErrNotTracked) Error() string {
+	return fmt.Sprintf("%s is not tracked in the substructure", err.path)
+}
+
+// Rebuild rebuilds the document or template at the given path into the given
+// dist directory.
+//
+// If the path is a template, any documents that use it will be rebuilt
+// afterwards. If the path is a document, any templates it uses will be rebuilt
+// first. If the path isn't known to the substructure, Rebuild returns
+// ErrNotTracked.
+func (s *Substructure) Rebuild(src, dist string) error {
+	var built bool
+	fmt.Println("rebuilding", src)
+	for _, doc := range s.docs {
+		name := tmplPathToName(src)
+		for d := range doc.dependencies {
+			if d == name {
+				fmt.Printf(" ↗ %s", doc.Shortname)
+				if err := s.Execute(doc, dist); err != nil {
+					return err
+				}
+				fmt.Printf(" ✓")
+				built = true
+			}
+		}
+		if doc.SrcPath == src {
+			fmt.Printf("  → %s", doc.Shortname)
+			if err := s.Execute(doc, dist); err != nil {
+				return err
+			}
+			fmt.Printf(" ✓")
+			built = true
+		}
+	}
+
+	if !built {
+		return ErrNotTracked{path: src}
+	}
+
+	return nil
+}
+
 func (s *Substructure) DocByShortname(shortname string) *document {
 	for _, d := range s.docs {
 		if d.Shortname == shortname {
@@ -232,12 +277,10 @@ func (s *Substructure) ExecuteAll(dist string) error {
 	return nil
 }
 
-// Execute builds the given document into the given directory.
+// Execute builds the given document into the given directory. To build a
+// document and its dependencies and dependants, use Rebuild instead.
 func (s *Substructure) Execute(d *document, dist string) error {
-	t := template.New("")
-	if err := loadTemplates(t); err != nil {
-		return err
-	}
+	t := template.New("body")
 
 	imgsFunc, err := imgs(d.Shortname)
 	if err != nil {
@@ -266,18 +309,30 @@ func (s *Substructure) Execute(d *document, dist string) error {
 		return err
 	}
 
-	if _, err := t.New("body").Parse(string(b)); err != nil {
+	if _, err := t.Parse(string(b)); err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
 	}
 
 	var buf bytes.Buffer
-	if t.Lookup("text_document") == nil {
-		if err := loadTemplates(t); err != nil {
-			return err
+	txt := t.Lookup(txtname)
+	if txt == nil {
+		txt = t.New(txtname)
+	}
+
+	if err := loadDependencies(t); err != nil {
+		return err
+	}
+	if err := loadDependencies(txt); err != nil {
+		return err
+	}
+
+	for _, dep := range append(t.Templates(), txt.Templates()...) {
+		if dep.Name() != "body" && dep.Name() != d.Shortname {
+			d.dependencies[dep.Name()] = struct{}{}
 		}
 	}
-	err = t.Lookup("text_document").
-		Execute(&buf, textDocumentVars{d, s, time.Now()})
+
+	err = txt.Execute(&buf, textDocumentVars{d, s, time.Now()})
 	if err != nil {
 		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname, err)
 	}

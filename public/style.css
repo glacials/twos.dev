@@ -84,6 +84,7 @@ a:hover.img > img {
 
 blockquote {
   border-left: 1px solid var(--fg-a-a);
+  padding-left: 1em;
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
