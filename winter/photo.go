@@ -15,157 +15,134 @@ import (
 
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
-	"golang.org/x/exp/slices"
 	"golang.org/x/image/draw"
 )
 
-type galleryVars struct {
-	*document
-
-	ImageSRC string
+type galleryDocument struct {
+	PageLink string
 	Alt      string
 	Camera   string
 	TakenAt  time.Time
+	WebPath  string
 
-	Prev *galleryImageVars
-	Next *galleryImageVars
+	Prev *galleryDocument
+	Next *galleryDocument
+
+	cfg       Config
+	localPath string
 }
 
-type galleryImageVars struct {
-	PageLink string
-	ImageSRC string
-}
-
-func BuildPhoto(src, dst string, cfg Config) error {
-	relsrc, err := filepath.Rel("src", src)
+// NewGalleryDocument returns a Document that represents an HTML page which
+// wraps a single, large-display image.
+func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
+	relpath, err := filepath.Rel("src", src)
 	if err != nil {
-		return fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
+		return nil, fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
 	}
 
-	dst = filepath.Join(dst, relsrc)
-	thmdst := strings.Replace(
-		dst,
+	return &galleryDocument{
+		localPath: src,
+		PageLink:  fmt.Sprintf("/%s.html", relpath),
+		WebPath:   relpath,
+		cfg:       cfg,
+	}, nil
+}
+
+// Build builds the gallery document.
+func (d *galleryDocument) Build() ([]byte, error) {
+	imgdest := filepath.Join("dist", d.WebPath) // TODO: Do from substructure
+	thmdest := strings.Replace(
+		imgdest,
 		filepath.FromSlash("/img/"),
 		filepath.FromSlash("/img/thumb/"),
 		1,
 	)
 
-	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(dst), err)
+	if err := os.MkdirAll(filepath.Dir(imgdest), 0755); err != nil {
+		return nil, fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdest), err)
 	}
 
-	srcf, err := os.Open(src)
+	srcf, err := os.Open(d.localPath)
 	if err != nil {
-		return fmt.Errorf("can't read `%s`: %w", src, err)
+		return nil, fmt.Errorf("can't read `%s`: %w", d.localPath, err)
 	}
 	defer srcf.Close()
 
-	dstf, err := os.Create(dst)
+	dstf, err := os.Create(imgdest)
 	if err != nil {
-		return fmt.Errorf("can't write photo `%s`: %w", dst, err)
+		return nil, fmt.Errorf("can't write photo `%s`: %w", imgdest, err)
 	}
 	defer dstf.Close()
 
 	if _, err := io.Copy(dstf, srcf); err != nil {
-		return fmt.Errorf("can't copy `%s` to `%s`: %w", src, dst, err)
-	}
-
-	// Generate thumbnails and place into build dir
-	if err := genThumbnail(src, thmdst, 300); err != nil {
-		return fmt.Errorf("can't generate thumbnails: %w", err)
-	}
-
-	if err := genGalleryPage(src, fmt.Sprintf("%s.html", dst), cfg); err != nil {
-		return fmt.Errorf("can't generate photo container pages: %w", err)
-	}
-
-	return nil
-}
-
-func genGalleryPage(src, dst string, cfg Config) error {
-	t := template.New(galname)
-	if err := loadDependencies(t); err != nil {
-		return fmt.Errorf("can't load dependencies: %w", err)
-	}
-
-	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
-		return fmt.Errorf(
-			"can't create imgcontainer directory `%s`: %w",
-			filepath.Dir(dst),
+		return nil, fmt.Errorf(
+			"can't copy `%s` to `%s`: %w",
+			d.localPath,
+			imgdest,
 			err,
 		)
 	}
 
-	f, err := os.Create(dst)
-	if err != nil {
-		return fmt.Errorf("can't create imgcontainer file for `%s`: %w", src, err)
+	if err := genThumbnail(d.localPath, thmdest, 300); err != nil {
+		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
-	defer f.Close()
 
-	files, err := filepath.Glob(
-		filepath.Join(filepath.Dir(src), "*.[jJ][pP][gG]"),
-	)
+	d.Camera, d.TakenAt, err = photodata(d.localPath)
 	if err != nil {
-		return fmt.Errorf(
-			"can't look into photo directory `%s` for ordering: %w",
-			filepath.Dir(src),
+		return nil, fmt.Errorf(
+			"can't get camera for `%s`: %w",
+			d.localPath,
 			err,
 		)
 	}
 
-	i := slices.IndexFunc(
-		files,
-		func(file string) bool { return filepath.Base(file) == filepath.Base(src) },
-	)
+	return tmplByName(galname)
+}
 
-	var prev, next *galleryImageVars
-	if i > 0 {
-		img := filepath.Base(files[i-1])
-		prev = &galleryImageVars{
-			ImageSRC: img,
-			PageLink: fmt.Sprintf("%s.html", img),
-		}
-	}
-	if i < len(files)-1 {
-		img := filepath.Base(files[i+1])
-		next = &galleryImageVars{
-			ImageSRC: img,
-			PageLink: fmt.Sprintf("%s.html", img),
-		}
-	}
+// Dependencies returns the filepaths the gallery document depends on.
+func (d *galleryDocument) Dependencies() map[string]struct{} {
+	return map[string]struct{}{}
+}
 
-	camera, datetime, err := photodata(src)
+// Dest returns the destination path for the final gallery document.
+func (d *galleryDocument) Dest() (string, error) {
+	relpath, err := filepath.Rel("src", d.localPath)
 	if err != nil {
-		return fmt.Errorf("can't get camera for `%s`: %w", src, err)
+		return "", fmt.Errorf(
+			"can't get relpath for photo `%s`: %w",
+			d.localPath,
+			err,
+		)
 	}
 
-	shortname := filepath.Base(src)
-	shortname, _, _ = strings.Cut(shortname, ".")
+	return fmt.Sprintf("%s.html", relpath), nil
+}
 
-	v := galleryVars{
-		document: &document{
-			SrcPath:   src,
-			Kind:      gallery,
-			Shortname: shortname,
-			Title:     fmt.Sprintf("%s Photo Viewer", cfg.Name),
-		},
+func (d *galleryDocument) Execute(w io.Writer, t *template.Template) error {
+	return t.Execute(w, d)
+}
 
-		Alt:      "",
-		Camera:   camera,
-		ImageSRC: filepath.Base(src),
-		TakenAt:  datetime,
+func (d *galleryDocument) IsPost() bool  { return false }
+func (d *galleryDocument) IsDraft() bool { return false }
 
-		Prev: prev,
-		Next: next,
-	}
-
-	if err := t.Lookup("imgcontainer").Execute(f, v); err != nil {
-		fmt.Println(t)
-		return fmt.Errorf("can't execute imgcontainer template: %w", err)
-	}
-
+// LoadTemplates loads the needed templates for the gallery document.
+func (d *galleryDocument) LoadTemplates(t *template.Template) error {
 	return nil
 }
+
+// Layout returns the image container template name.
+func (d *galleryDocument) Layout() string { return "imgcontainer" }
+
+// Title returns a generic gallery title.
+func (d *galleryDocument) Title() string { return fmt.Sprintf("%s Photo Viewer", d.cfg.Name) }
+
+// CreatedAt returns the date and time the photo was taken, or a zero time if
+// unknown.
+func (d *galleryDocument) CreatedAt() time.Time { return d.TakenAt }
+
+// UpdatedAt returns the date and time the photo was last updated, or a zero
+// time if unknown.
+func (d *galleryDocument) UpdatedAt() time.Time { return time.Time{} }
 
 // photodata extracts the EXIF string (including lens, etc.) and timestamp from
 // the image at the given path.
@@ -281,6 +258,7 @@ func exifFractionToDecimal(
 // The thumbnails have the given width. Height is automatically calculated to
 // maintain ratio.
 func genThumbnail(src, dst string, width int) error {
+	fmt.Println("generating thumbnail for", src, "at", dst)
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
@@ -313,8 +291,8 @@ func genThumbnail(src, dst string, width int) error {
 
 	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
 		return fmt.Errorf(
-			"can't make thumbnail directory in path `%s`: %w",
-			dst,
+			"can't make thumbnail directory `%s`: %w",
+			filepath.Dir(dst),
 			err,
 		)
 	}

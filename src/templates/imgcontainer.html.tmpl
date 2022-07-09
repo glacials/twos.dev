@@ -3,10 +3,10 @@
   <head>
     {{ template "head" }}
     {{ with .Prev }}
-      <link rel="preload" as="image" href="{{ .ImageSRC }}" />
+      <link rel="preload" as="image" href="/{{ .WebPath }}" />
     {{ end }}
     {{ with .Next }}
-      <link rel="preload" as="image" href="{{ .ImageSRC }}" />
+      <link rel="preload" as="image" href="/{{ .WebPath }}" />
     {{ end }}
     <script>
       document.addEventListener('keydown', event => {
@@ -27,7 +27,7 @@
     <title>twos.dev Photo Viewer</title>
     <style>
       body {
-        background: var(--bg-a);
+        background: black;
       }
     </style>
   </head>
@@ -45,10 +45,10 @@
         {{ end }}
       </p>
       <p style="text-align: center; margin-bottom: 0">
-        <a href="{{ .ImageSRC }}" class="img">
+        <a href="/{{ .WebPath }}" class="img">
           <img
             alt="{{ .Alt }}"
-            src="{{ .ImageSRC }}"
+            src="/{{ .WebPath }}"
             style="max-width: 100%; max-height: 75vh"
           />
         </a>
@@ -61,8 +61,8 @@
       </p>
       <footer style="margin-top: 1em">
         <p>
-          {{ if .Parent }}
-            &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+          {{ with parent }}
+            &larr; <a href="{{ parent.Source }}">{{ parent.Shortname }}</a>
           {{ else }}
             &larr; <a href="/">twos.dev</a>
           {{ end }}
@@ -70,11 +70,10 @@
         <p>
           <small>
             <i>
-              {{ if .SrcPath }}
+              {{ with src }}
                 source:
-                <a
-                  href="https://github.com/glacials/twos.dev/blob/main/{{ .SrcPath }}"
-                  >{{ .SrcPath }}</a
+                <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                  >{{ . }}</a
                 >
               {{ else }}
                 <a href="https://github.com/glacials/twos.dev">Source</a>

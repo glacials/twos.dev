@@ -35,12 +35,12 @@ var freezeCmd = &cobra.Command{
 			}
 
 			document := s.DocByShortname(shortname)
-			if document == nil {
+			if document.Document == nil {
 				return fmt.Errorf("cannot find document with shortname `%s`", shortname)
 			}
 
-			oldpath := document.SrcPath
-			newpath := filepath.Join("src", "cold", filepath.Base(document.SrcPath))
+			oldpath := document.Source
+			newpath := filepath.Join("src", "cold", filepath.Base(document.Source))
 
 			// The directory to remove warm files from, in addition to src/warm, so
 			// that the file doesn't just sync back to src/warm after removal. TODO:

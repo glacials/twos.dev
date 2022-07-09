@@ -7,6 +7,7 @@ type Config struct {
 	AuthorName  string
 	Debug       bool
 	Desc        string
+	Dist        string
 	Domain      url.URL
 	Name        string
 	Since       int

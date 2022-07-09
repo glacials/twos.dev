@@ -36,8 +36,12 @@ var (
 		Short: "Build the website",
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
-			s, err := buildAll(dist, builders, cfg)
+			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
+				return err
+			}
+
+			if err := s.ExecuteAll(dist); err != nil {
 				return err
 			}
 
@@ -47,19 +51,8 @@ var (
 			}
 
 			if serve {
-				mergedbuilders := map[string]Builder{}
-				for pattern, builder := range builders {
-					mergedbuilders[pattern] = builder
-				}
-				for pattern := range globalBuilders {
-					mergedbuilders[pattern] = func(_, _ string, cfg winter.Config) error {
-						return s.ExecuteAll(dist)
-					}
-				}
-
 				stop := make(chan struct{})
 				reloader := Reloader{
-					Builders:     mergedbuilders,
 					Ignore:       ignoreDirectories,
 					Substructure: s,
 				}
@@ -89,18 +82,6 @@ var (
 			return nil
 		},
 	}
-	builders = map[string]Builder{
-		"src/img/*/*/*.[jJ][pP][gG]": winter.BuildPhoto,
-		"src/favicon/*":              buildStaticFile("src/favicon"),
-		"public/*":                   buildStaticFile("public"),
-		"public/*/*":                 buildStaticFile("public"),
-		"public/*/*/*":               buildStaticFile("public"),
-	}
-	// globalBuilders must be separate from builders because buildTheWorld depends
-	// on builders being populated.
-	globalBuilders = map[string]struct{}{
-		"public/*.css": {},
-	}
 	serve bool
 )
 
@@ -121,6 +102,7 @@ func init() {
 		AuthorEmail: authorParts[2],
 		AuthorName:  authorParts[1],
 		Desc:        *f.StringP("desc", "d", "", "site description (e.g. misc thoughts)"),
+		Dist:        "dist",
 		Domain: url.URL{
 			Scheme: "https",
 			Host:   *f.StringP("domain", "m", "", "site root domain (e.g. twos.dev)"),

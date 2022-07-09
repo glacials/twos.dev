@@ -1,7 +1,6 @@
 package main
 
 import (
-	"errors"
 	"fmt"
 	"io/fs"
 	"log"
@@ -15,6 +14,8 @@ import (
 // Reloader watches the filesystem for changes to relevant files so it can
 // reload the browser using WebSockets.
 type Reloader struct {
+	// Builders is a mapping of filepath patterns to functions which can build
+	// paths that match those patterns. Deprecated: Use Substructure instead.
 	Builders     map[string]Builder
 	Ignore       map[string]struct{}
 	Substructure *winter.Substructure
@@ -95,10 +96,7 @@ func (r *Reloader) listen() {
 			}
 			fmt.Println("event:", event)
 			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {
-				if !errors.Is(err, winter.ErrNotTracked{}) {
-					log.Println(err.Error())
-					return
-				}
+				log.Println(err.Error())
 			}
 			r.Reload()
 		case err := <-r.watcher.Errors:

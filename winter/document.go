@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"net/url"
 	"os"
@@ -71,25 +72,64 @@ var (
 	tocmax = 3
 )
 
-// document is a single HTML or Markdown file that will be compiled into a
+type Document interface {
+	// Build returns the document HTML as it will be just before being executed as
+	// a template.
+	Build() ([]byte, error)
+	// Dependencies returns a set of filepaths this document depends on. A
+	// dependency is defined as a file that, when changed, should cause any
+	// browser displaying this document to refresh.
+	Dependencies() map[string]struct{}
+	// Dest returns the desired final path of the document, relative to the web
+	// root.
+	Dest() (string, error)
+	// Execute executes the given template in the context of the document (i.e.
+	// with whatever variables the template needs to execute successfully). It
+	// writes the resulting bytes to the given writer.
+	//
+	// If the document does not use templates, Execute writes the final document
+	// bytes to the given writer directly.
+	Execute(w io.Writer, t *template.Template) error
+	// IsDraft returns whether the document is of type draft.
+	IsDraft() bool
+	// IsPost returns whether the document is of type post.
+	IsPost() bool
+	// Layout returns the extensionless name of the base template to use for the
+	// document. It must be in src/templates. For example, to use
+	// src/templates/text_document.html.tmpl as the layout, Layout should return
+	// "text_document".
+	//
+	// This will be the template that gets executed to render the document. This
+	// is usually not the document itself, but a template used by all documents of
+	// its type. The document will dynamically be inserted into a template called
+	// "body", so this template should embed that template like `{{ template
+	// "body" }}`.
+	//
+	// If Layout returns an empty string, the document will be treated as a static
+	// asset and will be directly copied over without any template execution.
+	Layout() string
+	// Title returns the human-readable title of the document.
+	Title() string
+
+	// CreatedAt returns the time the document was first published.
+	CreatedAt() time.Time
+	// UpdatedAt returns the time the document was last meaningfully updated, or a
+	// zero time.Time if never.
+	UpdatedAt() time.Time
+}
+
+// textDocument is a single HTML or Markdown file that will be compiled into a
 // static HTML file.
-type document struct {
+type textDocument struct {
+	metadata
+
 	SrcPath string
-
-	Kind      kind   `yaml:"type"`
-	Parent    string `yaml:"parent"`
-	Shortname string `yaml:"filename"`
-	Title     string `yaml:"title"`
-	TOC       bool   `yaml:"toc"`
-
-	CreatedAt time.Time `yaml:"date"`
-	UpdatedAt time.Time `yaml:"updated"`
 
 	body     []byte
 	encoding encoding
 	root     *html.Node
-	incoming []*document
-	outgoing []*document
+	incoming []*textDocument
+	outgoing []*textDocument
 	t        *template.Template
 
 	// dependencies is the set of files that building this document depends on,
@@ -97,27 +137,19 @@ type document struct {
 	dependencies map[string]struct{}
 }
 
+type metadata struct {
+	Kind      kind   `yaml:"type"`
+	Shortname string `yaml:"filename"`
+	Title     string `yaml:"title"`
+	TOC       bool   `yaml:"toc"`
+
+	CreatedAt time.Time `yaml:"date"`
+	UpdatedAt time.Time `yaml:"updated"`
+}
+
 type encoding int
 
 type kind int
-
-// IsDraft returns whether the document type is DraftType. This function exists
-// to be used by templates.
-func (k kind) IsDraft() bool { return k == draft }
-
-// IsPost returns whether the document type is PostType. This function exists to
-// be used by templates.
-func (k kind) IsPost() bool { return k == post }
-
-// IsPage returns whether the document type is PageType. This function exists to
-// be used by templates.
-func (k kind) IsPage() bool { return k == page }
-
-// IsGallery returns whether the document type is GalleryType. This function
-// exists to be used by templates.
-func (k kind) IsGallery() bool { return k == gallery }
-
-const ()
 
 func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 	var s string
@@ -145,11 +177,11 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 // High-level information about the document is parsed during this call, such as
 // frontmatter and structure. Heavier details like template execution are not
 // touched until Render is called.
-func NewHTMLDocument(src string) (*document, error) {
-	d := document{
+func NewHTMLDocument(src string) (*textDocument, error) {
+	d := textDocument{
 		SrcPath:      src,
 		encoding:     encodingHTML,
-		dependencies: make(map[string]struct{}),
+		dependencies: map[string]struct{}{},
 	}
 	if err := d.load(); err != nil {
 		return nil, err
@@ -161,11 +193,11 @@ func NewHTMLDocument(src string) (*document, error) {
 // given path. High-level information about the document is parsed during this
 // call, such as frontmatter and structure. Heavier details like template
 // execution are not touched until Render is called.
-func NewMarkdownDocument(src string) (*document, error) {
-	d := document{
+func NewMarkdownDocument(src string) (*textDocument, error) {
+	d := textDocument{
 		SrcPath:      src,
 		encoding:     encodingMarkdown,
-		dependencies: make(map[string]struct{}),
+		dependencies: map[string]struct{}{},
 	}
 	if err := d.load(); err != nil {
 		return nil, err
@@ -173,14 +205,18 @@ func NewMarkdownDocument(src string) (*document, error) {
 	return &d, d.slurpHTML()
 }
 
-func (d *document) load() error {
+func (d *textDocument) Dependencies() map[string]struct{} {
+	return d.dependencies
+}
+
+func (d *textDocument) load() error {
 	f, err := os.Open(d.SrcPath)
 	if err != nil {
 		return err
 	}
 	defer f.Close()
 
-	body, err := frontmatter.Parse(f, &d)
+	body, err := frontmatter.Parse(f, &d.metadata)
 	if err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
 	}
@@ -196,15 +232,17 @@ func (d *document) load() error {
 	}
 }
 
-func (d *document) slurpHTML() error {
-	if d.Title == "" {
+// slurpHTML runs after HTML parsing has completed, extracting any information
+// from the HTML needed for processing.
+func (d *textDocument) slurpHTML() error {
+	if d.metadata.Title == "" {
 		if h1 := firstOfType(d.root, atom.H1); h1 != nil {
 			for child := h1.FirstChild; child != nil; child = child.NextSibling {
 				if child.Type == html.TextNode {
-					d.Title = child.Data
+					d.metadata.Title = child.Data
 				}
 			}
-			if d.Title == "" {
+			if d.metadata.Title == "" {
 				return fmt.Errorf("no title found in %s", d.SrcPath)
 			}
 		}
@@ -215,16 +253,10 @@ func (d *document) slurpHTML() error {
 	}
 	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
 
-	if d.Parent == "" && d.Kind != gallery {
-		if p, _, ok := strings.Cut(d.Shortname, "_"); ok {
-			d.Parent = p
-		}
-	}
-
 	return nil
 }
 
-func (d *document) parseHTML() error {
+func (d *textDocument) parseHTML() error {
 	root, err := html.Parse(bytes.NewBuffer(d.body))
 	if err != nil {
 		return err
@@ -234,7 +266,7 @@ func (d *document) parseHTML() error {
 	return nil
 }
 
-func (d *document) parseMarkdown() error {
+func (d *textDocument) parseMarkdown() error {
 	root, err := html.Parse(
 		bytes.NewBuffer(
 			markdown.ToHTML(
@@ -261,7 +293,7 @@ func (d *document) parseMarkdown() error {
 	return nil
 }
 
-func (d *document) build() ([]byte, error) {
+func (d *textDocument) Build() ([]byte, error) {
 	if err := d.load(); err != nil {
 		return nil, err
 	}
@@ -282,13 +314,32 @@ func (d *document) build() ([]byte, error) {
 	}
 	b := buf.Bytes()
 	for old, new := range replacements {
-		re := regexp.MustCompile(old)
+		re, err := regexp.Compile(old)
+		if err != nil {
+			return nil, err
+		}
 		b = re.ReplaceAll(b, []byte(new))
 	}
 	return b, nil
 }
 
-func (d *document) linksout() (hrfs []string, err error) {
+func (d *textDocument) Dest() (string, error) {
+	return fmt.Sprintf("%s.html", d.metadata.Shortname), nil
+}
+
+func (d *textDocument) Execute(w io.Writer, t *template.Template) error {
+	return t.Execute(w, d)
+}
+
+func (d *textDocument) Layout() string { return "text_document" }
+func (d *textDocument) IsPost() bool   { return d.Kind == post }
+func (d *textDocument) IsDraft() bool  { return d.Kind == draft }
+func (d *textDocument) Title() string  { return d.metadata.Title }
+
+func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
+func (d *textDocument) UpdatedAt() time.Time { return d.metadata.UpdatedAt }
+
+func (d *textDocument) linksout() (hrfs []string, err error) {
 	var f func(*html.Node)
 	f = func(n *html.Node) {
 		if n.Type == html.ElementNode && n.DataAtom == atom.A {
@@ -315,7 +366,7 @@ func (d *document) linksout() (hrfs []string, err error) {
 
 // fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
 // and makes a reflective table of contents.
-func (d *document) fillTOC() error {
+func (d *textDocument) fillTOC() error {
 	var (
 		f func(*html.Node)
 		v tocPartialVars
@@ -381,7 +432,7 @@ func (d *document) fillTOC() error {
 	return nil
 }
 
-func (d *document) highlightCode() error {
+func (d *textDocument) highlightCode() error {
 	for codeBlock := range codeBlocks(d.root) {
 		lang := lang(codeBlock)
 		formatted, err := syntaxHighlight(lang, codeBlock.FirstChild.Data)
@@ -454,7 +505,7 @@ func syntaxHighlight(lang, code string) (string, error) {
 	return buf.String(), nil
 }
 
-type documents []*document
+type documents []*substructureDocument
 
 func (d documents) Len() int {
 	return len(d)
@@ -463,7 +514,7 @@ func (d documents) Len() int {
 func (d documents) Less(i, j int) bool {
 	// Index must be rendered after others in order for all writing to show on
 	// index. TODO: Fix, maybe by having posts() lazily evaluate the rest.
-	return d[i].CreatedAt.After(d[j].CreatedAt)
+	return d[i].CreatedAt().After(d[j].CreatedAt())
 }
 
 func (d documents) Swap(i, j int) {

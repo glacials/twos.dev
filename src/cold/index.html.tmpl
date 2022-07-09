@@ -22,14 +22,13 @@ type: page
 
 <h2>Writing</h2>
 <ul>
-  {{ $now := .Now }}
   {{ range posts }}
-    {{ if lt (add .CreatedAt.Year 1) $now.Year }}
+    {{ if lt (add .CreatedAt.Year 1) now.Year }}
       {{ break }}
     {{ end }}
     <li>
       <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-      {{ if ne .CreatedAt.Year $now.Year }}({{ .CreatedAt.Year }}){{ end }}
+      {{ if ne .CreatedAt.Year now.Year }}({{ .CreatedAt.Year }}){{ end }}
     </li>
   {{ end }}
   <li><a href="/archives.html">archives</a> &rarr;</li>

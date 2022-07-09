@@ -8,7 +8,7 @@
     <div class="container">
       <header>
         {{ template "nav" . }}
-        {{ if and (.Kind.IsPost)  (not .CreatedAt.IsZero) }}
+        {{ if and (.IsPost)  (not .CreatedAt.IsZero) }}
           <small style="text-align:center; display: block">
             <i>
               published
@@ -21,7 +21,7 @@
         {{ end }}
       </header>
       <article>
-        {{ if .Kind.IsDraft }}
+        {{ if .IsDraft }}
           <div style="text-align:center; background-color: var(--bg-c)">
             DRAFT
           </div>
@@ -32,8 +32,8 @@
         <hr />
         <p>
           {{ if ne .Shortname "index" }}
-            {{ if .Parent }}
-              &larr; <a href="{{ .Parent }}">{{ .Parent }}</a>
+            {{ with parent }}
+              &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
             {{ else }}
               &larr; <a href="/">twos.dev</a>
             {{ end }}
@@ -42,11 +42,10 @@
         <p>
           <small>
             <i>
-              {{ if .SrcPath }}
+              {{ with src }}
                 source:
-                <a
-                  href="https://github.com/glacials/twos.dev/blob/main/{{ .SrcPath }}"
-                  >{{ .SrcPath }}</a
+                <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                  >{{ . }}</a
                 >
               {{ else }}
                 <a href="https://github.com/glacials/twos.dev">Source</a>
