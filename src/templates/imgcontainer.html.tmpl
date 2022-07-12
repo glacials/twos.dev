@@ -38,55 +38,43 @@
   </head>
 
   <body>
-    <div class="container">
-      <header>{{ template "nav" . }}</header>
-      <p style="text-align: center">
-        {{ with .Prev }}
-          <a href="{{ .PageLink }}">&larr; prev</a>
-        {{ end }}
-        {{ if and .Next .Prev }}/{{ end }}
-        {{ with .Next }}
-          <a href="{{ .PageLink }}">next &rarr;</a>
-        {{ end }}
+    <header style="text-align:center"><a href="/">twos.dev</a></header>
+    <p style="text-align: center">
+      {{ with .Prev }}
+        <a href="{{ .PageLink }}">&larr; prev</a>
+      {{ end }}
+      {{ if and .Next .Prev }}/{{ end }}
+      {{ with .Next }}
+        <a href="{{ .PageLink }}">next &rarr;</a>
+      {{ end }}
+    </p>
+    <p style="text-align: center; margin-bottom: 0">
+      <a href="{{ with .Next }}{{ .PageLink }}{{ else }}/{{ end }}" class="img">
+        <img
+          alt="{{ .Alt }}"
+          src="/{{ .WebPath }}"
+          style="max-width: 100%; max-height: 80vh"
+        />
+      </a>
+    </p>
+    <p style="text-align: center; margin-top: 0">
+      <i>{{ .Camera }}</i> &bull; &copy; {{ .TakenAt.Year }} Benjamin Carlsson
+    </p>
+    <footer style="margin-top: 1em">
+      <p style="text-align:center">
+        <small>
+          <i>
+            {{ with src }}
+              source:
+              <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                >{{ . }}</a
+              >
+            {{ else }}
+              <a href="https://github.com/glacials/twos.dev">Source</a>
+            {{ end }}
+          </i>
+        </small>
       </p>
-      <p style="text-align: center; margin-bottom: 0">
-        <a href="/{{ .WebPath }}" class="img">
-          <img
-            alt="{{ .Alt }}"
-            src="/{{ .WebPath }}"
-            style="max-width: 100%; max-height: 75vh"
-          />
-        </a>
-      </p>
-      <p style="text-align: center; margin-top: 0">
-        <i>{{ .Camera }}</i>
-      </p>
-      <p style="text-align: center">
-        &copy; {{ .TakenAt.Year }} Benjamin Carlsson
-      </p>
-      <footer style="margin-top: 1em">
-        <p>
-          {{ with parent }}
-            &larr; <a href="{{ parent.Source }}">{{ parent.Shortname }}</a>
-          {{ else }}
-            &larr; <a href="/">twos.dev</a>
-          {{ end }}
-        </p>
-        <p>
-          <small>
-            <i>
-              {{ with src }}
-                source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
-                  >{{ . }}</a
-                >
-              {{ else }}
-                <a href="https://github.com/glacials/twos.dev">Source</a>
-              {{ end }}
-            </i>
-          </small>
-        </p>
-      </footer>
-    </div>
+    </footer>
   </body>
 </html>
