@@ -261,7 +261,6 @@ func exifFractionToDecimal(
 // The thumbnails have the given width. Height is automatically calculated to
 // maintain ratio.
 func genThumbnail(src, dst string, width int) error {
-	fmt.Println("generating thumbnail for", src, "at", dst)
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)

@@ -30,12 +30,16 @@ type Builder func(src, dst string, cfg winter.Config) error
 
 var (
 	authorPattern = regexp.MustCompile(`^(.*) <(.*)>$`)
-	cfg           winter.Config
 	buildCmd      = &cobra.Command{
 		Use:   "build",
 		Short: "Build the website",
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
+			cfg, err := cmdConfig(cmd)
+			if err != nil {
+				return err
+			}
+
 			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
 				return err
@@ -86,37 +90,15 @@ var (
 )
 
 func init() {
+	// TODO: Allow all these options to be in a config file
 	f := buildCmd.PersistentFlags()
 
-	author := *f.StringP("author", "a", "", "author (e.g. Benjamin Carlsson <ben@twos.dev>)")
-	if author == "" {
-		author = "Anonymous <unspecified>"
-	}
-	authorParts := authorPattern.FindStringSubmatch(author)
-	if len(authorParts) != 3 {
-		fmt.Println("invalid --author format: must be \"NAME <EMAIL>\"")
-		os.Exit(1)
-	}
-
-	cfg = winter.Config{
-		AuthorEmail: authorParts[2],
-		AuthorName:  authorParts[1],
-		Desc:        *f.StringP("desc", "d", "", "site description (e.g. misc thoughts)"),
-		Dist:        "dist",
-		Domain: url.URL{
-			Scheme: "https",
-			Host:   *f.StringP("domain", "m", "", "site root domain (e.g. twos.dev)"),
-		},
-		Name: *f.StringP("name", "n", "", "site name (e.g. twos.dev)"),
-		Since: *f.IntP(
-			"since",
-			"y",
-			0,
-			"site year of creation (e.g. 2021)",
-		),
-	}
-
-	serve = *f.BoolP(serveFlag, "s", false, "start a webserver and rebuild on file changes")
+	_ = *f.BoolP(serveFlag, "s", false, "start a webserver and rebuild on file changes")
+	_ = *f.IntP("since", "y", 0, "site year of creation (e.g. 2021)")
+	_ = *f.StringP("author", "a", "", "author (e.g. Benjamin Carlsson <ben@twos.dev>)")
+	_ = *f.StringP("desc", "d", "", "site description (e.g. misc thoughts)")
+	_ = *f.StringP("domain", "m", "", "site root domain (e.g. twos.dev)")
+	_ = *f.StringP("name", "n", "", "site name (e.g. twos.dev)")
 
 	rootCmd.AddCommand(buildCmd)
 }
@@ -140,4 +122,34 @@ func startFileServer(server *http.Server) {
 		}
 		log.Fatal(fmt.Errorf("can't listen and serve: %w", err))
 	}
+}
+
+func cmdConfig(cmd *cobra.Command) (winter.Config, error) {
+	author := cmd.Flag("author").Value.String()
+	if author == "" {
+		author = "Anonymous <unspecified>"
+	}
+	authorParts := authorPattern.FindStringSubmatch(author)
+	if len(authorParts) != 3 {
+		fmt.Println("invalid --author format: must be \"NAME <EMAIL>\"")
+		os.Exit(1)
+	}
+
+	since, err := cmd.Flags().GetInt("since")
+	if err != nil {
+		return winter.Config{}, err
+	}
+
+	return winter.Config{
+		AuthorName:  authorParts[1],
+		AuthorEmail: authorParts[2],
+		Desc:        cmd.Flag("desc").Value.String(),
+		Dist:        "dist",
+		Domain: url.URL{
+			Scheme: "https",
+			Host:   cmd.Flag("domain").Value.String(),
+		},
+		Name:  cmd.Flag("name").Value.String(),
+		Since: since,
+	}, nil
 }

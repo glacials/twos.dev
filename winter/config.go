@@ -1,6 +1,8 @@
 package winter
 
-import "net/url"
+import (
+	"net/url"
+)
 
 type Config struct {
 	AuthorEmail string
