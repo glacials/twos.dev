@@ -101,7 +101,10 @@ func (d *galleryDocument) Build() ([]byte, error) {
 
 // Dependencies returns the filepaths the gallery document depends on.
 func (d *galleryDocument) Dependencies() map[string]struct{} {
-	return map[string]struct{}{}
+	return map[string]struct {
+	}{
+		galname: {},
+	}
 }
 
 // Dest returns the destination path for the final gallery document.
