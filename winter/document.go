@@ -59,11 +59,13 @@ var (
 	}
 	replacements = map[string]string{
 		// Break dashes out of monospace homogeneity
-		"–": styleWrapper, // En dash
-		"—": styleWrapper, // Em dash
-		"⁓": styleWrapper, // Swung dash
-		"―": styleWrapper, // Horizontal bar
-		"⁃": styleWrapper, // Hyphen bullet
+		"–":       styleWrapper, // En dash
+		"&ndash;": styleWrapper, // En dash
+		"—":       styleWrapper, // Em dash
+		"&mdash;": styleWrapper, // En dash
+		"⁓":       styleWrapper, // Swung dash
+		"―":       styleWrapper, // Horizontal bar
+		"⁃":       styleWrapper, // Hyphen bullet
 
 		"&#34;": "\"",
 		"&#39;": "'",
