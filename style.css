@@ -4,8 +4,8 @@
   :root {
     /* All fg-x-y colors should look good on their equivalent bg-x color. */
     --bg-a: rgba(255, 255, 240, 1);
-    --fg-a-a: rgba(76, 68, 66, 1);
-    --fg-a-b: rgba(149, 38, 36, 1);
+    --fg-a-a: rgba(48, 48, 78, 1);
+    --fg-a-b: rgba(48, 48, 78, 1);
 
     --bg-b: rgba(48, 48, 78, 1);
     --fg-b-a: rgba(255, 255, 240, 1);
@@ -19,22 +19,30 @@
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg-a: rgba(76, 68, 66, 1);
-    --fg-a-a: rgba(255, 255, 240, 1);
-    --fg-a-b: rgba(255, 200, 120, 1);
+    --bg-a: rgba(48, 48, 78, 1);
+    --fg-a-a: rgba(235, 255, 240, 1);
+    --fg-a-b: rgba(255, 255, 240, 1);
 
-    --bg-b: rgba(0, 25, 100, 0.5);
-    --fg-b-a: rgba(255, 255, 240, 1);
+    --bg-b: rgba(255, 255, 240, 1);
+    --fg-b-a: rgba(48, 48, 78, 1);
 
-    --bg-c: rgba(86, 78, 76, 1);
+    --bg-c: rgba(58, 58, 88, 1);
     --fg-c-a: rgba(248, 248, 242, 1);
 
     --bg-c-a: rgba(56, 56, 56, 1); /* Darker version of bg-c, for shadows */
   }
 }
 
+@keyframes appear {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 html {
-  font-family: Menlo, Monaco, Oxygen, monospace;
+  font-family: "DM Mono", Menlo, Monaco, Oxygen, monospace;
   font-size: 0.9em;
   line-height: 1.75em;
   letter-spacing: -0.07em;
@@ -48,6 +56,7 @@ html {
 }
 
 body {
+  animation: appear ease 2s;
   background: var(--bg-a);
   color: var(--fg-a-a);
   margin: 0;
@@ -87,6 +96,12 @@ blockquote {
   padding-left: 1em;
 }
 
+button,
+input[type="submit"] {
+  background: none;
+  border: 1px solid var(--fg-a-a);
+}
+
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
 em em,
 em i,
@@ -94,6 +109,11 @@ i em,
 i i {
   font-style: normal;
 }
+
+input {
+  font-family: inherit;
+}
+
 figcaption {
   font-style: italic;
 }
@@ -103,8 +123,7 @@ footer {
 }
 
 h1 {
-  background-color: var(--bg-b);
-  color: var(--fg-b-a);
+  font-size: 3em;
   display: block;
   text-align: center;
   text-transform: uppercase;
@@ -182,9 +201,25 @@ video + video {
 /* End naked elements */
 /* Start nav */
 
+nav {
+  font-size: 1.3em;
+}
+
+nav a {
+  text-decoration: none;
+}
+
+nav a.selected {
+  text-decoration: underline;
+}
+
+nav a:hover {
+  text-transform: lowercase;
+}
+
 /* In case none of the below rules trigger, display a backup */
 nav .arrow::before {
-  content: "-";
+  content: "↔";
 }
 
 /* Hovered/selected nav links should make arrows on their right point left */
