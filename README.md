@@ -52,12 +52,12 @@ go get -u twos.dev/winter@latest
 
 ### Philosophy
 
-The Winter CLI has three main commands:
+The Winter CLI has three main actions:
 
 ```sh
-winter build                # Build site once and stop
-winter build --serve        # Build site continuously and serve results
-winter freeze shortnames... # Convert the given documents from warm to cold
+winter build               # Build site once and stop
+winter build --serve       # Build site continuously and serve results
+winter freeze shortname... # Convert the given document(s) from warm to cold
 ```
 
 #### Warm vs. Cold Documents
@@ -67,14 +67,16 @@ existing content against breakages. Normally these goals work against each
 other. In Winter, the two types of content coexist and documents can flow easily
 from easy-to-edit ("warm") to hard-to-break ("cold").
 
-**Warm** content should be synchronized into the project directory from an
-outside tool---which specifically is up to the reader. I use [iA
+**Warm** content is unstable. It should be synchronized into the project
+directory from an outside tool---which tool is up to the user. I use [iA
 Writer](https://ia.net/writer) hooked up to an iCloud folder, with a Shortcut
-and/or cron job to copy files into the repository, then commit and push them.
-This makes creating content easy to do from any platform in any state of mind.
+and cron job to sync files into the repository. This makes creating content easy
+from any platform in any state of mind, while still publishing the (unlinked)
+content for preview, or for sending to a friend for review.
 
-**Cold** content must not be synchronized anywhere, because sync jobs are a
-great way to accidentally overwrite content. This is finished content you want
-to last for years or decades without needing to babysit its existence.
+**Cold** content is stable. It must not be sourced from anywhere automatically,
+because sync jobs are a great way to accidentally overwrite content. This is
+finished content you want to last for years or decades without needing to
+babysit its existence.
 
 Winter is very early software, so please use with caution.
