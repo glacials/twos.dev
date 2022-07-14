@@ -45,7 +45,7 @@ var (
 				return err
 			}
 
-			if err := s.ExecuteAll(dist); err != nil {
+			if err := s.ExecuteAll(dist, cfg); err != nil {
 				return err
 			}
 
@@ -85,6 +85,16 @@ var (
 
 			return nil
 		},
+	}
+	ignoreFiles = map[string]struct{}{
+		"README.md": {},
+		".DS_Store": {},
+	}
+	ignoreDirectories = map[string]struct{}{
+		".git":         {},
+		".github":      {},
+		dist:           {},
+		"node_modules": {},
 	}
 	serve bool
 )

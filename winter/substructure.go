@@ -340,8 +340,22 @@ func (s *Substructure) writefeed() error {
 
 // ExecuteAll builds all documents known to the substructure, as well as any
 // site-scoped non-documents such as RSS feeds.
-func (s *Substructure) ExecuteAll(dist string) error {
+func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
+	built := map[string]*substructureDocument{}
 	for _, d := range s.docs {
+		dest, err := d.Dest()
+		if err != nil {
+			return err
+		}
+		if prev, ok := built[dest]; ok {
+			return fmt.Errorf(
+				"both %s and %s wanted to build to %s/%s; remove one",
+				d.Source,
+				prev.Source,
+				cfg.Domain.Host,
+				dest,
+			)
+		}
 		if err := s.execute(d, dist); err != nil {
 			return fmt.Errorf(
 				"can't execute %s while executing all: %w",
@@ -349,6 +363,7 @@ func (s *Substructure) ExecuteAll(dist string) error {
 				err,
 			)
 		}
+		built[dest] = d
 	}
 
 	s.writefeed()

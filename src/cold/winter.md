@@ -3,6 +3,7 @@ date: 2022-07-07
 filename: winter.html
 toc: true
 type: draft
+updated: 2022-07-13
 ---
 
 <meta
@@ -68,17 +69,18 @@ piece of warm content is stable, it can be "frozen" into cold content using
   - `./src/cold`—Stable content
     - `*.md`—Markdown files
     - `*.html`—HTML files
-    - `*.html.tmpl`—HTML files compatible with Go [`text/template`](https://pkg.go.dev/text/template)
-  - `./src/warm`
+    - `*.html.tmpl`—HTML files compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
+  - `./src/warm`—Unstable content
     - `*.md`—Markdown files
     - `*.html`—HTML files
-    - `*.html.tmpl`—HTML files compatible with Go [`text/template`](https://pkg.go.dev/text/template)
-  - `./src/templates`
+    - `*.html.tmpl`—HTML files compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
+  - `./src/templates`—Reusable content
     - `text_document.html.tmpl`—Default page container
     - `imgcontainer.html.tmpl`—Gallery container
     - `*.html`—HTML templates
-    - `*.html.tmpl`—HTML templates compatible with Go [`text/template`](https://pkg.go.dev/text/template)
+    - `*.html.tmpl`—HTML templates compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
   - `./src/img`—Gallery images
+    - `...`—Any directory structure
 - `./public`—Static files copied directly to the build directory
 - `./dist`—Build directory
 
@@ -127,7 +129,7 @@ must end in `.html` and must not be in a subdirectory.
 
 When not set, the filename of the document minus extension is used in place. For
 example, `envy.html.tmpl` and `envy.md` would both become `envy.html`. In
-templates, the extension is stripped and the remainder is coalesced to `{{ .Shortname }}`.
+templates, the extension is stripped and the remainder is coalesced to `{{"{{"}} .Shortname }}`.
 
 ##### `date` {#date}
 
@@ -140,35 +142,35 @@ of the reference time `01/02 03:04:05PM '06 -0700`. For example, for a document
 dated 2022-07-08:
 
 ```template
-{{ .CreatedAt.Format "2006 January" }} <!-- Renders 2022 July  -->
-{{ .CreatedAt.Format "2006-01-02" }}   <!-- Renders 2022-07-08 -->
+{{"{{"}} .CreatedAt.Format "2006 January" }} <!-- Renders 2022 July  -->
+{{"{{"}} .CreatedAt.Format "2006-01-02" }}   <!-- Renders 2022-07-08 -->
 ```
 
-Use `{{ .CreatedAt.IsZero }}` to see if the date was not set. You can use this
+Use `{{"{{"}} .CreatedAt.IsZero }}` to see if the date was not set. You can use this
 to hide unset dates:
 
 ```template
-{{ if not .CreatedAt.IsZero }}
-  published {{ .CreatedAt.Format "2006 January" }}
-{{ end }}
+{{"{{"}} if not .CreatedAt.IsZero }}
+  published {{"{{"}} .CreatedAt.Format "2006 January" }}
+{{"{{"}} end }}
 ```
 
 ##### `updated` {#updated}
 
 The date the document was last meaningfully updated, if any, as a Go
-[`time.Time`](https://pkg.go.dev/time). Coalesces to `{{ .UpdatedAt }}` in
+[`time.Time`](https://pkg.go.dev/time). Coalesces to `{{"{{"}} .UpdatedAt }}` in
 templates.
 
-Use `{{ .UpdatedAt.IsZero }}` to see if the date was not set. You can use this
+Use `{{"{{"}} .UpdatedAt.IsZero }}` to see if the date was not set. You can use this
 to hide unset dates:
 
 ```template
-{{ if not .CreatedAt.IsZero }}
-  published {{ .CreatedAt.Format "2006 January" }}
-  {{ if not .UpdatedAt.IsZero }}
-    / last updated {{ .UpdatedAt.Format "2006 January" }}
-  {{ end }}
-{{ end }}
+{{"{{"}} if not .CreatedAt.IsZero }}
+  published {{"{{"}} .CreatedAt.Format "2006 January" }}
+  {{"{{"}} if not .UpdatedAt.IsZero }}
+    / last updated {{"{{"}} .UpdatedAt.Format "2006 January" }}
+  {{"{{"}} end }}
+{{"{{"}} end }}
 ```
 
 Renders:
@@ -176,6 +178,13 @@ Renders:
 ```html
 published 2022 July / last updated 2022 August
 ```
+
+##### `toc` {#tocprop}
+
+Whether to render a table of contents (default `false`). If `true`, the table of
+contents will be rendered just before the first level 2 header (`<h2>` in HTML,
+`##` in Markdown) and will list all level 2 and 3 headers. See the [top of this
+page](#toc) for an example.
 
 ##### `type` {#type}
 
@@ -188,7 +197,7 @@ The kind of document. Possible values are `post`, `page`, `draft`.
 
 Templates use the [`text/template`](https://pkg.go.dev/text/template) Go
 library. Available variables are in flux so are not yet documented, but can be
-viewed in [`winter/template.go`](winter/template.go).
+viewed in [`winter/template.go`](https://github.com/glacials/twos.dev/blob/main/winter/template.go).
 
 Template functions available are:
 
@@ -224,7 +233,7 @@ filename: mypage.html
 }}
 ```
 
-Images must be places in `public/img` in the form:
+Images must be present in `public/img` in the form:
 
 ```plain
 pageshortname-imageshortname[-<light|dark>].<png|jpg>

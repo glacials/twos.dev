@@ -40,6 +40,8 @@ const (
 	tocEl        = atom.Ol
 	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
 	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
+	tocMax       = 3
+	tocMin       = 2
 	tocReturn    = `
 <span style="margin-left:0.5em">
 	<a href="#{{.Anchor}}" style="text-decoration:none">#</a>
@@ -70,8 +72,6 @@ var (
 		"&#34;": "\"",
 		"&#39;": "'",
 	}
-	tocmin = 2
-	tocmax = 3
 )
 
 type Document interface {
@@ -374,9 +374,9 @@ func (d *textDocument) fillTOC() error {
 		v tocPartialVars
 	)
 	f = func(n *html.Node) {
-		if hi[n.DataAtom] >= tocmin && hi[n.DataAtom] <= tocmax {
+		if hi[n.DataAtom] >= tocMin && hi[n.DataAtom] <= tocMax {
 			grp := &v.Items
-			for i := tocmin; i < hi[n.DataAtom] && i < tocmax; i += 1 {
+			for i := tocMin; i < hi[n.DataAtom] && i < tocMax; i += 1 {
 				if len(*grp) > 0 {
 					grp = &((*grp)[len(*grp)-1].Items)
 				}
