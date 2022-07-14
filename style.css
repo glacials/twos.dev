@@ -100,6 +100,7 @@ button,
 input[type="submit"] {
   background: none;
   border: 1px solid var(--fg-a-a);
+  color: inherit;
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
