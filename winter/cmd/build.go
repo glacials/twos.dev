@@ -69,7 +69,7 @@ var (
 					Addr:    fmt.Sprintf(":%d", port),
 					Handler: &mux,
 				}
-				server.RegisterOnShutdown(reloader.ShutdownFunc())
+				server.RegisterOnShutdown(reloader.Shutdown)
 
 				go listenForCtrlC(stop, &server, &reloader)
 				go startFileServer(&server)

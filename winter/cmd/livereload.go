@@ -35,10 +35,15 @@ func (r *Reloader) Handler() websocket.Handler {
 	})
 }
 
-func (r *Reloader) Reload() {
+// Reload notifies all connected browsers to reload the page.
+func (r *Reloader) Reload() error {
 	for _, conn := range r.listeners {
-		conn.Write([]byte("refresh"))
+		_, err := conn.Write([]byte("refresh"))
+		if err != nil {
+			return err
+		}
 	}
+	return nil
 }
 
 // Watch starts watching the filesystem for changes asynchronously, building any
@@ -98,7 +103,9 @@ func (r *Reloader) listen() {
 			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {
 				log.Println(err.Error())
 			}
-			r.Reload()
+			if err := r.Reload(); err != nil {
+				panic(err)
+			}
 		case err := <-r.watcher.Errors:
 			if err != nil {
 				panic(err)
@@ -110,15 +117,13 @@ func (r *Reloader) listen() {
 	}
 }
 
-// ShutdownFunc returns a function that, when called, stops watching the
-// filesystem for changes and gracefully closes any open WebSockets connections.
-func (r *Reloader) ShutdownFunc() func() {
-	return func() {
-		for _, conn := range r.listeners {
-			conn.Close()
-		}
-		r.listeners = []*websocket.Conn{}
-		r.stop <- struct{}{}
-		r.closeSockets <- struct{}{}
+// Shutdown stops watching the filesystem for changes and gracefully closes any
+// open WebSocket connections.
+func (r *Reloader) Shutdown() {
+	for _, conn := range r.listeners {
+		conn.Close()
 	}
+	r.listeners = []*websocket.Conn{}
+	r.stop <- struct{}{}
+	r.closeSockets <- struct{}{}
 }
