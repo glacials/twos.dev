@@ -60,7 +60,7 @@ var (
 		atom.H6: 6,
 	}
 	replacements = map[string]string{
-		// Break dashes out of monospace homogeneity
+		// Break some special characters out of monospace homogeneity
 		"–":       styleWrapper, // En dash
 		"&ndash;": styleWrapper, // En dash
 		"—":       styleWrapper, // Em dash
@@ -68,6 +68,7 @@ var (
 		"⁓":       styleWrapper, // Swung dash
 		"―":       styleWrapper, // Horizontal bar
 		"⁃":       styleWrapper, // Hyphen bullet
+		"ƒ":       styleWrapper, // f-stop symbol
 
 		"&#34;": "\"",
 		"&#39;": "'",

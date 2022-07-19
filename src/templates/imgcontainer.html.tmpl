@@ -33,41 +33,28 @@
       body {
         background: black !important;
         color: grey !important;
+        line-height: 1em;
         margin: 0;
       }
       html {
         margin: 0;
       }
-      .contrast {
+      span {
         background: black !important;
-      }
-      footer,
-      p {
-        position: fixed;
-      }
-      footer {
-        bottom: 0;
-        left: 0;
       }
     </style>
   </head>
 
   <body>
-    <p style="text-align:center">
-      <a href="/" class="contrast">twos.dev</a>
-    </p>
-
-    <p style="text-align: center">
-      <span class="contrast">
-        {{ with .Prev }}
-          <a href="{{ .PageLink }}" class="contrast">&larr; prev</a>
-        {{ end }}
-        {{ if and .Prev .Next }}/{{ end }}
-        {{ with .Next }}
-          <a href="{{ .PageLink }}" class="contrast">next &rarr;</a>
-        {{ end }}
-      </span>
-    </p>
+    <span style="position:absolute">
+      {{ with .Prev }}
+        <a href="{{ .PageLink }}" class="contrast">&larr; prev</a>
+      {{ end }}
+      {{ if and .Prev .Next }}/{{ end }}
+      {{ with .Next }}
+        <a href="{{ .PageLink }}" class="contrast">next &rarr;</a>
+      {{ end }}
+    </span>
     <a
       href="{{ with .Next }}
         {{ .PageLink }}
@@ -81,28 +68,17 @@
         src="/{{ .WebPath }}"
         style="max-width: 100vh; max-height: 100vh; display:block;"
     /></a>
-    <div style="bottom:0; left:0; position:absolute;">
-      <p>
-        <span class="contrast"
-          ><i>{{ .Camera }}</i> &bull; &copy;
-          {{ .TakenAt.Year }}
-          Benjamin Carlsson
-        </span>
-      </p>
-      <p>
-        <small>
-          <i class="contrast">
-            {{ with src }}
-              source:
-              <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
-                >{{ . }}</a
-              >
-            {{ else }}
-              <a href="https://github.com/glacials/twos.dev">Source</a>
-            {{ end }}
-          </i>
-        </small>
-      </p>
+    <div style="position:absolute; left:0; bottom:0;">
+      <span style="font-style:italic;"> {{ .Camera }}</span><br />
+      <span style="font-style:italic;">
+        {{ .FocalLength }}mm &bull; ƒ{{ .Aperture }} &bull; {{ .ShutterSpeed }}s
+        &bull; ISO
+        {{ .ISO }}
+      </span>
+      <br />
+      <span style="font-style: italic; bottom:0;">
+        &copy; {{ .TakenAt.Year }} Benjamin Carlsson
+      </span>
     </div>
   </body>
 </html>

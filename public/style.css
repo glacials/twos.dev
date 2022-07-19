@@ -171,11 +171,6 @@ hr::before {
   text-align: center;
 }
 
-img,
-video {
-  transform: rotate(-0.5deg);
-}
-
 li {
   margin: 0.5em 0;
 }
@@ -255,6 +250,7 @@ nav .arrow:has(~ a.selected)::before {
 
 a img.silly {
   transition: 1s;
+  transform: rotate(-0.5deg);
 }
 
 a:hover img.silly {

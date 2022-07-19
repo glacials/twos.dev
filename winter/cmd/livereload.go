@@ -21,7 +21,7 @@ type Reloader struct {
 	Substructure *winter.Substructure
 
 	closeSockets chan struct{}
-	listeners    []*websocket.Conn
+	listeners    map[*websocket.Conn]struct{}
 	stop         chan struct{}
 	watcher      *fsnotify.Watcher
 }
@@ -29,21 +29,31 @@ type Reloader struct {
 // Handler returns a function that handles incoming WebSocket connections which
 // implements http.Handler.
 func (r *Reloader) Handler() websocket.Handler {
+	if r.listeners == nil {
+		r.listeners = map[*websocket.Conn]struct{}{}
+	}
 	return websocket.Handler(func(conn *websocket.Conn) {
-		r.listeners = append(r.listeners, conn)
+		r.listeners[conn] = struct{}{}
 		<-r.closeSockets
 	})
 }
 
 // Reload notifies all connected browsers to reload the page.
-func (r *Reloader) Reload() error {
-	for _, conn := range r.listeners {
+func (r *Reloader) Reload() {
+	remove := map[*websocket.Conn]struct{}{}
+	for conn := range r.listeners {
 		_, err := conn.Write([]byte("refresh"))
 		if err != nil {
-			return err
+			remove[conn] = struct{}{}
+			log.Printf("can't refresh browser: %s", err.Error())
+			if err := conn.Close(); err != nil {
+				log.Printf("can't close browser connection: %s", err.Error())
+			}
 		}
 	}
-	return nil
+	for c := range remove {
+		delete(r.listeners, c)
+	}
 }
 
 // Watch starts watching the filesystem for changes asynchronously, building any
@@ -103,9 +113,7 @@ func (r *Reloader) listen() {
 			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {
 				log.Println(err.Error())
 			}
-			if err := r.Reload(); err != nil {
-				panic(err)
-			}
+			r.Reload()
 		case err := <-r.watcher.Errors:
 			if err != nil {
 				panic(err)
@@ -120,10 +128,10 @@ func (r *Reloader) listen() {
 // Shutdown stops watching the filesystem for changes and gracefully closes any
 // open WebSocket connections.
 func (r *Reloader) Shutdown() {
-	for _, conn := range r.listeners {
+	for conn := range r.listeners {
 		conn.Close()
 	}
-	r.listeners = []*websocket.Conn{}
+	r.listeners = map[*websocket.Conn]struct{}{}
 	r.stop <- struct{}{}
 	r.closeSockets <- struct{}{}
 }

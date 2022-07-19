@@ -9,6 +9,7 @@ import (
 	"io"
 	"os"
 	"path/filepath"
+	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -19,10 +20,10 @@ import (
 )
 
 type galleryDocument struct {
+	EXIF
+
 	PageLink string
 	Alt      string
-	Camera   string
-	TakenAt  time.Time
 	WebPath  string
 
 	Prev *galleryDocument
@@ -87,7 +88,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	d.Camera, d.TakenAt, err = photodata(d.localPath)
+	d.EXIF, err = photodata(d.localPath)
 	if err != nil {
 		return nil, fmt.Errorf(
 			"can't get camera for `%s`: %w",
@@ -96,7 +97,20 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	return tmplByName(galname)
+	b, err := tmplByName(galname)
+	if err != nil {
+		return nil, err
+	}
+
+	for old, new := range replacements {
+		re, err := regexp.Compile(old)
+		if err != nil {
+			return nil, err
+		}
+		b = re.ReplaceAll(b, []byte(new))
+	}
+
+	return b, nil
 }
 
 // Dependencies returns the filepaths the gallery document depends on.
@@ -141,18 +155,27 @@ func (d *galleryDocument) Title() string { return fmt.Sprintf("%s Photo Viewer",
 
 // CreatedAt returns the date and time the photo was taken, or a zero time if
 // unknown.
-func (d *galleryDocument) CreatedAt() time.Time { return d.TakenAt }
+func (d *galleryDocument) CreatedAt() time.Time { return d.EXIF.TakenAt }
 
 // UpdatedAt returns the date and time the photo was last updated, or a zero
 // time if unknown.
 func (d *galleryDocument) UpdatedAt() time.Time { return time.Time{} }
 
+type EXIF struct {
+	Camera       string
+	FocalLength  float64
+	Aperture     float64
+	ShutterSpeed string
+	ISO          string
+	TakenAt      time.Time
+}
+
 // photodata extracts the EXIF string (including lens, etc.) and timestamp from
 // the image at the given path.
-func photodata(src string) (string, time.Time, error) {
+func photodata(src string) (EXIF, error) {
 	f, err := os.Open(src)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't open photo: %w", err)
+		return EXIF{}, fmt.Errorf("can't open photo: %w", err)
 	}
 	defer f.Close()
 
@@ -160,47 +183,47 @@ func photodata(src string) (string, time.Time, error) {
 
 	x, err := exif.Decode(f)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't read exif data: %w", err)
+		return EXIF{}, fmt.Errorf("can't read exif data: %w", err)
 	}
 
 	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't get focal length: %w", err)
+		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
 	}
 
 	camModel, err := x.Get(exif.Model) // normally, don't ignore errors!
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't get camera model: %w", err)
+		return EXIF{}, fmt.Errorf("can't get camera model: %w", err)
 	}
 
 	cam, err := camModel.StringVal()
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't render camera as string: %w", err)
+		return EXIF{}, fmt.Errorf("can't render camera as string: %w", err)
 	}
 
 	fnum, err := exifFractionToDecimal(x, exif.FNumber)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't get focal length: %w", err)
+		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
 	}
 
 	exposure, err := x.Get(exif.ExposureTime)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't get exposure: %w", err)
+		return EXIF{}, fmt.Errorf("can't get exposure: %w", err)
 	}
 
 	iso, err := x.Get(exif.ISOSpeedRatings)
 	if err != nil {
-		return "", time.Time{}, fmt.Errorf("can't get ISO: %w", err)
+		return EXIF{}, fmt.Errorf("can't get ISO: %w", err)
 	}
 
 	timestamp, err := x.DateTime()
 	if err != nil {
 		if errors.Is(err, exif.TagNotPresentError("")) {
-			return "", time.Time{}, fmt.Errorf(
+			return EXIF{}, fmt.Errorf(
 				"photo has no EXIF timestamp... what do?",
 			)
 		}
-		return "", time.Time{}, fmt.Errorf("can't get photo datetime: %w", err)
+		return EXIF{}, fmt.Errorf("can't get photo datetime: %w", err)
 	}
 
 	_, err = x.Get(exif.GPSInfoIFDPointer)
@@ -209,14 +232,14 @@ func photodata(src string) (string, time.Time, error) {
 		panic(fmt.Sprintf("photo %s has location data! please strip it.", src))
 	}
 
-	return fmt.Sprintf(
-		"%s • %.0fmm • ƒ%.1f • %ss • ISO %s",
+	return EXIF{
 		cam,
 		focalLength,
 		fnum,
 		strings.Replace(exposure.String(), "\"", "", 2),
-		iso,
-	), timestamp, nil
+		iso.String(),
+		timestamp,
+	}, nil
 }
 
 func exifFractionToDecimal(
