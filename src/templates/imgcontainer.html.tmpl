@@ -41,20 +41,26 @@
       }
       span {
         background: black !important;
+        padding: 0 0.5em;
       }
     </style>
   </head>
 
   <body>
-    <span style="position:absolute">
-      {{ with .Prev }}
-        <a href="{{ .PageLink }}" class="contrast">&larr; prev</a>
-      {{ end }}
-      {{ if and .Prev .Next }}/{{ end }}
-      {{ with .Next }}
-        <a href="{{ .PageLink }}" class="contrast">next &rarr;</a>
-      {{ end }}
-    </span>
+    <div style="position:absolute">
+      <span>
+        {{ with .Prev }}
+          <a href="{{ .PageLink }}">&larr; prev</a>
+        {{ end }}
+        {{ if and .Prev .Next }}/{{ end }}
+        {{ with .Next }}
+          <a href="{{ .PageLink }}">next &rarr;</a>
+        {{ end }}
+      </span>
+      <span style="margin-left: 5em;">
+        <a href="/">Exit</a>
+      </span>
+    </div>
     <a
       href="{{ with .Next }}
         {{ .PageLink }}

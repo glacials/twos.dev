@@ -5,6 +5,7 @@ import (
 	"io/fs"
 	"log"
 	"path/filepath"
+	"time"
 
 	"github.com/fsnotify/fsnotify"
 	"golang.org/x/net/websocket"
@@ -21,19 +22,21 @@ type Reloader struct {
 	Substructure *winter.Substructure
 
 	closeSockets chan struct{}
-	listeners    map[*websocket.Conn]struct{}
-	stop         chan struct{}
-	watcher      *fsnotify.Watcher
+	// listeners is a mapping of WebSocket connections browsers have open with us
+	// to the last time they were refreshed.
+	listeners map[*websocket.Conn]time.Time
+	stop      chan struct{}
+	watcher   *fsnotify.Watcher
 }
 
 // Handler returns a function that handles incoming WebSocket connections which
 // implements http.Handler.
 func (r *Reloader) Handler() websocket.Handler {
 	if r.listeners == nil {
-		r.listeners = map[*websocket.Conn]struct{}{}
+		r.listeners = map[*websocket.Conn]time.Time{}
 	}
 	return websocket.Handler(func(conn *websocket.Conn) {
-		r.listeners[conn] = struct{}{}
+		r.listeners[conn] = time.Now()
 		<-r.closeSockets
 	})
 }
@@ -41,7 +44,11 @@ func (r *Reloader) Handler() websocket.Handler {
 // Reload notifies all connected browsers to reload the page.
 func (r *Reloader) Reload() {
 	remove := map[*websocket.Conn]struct{}{}
-	for conn := range r.listeners {
+	for conn, lastRefreshed := range r.listeners {
+		if time.Now().Sub(lastRefreshed) < 2*time.Second {
+			// debounce
+			continue
+		}
 		_, err := conn.Write([]byte("refresh"))
 		if err != nil {
 			remove[conn] = struct{}{}
@@ -131,7 +138,7 @@ func (r *Reloader) Shutdown() {
 	for conn := range r.listeners {
 		conn.Close()
 	}
-	r.listeners = map[*websocket.Conn]struct{}{}
+	r.listeners = map[*websocket.Conn]time.Time{}
 	r.stop <- struct{}{}
 	r.closeSockets <- struct{}{}
 }
