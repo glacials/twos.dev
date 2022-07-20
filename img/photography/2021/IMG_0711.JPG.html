@@ -125,41 +125,34 @@
       body {
         background: black !important;
         color: grey !important;
+        line-height: 1em;
         margin: 0;
       }
       html {
         margin: 0;
       }
-      .contrast {
+      span {
         background: black !important;
-      }
-      footer,
-      p {
-        position: fixed;
-      }
-      footer {
-        bottom: 0;
-        left: 0;
+        padding: 0 0.5em;
       }
     </style>
   </head>
 
   <body>
-    <p style="text-align:center">
-      <a href="/" class="contrast">twos.dev</a>
-    </p>
-
-    <p style="text-align: center">
-      <span class="contrast">
+    <div style="position:absolute">
+      <span>
         
-          <a href="/img/photography/2021/IMG_0661.JPG.html" class="contrast">&larr; prev</a>
+          <a href="/img/photography/2021/IMG_0661.JPG.html">&larr; prev</a>
         
         /
         
-          <a href="/img/photography/2021/IMG_0818.JPG.html" class="contrast">next &rarr;</a>
+          <a href="/img/photography/2021/IMG_0818.JPG.html">next &rarr;</a>
         
       </span>
-    </p>
+      <span style="margin-left: 5em;">
+        <a href="/">Exit</a>
+      </span>
+    </div>
     <a
       href="
         /img/photography/2021/IMG_0818.JPG.html
@@ -169,28 +162,19 @@
       ><img
         alt=""
         src="/img/photography/2021/IMG_0711.JPG"
-        style="max-width: 100vh; max-height: 100vh; display:block;"
+        style="max-width: 100%; max-height: 100vh; display:block;"
     /></a>
-    <div style="bottom:0; left:0; position:absolute;">
-      <p>
-        <span class="contrast"
-          ><i>Canon EOS Rebel T7 • 32mm • ƒ5.6 • 1/1250s • ISO 800</i> &bull; &copy;
-          2021
-          Benjamin Carlsson
-        </span>
-      </p>
-      <p>
-        <small>
-          <i class="contrast">
-            
-              source:
-              <a href="https://github.com/glacials/twos.dev/blob/main/src/img/photography/2021/IMG_0711.JPG"
-                >src/img/photography/2021/IMG_0711.JPG</a
-              >
-            
-          </i>
-        </small>
-      </p>
+    <div style="position:absolute; left:0; bottom:0;">
+      <span style="font-style:italic;"> Canon EOS Rebel T7</span><br />
+      <span style="font-style:italic;">
+        32mm &bull; ƒ5.6 &bull; 1/1250s
+        &bull; ISO
+        800
+      </span>
+      <br />
+      <span style="font-style: italic; bottom:0;">
+        &copy; 2021 Benjamin Carlsson
+      </span>
     </div>
   </body>
 </html>
