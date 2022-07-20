@@ -22,6 +22,7 @@ func (d *staticDocument) Build() ([]byte, error) {
 	return ioutil.ReadFile(d.path)
 }
 
+func (d *staticDocument) Category() string { return "" }
 func (d *staticDocument) Dependencies() map[string]struct{} {
 	return map[string]struct{}{}
 }

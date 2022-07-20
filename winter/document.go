@@ -79,6 +79,9 @@ type Document interface {
 	// Build returns the document HTML as it will be just before being executed as
 	// a template.
 	Build() ([]byte, error)
+	// Category returns an optional category for the document. This is used
+	// exclusively by templates for styling and display purposes.
+	Category() string
 	// Dependencies returns a set of filepaths this document depends on. A
 	// dependency is defined as a file that, when changed, should cause any
 	// browser displaying this document to refresh.
@@ -141,6 +144,7 @@ type textDocument struct {
 }
 
 type metadata struct {
+	Category  string `yaml:"category"`
 	Kind      kind   `yaml:"type"`
 	Shortname string `yaml:"filename"`
 	Title     string `yaml:"title"`
@@ -238,16 +242,14 @@ func (d *textDocument) load() error {
 // slurpHTML runs after HTML parsing has completed, extracting any information
 // from the HTML needed for processing.
 func (d *textDocument) slurpHTML() error {
-	if d.metadata.Title == "" {
-		if h1 := firstOfType(d.root, atom.H1); h1 != nil {
-			for child := h1.FirstChild; child != nil; child = child.NextSibling {
-				if child.Type == html.TextNode {
-					d.metadata.Title = child.Data
-				}
+	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
+		for child := h1.FirstChild; child != nil; child = child.NextSibling {
+			if child.Type == html.TextNode {
+				d.metadata.Title = child.Data
 			}
-			if d.metadata.Title == "" {
-				return fmt.Errorf("no title found in %s", d.SrcPath)
-			}
+		}
+		if d.metadata.Title == "" {
+			return fmt.Errorf("no title found in %s", d.SrcPath)
 		}
 	}
 
@@ -326,6 +328,7 @@ func (d *textDocument) Build() ([]byte, error) {
 	return b, nil
 }
 
+func (d *textDocument) Category() string { return d.metadata.Category }
 func (d *textDocument) Dest() (string, error) {
 	return fmt.Sprintf("%s.html", d.metadata.Shortname), nil
 }

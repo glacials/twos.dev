@@ -67,7 +67,6 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 			return nil, err
 		}
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
-
 	}
 
 	warmhtml, err := filepathx.Glob("src/warm/*.html")
@@ -174,6 +173,9 @@ func (err ErrNotTracked) Error() string {
 // afterwards. If the path is a document, any templates it uses will be rebuilt
 // first. If the path isn't known to the substructure, Rebuild returns
 // ErrNotTracked.
+//
+// As a special case, the index page will be rebuilt after any post is built, so
+// that it can display its up to date title.
 func (s *Substructure) Rebuild(src, dist string) error {
 	pad := pad()
 	var built bool
@@ -184,13 +186,13 @@ func (s *Substructure) Rebuild(src, dist string) error {
 		}
 		name := tmplPathToName(src)
 		for d := range doc.Dependencies() {
-			if d == name {
-				fmt.Printf(" ↗ %s", pad(dest))
+			if d == name || d == src {
+				fmt.Printf("  ↗ %s", pad(dest))
 				if err := s.execute(doc, dist); err != nil {
 					return fmt.Errorf(
-						"can't rebuild upstream dependency %s of %s: %w",
-						d,
+						"can't rebuild %s upstream dependency %s: %w",
 						src,
+						d,
 						err,
 					)
 				}
@@ -206,6 +208,19 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			fmt.Println(" ✓")
 			built = true
 		}
+	}
+	if d := s.DocBySrc(src); d != nil && d.IsPost() {
+		fmt.Printf("  ↘ %s", pad("index.html"))
+		if err := s.execute(s.DocByShortname("index"), dist); err != nil {
+			return fmt.Errorf("can't rebuild index: %w", err)
+		}
+		fmt.Println(" ✓")
+		fmt.Printf("  ↘ %s", pad("archives.html"))
+		if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
+			return fmt.Errorf("can't rebuild index: %w", err)
+		}
+		fmt.Println(" ✓")
+		built = true
 	}
 
 	if !built {

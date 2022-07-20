@@ -113,6 +113,8 @@ func (d *galleryDocument) Build() ([]byte, error) {
 	return b, nil
 }
 
+func (d *galleryDocument) Category() string { return "" }
+
 // Dependencies returns the filepaths the gallery document depends on.
 func (d *galleryDocument) Dependencies() map[string]struct{} {
 	return map[string]struct {

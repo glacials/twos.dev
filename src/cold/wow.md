@@ -1,4 +1,5 @@
 ---
+category: game loads
 date: 2007-12-25
 filename: wow.html
 type: post
@@ -10,7 +11,7 @@ Neverhitboxes._
 
 ---
 
-# Game loads: World of Warcraft
+# World of Warcraft
 
 Yeah, you knew it was coming. If you despise _World of Warcraft_ (or MMORPG’s in
 general), maybe you should stop reading here if you don’t want to throw up.

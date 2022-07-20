@@ -1,4 +1,5 @@
 ---
+category: game loads
 date: 2007-11-19
 filename: crysis.html
 type: post
@@ -10,7 +11,7 @@ Neverhitboxes._
 
 ---
 
-# Game loads: Crysis
+# Crysis
 
 I’m one of those people who pretty much just has to play any game I’m excited
 for (a recent example of this is when I bought Halo 3 with no 360 to play it on

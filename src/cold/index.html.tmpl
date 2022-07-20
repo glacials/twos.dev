@@ -27,6 +27,9 @@ type: page
       {{ break }}
     {{ end }}
     <li>
+      {{ with .Category }}
+        {{ . }}:
+      {{ end }}
       <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
       {{ if ne .CreatedAt.Year now.Year }}({{ .CreatedAt.Year }}){{ end }}
     </li>

@@ -1,4 +1,5 @@
 ---
+category: game loads
 date: 2007-11-23
 filename: overlord.html
 type: post
@@ -10,7 +11,7 @@ Neverhitboxes._
 
 ---
 
-# Game loads: Overlord
+# Overlord
 
 A second game I’ve been trying to play lately is
 [Overlord](http://en.wikipedia.org/wiki/Overlord_%282007_video_game%29), which,

@@ -23,7 +23,7 @@ type: page
 
 {{range .Documents}}
 
-- [{{.Title}}]({{.Shortname}}.html)
+- {{with .Category}}{{.}}:{{end}} [{{.Title}}]({{.Shortname}}.html)
 
 {{end}}
 {{$prev = .Year}}
