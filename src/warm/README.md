@@ -1,3 +1,7 @@
+---
+date: 2022-07-15
+---
+
 # `src/warm`
 
 This directory is a sync target from a directory in my personal [iA
