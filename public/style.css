@@ -268,7 +268,7 @@ a:hover img.silly {
 
 .photo-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(128px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
 }
 
 .photo-grid img {
