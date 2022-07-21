@@ -21,6 +21,8 @@ type: post
 
 Combine all ingredients. Optionally shake and/or serve with ice.
 
+[Add recipe to Mixel](https://links.mixelcocktails.com/Fjf3)
+
 ## Purpose
 
 The skyhopper is based on the grasshopper, which is traditionally 1:1:1 heavy
