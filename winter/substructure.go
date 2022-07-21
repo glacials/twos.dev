@@ -34,6 +34,7 @@ type substructureDocument struct {
 	Document
 
 	Parent *substructureDocument
+	// Source is the path to the source file for the document.
 	Source string
 }
 
