@@ -1,5 +1,5 @@
 ---
-category: game loads
+category: game load
 date: 2007-11-19
 filename: crysis.html
 type: post
