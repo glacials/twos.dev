@@ -153,7 +153,7 @@ func tmplByName(name string) ([]byte, error) {
 	}
 	if len(paths) == 0 {
 		return nil, fmt.Errorf(
-			"no file for template `%s`; expected one at src/templates/[_]%s.html[.tmpl]",
+			"error opening file for template `%s` at src/templates/[_]%s.html[.tmpl]",
 			name,
 			name,
 		)
