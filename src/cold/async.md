@@ -2,6 +2,7 @@
 date: 2022-07-06
 filename: async.html
 type: post
+updated: 2022-07-20
 ---
 
 # Why Be Synchronous?
@@ -25,10 +26,18 @@ It solved the problem well. And we spent six months cleaning it up. That both
 those statements can be true is oft overlooked by engineers, junior and senior.
 
 Like tech debt, synchrony trades away future velocity for present velocity.
-Sometimes you need that. If you optimize too much for the future, you'll die
-before you get there. It's up to each project, team, org to find the right
-balance. I recommend asynchrony by default, with an eye trained on the efforts
-that really need to succeed in the present.
+Sometimes you need that.
+
+> In the long run we are all dead. Economists set themselves too easy, too
+> useless a task if, in tempestuous seasons, they can only tell us that when the
+> storm is long past the ocean is flat again.
+
+—_John Maynard Keynes, [A Tract on Monetary Reform](https://amzn.to/3PF7nKz) (1923)_
+
+If you optimize too much for the future, you'll die before you get there. It's
+up to each project, team, org to find the right balance. I recommend asynchrony
+by default, with an eye trained on the efforts that really need to succeed in
+the present.
 
 Employ synchrony when you need speed, but don’t call a 10-person meeting for
 anything that doesn't.
