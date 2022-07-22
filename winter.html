@@ -108,12 +108,7 @@
       >About</a
     >
     <span class="arrow"></span>
-    <a
-      href="/cv.html"
-      
-      >CV</a
-    >
-    <span class="arrow"></span>
+    
     <a
       href="/guide.html"
       
@@ -142,10 +137,6 @@
       </header>
       <article>
         
-          <div style="background-color: var(--bg-c); text-align:center;">
-            DRAFT
-          </div>
-        
         
         <html><head></head><body><p><meta name="go-import" content="twos.dev
              git https://github.com/glacials/twos.dev"/>
@@ -168,25 +159,100 @@ strongly opinionated to serve my pecularities around building twos.dev.</p>
 
 <html><head></head><body><ol id="toc">
   
-    <li><a href="#installation">Installation</a></li>
+    <li><a href="#installation"><span>Installation</span></a></li>
     
   
-    <li><a href="#documentation">Documentation</a></li>
+    <li><a href="#documentation"><span>Documentation</span></a></li>
     
       <ol>
   
     <li>
-      <a href="#layout">Directory Layout</a>
+      <a href="#layout"><span>Directory Layout</span></a>
       
     </li>
   
     <li>
-      <a href="#commands">Commands</a>
+      <a href="#commands"><span>Commands</span></a>
+      
+        <ol>
+  
+    <li>
+      <a href="#build"><span><code>winter build</code></span></a>
       
     </li>
   
     <li>
-      <a href="#documents">Documents</a>
+      <a href="#freeze"><span><code>winter freeze</code></span></a>
+      
+    </li>
+  
+</ol>
+
+      
+    </li>
+  
+    <li>
+      <a href="#documents"><span>Documents</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#frontmatter"><span>Frontmatter</span></a>
+      
+        <ol>
+  
+    <li>
+      <a href="#filename"><span><code>filename</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#date"><span><code>date</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#updated"><span><code>updated</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#tocprop"><span><code>toc</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#type"><span><code>type</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#category"><span><code>category</code></span></a>
+      
+    </li>
+  
+</ol>
+
+      
+    </li>
+  
+    <li>
+      <a href="#templates"><span>Templates</span></a>
+      
+        <ol>
+  
+    <li>
+      <a href="#fields"><span>Document Fields</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#functions"><span>Functions</span></a>
+      
+    </li>
+  
+</ol>
+
       
     </li>
   
@@ -283,8 +349,11 @@ and the browser automatically refreshes.</p>
 
 <h3 id="documents">Documents</h3>
 
-<p>A document is an HTML file or a Markdown file with optional frontmatter. This is
-an example document called <code>example.md</code>:</p>
+<p>A document is an HTML file or a Markdown file with optional frontmatter. The
+first level 1 heading (<code>&lt;h1&gt;</code> in HTML or <code>#</code> in Markdown) will be used as the
+document title.</p>
+
+<p>This is an example document called <code>example.md</code>:</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
 </span></span><span class="line"><span class="ln">2</span><span class="cl">date: 2022-07-07
@@ -297,20 +366,39 @@ an example document called <code>example.md</code>:</p>
 </span></span><span class="line"><span class="ln">9</span><span class="cl">This is an example document.
 </span></span></code></pre></body></html>
 
-<h4 id="frontmatter">Frontmatter</h4>
+<h3 id="frontmatter">Frontmatter</h3>
 
 <p>Frontmatter is specified in YAML. All fields are optional.</p>
 
-<h5 id="filename"><code>filename</code></h5>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">---
+</span></span><span class="line"><span class="ln"> 2</span><span class="cl">filename: example.html
+</span></span><span class="line"><span class="ln"> 3</span><span class="cl">date: 2022-07-07
+</span></span><span class="line"><span class="ln"> 4</span><span class="cl">updated: { { .Now.Format "2006-01-02" } }
+</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
+</span></span><span class="line"><span class="ln"> 6</span><span class="cl">category: arbitrary string
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">toc: true|false
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">type: post|page|draft
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">---
+</span></span><span class="line"><span class="ln">10</span><span class="cl">
+</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="gh"># The Thing About Icebergs
+</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="gh"></span>
+</span></span><span class="line"><span class="ln">13</span><span class="cl">...
+</span></span></code></pre></body></html>
+
+<h4 id="filename"><code>filename</code></h4>
 
 <p>Filename specifies the desired final location of the built file in <code>dist</code>. This
-must end in <code>.html</code> and must not be in a subdirectory.</p>
+must end in <code>.html</code> (even if the source document is Markdown) and must not be in
+a subdirectory. Winter enforces this because if you later move off Winter, web
+paths that end in <code>.html</code> and do not use subdirectories will be the easiest to
+migrate.</p>
 
-<p>When not set, the filename of the document minus extension is used in place. For
-example, <code>envy.html.tmpl</code> and <code>envy.md</code> would both become <code>envy.html</code>. In
-templates, the extension is stripped and the remainder is coalesced to <code>{{ .Shortname }}</code>.</p>
+<p>When not set, the filename of the source document minus extension is used in
+place. For example, <code>envy.html.tmpl</code> and <code>envy.md</code> would both become <code>envy.html</code>
+(though if two source files would produce the same destination file, Winter will
+error). The result can be accessed using the <a href="#shortname"><code>{{ .Shortname }}</code></a> template var.</p>
 
-<h5 id="date"><code>date</code></h5>
+<h4 id="date"><code>date</code></h4>
 
 <p>The publish date of the document as a Go
 <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a>. Coalesces to <code>2022-07-07 00:00:00 &#43;0000 UTC</code> in
@@ -332,7 +420,7 @@ to hide unset dates:</p>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">{{ end }}
 </span></span></code></pre></body></html>
 
-<h5 id="updated"><code>updated</code></h5>
+<h4 id="updated"><code>updated</code></h4>
 
 <p>The date the document was last meaningfully updated, if any, as a Go
 <a href="https://pkg.go.dev/time"><code>time.Time</code></a>. Coalesces to <code>{{ .UpdatedAt }}</code> in
@@ -354,73 +442,158 @@ to hide unset dates:</p>
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">published 2022 July / last updated 2022 August
 </span></span></code></pre></body></html>
 
-<h5 id="tocprop"><code>toc</code></h5>
+<h4 id="tocprop"><code>toc</code></h4>
 
 <p>Whether to render a table of contents (default <code>false</code>). If <code>true</code>, the table of
 contents will be rendered just before the first level 2 header (<code>&lt;h2&gt;</code> in HTML,
-<code>##</code> in Markdown) and will list all level 2 and 3 headers. See the <a href="#toc">top of this
-page</a> for an example.</p>
+<code>##</code> in Markdown) and will list all level 2, 3, and 4 header in nested <code>&lt;ul&gt;</code>s.
+See the <a href="#toc">top of this page</a> for an example.</p>
 
-<h5 id="type"><code>type</code></h5>
+<h4 id="type"><code>type</code></h4>
 
 <p>The kind of document. Possible values are <code>post</code>, <code>page</code>, <code>draft</code>.</p>
 
 <p><code>post</code> documents are programmatically included in template functions. <code>page</code> and
 <code>draft</code> documents have no programmatic action taken on them.</p>
 
-<h4 id="templates">Templates</h4>
+<h4 id="category"><code>category</code></h4>
+
+<p>The category of the document. Accepts any string. This is exposed to templates
+via the <code>{{ .Category }}</code> field. It has no other effect.</p>
+
+<h3 id="templates">Templates</h3>
 
 <p>Templates use the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
-library. Available variables are in flux so are not yet documented, but can be
-viewed in <a href="https://github.com/glacials/twos.dev/blob/main/winter/template.go"><code>winter/template.go</code></a>.</p>
+library.</p>
 
-<p>Template functions available are:</p>
+<h4 id="fields">Document Fields</h4>
+
+<p>Document fields are available on any document.</p>
+
+<h5 id="category-1"><code>{{ .Category }}</code></h5>
+
+<p><em>Type: <code>string</code></em></p>
+
+<p>The value specified by the frontmatter <a href="#category"><code>category</code></a> field. This can
+be any arbitrary string specified by the document and is not used internally by
+Winter.</p>
+
+<h5 id="dest"><code>{{ .Dest }}</code></h5>
+
+<p><em>Type: <code>string</code></em></p>
+
+<p>The path of the document, relative to the web root.</p>
+
+<h5 id="isdraft"><code>{{ .IsDraft }}</code></h5>
+
+<p><em>Type: <code>bool</code></em></p>
+
+<p>Whether the document is a draft (i.e. has frontmatter specifying <code>type: draft</code>).</p>
+
+<h5 id="ispost"><code>{{ .IsPost }}</code></h5>
+
+<p><em>Type: <code>bool</code></em></p>
+
+<p>Whether the document is a post (i.e. has frontmatter specifying <code>type: post</code>).</p>
+
+<h5 id="title"><code>{{ .Title }}</code></h5>
+
+<p><em>Type: <code>string</code></em></p>
+
+<p>The value of the document's first level 1 heading (<code>&lt;h1&gt;</code> for HTML or <code>#</code> for Markdown).</p>
+
+<h5 id="createdat"><code>{{ .CreatedAt }}</code></h5>
+
+<p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
+
+<p>The parsed date specified by the frontmatter <a href="#date"><code>date</code></a> field.</p>
+
+<h5 id="updatedat"><code>{{ .UpdatedAt }}</code></h5>
+
+<p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
+
+<p>The parsed date specified by the frontmatter <a href="#updated"><code>updated</code></a> field.</p>
+
+<h4 id="functions">Functions</h4>
 
 <h5 id="posts"><code>posts</code></h5>
 
+<p>Usage: <code>{{ range posts }} ... {{ end }}</code></p>
+
 <p>Returns a list of all documents with type <code>post</code>, from most to least recent.</p>
+
+<p>See <a href="#fields">Document Fields</a> for a list of fields available to documents.</p>
 
 <h5 id="archives"><code>archives</code></h5>
 
+<p>Usage: <code>{{ range archives }}{{ .Year }}: {{ range .Documents }} ... {{ end }}{{ end }}</code></p>
+
 <p>Returns a list of <code>archive</code> types ordered from most to least recent. An
-<code>archive</code> is a struct with two fields, <code>.Year</code> (integer) and <code>.Documents</code> (array
-of <code>document</code>s). This allows you to display posts sectioned by year.</p>
+<code>archive</code> has two fields, <code>.Year</code> (integer) and <code>.Documents</code> (array of
+documents). This allows you to display posts sectioned by year.</p>
+
+<p>See <a href="#fields">Document Fields</a> for a list of fields available to documents.</p>
 
 <h5 id="img"><code>img</code></h5>
 
 <p><em>Alias: <code>imgs</code></em></p>
 
-<p>Render an image or images with optional alt text and a caption.</p>
+<p>Usage: <code>{{ img[s] &lt;caption&gt; &lt;imageshortname alttext&gt;... }}</code></p>
 
-<p>Usage: <code>{{ img caption &lt;imgname alt&gt;... }}</code></p>
+<p>Render an image or images with a single caption. Image files must be present in
+this format:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">public/img/&lt;pageshortname&gt;-&lt;imageshortname&gt;[-&lt;light|dark&gt;].&lt;png|jpg|jpeg&gt;
+</span></span></code></pre></body></html>
 
 <p>For example, to render one image with a caption and alt text:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
-</span></span><span class="line"><span class="ln">2</span><span class="cl">filename: mypage.html
-</span></span><span class="line"><span class="ln">3</span><span class="cl">---
-</span></span><span class="line"><span class="ln">4</span><span class="cl">
-</span></span><span class="line"><span class="ln">5</span><span class="cl">{{ img
-</span></span><span class="line"><span class="ln">6</span><span class="cl">   "A caption."
-</span></span><span class="line"><span class="ln">7</span><span class="cl">   "myimg"
-</span></span><span class="line"><span class="ln">8</span><span class="cl">   "Descriptive alt text of what the image is of, for assistive tech"
-</span></span><span class="line"><span class="ln">9</span><span class="cl">}}
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">&lt;!-- mypage.md --&gt;
+</span></span><span class="line"><span class="ln">2</span><span class="cl">
+</span></span><span class="line"><span class="ln">3</span><span class="cl">{{ img
+</span></span><span class="line"><span class="ln">4</span><span class="cl">   "A caption."
+</span></span><span class="line"><span class="ln">5</span><span class="cl">   "test1"
+</span></span><span class="line"><span class="ln">6</span><span class="cl">   "Descriptive alt text of what the image is of, for assistive tech"
+</span></span><span class="line"><span class="ln">7</span><span class="cl">}}
 </span></span></code></pre></body></html>
 
-<p>Images must be present in <code>public/img</code> in the form:</p>
+<p>Result:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">pageshortname-imageshortname[-&lt;light|dark&gt;].&lt;png|jpg&gt;
-</span></span></code></pre></body></html>
+<p><figure style="text-align: center">
+  
+  <picture>
+    <source srcset="" media="(prefers-color-scheme: dark)" />
+    <img
+      alt="Descriptive alt text of what the image is of, for assistive tech"
+      src="img/winter-test1.jpeg"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+  
+  <figcaption>A caption.</figcaption>
+</figure>
+</p>
 
-<p>When the <code>img</code> function is called from a template, <code>public/img</code> is searched for
-an image named in this format. In the example above, one possible image name
-that would be found is <code>public/img/mypage-myimg.jpg</code>.</p>
+<p>In this example, the image file must hold one or more of these forms:</p>
 
-<p>If both a <code>-light</code> and a <code>-dark</code> image exist, the correct one will be used for
-the user's dark mode preference.</p>
+<ul>
+<li><code>public/img/mypage-test1.jpg</code></li>
+<li><code>public/img/mypage-test1-light.jpg</code></li>
+<li><code>public/img/mypage-test1-dark.jpg</code></li>
+<li><code>public/img/mypage-test1.jpeg</code></li>
+<li><code>public/img/mypage-test1-light.jpeg</code></li>
+<li><code>public/img/mypage-test1-dark.jpeg</code></li>
+<li><code>public/img/mypage-test1.png</code></li>
+<li><code>public/img/mypage-test1-light.png</code></li>
+<li><code>public/img/mypage-test1-dark.png</code></li>
+</ul>
 
-<p>Any number of images can be rendered next to each other with one caption
-beneath the group:</p>
+<p>If <code>-light</code> and/or a <code>-dark</code> variants exist, they will be used when the user is
+in the respective dark mode setting.</p>
+
+<p>Any number of images can be rendered together with one caption beneath the
+group by passing multiple images and alt texts. They will appear next to each
+other when the page width allows it, or stacked vertically otherwise.</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">---
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">filename: example.html
@@ -428,20 +601,48 @@ beneath the group:</p>
 </span></span><span class="line"><span class="ln"> 4</span><span class="cl">
 </span></span><span class="line"><span class="ln"> 5</span><span class="cl">{{ imgs
 </span></span><span class="line"><span class="ln"> 6</span><span class="cl">   "A pair of images."
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">   "imagename1"
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">   "Descriptive text of imagename1"
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">   "imagename2"
-</span></span><span class="line"><span class="ln">10</span><span class="cl">   "Descriptive text of imagename2"
+</span></span><span class="line"><span class="ln"> 7</span><span class="cl">   "test1"
+</span></span><span class="line"><span class="ln"> 8</span><span class="cl">   "Descriptive text of test1"
+</span></span><span class="line"><span class="ln"> 9</span><span class="cl">   "test1"
+</span></span><span class="line"><span class="ln">10</span><span class="cl">   "Descriptive text of test2"
 </span></span><span class="line"><span class="ln">11</span><span class="cl">}}
 </span></span></code></pre></body></html>
+
+<p>Result:</p>
+
+<p><figure style="text-align: center">
+  
+  <picture>
+    <source srcset="" media="(prefers-color-scheme: dark)" />
+    <img
+      alt="Descriptive text of imagename1"
+      src="img/winter-test1.jpeg"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+  
+  <picture>
+    <source srcset="" media="(prefers-color-scheme: dark)" />
+    <img
+      alt="Descriptive text of imagename2"
+      src="img/winter-test2.jpeg"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+  
+  <figcaption>A pair of images.</figcaption>
+</figure>
+</p>
 
 <h5 id="video"><code>video</code></h5>
 
 <p><em>Alias: <code>videos</code></em></p>
 
-<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead. Note that
-most browsers do not currently support light or dark mode variations of
-<code>&lt;video&gt;</code> tags.</p>
+<p>Usage: <code>{{ video[s] &lt;caption&gt; &lt;videoshortname alttext&gt;... }}</code></p>
+
+<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead and renders
+them in <code>&lt;video&gt;</code> tags. Note that most browsers do not currently support light
+or dark mode variations for videos, so the wrong variant may be displayed.</p>
 </body></html>
       </article>
       <footer>
