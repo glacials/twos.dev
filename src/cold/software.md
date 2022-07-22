@@ -10,21 +10,21 @@ type: page
 <i>Solid hearts are active; hollow hearts are inactive but stable.</i>
 
 - ♥ [Winter](https://twos.dev/winter): Static website generator powering this
-  website
+  website (Go)
 - ♥ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails,
   Vue)
-- ♥ [What's in Standard?](https://whatsinstandard.com): Reference tool & Twitter
-  bot for Magic: The Gathering (Vue, Flutter)
+- ♥ [What's in Standard?](https://whatsinstandard.com): Reference tool for
+  Magic: The Gathering (Vue, Flutter)
 - ♡ [Pricegun](https://pricegun.twos.dev): Estimate how much to charge for a
   side project (React)
 - ♡ [Licenseland](https://license.land): Dual-license provider for open source
   developers (Vue)
-- ♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Library to add
-  zero-configuration stateless UUID-based URL slugs (Ruby on Rails)
-- ♡ [Indenter](https://github.com/glacials/indenter): Library to add syntactic
-  sugar for neatly-indented CLI output (Python)
-- [Housebot](https://github.com/glacials/housebot): Twitch chat bot that allows
-  viewers to vote to control smart lights (Node, CoffeeScript)
+- ♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Zero-config
+  stateless UUID-based URL slugs (Ruby on Rails)
+- ♡ [Indenter](https://github.com/glacials/indenter): Syntactic sugar for
+  neatly-indented CLI output (Python)
+- [Housebot](https://github.com/glacials/housebot): Twitch-controlled smart
+  lights (Node, CoffeeScript)
 - [Mainframe](https://github.com/glacials/mainframe): A bespoke home server
   running on an RPi in my closet (Go)
 - [kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)
