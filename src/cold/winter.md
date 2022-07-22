@@ -19,13 +19,13 @@ updated: 2022-07-13
              https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
 />
 
-# Winter
-
-[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
-
 _Warning: Winter is in early alpha and so is this documentation. You may find
 inconsistencies or pieces of code present in twos.dev that have not yet been
 migrated to Winter._
+
+# Winter
+
+[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
 
 _Winter_ is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
