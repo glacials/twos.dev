@@ -9,7 +9,10 @@ type: page
 
 <i>Solid hearts are active; hollow hearts are inactive but stable.</i>
 
-- ♥ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails, Vue)
+- ♥ [Winter](https://twos.dev/winter): Static website generator powering this
+  website
+- ♥ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails,
+  Vue)
 - ♥ [What's in Standard?](https://whatsinstandard.com): Reference tool & Twitter
   bot for Magic: The Gathering (Vue, Flutter)
 - ♡ [Pricegun](https://pricegun.twos.dev): Estimate how much to charge for a
@@ -22,7 +25,8 @@ type: page
   sugar for neatly-indented CLI output (Python)
 - [Housebot](https://github.com/glacials/housebot): Twitch chat bot that allows
   viewers to vote to control smart lights (Node, CoffeeScript)
-- [Mainframe](https://github.com/glacials/mainframe): A bespoke home server running on an RPi in my closet (Go)
+- [Mainframe](https://github.com/glacials/mainframe): A bespoke home server
+  running on an RPi in my closet (Go)
 - [kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)
 
 ## Contributions
