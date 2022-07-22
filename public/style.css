@@ -140,7 +140,7 @@ h2,
 h3 {
   background-color: var(--bg-b);
   color: var(--fg-b-a);
-  display: inline-block;
+  padding-left: 1rem;
 }
 
 h2,
@@ -148,8 +148,11 @@ h3,
 h4,
 h5,
 h6 {
+  display: inline-block;
   margin-top: 2em;
-  padding: 0.1em 1rem 0 1rem;
+  padding-top: 0.1em;
+  padding-right: 1rem;
+  padding-bottom: 0;
 }
 
 h4,
@@ -157,8 +160,7 @@ h5,
 h6 {
   color: var(--fg-a-b);
   display: block;
-  margin: auto;
-  text-align: center;
+  padding-left: 0;
 }
 
 hr {
@@ -283,6 +285,7 @@ a:hover img.silly {
 code {
   background-color: var(--bg-c);
   color: var(--fg-c-a);
+  font-family: "DM Mono", Menlo, Monaco, Oxygen, monospace;
   padding: 0.25em 0.5em;
 }
 

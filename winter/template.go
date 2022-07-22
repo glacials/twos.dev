@@ -105,7 +105,7 @@ type tocPartialVars struct {
 type tocVars struct {
 	Anchor string
 	Items  []tocVars
-	Title  string
+	HTML   template.HTML
 }
 
 type videosfunc func(graphic.Caption, ...string) (template.HTML, error)

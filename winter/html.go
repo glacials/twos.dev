@@ -1,23 +1,55 @@
 package winter
 
 import (
+	"bytes"
+
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
 
-// firstOfType returns the first descendant node of n with the given type.
-func firstOfType(n *html.Node, t atom.Atom) *html.Node {
-	if n.DataAtom == t {
+// firstTag returns the first element with the given tag which is a descendant
+// of n.
+func firstTag(n *html.Node, t atom.Atom) *html.Node {
+	if n.Type == html.ElementNode && n.DataAtom == t {
 		return n
 	}
 
 	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		if el := firstOfType(child, t); el != nil {
+		if el := firstTag(child, t); el != nil {
 			return el
 		}
 	}
 
 	return nil
+}
+
+// firstText returns the first descendant node of n which is a text node.
+func firstText(n *html.Node) *html.Node {
+	if n.Type == html.TextNode {
+		return n
+	}
+
+	for child := n.FirstChild; child != nil; child = child.NextSibling {
+		if el := firstText(child); el != nil {
+			return el
+		}
+	}
+
+	return nil
+}
+
+// clone returns a deep copy of n.
+func clone(n *html.Node) (*html.Node, error) {
+	var buf bytes.Buffer
+	if err := html.Render(&buf, n); err != nil {
+		return nil, err
+	}
+	els, err := html.ParseFragment(&buf, n.Parent)
+	if err != nil {
+		return nil, err
+	}
+
+	return els[0], nil
 }
 
 // allOfTypes returns all descendant nodes of n with any of the given types. The

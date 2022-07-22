@@ -1,7 +1,7 @@
 <ol>
   {{ range . }}
     <li>
-      <a href="#{{ .Anchor }}">{{ .Title }}</a>
+      <a href="#{{ .Anchor }}">{{ .HTML }}</a>
       {{ if .Items }}
         {{ template "subtoc" .Items }}
       {{ end }}

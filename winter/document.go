@@ -40,7 +40,7 @@ const (
 	tocEl        = atom.Ol
 	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
 	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
-	tocMax       = 3
+	tocMax       = 4
 	tocMin       = 2
 	tocReturn    = `
 <span style="margin-left:0.5em">
@@ -242,7 +242,7 @@ func (d *textDocument) load() error {
 // slurpHTML runs after HTML parsing has completed, extracting any information
 // from the HTML needed for processing.
 func (d *textDocument) slurpHTML() error {
-	if h1 := firstOfType(d.root, atom.H1); h1 != nil {
+	if h1 := firstTag(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
 			if child.Type == html.TextNode {
 				d.metadata.Title = child.Data
@@ -374,10 +374,10 @@ func (d *textDocument) linksout() (hrfs []string, err error) {
 // and makes a reflective table of contents.
 func (d *textDocument) fillTOC() error {
 	var (
-		f func(*html.Node)
+		f func(*html.Node) error
 		v tocPartialVars
 	)
-	f = func(n *html.Node) {
+	f = func(n *html.Node) error {
 		if hi[n.DataAtom] >= tocMin && hi[n.DataAtom] <= tocMax {
 			grp := &v.Items
 			for i := tocMin; i < hi[n.DataAtom] && i < tocMax; i += 1 {
@@ -385,14 +385,34 @@ func (d *textDocument) fillTOC() error {
 					grp = &((*grp)[len(*grp)-1].Items)
 				}
 			}
+			// Replace the <h*> tag with a <span>
+			wrapper := &html.Node{
+				Type:     html.ElementNode,
+				Data:     atom.Span.String(),
+				DataAtom: atom.Span,
+			}
+			for child := n.FirstChild; child != nil; child = child.NextSibling {
+				child, err := clone(child)
+				if err != nil {
+					return err
+				}
+				wrapper.AppendChild(child)
+			}
+			var buf bytes.Buffer
+			if err := html.Render(&buf, wrapper); err != nil {
+				return err
+			}
 			*grp = append(*grp, tocVars{
 				Anchor: attr(n, atom.Id),
-				Title:  n.FirstChild.Data,
+				HTML:   template.HTML(buf.String()),
 			})
 		}
 		for c := n.FirstChild; c != nil; c = c.NextSibling {
-			f(c)
+			if err := f(c); err != nil {
+				return err
+			}
 		}
+		return nil
 	}
 	f(d.root)
 
@@ -427,10 +447,11 @@ func (d *textDocument) fillTOC() error {
 		return err
 	}
 
-	firstH2 := firstOfType(d.root, atom.H2)
+	// Insert table of contents before first H2 (i.e. after introduction)
+	firstH2 := firstTag(d.root, atom.H2)
 	if firstH2 == nil {
 		return fmt.Errorf(
-			"don't know how to build TOC without any H2 headings in %s",
+			"please add at least one H2 heading to %s in order to provide a table of contents anchor point",
 			d.SrcPath,
 		)
 	}
