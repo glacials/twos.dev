@@ -2,7 +2,7 @@
 date: 2022-07-07
 filename: winter.html
 toc: true
-type: draft
+type: page
 updated: 2022-07-13
 ---
 
@@ -103,8 +103,11 @@ Freeze all arguments, specified by shortname. This moves the files from
 
 ### Documents {#documents}
 
-A document is an HTML file or a Markdown file with optional frontmatter. This is
-an example document called `example.md`:
+A document is an HTML file or a Markdown file with optional frontmatter. The
+first level 1 heading (`<h1>` in HTML or `#` in Markdown) will be used as the
+document title.
+
+This is an example document called `example.md`:
 
 ```markdown
 ---
@@ -118,20 +121,40 @@ type: post
 This is an example document.
 ```
 
-#### Frontmatter {#frontmatter}
+### Frontmatter {#frontmatter}
 
 Frontmatter is specified in YAML. All fields are optional.
 
-##### `filename` {#filename}
+```markdown
+---
+filename: example.html
+date: 2022-07-07
+updated: { { .Now.Format "2006-01-02" } }
+
+category: arbitrary string
+toc: true|false
+type: post|page|draft
+---
+
+# The Thing About Icebergs
+
+...
+```
+
+#### `filename` {#filename}
 
 Filename specifies the desired final location of the built file in `dist`. This
-must end in `.html` and must not be in a subdirectory.
+must end in `.html` (even if the source document is Markdown) and must not be in
+a subdirectory. Winter enforces this because if you later move off Winter, web
+paths that end in `.html` and do not use subdirectories will be the easiest to
+migrate.
 
-When not set, the filename of the document minus extension is used in place. For
-example, `envy.html.tmpl` and `envy.md` would both become `envy.html`. In
-templates, the extension is stripped and the remainder is coalesced to `{{"{{"}} .Shortname }}`.
+When not set, the filename of the source document minus extension is used in
+place. For example, `envy.html.tmpl` and `envy.md` would both become `envy.html`
+(though if two source files would produce the same destination file, Winter will
+error). The result can be accessed using the [`{{"{{"}} .Shortname }}`](#shortname) template var.
 
-##### `date` {#date}
+#### `date` {#date}
 
 The publish date of the document as a Go
 [`time.Time`](https://pkg.go.dev/time#Time). Coalesces to `{{ .CreatedAt }}` in
@@ -155,7 +178,7 @@ to hide unset dates:
 {{"{{"}} end }}
 ```
 
-##### `updated` {#updated}
+#### `updated` {#updated}
 
 The date the document was last meaningfully updated, if any, as a Go
 [`time.Time`](https://pkg.go.dev/time). Coalesces to `{{"{{"}} .UpdatedAt }}` in
@@ -179,75 +202,149 @@ Renders:
 published 2022 July / last updated 2022 August
 ```
 
-##### `toc` {#tocprop}
+#### `toc` {#tocprop}
 
 Whether to render a table of contents (default `false`). If `true`, the table of
 contents will be rendered just before the first level 2 header (`<h2>` in HTML,
-`##` in Markdown) and will list all level 2 and 3 headers. See the [top of this
-page](#toc) for an example.
+`##` in Markdown) and will list all level 2, 3, and 4 header in nested `<ul>`s.
+See the [top of this page](#toc) for an example.
 
-##### `type` {#type}
+#### `type` {#type}
 
 The kind of document. Possible values are `post`, `page`, `draft`.
 
 `post` documents are programmatically included in template functions. `page` and
 `draft` documents have no programmatic action taken on them.
 
-#### Templates {#templates}
+#### `category` {#category}
+
+The category of the document. Accepts any string. This is exposed to templates
+via the `{{"{{"}} .Category }}` field. It has no other effect.
+
+### Templates {#templates}
 
 Templates use the [`text/template`](https://pkg.go.dev/text/template) Go
-library. Available variables are in flux so are not yet documented, but can be
-viewed in [`winter/template.go`](https://github.com/glacials/twos.dev/blob/main/winter/template.go).
+library.
 
-Template functions available are:
+#### Document Fields {#fields}
+
+Document fields are available on any document.
+
+##### `{{"{{"}} .Category }}` {#category}
+
+_Type: `string`_
+
+The value specified by the frontmatter [`category`](#category) field. This can
+be any arbitrary string specified by the document and is not used internally by
+Winter.
+
+##### `{{"{{"}} .Dest }}` {#dest}
+
+_Type: `string`_
+
+The path of the document, relative to the web root.
+
+##### `{{"{{"}} .IsDraft }}` {#isdraft}
+
+_Type: `bool`_
+
+Whether the document is a draft (i.e. has frontmatter specifying `type: draft`).
+
+##### `{{"{{"}} .IsPost }}` {#ispost}
+
+_Type: `bool`_
+
+Whether the document is a post (i.e. has frontmatter specifying `type: post`).
+
+##### `{{"{{"}} .Title }}` {#title}
+
+_Type: `string`_
+
+The value of the document's first level 1 heading (`<h1>` for HTML or `#` for Markdown).
+
+##### `{{"{{"}} .CreatedAt }}` {#createdat}
+
+_Type: [`time.Time`](https://pkg.go.dev/time#Time)_
+
+The parsed date specified by the frontmatter [`date`](#date) field.
+
+##### `{{"{{"}} .UpdatedAt }}` {#updatedat}
+
+_Type: [`time.Time`](https://pkg.go.dev/time#Time)_
+
+The parsed date specified by the frontmatter [`updated`](#updated) field.
+
+#### Functions {#functions}
 
 ##### `posts` {#posts}
 
+Usage: `{{"{{"}} range posts }} ... {{"{{"}} end }}`
+
 Returns a list of all documents with type `post`, from most to least recent.
+
+See [Document Fields](#fields) for a list of fields available to documents.
 
 ##### `archives` {#archives}
 
+Usage: `{{"{{"}} range archives }}{{"{{"}} .Year }}: {{"{{"}} range .Documents }} ... {{"{{"}} end }}{{"{{"}} end }}`
+
 Returns a list of `archive` types ordered from most to least recent. An
-`archive` is a struct with two fields, `.Year` (integer) and `.Documents` (array
-of `document`s). This allows you to display posts sectioned by year.
+`archive` has two fields, `.Year` (integer) and `.Documents` (array of
+documents). This allows you to display posts sectioned by year.
+
+See [Document Fields](#fields) for a list of fields available to documents.
 
 ##### `img` {#img}
 
 _Alias: `imgs`_
 
-Render an image or images with optional alt text and a caption.
+Usage: `{{"{{"}} img[s] <caption> <imageshortname alttext>... }}`
 
-Usage: `{{"{{"}} img caption <imgname alt>... }}`
+Render an image or images with a single caption. Image files must be present in
+this format:
+
+```plain
+public/img/<pageshortname>-<imageshortname>[-<light|dark>].<png|jpg|jpeg>
+```
 
 For example, to render one image with a caption and alt text:
 
 ```template
----
-filename: mypage.html
----
+<!-- mypage.md -->
 
 {{"{{"}} img
    "A caption."
-   "myimg"
+   "test1"
    "Descriptive alt text of what the image is of, for assistive tech"
 }}
 ```
 
-Images must be present in `public/img` in the form:
+Result:
 
-```plain
-pageshortname-imageshortname[-<light|dark>].<png|jpg>
-```
+{{ img
+   "A caption."
+   "test1"
+   "Descriptive alt text of what the image is of, for assistive tech"
+}}
 
-When the `img` function is called from a template, `public/img` is searched for
-an image named in this format. In the example above, one possible image name
-that would be found is `public/img/mypage-myimg.jpg`.
+In this example, the image file must hold one or more of these forms:
 
-If both a `-light` and a `-dark` image exist, the correct one will be used for
-the user's dark mode preference.
+- `public/img/mypage-test1.jpg`
+- `public/img/mypage-test1-light.jpg`
+- `public/img/mypage-test1-dark.jpg`
+- `public/img/mypage-test1.jpeg`
+- `public/img/mypage-test1-light.jpeg`
+- `public/img/mypage-test1-dark.jpeg`
+- `public/img/mypage-test1.png`
+- `public/img/mypage-test1-light.png`
+- `public/img/mypage-test1-dark.png`
 
-Any number of images can be rendered next to each other with one caption
-beneath the group:
+If `-light` and/or a `-dark` variants exist, they will be used when the user is
+in the respective dark mode setting.
+
+Any number of images can be rendered together with one caption beneath the
+group by passing multiple images and alt texts. They will appear next to each
+other when the page width allows it, or stacked vertically otherwise.
 
 ```template
 ---
@@ -256,17 +353,29 @@ filename: example.html
 
 {{"{{"}} imgs
    "A pair of images."
-   "imagename1"
-   "Descriptive text of imagename1"
-   "imagename2"
-   "Descriptive text of imagename2"
+   "test1"
+   "Descriptive text of test1"
+   "test1"
+   "Descriptive text of test2"
 }}
 ```
+
+Result:
+
+{{ imgs
+   "A pair of images."
+   "test1"
+   "Descriptive text of imagename1"
+   "test2"
+   "Descriptive text of imagename2"
+}}
 
 ##### `video` {#video}
 
 _Alias: `videos`_
 
-Behaves exactly as `img` but searches for `mp4`/`mov` files instead. Note that
-most browsers do not currently support light or dark mode variations of
-`<video>` tags.
+Usage: `{{"{{"}} video[s] <caption> <videoshortname alttext>... }}`
+
+Behaves exactly as `img` but searches for `mp4`/`mov` files instead and renders
+them in `<video>` tags. Note that most browsers do not currently support light
+or dark mode variations for videos, so the wrong variant may be displayed.
