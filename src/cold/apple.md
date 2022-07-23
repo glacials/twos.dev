@@ -330,7 +330,7 @@ any device.
    "Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
 }}
 
-#### Moto 360 &rarr; Apple Watch {#watch}
+#### Moto 360 → Apple Watch {#watch}
 
 My relationship with the Moto 360 was on and off. To me it served two
 functions:
@@ -482,7 +482,7 @@ macOS Mail has horrible keyboard shortcuts by default, e.g. ⌘^A to archive.
 Thankfully macOS natively supports rebinding shortcuts for any app.
 
 {{ img
-   "Any app's menu actions (e.g. File &rarr; Save) can be [re]bound."
+   "Any app's menu actions (e.g. File → Save) can be [re]bound."
    "rebind"
    "A screenshot of macOS's Settings.app rebinding a key for Mail.app"
 }}
@@ -569,7 +569,7 @@ Ecosystem effects of Apple Maps include rich links in iMessage and Calendar,
 Siri suggestions for destinations based on those and other sources, and Apple
 Watch vibration patterns to indicate upcoming turns.
 
-#### Location Sharing &rarr; Find My {#findmy}
+#### Location Sharing → Find My {#findmy}
 
 I use persistent location sharing with a small set of close friends and
 family. The Google offering (built into Google Maps) and the Apple offering (a
@@ -586,7 +586,7 @@ have peace of mind. The app sends a notification when I leave `$DEVICE` at
 `$LOCATION`, with easy controls to disable future notifications for any such
 combination.
 
-### Google Photos &rarr; Apple Photos {#photos}
+### Google Photos → Apple Photos {#photos}
 
 Mostly, these two products are equivalent. Apple Photos has more powerful
 editing tools but Google Photos has more powerful search. Both have similar
@@ -756,7 +756,7 @@ I’m a software engineer and am comfortable coding, but the fact that I could
 do all this without any was impressive. It’s also fun to say that my phone is
 a vital part of my CI/CD pipeline.
 
-### Google Drive &rarr; iCloud Drive {#drive}
+### Google Drive → iCloud Drive {#drive}
 
 Most Dropbox-esque apps are the same and iCloud Drive is no exception. Use it
 if you're in the Apple ecosystem, and don't if you're not. The biggest downside
