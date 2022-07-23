@@ -143,7 +143,7 @@ experience synchronization delays and conflicts. Sync settings for a machine
 are centralized in iCloud settings where they're often off by default. I still
 can't get one of my Safaris to synchronize its bookmarks with the rest.
 
-### Committment vs. Experimentation {#committment}
+### Commitment vs. Experimentation {#committment}
 
 Google is infamous for killing products. They release early, often, and in
 isolation; see Hangouts and Allo, Meet and Duo, or Reminders and Tasks.
@@ -431,9 +431,8 @@ harvesting and therefore ad targeting.
 
 So, I tried sticking with my classic Google account and accepting that its
 email would always be different from my preferred email. I finally snagged my
-leg on Google Groups, as Groups does not recognize alternative email addresses
-on Google accounts; I was forced to be presented as my old email address.
-(Though I did not test if posting via email from ben@twos.dev worked.)
+leg on two products: Google Groups, as Groups does not recognize alternative email addresses
+on Google accounts so I was forced to be presented as my old email address; and Google Calendar, as accepting invitations sent to ben@twos.dev would add my unknown (to the inviter) Google account email address to the event.
 
 I've now landed on creating a new personal Google account with ben@twos.dev as
 its primary email address. I needed to delete the twos.dev Google Workspace
