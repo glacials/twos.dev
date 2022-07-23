@@ -408,7 +408,7 @@ error). The result can be accessed using the <a href="#shortname"><code>{{ .Shor
 <h4 id="date"><code>date</code></h4>
 
 <p>The publish date of the document as a Go
-<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a>. Coalesces to <code>2022-07-07 00:00:00 &#43;0000 UTC</code> in
+<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a>. Coalesces to <code>{{ .CreatedAt }}</code> in
 templates.</p>
 
 <p>Templates can format the time using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time) Format</code></a> function, which accepts a string
