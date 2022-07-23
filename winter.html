@@ -145,7 +145,11 @@ migrated to Winter.</em></p>
 
 <h1>Winter</h1>
 
-<p><a href="https://pkg.go.dev/twos.dev/winter"><img src="https://pkg.go.dev/badge/twos.dev/winter.svg" alt="Go Reference"/></a> <a href="https://github.com/glacials/twos.dev#winter">GitHub Repository</a></p>
+<p><a href="https://pkg.go.dev/twos.dev/winter"><img src="https://pkg.go.dev/badge/twos.dev/winter.svg" alt="Go Reference"/></a> <a href="https://github.com/glacials/twos.dev#winter"><picture>
+  <source srcset="img/winter-github-dark.png" media="(prefers-color-scheme: dark)" />
+  <img alt="GitHub logo" src="img/winter-github-light.png" style="max-height: 1.35em" />
+</picture>
+</a></p>
 
 <p><em>Winter</em> is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
@@ -241,12 +245,77 @@ strongly opinionated to serve my pecularities around building twos.dev.</p>
         <ol>
   
     <li>
-      <a href="#fields"><span>Document Fields</span></a>
+      <a href="#fields"><span>Fields</span></a>
+      
+        <ol>
+  
+    <li>
+      <a href="#category-1"><span><code>{{ .Category }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#dest"><span><code>{{ .Dest }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#isdraft"><span><code>{{ .IsDraft }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#ispost"><span><code>{{ .IsPost }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#title"><span><code>{{ .Title }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#createdat"><span><code>{{ .CreatedAt }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#updatedat"><span><code>{{ .UpdatedAt }}</code></span></a>
+      
+    </li>
+  
+</ol>
+
       
     </li>
   
     <li>
       <a href="#functions"><span>Functions</span></a>
+      
+        <ol>
+  
+    <li>
+      <a href="#posts"><span><code>posts</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#archives"><span><code>archives</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#img"><span><code>img</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#video"><span><code>video</code></span></a>
+      
+    </li>
+  
+</ol>
+
       
     </li>
   
@@ -473,9 +542,7 @@ via the <code>{{ .Category }}</code> field. It has no other effect.</p>
 <p>Templates use the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
 library.</p>
 
-<h4 id="fields">Document Fields</h4>
-
-<p>Document fields are available on any document.</p>
+<h4 id="fields">Fields</h4>
 
 <h5 id="category-1"><code>{{ .Category }}</code></h5>
 

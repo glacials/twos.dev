@@ -76,6 +76,11 @@ a:visited {
   text-transform: lowercase;
 }
 
+/* Don't lowercase if case might functionally matter */
+a:has(code) {
+  text-transform: inherit;
+}
+
 a:hover {
   background-color: var(--fg-a-b);
   color: var(--bg-a);
@@ -83,11 +88,8 @@ a:hover {
   text-transform: none;
 }
 
-a:hover.img {
-  background: none;
-}
-
-a:hover.img > img {
+a:hover:has(img) {
+  background: inherit;
 }
 
 blockquote {
@@ -228,7 +230,7 @@ nav a.selected ~ .arrow::before {
   content: "←" !important;
 }
 
-/* Hovere/selected  nav links should make arrows on their left point right */
+/* Hovered/selected  nav links should make arrows on their left point right */
 nav .arrow:has(~ a:hover)::before {
   content: "→" !important;
 }
