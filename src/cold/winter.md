@@ -165,7 +165,7 @@ error). The result can be accessed using the [`{{"{{"}} .Shortname }}`](#shortna
 #### `date` {#date}
 
 The publish date of the document as a Go
-[`time.Time`](https://pkg.go.dev/time#Time). Coalesces to `{{ .CreatedAt }}` in
+[`time.Time`](https://pkg.go.dev/time#Time). Coalesces to `{{"{{"}} .CreatedAt }}` in
 templates.
 
 Templates can format the time using Go's [`func (time.Time) Format`](https://pkg.go.dev/time#Time.Format) function, which accepts a string
