@@ -14,13 +14,6 @@ import (
 	"github.com/yargevad/filepathx"
 )
 
-var (
-	ignoreFilenames = map[string]struct{}{
-		"README.md": {},
-		".DS_Store": {},
-	}
-)
-
 // Substructure is a graph of documents on the website, generated with read-only
 // operations. It will later be fed into a renderer.
 type Substructure struct {
@@ -37,6 +30,14 @@ type substructureDocument struct {
 	// Source is the path to the source file for the document.
 	Source string
 }
+
+var (
+	ignoreFilenames = map[string]struct{}{
+		"README.md": {},
+		".DS_Store": {},
+	}
+	pad = newPad()
+)
 
 func (d *substructureDocument) Shortname() string {
 	dest, err := d.Dest()
@@ -187,7 +188,6 @@ func (err ErrNotTracked) Error() string {
 // As a special case, the index page will be rebuilt after any post is built, so
 // that it can display its up to date title.
 func (s *Substructure) Rebuild(src, dist string) error {
-	pad := pad()
 	var built bool
 
 	// Try first as-is; if that fails we'll discover() and try again.
