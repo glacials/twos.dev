@@ -187,7 +187,7 @@ A common replacement for the em dash is a space on either end of two hyphens (` 
 
 ### Output Difficulties
 
-At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step(https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47) to render twos.dev's dashes in a variable width font.
+At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote [a bespoke preprocessing step](https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47) to render twos.dev's dashes in a variable width font.
 
 I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.
 
