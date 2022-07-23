@@ -1,0 +1,15 @@
+<nav>
+  <p style="text-align:center">
+    <a
+      href="/"
+      {{ if eq .Dest "index.html" }}class="selected"{{ end }}
+      >Index</a
+    >
+  </p>
+
+  <p style="text-align:center">
+    {{ with parent }}
+      <a href="{{ parent.Source }}">back to {{ parent.Shortname }}</a>
+    {{ end }}
+  </p>
+</nav>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{ template "head" . }}
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        {{ template "nav" . }}
+        {{ if and (.IsPost)  (not .CreatedAt.IsZero) }}
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
+                | last updated
+                {{ .UpdatedAt.Format "2006 January" }}
+              {{ end }}</i
+            >
+          </small>
+        {{ end }}
+      </header>
+      <article>
+        {{ if .IsDraft }}
+          <div>DRAFT</div>
+        {{ end }}
+        {{ with .Category }}
+          <div
+            style="text-align:center;text-transform:uppercase;margin-top:3em;"
+          >
+            {{ . }}s
+          </div>
+        {{ end }}
+        {{ template "body" . }}
+      </article>
+      <footer>
+        <hr />
+        <p>
+          {{ if ne .Shortname "index" }}
+            {{ with parent }}
+              &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+            {{ else }}
+              &larr; <a href="/">Index</a>
+            {{ end }}
+          {{ end }}
+        </p>
+        <p>
+          <small>
+            <i>
+              {{ if not .CreatedAt.IsZero }}
+                published
+                {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
+                  / last updated
+                  {{ .UpdatedAt.Format "2006 January" }}
+                {{ end }}
+              {{ end }}
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

@@ -50,11 +50,12 @@ winter --help
 go get -u twos.dev/winter@latest
 ```
 
-### Philosophy
+### Commands
 
 The Winter CLI has three main actions:
 
 ```sh
+winter init                # Initialize the current directory for Winter
 winter build               # Build site once and stop
 winter build --serve       # Build site continuously and serve results
 winter freeze shortname... # Convert the given document(s) from warm to cold
@@ -82,9 +83,8 @@ last for years or decades without babysittting its existence.
 
 ### Technical Documentation
 
-If you are using the Winter CLI, see
-[twos.dev/winter.html](https://twos.dev/winter.html) for documentation. If you
-are using the Go library, see
+If you are using the Winter CLI, see [twos.dev/winter](https://twos.dev/winter)
+for documentation. If you are using the Go library, see
 [pkg.go.dev/twos.dev/winter](https://pkg.go.dev/twos.dev/winter) for
 documentation.
 

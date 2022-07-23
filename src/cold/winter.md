@@ -25,7 +25,7 @@ migrated to Winter._
 
 # Winter
 
-[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
+[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter) [GitHub Repository](https://github.com/glacials/twos.dev#winter)
 
 _Winter_ is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
@@ -63,7 +63,7 @@ preseved for years or decades, so less exposed surface area is better. When a
 piece of warm content is stable, it can be "frozen" into cold content using
 `winter freeze`.
 
-### Directory Layout {#layout}
+### Directory Structure {#layout}
 
 - `./src`—Content to be built
   - `./src/cold`—Stable content
@@ -85,6 +85,14 @@ piece of warm content is stable, it can be "frozen" into cold content using
 - `./dist`—Build directory
 
 ### Commands {#commands}
+
+#### `winter init` {#init}
+
+Usage: `winter init`
+
+Initialize the current directory for use with Winter. The Winter directory
+structured detailed above will be created, and default starting templates will
+be populated so that you have a working `index.html` listing posts.
 
 #### `winter build` {#build}
 

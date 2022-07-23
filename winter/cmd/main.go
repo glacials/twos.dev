@@ -24,9 +24,10 @@ const (
 // rootCmd represents the base command when called without any subcommands
 var (
 	rootCmd = &cobra.Command{
-		Use:   "winter",
-		Short: "Build or serve a static website locally",
-		Long:  `Build or serve a static website from source.`,
+		Use:     "winter",
+		Short:   "Build or serve a static website locally",
+		Long:    `Build or serve a static website from source.`,
+		Version: "0.0.1",
 	}
 )
 

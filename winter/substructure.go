@@ -54,9 +54,15 @@ func (d *substructureDocument) Shortname() string {
 // content and render it to HTML.
 func NewSubstructure(cfg Config) (*Substructure, error) {
 	s := Substructure{cfg: cfg}
+	return &s, s.discover()
+}
+
+// discover clears the substructure of any known documents and discovers all
+// documents from scratch from the filesystem.
+func (s *Substructure) discover() error {
 	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	for _, src := range md {
@@ -65,29 +71,29 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 		}
 		doc, err := NewMarkdownDocument(src)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
 	}
 
 	warmhtml, err := filepathx.Glob("src/warm/*.html")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	warmtmpl, err := filepathx.Glob("src/warm/*.tmpl")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	coldhtml, err := filepathx.Glob("src/cold/*.html")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	coldtmpl, err := filepathx.Glob("src/cold/*.tmpl")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	warm := append(warmhtml, warmtmpl...)
@@ -99,7 +105,7 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 		}
 		doc, err := NewHTMLDocument(src)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
 	}
@@ -111,12 +117,12 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 
 	jpg, err := filepathx.Glob("src/**/*.[jJ][pP][gG]")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	jpeg, err := filepathx.Glob("src/**/*.[jJ][pP][eE][gG]")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	var prev, next *galleryDocument
@@ -124,9 +130,9 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
-		doc, err := NewGalleryDocument(src, cfg)
+		doc, err := NewGalleryDocument(src, s.cfg)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		doc.Prev, prev = prev, doc
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
@@ -137,7 +143,7 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 
 	static, err := filepathx.Glob("public/**/*")
 	if err != nil {
-		return nil, err
+		return err
 	}
 
 	for _, src := range static {
@@ -145,26 +151,29 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 			continue
 		}
 		if stat, err := os.Stat(src); err != nil {
-			return nil, err
+			return err
 		} else if stat.IsDir() {
 			continue
 		}
 		doc, err := NewStaticDocument(src)
 		if err != nil {
-			return nil, err
+			return err
 		}
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
 	}
 
 	sort.Sort(s.docs)
 
-	return &s, err
+	return err
 }
 
 type ErrNotTracked struct{ path string }
 
 func (err ErrNotTracked) Error() string {
-	return fmt.Sprintf("%s is not tracked in the substructure", err.path)
+	return fmt.Sprintf(
+		"%s is not tracked; restart to track",
+		err.path,
+	)
 }
 
 // Rebuild rebuilds the document or template at the given path into the given
@@ -180,52 +189,62 @@ func (err ErrNotTracked) Error() string {
 func (s *Substructure) Rebuild(src, dist string) error {
 	pad := pad()
 	var built bool
-	for _, doc := range s.docs {
-		dest, err := doc.Dest()
-		if err != nil {
-			return err
-		}
-		name := tmplPathToName(src)
-		for d := range doc.Dependencies() {
-			if d == name || d == src {
-				fmt.Printf("  ↗ %s", pad(dest))
+
+	// Try first as-is; if that fails we'll discover() and try again.
+	for i := 0; i < 2; i++ {
+		for _, doc := range s.docs {
+			dest, err := doc.Dest()
+			if err != nil {
+				return err
+			}
+			name := tmplPathToName(src)
+			for d := range doc.Dependencies() {
+				if d == name || d == src {
+					fmt.Printf("  ↗ %s", pad(dest))
+					if err := s.execute(doc, dist); err != nil {
+						return fmt.Errorf(
+							"can't rebuild %s upstream dependency %s: %w",
+							src,
+							d,
+							err,
+						)
+					}
+					fmt.Println(" ✓")
+					built = true
+				}
+			}
+			if doc.Source == src {
+				fmt.Printf("  → %s", pad(dest))
 				if err := s.execute(doc, dist); err != nil {
-					return fmt.Errorf(
-						"can't rebuild %s upstream dependency %s: %w",
-						src,
-						d,
-						err,
-					)
+					return fmt.Errorf("can't rebuild changed file %s: %w", src, err)
 				}
 				fmt.Println(" ✓")
 				built = true
 			}
 		}
-		if doc.Source == src {
-			fmt.Printf("  → %s", pad(dest))
-			if err := s.execute(doc, dist); err != nil {
-				return fmt.Errorf("can't rebuild changed file %s: %w", src, err)
+		if d := s.DocBySrc(src); d != nil && d.IsPost() {
+			fmt.Printf("  ↘ %s", pad("index.html"))
+			if err := s.execute(s.DocByShortname("index"), dist); err != nil {
+				return fmt.Errorf("can't rebuild index: %w", err)
+			}
+			fmt.Println(" ✓")
+			fmt.Printf("  ↘ %s", pad("archives.html"))
+			if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
+				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
 			built = true
 		}
-	}
-	if d := s.DocBySrc(src); d != nil && d.IsPost() {
-		fmt.Printf("  ↘ %s", pad("index.html"))
-		if err := s.execute(s.DocByShortname("index"), dist); err != nil {
-			return fmt.Errorf("can't rebuild index: %w", err)
-		}
-		fmt.Println(" ✓")
-		fmt.Printf("  ↘ %s", pad("archives.html"))
-		if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
-			return fmt.Errorf("can't rebuild index: %w", err)
-		}
-		fmt.Println(" ✓")
-		built = true
-	}
 
-	if !built {
-		return ErrNotTracked{path: src}
+		if !built {
+			if i == 0 {
+				if err := s.discover(); err != nil {
+					return err
+				}
+			} else {
+				return ErrNotTracked{src}
+			}
+		}
 	}
 
 	return nil

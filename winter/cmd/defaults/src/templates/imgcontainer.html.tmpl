@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    {{ template "head" }}
+    {{ with .Prev }}
+      <link rel="preload" as="image" href="/{{ .WebPath }}" />
+    {{ end }}
+    {{ with .Next }}
+      <link rel="preload" as="image" href="/{{ .WebPath }}" />
+    {{ end }}
+    <script>
+      // Allow left/right arrow keys to navigate
+      document.addEventListener('keydown', event => {
+        switch (event.key) {
+          {{with .Prev}}
+            case "ArrowLeft":
+              window.location.href = "{{ .PageLink }}";
+              break;
+          {{end}}
+          {{with .Next}}
+            case "ArrowRight":
+              window.location.href = "{{ .PageLink }}";
+              break;
+          {{end}}
+        }
+      });
+    </script>
+    <title>twos.dev Photo Viewer</title>
+  </head>
+
+  <body>
+    <div style="position:absolute">
+      <span>
+        {{ with .Prev }}
+          <a href="{{ .PageLink }}">&larr; prev</a>
+        {{ end }}
+        {{ if and .Prev .Next }}/{{ end }}
+        {{ with .Next }}
+          <a href="{{ .PageLink }}">next &rarr;</a>
+        {{ end }}
+      </span>
+      <span style="margin-left: 5em;">
+        <a href="/">Exit</a>
+      </span>
+    </div>
+    <a
+      href="{{ with .Next }}
+        {{ .PageLink }}
+      {{ else }}
+        /
+      {{ end }}"
+      class="img"
+      style="text-align: center; margin-bottom: 0; position: absolute; top: 0; left: 0; z-index: -1;"
+      ><img
+        alt="{{ .Alt }}"
+        src="/{{ .WebPath }}"
+        style="max-width: 100%; max-height: 100vh; display:block;"
+    /></a>
+    <div style="position:absolute; left:0; bottom:0;">
+      <span style="font-style:italic;"> {{ .Camera }}</span><br />
+      <span style="font-style:italic;">
+        {{ .FocalLength }}mm &bull; ƒ{{ .Aperture }} &bull; {{ .ShutterSpeed }}s
+        &bull; ISO
+        {{ .ISO }}
+      </span>
+    </div>
+  </body>
+</html>
