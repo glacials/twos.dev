@@ -151,7 +151,7 @@ migrated to Winter.</em></p>
 
 <h1>Winter</h1>
 
-<p><a href="https://pkg.go.dev/twos.dev/winter"><img src="https://pkg.go.dev/badge/twos.dev/winter.svg" alt="Go Reference"/></a></p>
+<p><a href="https://pkg.go.dev/twos.dev/winter"><img src="https://pkg.go.dev/badge/twos.dev/winter.svg" alt="Go Reference"/></a> <a href="https://github.com/glacials/twos.dev#winter">GitHub Repository</a></p>
 
 <p><em>Winter</em> is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
@@ -167,7 +167,7 @@ strongly opinionated to serve my pecularities around building twos.dev.</p>
       <ol>
   
     <li>
-      <a href="#layout"><span>Directory Layout</span></a>
+      <a href="#layout"><span>Directory Structure</span></a>
       
     </li>
   
@@ -175,6 +175,11 @@ strongly opinionated to serve my pecularities around building twos.dev.</p>
       <a href="#commands"><span>Commands</span></a>
       
         <ol>
+  
+    <li>
+      <a href="#init"><span><code>winter init</code></span></a>
+      
+    </li>
   
     <li>
       <a href="#build"><span><code>winter build</code></span></a>
@@ -292,7 +297,7 @@ preseved for years or decades, so less exposed surface area is better. When a
 piece of warm content is stable, it can be "frozen" into cold content using
 <code>winter freeze</code>.</p>
 
-<h3 id="layout">Directory Layout</h3>
+<h3 id="layout">Directory Structure</h3>
 
 <ul>
 <li><code>./src</code><span style="font-family: sans-serif">—</span>Content to be built
@@ -331,6 +336,14 @@ piece of warm content is stable, it can be "frozen" into cold content using
 </ul>
 
 <h3 id="commands">Commands</h3>
+
+<h4 id="init"><code>winter init</code></h4>
+
+<p>Usage: <code>winter init</code></p>
+
+<p>Initialize the current directory for use with Winter. The Winter directory
+structured detailed above will be created, and default starting templates will
+be populated so that you have a working <code>index.html</code> listing posts.</p>
 
 <h4 id="build"><code>winter build</code></h4>
 
