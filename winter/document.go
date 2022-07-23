@@ -40,7 +40,7 @@ const (
 	tocEl        = atom.Ol
 	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
 	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
-	tocMax       = 4
+	tocMax       = 5
 	tocMin       = 2
 	tocReturn    = `
 <span style="margin-left:0.5em">

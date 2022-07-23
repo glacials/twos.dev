@@ -97,7 +97,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	b, err := tmplByName(galname)
+	b, err := tmplByName(tmplPathToName(galTmplPath))
 	if err != nil {
 		return nil, err
 	}
@@ -117,10 +117,7 @@ func (d *galleryDocument) Category() string { return "" }
 
 // Dependencies returns the filepaths the gallery document depends on.
 func (d *galleryDocument) Dependencies() map[string]struct{} {
-	return map[string]struct {
-	}{
-		galname: {},
-	}
+	return map[string]struct{}{tmplPathToName(galTmplPath): {}}
 }
 
 // Dest returns the destination path for the final gallery document.

@@ -14,8 +14,12 @@ import (
 )
 
 const (
-	txtname = "text_document"
-	galname = "imgcontainer"
+	galTmplPath = "src/templates/imgcontainer.html.tmpl"
+	txtTmplPath = "src/templates/text_document.html.tmpl"
+
+	icnTmplPath = "src/templates/_icon.html.tmpl"
+	imgTmplPath = "src/templates/_imgs.html.tmpl"
+	vidTmplPath = "src/templates/_videos.html.tmpl"
 )
 
 // CommonVars holds several methods accessible to all templates. Note that this
@@ -70,6 +74,15 @@ type archiveVars struct {
 	Documents documents
 }
 
+type iconfunc func(graphic.Shortname, graphic.Alt) (template.HTML, error)
+
+type iconPartialVars struct {
+	commonVars
+	Alt   graphic.Alt
+	Light graphic.SRC
+	Dark  graphic.SRC
+}
+
 type imgsfunc func(graphic.Caption, ...string) (template.HTML, error)
 
 // imgsPartialVars are the template variables given to
@@ -108,7 +121,7 @@ type tocVars struct {
 	HTML   template.HTML
 }
 
-type videosfunc func(graphic.Caption, ...string) (template.HTML, error)
+type videosfunc func(graphic.Caption, ...graphic.Shortname) (template.HTML, error)
 
 // videosPartialVars are the template variables given to
 // src/templates/_videos.html.tmpl to render any number of videos inline.
@@ -179,17 +192,18 @@ func sub(a, b int) int {
 // The images must be named in the format SHORTNAME-IMAGE-STYLE.EXTENSION, where
 // SHORTNAME is the page shortname (e.g. "apple" for apple.html), IMAGE is any
 // arbitrary string that must be passed to the returned function as its imgsrc,
-// STYLE is one of "light" or "dark", and EXTENSION is one of "png" or "jpg".
+// STYLE is one of "light" or "dark", and EXTENSION is one of "png", "jpg", or
+// "jpeg".
 //
 // The given shortname must be the page shortname the images will appear on, or
 // the rendered images won't point to the right URLs.
-func imgs(shortname string) (imgsfunc, error) {
-	partial, err := ioutil.ReadFile("src/templates/_imgs.html.tmpl")
+func imgs(docShortname string) (imgsfunc, error) {
+	partial, err := ioutil.ReadFile(imgTmplPath)
 	if err != nil {
 		return nil, err
 	}
 
-	t := template.New("imgs")
+	t := template.New(tmplPathToName(imgTmplPath))
 	if _, err := t.Parse(string(partial)); err != nil {
 		return nil, err
 	}
@@ -199,7 +213,7 @@ func imgs(shortname string) (imgsfunc, error) {
 
 		for i := 0; i < len(srcsAndAlts); i += 2 {
 			light, dark, err := graphic.LightDark(
-				shortname,
+				docShortname,
 				graphic.Shortname(srcsAndAlts[i]),
 				graphic.ImageExts,
 			)
@@ -223,6 +237,56 @@ func imgs(shortname string) (imgsfunc, error) {
 	}, nil
 }
 
+// icon returns a function that can be inserted into a template's FuncMap for
+// calling by the template. The returned function takes an image shortname and
+// alt text. The image is rendered inline (1em tall). If light and dark mode
+// images are both present, the correct one will be rendered based on the user's
+// mode.
+//
+// The image must be named in the format SHORTNAME-IMAGE-STYLE.EXTENSION, where
+// SHORTNAME is the page shortname (e.g. "apple" for apple.html), IMAGE is any
+// arbitrary string that must be passed to the returned function as its imgsrc,
+// STYLE is one of "light" or "dark", and EXTENSION is one of "png", "jpg", or
+// "jpeg".
+//
+// The given shortname must be the page shortname the images will appear on, or
+// the rendered images won't point to the right URLs.
+func icon(docShortname string) (iconfunc, error) {
+	partial, err := ioutil.ReadFile(icnTmplPath)
+	if err != nil {
+		return nil, err
+	}
+
+	t := template.New(tmplPathToName(icnTmplPath))
+	if _, err := t.Parse(string(partial)); err != nil {
+		return nil, err
+	}
+
+	return func(imgShortname graphic.Shortname, alt graphic.Alt) (template.HTML, error) {
+		light, dark, err := graphic.LightDark(
+			docShortname,
+			graphic.Shortname(imgShortname),
+			graphic.ImageExts,
+		)
+		if err != nil {
+			return "", err
+		}
+
+		v := iconPartialVars{
+			Alt:   alt,
+			Light: light,
+			Dark:  dark,
+		}
+
+		var buf bytes.Buffer
+		if err := t.Execute(&buf, v); err != nil {
+			return "", fmt.Errorf("can't execute icon template: %w", err)
+		}
+
+		return template.HTML(buf.String()), nil
+	}, nil
+}
+
 // videos returns a function that can be inserted into a template's FuncMap for
 // calling by the template. The returned function takes a caption followed by
 // any number of video shortnames. The videos are rendered next to each other
@@ -237,9 +301,7 @@ func imgs(shortname string) (imgsfunc, error) {
 //
 // The given shortname must be the page shortname the videos will appear on, or
 // the rendered videos won't point to the right URLs.
-func videos(
-	pageShortname string,
-) (func(graphic.Caption, ...graphic.Shortname) (template.HTML, error), error) {
+func videos(docShortname string) (videosfunc, error) {
 	partial, err := ioutil.ReadFile("src/templates/_videos.html.tmpl")
 	if err != nil {
 		return nil, err
@@ -255,7 +317,7 @@ func videos(
 
 		for _, videoShortname := range videoShortnames {
 			lightMP4, darkMP4, err := graphic.LightDark(
-				pageShortname,
+				docShortname,
 				videoShortname,
 				map[string]struct{}{"mp4": {}},
 			)
@@ -264,7 +326,7 @@ func videos(
 			}
 
 			lightMOV, darkMOV, err := graphic.LightDark(
-				pageShortname,
+				docShortname,
 				videoShortname,
 				map[string]struct{}{"mp4": {}},
 			)
@@ -285,7 +347,7 @@ func videos(
 		if err := t.Execute(&buf, v); err != nil {
 			return "", fmt.Errorf(
 				"can't execute video template for `%s`/`%s`: %w",
-				pageShortname,
+				docShortname,
 				videoShortnames,
 				err,
 			)

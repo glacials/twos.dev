@@ -25,7 +25,10 @@ migrated to Winter._
 
 # Winter
 
-[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter) [GitHub Repository](https://github.com/glacials/twos.dev#winter)
+[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter) [{{ icon
+    "github"
+    "GitHub logo"
+}}](https://github.com/glacials/twos.dev#winter)
 
 _Winter_ is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
@@ -234,9 +237,7 @@ via the `{{"{{"}} .Category }}` field. It has no other effect.
 Templates use the [`text/template`](https://pkg.go.dev/text/template) Go
 library.
 
-#### Document Fields {#fields}
-
-Document fields are available on any document.
+#### Fields {#fields}
 
 ##### `{{"{{"}} .Category }}` {#category}
 

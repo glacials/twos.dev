@@ -420,11 +420,14 @@ func (s *Substructure) internalize(d Document) (*substructureDocument, error) {
 // execute builds the given document into the given directory. To build a
 // document and its dependencies and dependants, use Rebuild instead.
 func (s *Substructure) execute(d *substructureDocument, dist string) error {
+	iconFunc, err := icon(d.Shortname())
+	if err != nil {
+		return err
+	}
 	imgsFunc, err := imgs(d.Shortname())
 	if err != nil {
 		return err
 	}
-
 	videoFunc, err := videos(d.Shortname())
 	if err != nil {
 		return err
@@ -439,7 +442,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	if err := os.MkdirAll(filepath.Dir(dest), 0755); err != nil {
 		return fmt.Errorf(
 			"can't create %s directory `%s`: %w",
-			galname,
+			tmplPathToName(galTmplPath),
 			filepath.Dir(dest),
 			err,
 		)
@@ -468,6 +471,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 		"src":    func() string { return d.Source },
 
 		"archives": s.archives,
+		"icon":     iconFunc,
 		"img":      imgsFunc,
 		"imgs":     imgsFunc,
 		"posts":    s.posts,
