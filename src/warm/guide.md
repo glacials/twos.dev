@@ -14,7 +14,7 @@ This page describes things I value at work. This is descriptive, not prescriptiv
 
 1. **Succinctness**: The more people who will read what you're writing, the higher the cost/benefit of spending more time writing it. (For widespread pieces, my "writing time" is 90% editing.) [More](http://www.paulgraham.com/simply.html), [even more](http://www.paulgraham.com/useful.html)
 2. **Agree on a vision**: Coordination is slow. Once we agree on a shared vision, it's easier for everyone if we trust (and authorize) each other to make the right decisions in motion.
-3. **Async, by default**: A thirty-second interruption can set me back 30 minutes. I like to bring more conversations async: tickets, pull requests, recordings. [More](https://heeris.id.au/trinkets/ProgrammerInterrupted.png)
+3. **Async, by default**: A thirty-second interruption can set me back 30 minutes. I like to bring more conversations async: tickets, pull requests, recordings. [More](https://heeris.id.au/trinkets/ProgrammerInterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
 4. **Tickets, by default**: As a forgetful person I love single-origin paper trails.
 5. **Speak in customer problems**: Even if a solution "feels right" be prepared for me to ask what customer problem it solves. The one free pass is tech debt, since we all know how it impacts customers.
 6. **Know when to meet**: Async communication has its limits [2]. If things are getting heated, misunderstood, or blocked, throw a meeting on my calendar or [pop in](thepopin.html).
