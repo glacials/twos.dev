@@ -74,7 +74,7 @@ Advanced usage of dashes unfortunately revolves around avoiding common issues.
 
 ### Em Dash Overuse
 
-As a personal opinion, the em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode—thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.
+The em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode—thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.
 
 Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which—for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it—can be hard to do.
 
