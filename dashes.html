@@ -131,7 +131,10 @@
           <small style="text-align:center; display: block">
             <i>
               published
-              2022 July</i
+              2022 July
+                | last updated
+                2022 September
+              </i
             >
           </small>
         
@@ -176,9 +179,9 @@
 
 <h3>The Em</h3>
 
-<p>To talk about the em dash necessitates talk about the <a href="https://en.wikipedia.org/wiki/Em_(typography)">em</a>. The em (pronounced <a href="https://en.wiktionary.org/wiki/Appendix:English_pronunciation">/ɛm/</a>) is an invisible square bounding box every character is designed within<sup class="footnote-ref" id="fnref:boundingbox"><a href="#fn:boundingbox">1</a></sup> whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: <code>1em</code> is always one <em>font-heighth</em> long. It is a unitless measurement that allows us to speak in relatives.</p>
+<p>To talk about the em dash necessitates talk about the <a href="https://en.wikipedia.org/wiki/Em_(typography)">em</a>. The em (pronounced <a href="https://en.wiktionary.org/wiki/Appendix:English_pronunciation">/ɛm/</a>) is a unit of length defined as the height of the character bounding box<sup class="footnote-ref" id="fnref:boundingbox"><a href="#fn:boundingbox">1</a></sup>. This height changes with font family and size, so the length of the em changes with it: <code>1em</code> is always one <em>font-heighth</em> long.</p>
 
-<p>Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration <code>font-size: 1em</code> is equivalent to <code>font-size: 100%</code>, while <code>1.5em</code> is equivalent to <code>150%</code>, and so on.</p>
+<p>Specifying a font size in ems, then, is an exercise in ratios. The CSS declaration <code>font-size: 1em</code> is equivalent to <code>font-size: 100%</code>, while <code>1.5em</code> is equivalent to <code>150%</code> and so on; the current font size is used as a base to specify the desired font size.</p>
 
 <p>The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.</p>
 
@@ -416,6 +419,9 @@
               
                 published
                 2022 July
+                  / last updated
+                  2022 September
+                
               
             </i>
           </small>
