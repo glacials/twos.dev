@@ -49,13 +49,16 @@ To accomplish these two needs I simply migrate the file out of iA Writer and int
 git mv src/{warm,cold}/DOCUMENT.md
 ```
 
-From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.
+From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.
 
 ```sh
-twos.dev build
-mv dist/DOCUMENT.html src/cold/DOCUMENT.md
-git mv src/cold/DOCUMENT.{md,html}
+winter build
+mv dist/DOCUMENT.html src/cold/DOCUMENT.html
+git rm src/cold/DOCUMENT.md
+git add src/cold/DOCUMENT.html
 ```
+
+_([Winter](https://twos.dev/winter) is the bespoke CLI that builds twos.dev.)_
 
 This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.
 
