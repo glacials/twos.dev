@@ -30,7 +30,7 @@ A myth states the em dash is so named because it is "one `M` wide", and the en d
 
 ### The Em
     
-To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *font-heighth* long. It is a unitless measurement that allows us to speak in relatives.
+To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible square bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *font-heighth* long. It is a unitless measurement that allows us to speak in relatives.
 
 [^boundingbox]: "Bounding box" is strong; font designers are free to design outside it.
 
