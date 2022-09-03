@@ -187,12 +187,15 @@
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
 </span></span></code></pre></body></html>
 
-<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. This gives me autoformatting and syntax highlighting, and hardens the file against future changes to preprocessing.</p>
+<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">twos.dev build
-</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.md
-</span></span><span class="line"><span class="ln">3</span><span class="cl">git mv src/cold/DOCUMENT.<span class="o">{</span>md,html<span class="o">}</span>
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter build
+</span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.html
+</span></span><span class="line"><span class="ln">3</span><span class="cl">git rm src/cold/DOCUMENT.md
+</span></span><span class="line"><span class="ln">4</span><span class="cl">git add src/cold/DOCUMENT.html
 </span></span></code></pre></body></html>
+
+<p><em>(<a href="https://twos.dev/winter">Winter</a> is the bespoke CLI that builds twos.dev.)</em></p>
 
 <p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
 
