@@ -153,7 +153,7 @@ I    said    they   were—wolf
 playdates don't last forever!
 ```
 
-In the justified simulation, "were—wolf" reads like the mythical creature "were-wolf" because the spaces are proportionally larger than the em dash.
+In the justified simulation, "were—wolf" may read like the mythical creature "were-wolf" because the em dash looks short relative to the longer spaces.
 
 A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:
 
