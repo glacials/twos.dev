@@ -39,7 +39,7 @@ Technically at this point the page is now published, just not linked to from any
 
 ## Cold Content
 
-There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I yet have high confidence in, so I'd like to limit its exposure.
+There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I have high confidence in, so I'd like to limit its blast radius to content that benefits from it---content I'm actively working on---and keep safe the innocent bystanders that are historical content.
 
 Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`.
 
