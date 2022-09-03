@@ -47,7 +47,7 @@ With the tailwind given by the definition of the em, the em dash is easily defin
 
 #### The Root Em
 
-The `rem` or **root em** is a twist on the em. It is relative not to the parent context's font size, but to the root context's (in a web page, `<html>`). This allows one to escape relativity hell without reverting to absolutes:
+The `rem` or **root em** is a twist on the em. Where the em is defined using the current context's font size, the root em is defined using the root context's font size (in a web page, `<html>`). This allows escape from relativity hell without reverting to absolutes:
 
 ```plain
 html: 16pt              (default     = 16pt)
