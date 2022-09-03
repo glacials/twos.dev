@@ -2,6 +2,7 @@
 date: 2022-07-05
 filename: dashes.html
 type: post
+updated: 2022-09-03
 ---
 
 # Advanced Dashes
@@ -30,11 +31,11 @@ A myth states the em dash is so named because it is "one `M` wide", and the en d
 
 ### The Em
     
-To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is an invisible square bounding box every character is designed within[^boundingbox] whose edge length is equal to the font height. Font height changes with font size, so the size of the em changes with it: `1em` is always one *font-heighth* long. It is a unitless measurement that allows us to speak in relatives.
+To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is a unit of length defined as the height of the character bounding box[^boundingbox]. This height changes with font family and size, so the length of the em changes with it: `1em` is always one *font-heighth* long.
 
 [^boundingbox]: "Bounding box" is strong; font designers are free to design outside it.
 
-Speaking in ems, it follows, is functionally equivalent to speaking in font size percentages. A font size in ems is a ratio between the desired font size and the current font size. The CSS declaration `font-size: 1em` is equivalent to `font-size: 100%`, while `1.5em` is equivalent to `150%`, and so on.
+Specifying a font size in ems, then, is an exercise in ratios. The CSS declaration `font-size: 1em` is equivalent to `font-size: 100%`, while `1.5em` is equivalent to `150%` and so on; the current font size is used as a base to specify the desired font size.
 
 The em's eccentric offering is that it can be used outside the context of font sizes. It can set margins, widths, even blur radii based on the font size of the containing context. It can scale an image up and down with the text around it, whether the text's changing size is a product of assistive technologies or simply of a component being reused in multiple contexts.
 
