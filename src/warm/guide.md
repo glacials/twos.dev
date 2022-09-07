@@ -17,7 +17,7 @@ This page describes things I value at work. This is descriptive of me, not
 prescriptive to you; treat it as a set of FYIs, not requirements. Use or ignore
 at your discretion, and share your own guide with me!
 
-## Communication Style
+## My Communication Style
 
 1. **Succinct**: The more people who will read what I'm writing, the higher the
    cost/benefit of spending time honing it. For widespread pieces, 90% of my
@@ -27,22 +27,14 @@ at your discretion, and share your own guide with me!
    we trust and authorize each other to make decisions in motion, rather than
    blocking on consensus. We can continue to share progress in nonblocking
    ways.
-3. **Asynchronous**: A 30-second interruption sets me back 30 minutes—it's just
-   how my brain works. To minimize this I like to default conversations to async
+3. **Asynchronous by default**: A 30-second interruption sets me back 30 minutes—it's just how my brain works. To minimize this I usually like to have conversations in async
    mediums like tickets, pull requests, and screen recordings.
    [More](https://heeris.id.au/trinkets/ProgrammerInterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
-4. **Ticket-associated**: As a forgetful person I love single-origin paper
+4. **Ticket-centric**: As a forgetful person I love single-origin paper
    trails. I practice inbox zero so pinging me in a ticket is a more reliable
    way to reach me than Slack.
 5. **Customer-focused**: Even if a solution "feels right" be prepared for me to
    ask what customer problem it solves.
-6. **Sometimes synchronous**: Async communication has its limits. If things are
-   getting heated, misunderstood, or blocked, throw a meeting on my calendar or
-   [pop in](thepopin.html).
-7. **Feedback-heavy**: I love unprompted feedback. As a [person with
-   autism](autism.html) I particularly value feedback that helps me improve
-   socially. We all feel it's awkward to give feedback and I think that is dumb
-   and you should help me break that norm.
 
 ## Warnings
 
