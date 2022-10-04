@@ -23,11 +23,11 @@ at your discretion, and share your own guide with me!
    cost/benefit of spending time honing it. For widespread pieces, 90% of my
    time is spent editing. [More](http://www.paulgraham.com/simply.html), [even
    more](http://www.paulgraham.com/useful.html)
-2. **Trusting**: Coordination is slow. Once we agree on a vision, it's easier if
+2. **Trusting**: Coordination is slow. Everything is easier if
    we trust and authorize each other to make decisions in motion, rather than
    blocking on consensus. We can continue to share progress in nonblocking
-   ways.
-3. **Asynchronous by default**: A 30-second interruption sets me back 30 minutes—it's just how my brain works. To minimize this I usually like to have conversations in async
+   ways. [More](https://communitywiki.org/wiki/DoOcracy)
+3. **Asynchronous by default**: A 30-second interruption sets me back 30 minutes—it's how my brain works. To minimize this I like to have conversations in async
    mediums like tickets, pull requests, and screen recordings.
    [More](https://heeris.id.au/trinkets/ProgrammerInterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
 4. **Ticket-centric**: As a forgetful person I love single-origin paper
