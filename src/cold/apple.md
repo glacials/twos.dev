@@ -431,8 +431,11 @@ harvesting and therefore ad targeting.
 
 So, I tried sticking with my classic Google account and accepting that its
 email would always be different from my preferred email. I finally snagged my
-leg on two products: Google Groups, as Groups does not recognize alternative email addresses
-on Google accounts so I was forced to be presented as my old email address; and Google Calendar, as accepting invitations sent to ben@twos.dev would add my unknown (to the inviter) Google account email address to the event.
+leg on two products: Google Groups, as Groups does not recognize alternative
+email addresses on Google accounts so I was forced to be presented as my old
+email address; and Google Calendar, as accepting invitations sent to
+ben@twos.dev would add my unknown (to the inviter) Google account email address
+to the event.
 
 I've now landed on creating a new personal Google account with ben@twos.dev as
 its primary email address. I needed to delete the twos.dev Google Workspace
@@ -495,15 +498,22 @@ and behaving super well as a multitasking app on iPadOS.
 
 ### Google Calendar → Apple Calendar {#calendar}
 
-This may be the first service I switch back to Google. Google Calendar is so
-ubiquitous that I've forgotten how limited and finicky calendar protocols are
-at their core. So many things just stop working when you leave Google
-Calendar, all the way down to RSVPs.
+I switched to Apple Calendar as both an app and a calendar provider. I'd
+forgotten how limited and finicky calendar protocols are at their core—so many
+things just stop working when you leave Google Calendar. Folks send me
+invitations that don't show, my RSVPs don't make it back to them, and I
+sometimes don't receive updates to events.
 
-I don't recommend using the Week view in Calendar. Like Google Calendar, Apple
-Calendar uses a horizontal red bar to represent the current time of day; but
-this bar extends 100% of the width of the week, and does not do a good job
-showing you which day today is.
+I switched my provider back to Google Calendar about 18 months in while
+continuing to use the Apple Calendar app. It's a much better experience while
+sacrificing virtually nothing in ecosystem benefits. I also get to avoid the
+crappy Apple Calendar web UI for those few times I need my calendar on my gaming
+computer, and I get the more powerful sharing tools of Google Calendar.
+
+As for the Apple Calendar iOS and macOS apps, I don't recommend using the Week
+view. Like Google Calendar, Apple Calendar uses a horizontal red bar to
+represent the current time of day; but this bar extends 100% of the width of the
+week, and does not do a good job showing you which day today is.
 
 {{ img
    "Week view in Apple Calendar. At a glance, can you tell what day it is?"
@@ -518,30 +528,22 @@ when viewing today.
 Mail has no special treatment of calendar invitations, which is to say they
 appear as raw attachments. When Google Calendar users send a calendar invitation
 there are two attachments, `invite.ics` and `mime-attachment.ics`. Each will pop
-up a Calendar float to add the event; I’ve learned to use `mime-attachment.ics`
-because it seems to open a two-way connection with the sender’s event, where
-`invite.ics` seems to be a local copy.
+up a Calendar float to add the event. I don't know the difference; since
+switching to Google Calendar as a backend I've learned to RSVP using the
+embedded buttons which (outside of Gmail) open a web browser to the Google
+Calendar UI.
 
 {{ video
   "Opening a Google Calendar invitation from within the Apple ecosystem."
   "mail"
 }}
 
-Google Calendar is the stickiest part of the Google ecosystem due to the
-features they’ve built on top of vanilla calendaring and their ubiquity.
-Interactions with Google Calendar users, which in my experience is everyone,
-always leave me with a feeling of unease: “did they get this RSVP?” or “did
-their event update with the new time?”. For some use cases, Calendar will RSVP
-by sending an email from your account with a plaintext description of your
-response. I haven’t discovered yet if these are seen by human eyes or
-interpreted automatically.
-
-Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to have
-a refresh in a decade. Calendar can automatically generate “travel to” and
-“travel from” events based on the travel time between locations.
+Apple Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to
+have a refresh in a decade. Apple Calendar can automatically generate “travel
+to” and “travel from” events based on the travel time between locations.
 
 Ecosystem effects of Calendar include context-aware Maps and Siri suggestions
-for navigation destinations and video call links.
+for navigation destinations and video calls.
 
 ### Google Maps → Apple Maps {#maps}
 
@@ -555,14 +557,15 @@ right area but wrong specific destination. I’ve been routed to the delivery
 entrance for a museum, the back entrance for an airport, and the wrong parking
 lot (15 minutes of walking wrong) of a large shopping center.
 
-I’m continuing to give it chances because I know more data helps, but for
-tight schedules I go back to Google Maps.
+I’m continuing to give it chances because I know more data helps, but for tight
+schedules I go back to Google Maps.
 
 Then there's the other dimension of Google Maps: reviews, photos, menus,
 ordering, and reservations. Apple is a generation behind here; their purchase
 of Yelp means they inherit photos & reviews, but even that can't beat the
 sheer volume Google Maps. I've only seen one or two restaurants with ordering
-functionality enabled.
+functionality enabled. Many business hours are out of date—I update them when I
+notice, but I'm just one person.
 
 Ecosystem effects of Apple Maps include rich links in iMessage and Calendar,
 Siri suggestions for destinations based on those and other sources, and Apple
@@ -592,17 +595,24 @@ editing tools but Google Photos has more powerful search. Both have similar
 tooling around memories, viewing photos on maps or by year, etc.
 
 Classically, Google has a better web experience and Apple has a better native
-experience, meaning sharing photos with others is better if and only if you're
-sharing with other iOS users.
+experience, meaning sharing photos with others is better in Apple Photos if and
+only if you're sharing with other Apple users.
 
-The migration was simple, but long. Google Takeout produced hundreds of
-gigabytes of exports, which I downloaded onto a Mac and then imported with
-Photos.app. Due to Apple's offline-first approach synchronization took place
-in the background at reduced speeds. This meant it tried to take place while the
-laptop was closed and charging (even if Photos.app wasn't open). This was
-jarring at first when trying to babysit the process, as by design it stops
-performing well when you start using the machine. When I learned to let go, it
-showed its colors.
+As I've been getting more into photography I've come to like how smooth the
+import experience is in macOS—insert SD card, Photos.app automatically opens up
+to the Import window, I tick "Automatically delete photos after import" and tell
+it go, and it's done. I can take the SD card out and the photos will upload in
+the background. The Google equivalent isn't _hard_ but it takes more
+babysitting.
+
+The migration from Google Photos to Apple Photos was simple, but long. Google
+Takeout produced hundreds of gigabytes of exports, which I downloaded onto a Mac
+and then imported with Photos.app. Due to Apple's offline-first approach
+synchronization took place in the background at reduced speeds. This meant it
+tried to take place while the laptop was closed and charging.  This was jarring
+at first when trying to babysit the process, as by design it stops performing
+well when you start using the machine. When I learned to let go, it showed its
+colors.
 
 Ecosystem effects include unified conversations: when you share content from
 Google Photos with someone, you and they can comment on photos and albums; when
