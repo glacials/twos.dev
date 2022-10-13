@@ -362,9 +362,9 @@ Watch a lot more than the Android app ecosystem does with Wear OS.
 
 ### Chromecast/Google TV → Apple TV {#appletv}
 
-We don’t have HomePods and my spouse forbids me to get any after filling our
-home with Google Home Minis, so we’ve had to migrate away from “hey Google,
-play `$SHOW`”.
+We don’t have HomePods and Summer forbids me to get any (reasonably) after
+filling our home with Google Home Minis, so we’ve had to migrate away from “hey
+Google, play `$SHOW`”.
 
 #### The Remote {#remote}
 
@@ -716,8 +716,8 @@ macOS app that synchronizes, so I get proper notifications on most of my
 devices. In app, I use the “Today” view which shows reminders ready to be
 addressed.
 
-As one use case, my spouse and I share a family reminders list. On that list,
-a reminder to take out the trash pops every trash day when I arrive home. It’s
+As one use case, Summer and I share a family reminders list. On that list, a
+reminder to take out the trash pops every trash day when I arrive home. It’s
 assigned to me, but if she happens to do it before I get home she can check it
 off; it then won't pop for me.
 

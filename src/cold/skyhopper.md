@@ -30,7 +30,7 @@ cream : crème de menthe : crème de cacao. We don't usually have heavy cream
 around so we tend to substitute milk or a milk alternative and fill the glass,
 yielding something like 6:1:1 milk : crème de menthe : crème de cacao.
 
-My spouse likes everything about the grasshopper except the mint flavor. I like
+Summer likes everything about the grasshopper except the mint flavor. I like
 making grasshoppers because their ingredients are shelf stable and/or always on
 hand (after the milk substitution). I started on a journey to replace the mint
 with orange.
