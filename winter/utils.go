@@ -7,11 +7,13 @@ import "strings"
 //
 // For example:
 //
-//     p := newPad()
-//     newPad("hi")    // "hi"
-//     newPad("hello") // "hello"
-//     newPad("hi")    // "hi   "
-//     newPad("hello") // "hello"
+//	p := newPad()
+//	p("hi")    // "hi"
+//	p("hello") // "hello"
+//	p("hi")    // "hi   "
+//	p("hello") // "hello"
+//	q := newPad()
+//	q("hi")    // "hi"
 func newPad() func(string) string {
 	var longest int
 	return func(s string) string {
