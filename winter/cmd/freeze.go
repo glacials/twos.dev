@@ -35,7 +35,7 @@ var freezeCmd = &cobra.Command{
 			}
 
 			document := s.DocByShortname(shortname)
-			if document.Document == nil {
+			if document == nil || document.Document == nil {
 				return fmt.Errorf("cannot find document with shortname `%s`", shortname)
 			}
 
