@@ -140,7 +140,7 @@ Frontmatter is specified in YAML. All fields are optional.
 ---
 filename: example.html
 date: 2022-07-07
-updated: { { .Now.Format "2006-01-02" } }
+updated: {{ .Now.Format "2006-01-02" }}
 
 category: arbitrary string
 toc: true|false
