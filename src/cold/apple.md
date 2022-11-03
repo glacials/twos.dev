@@ -280,9 +280,10 @@ less happy.
 When I switched to iPhone, we had been using Google Fi as our carrier. We
 decided to stay with it because they'd recently started to officially support
 iPhone. However, after about a year we found out that Google Fi had been
-intermittently dropping outgoing SMS messages from iPhones, leading a friend
-and I to think we were ghosting each other. Once we learned this, we
-immediately switched.
+intermittently dropping outgoing SMS messages from iPhones, leading one friend
+(I hope only one) and I to think we were ghosting each other. Once I learned
+this, Summer and I immediately switched off Google Fi to T-Mobile, which had a
+close ethical alignment around contracts and data usage.
 
 Even if this whole Apple experiment fails and I go back to Android, I can't
 see myself trusting Fi again after such an impactful and long-term bug that
@@ -306,8 +307,9 @@ by committing the cardinal sin of unlocking my phone.
 
 However, iOS mostly fills the gap with badges. Badges are red numbers in the
 corners of app icons that are stateful in the same way Android notifications
-are, so can be used as a todo list. I’ve found these a decent enough
-substitute, although I still prefer Android’s notifications.
+are, so can be used as a todo list. They're a decent enough substitute that
+although I still prefer Android’s notifications, the difference is a couple of
+orders of magnitude less impactful than I scoped it out as.
 
 #### iMessage {#imessage}
 
@@ -316,10 +318,16 @@ I finally know why none of my iPhone friends were as excited as me about
 gold standard of chat apps. I’m even feeling the guilty urge to nudge friends
 towards iPhone so I can use it with them.
 
-In classic Apple fashion iMessages aren’t between Apple accounts, but devices.
-I recently changed my email address but I need to keep my old one in my Apple
-account indefinitely so my friends’ threads with me won’t retroactively split
-into two.
+To users iMessages threads appear to be between contacts, but on the backend
+they're between contact methods like phone numbers or email addresses. Along
+with Apple's device-first philosophy I presume this is so people don't need an
+Apple account to use iMessage, but it has quite a few papercuts. I recently
+changed my email address but I need to keep my old one in my Apple account
+indefinitely so my friends’ threads with me (read: with my old email address)
+won’t retroactively split. I've also encountered unsolvable problems spinning up
+group chats with [Jordan][https://jm.dev] since he moved to Japan.
+
+Beyond these rare issues I'm very happy with iMessage.
 
 Ecosystem effects of iMessage include automatically entering SMS 2FA codes on
 any device.
@@ -365,6 +373,13 @@ Watch a lot more than the Android app ecosystem does with Wear OS.
 We don’t have HomePods and Summer forbids me to get any (reasonably) after
 filling our home with Google Home Minis, so we’ve had to migrate away from “hey
 Google, play `$SHOW`”.
+
+When it comes to casting from your phone Apple TV and Chromecast are both good,
+but Chromecast shines brighter. Casting is a first-class citizen on Chromecast
+because it's all you have. I've seen more apps expose a Chromecast icon than an
+AirPlay icon, and casting to an Apple TV that's asleep sometimes just turns it
+on without playing anything. We now just use the remote as our default control
+mechanism.
 
 #### The Remote {#remote}
 
@@ -502,13 +517,15 @@ I switched to Apple Calendar as both an app and a calendar provider. I'd
 forgotten how limited and finicky calendar protocols are at their core—so many
 things just stop working when you leave Google Calendar. Folks send me
 invitations that don't show, my RSVPs don't make it back to them, and I
-sometimes don't receive updates to events.
+sometimes don't receive updates to events. Even unfurling invited mailing lists
+into individuals (who can then RSVP individuallly) is specific to Google
+Calendar.
 
 I switched my provider back to Google Calendar about 18 months in while
 continuing to use the Apple Calendar app. It's a much better experience while
 sacrificing virtually nothing in ecosystem benefits. I also get to avoid the
-crappy Apple Calendar web UI for those few times I need my calendar on my gaming
-computer, and I get the more powerful sharing tools of Google Calendar.
+crappy Apple Calendar web UI those few times I need my calendar on Windows, and
+I get the more powerful sharing / RSVP tools of Google Calendar.
 
 As for the Apple Calendar iOS and macOS apps, I don't recommend using the Week
 view. Like Google Calendar, Apple Calendar uses a horizontal red bar to
@@ -548,14 +565,15 @@ for navigation destinations and video calls.
 ### Google Maps → Apple Maps {#maps}
 
 Apple Maps gets a lot of flak for its initial release state, rightly so. But
-that was years ago, and they’ve kept at it. It’s improved.
+that was years ago, and they’ve kept at it. It’s improved. Unfortunately it’s
+only gotten good, not great.
 
-Unfortunately it’s only gotten good, not great. There are UX benefits over
-Google Maps, such as the spoken direction “Go past this light, then at the next
-one, turn `$DIRECTION`”, but about 5% of my trips to new places end me at the
-right area but wrong specific destination. I’ve been routed to the delivery
-entrance for a museum, the back entrance for an airport, and the wrong parking
-lot (15 minutes of walking wrong) of a large shopping center.
+There are UX benefits over Google Maps, such as the spoken direction “Go past
+this light, then at the next one, turn `$DIRECTION`”, but about 5% of my trips
+to new places end me at the right area but wrong specific destination. I’ve been
+routed to the delivery entrance for a museum, the back entrance for an airport,
+and the wrong parking lot (15 minutes of walking wrong) for a store in a large
+shopping center.
 
 I’m continuing to give it chances because I know more data helps, but for tight
 schedules I go back to Google Maps.
@@ -609,7 +627,7 @@ The migration from Google Photos to Apple Photos was simple, but long. Google
 Takeout produced hundreds of gigabytes of exports, which I downloaded onto a Mac
 and then imported with Photos.app. Due to Apple's offline-first approach
 synchronization took place in the background at reduced speeds. This meant it
-tried to take place while the laptop was closed and charging.  This was jarring
+tried to take place while the laptop was closed and charging. This was jarring
 at first when trying to babysit the process, as by design it stops performing
 well when you start using the machine. When I learned to let go, it showed its
 colors.
@@ -806,7 +824,8 @@ transitions to get where you’re going. For details on its UX failings, see (Ja
 from Cinnamon's
 post)[https://cinnamon.agency/blog/post/apple_musics_ux_problem].
 
-I miss Google Play Music.
+I miss Google Play Music. I've softly switched to Spotify which, in a vacuum, is
+strictly better.
 
 Ecosystem effects of Apple Music include tighter Shazam integration and better
 Siri support for when I’m driving and want to play something.
@@ -832,9 +851,10 @@ pay-at-counter support Apple Pay, and about 20% of table-service restaurants
 do. For online orders, roughly half of the non-Amazon orders I place support
 it.
 
-The experience of managing an Apple Card in Wallet is also the first credit
-card experience that feels like it was made this century. The app is
-beautiful, snappy, and simple.
+The experience of managing an Apple Card in Wallet is also the first credit card
+experience that feels like it was made this century. The app is beautiful,
+snappy, and simple. Summer and I have moved our primary credit card to the Apple
+Card and it's been a fantastic and financially beneficial switch.
 
 {{ video "Drilling into Apple Card transactions using Wallet." "card" }}
 
