@@ -632,10 +632,9 @@ at first when trying to babysit the process, as by design it stops performing
 well when you start using the machine. When I learned to let go, it showed its
 colors.
 
-Ecosystem effects include unified conversations: when you share content from
-Google Photos with someone, you and they can comment on photos and albums; when
-you share content from Apple Photos using Messages, the photos appear inline in
-Messages. If you want to "comment" on one, you simply Reply to that message.
+Ecosystem effects include rich embeds & commenting in iMessage, and photos
+appearing in upload prompts on all platforms (e.g. when uploading an avatar to
+some random internet account) with full face search embedded.
 
 ### Chrome → Safari {#safari}
 
