@@ -340,6 +340,7 @@ func (d *textDocument) Execute(w io.Writer, t *template.Template) error {
 func (d *textDocument) Layout() string { return "text_document" }
 func (d *textDocument) IsPost() bool   { return d.Kind == post }
 func (d *textDocument) IsDraft() bool  { return d.Kind == draft }
+func (d *textDocument) Now() time.Time { return time.Now() }
 func (d *textDocument) Title() string  { return d.metadata.Title }
 
 func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
