@@ -426,38 +426,58 @@ Assistant imtegration.
 The big one. I’ve been wanting to switch my email to a domain I control
 anyway, and iCloud+ supports that.
 
-#### Migrating {#migrating}
+#### Migrating Emails {#migrating}
 
 I don’t recommend importing Gmail archives into iCloud Mail; the experience
 was fraught with landmines and didn’t achieve the desired result. After
 starting from scratch several times and hitting new issues every time, I’ve
 chosen to live the life of searching in two places when I need something.
 
-To migrate, I coopted ben@twos.dev from Google Workspace which I had only used
-for a little consulting. This caused a few minor issues and UX hiccups because
-Workspace Gmail behaved as if it were still my provider, but DNS wasn't
-delivering it anything.
+#### Migrating Email Addresses {#migratingaddresses}
 
-I wanted my main Google account to match my main email address, so I tried to
-use this Google Workspace account as my new primary Google account. But many
-Google features don't support Workspace accounts, like Google One, family
-sharing, some security features, and (for better and worse) some types of data
-harvesting and therefore ad targeting.
+To migrate email addresses I made a very tough decision that I'm still
+frustrated years later that I had to make, which was to change Google accounts
+during this transition. I wanted my email address on my Google account to match
+my true email address, but Google doesn't let you change your primary email
+address. You can add additional "contact" email addresses, but your account is
+still very much bound to the original address you signed up for. If you try to
+do this anyway, like I did, there are a lot of little knock-on effects.
 
-So, I tried sticking with my classic Google account and accepting that its
-email would always be different from my preferred email. I finally snagged my
-leg on two products: Google Groups, as Groups does not recognize alternative
-email addresses on Google accounts so I was forced to be presented as my old
-email address; and Google Calendar, as accepting invitations sent to
-ben@twos.dev would add my unknown (to the inviter) Google account email address
-to the event.
+One is that accepting calendar invitations adds your Google account as an
+invitee to the event (confusing the inviter, who won't recognize it). And
+because your Google account wasn't invited by the organizer, joining Meet
+meetings means you first get dumped into a waiting room from which the
+organizer has to approve you. This is especially frustrating when the
+organizer doesn't show up, but the meeting is still happening.
+
+Google Groups also behaves poorly, as you'll get added to groups by your true
+email address but you'll join as a Google account, forcing your web-based
+replies to be from your Google account's email address.
+
+In my first effort to migrate Google accounts, I coopted ben@twos.dev from
+Google Workspace which I had used for a little consulting. This caused a
+few minor issues and UX hiccups because Workspace Gmail believed it was
+still my provider, even though a non-Gmail server was receiving my emails.
+
+I tried to use this Google Workspace account as my new primary Google account.
+But many Google features don't support Workspace accounts, like Google One,
+family sharing, some security features, and (for better and worse) some types
+of data harvesting and therefore ad/search targeting.
 
 I've now landed on creating a new personal Google account with ben@twos.dev as
 its primary email address. I needed to delete the twos.dev Google Workspace
 organization to do this, as it had claim to ben@twos.dev already. Signing up
-to Google without an @gmail.com address is a somewhat hidden option when
-signing up for Google. Beware that you can later "upgrade" to an @gmail.com
-account, but you can never change back.
+to Google without an @gmail.com address is a somewhat hidden option, but it
+exists. You just can't ever "upgrade" to an `@gmail.com` address, because
+that _does_ change your primary email address, and there's no way back.
+
+None of this would be so frustrating if there weren't so many things tied to
+my Google account, like all my Maps reviews, my Chat/Hangouts history from
+decades ago, and my purchased Play content. I really wanted to keep my
+account, but there's just no way to do that with a new email address without
+experiencing too many little hiccups to be worth it. The one thing I could
+smoothly transfer over was YouTube. Everything else was just as "walled
+garden" as you'd expect from an Apple product, just in far subtler ways.
 
 #### Daily Use {#daily}
 
@@ -506,7 +526,7 @@ Thankfully macOS natively supports rebinding shortcuts for any app.
 
 If you want a Mail-like experience with Gmail as a backend, instead of using
 SMTP I recommend [Mimestream](https://mimestream.com); it is written by a former
-Apple engineer on Mail to have a similar UX but using proper Gmail APIs.
+Apple Mail engineer to have a similar UX but using proper Gmail APIs.
 
 Ecosystem effects of Mail include having search results show up in Spotlight
 and behaving super well as a multitasking app on iPadOS.
@@ -856,6 +876,24 @@ snappy, and simple. Summer and I have moved our primary credit card to the Apple
 Card and it's been a fantastic and financially beneficial switch.
 
 {{ video "Drilling into Apple Card transactions using Wallet." "card" }}
+
+### Google Podcasts → Apple Podcasts {#podcasts}
+
+Google Podcasts and Apple Podcasts are very comparable. Google Podcasts has a
+bit plainer UI, but they're both good enough.
+
+The biggest upside to Apple Podcasts is the better sorting and filtering of
+episodes on a podcast-specific basis. For example, I like Planet Money enough
+that I want to listen to every episode, so I have them play from oldest to
+newest; most other podcasts I don't care so much and have no hope of working
+through their backlogs, so I go newest to oldest. These all interleave
+correctly when I hit the podcast-agnostic "Play" button on the homescreen, so
+that the correct episodes of each podcast are played.
+
+The biggest downside to Apple Podcasts has been stability. Roughly 1-5% of
+the time I go to play a podcast, the player gets stuck loading it forever.
+
+Ecosystem effects of Apple Podcasts include tight Siri support.
 
 ## Conclusion {#conclusion}
 
