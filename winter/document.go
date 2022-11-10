@@ -80,7 +80,7 @@ type Document interface {
 	// a template.
 	Build() ([]byte, error)
 	// Category returns an optional category for the document. This is used
-	// exclusively by templates for styling and display purposes.
+	// by templates for styling and display.
 	Category() string
 	// Dependencies returns a set of filepaths this document depends on. A
 	// dependency is defined as a file that, when changed, should cause any
