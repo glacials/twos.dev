@@ -254,7 +254,12 @@ you please.</p>
         <ol>
   
     <li>
-      <a href="#migrating"><span>Migrating</span></a>
+      <a href="#migrating"><span>Migrating Emails</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#migratingaddresses"><span>Migrating Email Addresses</span></a>
       
     </li>
   
@@ -350,6 +355,11 @@ you please.</p>
   
     <li>
       <a href="#pay"><span>Google Pay → Apple Pay</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#podcasts"><span>Google Podcasts → Apple Podcasts</span></a>
       
     </li>
   
@@ -702,9 +712,10 @@ less happy.</p>
 <p>When I switched to iPhone, we had been using Google Fi as our carrier. We
 decided to stay with it because they'd recently started to officially support
 iPhone. However, after about a year we found out that Google Fi had been
-intermittently dropping outgoing SMS messages from iPhones, leading a friend
-and I to think we were ghosting each other. Once we learned this, we
-immediately switched.</p>
+intermittently dropping outgoing SMS messages from iPhones, leading one friend
+(I hope only one) and I to think we were ghosting each other. Once I learned
+this, Summer and I immediately switched off Google Fi to T-Mobile, which had a
+close ethical alignment around contracts and data usage.</p>
 
 <p>Even if this whole Apple experiment fails and I go back to Android, I can't
 see myself trusting Fi again after such an impactful and long-term bug that
@@ -728,8 +739,9 @@ by committing the cardinal sin of unlocking my phone.</p>
 
 <p>However, iOS mostly fills the gap with badges. Badges are red numbers in the
 corners of app icons that are stateful in the same way Android notifications
-are, so can be used as a todo list. I’ve found these a decent enough
-substitute, although I still prefer Android’s notifications.</p>
+are, so can be used as a todo list. They're a decent enough substitute that
+although I still prefer Android’s notifications, the difference is a couple of
+orders of magnitude less impactful than I scoped it out as.</p>
 
 <h4 id="imessage">iMessage</h4>
 
@@ -738,10 +750,16 @@ substitute, although I still prefer Android’s notifications.</p>
 gold standard of chat apps. I’m even feeling the guilty urge to nudge friends
 towards iPhone so I can use it with them.</p>
 
-<p>In classic Apple fashion iMessages aren’t between Apple accounts, but devices.
-I recently changed my email address but I need to keep my old one in my Apple
-account indefinitely so my friends’ threads with me won’t retroactively split
-into two.</p>
+<p>To users iMessages threads appear to be between contacts, but on the backend
+they're between contact methods like phone numbers or email addresses. Along
+with Apple's device-first philosophy I presume this is so people don't need an
+Apple account to use iMessage, but it has quite a few papercuts. I recently
+changed my email address but I need to keep my old one in my Apple account
+indefinitely so my friends’ threads with me (read: with my old email address)
+won’t retroactively split. I've also encountered unsolvable problems spinning up
+group chats with [Jordan][<a href="https://jm.dev">https://jm.dev</a>] since he moved to Japan.</p>
+
+<p>Beyond these rare issues I'm very happy with iMessage.</p>
 
 <p>Ecosystem effects of iMessage include automatically entering SMS 2FA codes on
 any device.</p>
@@ -801,6 +819,13 @@ Watch a lot more than the Android app ecosystem does with Wear OS.</p>
 filling our home with Google Home Minis, so we’ve had to migrate away from “hey
 Google, play <code>$SHOW</code>”.</p>
 
+<p>When it comes to casting from your phone Apple TV and Chromecast are both good,
+but Chromecast shines brighter. Casting is a first-class citizen on Chromecast
+because it's all you have. I've seen more apps expose a Chromecast icon than an
+AirPlay icon, and casting to an Apple TV that's asleep sometimes just turns it
+on without playing anything. We now just use the remote as our default control
+mechanism.</p>
+
 <h4 id="remote">The Remote</h4>
 
 <p>Apple TV can initiate play from a phone like Chromecast, but beyond that it's
@@ -846,38 +871,58 @@ Assistant imtegration.</p>
 <p>The big one. I’ve been wanting to switch my email to a domain I control
 anyway, and iCloud+ supports that.</p>
 
-<h4 id="migrating">Migrating</h4>
+<h4 id="migrating">Migrating Emails</h4>
 
 <p>I don’t recommend importing Gmail archives into iCloud Mail; the experience
 was fraught with landmines and didn’t achieve the desired result. After
 starting from scratch several times and hitting new issues every time, I’ve
 chosen to live the life of searching in two places when I need something.</p>
 
-<p>To migrate, I coopted ben@twos.dev from Google Workspace which I had only used
-for a little consulting. This caused a few minor issues and UX hiccups because
-Workspace Gmail behaved as if it were still my provider, but DNS wasn't
-delivering it anything.</p>
+<h4 id="migratingaddresses">Migrating Email Addresses</h4>
 
-<p>I wanted my main Google account to match my main email address, so I tried to
-use this Google Workspace account as my new primary Google account. But many
-Google features don't support Workspace accounts, like Google One, family
-sharing, some security features, and (for better and worse) some types of data
-harvesting and therefore ad targeting.</p>
+<p>To migrate email addresses I made a very tough decision that I'm still
+frustrated years later that I had to make, which was to change Google accounts
+during this transition. I wanted my email address on my Google account to match
+my true email address, but Google doesn't let you change your primary email
+address. You can add additional "contact" email addresses, but your account is
+still very much bound to the original address you signed up for. If you try to
+do this anyway, like I did, there are a lot of little knock-on effects.</p>
 
-<p>So, I tried sticking with my classic Google account and accepting that its
-email would always be different from my preferred email. I finally snagged my
-leg on two products: Google Groups, as Groups does not recognize alternative
-email addresses on Google accounts so I was forced to be presented as my old
-email address; and Google Calendar, as accepting invitations sent to
-ben@twos.dev would add my unknown (to the inviter) Google account email address
-to the event.</p>
+<p>One is that accepting calendar invitations adds your Google account as an
+invitee to the event (confusing the inviter, who won't recognize it). And
+because your Google account wasn't invited by the organizer, joining Meet
+meetings means you first get dumped into a waiting room from which the
+organizer has to approve you. This is especially frustrating when the
+organizer doesn't show up, but the meeting is still happening.</p>
+
+<p>Google Groups also behaves poorly, as you'll get added to groups by your true
+email address but you'll join as a Google account, forcing your web-based
+replies to be from your Google account's email address.</p>
+
+<p>In my first effort to migrate Google accounts, I coopted ben@twos.dev from
+Google Workspace which I had used for a little consulting. This caused a
+few minor issues and UX hiccups because Workspace Gmail believed it was
+still my provider, even though a non-Gmail server was receiving my emails.</p>
+
+<p>I tried to use this Google Workspace account as my new primary Google account.
+But many Google features don't support Workspace accounts, like Google One,
+family sharing, some security features, and (for better and worse) some types
+of data harvesting and therefore ad/search targeting.</p>
 
 <p>I've now landed on creating a new personal Google account with ben@twos.dev as
 its primary email address. I needed to delete the twos.dev Google Workspace
 organization to do this, as it had claim to ben@twos.dev already. Signing up
-to Google without an @gmail.com address is a somewhat hidden option when
-signing up for Google. Beware that you can later "upgrade" to an @gmail.com
-account, but you can never change back.</p>
+to Google without an @gmail.com address is a somewhat hidden option, but it
+exists. You just can't ever "upgrade" to an <code>@gmail.com</code> address, because
+that <em>does</em> change your primary email address, and there's no way back.</p>
+
+<p>None of this would be so frustrating if there weren't so many things tied to
+my Google account, like all my Maps reviews, my Chat/Hangouts history from
+decades ago, and my purchased Play content. I really wanted to keep my
+account, but there's just no way to do that with a new email address without
+experiencing too many little hiccups to be worth it. The one thing I could
+smoothly transfer over was YouTube. Everything else was just as "walled
+garden" as you'd expect from an Apple product, just in far subtler ways.</p>
 
 <h4 id="daily">Daily Use</h4>
 
@@ -935,7 +980,7 @@ Thankfully macOS natively supports rebinding shortcuts for any app.</p>
 
 <p>If you want a Mail-like experience with Gmail as a backend, instead of using
 SMTP I recommend <a href="https://mimestream.com">Mimestream</a>; it is written by a former
-Apple engineer on Mail to have a similar UX but using proper Gmail APIs.</p>
+Apple Mail engineer to have a similar UX but using proper Gmail APIs.</p>
 
 <p>Ecosystem effects of Mail include having search results show up in Spotlight
 and behaving super well as a multitasking app on iPadOS.</p>
@@ -946,13 +991,15 @@ and behaving super well as a multitasking app on iPadOS.</p>
 forgotten how limited and finicky calendar protocols are at their core<span style="font-family: sans-serif">—</span>so many
 things just stop working when you leave Google Calendar. Folks send me
 invitations that don't show, my RSVPs don't make it back to them, and I
-sometimes don't receive updates to events.</p>
+sometimes don't receive updates to events. Even unfurling invited mailing lists
+into individuals (who can then RSVP individuallly) is specific to Google
+Calendar.</p>
 
 <p>I switched my provider back to Google Calendar about 18 months in while
 continuing to use the Apple Calendar app. It's a much better experience while
 sacrificing virtually nothing in ecosystem benefits. I also get to avoid the
-crappy Apple Calendar web UI for those few times I need my calendar on my gaming
-computer, and I get the more powerful sharing tools of Google Calendar.</p>
+crappy Apple Calendar web UI those few times I need my calendar on Windows, and
+I get the more powerful sharing / RSVP tools of Google Calendar.</p>
 
 <p>As for the Apple Calendar iOS and macOS apps, I don't recommend using the Week
 view. Like Google Calendar, Apple Calendar uses a horizontal red bar to
@@ -1014,14 +1061,15 @@ for navigation destinations and video calls.</p>
 <h3 id="maps">Google Maps → Apple Maps</h3>
 
 <p>Apple Maps gets a lot of flak for its initial release state, rightly so. But
-that was years ago, and they’ve kept at it. It’s improved.</p>
+that was years ago, and they’ve kept at it. It’s improved. Unfortunately it’s
+only gotten good, not great.</p>
 
-<p>Unfortunately it’s only gotten good, not great. There are UX benefits over
-Google Maps, such as the spoken direction “Go past this light, then at the next
-one, turn <code>$DIRECTION</code>”, but about 5% of my trips to new places end me at the
-right area but wrong specific destination. I’ve been routed to the delivery
-entrance for a museum, the back entrance for an airport, and the wrong parking
-lot (15 minutes of walking wrong) of a large shopping center.</p>
+<p>There are UX benefits over Google Maps, such as the spoken direction “Go past
+this light, then at the next one, turn <code>$DIRECTION</code>”, but about 5% of my trips
+to new places end me at the right area but wrong specific destination. I’ve been
+routed to the delivery entrance for a museum, the back entrance for an airport,
+and the wrong parking lot (15 minutes of walking wrong) for a store in a large
+shopping center.</p>
 
 <p>I’m continuing to give it chances because I know more data helps, but for tight
 schedules I go back to Google Maps.</p>
@@ -1075,15 +1123,14 @@ babysitting.</p>
 Takeout produced hundreds of gigabytes of exports, which I downloaded onto a Mac
 and then imported with Photos.app. Due to Apple's offline-first approach
 synchronization took place in the background at reduced speeds. This meant it
-tried to take place while the laptop was closed and charging.  This was jarring
+tried to take place while the laptop was closed and charging. This was jarring
 at first when trying to babysit the process, as by design it stops performing
 well when you start using the machine. When I learned to let go, it showed its
 colors.</p>
 
-<p>Ecosystem effects include unified conversations: when you share content from
-Google Photos with someone, you and they can comment on photos and albums; when
-you share content from Apple Photos using Messages, the photos appear inline in
-Messages. If you want to "comment" on one, you simply Reply to that message.</p>
+<p>Ecosystem effects include rich embeds &amp; commenting in iMessage, and photos
+appearing in upload prompts on all platforms (e.g. when uploading an avatar to
+some random internet account) with full face search embedded.</p>
 
 <h3 id="safari">Chrome → Safari</h3>
 
@@ -1299,7 +1346,8 @@ transitions to get where you’re going. For details on its UX failings, see (Ja
 from Cinnamon's
 post)[<a href="https://cinnamon.agency/blog/post/apple_musics_ux_problem">https://cinnamon.agency/blog/post/apple_musics_ux_problem</a>].</p>
 
-<p>I miss Google Play Music.</p>
+<p>I miss Google Play Music. I've softly switched to Spotify which, in a vacuum, is
+strictly better.</p>
 
 <p>Ecosystem effects of Apple Music include tighter Shazam integration and better
 Siri support for when I’m driving and want to play something.</p>
@@ -1325,9 +1373,10 @@ pay-at-counter support Apple Pay, and about 20% of table-service restaurants
 do. For online orders, roughly half of the non-Amazon orders I place support
 it.</p>
 
-<p>The experience of managing an Apple Card in Wallet is also the first credit
-card experience that feels like it was made this century. The app is
-beautiful, snappy, and simple.</p>
+<p>The experience of managing an Apple Card in Wallet is also the first credit card
+experience that feels like it was made this century. The app is beautiful,
+snappy, and simple. Summer and I have moved our primary credit card to the Apple
+Card and it's been a fantastic and financially beneficial switch.</p>
 
 <p><figure style="text-align: center">
   
@@ -1346,6 +1395,24 @@ beautiful, snappy, and simple.</p>
   <figcaption>Drilling into Apple Card transactions using Wallet.</figcaption>
 </figure>
 </p>
+
+<h3 id="podcasts">Google Podcasts → Apple Podcasts</h3>
+
+<p>Google Podcasts and Apple Podcasts are very comparable. Google Podcasts has a
+bit plainer UI, but they're both good enough.</p>
+
+<p>The biggest upside to Apple Podcasts is the better sorting and filtering of
+episodes on a podcast-specific basis. For example, I like Planet Money enough
+that I want to listen to every episode, so I have them play from oldest to
+newest; most other podcasts I don't care so much and have no hope of working
+through their backlogs, so I go newest to oldest. These all interleave
+correctly when I hit the podcast-agnostic "Play" button on the homescreen, so
+that the correct episodes of each podcast are played.</p>
+
+<p>The biggest downside to Apple Podcasts has been stability. Roughly 1-5% of
+the time I go to play a podcast, the player gets stuck loading it forever.</p>
+
+<p>Ecosystem effects of Apple Podcasts include tight Siri support.</p>
 
 <h2 id="conclusion">Conclusion</h2>
 
