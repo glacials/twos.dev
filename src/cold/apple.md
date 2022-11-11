@@ -121,7 +121,7 @@ Here are some ways these differences are expressed:
   and app ~identically. In contrast Apple puts every major UX flow in a native
   app, from email and calendar to bug reporting and account management. Even
   uploading apps to the App Store for publishing—a fundamentally online
-  experience--is a native app.
+  experience—is a native app.
 - Google Docs documents are rows in a database, where Apple Pages documents
   are files on a filesystem; sharing and synchronization are handled by iCloud
   which is more akin to Dropbox in this mode. It does support 100 simultaneous
