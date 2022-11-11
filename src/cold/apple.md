@@ -339,7 +339,7 @@ on any device.
    "Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
 }}
 
-#### Moto 360 → Apple Watch {#watch}
+### Moto 360 → Apple Watch {#watch}
 
 My relationship with the Moto 360 was on and off. To me it served two
 functions:
