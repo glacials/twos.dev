@@ -800,8 +800,8 @@ interact with Git repositories, Shortcuts lets me glue them together:
 
 1. (Working Copy) Pull from `twos.dev` remote
 2. (iOS) Get contents of folder `iCloud/iA Writer/Published`
-3. (Working Copy) Write contents of folder to `./src` in `twos.dev`
-4. (Working Copy) Stage `./src` in `twos.dev`
+3. (Working Copy) Write contents of folder to [`./src/warm`](https://twos.dev/winter) in `twos.dev`
+4. (Working Copy) Stage `./src/warm` in `twos.dev`
 5. (Working Copy) Commit `twos.dev` with message “Automatic commit by iA Writer
    sync job”
 6. (Working Copy) Push `twos.dev` to remote
