@@ -318,7 +318,7 @@ I finally know why none of my iPhone friends were as excited as me about
 gold standard of chat apps. I’m even feeling the guilty urge to nudge friends
 towards iPhone so I can use it with them.
 
-To users iMessages threads appear to be between contacts, but on the backend
+To users iMessage threads appear to be between contacts, but on the backend
 they're between contact methods like phone numbers or email addresses. Along
 with Apple's device-first philosophy I presume this is so people don't need an
 Apple account to use iMessage, but it has quite a few papercuts. I recently
