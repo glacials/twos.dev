@@ -325,7 +325,7 @@ Apple account to use iMessage, but it has quite a few papercuts. I recently
 changed my email address but I need to keep my old one in my Apple account
 indefinitely so my friends’ threads with me (read: with my old email address)
 won’t retroactively split. I've also encountered unsolvable problems spinning up
-group chats with [Jordan][https://jm.dev] since he moved to Japan.
+group chats with [Jordan](https://jm.dev) since he moved to Japan.
 
 Beyond these rare issues I'm very happy with iMessage.
 
