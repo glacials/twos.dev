@@ -423,7 +423,7 @@ ears. They’ve more than replaced my Bose QuietComfort 35 IIs.
 
 Ecosystem effects of AirPods include automatic switching between devices based
 on attention, and Siri integration slightly worse than Pixel Buds's Google
-Assistant imtegration.
+Assistant integration.
 
 ### Gmail → iCloud Mail {#mail}
 
