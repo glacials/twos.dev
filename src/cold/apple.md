@@ -474,9 +474,10 @@ of data harvesting and therefore ad/search targeting.
 I've now landed on creating a new personal Google account with ben@twos.dev as
 its primary email address. I needed to delete the twos.dev Google Workspace
 organization to do this, as it had claim to ben@twos.dev already. Signing up
-to Google without an @gmail.com address is a somewhat hidden option, but it
-exists. You just can't ever "upgrade" to an `@gmail.com` address, because
-that _does_ change your primary email address, and there's no way back.
+to Google without an `@gmail.com` address is a somewhat hidden option, but it
+exists. You just can't ever fall into their "upgrade" funnel which assigns you
+an `@gmail.com` address, because that _does_ change your primary email address
+and there's no way back.
 
 None of this would be so frustrating if there weren't so many things tied to
 my Google account, like all my Maps reviews, my Chat/Hangouts history from
