@@ -41,6 +41,7 @@
     opacity: 1;
   }
 }
+
 html {
   font-family: "DM Mono", Menlo, Monaco, Oxygen, monospace;
   font-size: 0.9em;
@@ -127,6 +128,7 @@ footer {
 h1 {
   font-size: 3em;
   display: block;
+  line-height: initial; /* Undoes weird inheritance of html line-height w/ display:block */
   text-align: center;
   text-transform: uppercase;
 }
