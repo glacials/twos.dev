@@ -587,8 +587,8 @@ Apple Calendar’s UI is prettier than Google Calendar’s, which hasn’t seeme
 have a refresh in a decade. Apple Calendar can automatically generate “travel
 to” and “travel from” events based on the travel time between locations.
 
-Ecosystem effects of Calendar include context-aware Maps and Siri suggestions
-for navigation destinations and video calls.
+Ecosystem effects of Calendar include context-aware Maps, Siri suggestions
+for navigation destinations and video calls, and the ability to longpress dates and times in iMessage to create events.
 
 ### Google Maps → Apple Maps {#maps}
 
