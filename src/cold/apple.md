@@ -919,6 +919,6 @@ liquid is not as destructive, you breathe in less dust—but the bulk of the
 benefit is in the hard-to-describe ways the space feels better and motivates
 more.
 
-As of 2022 May, I’m overall happy with the Apple ecosystem and would not count
+For now, I’m overall happy with the Apple ecosystem and would not count
 it out from becoming my new preference. But, time will tell and I'll continue
 to document my journey here.
