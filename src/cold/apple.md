@@ -12,9 +12,6 @@ This is a one-page website within twos.dev where I detail my multi-year
 journey of migrating from deep in the Google ecosystem to deep in the Apple
 ecosystem. It is occasionally updated.
 
-Do not read this in order. Do not read this in its entirety. Skip around as
-you please.
-
 ## Why? {#why}
 
 My life is in Google more than anyone I know. The usual suspects sure—Gmail,
