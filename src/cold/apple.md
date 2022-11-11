@@ -847,9 +847,9 @@ move it to Apple Music’s search field, paste, and add the top result.
 The UI of Apple Music for macOS is a let-down and is more on par with the
 iCloud Mail web interface than with any other native Apple app. Navigation is
 slow and unresponsive, which is compounded by the fact that it takes too many
-transitions to get where you’re going. For details on its UX failings, see (Jake
+transitions to get where you’re going. For details on its UX failings, see [Jake
 from Cinnamon's
-post)[https://cinnamon.agency/blog/post/apple_musics_ux_problem].
+post](https://cinnamon.agency/blog/post/apple_musics_ux_problem).
 
 I miss Google Play Music. I've softly switched to Spotify which, in a vacuum, is
 strictly better.
