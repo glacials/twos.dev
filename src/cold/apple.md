@@ -329,8 +329,9 @@ group chats with [Jordan](https://jm.dev) since he moved to Japan.
 
 Beyond these rare issues I'm very happy with iMessage.
 
-Ecosystem effects of iMessage include automatically entering SMS 2FA codes on
-any device.
+Ecosystem effects of iMessage include rich embedded media from all other Apple
+products like Photos, Music, and Maps, and automatically entering SMS 2FA codes
+on any device.
 
 {{ img
    "Signing into a website on macOS using the SMS 2FA code from iPhone."
