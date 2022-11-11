@@ -388,9 +388,12 @@ Apple TV can initiate play from a phone like Chromecast, but beyond that it's
 pretty remote-centric. The touchpad on the remote is awkward and hard to use;
 I brush it when trying to click it, causing me to click on the wrong thing.
 
-Otherwise it has a good build quality and feels good in the hand. But it’s a
-remote and can be lost. We’ve 3D printed a holder for it that attaches to the
-coffee table. I miss the remote-free life.
+Otherwise it has a good build quality and feels good in the hand. It's not IR,
+so you don't have to point it at anything; and the Apple TV can forward
+incoming buttonpresses to the attached television, so it's a strict upgrade
+for volume adjustment from our television's remote. But it’s a remote, and can
+be lost. We’ve 3D printed a holder for it that attaches to the coffee table. I
+miss the remote-free life.
 
 Ecosystem effects of Apple TV include typing: when a text input is selected on
 the Apple TV, a notification shows on my iOS devices allowing me to use them
