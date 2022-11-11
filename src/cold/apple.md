@@ -1,6 +1,6 @@
 ---
 date: 2022-05-25
-updated: 2022-06-27
+updated: 2022-11-11
 filename: apple.html
 type: post
 toc: true
