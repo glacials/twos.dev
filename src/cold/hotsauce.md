@@ -151,8 +151,8 @@ another year later.
 ## Finances
 
 After the sample packs and the bulk order of 48 bottles (the minimum), upfront
-costs came to \$192.05. Over three April Fool's Days we sold 28 bottles in 25
-orders at \$15 / bottle.
+costs came to $$192.05. Over three April Fool's Days we sold 28 bottles in 25
+orders at $$15 / bottle.
 
 The cost of my labor and the boon to the brand are harder to calculate. I'll
 call them a wash.
