@@ -91,6 +91,7 @@ var (
 		"png":  {},
 		"jpg":  {},
 		"jpeg": {},
+		"svg":  {},
 	}
 	VideoExts = map[string]struct{}{
 		"mov": {},
