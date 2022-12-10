@@ -113,7 +113,7 @@ The response when the clock struck midnight was exactly as we hoped.
 
 > its actually real wtf
 
-&mdash; Dark (@DarkRTA)
+—Dark (@DarkRTA)
 [April 1, 2020](https://twitter.com/DarkRTA/status/1245495897875759108)
 
 {{ imgs
