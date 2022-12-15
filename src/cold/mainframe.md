@@ -1,7 +1,6 @@
 ---
 date: 2022-07-07
 filename: mainframe.html
-toc: true
 type: page
 updated: 2022-12-14
 ---
