@@ -33,9 +33,11 @@ type: page
 
 Other open source projects I've contributed to:
 
+- [Emacs](https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263) (docs only):
+  [#60263](https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263) Correct wrong info in (info)Go to node
 - [Coverage.py](https://github.com/nedbat/coveragepy):
   [#1210](https://github.com/nedbat/coveragepy/pull/1210) Fix an incompatibility with pyarmor
-- [Ruby on Rails](https://github.com/rails/rails/pull/37190):
+- [Ruby on Rails](https://github.com/rails/rails/pull/37190) (docs only):
   [#37190](https://github.com/rails/rails/pull/37190) Fix a button_to documentation example
 - [Highcharts Regression](https://github.com/streamlinesocial/highcharts-regression):
   [#84](https://github.com/streamlinesocial/highcharts-regression/pull/84) Add extrapolation for exponential, linear, power, & log
