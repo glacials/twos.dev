@@ -1,1 +1,1 @@
-include: [".well-known"]
+include: ["public/.well-known"]
