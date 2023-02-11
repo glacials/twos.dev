@@ -1,13 +1,14 @@
 ---
 date: 2022-06-23
 type: page
+updated: 2023-02-10
 ---
 
 # Software
 
 ## Creations
 
-<i>Solid hearts are active; hollow hearts are inactive but stable.</i>
+_Solid hearts are active; hollow hearts are inactive but stable._
 
 - ♥ [Winter](https://twos.dev/winter): Static website generator powering this
   website (Go)
@@ -37,8 +38,10 @@ Other open source projects I've contributed to:
   [#60263](https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263) Correct wrong info in (info)Go to node
 - [Coverage.py](https://github.com/nedbat/coveragepy):
   [#1210](https://github.com/nedbat/coveragepy/pull/1210) Fix an incompatibility with pyarmor
-- [Ruby on Rails](https://github.com/rails/rails/pull/37190) (docs only):
+- [Ruby on Rails](https://github.com/rails/rails) (docs only):
   [#37190](https://github.com/rails/rails/pull/37190) Fix a button_to documentation example
+- [vim-kitty](https://github.com/fladson/vim-kitty):
+  [#20](https://github.com/fladson/vim-kitty/pull/20) Recognize `#:` comment syntax in `kitty.conf`
 - [Highcharts Regression](https://github.com/streamlinesocial/highcharts-regression):
   [#84](https://github.com/streamlinesocial/highcharts-regression/pull/84) Add extrapolation for exponential, linear, power, & log
 - [ruby-gettext](https://github.com/ruby-gettext/gettext):
