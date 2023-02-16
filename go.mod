@@ -12,6 +12,7 @@ require (
 	github.com/lithammer/dedent v1.1.0
 	github.com/mitchellh/go-wordwrap v1.0.1
 	github.com/mitranim/gow v0.0.0-20220616172716-e9d92c985e03
+	github.com/niklasfasching/go-org v1.6.5
 	github.com/otiai10/copy v1.7.0
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/spf13/cobra v1.5.0

@@ -77,6 +77,24 @@ func (s *Substructure) discover() error {
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
 	}
 
+	// TODO: Allow looking in user's org directory.
+	// TODO: Allow rendering only a heading of an org file.
+	org, err := filepathx.Glob("src/**/*.org")
+	if err != nil {
+		return err
+	}
+
+	for _, src := range org {
+		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+			continue
+		}
+		doc, err := NewOrgDocument(src)
+		if err != nil {
+			return err
+		}
+		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+	}
+
 	warmhtml, err := filepathx.Glob("src/warm/*.html")
 	if err != nil {
 		return err

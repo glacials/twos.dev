@@ -21,6 +21,7 @@ import (
 	"github.com/gomarkdown/markdown"
 	mdhtml "github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
+	"github.com/niklasfasching/go-org/org"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -35,6 +36,7 @@ const (
 const (
 	encodingHTML encoding = iota
 	encodingMarkdown
+	encodingOrg
 
 	styleWrapper = "<span style=\"font-family: sans-serif\">$0</span>"
 	tocEl        = atom.Ol
@@ -212,6 +214,22 @@ func NewMarkdownDocument(src string) (*textDocument, error) {
 	return &d, d.slurpHTML()
 }
 
+// NewOrgDocument creates a new document from the Org file at the given
+// path. High-level information about the document is parsed during this call,
+// such as tags and structure. Heavier details like template execution are not
+// touched until Render is called.
+func NewOrgDocument(src string) (*textDocument, error) {
+	d := textDocument{
+		SrcPath:      src,
+		encoding:     encodingOrg,
+		dependencies: map[string]struct{}{},
+	}
+	if err := d.load(); err != nil {
+		return nil, err
+	}
+	return &d, d.slurpHTML()
+}
+
 func (d *textDocument) Dependencies() map[string]struct{} {
 	return d.dependencies
 }
@@ -223,6 +241,7 @@ func (d *textDocument) load() error {
 	}
 	defer f.Close()
 
+	// TODO: Allow org-mode tags to be used as frontmatter.
 	body, err := frontmatter.Parse(f, &d.metadata)
 	if err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
@@ -234,6 +253,8 @@ func (d *textDocument) load() error {
 		return d.parseHTML()
 	case encodingMarkdown:
 		return d.parseMarkdown()
+	case encodingOrg:
+		return d.parseOrg()
 	default:
 		return fmt.Errorf("unknown encoding %d", d.encoding)
 	}
@@ -290,6 +311,24 @@ func (d *textDocument) parseMarkdown() error {
 			),
 		),
 	)
+	if err != nil {
+		return err
+	}
+
+	d.root = root
+	return nil
+}
+
+func (d *textDocument) parseOrg() error {
+	htm, err := org.New().Parse(
+		bytes.NewBuffer(d.body),
+		d.SrcPath,
+	).Write(org.NewHTMLWriter())
+	if err != nil {
+		return err
+	}
+
+	root, err := html.Parse(strings.NewReader(htm))
 	if err != nil {
 		return err
 	}
