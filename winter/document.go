@@ -166,20 +166,30 @@ func (k *kind) UnmarshalYAML(unmarshal func(interface{}) error) error {
 		return err
 	}
 
-	switch s {
-	case "draft", "":
-		*k = draft
-	case "post":
-		*k = post
-	case "page":
-		*k = page
-	case "gallery":
-		*k = gallery
-	default:
-		return fmt.Errorf("unknown kind %q", s)
+	var tmp kind
+
+	tmp, err := parseKind(s)
+	if err != nil {
+		return err
 	}
 
+	*k = tmp
+
 	return nil
+}
+
+func parseKind(s string) (kind, error) {
+	switch s {
+	case "draft", "":
+		return draft, nil
+	case "post":
+		return post, nil
+	case "page":
+		return page, nil
+	case "gallery":
+		return gallery, nil
+	}
+	return -1, fmt.Errorf("unknown kind %q", s)
 }
 
 // NewHTMLDocument creates a new document from the HTML file at the given path.
@@ -241,7 +251,6 @@ func (d *textDocument) load() error {
 	}
 	defer f.Close()
 
-	// TODO: Allow org-mode tags to be used as frontmatter.
 	body, err := frontmatter.Parse(f, &d.metadata)
 	if err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
@@ -320,10 +329,46 @@ func (d *textDocument) parseMarkdown() error {
 }
 
 func (d *textDocument) parseOrg() error {
-	htm, err := org.New().Parse(
+	orgparser := org.New()
+	orgparser.DefaultSettings["OPTIONS"] =
+		strings.Replace(orgparser.DefaultSettings["OPTIONS"], "toc:t", "toc:nil", 1)
+	orgdoc := orgparser.Parse(
 		bytes.NewBuffer(d.body),
 		d.SrcPath,
-	).Write(org.NewHTMLWriter())
+	)
+	orgdoc.BufferSettings["OPTIONS"] = strings.Replace(orgdoc.BufferSettings["OPTIONS"], "toc:t", "toc:nil", 1)
+
+	var err error
+	for k, v := range orgdoc.BufferSettings {
+		switch strings.ToLower(k) {
+		case "category":
+			d.metadata.Category = v
+		case "date":
+			d.metadata.CreatedAt, err = time.Parse("2006-01-02", v)
+			if err != nil {
+				return err
+			}
+		case "kind":
+			var err error
+			d.metadata.Kind, err = parseKind(v)
+			if err != nil {
+				return err
+			}
+		case "shortname":
+			d.metadata.Shortname = v
+		case "title":
+			d.metadata.Title = v
+		case "toc":
+			d.metadata.TOC = v == "t"
+		case "updated":
+			d.metadata.UpdatedAt, err = time.Parse("2006-01-02", v)
+			if err != nil {
+				return err
+			}
+		}
+	}
+
+	htm, err := orgdoc.Write(org.NewHTMLWriter())
 	if err != nil {
 		return err
 	}
