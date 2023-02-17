@@ -34,6 +34,28 @@ _Winter_ is the bespoke static website generator that powers twos.dev. It can
 power your static website as well, either as a CLI tool or Go library. Winter is
 strongly opinionated to serve my pecularities around building twos.dev.
 
+On the surface, Winter is similar to other static website
+generators. It can take a directory of files of varying content
+types—Markdown, Org, or HTML—apply some templating, and render them to
+HTML files ready for deployment to a static web server.
+
+Winter is different because of its unique design goals.
+
+Winter's design goals are to allow content to be both easy to edit and hard to
+break. These goals work against each other by default, so Winter splits content
+into two modes: **warm** and **cold**.
+
+**Warm** content should be synchronized into the project directory from an
+outside tool of your choice. Generally this is a writing program such as [iA
+Writer](https://ia.net/writer) hooked up to a shared or cloud directory;
+simplistically, it can be a cron job that runs `rsync` followed by a Git add and
+push.
+
+**Cold** content should not be touched by automated tools. This content must be
+preseved for years or decades, so less exposed surface area is better. When a
+piece of warm content is stable, it can be "frozen" into cold content using
+`winter freeze`.
+
 ## Installation {#installation}
 
 ```sh
@@ -50,21 +72,6 @@ go get -u twos.dev/winter@latest
 This section details the `winter` CLI documentation. For Go library
 documentation, see
 [pkg.go.dev/twos.dev/winter](https://pkg.go.dev/twos.dev/winter).
-
-Winter's design goals are to allow content to be both easy to edit and hard to
-break. These goals work against each other by default, so Winter splits content
-into two modes: **warm** and **cold**.
-
-**Warm** content should be synchronized into the project directory from an
-outside tool of your choice. Generally this is a writing program such as [iA
-Writer](https://ia.net/writer) hooked up to a shared or cloud directory;
-simplistically, it can be a cron job that runs `rsync` followed by a Git add and
-push.
-
-**Cold** content should not be touched by automated tools. This content must be
-preseved for years or decades, so less exposed surface area is better. When a
-piece of warm content is stable, it can be "frozen" into cold content using
-`winter freeze`.
 
 ### Directory Structure {#layout}
 
