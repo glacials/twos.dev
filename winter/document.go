@@ -146,13 +146,33 @@ type textDocument struct {
 }
 
 type metadata struct {
-	Category  string `yaml:"category"`
-	Kind      kind   `yaml:"type"`
+	// Category is an optional category for the document. This is used
+	// only for a small visual treatment on the index page (if this is
+	// of kind post) and on the document page itself.
+	//
+	// Category MUST be a singular noun that can be pluralized by adding
+	// a single "s" at its end, as this is exactly what the visual
+	// treatment will do. If this doesn't work for you, go fix that
+	// code.
+	Category string `yaml:"category"`
+	// Kind specifies the type of document this is. In every user-facing
+	// context, this is called "type". In Go we cannot use the "type"
+	// keyword, so we use "kind" instead.
+	Kind kind `yaml:"type"`
+	// Shortname is the short name of the document. This is used when
+	// picking a filename for the document, among other small and
+	// mostly-internal bookkeeping measures. It must never change.
 	Shortname string `yaml:"filename"`
-	Title     string `yaml:"title"`
-	TOC       bool   `yaml:"toc"`
+	// Title is the human-readable title of the document.
+	Title string `yaml:"title"`
+	// TOC is whether a table of contents should be rendered with the
+	// document. If true, the table of contents is rendered immediately
+	// above the first non-first-level heading.
+	TOC bool `yaml:"toc"`
 
+	// CreatedAt is the time the document was first published.
 	CreatedAt time.Time `yaml:"date"`
+	// UpdatedAt is the time the document was last meaningfully updated.
 	UpdatedAt time.Time `yaml:"updated"`
 }
 
@@ -348,7 +368,7 @@ func (d *textDocument) parseOrg() error {
 			if err != nil {
 				return err
 			}
-		case "kind":
+		case "type":
 			var err error
 			d.metadata.Kind, err = parseKind(v)
 			if err != nil {

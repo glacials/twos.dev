@@ -2,19 +2,19 @@ package winter
 
 import "strings"
 
-// newPad returns a function that pads every string given to it to the longest
+// newPadder returns a function that pads every string given to it to the longest
 // length it has seen so far.
 //
 // For example:
 //
-//	p := newPad()
+//	p := newPadder()
 //	p("hi")    // "hi"
 //	p("hello") // "hello"
 //	p("hi")    // "hi   "
 //	p("hello") // "hello"
-//	q := newPad()
+//	q := newPadder()
 //	q("hi")    // "hi"
-func newPad() func(string) string {
+func newPadder() func(string) string {
 	var longest int
 	return func(s string) string {
 		if len(s) >= longest {

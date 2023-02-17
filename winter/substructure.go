@@ -36,7 +36,7 @@ var (
 		"README.md": {},
 		".DS_Store": {},
 	}
-	pad = newPad()
+	pad = newPadder()
 )
 
 func (d *substructureDocument) Shortname() string {
@@ -78,7 +78,7 @@ func (s *Substructure) discover() error {
 	}
 
 	// TODO: Allow looking in user's org directory.
-	// TODO: Allow rendering only a heading of an org file.
+	// TODO: Allow rendering only a subsection of an org file.
 	org, err := filepathx.Glob("src/**/*.org")
 	if err != nil {
 		return err
