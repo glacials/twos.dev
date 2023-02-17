@@ -110,6 +110,28 @@ migrated to Winter.</em></p>
 power your static website as well, either as a CLI tool or Go library. Winter is
 strongly opinionated to serve my pecularities around building twos.dev.</p>
 
+<p>On the surface, Winter is similar to other static website
+generators. It can take a directory of files of varying content
+types<span style="font-family: sans-serif">—</span>Markdown, Org, or HTML<span style="font-family: sans-serif">—</span>apply some templating, and render them to
+HTML files ready for deployment to a static web server.</p>
+
+<p>Winter is different because of its unique design goals.</p>
+
+<p>Winter's design goals are to allow content to be both easy to edit and hard to
+break. These goals work against each other by default, so Winter splits content
+into two modes: <strong>warm</strong> and <strong>cold</strong>.</p>
+
+<p><strong>Warm</strong> content should be synchronized into the project directory from an
+outside tool of your choice. Generally this is a writing program such as <a href="https://ia.net/writer">iA
+Writer</a> hooked up to a shared or cloud directory;
+simplistically, it can be a cron job that runs <code>rsync</code> followed by a Git add and
+push.</p>
+
+<p><strong>Cold</strong> content should not be touched by automated tools. This content must be
+preseved for years or decades, so less exposed surface area is better. When a
+piece of warm content is stable, it can be "frozen" into cold content using
+<code>winter freeze</code>.</p>
+
 <html><head></head><body><ol id="toc">
   
     <li><a href="#installation"><span>Installation</span></a></li>
@@ -299,21 +321,6 @@ strongly opinionated to serve my pecularities around building twos.dev.</p>
 <p>This section details the <code>winter</code> CLI documentation. For Go library
 documentation, see
 <a href="https://pkg.go.dev/twos.dev/winter">pkg.go.dev/twos.dev/winter</a>.</p>
-
-<p>Winter's design goals are to allow content to be both easy to edit and hard to
-break. These goals work against each other by default, so Winter splits content
-into two modes: <strong>warm</strong> and <strong>cold</strong>.</p>
-
-<p><strong>Warm</strong> content should be synchronized into the project directory from an
-outside tool of your choice. Generally this is a writing program such as <a href="https://ia.net/writer">iA
-Writer</a> hooked up to a shared or cloud directory;
-simplistically, it can be a cron job that runs <code>rsync</code> followed by a Git add and
-push.</p>
-
-<p><strong>Cold</strong> content should not be touched by automated tools. This content must be
-preseved for years or decades, so less exposed surface area is better. When a
-piece of warm content is stable, it can be "frozen" into cold content using
-<code>winter freeze</code>.</p>
 
 <h3 id="layout">Directory Structure</h3>
 
