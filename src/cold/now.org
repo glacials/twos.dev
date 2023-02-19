@@ -1,7 +1,7 @@
 #+TITLE: What I'm Doing Now
 #+TYPE: page
 
-/This page is in the form of [[https://sive.rs/now][Derek Sivers's `/now` page]]./
+/This page is in the form of [[https://sive.rs/now][Derek Sivers's =/now= page]]./
 
 * SunPower
 
