@@ -48,8 +48,7 @@ into two modes: **warm** and **cold**.
 **Warm** content should be synchronized into the project directory from an
 outside tool of your choice. Generally this is a writing program such as [iA
 Writer](https://ia.net/writer) hooked up to a shared or cloud directory;
-simplistically, it can be a cron job that runs `rsync` followed by a Git add and
-push.
+simplistically, it can be a cron job that runs `rsync`.
 
 **Cold** content should not be touched by automated tools. This content must be
 preseved for years or decades, so less exposed surface area is better. When a
