@@ -1,9 +1,10 @@
-#+TITLE: What I'm Doing Now
 #+TYPE: page
 
 /This page is in the form of [[https://sive.rs/now][Derek Sivers's =/now= page]]./
 
-* SunPower
+* What I'm Doing Now
+
+** SunPower
 
 Since July 2022 I've worked at [[https://sunpower.com][SunPower]], a consumer solar panel
 company serving the US. I worked for six months on a team that manages
@@ -22,7 +23,7 @@ to ~days. It involves a lot of learning and has been super fun so
 far. I'm working with two people who are also ex-[[https://twitch.tv][Twitch]], which has
 been a fun bonding experience.
 
-* Emacs
+** Emacs
 
 I've started using Emacs and org-mode. Both are great and it really
 feels like Emacs : Vim :: Vim : nano. It's pretty rocky here and there
@@ -31,7 +32,7 @@ the rocks eventually erode my motivation and I jump back to VSCode
 again, as I tended to do on six-month rotations between Vim and
 VSCode.
 
-* This Website
+** This Website
 
 Somehow after a dozen attempts over two dozen years I finally have a
 website that I've stuck with for quite a while. The secret sauce
@@ -44,7 +45,7 @@ build-time.
 (For more information see [[/meta.html][Inside twos.dev]], or the [[/winter][documentation]] for
 the generator.)
 
-* Autism
+** Autism
 
 I found out in 2020 that I'm autistic and it's been a fantastic and
 eye-opening experience. Every ~month (at first every ~day) I learn
@@ -57,7 +58,7 @@ far too loud.
 
 I wrote about it in an article titled [[/autism.html][Anonymously Autistic]].
 
-* Mastodon
+** Mastodon
 
 I've mostly jumped ship from Twitter and have switched to Mastodon:
 [[https://m.twos.dev/@ben][@ben@m.twos.dev]]. I run my own instance with signups closed just

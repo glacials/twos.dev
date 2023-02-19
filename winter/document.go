@@ -358,6 +358,9 @@ func (d *textDocument) parseOrg() error {
 	)
 	orgdoc.BufferSettings["OPTIONS"] = strings.Replace(orgdoc.BufferSettings["OPTIONS"], "toc:t", "toc:nil", 1)
 
+	orgwriter := org.NewHTMLWriter()
+	orgwriter.TopLevelHLevel = 1
+
 	var err error
 	for k, v := range orgdoc.BufferSettings {
 		switch strings.ToLower(k) {
@@ -388,7 +391,7 @@ func (d *textDocument) parseOrg() error {
 		}
 	}
 
-	htm, err := orgdoc.Write(org.NewHTMLWriter())
+	htm, err := orgdoc.Write(orgwriter)
 	if err != nil {
 		return err
 	}
