@@ -1,4 +1,5 @@
 #+TYPE: page
+#+FILENAME: now.html
 
 /This page is in the form of [[https://sive.rs/now][Derek Sivers's =/now= page]]./
 
