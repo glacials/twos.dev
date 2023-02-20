@@ -12,5 +12,6 @@ type Config struct {
 	Dist        string
 	Domain      url.URL
 	Name        string
-	Since       int
+	// TODO: Use this for copyright in page footer
+	Since int
 }
