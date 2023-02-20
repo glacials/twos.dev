@@ -23,7 +23,6 @@ require (
 
 require (
 	github.com/BurntSushi/toml v1.1.0 // indirect
-	github.com/alecthomas/chroma/v2 v2.5.0 // indirect
 	github.com/dlclark/regexp2 v1.8.0 // indirect
 	github.com/google/go-cmp v0.5.8 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
