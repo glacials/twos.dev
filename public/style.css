@@ -228,7 +228,9 @@ nav a:hover {
 		text-transform: lowercase;
 }
 
-/* In case none of the below rules trigger, display a backup */
+/* In case none of the below rules trigger, display a backup.
+   For some reason Chrome on Windows hits this, though Chrome on macOS doesn't.
+*/
 nav .arrow::before {
 		content: "↔";
 }
