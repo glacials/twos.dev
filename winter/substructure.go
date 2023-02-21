@@ -74,7 +74,7 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 // discover clears the substructure of any known documents and
 // discovers all documents from scratch on the filesystem.
 func (s *Substructure) discover() error {
-	paths := append(s.cfg.SourceDirectories, "src/**")
+	paths := append(s.cfg.SourceDirectories, "src")
 	for _, path := range paths {
 		if err := s.discoverAtPath(path); err != nil {
 			return err
