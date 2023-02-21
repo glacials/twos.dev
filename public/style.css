@@ -128,9 +128,9 @@ footer {
 h1 {
   font-size: 3em;
   display: block;
-  line-height: initial; /* Undoes weird inheritance of html line-height w/ display:block */
-  text-align: center;
-  text-transform: uppercase;
+	line-height: 0.85em; /* Undoes weird inheritance of html line-height w/ display:block */
+	text-align: center;
+	text-transform: uppercase;
 }
 
 /* Hero image */

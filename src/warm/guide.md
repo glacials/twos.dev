@@ -11,23 +11,23 @@ and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._
 
 ---
 
-# User Guide
+# The Ben Carlsson User Guide
 
 This page describes things I value at work. This is descriptive of me, not
 prescriptive to you; treat it as a set of FYIs, not requirements. Use or ignore
 at your discretion, and share your own guide with me!
 
-## My Communication Style
+## Communication Style
 
-1. **Succinct**: The more people who will read what I'm writing, the higher the
+1. **Succinct**: The more people expected to read what I'm writing, the higher the
    cost/benefit of spending time honing it. For widespread pieces, 90% of my
-   time is spent editing. [More](http://www.paulgraham.com/simply.html), [even
+   time is editing. [More](http://www.paulgraham.com/simply.html), [even
    more](http://www.paulgraham.com/useful.html)
 2. **Trusting**: Coordination is slow. Everything is easier if
    we trust and authorize each other to make decisions in motion, rather than
    blocking on consensus. We can continue to share progress in nonblocking
    ways. [More](https://communitywiki.org/wiki/DoOcracy)
-3. **Asynchronous by default**: A 30-second interruption sets me back 30 minutes—it's how my brain works. To minimize this I like to have conversations in async
+3. **Asynchronous by default**: A 30-second interruption sets my brain back 30 minutes. I wish it didn't, but it does. To minimize this I like to have conversations in async
    mediums like tickets, pull requests, and screen recordings.
    [More](https://heeris.id.au/trinkets/ProgrammerInterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
 4. **Ticket-centric**: As a forgetful person I love single-origin paper
@@ -43,8 +43,8 @@ at your discretion, and share your own guide with me!
    question. This means I'm excited about the problem, but sometimes stresses
    people out; tell me if so and I can avoid doing that with you.
 -  **I go rogue.** Sometimes I care so much about fixing or building something
-   that I'll do it without tracking it, because the overhead—or the emotional
-   burden that comes with it—is bigger than the job itself. Some [adored
+   that I'll do it without tracking it, because the overhead—or its emotional
+   burden—is bigger than the job itself. Some [adored
    features](https://twitter.com/search?q=https%3A%2F%2Ftwitter.com%2Fglcls%2Fstatus%2F720689621466619904&src=typed_query)
    have come out of having the freedom to do this; see #2 above :D
 -  **I work weird hours.** Motivation strikes me randomly—sometimes during a
