@@ -88,7 +88,10 @@
           <small style="text-align:center; display: block">
             <i>
               published
-              2022 June</i
+              2022 June
+                / last updated
+                2023 February
+              </i
             >
           </small>
         
@@ -129,7 +132,7 @@
 
 <h3>Preprocessing</h3>
 
-<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
+<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/c59cc1a/winter/document.go#L408-L436">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
 
 <p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
 
@@ -137,14 +140,22 @@
 
 <p>There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I have high confidence in, so I'd like to limit its blast radius to content that benefits from it<span style="font-family: sans-serif">—</span>content I'm actively working on<span style="font-family: sans-serif">—</span>and keep safe the innocent bystanders that are historical content.</p>
 
-<p>Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Advanced Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
+<p>Second, once in a while I need some wacky one-off piece of code for a single post, like the CSS-only spectrum in <a href="autism.html">Anonymously Autistic</a> or the variable-width font requirements of <a href="dashes.html">Advanced Dashes</a>. iA Writer is great for prose, but when it's time to write code I need to be back in <code>$EDITOR</code>.</p>
 
-<p>To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":</p>
+<p>Cold content exists to serve these needs. At the most basic level, cold content is just warm content that has been moved to a directory outside the reach of the warm pipeline. This is content I only touch with <code>$EDITOR</code>, like a normal code repository.</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">git mv src/<span class="o">{</span>warm,cold<span class="o">}</span>/DOCUMENT.md
+<p>To fully turn warm content cold, there is a small amount of bookkeeping.</p>
+
+<h3>Winter</h3>
+
+<p>To handle this bookkeeping along with the other build pipeline steps, I wrote the <a href="https://twos.dev/winter">Winter</a> CLI. Winter can handle the process of converting warm content to cold like so:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter freeze DOCUMENT
 </span></span></code></pre></body></html>
 
-<p>From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.</p>
+<p>which more or less performs a <code>git mv src/{cold,warm}/DOCUMENT.md</code> plus chips.</p>
+
+<p>From here I may also take one final step of permanently converting the source document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.</p>
 
 <html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter build
 </span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.html
@@ -152,13 +163,11 @@
 </span></span><span class="line"><span class="ln">4</span><span class="cl">git add src/cold/DOCUMENT.html
 </span></span></code></pre></body></html>
 
-<p><em>(<a href="https://twos.dev/winter">Winter</a> is the bespoke CLI that builds twos.dev.)</em></p>
-
-<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.</p>
+<p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done.</p>
 
 <h4>Results</h4>
 
-<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
+<p>Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but in a way I can break when I need (e.g. for a <a href="cv.html">CV</a>'s bicolumnar layout).</p>
 
 <h2>On URLs Not Changing</h2>
 
@@ -191,6 +200,9 @@
               
                 published
                 2022 June
+                  / last updated
+                  2023 February
+                
               
             </i>
           </small>
