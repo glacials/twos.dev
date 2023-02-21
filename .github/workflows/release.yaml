@@ -14,9 +14,6 @@ jobs:
         with:
           go-version: "1.18"
 
-      - name: Pull down config.org
-        run: curl https://raw.githubusercontent.com/glacials/dotfiles/main/dot_config/emacs/config.org > src/warm/config.org
-
       - name: Install and Build 🔧
         run: make build
 
