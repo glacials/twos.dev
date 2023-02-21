@@ -1,5 +1,6 @@
 ---
 date: 2022-06-18
+updated: 2023-02-20
 filename: meta.html
 type: post
 ---
@@ -33,7 +34,7 @@ iOS and macOS ship with [Shortcuts](https://apps.apple.com/us/app/shortcuts/id14
 
 ### Preprocessing
 
-On push, GitHub Actions builds the Markdown file into HTML with all the [right preprocessing](https://github.com/glacials/twos.dev/blob/main/cmd/build_document.go) required to make it look like twos.dev. I use a small subset of [`html/template`](https://pkg.go.dev/html/template) to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.
+On push, GitHub Actions builds the Markdown file into HTML with all the [right preprocessing](https://github.com/glacials/twos.dev/blob/c59cc1a/winter/document.go#L408-L436) required to make it look like twos.dev. I use a small subset of [`html/template`](https://pkg.go.dev/html/template) to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.
 
 Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.
 
@@ -41,15 +42,23 @@ Technically at this point the page is now published, just not linked to from any
 
 There are 2-3 needs warm content doesn't cover: first, this odd pipeline that uses my phone for CI is not something I have high confidence in, so I'd like to limit its blast radius to content that benefits from it—content I'm actively working on—and keep safe the innocent bystanders that are historical content.
 
-Second, once in a while I need some wacky one-off piece of code code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Advanced Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`.
+Second, once in a while I need some wacky one-off piece of code for a single post, like the CSS-only spectrum in [Anonymously Autistic](autism.html) or the variable-width font requirements of [Advanced Dashes](dashes.html). iA Writer is great for prose, but when it's time to write code I need to be back in `$EDITOR`.
 
-To accomplish these two needs I simply migrate the file out of iA Writer and into a plain directory meant for these pages that have "graduated":
+Cold content exists to serve these needs. At the most basic level, cold content is just warm content that has been moved to a directory outside the reach of the warm pipeline. This is content I only touch with `$EDITOR`, like a normal code repository.
+
+To fully turn warm content cold, there is a small amount of bookkeeping.
+
+### Winter
+
+To handle this bookkeeping along with the other build pipeline steps, I wrote the [Winter](https://twos.dev/winter) CLI. Winter can handle the process of converting warm content to cold like so:
 
 ```sh
-git mv src/{warm,cold}/DOCUMENT.md
+winter freeze DOCUMENT
 ```
 
-From here I may also take one final step of permanently converting the document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.
+which more or less performs a `git mv src/{cold,warm}/DOCUMENT.md` plus chips.
+
+From here I may also take one final step of permanently converting the source document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.
 
 ```sh
 winter build
@@ -58,13 +67,11 @@ git rm src/cold/DOCUMENT.md
 git add src/cold/DOCUMENT.html
 ```
 
-_([Winter](https://twos.dev/winter) is the bespoke CLI that builds twos.dev.)_
-
-This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done anyway.
+This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done.
 
 #### Results
 
-Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but I can break that consistency when I need (e.g. for a [CV](cv.html)'s bicolumnar layout).
+Allowing myself this escape hatch is freeing. I’m more encouraged to write interactive or otherwise bespoke components, and twos.dev becomes consistent by default but in a way I can break when I need (e.g. for a [CV](cv.html)'s bicolumnar layout).
 
 ## On URLs Not Changing
 
