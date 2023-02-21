@@ -80,6 +80,9 @@ func (s *Substructure) discover() error {
 			return err
 		}
 	}
+	if err := s.discoverStaticAtPath("public"); err != nil {
+		return err
+	}
 	return nil
 }
 
@@ -94,15 +97,11 @@ func (s *Substructure) discoverAtPath(path string) error {
 		return err
 	}
 
-	if err := s.discoverOrgFromPath(path); err != nil {
+	if err := s.discoverOrgAtPath(path); err != nil {
 		return err
 	}
 
 	if err := s.discoverGalleriesAtPath(path); err != nil {
-		return err
-	}
-
-	if err := s.discoverStaticAtPath(path); err != nil {
 		return err
 	}
 
@@ -113,18 +112,36 @@ func (s *Substructure) discoverAtPath(path string) error {
 
 // discoverGalleriesAtPath discovers all galleries in or at the given path glob.
 func (s *Substructure) discoverGalleriesAtPath(path string) error {
-	jpg, err := filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][gG]"))
-	if err != nil {
-		return err
+	var jpgFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		jpgFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][gG]"))
+		if err != nil {
+			return err
+		}
+	} else if strings.ToLower(filepath.Ext(path)) == ".jpg" {
+		jpgFiles = append(jpgFiles, path)
 	}
 
-	jpeg, err := filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][eE][gG]"))
-	if err != nil {
-		return err
+	var jpegFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		jpegFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][eE][gG]"))
+		if err != nil {
+			return err
+		}
+	} else if strings.ToLower(filepath.Ext(path)) == ".jpeg" {
+		jpegFiles = append(jpegFiles, path)
 	}
 
 	var prev, next *galleryDocument
-	for _, src := range append(jpg, jpeg...) {
+	for _, src := range append(jpgFiles, jpegFiles...) {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
@@ -145,31 +162,35 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 // discoverHTMLAtPath discovers all HTML documents in or at the
 // given path glob.
 func (s *Substructure) discoverHTMLAtPath(path string) error {
-	warmhtml, err := filepathx.Glob(filepath.Join(path, "**", "*.html"))
-	if err != nil {
-		return err
+	var htmlFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		htmlFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.html"))
+		if err != nil {
+			return err
+		}
+	} else if strings.HasSuffix(path, ".html") {
+		htmlFiles = append(htmlFiles, path)
 	}
 
-	warmtmpl, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
-	if err != nil {
-		return err
+	var tmplFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		tmplFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
+		if err != nil {
+			return err
+		}
+	} else if strings.HasSuffix(path, ".tmpl") {
+		tmplFiles = append(tmplFiles, path)
 	}
 
-	// coldhtml, err := filepathx.Glob(filepath.Join(path, "**", "*.html"))
-	// if err != nil {
-	// 	return err
-	// }
-	//
-	//	coldtmpl, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
-	//	if err != nil {
-	//		return err
-	//	}
-
-	var coldhtml, coldtmpl []string
-	warm := append(warmhtml, warmtmpl...)
-	cold := append(coldhtml, coldtmpl...)
-
-	for _, src := range append(warm, cold...) {
+	for _, src := range append(htmlFiles, tmplFiles...) {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
@@ -191,12 +212,21 @@ func (s *Substructure) discoverHTMLAtPath(path string) error {
 // discoverMarkdownAtPath discovers all Markdown documents in or at
 // the given path glob.
 func (s *Substructure) discoverMarkdownAtPath(path string) error {
-	md, err := filepathx.Glob("src/**/*.md")
-	if err != nil {
-		return err
+	var markdownFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		markdownFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.md"))
+		if err != nil {
+			return err
+		}
+	} else if strings.ToLower(filepath.Ext(path)) == ".md" {
+		markdownFiles = append(markdownFiles, path)
 	}
 
-	for _, src := range md {
+	for _, src := range markdownFiles {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
@@ -210,17 +240,26 @@ func (s *Substructure) discoverMarkdownAtPath(path string) error {
 	return nil
 }
 
-// discoverOrgFromPath discovers all Org documents in or at the given
+// discoverOrgAtPath discovers all Org documents in or at the given
 // path glob.
-func (s *Substructure) discoverOrgFromPath(path string) error {
+func (s *Substructure) discoverOrgAtPath(path string) error {
 	// TODO: Allow looking in user's org directory.
 	// TODO: Allow rendering only a subsection of an org file.
-	org, err := filepathx.Glob("src/**/*.org")
-	if err != nil {
-		return err
+	var orgFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		orgFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.org"))
+		if err != nil {
+			return err
+		}
+	} else {
+		orgFiles = append(orgFiles, path)
 	}
 
-	for _, src := range org {
+	for _, src := range orgFiles {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
@@ -235,12 +274,21 @@ func (s *Substructure) discoverOrgFromPath(path string) error {
 }
 
 func (s *Substructure) discoverStaticAtPath(path string) error {
-	static, err := filepathx.Glob("public/**/*")
-	if err != nil {
-		return err
+	var staticFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		staticFiles, err = filepathx.Glob(filepath.Join(path, "**", "*"))
+		if err != nil {
+			return err
+		}
+	} else {
+		staticFiles = append(staticFiles, path)
 	}
 
-	for _, src := range static {
+	for _, src := range staticFiles {
 		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
 			continue
 		}
