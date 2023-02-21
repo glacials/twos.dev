@@ -109,7 +109,6 @@ func init() {
 	_ = *f.StringP("desc", "d", "", "site description (e.g. misc thoughts)")
 	_ = *f.StringP("domain", "m", "", "site root domain (e.g. twos.dev)")
 	_ = *f.StringP("name", "n", "", "site name (e.g. twos.dev)")
-	_ = *f.StringArrayP("source", "i", []string{}, "supplemental source file or directory to build (can be specified multiple times)")
 
 	rootCmd.AddCommand(buildCmd)
 }

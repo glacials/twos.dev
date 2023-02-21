@@ -20,21 +20,21 @@ var freezeCmd = &cobra.Command{
 		destructive issues caused by the hotbed of src/warm.
 	`),
 	Example: wrap(`
-		The command ` + "`" + `winter freeze autism` + "`" + ` searches for a file
-		with the shortname ` + "`" + `autism` + "`" + ` in src/cold (whether
+		The command ` + "`" + `winter freeze DOCUMENT` + "`" + ` searches for a file
+		with the shortname ` + "`" + `DOCUMENT` + "`" + ` in src/cold (whether
 		explicitly in frontmatter or implicitly in filename) and moves it to
 		src/cold.
 	`),
 	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		cfg, err := cmdConfig(cmd)
+		// TODO: Allow an argument to also render .md to .html
+		sources, err := cmd.Flags().GetStringArray("source")
 		if err != nil {
 			return err
 		}
 
-		// TODO: Allow an argument to also render .md to .html
 		for _, shortname := range args {
-			s, err := winter.NewSubstructure(cfg)
+			s, err := winter.NewSubstructure(winter.Config{SourceDirectories: sources})
 			if err != nil {
 				return err
 			}
@@ -61,7 +61,12 @@ var freezeCmd = &cobra.Command{
 				if err != nil {
 					return err
 				}
-				if err := os.Remove(filepath.Join(warmSourceOfTruth, rel)); err != nil {
+				relpath := filepath.Join(warmSourceOfTruth, rel)
+				if _, err := os.Stat(relpath); err != nil {
+					if !os.IsNotExist(err) {
+						return err
+					}
+				} else if err := os.Remove(relpath); err != nil {
 					return err
 				}
 			}
