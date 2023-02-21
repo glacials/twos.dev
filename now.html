@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="
+What I&#39;m Doing Now
+" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>
+What I&#39;m Doing Now
+</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" class="selected" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+      </header>
+      <article>
+        
+        
+        <html><head></head><body><p>
+<em>This page is in the form of <a href="https://sive.rs/now">Derek Sivers's <code class="verbatim">/now</code> page</a>.</em></p>
+<div id="outline-container-headline-1" class="outline-1">
+<h1 id="headline-1">
+What I'm Doing Now
+</h1>
+<div id="outline-text-headline-1" class="outline-text-1">
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+SunPower
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>
+Since July 2022 I've worked at <a href="https://sunpower.com">SunPower</a>, a consumer solar panel
+company serving the US. I worked for six months on a team that manages
+the data pipeline between panels and the consumer mobile app.</p>
+<p>
+I jumped in February 2023 to a new team spun up to reimagine the
+customer onboarding pipeline that takes place between someone saying
+"I would like some panels please" and actually getting the panels
+bolted to their roof. This is a complex process involving permitting,
+panel placement design, electrical work, and shipping the right parts
+to the right place, among sometimes-exceptional circumstances like
+roof replacement.</p>
+<p>
+The team's goal is to take this process from the current ~months down
+to ~days. It involves a lot of learning and has been super fun so
+far. I'm working with two people who are also ex-<a href="https://twitch.tv">Twitch</a>, which has
+been a fun bonding experience.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Emacs
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>
+I've started using Emacs and org-mode. Both are great and it really
+feels like Emacs : Vim :: Vim : nano. It's pretty rocky here and there
+but I can feel the power lurking under the surface. Time will tell if
+the rocks eventually erode my motivation and I jump back to VSCode
+again, as I tended to do on six-month rotations between Vim and
+VSCode.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+This Website
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>
+Somehow after a dozen attempts over two dozen years I finally have a
+website that I've stuck with for quite a while. The secret sauce
+turned out to be building the generator myself, because I constantly
+want to try some new way of writing and this is the only way I can be
+sure I have the context to implement it. For example, <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/now.org">this page itself</a>
+is written in org-mode automatically converted from Org to HTML at
+build-time.</p>
+<p>
+(For more information see <a href="/meta.html">Inside twos.dev</a>, or the <a href="/winter">documentation</a> for
+the generator.)</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Autism
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>
+I found out in 2020 that I'm autistic and it's been a fantastic and
+eye-opening experience. Every ~month (at first every ~day) I learn
+that some weird behavior about myself is attributable to autism, and
+that there's a pool of people I can talk to about it. These vary from
+having been mute for 9 years as a child, to spending multiple hours
+per day preparing and retrospecting conversations I've had, to not
+liking hot weather, to sometimes feeling like every little noise is
+far too loud.</p>
+<p>
+I wrote about it in an article titled <a href="/autism.html">Anonymously Autistic</a>.</p>
+</div>
+</div>
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
+Mastodon
+</h2>
+<div id="outline-text-headline-6" class="outline-text-2">
+<p>
+I've mostly jumped ship from Twitter and have switched to Mastodon:
+<a href="https://m.twos.dev/@ben">@ben@m.twos.dev</a>. I run my own instance with signups closed just
+because I wanted something to tinker with at the time.</p>
+</div>
+</div>
+</div>
+</div>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/now.org"
+                  >src/cold/now.org</a
+                >
+              
+              <br />
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

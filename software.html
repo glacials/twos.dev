@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Software" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>Software</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" class="selected" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+      </header>
+      <article>
+        
+        
+        <html><head></head><body><h1>Software</h1>
+
+<h2>Creations</h2>
+
+<p><em>Solid hearts are active; hollow hearts are inactive but stable.</em></p>
+
+<ul>
+<li>♥ <a href="https://twos.dev/winter">Winter</a>: Static website generator powering this
+website (Go)</li>
+<li>♥ <a href="https://splits.io">Splits.io</a>: Strava for game speedrunning (Ruby on Rails,
+Vue)</li>
+<li>♥ <a href="https://whatsinstandard.com">What's in Standard?</a>: Reference tool for
+Magic: The Gathering (Vue, Flutter)</li>
+<li>♡ <a href="https://pricegun.twos.dev">Pricegun</a>: Estimate how much to charge for a
+side project (React)</li>
+<li>♡ <a href="https://license.land">Licenseland</a>: Dual-license provider for open source
+developers (Vue)</li>
+<li>♡ <a href="https://github.com/glacials/friendly_uuid">FriendlyUUID</a>: Zero-config
+stateless UUID-based URL slugs (Ruby on Rails)</li>
+<li>♡ <a href="https://github.com/glacials/indenter">Indenter</a>: Syntactic sugar for
+neatly-indented CLI output (Python)</li>
+<li><a href="https://github.com/glacials/housebot">Housebot</a>: Twitch-controlled smart
+lights (Node, CoffeeScript)</li>
+<li><a href="https://github.com/glacials/mainframe">Mainframe</a>: A bespoke home server
+running on an RPi in my closet (Go)</li>
+<li><a href="https://github.com/glacials/kure">kure</a>: A flat-file blogging engine (PHP)</li>
+</ul>
+
+<h2>Contributions</h2>
+
+<p>Other open source projects I've contributed to:</p>
+
+<ul>
+<li><a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263">Emacs</a> (docs only):
+<a href="https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263">#60263</a> Correct wrong info in (info)Go to node</li>
+<li><a href="https://github.com/nedbat/coveragepy">Coverage.py</a>:
+<a href="https://github.com/nedbat/coveragepy/pull/1210">#1210</a> Fix an incompatibility with pyarmor</li>
+<li><a href="https://github.com/rails/rails">Ruby on Rails</a> (docs only):
+<a href="https://github.com/rails/rails/pull/37190">#37190</a> Fix a button_to documentation example</li>
+<li><a href="https://github.com/fladson/vim-kitty">vim-kitty</a>:
+<a href="https://github.com/fladson/vim-kitty/pull/20">#20</a> Recognize <code>#:</code> comment syntax in <code>kitty.conf</code></li>
+<li><a href="https://github.com/streamlinesocial/highcharts-regression">Highcharts Regression</a>:
+<a href="https://github.com/streamlinesocial/highcharts-regression/pull/84">#84</a> Add extrapolation for exponential, linear, power, &amp; log</li>
+<li><a href="https://github.com/ruby-gettext/gettext">ruby-gettext</a>:
+<a href="https://github.com/ruby-gettext/gettext/pull/32">#32</a> Support Pathnames in $LOAD_PATH</li>
+<li><a href="https://github.com/matiasb/python-unidiff">Unidiff</a>:
+<a href="https://github.com/matiasb/python-unidiff/pull/75">#75</a> Fix an error when the first change is a binary,
+<a href="https://github.com/matiasb/python-unidiff/pull/82">#82</a> Add type hints</li>
+<li><a href="https://github.com/german1608/android-bundle-uploader">android-bundle-uploader</a>:
+<a href="https://github.com/german1608/android-bundle-uploader/pull/3">#3</a> Allow setting release notes,
+<a href="https://github.com/german1608/android-bundle-uploader/pull/7">#7</a> Convert into a first-class CLI</li>
+<li><a href="https://github.com/andresaraujo/timeago.dart">timeago</a>:
+<a href="https://github.com/andresaraujo/timeago.dart/pull/128">#128</a> Make en_short
+consistent with other sites</li>
+<li><a href="https://github.com/teranetsrl/oauth2_client">oauth2_client</a>:
+<a href="https://github.com/teranetsrl/oauth2_client/pull/29">#29</a> Add clientSecret param to Authorization Code Grant examples,
+<a href="https://github.com/teranetsrl/oauth2_client/pull/53">#53</a> Handle provider
+errors when refreshing tokens</li>
+<li><a href="https://github.com/iain/http_accept_language">HttpAcceptLanguage</a>:
+<a href="https://github.com/iain/http_accept_language/pull/41">#41</a> Make language comparisons case-insensitive</li>
+<li><a href="https://github.com/Cockatrice/Cockatrice">Cockatrice</a>:
+<a href="https://github.com/Cockatrice/Cockatrice/pull/6">#6</a> Fixed a cursor bug,
+<a href="https://github.com/Cockatrice/Cockatrice/pull/7">#7</a> Added a UI option to play all nonlands to the stack instead of the battlefield</li>
+</ul>
+
+<p>(<a href="https://github.com/search?o=desc&amp;q=is%3Apr+author%3Aglacials+archived%3Afalse+is%3Aclosed+-user%3Ayourbase+-user%3Aglacials+&amp;s=created&amp;type=Issues">see all</a>)</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/software.md"
+                  >src/cold/software.md</a
+                >
+              
+              <br />
+              
+                published
+                2022 June
+                  / last updated
+                  2023 February
+                
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

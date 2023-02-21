@@ -1,0 +1,190 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Crysis" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>Crysis</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2007 November</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        
+          <div
+            style="text-align:center;text-transform:uppercase;margin-top:3em;"
+          >
+            game loads
+          </div>
+        
+        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/">I FEEL
+ASLEEP</a>, which was shared with
+Neverhitboxes.</em></p>
+
+<hr/>
+
+<h1>Crysis</h1>
+
+<p>I’m one of those people who pretty much just has to play any game I’m excited
+for (a recent example of this is when I bought Halo 3 with no 360 to play it on
+and had to get a friend to lend me his, so long as I <a href="halo3.html">give him the
+game</a> afterwards). And being a pretty heavy gamer, I get excited for
+quite a lot of games.</p>
+
+<p>So often times I approach a sort of pickle in my gaming life, much like the one
+I’m in right now. I’m sure many others have encountered the situation: a slew of
+new games all come out within a few weeks of each other, and you simply don’t
+have enough time to play them all as much as you want. It’s a weird situation,
+having too much of a good thing.</p>
+
+<p>This was originally going to be a post about all of those games, but let’s split
+it up into chunks:</p>
+
+<p>One of the games I’ve been trying to work into my schedule is, of course,
+Crysis. I won’t waste keystrokes trying to explain the awesomeness of its
+graphics and physics (I’m no graphics whore, but hey <span style="font-family: sans-serif">—</span> a good thing is a good
+thing), because I’m sure everyone who’s heard of Crysis has probably heard about
+it in some reference to graphical detail. Rather, I’d like to explain somewhat
+the opposite: the lack of possible graphics.</p>
+
+<p><strong>Before I start trippin’ up all in your grill,</strong> I’m talking about the DirectX9
+version here. And I’m in no way trying to criticize its capabilities; in fact,
+I’m trying to bring them out. It’s been circulating around the ‘net that when
+Crysis runs on DX9, its graphical intensity is purposefully not as high as it
+can be, presumably to make people say “Oh man, DX9 sucks compared to DX10, now
+I’m going to go spend some money on Vista and a new graphics card so I can
+experience the awesomeness.”</p>
+
+<p>A (somewhat) recent <a href="http://webpages.charter.net/bliss/">comparison</a> of the DX9
+and DX10 versions of Crysis somewhat reveals this <span style="font-family: sans-serif">—</span> throughout the page,
+screenshots taken on DX9 Crysis are shown, and on rollover you can see the DX10
+versions of the exact same screenshots. But at the bottom, <a href="http://webpages.charter.net/bliss/crysis-config-settings-tweaks.html">some
+instructions</a>
+are mentioned to allow DX9 to run on some high-end settings that supposedly only
+DX10 can handle <span style="font-family: sans-serif">—</span> apparently Crytek has “chosen to artificially limit some of
+the game’s graphics effects to only the DX10 version in order to create a bigger
+perceived difference.”</p>
+
+<p>Not cool, man.</p>
+
+<p>DX10 is still (I hear) much better than 9, but why would Crytek choose to
+disallow DX9 to work up to its full potential? Are they trying to encourage
+people to get DX10 cards to prepare for the future, or did Microsoft have some
+say in this?</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/crysis.md"
+                  >src/cold/crysis.md</a
+                >
+              
+              <br />
+              
+                published
+                2007 November
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

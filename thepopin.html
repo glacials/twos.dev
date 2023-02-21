@@ -1,0 +1,244 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="The Remote Pop-In" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>The Remote Pop-In</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2021 May</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        
+        <html><head></head><body><h1>The Remote Pop-In</h1>
+
+<p>
+  This page describes a method of dealing with one of the missing features of
+  fully remote teams: the pop-in.
+
+  
+</p>
+
+<h2>The Pop-In</h2>
+<p>
+  The pop-in, back before open floorplans, is when you physically walk into
+  someone's office to ask them a question or spitball an idea. In an open
+  floorplan you can instead swivel your chair or walk to their desk.
+</p>
+<p>
+  The pop-in is valuable because it's as informal as email, but as
+  high-bandwidth and low-latency as meetings. It's interruptive to be popped in
+  on, but that interruption power is self-limiting: the effort of physically
+  going somewhere is high, and the tools available to the target like doors,
+  signs, and social cues are numerous and don't require much thought to
+  implement.
+</p>
+<p>
+  Slack DMs come close to replacing the pop-in, but they reduce the effort too
+  much. This leads to more interruptions (a little lower in intensity, but a lot
+  higher in number) and even to the replacement of trackers, emails, and wikis
+  with DMs.
+</p>
+<p>
+  There's a lot wrong with the pop-in, but like any tool it has its uses. Many
+  great products<span style="font-family: sans-serif">—</span>companies, even<span style="font-family: sans-serif">—</span>have been built on the shoulders of
+  the pop-in.
+</p>
+<h2>The Remote Pop-In</h2>
+<p>
+  There's really no remote equivalent to the pop-in. There are products that
+  help you "hang out" like Facebook Portal, but nothing that implements the
+  pop-in.
+</p>
+<p>
+  At <a href="https://yourbase.io">YourBase</a> we decided we needed one. Rather
+  than build another tool, we experimented with Discord. I'm happy to say we
+  found something that works, and even solves the worst problem of the
+  open-office pop-in: the inability to shut your damned door.
+</p>
+<h3>The Setup</h3>
+<figure style="text-align: center">
+  
+  <picture>
+    <source srcset="img/thepopin-0-dark.png" media="(prefers-color-scheme: dark)" />
+    <img
+      alt="A screenshot of a Discord server with several voice channels, some empty, some having one person in them"
+      src="img/thepopin-0-light.png"
+      style="max-height: 40em; max-width: 100%"
+    />
+  </picture>
+  
+  <figcaption>The company Discord server on a workday.</figcaption>
+</figure>
+
+<p>
+  In our company Discord server, we give everyone one voice channel of their
+  own. This is your "office". When you are online and able to be disturbed, you
+  join your office, alone. You stay in there as long as you are "in".
+</p>
+<p>
+  Because of how Discord works, everyone can see who is in what office at all
+  times. But you can only hear conversations for the room you're in, and you can
+  only be in one room at a time. Joining a room plays an obvious audio chime and
+  is not something you can do sneakily.
+</p>
+<p>
+  When someone wants to pop in, they join your voice channel. The chime plays,
+  they say hello, you unmute and turn on video if you like, and have your
+  pop-in. And that's really it.
+</p>
+<p>
+  If you're going to the restroom and will be AFK, you can join the restroom
+  channel. You're in, but away. No one is actually wearing a headset on the
+  toilet, it's just a fun way to feel like a real office.
+</p>
+<p>We've even fallen into some typical office behaviors:</p>
+
+<ul>
+  <li>
+    We've started having meetings in people's offices, just because it's easier.
+  </li>
+  <li>
+    We have a "cafeteria" room where you can eat your lunch if you've got
+    nothing going on in real life. We also hold lunch-and-learns here.
+  </li>
+  <li>
+    We have a "rooftop" and other common spaces where some people chill, which
+    signals that they're open for a chat.
+  </li>
+</ul>
+<p>
+  The oddest one is that when it's slow around the office, you can tell. You can
+  almost hear how quiet it is when you're the first one in or the last one out.
+</p>
+<p>
+  The pop-in is valuable because it's informal, high bandwidth, and low latency.
+  Enabling it using Discord has worked very well for us over the last six
+  months, and we didn't even have to build anything.
+</p>
+<p>
+  Thanks to <a href="https://discordapp.com">Discord</a> for making such a
+  flexible platform. Thanks to <a href="https://yourbase.io">YourBase</a> for
+  being so open to crazy ideas. (Check us out if your CI is slow.)
+</p>
+<p>
+  <a href="https://www.youtube.com/watch?v=KzOv2jrC1I8">"The Pop-In"</a>
+</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/thepopin.html.tmpl"
+                  >src/cold/thepopin.html.tmpl</a
+                >
+              
+              <br />
+              
+                published
+                2021 May
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

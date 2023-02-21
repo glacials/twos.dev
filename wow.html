@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="World of Warcraft" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>World of Warcraft</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2007 December</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        
+          <div
+            style="text-align:center;text-transform:uppercase;margin-top:3em;"
+          >
+            game loads
+          </div>
+        
+        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/">I FEEL
+ASLEEP</a>, which was shared with
+Neverhitboxes.</em></p>
+
+<hr/>
+
+<h1>World of Warcraft</h1>
+
+<p>Yeah, you knew it was coming. If you despise <em>World of Warcraft</em> (or MMORPG’s in
+general), maybe you should stop reading here if you don’t want to throw up.</p>
+
+<p>I started playing in September 2005, right when I started my job (where both my
+coblogger and I still work) because about half of the employees there played
+religiously, so I figured, <em>why the hell not</em>.</p>
+
+<p>At that time I had been exploring <a href="http://en.wikipedia.org/wiki/MUD">multi-user
+dungeons</a>, which are basically text-based
+MMORPG’s, but I guess <em>WoW</em> sounded more appealing when everyone got into
+talking about it. It was a nice sort of ice-breaker, too <span style="font-family: sans-serif">—</span> I’m not a big
+initiator of smalltalk, so actually having something real (if you can call it
+that ) to talk about was a good way to pass the time.</p>
+
+<p>You could probably view my track record with WoW as a tipsy relationship. You
+could say we went out for about six months, but then we got bored of each other
+and separated. You could then say we got back together a few months later with
+more passion than ever <span style="font-family: sans-serif">—</span> I was always bad at sticking to one character, but
+during this passion period, I played only my mage for about three or four weeks,
+getting him from the mid-30’s to 54 <span style="font-family: sans-serif">—</span> which was the largest spike in our
+relationship.</p>
+
+<p>You could also say that once the effects of the spike dwindled away, our
+relationship again grew repetitive and boring, so we took another break <span style="font-family: sans-serif">—</span> one
+that lasted about two months.</p>
+
+<p>And now, after the serious lows and the serious highs, it’s almost like we’ve
+landed right in the middle <span style="font-family: sans-serif">—</span> right at the sweet spot. I like to play it enough
+to maintain my characters, but not enough to cut myself off from all the other
+good games out there <span style="font-family: sans-serif">—</span> it’s an open relationship.</p>
+
+<p>I’ve given up on getting better gear for my 70 (the mage I leveled in such a
+hurry for <em>Burning Crusade</em>) because of the upcoming release of <em>Wrath of the
+Lich King</em>. Instead I’m just leveling a handful of alts, trying not to rush
+through them.</p>
+
+<p>These include an 11 priest, a 32 druid, a 40 warlock (free mounts ftw) all on
+the same server.</p>
+
+<p>I would review the game itself instead of my history with it, but reviewing
+MMORPG’s is a touchy subject <span style="font-family: sans-serif">—</span> my opinions would probably be way more biased
+than usual, and (not even as an affect of that) people would probably exaggerate
+the review depending on their attitude towards MMO’s.</p>
+
+<p>And apparently because it’s Christmas, my family and I are going to do family
+things like make waffles and play Monopoly. So I should wrap this up.</p>
+
+<p>Blegh.</p>
+
+<p>(not at the waffles <span style="font-family: sans-serif">—</span> waffles are the pwnzage)</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/wow.md"
+                  >src/cold/wow.md</a
+                >
+              
+              <br />
+              
+                published
+                2007 December
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>

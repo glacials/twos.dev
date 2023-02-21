@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Things I&#39;ve learned today" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>Things I&#39;ve learned today</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+		<a href="/now.html" >Now</a>
+		<span class="arrow"></span>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2007 September</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        
+        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/">I FEEL
+ASLEEP</a>, which was shared with
+Neverhitboxes.</em></p>
+
+<hr/>
+
+<h1>Things I've learned today</h1>
+
+<p>So I played through <em>Halo 3</em> today with a friend, start to finish, and I have to
+say, I kinda don’t like it at all. I loved <em>Halo</em>; <em>Halo 2</em> was great; but <em>Halo
+3</em>…meh.</p>
+
+<p>I’m a big storyline person. I love getting involved in the events of a game. A
+big reason I bought the game (I don’t even have a 360 and had to get a friend to
+lend his to me under the sole condition that I <em>give him the game</em> when I’m
+done) was to get some closure for the <em>Halo</em> storyline, and frankly, <em>there is
+none</em>. There are <em>so many</em> questions left unanswered at the end of the game; too
+many even if there were to be a <em>Halo 4</em>. I don’t want to get too into specifics
+for those who haven’t yet played through it and still plan to, but were it not
+for a few small things, the game would have almost no attracting storyline
+elements <em>whatsoever</em>.</p>
+
+<p>I admit that some parts of the game were fun, namely the last level, which was
+reminiscent of the first game’s last level <em>The Maw</em>, but overall the game failed
+to impress. The graphics were not at all bad, but weren’t something to drool
+over (then again, we were playing split-screen on a 19-inch TV). I’d much prefer
+not necessarily the graphics, but maybe the graphical feel of Wii’s Metroid
+Prime 3, my last favorite console game.</p>
+
+<p>On a separate but related note, playing console FPS’s constantly makes me
+realize how much I love PC games. It seems trivial, but when you’re in an
+intense situation, and you need to turn 180 degrees around, and with a console
+you can only push the control stick so far in one direction and actually have to
+<em>wait</em> for your character to turn all the way around, it gets pretty annoying
+and sets some serious pace limits. On a PC, you’re in full control <span style="font-family: sans-serif">—</span> your
+character’s movements actually <em>correspond</em> to your mouse; there’s no center
+that you need to reset to when you’re done turning.</p>
+
+<p>If this is hard to understand, just think about what I said <span style="font-family: sans-serif">—</span> imagine you’re
+playing <em>Halo</em> right now (or just go play it), and you want to spin around to
+face the other way. You hold the control stick down one direction until you’re
+there, right? It might take a second or less (depending on your sensitivity).
+Now imagine the same situation on a PC. You just go <em>VRRP!</em> and you’re there
+(yes, that’s my sound effect for a mouse).</p>
+
+<p>So <strong>anyways</strong>, some PC games I’m excited for now are <em>Portal</em> and <em>Half-Life 2:
+Episode 2</em>. I’ve already been playing the <em>Team Fortress 2</em> beta and it’s pretty
+freaking sweet (they’ve even implemented rankings, just like BF2/2142!).</p>
+
+<p>And this time going completely off-topic: did you know <em>fell</em> is a word!? I
+don’t mean the past tense of <em>fall</em>; I mean you can actually go <em>fell</em> something
+(i.e. I <a href="https://ninjawords.com/fell">felled</a> that tree yesterday!). Woo, good
+times.</p>
+
+<p>Ugh, I could totally follow that up with an
+<a href="http://en.wikipedia.org/wiki/Avatar:_The_Last_Airbender">ATLA</a> quote…</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/halo3.md"
+                  >src/cold/halo3.md</a
+                >
+              
+              <br />
+              
+                published
+                2007 September
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
