@@ -140,8 +140,7 @@ type videoVars struct {
 	DarkMP4  graphic.SRC
 }
 
-// tmplPathToName converts a template path to a template name. This is
-// a lexicographical calculation; the filesystem is not looked at.
+// tmplPathToName converts a template path to a template name.
 func tmplPathToName(src string) string {
 	name := filepath.Base(src)
 	name = strings.TrimPrefix(name, "_")

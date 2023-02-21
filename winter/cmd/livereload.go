@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io/fs"
 	"log"
-	"os"
 	"path/filepath"
 	"time"
 
@@ -68,7 +67,7 @@ func (r *Reloader) Reload() {
 //
 // Watch returns once the goroutine has been spun off successfully. Any errors
 // enountered while watching the filesystem are printed to stderr.
-func (r *Reloader) Watch(paths []string) error {
+func (r *Reloader) Watch() error {
 	watcher, err := fsnotify.NewWatcher()
 	if err != nil {
 		return fmt.Errorf("cannot initialize fsnotify watcher: %s", err)
@@ -77,52 +76,29 @@ func (r *Reloader) Watch(paths []string) error {
 	r.watcher = watcher
 	r.stop = make(chan struct{})
 
-	for _, path := range paths {
-		for pattern := range r.Ignore {
-			if ok, err := filepath.Match(pattern, path); err != nil {
+	if err := filepath.WalkDir(
+		".",
+		func(path string, info fs.DirEntry, err error) error {
+			if err != nil {
 				return err
-			} else if ok {
-				return filepath.SkipDir
 			}
-		}
-
-		// If we're passed a file, watch it directly
-		if stat, err := os.Stat(path); err != nil {
-			return fmt.Errorf("cannot stat %s: %w", path, err)
-		} else if !stat.IsDir() {
-			r.watcher.Add(path)
-			continue
-		}
-
-		// If we're passed a directory, watch it recursively.
-		// fsnotify.Watcher only supports watching directories
-		// non-recurisvely, so we'll recurse ourselves.
-		if err := filepath.WalkDir(
-			path,
-			func(path string, info fs.DirEntry, err error) error {
-				if err != nil {
+			for pattern := range r.Ignore {
+				if ok, err := filepath.Match(pattern, path); err != nil {
 					return err
+				} else if ok {
+					return filepath.SkipDir
 				}
-				for pattern := range r.Ignore {
-					if ok, err := filepath.Match(pattern, path); err != nil {
-						return err
-					} else if ok {
-						return filepath.SkipDir
-					}
-				}
-				if !info.IsDir() {
-					// We can skip watching files, because we're watching all
-					// directories.
-					return nil
-				}
+			}
+			if info.IsDir() {
 				if err := r.watcher.Add(path); err != nil {
 					return fmt.Errorf("can't watch %s: %w", path, err)
 				}
 				return nil
-			},
-		); err != nil {
-			return err
-		}
+			}
+			return nil
+		},
+	); err != nil {
+		return err
 	}
 
 	go r.listen()
