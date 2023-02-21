@@ -74,7 +74,7 @@ var (
 				go listenForCtrlC(stop, &server, &reloader)
 				go startFileServer(&server)
 
-				if err := reloader.Watch(); err != nil {
+				if err := reloader.Watch(append(cfg.SourceDirectories, ".")); err != nil {
 					return err
 				}
 
