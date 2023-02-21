@@ -32,22 +32,9 @@ type substructureDocument struct {
 }
 
 var (
-	// ignoreFilenames are filenames (not paths) that should not be
-	// treated as documents to be generated, even though they are in
-	// source directories.
-	//
-	// TODO: Migrate some of these to a directory blocklist instead.
 	ignoreFilenames = map[string]struct{}{
-		"README.md":               {},
-		".DS_Store":               {},
-		"imgcontainer.html.tmpl":  {},
-		"text_document.html.tmpl": {},
-		"_icon.html.tmpl":         {},
-		"_imgs.html.tmpl":         {},
-		"_nav.html.tmpl":          {},
-		"_subtoc.html.tmpl":       {},
-		"_toc.html.tmpl":          {},
-		"_videos.html.tmpl":       {},
+		"README.md": {},
+		".DS_Store": {},
 	}
 	pad = newPadder()
 )
@@ -71,54 +58,88 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 	return &s, s.discover()
 }
 
-// discover clears the substructure of any known documents and
-// discovers all documents from scratch on the filesystem.
+// discover clears the substructure of any known documents and discovers all
+// documents from scratch from the filesystem.
 func (s *Substructure) discover() error {
-	paths := append(s.cfg.SourceDirectories, "src/**")
-	for _, path := range paths {
-		if err := s.discoverAtPath(path); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-// discoverAtPath discovers all documents in or at the given path
-// glob.
-func (s *Substructure) discoverAtPath(path string) error {
-	if err := s.discoverHTMLAtPath(path); err != nil {
-		return err
-	}
-
-	if err := s.discoverMarkdownAtPath(path); err != nil {
-		return err
-	}
-
-	if err := s.discoverOrgFromPath(path); err != nil {
-		return err
-	}
-
-	if err := s.discoverGalleriesAtPath(path); err != nil {
-		return err
-	}
-
-	if err := s.discoverStaticAtPath(path); err != nil {
-		return err
-	}
-
-	sort.Sort(s.docs)
-
-	return nil
-}
-
-// discoverGalleriesAtPath discovers all galleries in or at the given path glob.
-func (s *Substructure) discoverGalleriesAtPath(path string) error {
-	jpg, err := filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][gG]"))
+	md, err := filepathx.Glob("src/**/*.md")
 	if err != nil {
 		return err
 	}
 
-	jpeg, err := filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][eE][gG]"))
+	for _, src := range md {
+		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+			continue
+		}
+		doc, err := NewMarkdownDocument(src)
+		if err != nil {
+			return err
+		}
+		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+	}
+
+	// TODO: Allow looking in user's org directory.
+	// TODO: Allow rendering only a subsection of an org file.
+	org, err := filepathx.Glob("src/**/*.org")
+	if err != nil {
+		return err
+	}
+
+	for _, src := range org {
+		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+			continue
+		}
+		doc, err := NewOrgDocument(src)
+		if err != nil {
+			return err
+		}
+		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+	}
+
+	warmhtml, err := filepathx.Glob("src/warm/*.html")
+	if err != nil {
+		return err
+	}
+
+	warmtmpl, err := filepathx.Glob("src/warm/*.tmpl")
+	if err != nil {
+		return err
+	}
+
+	coldhtml, err := filepathx.Glob("src/cold/*.html")
+	if err != nil {
+		return err
+	}
+
+	coldtmpl, err := filepathx.Glob("src/cold/*.tmpl")
+	if err != nil {
+		return err
+	}
+
+	warm := append(warmhtml, warmtmpl...)
+	cold := append(coldhtml, coldtmpl...)
+
+	for _, src := range append(warm, cold...) {
+		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+			continue
+		}
+		doc, err := NewHTMLDocument(src)
+		if err != nil {
+			return err
+		}
+		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+	}
+	for _, d := range s.docs {
+		if p, _, ok := strings.Cut(d.Shortname(), "_"); ok {
+			d.Parent = s.DocByShortname(p)
+		}
+	}
+
+	jpg, err := filepathx.Glob("src/**/*.[jJ][pP][gG]")
+	if err != nil {
+		return err
+	}
+
+	jpeg, err := filepathx.Glob("src/**/*.[jJ][pP][eE][gG]")
 	if err != nil {
 		return err
 	}
@@ -139,102 +160,6 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 		d.Next, next = next, d
 	}
 
-	return nil
-}
-
-// discoverHTMLAtPath discovers all HTML documents in or at the
-// given path glob.
-func (s *Substructure) discoverHTMLAtPath(path string) error {
-	warmhtml, err := filepathx.Glob(filepath.Join(path, "**", "*.html"))
-	if err != nil {
-		return err
-	}
-
-	warmtmpl, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
-	if err != nil {
-		return err
-	}
-
-	// coldhtml, err := filepathx.Glob(filepath.Join(path, "**", "*.html"))
-	// if err != nil {
-	// 	return err
-	// }
-	//
-	//	coldtmpl, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
-	//	if err != nil {
-	//		return err
-	//	}
-
-	var coldhtml, coldtmpl []string
-	warm := append(warmhtml, warmtmpl...)
-	cold := append(coldhtml, coldtmpl...)
-
-	for _, src := range append(warm, cold...) {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
-			continue
-		}
-		doc, err := NewHTMLDocument(src)
-		if err != nil {
-			return err
-		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
-	}
-	for _, d := range s.docs {
-		if p, _, ok := strings.Cut(d.Shortname(), "_"); ok {
-			d.Parent = s.DocByShortname(p)
-		}
-	}
-
-	return nil
-}
-
-// discoverMarkdownAtPath discovers all Markdown documents in or at
-// the given path glob.
-func (s *Substructure) discoverMarkdownAtPath(path string) error {
-	md, err := filepathx.Glob("src/**/*.md")
-	if err != nil {
-		return err
-	}
-
-	for _, src := range md {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
-			continue
-		}
-		doc, err := NewMarkdownDocument(src)
-		if err != nil {
-			return err
-		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
-	}
-
-	return nil
-}
-
-// discoverOrgFromPath discovers all Org documents in or at the given
-// path glob.
-func (s *Substructure) discoverOrgFromPath(path string) error {
-	// TODO: Allow looking in user's org directory.
-	// TODO: Allow rendering only a subsection of an org file.
-	org, err := filepathx.Glob("src/**/*.org")
-	if err != nil {
-		return err
-	}
-
-	for _, src := range org {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
-			continue
-		}
-		doc, err := NewOrgDocument(src)
-		if err != nil {
-			return err
-		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
-	}
-
-	return nil
-}
-
-func (s *Substructure) discoverStaticAtPath(path string) error {
 	static, err := filepathx.Glob("public/**/*")
 	if err != nil {
 		return err
@@ -256,7 +181,9 @@ func (s *Substructure) discoverStaticAtPath(path string) error {
 		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
 	}
 
-	return nil
+	sort.Sort(s.docs)
+
+	return err
 }
 
 type ErrNotTracked struct{ path string }

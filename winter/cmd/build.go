@@ -109,7 +109,6 @@ func init() {
 	_ = *f.StringP("desc", "d", "", "site description (e.g. misc thoughts)")
 	_ = *f.StringP("domain", "m", "", "site root domain (e.g. twos.dev)")
 	_ = *f.StringP("name", "n", "", "site name (e.g. twos.dev)")
-	_ = *f.StringArrayP("source", "i", []string{}, "supplemental source file or directory to build (can be specified multiple times)")
 
 	rootCmd.AddCommand(buildCmd)
 }
@@ -151,11 +150,6 @@ func cmdConfig(cmd *cobra.Command) (winter.Config, error) {
 		return winter.Config{}, err
 	}
 
-	sources, err := cmd.Flags().GetStringArray("source")
-	if err != nil {
-		return winter.Config{}, err
-	}
-
 	return winter.Config{
 		AuthorName:  authorParts[1],
 		AuthorEmail: authorParts[2],
@@ -165,8 +159,7 @@ func cmdConfig(cmd *cobra.Command) (winter.Config, error) {
 			Scheme: "https",
 			Host:   cmd.Flag("domain").Value.String(),
 		},
-		Name:              cmd.Flag("name").Value.String(),
-		Since:             since,
-		SourceDirectories: sources,
+		Name:  cmd.Flag("name").Value.String(),
+		Since: since,
 	}, nil
 }
