@@ -21,7 +21,7 @@ jobs:
         run: make build
 
       - name: Sanity check
-        run: test -f index.html
+        run: test -f dist/index.html
 
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
