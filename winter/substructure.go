@@ -71,6 +71,12 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 	return &s, s.discover()
 }
 
+// add adds the given document to the substructure, removing any old
+// versions in the process.
+func (s *Substructure) add(d *substructureDocument) {
+	s.docs = append(s.docs, d)
+}
+
 // discover clears the substructure of any known documents and
 // discovers all documents from scratch on the filesystem.
 func (s *Substructure) discover() error {
@@ -150,7 +156,7 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 			return err
 		}
 		doc.Prev, prev = prev, doc
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 	for d := prev; d != nil; d = d.Prev {
 		d.Next, next = next, d
@@ -198,7 +204,7 @@ func (s *Substructure) discoverHTMLAtPath(path string) error {
 		if err != nil {
 			return err
 		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 	for _, d := range s.docs {
 		if p, _, ok := strings.Cut(d.Shortname(), "_"); ok {
@@ -234,7 +240,7 @@ func (s *Substructure) discoverMarkdownAtPath(path string) error {
 		if err != nil {
 			return err
 		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 
 	return nil
@@ -267,7 +273,7 @@ func (s *Substructure) discoverOrgAtPath(path string) error {
 		if err != nil {
 			return err
 		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 
 	return nil
@@ -301,7 +307,7 @@ func (s *Substructure) discoverStaticAtPath(path string) error {
 		if err != nil {
 			return err
 		}
-		s.docs = append(s.docs, &substructureDocument{Document: doc, Source: src})
+		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 
 	return nil
