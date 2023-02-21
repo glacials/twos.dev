@@ -20,6 +20,9 @@ jobs:
       - name: Install and Build 🔧
         run: make build
 
+      - name: Sanity check
+        run: test -f index.html
+
       - name: Deploy 🚀
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
