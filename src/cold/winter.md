@@ -404,10 +404,6 @@ group by passing multiple images and alt texts. They will appear next to each
 other when the page width allows it, or stacked vertically otherwise.
 
 ```template
----
-filename: example.html
----
-
 {{"{{"}} imgs
    "A pair of images."
    "test1"
