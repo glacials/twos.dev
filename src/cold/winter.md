@@ -59,7 +59,7 @@ piece of warm content is stable, it can be "frozen" into cold content using
 
 ```sh
 # CLI
-go install twos.dev/winter/cmd@latest
+go install twos.dev/winter@latest
 winter --help
 
 # Go library

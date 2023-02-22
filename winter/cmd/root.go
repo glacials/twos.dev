@@ -1,5 +1,5 @@
 // Package cmd contains the commands for the winter CLI.
-package main
+package cmd
 
 import (
 	"os"
@@ -21,7 +21,7 @@ var (
 	}
 )
 
-func main() {
+func Execute() {
 	err := rootCmd.Execute()
 	if err != nil {
 		os.Exit(1)

@@ -43,7 +43,7 @@ my peculiarities.
 
 ```sh
 # CLI
-go install twos.dev/winter/cmd@latest
+go install twos.dev/winter@latest
 winter --help
 
 # Go library
