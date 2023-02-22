@@ -100,7 +100,7 @@ documentation, see
 Usage: `winter init`
 
 Initialize the current directory for use with Winter. The Winter directory
-structured detailed above will be created, and default starting templates will
+structure detailed above will be created, and default starting templates will
 be populated so that you have a working `index.html` listing posts.
 
 #### `winter build` {#build}
