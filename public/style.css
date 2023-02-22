@@ -224,7 +224,8 @@ nav a {
 }
 
 nav a.selected {
-		text-decoration: underline;
+		background: var(--bg-b);
+		color: var(--fg-b-a);
 }
 
 nav a:hover {
@@ -232,7 +233,7 @@ nav a:hover {
 }
 
 /* In case none of the below rules trigger, display a backup.
-   For some reason Chrome on Windows hits this, though Chrome on macOS doesn't.
+   This can happen if we're not on any of these pages.
 */
 nav .arrow::before {
 		content: "↔";
