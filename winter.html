@@ -223,12 +223,12 @@ piece of warm content is stable, it can be "frozen" into cold content using
         <ol>
   
     <li>
-      <a href="#fields"><span>Fields</span></a>
+      <a href="#fields"><span>Document Fields</span></a>
       
         <ol>
   
     <li>
-      <a href="#category-1"><span><code>{{ .Category }}</code></span></a>
+      <a href="#cat"><span><code>{{ .Category }}</code></span></a>
       
     </li>
   
@@ -244,6 +244,11 @@ piece of warm content is stable, it can be "frozen" into cold content using
   
     <li>
       <a href="#ispost"><span><code>{{ .IsPost }}</code></span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#shortname"><span><code>{{ .Shortname }}</code></span></a>
       
     </li>
   
@@ -363,12 +368,14 @@ documentation, see
 
 <h3 id="commands">Commands</h3>
 
+<p>Pass <code>--help</code> to any command to see detailed usage and behavior.</p>
+
 <h4 id="init"><code>winter init</code></h4>
 
 <p>Usage: <code>winter init</code></p>
 
 <p>Initialize the current directory for use with Winter. The Winter directory
-structured detailed above will be created, and default starting templates will
+structure detailed above will be created, and default starting templates will
 be populated so that you have a working <code>index.html</code> listing posts.</p>
 
 <h4 id="build"><code>winter build</code></h4>
@@ -388,9 +395,9 @@ and the browser automatically refreshes.</p>
 
 <h3 id="documents">Documents</h3>
 
-<p>A document is an HTML file or a Markdown file with optional frontmatter. The
-first level 1 heading (<code>&lt;h1&gt;</code> in HTML or <code>#</code> in Markdown) will be used as the
-document title.</p>
+<p>A document is an HTML, Markdown, or Org file with optional
+frontmatter. The first level 1 heading (<code>&lt;h1&gt;</code> in HTML, <code>#</code> in
+Markdown, <code>*</code> in Org) will be used as the document title.</p>
 
 <p>This is an example document called <code>example.md</code>:</p>
 
@@ -407,119 +414,133 @@ document title.</p>
 
 <h3 id="frontmatter">Frontmatter</h3>
 
-<p>Frontmatter is specified in YAML. All fields are optional.</p>
+<p>Frontmatter for HTML and Markdown documents is specified in YAML.
+Frontmatter for Org files is specified using Org keywords of
+equivalent names (in whatever case you choose). All fields are
+optional.</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">---
-</span></span><span class="line"><span class="ln"> 2</span><span class="cl">filename: example.html
-</span></span><span class="line"><span class="ln"> 3</span><span class="cl">date: 2022-07-07
-</span></span><span class="line"><span class="ln"> 4</span><span class="cl">updated: 2022-11-10
-</span></span><span class="line"><span class="ln"> 5</span><span class="cl">
-</span></span><span class="line"><span class="ln"> 6</span><span class="cl">category: arbitrary string
-</span></span><span class="line"><span class="ln"> 7</span><span class="cl">toc: true|false
-</span></span><span class="line"><span class="ln"> 8</span><span class="cl">type: post|page|draft
-</span></span><span class="line"><span class="ln"> 9</span><span class="cl">---
-</span></span><span class="line"><span class="ln">10</span><span class="cl">
-</span></span><span class="line"><span class="ln">11</span><span class="cl"><span class="gh"># The Thing About Icebergs
-</span></span></span><span class="line"><span class="ln">12</span><span class="cl"><span class="gh"></span>
-</span></span><span class="line"><span class="ln">13</span><span class="cl">...
+<p>The available frontmatter fields for HTML and Markdown are:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l">example.html</span><span class="w">
+</span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2022-07-07</span><span class="w">
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="nt">updated</span><span class="p">:</span><span class="w"> </span><span class="ld">2022-11-10</span><span class="w">
+</span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l">arbitrary string</span><span class="w">
+</span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="nt">toc</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="l">|false</span><span class="w">
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">post|page|draft</span><span class="w">
+</span></span></span></code></pre></body></html>
+
+<p>The same fields are available in Org files:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="cs">#+FILENAME</span><span class="c">: example.html</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="cs">#+DATE</span><span class="c">: 2022-07-07</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="cs">#+UPDATED</span><span class="c">: 2022-11-10</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="cs">#+CATEGORY</span><span class="c">: arbitrary string</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="cs">#+TOC</span><span class="c">: true|false</span>
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="cs">#+TYPE</span><span class="c">: post|page|draft</span>
 </span></span></code></pre></body></html>
+
+<p>See below for details of each.</p>
 
 <h4 id="filename"><code>filename</code></h4>
 
-<p>Filename specifies the desired final location of the built file in <code>dist</code>. This
-must end in <code>.html</code> (even if the source document is Markdown) and must not be in
-a subdirectory. Winter enforces this because if you later move off Winter, web
-paths that end in <code>.html</code> and do not use subdirectories will be the easiest to
-migrate.</p>
+<p>Filename specifies the desired final location of the built file in
+<code>dist</code>. This must end in <code>.html</code> no matter the source document type
+and must not be in a subdirectory. Winter enforces this because if you
+later move off Winter, web paths that end in <code>.html</code> and do not use
+subdirectories will be the easiest to migrate.</p>
 
-<p>When not set, the filename of the source document minus extension is used in
-place. For example, <code>envy.html.tmpl</code> and <code>envy.md</code> would both become <code>envy.html</code>
-(though if two source files would produce the same destination file, Winter will
-error). The result can be accessed using the <a href="#shortname"><code>{{ .Shortname }}</code></a> template var.</p>
+<p>When not set the filename of the source document is used, with any
+extensions replaced with <code>.html</code>. For example, <code>envy.html.tmpl</code> and
+<code>envy.md</code> would both become <code>envy.html</code> (though if two source files
+would produce the same destination file, Winter will error).</p>
+
+<p>A document's <strong>shortname</strong> is defined as its extensionless filename.
+The shortname is accessible to templates using the <a href="#shortname"><code>{{
+.Shortname }}</code></a> template variable. The filename is not
+accessible to templates, but can be calculated by appending <code>.html</code> to
+the shortname.</p>
 
 <h4 id="date"><code>date</code></h4>
 
-<p>The publish date of the document as a Go
-<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a>. Coalesces to <code>{{ .CreatedAt }}</code> in
-templates.</p>
+<p>Date is the publish date of the document written as <code>YYYY-MM-DD</code>. It
+is available to templates as a Go
+<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a> using <a href="#createdat"><code>{{
+.CreatedAt }}</code></a>.</p>
 
-<p>Templates can format the time using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time) Format</code></a> function, which accepts a string
-of the reference time <code>01/02 03:04:05PM '06 -0700</code>. For example, for a document
-dated 2022-07-08:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ .CreatedAt.Format "2006 January" }} &lt;!-- Renders 2022 July  --&gt;
-</span></span><span class="line"><span class="ln">2</span><span class="cl">{{ .CreatedAt.Format "2006-01-02" }}   &lt;!-- Renders 2022-07-08 --&gt;
-</span></span></code></pre></body></html>
-
-<p>Use <code>{{ .CreatedAt.IsZero }}</code> to see if the date was not set. You can use this
-to hide unset dates:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ if not .CreatedAt.IsZero }}
-</span></span><span class="line"><span class="ln">2</span><span class="cl">  published {{ .CreatedAt.Format "2006 January" }}
-</span></span><span class="line"><span class="ln">3</span><span class="cl">{{ end }}
-</span></span></code></pre></body></html>
+<p>When not set the document will not have a publish date attached to it.</p>
 
 <h4 id="updated"><code>updated</code></h4>
 
-<p>The date the document was last meaningfully updated, if any, as a Go
-<a href="https://pkg.go.dev/time"><code>time.Time</code></a>. Coalesces to <code>{{ .UpdatedAt }}</code> in
-templates.</p>
+<p>Updated is the date the document was last meaningfully updated, if
+any, written as <code>YYYY-MM-DD</code>. It is available to templates as a Go
+<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a> using <a href="#updatedat"><code>{{
+.UpdatedAt }}</code></a>.</p>
 
-<p>Use <code>{{ .UpdatedAt.IsZero }}</code> to see if the date was not set. You can use this
-to hide unset dates:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ if not .CreatedAt.IsZero }}
-</span></span><span class="line"><span class="ln">2</span><span class="cl">  published {{ .CreatedAt.Format "2006 January" }}
-</span></span><span class="line"><span class="ln">3</span><span class="cl">  {{ if not .UpdatedAt.IsZero }}
-</span></span><span class="line"><span class="ln">4</span><span class="cl">    / last updated {{ .UpdatedAt.Format "2006 January" }}
-</span></span><span class="line"><span class="ln">5</span><span class="cl">  {{ end }}
-</span></span><span class="line"><span class="ln">6</span><span class="cl">{{ end }}
-</span></span></code></pre></body></html>
-
-<p>Renders:</p>
-
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">published 2022 July / last updated 2022 August
-</span></span></code></pre></body></html>
+<p>When not set the document will not have an update date attached to it.</p>
 
 <h4 id="tocprop"><code>toc</code></h4>
 
-<p>Whether to render a table of contents (default <code>false</code>). If <code>true</code>, the table of
-contents will be rendered just before the first level 2 header (<code>&lt;h2&gt;</code> in HTML,
-<code>##</code> in Markdown) and will list all level 2, 3, and 4 header in nested <code>&lt;ul&gt;</code>s.
-See the <a href="#toc">top of this page</a> for an example.</p>
+<p>Whether to render a table of contents (default <code>false</code>). If <code>true</code>,
+the table of contents will be rendered just before the first level 2
+header (<code>&lt;h2&gt;</code> in HTML, <code>##</code> in Markdown, <code>**</code> in Org) and will list
+all level 2, 3, and 4 headers. See the <a href="#toc">top of this page</a> for an
+example.</p>
 
 <h4 id="type"><code>type</code></h4>
 
 <p>The kind of document. Possible values are <code>post</code>, <code>page</code>, <code>draft</code>.</p>
 
-<p><code>post</code> documents are programmatically included in template functions. <code>page</code> and
-<code>draft</code> documents have no programmatic action taken on them.</p>
+<p><code>post</code> documents are programmatically included in template functions.
+<code>page</code> and <code>draft</code> documents have no programmatic action taken on
+them and will not be discoverable unless linked to.</p>
+
+<p>The default template set provided by <code>winter init</code> gives each a
+slightly different visual treatment:</p>
+
+<ul>
+<li>Posts have a publish date and update date at the top and bottom of
+the page</li>
+<li>Pages have a publish date and update date at the bottom of the page</li>
+<li>Drafts behave like posts but have a large "DRAFT" banner at the top
+of the page</li>
+</ul>
+
+<p>Beyond this, the types are only different in semantics.</p>
 
 <h4 id="category"><code>category</code></h4>
 
 <p>The category of the document. Accepts any string. This is exposed to templates
-via the <code>{{ .Category }}</code> field. It has no other effect.</p>
+via the <a href="#cat"><code>{{ .Category }}</code></a> field.</p>
+
+<p>The default template set provided by <code>winter init</code> gives a minor
+visual treatment to the listing and display of documents with
+categories.</p>
+
+<p>Otherwise, the category is semantic. There is no programmatic access
+to documents by category.</p>
 
 <h3 id="templates">Templates</h3>
 
 <p>Templates use the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
 library.</p>
 
-<h4 id="fields">Fields</h4>
+<h4 id="fields">Document Fields</h4>
 
-<h5 id="category-1"><code>{{ .Category }}</code></h5>
+<p>The following fields are available to templates rendering documents.</p>
+
+<h5 id="cat"><code>{{ .Category }}</code></h5>
 
 <p><em>Type: <code>string</code></em></p>
 
-<p>The value specified by the frontmatter <a href="#category"><code>category</code></a> field. This can
-be any arbitrary string specified by the document and is not used internally by
-Winter.</p>
+<p>The value specified by the frontmatter <a href="#category"><code>category</code></a> field.
+This is an arbitrary string.</p>
 
 <h5 id="dest"><code>{{ .Dest }}</code></h5>
 
 <p><em>Type: <code>string</code></em></p>
 
-<p>The path of the document, relative to the web root.</p>
+<p>The filesystem path of the document after having been rendered,
+relative to the web root.</p>
 
 <h5 id="isdraft"><code>{{ .IsDraft }}</code></h5>
 
@@ -533,23 +554,52 @@ Winter.</p>
 
 <p>Whether the document is a post (i.e. has frontmatter specifying <code>type: post</code>).</p>
 
+<h5 id="shortname"><code>{{ .Shortname }}</code></h5>
+
+<p><em>Type: <code>string</code></em></p>
+
+<p>The shortname of the document. This is the extensionless
+<a href="#filename">filename</a> frontmatter attribute if set, or the source
+document's extensionless filename otherwise.</p>
+
 <h5 id="title"><code>{{ .Title }}</code></h5>
 
 <p><em>Type: <code>string</code></em></p>
 
-<p>The value of the document's first level 1 heading (<code>&lt;h1&gt;</code> for HTML or <code>#</code> for Markdown).</p>
+<p>The value of the document's first level 1 heading (<code>&lt;h1&gt;</code> in HTML, <code>#</code> in Markdown, <code>*</code> in Org).</p>
 
 <h5 id="createdat"><code>{{ .CreatedAt }}</code></h5>
 
 <p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
 
-<p>The parsed date specified by the frontmatter <a href="#date"><code>date</code></a> field.</p>
+<p>The publish date of the document as specified by the frontmatter
+<a href="#date"><code>date</code></a> attribute.</p>
+
+<p>This value can be formatted using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time)
+Format</code></a> function:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ .CreatedAt.Format "2006 January" }} &lt;!-- Renders 2022 July  --&gt;
+</span></span><span class="line"><span class="ln">2</span><span class="cl">{{ .CreatedAt.Format "2006-01-02" }}   &lt;!-- Renders 2022-07-08 --&gt;
+</span></span></code></pre></body></html>
+
+<p>Use <code>{{ .CreatedAt.IsZero }}</code> to see if the date was not set.
+You can use this to hide unset dates:</p>
+
+<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ if not .CreatedAt.IsZero }}
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  published {{ .CreatedAt.Format "2006 January" }}
+</span></span><span class="line"><span class="ln">3</span><span class="cl">{{ end }}
+</span></span></code></pre></body></html>
 
 <h5 id="updatedat"><code>{{ .UpdatedAt }}</code></h5>
 
 <p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
 
-<p>The parsed date specified by the frontmatter <a href="#updated"><code>updated</code></a> field.</p>
+<p>The date the document was last meaningfully updated, as specified by
+the frontmatter <a href="#updated"><code>updated</code></a> attribute.</p>
+
+<p>This value behaves identically to <a href="#createdat"><code>{{ .CreatedAt
+}}</code></a>. For details on dealing with it, see that
+documentation.</p>
 
 <h4 id="functions">Functions</h4>
 
@@ -625,7 +675,7 @@ this format:</p>
 <li><code>public/img/mypage-test1-dark.png</code></li>
 </ul>
 
-<p>If <code>-light</code> and/or a <code>-dark</code> variants exist, they will be used when the user is
+<p>If <code>-light</code> and/or <code>-dark</code> variants exist, they will be used when the user is
 in the respective dark mode setting.</p>
 
 <p>Any number of images can be rendered together with one caption beneath the
@@ -677,9 +727,12 @@ other when the page width allows it, or stacked vertically otherwise.</p>
 
 <p>Usage: <code>{{ video[s] &lt;caption&gt; &lt;videoshortname alttext&gt;... }}</code></p>
 
-<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead and renders
-them in <code>&lt;video&gt;</code> tags. Note that most browsers do not currently support light
-or dark mode variations for videos, so the wrong variant may be displayed.</p>
+<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead
+and renders them in <code>&lt;video&gt;</code> tags.</p>
+
+<p>Note that most browsers do not currently support varying a video
+source by light/dark mode setting, so the wrong variant may be
+displayed.</p>
 </body></html>
       </article>
       <footer>
