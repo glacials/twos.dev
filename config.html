@@ -106,12 +106,100 @@ my Emacs config and the documentation for my Emacs config are the same
 file, and it's the one you're reading (<a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org">source</a>). <a href="https://twos.dev/winter">Winter</a> has rendered it
 from Org to HTML.</p>
 <div id="outline-container-headline-2" class="outline-2">
-<h2 id="headline-2">
+<html><head></head><body><ol id="toc">
+  
+    <li><a href="#headline-2"><span>
+Traditional Configuration
+</span></a></li>
+    
+  
+    <li><a href="#headline-3"><span>
+Small Efficiencies
+</span></a></li>
+    
+  
+    <li><a href="#headline-4"><span>
+Get Things Out of My Face
+</span></a></li>
+    
+  
+    <li><a href="#headline-5"><span>
+Packages
+</span></a></li>
+    
+      <ol>
+  
+    <li>
+      <a href="#headline-6"><span>
+Splash Screen
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-7"><span>
+Language Support
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-8"><span>
+Display
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-9"><span>
+System Tweaks
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-10"><span>
+Org Mode
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-11"><span>
+Project management
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-12"><span>
+Newbie Helpers
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-13"><span>
+Modern Niceties
+</span></a>
+      
+    </li>
+  
+</ol>
+
+    
+  
+    <li><a href="#headline-14"><span>
+The End
+</span></a></li>
+    
+  
+</ol>
+</body></html><h2 id="headline-2">
 Traditional Configuration
 </h2>
 <div id="outline-text-headline-2" class="outline-text-2">
-<p>
-Get the boring stuff out of the way first:</p>
+<p>Get the boring stuff out of the way first:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (setq user-full-name "Benjamin Carlsson" user-mail-address "ben@twos.dev")
@@ -120,7 +208,12 @@ Get the boring stuff out of the way first:</p>
   (setq mac-option-modifier 'super) ; Make Option act as Super
   (setq ring-bell-function 'ignore) ; Disable the audible bell
   (setq sentence-end-double-space nil) ; End sentences with single spaces
-  (setq display-line-numbers-type t) ; Show line numbers
+  (setq display-line-numbers t) ; Show line numbers
+  (delete-selection-mode 1) ; Delete selected text when starting to type
+  (setq-default fill-column 80) ; Wrap at 80 characters
+  (add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
+  (add-hook 'text-mode-hook #'auto-fill-mode) ; Autowrap when writing
+  (global-hl-line-mode 1) ; Highlight cursor line
 </pre>
 </div>
 </div>
@@ -131,8 +224,7 @@ Get the boring stuff out of the way first:</p>
 Small Efficiencies
 </h2>
 <div id="outline-text-headline-3" class="outline-text-2">
-<p>
-Now we'll start with some of the less obvious stuff.</p>
+<p>Now we'll start with some of the less obvious stuff.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (ido-mode 1) ; Autocomplete M-x among other things
@@ -158,7 +250,15 @@ affect mouse-1, see <a href="https://emacs.stackexchange.com/questions/35536/dir
 </div>
 </div>
 <p>
-The last small thing: open this config file with <code class="verbatim">C-c i</code>:</p>
+Some keybinds:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (global-set (kbd "C-c a") 'org-agenda)
+</pre>
+</div>
+</div>
+<p>
+  The last small thing: open this config file with <code class="verbatim">C-c i</code>:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (global-set-key
@@ -175,8 +275,7 @@ The last small thing: open this config file with <code class="verbatim">C-c i</c
 Get Things Out of My Face
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
-<p>
-This section deals with minimizing visual noise.</p>
+<p>This section deals with minimizing visual noise.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Delete-auto-save-files
@@ -193,6 +292,46 @@ This section deals with minimizing visual noise.</p>
 
   ;; Delete old backups silently.
   (setq delete-old-versions t)
+
+  ;; Ligatures, to be provided by major modes.
+  (global-prettify-symbols-mode +1)
+
+  ;; Custom ligatures
+  (setq prettify-symbols-alist
+        '(("TODO" . "")
+          ("BLKD" . "")        
+          ("CNCL" . "")
+          ("DONE" . "")
+          ("-&gt;&gt;"  . "↠")
+          ("-&gt;"   . "→")
+          ("&lt;-"   . "←")
+          ("&lt;-"   . "←")
+          ("=&gt;"   . "⇒")
+          ("&lt;="   . "≤")
+          ("&gt;="   . "≥")
+          ;; Below are commented until/unless I start using them frequently.
+  ;				("[#A]" . "")
+  ;				("[#B]" . "")
+  ;				("[#C]" . "")
+  ;				("[ ]" . "")
+  ;				("[X]" . "")
+  ;				("[-]" . "")
+  ;				("#+BEGIN_SRC" . "")
+  ;				("#+END_SRC" . "<span style="font-family: sans-serif">―</span>")
+  ;				(":PROPERTIES:" . "")
+  ;				(":END:" . "<span style="font-family: sans-serif">―</span>")
+  ;				("#+STARTUP:" . "")
+  ;				("#+TITLE: " . "")
+  ;				("#+RESULTS:" . "")
+  ;				("#+NAME:" . "")
+  ;				("#+ROAM_TAGS:" . "")
+  ;				("#+FILETAGS:" . "")
+  ;				("#+HTML_HEAD:" . "")
+  ;				("#+SUBTITLE:" . "")
+  ;				("#+AUTHOR:" . "")
+  ;				(":Effort:" . "")
+  ;				("SCHEDULED:" . "")
+  ;				("DEADLINE:" . "")))
 </pre>
 </div>
 </div>
@@ -329,8 +468,7 @@ out to <code class="verbatim">fortune</code> to render a random quote from my <a
 Language Support
 </h3>
 <div id="outline-text-headline-7" class="outline-text-3">
-<p>
-This section loads various types of support for programming languages, markups, and similar.</p>
+<p>This section loads various types of support for programming languages, markups, and similar.</p>
 <p>
 And how can we do any of that without the miracle of LSP and an appropriate UI for it?</p>
 <div class="src src-emacs-lisp">
@@ -372,6 +510,7 @@ For YAML:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'dockerfile-mode)
+  (straight-use-package 'git-modes)
   (straight-use-package 'hcl-mode)
   (straight-use-package 'terraform-mode)
 </pre>
@@ -384,8 +523,7 @@ For YAML:</p>
 Display
 </h3>
 <div id="outline-text-headline-8" class="outline-text-3">
-<p>
-A beautiful editor is important to me whether it was made in 2015 or 1976.</p>
+<p>A beautiful editor is important to me whether it was made in 2015 or 1976.</p>
 <p>
 I started my Emacs journey with <a href="https://doomemacs.org">Doom</a> and eventually migrated to
 vanilla, but missed the Doom themeset. Thankfully, Doom is very
@@ -429,6 +567,23 @@ And some final small tweaks:</p>
 <pre>  ;; Color-coordinate each pair of parentheses
   (straight-use-package 'rainbow-delimiters)
   (add-hook 'prog-mode-hook #'rainbow-delimiters-mode)
+
+  ;; Colorize mentions of colors in files
+  (straight-use-package 'rainbow-mode)
+
+  ;; Show Git changes in the gutter
+  (straight-use-package diff-hl-mode)
+  (global-diff-hl-mode)
+
+  ;; Show trailing whitespace
+  (straight-use-package
+   whitespace :ensure nil
+   :hook
+   (prog-mode . whitespace-mode)
+   (text-mode . whitespace-mode)
+   :custom
+   (whitespace-style
+    '(face empty indentation::space tab trailing)))
 </pre>
 </div>
 </div>
@@ -609,8 +764,17 @@ can help me with either of these things.)</p>
 </div>
 </div>
 <p>
-We'll also set up our preferred TODO keywords, and have Org autosave
-our Org file whenever we update a TODO item.</p>
+Speaking of headlines, let's clean up the display of a collapsed
+headline a bit:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (setq org-ellipsis "⤵")
+</pre>
+</div>
+</div>
+<p>
+  We'll also set up our preferred TODO keywords, and have Org autosave
+  our Org file whenever we update a TODO item.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (advice-add 'org-todo :after 'org-save-all-org-buffers)
@@ -619,6 +783,19 @@ our Org file whenever we update a TODO item.</p>
           (sequence "TODO(t)" "STRT(s)" "BLKD(b)" "|" "DONE(d)" "CNCL(c)")
           (sequence "[ ](T)" "[-](S)" "[?](B)" "|" "[X](D)" "[C](C)")
           ))
+</pre>
+</div>
+</div>
+<p>
+And add some Org packages:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  ;; Various visual improvements to Org
+  (straight-use-package 'org-modern)
+  (add-hook 'org-mode-hook #'org-modern-mode)
+  (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
+
+  (straight-use-package 'org-roam)
 </pre>
 </div>
 </div>
@@ -779,15 +956,15 @@ These packages help me out as a new Emacs user.</p>
 Modern Niceties
 </h3>
 <div id="outline-text-headline-13" class="outline-text-3">
+<p>Emacs was written in 1976, and it takes a bit of configuration to get
+up to speed with modern standard practices.</p>
 <p>
-<code class="verbatim">savehist</code> generically allows saving minibuffer histories (e.g.
-frecency data) across restarts:</p>
-<div class="src src-emacs-lisp">
-<div class="highlight">
-<pre>(straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico
-</pre>
-</div>
-</div>
+  <code class="verbatim">savehist</code> generically allows saving minibuffer histories (e.g.
+  frecency data) across restarts:</p>
+<p>
+  ,#+BEGIN_SRC emacs-lisp
+  (straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico</p>
+<p>#+END_SRC</p>
 <p>
 <code class="verbatim">undo-fu</code> makes Emacs's undo feature more modern:</p>
 <div class="src src-emacs-lisp">
