@@ -57,15 +57,14 @@ html {
 }
 
 body {
-  animation: appear ease 2s;
-  background: var(--bg-a);
-  color: var(--fg-a-a);
+		background: var(--bg-a);
+		color: var(--fg-a-a);
   margin: 0;
 }
 
 .container {
-  margin: auto;
-  max-width: 50em;
+		margin: auto;
+		max-width: 50em;
 }
 
 /* End root elements */
@@ -93,16 +92,20 @@ a:hover:has(img) {
   background: inherit;
 }
 
+article {
+		animation: appear ease 2s;
+}
+
 blockquote {
-  border-left: 1px solid var(--fg-a-a);
-  padding-left: 1em;
+		border-left: 1px solid var(--fg-a-a);
+		padding-left: 1em;
 }
 
 button,
 input[type="submit"] {
-  background: none;
-  border: 1px solid var(--fg-a-a);
-  color: inherit;
+		background: none;
+		border: 1px solid var(--fg-a-a);
+		color: inherit;
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
@@ -110,41 +113,41 @@ em em,
 em i,
 i em,
 i i {
-  font-style: normal;
+		font-style: normal;
 }
 
 input {
-  font-family: inherit;
+		font-family: inherit;
 }
 
 figcaption {
-  font-style: italic;
+		font-style: italic;
 }
 
 footer {
-  margin-top: 4em;
+		margin-top: 4em;
 }
 
 h1 {
-  font-size: 3em;
-  display: block;
-	line-height: 0.85em; /* Undoes weird inheritance of html line-height w/ display:block */
-	text-align: center;
-	text-transform: uppercase;
+		font-size: 3em;
+		display: block;
+		line-height: 0.85em; /* Undoes weird inheritance of html line-height w/ display:block */
+		text-align: center;
+		text-transform: uppercase;
 }
 
 /* Hero image */
 h1 + figure,
 h1 + p + figure {
-  margin: auto;
-  max-width: 40em;
+		margin: auto;
+		max-width: 40em;
 }
 
 h2,
 h3 {
-  background-color: var(--bg-b);
-  color: var(--fg-b-a);
-  padding-left: 1rem;
+		background-color: var(--bg-b);
+		color: var(--fg-b-a);
+		padding-left: 1rem;
 }
 
 /* Links would have the same color as the background, so invert them */
@@ -221,7 +224,8 @@ nav a {
 }
 
 nav a.selected {
-		text-decoration: underline;
+		background: var(--bg-b);
+		color: var(--fg-b-a);
 }
 
 nav a:hover {
@@ -229,7 +233,7 @@ nav a:hover {
 }
 
 /* In case none of the below rules trigger, display a backup.
-   For some reason Chrome on Windows hits this, though Chrome on macOS doesn't.
+   This can happen if we're not on any of these pages.
 */
 nav .arrow::before {
 		content: "↔";
