@@ -356,7 +356,12 @@ func (d *textDocument) parseOrg() error {
 		bytes.NewBuffer(d.body),
 		d.SrcPath,
 	)
-	orgdoc.BufferSettings["OPTIONS"] = strings.Replace(orgdoc.BufferSettings["OPTIONS"], "toc:t", "toc:nil", 1)
+	orgdoc.BufferSettings["OPTIONS"] = strings.Replace(
+		orgdoc.BufferSettings["OPTIONS"],
+		"toc:t",
+		"toc:nil",
+		1,
+	)
 
 	orgwriter := org.NewHTMLWriter()
 	orgwriter.TopLevelHLevel = 1
@@ -382,7 +387,7 @@ func (d *textDocument) parseOrg() error {
 		case "title":
 			d.metadata.Title = v
 		case "toc":
-			d.metadata.TOC = v == "t"
+			d.metadata.TOC = (v == "t" || v == "true")
 		case "updated":
 			d.metadata.UpdatedAt, err = time.Parse("2006-01-02", v)
 			if err != nil {
