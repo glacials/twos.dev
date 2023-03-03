@@ -119,7 +119,7 @@ Small Efficiencies
     
   
     <li><a href="#headline-4"><span>
-Get Things Out of My Face
+Visuals
 </span></a></li>
     
   
@@ -131,55 +131,83 @@ Packages
   
     <li>
       <a href="#headline-6"><span>
-Splash Screen
+Formatting
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-7"><span>
-Language Support
+Integrations
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-8"><span>
-Display
+Autocompletion
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-9"><span>
-System Tweaks
+Splash Screen
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-10"><span>
-Org Mode
+Language Support
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-11"><span>
-Project management
+Display
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-12"><span>
-Newbie Helpers
+System Tweaks
 </span></a>
       
     </li>
   
     <li>
       <a href="#headline-13"><span>
+Org Mode
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-14"><span>
+Project management
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-15"><span>
+Newbie Helpers
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-16"><span>
+Efficiencies
+</span></a>
+      
+    </li>
+  
+    <li>
+      <a href="#headline-17"><span>
 Modern Niceties
 </span></a>
       
@@ -189,7 +217,7 @@ Modern Niceties
 
     
   
-    <li><a href="#headline-14"><span>
+    <li><a href="#headline-18"><span>
 The End
 </span></a></li>
     
@@ -214,6 +242,16 @@ Traditional Configuration
   (add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
   (add-hook 'text-mode-hook #'auto-fill-mode) ; Autowrap when writing
   (global-hl-line-mode 1) ; Highlight cursor line
+
+  ;; Unicode everywhere
+  (set-charset-priority 'unicode)
+  (set-default-coding-systems 'utf-8)
+  (set-terminal-coding-system 'utf-8)
+  (set-keyboard-coding-system 'utf-8)
+  (set-selection-coding-system 'utf-8)
+  (prefer-coding-system 'utf-8)
+  (setq-default buffer-file-coding-system 'utf-8)
+  (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
 </pre>
 </div>
 </div>
@@ -229,6 +267,8 @@ Small Efficiencies
 <div class="highlight">
 <pre>  (ido-mode 1) ; Autocomplete M-x among other things
   (setq ido-enable-flex-matching t) ; Don't require exact matches in ido-mode
+  (defalias 'yes-or-no-p 'y-or-n-p) ; Allow y/n in yes/no prompts
+  (global-set-key (kbd "C-x k") #'kill-this-buffer) ; Make C-x k kill focused buffer instead of promptingexpand-region
 </pre>
 </div>
 </div>
@@ -253,7 +293,16 @@ affect mouse-1, see <a href="https://emacs.stackexchange.com/questions/35536/dir
 Some keybinds:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (global-set (kbd "C-c a") 'org-agenda)
+<pre>  (global-set-key (kbd "C-c a") 'org-agenda)
+</pre>
+</div>
+</div>
+<p>
+Some keybinds that work in macOS but are overridden by Emacs's use of modifiers:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (global-set-key (kbd "s--") (lambda () (interactive) (insert "<span style="font-family: sans-serif">–</span>"))) ; En dash
+  (global-set-key (kbd "s-_") (lambda () (interactive) (insert "<span style="font-family: sans-serif">—</span>"))) ; Em dash
 </pre>
 </div>
 </div>
@@ -272,10 +321,17 @@ Some keybinds:</p>
 </div>
 <div id="outline-container-headline-4" class="outline-2">
 <h2 id="headline-4">
-Get Things Out of My Face
+Visuals
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
-<p>This section deals with minimizing visual noise.</p>
+<p>This section deals with minimizing visual noise and making things pretty.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (add-to-list 'default-frame-alist '(font . "JetBrains Mono" ))
+  (set-face-attribute 'default t :font "JetBrains Mono" )
+</pre>
+</div>
+</div>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Delete-auto-save-files
@@ -331,7 +387,8 @@ Get Things Out of My Face
   ;				("#+AUTHOR:" . "")
   ;				(":Effort:" . "")
   ;				("SCHEDULED:" . "")
-  ;				("DEADLINE:" . "")))
+  ;				("DEADLINE:" . "")
+          ))
 </pre>
 </div>
 </div>
@@ -344,23 +401,38 @@ Packages
 <div id="outline-text-headline-5" class="outline-text-2">
 <p>
 The meat of it.</p>
+<div id="outline-container-headline-6" class="outline-3">
+<h3 id="headline-6">
+Formatting
+</h3>
+<div id="outline-text-headline-6" class="outline-text-3">
 <p>
-The following package and associated settings aggressively fix
-indentation in realtime while programming, all the way down to adding
-an indentation to the rest of the file when you type <code>if {</code> and then
-removing it when you finally type <code>}</code>. It can be distracting, but I
-appreciate the staunchness of <code class="verbatim">gofmt</code> especially when learning a new
-language, so I enjoy it overall.</p>
-<p>
-(It has settings to make it less aggressive than that example, though.)</p>
+The following package and associated settings deal with indentation and
+formatting on a language-agnostic basis.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>(straight-use-package 'aggressive-indent)
-(global-aggressive-indent-mode 1)
-(add-to-list 'aggressive-indent-excluded-modes 'html-mode)
+<pre>  (straight-use-package 'ws-butler)
+  (require 'ws-butler)
+  (add-hook 'prog-mode-hook #'ws-butler-mode)
 </pre>
 </div>
 </div>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'auto-indent-mode)
+  (setq auto-indent-on-visit-file t)
+  (require 'auto-indent-mode)
+  (auto-indent-global-mode)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
+Integrations
+</h3>
+<div id="outline-text-headline-7" class="outline-text-3">
 <p>
 Magit is the de facto Git interface in Emacs. This package surprised
 me with its convenience; having come from Vim I was expecting
@@ -397,6 +469,13 @@ don't use it unless you're already a <code class="verbatim">chezmoi</code> user.
 </pre>
 </div>
 </div>
+</div>
+</div>
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
+Autocompletion
+</h3>
+<div id="outline-text-headline-8" class="outline-text-3">
 <p>
 The next code block sets up autocompletion with <code class="verbatim">company</code>, the most
 popular generic autocompletion package for Emacs. Generally, LSP
@@ -434,11 +513,13 @@ zerolfx has a pretty good unofficial one.</p>
 </pre>
 </div>
 </div>
-<div id="outline-container-headline-6" class="outline-3">
-<h3 id="headline-6">
+</div>
+</div>
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
 Splash Screen
 </h3>
-<div id="outline-text-headline-6" class="outline-text-3">
+<div id="outline-text-headline-9" class="outline-text-3">
 <p>
 The following code sets up the splash screen that shows when Emacs
 boots, which is usually an empty buffer. It pulls some info from
@@ -463,11 +544,11 @@ out to <code class="verbatim">fortune</code> to render a random quote from my <a
 </div>
 </div>
 </div>
-<div id="outline-container-headline-7" class="outline-3">
-<h3 id="headline-7">
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
 Language Support
 </h3>
-<div id="outline-text-headline-7" class="outline-text-3">
+<div id="outline-text-headline-10" class="outline-text-3">
 <p>This section loads various types of support for programming languages, markups, and similar.</p>
 <p>
 And how can we do any of that without the miracle of LSP and an appropriate UI for it?</p>
@@ -475,6 +556,12 @@ And how can we do any of that without the miracle of LSP and an appropriate UI f
 <div class="highlight">
 <pre>  (straight-use-package 'lsp-mode)
   (straight-use-package 'lsp-ui)
+</pre>
+</div>
+</div>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'flycheck)
 </pre>
 </div>
 </div>
@@ -518,11 +605,11 @@ For YAML:</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-8" class="outline-3">
-<h3 id="headline-8">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
 Display
 </h3>
-<div id="outline-text-headline-8" class="outline-text-3">
+<div id="outline-text-headline-11" class="outline-text-3">
 <p>A beautiful editor is important to me whether it was made in 2015 or 1976.</p>
 <p>
 I started my Emacs journey with <a href="https://doomemacs.org">Doom</a> and eventually migrated to
@@ -572,28 +659,21 @@ And some final small tweaks:</p>
   (straight-use-package 'rainbow-mode)
 
   ;; Show Git changes in the gutter
-  (straight-use-package diff-hl-mode)
+  (straight-use-package 'diff-hl)
   (global-diff-hl-mode)
 
   ;; Show trailing whitespace
-  (straight-use-package
-   whitespace :ensure nil
-   :hook
-   (prog-mode . whitespace-mode)
-   (text-mode . whitespace-mode)
-   :custom
-   (whitespace-style
-    '(face empty indentation::space tab trailing)))
+  (straight-use-package  'whitespace)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-9" class="outline-3">
-<h3 id="headline-9">
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
 System Tweaks
 </h3>
-<div id="outline-text-headline-9" class="outline-text-3">
+<div id="outline-text-headline-12" class="outline-text-3">
 <p>
 When Emacs is booted it inherits a copy of the environment it was
 created in. This is fine when you run <code class="verbatim">emacs</code> from the command line,
@@ -659,11 +739,11 @@ the sacrifice. This may change later.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-10" class="outline-3">
-<h3 id="headline-10">
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
 Org Mode
 </h3>
-<div id="outline-text-headline-10" class="outline-text-3">
+<div id="outline-text-headline-13" class="outline-text-3">
 <p>
 Org Mode has already been loaded by the <code class="verbatim">straight.el</code> package in
 <code class="verbatim">init.el</code> (that's how the Org file you're reading was tangled into an
@@ -697,6 +777,11 @@ Now, for some shortcuts to skip around Org Mode.</p>
    (lambda ()
      (interactive)
      (find-file "~/org/notes.org")))
+
+  ;; Drag and drop images into Org mode
+  (straight-use-package 'org-download)
+  (require 'org-download)
+  (add-hook 'dired-mode-hook 'org-download-enable)
 </pre>
 </div>
 </div>
@@ -729,20 +814,26 @@ entry, or <code class="verbatim">C-c c h</code> to create a new generic note.</p
 <pre>  (global-set-key (kbd "C-c c") 'org-capture)
   (setq org-capture-templates
         '(("t"
-           "Log a TODO entry"
+           "Task"
            entry
            (file+olp+datetree
             "~/org/notes.org"
             "Daily log")
-           "* TODO %?"
-           )
+           "* TODO %?")
           ("h"
-           "Log a new headline"
+           "Headline"
            entry
            (file+olp+datetree
             "~/org/notes.org"
             "Daily log")
-           "* %?")))
+           "* %?")
+          ("m"
+           "Meeting"
+           entry
+           (file+olp+datetree
+            "~/org/notes.org"
+            "Daily log")
+           "* %t %? :meeting:")))
 </pre>
 </div>
 </div>
@@ -796,6 +887,11 @@ And add some Org packages:</p>
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
 
   (straight-use-package 'org-roam)
+  (straight-use-package 'emacsql)
+  (setq org-roam-directory "~/sync/org-roam")
+  (org-roam-db-autosync-mode)
+
+  (straight-use-package 'org-roam-ui)
 </pre>
 </div>
 </div>
@@ -893,11 +989,11 @@ is to get my calendar and email readable and writable inside Emacs.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-11" class="outline-3">
-<h3 id="headline-11">
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
 Project management
 </h3>
-<div id="outline-text-headline-11" class="outline-text-3">
+<div id="outline-text-headline-14" class="outline-text-3">
 <p>
 Because Emacs runs as a daemon with any number of frames connected to
 it, it doesn't place the same emphasis on a working directory as
@@ -931,11 +1027,11 @@ test file, closing every buffer for a project, etc.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-12" class="outline-3">
-<h3 id="headline-12">
+<div id="outline-container-headline-15" class="outline-3">
+<h3 id="headline-15">
 Newbie Helpers
 </h3>
-<div id="outline-text-headline-12" class="outline-text-3">
+<div id="outline-text-headline-15" class="outline-text-3">
 <p>
 These packages help me out as a new Emacs user.</p>
 <div class="src src-emacs-lisp">
@@ -951,20 +1047,63 @@ These packages help me out as a new Emacs user.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-13" class="outline-3">
-<h3 id="headline-13">
+<div id="outline-container-headline-16" class="outline-3">
+<h3 id="headline-16">
+Efficiencies
+</h3>
+<div id="outline-text-headline-16" class="outline-text-3">
+<p>Use <code class="verbatim">C-=</code> to smartly select based on semantics of the language being selected.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'expand-region)
+  (global-set-key (kbd "C-=") 'er/expand-region)
+</pre>
+</div>
+</div>
+<p>
+Use <a href="https://github.com/emacsorphanage/god-mode"><code class="verbatim">god-mode</code></a>, which is like normal mode in Vim but using traditional Emacs
+bindings. It has these effects:</p>
+<ul>
+<li>All <code class="verbatim">C-</code> are removed from commands (e.g. <code class="verbatim">x s</code> performs <code class="verbatim">C-x C-s</code>)</li>
+<li><code class="verbatim">g</code> modifies the next keystroke with <code class="verbatim">M-</code> (e.g. <code class="verbatim">g x</code> performs <code class="verbatim">M-x</code>)</li>
+<li><code class="verbatim">G</code> modifies the next keystroke with <code class="verbatim">C-M-</code> (e.g. <code class="verbatim">G x</code> performs <code class="verbatim">C-M-x</code>)</li>
+<li><code class="verbatim">SPC</code> prevents all of the above for the remainder of the key sequence (e.g. <code class="verbatim">x
+SPC s</code> performs <code class="verbatim">C-x s</code>)</li>
+<li>Starting a key sequence with <code class="verbatim">C-</code> stops God mode from affecting that sequence
+(e.g. <code class="verbatim">C-x C-s</code> performs itself: <code class="verbatim">C-x C-s</code>)</li>
+</ul>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'god-mode)
+  (global-set-key (kbd "&lt;escape&gt;") #'god-local-mode)
+  (setq god-mode-enable-function-key-translation nil) ; Except function keys
+  (require 'god-mode)
+
+  ;; Change cursor to box outside god mode, bar inside it
+  (defun my-god-mode-update-cursor-type ()
+    (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
+  (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-17" class="outline-3">
+<h3 id="headline-17">
 Modern Niceties
 </h3>
-<div id="outline-text-headline-13" class="outline-text-3">
+<div id="outline-text-headline-17" class="outline-text-3">
 <p>Emacs was written in 1976, and it takes a bit of configuration to get
 up to speed with modern standard practices.</p>
 <p>
   <code class="verbatim">savehist</code> generically allows saving minibuffer histories (e.g.
   frecency data) across restarts:</p>
-<p>
-  ,#+BEGIN_SRC emacs-lisp
-  (straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico</p>
-<p>#+END_SRC</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico
+</pre>
+</div>
+</div>
 <p>
 <code class="verbatim">undo-fu</code> makes Emacs's undo feature more modern:</p>
 <div class="src src-emacs-lisp">
@@ -979,8 +1118,8 @@ up to speed with modern standard practices.</p>
 </div>
 </div>
 <p>
-And <code class="verbatim">vertico</code> has better (and better-looking) completion than Ido, the
-built-in fuzzy engine:</p>
+And <a href="https://github.com/minad/vertico"><code class="verbatim">vertico</code></a> has better (and better-looking) completion than Ido, the built-in
+fuzzy engine:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>(straight-use-package 'vertico)
@@ -992,11 +1131,11 @@ built-in fuzzy engine:</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-14" class="outline-2">
-<h2 id="headline-14">
+<div id="outline-container-headline-18" class="outline-2">
+<h2 id="headline-18">
 The End
 </h2>
-<div id="outline-text-headline-14" class="outline-text-2">
+<div id="outline-text-headline-18" class="outline-text-2">
 <p>
 Thanks for reading my Emacs config! Please let me know if you have any
 questions or improvement suggestions! <a href="mailto:ben@twos.dev">ben@twos.dev</a></p>
