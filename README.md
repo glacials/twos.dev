@@ -65,18 +65,17 @@ winter freeze shortname... # Convert the given document(s) from warm to cold
 
 Winter's goals are to ease writing and editing of new content, and to harden
 existing content against breakages. Normally these goals work against each
-other---easy creation brings easy destruction---so in Winter, the two types of
+other—easy creation brings easy destruction—so in Winter, the two types of
 content exist in parallel and documents can flow between them at your will.
-will.
 
-**Warm** content is unstable---easy to edit. It should be synchronized into the
+**Warm** content is unstable and easy to edit. It should be synchronized into the
 project directory from an outside tool; which tool is a personal choice. I use
 [iA Writer](https://ia.net/writer) hooked up to an iCloud folder, with a cron
 job to sync files into the repository. This makes creating content easy from any
 platform in any state of mind, and anything I write is automatically deployed
 (but not published) for preview, or for sending to a friend for review.
 
-**Cold** content is stable---hard to break. It must not be sourced from anywhere
+**Cold** content is stable and hard to break. It must not be sourced from anywhere
 automatically, because sync jobs are a great way to accidentally overwrite
 content. Cold content is, for the most part, done. This is content you want to
 last for years or decades without babysittting its existence.
