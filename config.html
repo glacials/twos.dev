@@ -419,10 +419,8 @@ formatting on a language-agnostic basis.</p>
 </div>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (straight-use-package 'auto-indent-mode)
-  (setq-default auto-indent-on-visit-file t)
-  (require 'auto-indent-mode)
-  (auto-indent-global-mode)
+<pre>    (straight-use-package 'aggressive-indent-mode)
+    (add-hook 'prog-mode-hook 'aggressive-indent-mode)
 </pre>
 </div>
 </div>
