@@ -28,7 +28,7 @@ type Caption string
 
 // LightDark returns the paths to the light and dark versions of the graphic
 // specified. Any nonempty returned paths are guaranteed to be on disk and can
-// have any extension in exts. If err is non-nil, at least one path is
+// have any extension in exts. If err is nil, at least one path is
 // guaranteed nonempty.
 //
 // If neither a light nor a dark version is found but a neutral (unspecified)
