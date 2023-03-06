@@ -230,13 +230,13 @@ Traditional Configuration
 <p>Get the boring stuff out of the way first:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq user-full-name "Benjamin Carlsson" user-mail-address "ben@twos.dev")
+<pre>  (setq-default user-full-name "Benjamin Carlsson" user-mail-address "ben@twos.dev")
   (setq-default tab-width 2)
   (tool-bar-mode -1) ; Don't show the GUI toolbar
-  (setq mac-option-modifier 'super) ; Make Option act as Super
-  (setq ring-bell-function 'ignore) ; Disable the audible bell
-  (setq sentence-end-double-space nil) ; End sentences with single spaces
-  (setq display-line-numbers t) ; Show line numbers
+  (setq-default mac-option-modifier 'super) ; Make Option act as Super
+  (setq-default ring-bell-function 'ignore) ; Disable the audible bell
+  (setq-default sentence-end-double-space nil) ; End sentences with single spaces
+  (setq-default display-line-numbers t) ; Show line numbers
   (delete-selection-mode 1) ; Delete selected text when starting to type
   (setq-default fill-column 80) ; Wrap at 80 characters
   (add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
@@ -251,7 +251,7 @@ Traditional Configuration
   (set-selection-coding-system 'utf-8)
   (prefer-coding-system 'utf-8)
   (setq-default buffer-file-coding-system 'utf-8)
-  (setq default-process-coding-system '(utf-8-unix . utf-8-unix))
+  (setq-default default-process-coding-system '(utf-8-unix . utf-8-unix))
 </pre>
 </div>
 </div>
@@ -266,7 +266,7 @@ Small Efficiencies
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (ido-mode 1) ; Autocomplete M-x among other things
-  (setq ido-enable-flex-matching t) ; Don't require exact matches in ido-mode
+  (setq-default ido-enable-flex-matching t) ; Don't require exact matches in ido-mode
   (defalias 'yes-or-no-p 'y-or-n-p) ; Allow y/n in yes/no prompts
   (global-set-key (kbd "C-x k") #'kill-this-buffer) ; Make C-x k kill focused buffer instead of promptingexpand-region
 </pre>
@@ -335,7 +335,7 @@ Visuals
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Delete-auto-save-files
-  (setq delete-auto-save-files t)
+  (setq-default delete-auto-save-files t)
 
   ;; Don't pollute project directories; save backup files in a central location.
   (when (not (file-exists-p "~/.cache/emacs"))
@@ -343,17 +343,17 @@ Visuals
 
   (setq-default backup-directory-alist
                 '((".*" . "~/.cache/emacs")))
-  (setq auto-save-file-name-transforms
+  (setq-default auto-save-file-name-transforms
         '((".*" "~/.cache/emacs/" t)))
 
   ;; Delete old backups silently.
-  (setq delete-old-versions t)
+  (setq-default delete-old-versions t)
 
   ;; Ligatures, to be provided by major modes.
   (global-prettify-symbols-mode +1)
 
   ;; Custom ligatures
-  (setq prettify-symbols-alist
+  (setq-default prettify-symbols-alist
         '(("TODO" . "")
           ("BLKD" . "")        
           ("CNCL" . "")
@@ -420,7 +420,7 @@ formatting on a language-agnostic basis.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'auto-indent-mode)
-  (setq auto-indent-on-visit-file t)
+  (setq-default auto-indent-on-visit-file t)
   (require 'auto-indent-mode)
   (auto-indent-global-mode)
 </pre>
@@ -484,8 +484,8 @@ minibuffer near point.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'company)
-  (setq company-idle-delay 0)
-  (setq company-minimum-prefix-length 1)
+  (setq-default company-idle-delay 0)
+  (setq-default company-minimum-prefix-length 1)
 </pre>
 </div>
 </div>
@@ -529,14 +529,14 @@ out to <code class="verbatim">fortune</code> to render a random quote from my <a
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>   (straight-use-package 'dashboard)
-   (setq dashboard-items '((recents . 5)
+   (setq-default dashboard-items '((recents . 5)
                            (agenda . 5)
                            (bookmarks . 5)
                            (projects . 5)
                            (registers . 5)))
-   (setq dashboard-banner-logo-title
+   (setq-default dashboard-banner-logo-title
          (shell-command-to-string "fortune ~/.config/fortune"))
-   (setq dashboard-startup-banner 'logo)
+   (setq-default dashboard-startup-banner 'logo)
    (require 'dashboard)
    (dashboard-setup-startup-hook)
 </pre>
@@ -620,7 +620,7 @@ form I've been using Monokai on and off for well over a decade.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'doom-themes)
-  (setq doom-themes-enable-bold t doom-themes-enable-italic t)
+  (setq-default doom-themes-enable-bold t doom-themes-enable-italic t)
   (load-theme 'doom-monokai-pro t)
 </pre>
 </div>
@@ -753,9 +753,9 @@ of Org.</p>
 First, we'll set up some basic configuration.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq org-directory "~/org")
-  (setq org-default-notes-file (concat org-directory "/notes.org"))
-  (setq org-agenda-files '("~/org/notes.org"))
+<pre>  (setq-default org-directory "~/org")
+  (setq-default org-default-notes-file (concat org-directory "/notes.org"))
+  (setq-default org-agenda-files '("~/org/notes.org"))
 </pre>
 </div>
 </div>
@@ -763,7 +763,7 @@ First, we'll set up some basic configuration.</p>
 And clean it up visually. Hide the first n-1 stars on level n headlines:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq org-startup-indented t)
+<pre>  (setq-default org-startup-indented t)
 </pre>
 </div>
 </div>
@@ -812,7 +812,7 @@ entry, or <code class="verbatim">C-c c h</code> to create a new generic note.</p
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (global-set-key (kbd "C-c c") 'org-capture)
-  (setq org-capture-templates
+  (setq-default org-capture-templates
         '(("t"
            "Task"
            entry
@@ -849,7 +849,7 @@ Org only supports tasks in headlines by default. Let me know if you
 can help me with either of these things.)</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>   (setq org-refile-targets
+<pre>   (setq-default org-refile-targets
          '((nil :maxlevel . 99) (org-agenda-files :maxlevel . 99)))
 </pre>
 </div>
@@ -859,7 +859,7 @@ Speaking of headlines, let's clean up the display of a collapsed
 headline a bit:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq org-ellipsis "⤵")
+<pre>  (setq-default org-ellipsis "⤵")
 </pre>
 </div>
 </div>
@@ -869,7 +869,7 @@ headline a bit:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (advice-add 'org-todo :after 'org-save-all-org-buffers)
-  (setq org-todo-keywords
+  (setq-default org-todo-keywords
         '(
           (sequence "TODO(t)" "STRT(s)" "BLKD(b)" "|" "DONE(d)" "CNCL(c)")
           (sequence "[ ](T)" "[-](S)" "[?](B)" "|" "[X](D)" "[C](C)")
@@ -888,7 +888,7 @@ And add some Org packages:</p>
 
   (straight-use-package 'org-roam)
   (straight-use-package 'emacsql)
-  (setq org-roam-directory "~/sync/org-roam")
+  (setq-default org-roam-directory "~/sync/org-roam")
   (org-roam-db-autosync-mode)
 
   (straight-use-package 'org-roam-ui)
@@ -934,7 +934,7 @@ buffer's date tree.</p>
                       (title (org-element-property :raw-value hl)))
                  (when (member title (datetree-dates))
                    (org-show-context)
-                   (setq point (point))
+                   (setq-default point (point))
                    (throw 'found t)))))
       (goto-char point)))
 </pre>
@@ -970,7 +970,7 @@ is to get my calendar and email readable and writable inside Emacs.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Required to not get prompted for Touch ID every boot
-  (setq plstore-cache-passphrase-for-symmetric-encryption t)
+  (setq-default plstore-cache-passphrase-for-symmetric-encryption t)
 
   (straight-use-package 'org-gcal)
   (setq
@@ -1076,12 +1076,12 @@ SPC s</code> performs <code class="verbatim">C-x s</code>)</li>
 <div class="highlight">
 <pre>  (straight-use-package 'god-mode)
   (global-set-key (kbd "&lt;escape&gt;") #'god-local-mode)
-  (setq god-mode-enable-function-key-translation nil) ; Except function keys
+  (setq-default god-mode-enable-function-key-translation nil) ; Except function keys
   (require 'god-mode)
 
   ;; Change cursor to box outside god mode, bar inside it
   (defun my-god-mode-update-cursor-type ()
-    (setq cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
+    (setq-default cursor-type (if (or god-local-mode buffer-read-only) 'box 'bar)))
   (add-hook 'post-command-hook #'my-god-mode-update-cursor-type)
 </pre>
 </div>
