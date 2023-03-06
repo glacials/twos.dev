@@ -58,7 +58,25 @@ winter freeze DOCUMENT
 
 which more or less performs a `git mv src/{cold,warm}/DOCUMENT.md` plus chips.
 
-From here I may also take one final step of permanently converting the source document to HTML if I find myself building more than a little code into it. I can always embed HTML in the Markdown, but taking this extra step gives me all my editor doodads and hardens the file against future changes to preprocessing.
+Winter also handles all the static generation. Writing my own generator was an
+important step in building longevity into twos.dev because I often switch tools
+when I discover a small feature I want but don't have (put simply: "oo shiny")
+and that switching of tools is what eventually erodes the content.
+
+Many static site generators are open source, but I'll often prefer to switch
+tools than learn how to contribute if the barrier to entry contribution is
+high, such as a language I don't like writing or an overly complex architecture.
+
+Writing the generator myself guarantees that barrier is minimal. Writing it in
+Go is a guarantee the code will not rot quickly or fall into dependency hell
+after a few years without attention.
+
+### Post-freeze
+
+After freezing my content I may also take one final step of permanently
+rendering it to HTML if I've built more than a little code into it. Sure I can
+always embed HTML in Markdown, but taking this extra step gives me all my editor
+doodads and hardens the file against future changes to preprocessing.
 
 ```sh
 winter build
