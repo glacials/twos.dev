@@ -43,8 +43,8 @@
 }
 
 html {
-  font-family: "DM Mono", Menlo, Monaco, Oxygen, monospace;
-  font-size: 0.9em;
+		font-family: "JetBrains Mono", "DM Mono", Menlo, Monaco, Oxygen, monospace;
+		font-size: 0.9em;
   line-height: 1.75em;
   letter-spacing: -0.07em;
   text-align: justify;
@@ -90,10 +90,6 @@ a:hover {
 
 a:hover:has(img) {
   background: inherit;
-}
-
-article {
-		animation: appear ease 2s;
 }
 
 blockquote {
@@ -270,14 +266,40 @@ nav .arrow:has(~ a.selected)::before {
 		}
 }
 
-a img.silly {
-		transition: 1s;
-		transform: rotate(-0.5deg);
+a img.silly, a:hover img.silly {
+		image-rendering: pixelated;
+		mix-blend-mode: screen;
+		filter: grayscale(100%) contrast(200%);
+		-webkit-filter: grayscale(100%) contrast(200%);
+		opacity: 1;
 }
 
 a:hover img.silly {
+		filter: contrast(200%) grayscale(0%);
+		-webkit-filter: contrast(200%) grayscale(0%);
+
+		position: relative;
+		top: 4px;
+		left: 4px;
+
 		transform: rotate(360deg);
-		transition: 300s;
+		transition:900s;
+}
+
+		/* mix-blend-mode: screen (above) uses a lot of light colors so needs to be
+/* contrasted with a dark color. Here we specifically use the typical dark mode
+ * color in both dark mode AND light mode. It may as well have been a hardcoded
+ * value, but I wanted it to vary with the colors themselves, if I changed them.
+ */
+@media (prefers-color-scheme: dark) {
+		a.img, a:hover.img {
+				background: var(--bg-a);
+		}
+}
+@media (prefers-color-scheme: light) {
+		a.img, a:hover.img {
+				background: var(--bg-b);
+		}
 }
 
 .dark-only {
