@@ -84,7 +84,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	if err := genThumbnail(d.localPath, thmdest, 150); err != nil {
+	if err := genThumbnail(d.localPath, thmdest, 32); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
