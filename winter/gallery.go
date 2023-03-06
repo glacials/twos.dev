@@ -84,7 +84,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	if err := genThumbnail(d.localPath, thmdest, 300); err != nil {
+	if err := genThumbnail(d.localPath, thmdest, 150); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
@@ -330,6 +330,29 @@ func genThumbnail(src, dst string, width int) error {
 		)
 	}
 	defer destinationFile.Close()
+
+	/*
+		palette := []color.Color{
+			color.RGBA{0x00, 0x00, 0x00, 0xff},
+			color.RGBA{0x00, 0x00, 0xff, 0xff},
+			//		color.RGBA{0x00, 0xff, 0x00, 0xff},
+			//		color.RGBA{0x00, 0xff, 0xff, 0xff},
+			color.RGBA{0xff, 0x00, 0x00, 0xff},
+			color.RGBA{0xff, 0x00, 0xff, 0xff},
+			//		color.RGBA{0xff, 0xff, 0x00, 0xff},
+			//		color.RGBA{0x00, 0xff, 0xff, 0xff},
+			color.RGBA{0xff, 0xff, 0xff, 0xff},
+		}
+		d := dither.NewDitherer(palette)
+		d.Matrix = dither.FloydSteinberg
+
+		// Dither tries to modify the original first, and may return nil if it does,
+		// so guard against that.
+		new := d.Dither(dstPhoto)
+		if new != nil {
+			dstPhoto = nil
+		}
+	*/
 
 	if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
 		return fmt.Errorf(

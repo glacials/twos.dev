@@ -117,6 +117,8 @@ func (s *Substructure) discoverAtPath(path string) error {
 }
 
 // discoverGalleriesAtPath discovers all galleries in or at the given path glob.
+// The files are wrapped in galleryDocument types and then added to the
+// substructure.
 func (s *Substructure) discoverGalleriesAtPath(path string) error {
 	var jpgFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -165,8 +167,9 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 	return nil
 }
 
-// discoverHTMLAtPath discovers all HTML documents in or at the
-// given path glob.
+// discoverHTMLAtPath discovers all HTML documents in or at the given path glob.
+// The files are wrapped in textDocument types and then added to the
+// substructure.
 func (s *Substructure) discoverHTMLAtPath(path string) error {
 	var htmlFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -215,8 +218,9 @@ func (s *Substructure) discoverHTMLAtPath(path string) error {
 	return nil
 }
 
-// discoverMarkdownAtPath discovers all Markdown documents in or at
-// the given path glob.
+// discoverMarkdownAtPath discovers all Markdown documents in or at the given
+// path glob. The files are wrapped in textDocument types and then added to the
+// substructure.
 func (s *Substructure) discoverMarkdownAtPath(path string) error {
 	var markdownFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -246,8 +250,9 @@ func (s *Substructure) discoverMarkdownAtPath(path string) error {
 	return nil
 }
 
-// discoverOrgAtPath discovers all Org documents in or at the given
-// path glob.
+// discoverOrgAtPath discovers all Org documents in or at the given path glob.
+// The files are wrapped in textDocument types and then added to the
+// substructure.
 func (s *Substructure) discoverOrgAtPath(path string) error {
 	// TODO: Allow looking in user's org directory.
 	// TODO: Allow rendering only a subsection of an org file.
@@ -279,6 +284,9 @@ func (s *Substructure) discoverOrgAtPath(path string) error {
 	return nil
 }
 
+// discoverStaticAtPath discovers all static files in or at the given path glob.
+// The files are wrapped with staticDocument types then added to the
+// substructure.
 func (s *Substructure) discoverStaticAtPath(path string) error {
 	var staticFiles []string
 	if stat, err := os.Stat(path); err != nil {
