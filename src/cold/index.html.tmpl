@@ -6,7 +6,7 @@ type: page
 ---
 
 <div style="margin: auto; text-align: center">
-  <h1>Benjamin Carlsson</h1>
+  <h1>twos.dev</h1>
   <p>happily experiencing clouds in Seattle, WA</p>
   <p>
     <a href="benjamincarlsson.vcf">Contact card</a>
@@ -33,9 +33,8 @@ type: page
         {{ . }}:
       {{ end }}
       <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-      {{ if ne .CreatedAt.Year now.Year }}({{ .CreatedAt.Year }}){{ end }}
     </li>
-  {{ end }}
+		{{ end }}
   <li><a href="/archives.html">archives</a> &rarr;</li>
 </ul>
 <p></p>

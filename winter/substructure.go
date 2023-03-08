@@ -74,6 +74,14 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 // add adds the given document to the substructure, removing any old
 // versions in the process.
 func (s *Substructure) add(d *substructureDocument) {
+	// dedupe
+	for i, doc := range s.docs {
+		if doc.Source == d.Source {
+			s.docs[i] = d
+			return
+		}
+	}
+
 	s.docs = append(s.docs, d)
 }
 

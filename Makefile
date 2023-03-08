@@ -17,5 +17,5 @@ build_twos.dev:
 
 build: build_winter prep_twos.dev build_twos.dev
 
-serve: build_winter prep_twos.dev
-	./w build --serve $(WINTER_ARGS)
+serve: prep_twos.dev
+	gow run . build --serve $(WINTER_ARGS)

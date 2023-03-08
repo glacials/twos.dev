@@ -1,6 +1,6 @@
 ---
 date: 2022-05-25
-updated: 2022-11-11
+updated: 2023-03-08
 filename: apple.html
 type: post
 toc: true
@@ -814,22 +814,23 @@ if you're in the Apple ecosystem, and don't if you're not. The biggest downside
 I've witnessed is that iCloud Drive does not have an API. This is not a problem
 when running software on a persistent macOS or Windows machine, but for Linux or
 for ephemeral machines (e.g. CI) the only option is an unofficial
-reverse-engineered solution.
+reverse-engineered solution. This may be the reason I ultimately switch to
+something else. I have been trying out Syncthing.
 
 Ecosystem effects of iCloud Drive include a more native sharing flow between
 your drive and apps (in both directions) and a tendancy for first-party and
 some third-party apps to use it as a default data store anyway (e.g. Pages
 saves documents there, Numbers saves spreadsheets there).
 
-macOS also pulls a trick where it allows you to queue up actions on iCloud
-Drive files that haven't yet fully synced to your machine yet. For example, if
-you download an image to iCloud Drive on your iPhone, it will show up
-~immediately on macOS Finder, then begin syncing. If you try to open the file
-on macOS before it finishes, the open action will queue until the sync
-finishes, then execute. This behavior is nice most of the time (compared to
-the industry standard of trying to open a broken file), but when you first
-encounter it with a large file like a video it's easy to perceive it as
-slowness or stalling.
+macOS also pulls a trick where it invisibly queues up actions on iCloud Drive
+files that haven't yet fully synced to your machine yet. For example, if you are
+on your iPhone and download an image to iCloud Drive, then you open your Mac,
+the image will show up ~immediately in macOS Finder, before it has finished
+syncing. If you try to open the file in macOS before it finishes, the open
+action will queue until the sync finishes, then execute. This behavior is nice
+compared to the industry standard of trying to open a broken file, but when you
+first encounter it with a large file like a video it's easy to perceive it as
+OS-level slowness or stalling.
 
 ### YouTube Music → Apple Music {#music}
 
