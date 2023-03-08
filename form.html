@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Form is Function" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>Form is Function</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+</nav>
+<nav style="font-size:1em">
+	<p style="text-align:center">
+		<a href="/now.html" >What I'm doing now</a>
+		&bull;
+		<a href="/config.html" >My Emacs Config</a>
+		
+  </p>
+  <p style="text-align:center">
+    
+  </p>
+</nav>
+
+        
+      </header>
+      <article>
+        
+          <div style="background-color: var(--bg-c); text-align:center;">
+            DRAFT
+          </div>
+        
+        
+        <html><head></head><body><h1>Form is Function</h1>
+
+<p>We humans are not rational creatures. We have irrational fears, hates, beliefs, biases. There are entire fields of study on the various ways human beings are irrational, and they are still discovering new things.</p>
+
+<p>When we pit form against function, we ignore this. We put function in the light of getting things done, and form in the light of looking pretty for... reasons?</p>
+
+<p>Form<span style="font-family: sans-serif">—</span>design<span style="font-family: sans-serif">—</span>does a lot. For the sake of argument, let's boil it down to its essence: it makes products enjoyable.</p>
+
+<p>Enjoyability has utility.</p>
+
+<h2>Anticlutter</h2>
+
+<p>When I'm in a messy space, it gets in my head. I become anxious and distracted, but not enough to realize it. I don't know there's a problem to be fixed.</p>
+
+<p>When I happen to fix it by tidying my space, I sit down in my chair and feel peace and productivity wash over me. In this space and headspace, the creative possibilities lay themselves in front of me. The doodads are in their places, the surfaces are ready to be used. I am calm. I am concentrated, ready to take on a challenge.</p>
+
+<p>This makes no sense I can gather. Maybe at some evolutionary stage of our development it paid dividends in fitness to have a clean space, but today it really shouldn't matter if I have a couple of things scattered about. The behavior doesn't make sense. But we must acknowledge that though it doesn't make sense, it still <em>is</em>. You don't go to the users who fell out of your funnel and explain why they're being irrational. You fix the funnel.</p>
+
+<p>We need to build around our own irrationalities.</p>
+
+<h2>Interior Design</h2>
+
+<p>I took it one step further than clutter started learning to make a space itself invoke this feeling, rather than the (lack of) things scattered in it. This is how I started my interior design kick. If you thought sitting down in a newly tidied space was irrationally motivating, wait until you sit down in a well designed space. I'm not convinced feng shui affects the ions in the air or whatever, but I am very much convinced the Feng shui terminology around positive and negative energies is just another way to talk about good and bad design of furniture arrangement.</p>
+
+<p>For example, the "command position" mandates that your default place in the room, like a desk, face the room's entrance to "receive the positive energy coming in from the door". Put another way, evolution has molded our brains to enjoy being able to see vectors of attack.</p>
+
+<p>Even learning the ins and outs of color theory is amazing. Why do some colors "go together"? It's a mind twist learning about the silly rules for good vs. bad pairings and then also noticing that you actually do like the good ones more, a lot more.</p>
+
+<h2>Design</h2>
+
+<p>It has never been form vs. function. Form is just a category of function. It is the category focused on the subtleties that our we enjoy without knowing it.</p>
+
+<p>I am more productive in a space with good form than in a space with bad form. This applies equally to any dimension. After twelve years on Android, switching to iPhone had that unnamed UX feeling of peace and motivation. It permeates the OS and the design handbook. I found it enjoyable to use the OS. I still do. The joy turns into more usage, which turns into money spent.</p>
+
+<p>Once form has you on the hook like this, you're on the bandwagon. The funniest part is you can't quite express why. People criticize Apple users for spending <code>$MONEY</code> on <code>$SPEC_SHEET</code> when they could have spent less on more; for choosing a locked-down experience over a customizable one. Apple users suck at arguing against this<span style="font-family: sans-serif">—</span>"it just <em>feels</em> better!"<span style="font-family: sans-serif">—</span>because all the reasons they like Apple products are inherently nonsensical. They're inbuilt traits of us as a species, but not something allowed in rational conversation.</p>
+
+<p>Phooey, I say. Let us acknowledge that our species has irrationalities and not be ashamed of them. Eating sweet desserts, seeking sweeping landscapes, having nonproductive sex<span style="font-family: sans-serif">—</span>these are all irrational nonsensical behaviors fueled by evolutionary leftovers, and pretending they don't exist, or even pretending that they <em>are</em> rational, is only making it harder to talk about them.</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/warm/form.md"
+                  >src/warm/form.md</a
+                >
+              
+              <br />
+              
+                published
+                2022 July
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
