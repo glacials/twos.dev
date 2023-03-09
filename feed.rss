@@ -5,8 +5,54 @@
     <description>misc thoughts</description>
     <copyright>Copyright 2021–2023 Benjamin Carlsson</copyright>
     <managingEditor>ben@twos.dev (Benjamin Carlsson)</managingEditor>
-    <pubDate>Thu, 09 Mar 2023 03:33:02 +0000</pubDate>
-    <lastBuildDate>Thu, 09 Mar 2023 03:33:02 +0000</lastBuildDate>
+    <pubDate>Thu, 09 Mar 2023 17:00:15 +0000</pubDate>
+    <lastBuildDate>Thu, 09 Mar 2023 17:00:15 +0000</lastBuildDate>
+    <item>
+      <title>Form is Function</title>
+      <link>https://twos.dev/form.html.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Form is Function&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;We are not rational creatures. We have irrational fears, hates, beliefs, biases. There are entire fields of study on these irrationalities. Those fields are still discovering new ways our brains fail us.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;When we pit form against function, we ignore this. We put function in the light of getting things done, and form in the light of looking pretty for... reasons?&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Form&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;design&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;does a lot. For the sake of argument, let&#39;s boil it down to its essence: it makes products enjoyable.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Enjoyability has utility.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Anticlutter&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;When I&#39;m in a messy space, it gets in my head. I become anxious and distracted, but not enough to realize it. I don&#39;t know there&#39;s a problem to be fixed.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;When I happen to fix it by tidying my space, I sit down in my chair and feel peace and productivity wash over me. In this space and headspace the creative possibilities lay themselves in front of me. The doodads are in their places, the surfaces are ready to be used. I am calm. I am concentrated, ready to take on a challenge.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;This makes no sense I can gather. Maybe at some evolutionary stage it paid to have a clean space, or maybe it&#39;s a byproduct of some other evolutionary development. Today it really shouldn&#39;t matter if I have a couple of things scattered about.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;But it does. We must learn &#34;it shouldn&#39;t matter&#34; does not mean &#34;it doesn&#39;t matter&#34;. You don&#39;t go to the users who fell out of your funnel and explain why they&#39;re being irrational. You fix the funnel.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We need to build our own funnels around our own brains&#39; irrationalities.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Interior Design&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;I took it one step further than clutter started learning to make a space itself invoke this feeling, rather than just the objects that exist inside it. This is how I started my interior design kick.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;If you thought sitting down in a newly tidied space was irrationally motivating, wait until you sit down in a well designed space. Even learning the basics of color theory throws an alleged rational mind for a twist. Learn about &lt;a href=&#34;https://www.canva.com/colors/color-wheel/&#34;&gt;the silly irrational rules&lt;/a&gt; for good vs. bad color pairings and then notice that actually, the supposed good pairings &lt;em&gt;do&lt;/em&gt; look better.&lt;/p&gt;&#xA;&#xA;&lt;h2&gt;Design&lt;/h2&gt;&#xA;&#xA;&lt;p&gt;It has never been form vs. function. Form is a category of function. It is the category focused on the subtleties we don&#39;t realize we enjoy. And enjoyment has utility.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I am more productive in a space with good form than in a space with bad form. This applies to more than just physical spaces. After twelve years on Android, switching to iPhone had that unnamed UX feeling of peace and motivation. The design handbook permeates the OS and nearly all popular apps. It&#39;s enjoyable to just use the OS.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;The biggest prank here is you can&#39;t quite express why. I&#39;m not even sure that I have on this page. People criticize Apple users for spending &lt;code&gt;$MONEY&lt;/code&gt; on &lt;code&gt;$SPEC_SHEET&lt;/code&gt; when they could have spent less on more, and for choosing a locked-down experience over a customizable one. Apple users suck at arguing against this because all the reasons they like Apple products are inherently nonsensical. They&#39;re inbuilt traits of us as a species, but not something allowed in rational conversation.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;Let us acknowledge that our species has irrationalities and not be ashamed of them. Eating sweet desserts, seeking out sweeping landscapes, engaging in nonproductive sex&lt;span style=&#34;font-family: sans-serif&#34;&gt;—&lt;/span&gt;these are all irrational nonsensical behaviors fueled by evolutionary leftovers, and acknowledging they can be irrational and also real is our only way to continue the conversation around them.&lt;/p&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Form is Function</h1>
+
+<p>We are not rational creatures. We have irrational fears, hates, beliefs, biases. There are entire fields of study on these irrationalities. Those fields are still discovering new ways our brains fail us.</p>
+
+<p>When we pit form against function, we ignore this. We put function in the light of getting things done, and form in the light of looking pretty for... reasons?</p>
+
+<p>Form<span style="font-family: sans-serif">—</span>design<span style="font-family: sans-serif">—</span>does a lot. For the sake of argument, let's boil it down to its essence: it makes products enjoyable.</p>
+
+<p>Enjoyability has utility.</p>
+
+<h2>Anticlutter</h2>
+
+<p>When I'm in a messy space, it gets in my head. I become anxious and distracted, but not enough to realize it. I don't know there's a problem to be fixed.</p>
+
+<p>When I happen to fix it by tidying my space, I sit down in my chair and feel peace and productivity wash over me. In this space and headspace the creative possibilities lay themselves in front of me. The doodads are in their places, the surfaces are ready to be used. I am calm. I am concentrated, ready to take on a challenge.</p>
+
+<p>This makes no sense I can gather. Maybe at some evolutionary stage it paid to have a clean space, or maybe it's a byproduct of some other evolutionary development. Today it really shouldn't matter if I have a couple of things scattered about.</p>
+
+<p>But it does. We must learn "it shouldn't matter" does not mean "it doesn't matter". You don't go to the users who fell out of your funnel and explain why they're being irrational. You fix the funnel.</p>
+
+<p>We need to build our own funnels around our own brains' irrationalities.</p>
+
+<h2>Interior Design</h2>
+
+<p>I took it one step further than clutter started learning to make a space itself invoke this feeling, rather than just the objects that exist inside it. This is how I started my interior design kick.</p>
+
+<p>If you thought sitting down in a newly tidied space was irrationally motivating, wait until you sit down in a well designed space. Even learning the basics of color theory throws an alleged rational mind for a twist. Learn about <a href="https://www.canva.com/colors/color-wheel/">the silly irrational rules</a> for good vs. bad color pairings and then notice that actually, the supposed good pairings <em>do</em> look better.</p>
+
+<h2>Design</h2>
+
+<p>It has never been form vs. function. Form is a category of function. It is the category focused on the subtleties we don't realize we enjoy. And enjoyment has utility.</p>
+
+<p>I am more productive in a space with good form than in a space with bad form. This applies to more than just physical spaces. After twelve years on Android, switching to iPhone had that unnamed UX feeling of peace and motivation. The design handbook permeates the OS and nearly all popular apps. It's enjoyable to just use the OS.</p>
+
+<p>The biggest prank here is you can't quite express why. I'm not even sure that I have on this page. People criticize Apple users for spending <code>$MONEY</code> on <code>$SPEC_SHEET</code> when they could have spent less on more, and for choosing a locked-down experience over a customizable one. Apple users suck at arguing against this because all the reasons they like Apple products are inherently nonsensical. They're inbuilt traits of us as a species, but not something allowed in rational conversation.</p>
+
+<p>Let us acknowledge that our species has irrationalities and not be ashamed of them. Eating sweet desserts, seeking out sweeping landscapes, engaging in nonproductive sex<span style="font-family: sans-serif">—</span>these are all irrational nonsensical behaviors fueled by evolutionary leftovers, and acknowledging they can be irrational and also real is our only way to continue the conversation around them.</p>
+</body></html>]]></content:encoded>
+      <author>Benjamin Carlsson</author>
+      <guid>form.html</guid>
+      <pubDate>Thu, 09 Mar 2023 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Orange Creamsicle</title>
       <link>https://twos.dev/creamsicle.html.html</link>
