@@ -1,9 +1,10 @@
 ---
+category: living document
 date: 2022-05-25
-updated: 2023-03-08
 filename: apple.html
-type: post
 toc: true
+type: post
+updated: 2023-03-08
 ---
 
 # From Google to Apple
@@ -108,8 +109,9 @@ offline, but ultimately Google's servers are the source of truth.
 
 To Apple, a user is a device first. iCloud exists to synchronize data between
 multiple devices, but it's just that—synchronization. Apps usually wait until
-the device is plugged in to bother syncing, and you can even sync with a cable
-(or not at all) instead of iCloud.
+the device is plugged in to bother syncing, and you can even still perform a
+first-class OS-level sync of all your data to another device with a cable
+instead of iCloud. You can also opt to keep everything local.
 
 Here are some ways these differences are expressed:
 
@@ -118,17 +120,15 @@ Here are some ways these differences are expressed:
   and app ~identically. In contrast Apple puts every major UX flow in a native
   app, from email and calendar to bug reporting and account management. Even
   uploading apps to the App Store for publishing—a fundamentally online
-  experience—is a native app.
-- Google Docs documents are rows in a database, where Apple Pages documents
-  are files on a filesystem; sharing and synchronization are handled by iCloud
-  which is more akin to Dropbox in this mode. It does support 100 simultaneous
-  writers, but I'm not sure how.
+  experience—is a native macOS app.
+- Google Docs documents are rows in a database. Apple Pages documents are files
+  on a filesystem.
 - When you message someone with iMessage you are messaging a device (a phone
   number or email), not an Apple account—even if the bubble is blue. You may
-  be unknowingly using a combination of phone and email for one contact, because
-  iMessage silently interleaves them if they're owned by the same Apple account.
-  If that person later removes one from their Apple account, your iMessage
-  thread with them retroactively splits.
+  even be unknowingly using a combination of phone and email for one contact,
+  because iMessage silently interleaves them if they're owned by the same Apple
+  account. If that person later removes one from their Apple account, your
+  iMessage thread with them retroactively splits.
 - In the Google ecosystem, when you take or make a Fi / Voice call from your
   computer, you're going through Google's servers. In the Apple ecosystem,
   when you take or make a call from your Mac or iPad, you're connecting
@@ -173,7 +173,8 @@ contributes to more product deaths.
 
 ## Specific Notes {#specifics}
 
-Below are my notes on moving between the ecosystems at specific touchpoints.
+Below are my notes on moving between the ecosystems at specific touchpoints. To
+see an overview, visit the [table of contents](#toc).
 
 ### ArchLinux → macOS {#macos}
 
@@ -416,10 +417,10 @@ hooking up more devices through automation with Shortcuts.
 
 Everything you’ve heard about the AirPods Pro noise cancellation is true.
 Transparency mode is so good that more than once I’ve forgotten they’re in my
-ears. They’ve more than replaced my Bose QuietComfort 35 IIs.
+ears. They’ve more than replaced my Bose QuietComfort 35 IIs, even for flights.
 
 Ecosystem effects of AirPods include automatic switching between devices based
-on attention, and Siri integration slightly worse than Pixel Buds's Google
+on attention, and a Siri integration slightly worse than Pixel Buds's Google
 Assistant integration.
 
 ### Gmail → iCloud Mail {#mail}

@@ -4,7 +4,7 @@ filename: hotsauce.html
 type: post
 ---
 
-# When the April Fool's Day Prank is Real
+# Inverted April Fool's
 
 I love it when companies call their own bluffs on April Fool's Day. I like to
 click into their pranks to see where the seam is. Are they "launching a

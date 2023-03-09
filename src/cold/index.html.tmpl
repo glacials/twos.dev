@@ -22,22 +22,35 @@ type: page
   <a rel="me" href="https://m.twos.dev/@ben">@ben@m.twos.dev</a>
 </div>
 
-<h2>Writing</h2>
-<ul>
-  {{ range posts }}
-    {{ if lt (add .CreatedAt.Year 1) now.Year }}
-      {{ break }}
-    {{ end }}
-    <li>
-      {{ with .Category }}
-        {{ . }}:
-      {{ end }}
-      <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-    </li>
-		{{ end }}
-  <li><a href="/archives.html">archives</a> &rarr;</li>
-</ul>
-<p></p>
+<div style="display:flex;flex-wrap:wrap">
+	<div>
+		<h2>Writing</h2>
+		<ul>
+			{{ range posts }}
+			{{ if .Category }}{{ continue }}{{ end }}
+			{{ if lt .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
+			<li>
+				<a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+ 			</li>
+ 			{{ end }}
+			<li><a href="/archives.html">archives</a> &rarr;</li>
+		</ul>
+	</div>
+
+ 	{{ range $category, $posts := categories }}
+	{{ if not $category }}{{ continue }}{{ end }}
+ 	<div>
+		<h2>{{ $category }}s</h2>
+		<ul>
+ 			{{ range $posts }}
+ 			<li>
+ 				<a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+ 			</li>
+ 			{{ end }}
+ 		</ul>
+ 	</div>
+ 	{{ end }}
+</div>
 
 <h2>2022</h2>
 <p>

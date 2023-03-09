@@ -12,6 +12,8 @@ import (
 
 	"github.com/gorilla/feeds"
 	"github.com/yargevad/filepathx"
+	"golang.org/x/text/cases"
+	"golang.org/x/text/language"
 )
 
 // Substructure is a graph of documents on the website, generated with read-only
@@ -460,6 +462,19 @@ func (s *Substructure) archives() (archivesVars, error) {
 	return archives, nil
 }
 
+// categories returns posts grouped by category. The key of the returned map is
+// the non-pluralized category name in title casing.
+//
+// The empty string is a valid category and will appear in the map.
+func (s *Substructure) categories() map[string]documents {
+	cats := map[string]documents{}
+	for _, d := range s.posts() {
+		cat := cases.Title(language.English).String(d.Category())
+		cats[cat] = append(cats[cat], d)
+	}
+	return cats
+}
+
 // posts returns text documents of type post.
 func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
@@ -631,13 +646,14 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 		"parent": func() *substructureDocument { return d.Parent },
 		"src":    func() string { return d.Source },
 
-		"archives": s.archives,
-		"icon":     iconFunc,
-		"img":      imgsFunc,
-		"imgs":     imgsFunc,
-		"posts":    s.posts,
-		"video":    videoFunc,
-		"videos":   videoFunc,
+		"archives":   s.archives,
+		"categories": s.categories,
+		"icon":       iconFunc,
+		"img":        imgsFunc,
+		"imgs":       imgsFunc,
+		"posts":      s.posts,
+		"video":      videoFunc,
+		"videos":     videoFunc,
 	})
 	_, err = t.Parse(string(layoutBytes))
 	if err != nil {

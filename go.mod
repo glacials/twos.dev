@@ -10,7 +10,6 @@ require (
 	github.com/gomarkdown/markdown v0.0.0-20220627144906-e9a81102ebeb
 	github.com/gorilla/feeds v1.1.1
 	github.com/lithammer/dedent v1.1.0
-	github.com/makeworld-the-better-one/dither v1.0.0
 	github.com/mitchellh/go-wordwrap v1.0.1
 	github.com/mitranim/gow v0.0.0-20220616172716-e9d92c985e03
 	github.com/niklasfasching/go-org v1.6.6-0.20230219175512-fa3e6f91d96b
@@ -20,6 +19,7 @@ require (
 	github.com/yargevad/filepathx v1.0.0
 	golang.org/x/image v0.0.0-20220617043117-41969df76e82
 	golang.org/x/net v0.7.0
+	golang.org/x/text v0.7.0
 )
 
 require (

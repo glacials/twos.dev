@@ -1,5 +1,4 @@
 ---
-category: game load
 date: 2007-12-25
 filename: wow.html
 type: post

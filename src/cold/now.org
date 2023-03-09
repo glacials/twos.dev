@@ -1,5 +1,7 @@
-#+TYPE: page
+#+CATEGORY: living document
+#+DATE: 2023-02-16
 #+FILENAME: now.html
+#+TYPE: post
 
 /This page is in the form of [[https://sive.rs/now][Derek Sivers's =/now= page]]./
 
