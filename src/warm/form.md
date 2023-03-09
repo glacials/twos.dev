@@ -1,7 +1,7 @@
 ---
-date: 2022-07-06
+date: 2023-03-09
 filename: form.html
-type: draft
+type: post
 ---
 
 # Form is Function
