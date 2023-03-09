@@ -6,7 +6,7 @@ type: draft
 
 # Form is Function
 
-We are not rational creatures. We have irrational fears, hates, beliefs, biases. There are fields of study on these irrationalities.
+We are not rational creatures. We have irrational fears, hates, beliefs, biases. There are entire fields of study on these irrationalities. Those fields are still discovering new ways our brains fail us.
 
 When we pit form against function, we ignore this. We put function in the light of getting things done, and form in the light of looking pretty for... reasons?
 
