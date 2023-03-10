@@ -382,7 +382,7 @@ func (d *textDocument) parseOrg() error {
 			if err != nil {
 				return err
 			}
-		case "shortname":
+		case "filename":
 			d.metadata.Shortname = v
 		case "title":
 			d.metadata.Title = v
