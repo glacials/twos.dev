@@ -267,7 +267,7 @@ func (d *textDocument) Dependencies() map[string]struct{} {
 func (d *textDocument) load() error {
 	f, err := os.Open(d.SrcPath)
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot open text document source: %w", err)
 	}
 	defer f.Close()
 

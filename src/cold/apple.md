@@ -419,9 +419,14 @@ Everything you’ve heard about the AirPods Pro noise cancellation is true.
 Transparency mode is so good that more than once I’ve forgotten they’re in my
 ears. They’ve more than replaced my Bose QuietComfort 35 IIs, even for flights.
 
+[Spatial audio](https://support.apple.com/en-us/HT211775) is literally too good;
+I had to turn it off. Again and again I became very nervous that I was blasting
+sound from my speakers that I would have to briefly remove one earbud to ensure
+I wasn't. The anxiety of this was so distracting as to be counterproductive.
+
 Ecosystem effects of AirPods include automatic switching between devices based
-on attention, and a Siri integration slightly worse than Pixel Buds's Google
-Assistant integration.
+on attention, a Siri integration slightly worse than Pixel Buds's Google
+Assistant integration, and spatial audio.
 
 ### Gmail → iCloud Mail {#mail}
 
