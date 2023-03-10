@@ -6,6 +6,7 @@ import (
 	"io/ioutil"
 	"os"
 	"path/filepath"
+	"regexp"
 	"sort"
 	"strings"
 	"time"
@@ -34,22 +35,24 @@ type substructureDocument struct {
 }
 
 var (
-	// ignoreFilenames are filenames (not paths) that should not be
-	// treated as documents to be generated, even though they are in
-	// source directories.
+	// ignorePaths are file path regex patterns that should not be
+	// treated as documents to be generated, even though they are in source
+	// directories. The regex is a full match so must start with ^ and end with $.
 	//
 	// TODO: Migrate some of these to a directory blocklist instead.
-	ignoreFilenames = map[string]struct{}{
-		"README.md":               {},
-		".DS_Store":               {},
-		"imgcontainer.html.tmpl":  {},
-		"text_document.html.tmpl": {},
-		"_icon.html.tmpl":         {},
-		"_imgs.html.tmpl":         {},
-		"_nav.html.tmpl":          {},
-		"_subtoc.html.tmpl":       {},
-		"_toc.html.tmpl":          {},
-		"_videos.html.tmpl":       {},
+	ignorePaths = map[*regexp.Regexp]struct{}{
+		regexp.MustCompile("(^\\.)|(^.*\\/\\.)\\.[^\\/]*$"):     {},
+		regexp.MustCompile("^(.*\\/)?#.*$"):                     {},
+		regexp.MustCompile("^(.*\\/)?README.md$"):               {},
+		regexp.MustCompile("^(.*\\/)?.DS_Store$"):               {},
+		regexp.MustCompile("^(.*\\/)?imgcontainer.html.tmpl$"):  {},
+		regexp.MustCompile("^(.*\\/)?text_document.html.tmpl$"): {},
+		regexp.MustCompile("^(.*\\/)?_icon.html.tmpl$"):         {},
+		regexp.MustCompile("^(.*\\/)?_imgs.html.tmpl$"):         {},
+		regexp.MustCompile("^(.*\\/)?_nav.html.tmpl$"):          {},
+		regexp.MustCompile("^(.*\\/)?_subtoc.html.tmpl$"):       {},
+		regexp.MustCompile("^(.*\\/)?_toc.html.tmpl$"):          {},
+		regexp.MustCompile("^(.*\\/)?_videos.html.tmpl$"):       {},
 	}
 	pad = newPadder()
 )
@@ -160,12 +163,12 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 
 	var prev, next *galleryDocument
 	for _, src := range append(jpgFiles, jpegFiles...) {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+		if shouldIgnore(src) {
 			continue
 		}
 		doc, err := NewGalleryDocument(src, s.cfg)
 		if err != nil {
-			return err
+			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
 		}
 		doc.Prev, prev = prev, doc
 		s.add(&substructureDocument{Document: doc, Source: src})
@@ -210,12 +213,12 @@ func (s *Substructure) discoverHTMLAtPath(path string) error {
 	}
 
 	for _, src := range append(htmlFiles, tmplFiles...) {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+		if shouldIgnore(src) {
 			continue
 		}
 		doc, err := NewHTMLDocument(src)
 		if err != nil {
-			return err
+			return fmt.Errorf("cannot create HTML document from %s: %w", src, err)
 		}
 		s.add(&substructureDocument{Document: doc, Source: src})
 	}
@@ -247,12 +250,12 @@ func (s *Substructure) discoverMarkdownAtPath(path string) error {
 	}
 
 	for _, src := range markdownFiles {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+		if shouldIgnore(src) {
 			continue
 		}
 		doc, err := NewMarkdownDocument(src)
 		if err != nil {
-			return err
+			return fmt.Errorf("cannot create Markdown document from %s: %w", src, err)
 		}
 		s.add(&substructureDocument{Document: doc, Source: src})
 	}
@@ -281,7 +284,7 @@ func (s *Substructure) discoverOrgAtPath(path string) error {
 	}
 
 	for _, src := range orgFiles {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+		if shouldIgnore(src) {
 			continue
 		}
 		doc, err := NewOrgDocument(src)
@@ -313,7 +316,7 @@ func (s *Substructure) discoverStaticAtPath(path string) error {
 	}
 
 	for _, src := range staticFiles {
-		if _, ok := ignoreFilenames[filepath.Base(src)]; ok {
+		if shouldIgnore(src) {
 			continue
 		}
 		if stat, err := os.Stat(src); err != nil {
@@ -689,4 +692,15 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	}
 
 	return nil
+}
+
+// shouldIgnore returns true if the given file path should not be built into the
+// substructure, or false otherwise.
+func shouldIgnore(src string) bool {
+	for r := range ignorePaths {
+		if r.MatchString(src) {
+			return true
+		}
+	}
+	return false
 }
