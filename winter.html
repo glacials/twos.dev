@@ -384,11 +384,16 @@ be populated so that you have a working <code>index.html</code> listing posts.</
 
 <h4 id="build"><code>winter build</code></h4>
 
-<p>Usage: <code>winter build [--serve]</code></p>
+<p>Usage: <code>winter build [--serve] [--source directory]</code></p>
 
-<p>Build all content into <code>dist</code>. When <code>--serve</code> is passed, a fileserver is stood
-up afterwards pointing to <code>dist</code>, content is continually rebuilt as it changes,
-and the browser automatically refreshes.</p>
+<p>Build all source content into <code>dist</code>. When <code>--serve</code> is passed, a fileserver is
+stood up afterwards pointing to <code>dist</code>, content is continually rebuilt as it
+changes, and the browser automatically refreshes.</p>
+
+<p>Winter always builds text content from <code>src/cold</code> and <code>src/warm</code>, gallery
+content from <code>src/img</code>, and templates from <code>src/template</code>. If <code>--source</code> is
+specified, Winter will also build text content from that file or directory.
+<code>--source</code> can be specified any number of times.</p>
 
 <h4 id="freeze"><code>winter freeze</code></h4>
 

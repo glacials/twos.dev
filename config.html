@@ -94,7 +94,10 @@
           <small style="text-align:center; display: block">
             <i>
               published
-              2023 February</i
+              2023 February
+                / last updated
+                2023 March
+              </i
             >
           </small>
         
@@ -105,11 +108,10 @@
           <div
             style="text-align:center;text-transform:uppercase;margin-top:3em;"
           >
-            living documents
+            living document
           </div>
         
-        <html><head></head><body><p>UPDATED: 2023-03-06</p>
-<div id="outline-container-headline-1" class="outline-1">
+        <html><head></head><body><div id="outline-container-headline-1" class="outline-1">
 <h1 id="headline-1">
 <code class="verbatim">config.org</code>
 </h1>
@@ -244,7 +246,9 @@ Traditional Configuration
 <p>Get the boring stuff out of the way first:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq-default user-full-name "Benjamin Carlsson" user-mail-address "ben@twos.dev")
+<pre>  (setq-default
+   user-full-name "Benjamin Carlsson"
+   user-mail-address "ben@twos.dev")
   (setq-default tab-width 2)
   (tool-bar-mode -1) ; Don't show the GUI toolbar
   (setq-default mac-option-modifier 'super) ; Make Option act as Super
@@ -282,7 +286,8 @@ Small Efficiencies
 <pre>  (ido-mode 1) ; Autocomplete M-x among other things
   (setq-default ido-enable-flex-matching t) ; Don't require exact matches in ido-mode
   (defalias 'yes-or-no-p 'y-or-n-p) ; Allow y/n in yes/no prompts
-  (global-set-key (kbd "C-x k") #'kill-this-buffer) ; Make C-x k kill focused buffer instead of promptingexpand-region
+  ;; Make C-x k kill focused buffer instead of promptingexpand-region
+  (global-set-key (kbd "C-x k") #'kill-this-buffer)
 </pre>
 </div>
 </div>
@@ -890,20 +895,26 @@ headline a bit:</p>
 </div>
 </div>
 <p>
-And add some Org packages:</p>
+We'll also add <a href="https://www.orgroam.com/">Org-roam</a>, which is like wiki mode for Org mode:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'org-roam)
+  (straight-use-package 'org-roam-ui)
+  (setq-default org-roam-directory "~/sync/org-roam")
+  (org-roam-db-autosync-mode)
+  (setq-default org-roam-completion-everywhere t)
+</pre>
+</div>
+</div>
+<p>
+And add some more Org packages:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Various visual improvements to Org
   (straight-use-package 'org-modern)
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-
-  (straight-use-package 'org-roam)
   (straight-use-package 'emacsql)
-  (setq-default org-roam-directory "~/sync/org-roam")
-  (org-roam-db-autosync-mode)
-
-  (straight-use-package 'org-roam-ui)
 </pre>
 </div>
 </div>
@@ -1130,8 +1141,15 @@ up to speed with modern standard practices.</p>
 </div>
 </div>
 <p>
-And <a href="https://github.com/minad/vertico"><code class="verbatim">vertico</code></a> has better (and better-looking) completion than Ido, the built-in
-fuzzy engine:</p>
+We'll install <a href="https://github.com/oantolin/orderless"><code class="verbatim">orderless</code></a> for completion:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'orderless)
+</pre>
+</div>
+</div>
+<p>
+And <a href="https://github.com/minad/vertico"><code class="verbatim">vertico</code></a> for more completion improvements:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>(straight-use-package 'vertico)
@@ -1179,6 +1197,9 @@ questions or improvement suggestions! <a href="mailto:ben@twos.dev">ben@twos.dev
               
                 published
                 2023 February
+                  / last updated
+                  2023 March
+                
               
             </i>
           </small>
