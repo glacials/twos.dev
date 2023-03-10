@@ -107,11 +107,16 @@ be populated so that you have a working `index.html` listing posts.
 
 #### `winter build` {#build}
 
-Usage: `winter build [--serve]`
+Usage: `winter build [--serve] [--source directory]`
 
-Build all content into `dist`. When `--serve` is passed, a fileserver is stood
-up afterwards pointing to `dist`, content is continually rebuilt as it changes,
-and the browser automatically refreshes.
+Build all source content into `dist`. When `--serve` is passed, a fileserver is
+stood up afterwards pointing to `dist`, content is continually rebuilt as it
+changes, and the browser automatically refreshes.
+
+Winter always builds text content from `src/cold` and `src/warm`, gallery
+content from `src/img`, and templates from `src/template`. If `--source` is
+specified, Winter will also build text content from that file or directory.
+`--source` can be specified any number of times.
 
 #### `winter freeze` {#freeze}
 
