@@ -1,5 +1,7 @@
 # Winter
 
+[![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
+
 Winter is the bespoke static website generator that powers twos.dev. It can be
 used to power your static website as well, as a CLI or Go library. Beware that
 although it is technically website-agnostic, its feature set is shaped to serve
