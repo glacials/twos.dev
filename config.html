@@ -238,30 +238,39 @@ Traditional Configuration
 <p>Get the boring stuff out of the way first:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq-default
-   user-full-name "Benjamin Carlsson"
-   user-mail-address "ben@twos.dev")
-  (setq-default tab-width 2)
-  (tool-bar-mode -1) ; Don't show the GUI toolbar
-  (setq-default mac-option-modifier 'super) ; Make Option act as Super
-  (setq-default ring-bell-function 'ignore) ; Disable the audible bell
-  (setq-default sentence-end-double-space nil) ; End sentences with single spaces
-  (setq-default display-line-numbers t) ; Show line numbers
-  (delete-selection-mode 1) ; Delete selected text when starting to type
-  (setq-default fill-column 80) ; Wrap at 80 characters
-  (add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
-  (add-hook 'text-mode-hook #'auto-fill-mode) ; Autowrap when writing
-  (global-hl-line-mode 1) ; Highlight cursor line
+<pre>	(setq-default
+	 user-full-name "Benjamin Carlsson"
+	 user-mail-address "ben@twos.dev")
+	(setq-default tab-width 2)
+	(tool-bar-mode -1) ; Don't show the GUI toolbar
 
-  ;; Unicode everywhere
-  (set-charset-priority 'unicode)
-  (set-default-coding-systems 'utf-8)
-  (set-terminal-coding-system 'utf-8)
-  (set-keyboard-coding-system 'utf-8)
-  (set-selection-coding-system 'utf-8)
-  (prefer-coding-system 'utf-8)
-  (setq-default buffer-file-coding-system 'utf-8)
-  (setq-default default-process-coding-system '(utf-8-unix . utf-8-unix))
+	;; Modifier keys
+	(setq-default mac-command-modifier 'meta)       ; Make Command act as Meta
+	(setq-default mac-option-modifier 'super)       ; Make Option act as Super
+	(setq-default mac-control-modifier 'control)    ; Make Control act as Control
+	(setq-default mac-right-option-modifier 'hyper) ; Make Right Option act as Hyper
+	(setq-default ns-function-modifier 'hyper)      ; Make Fn act as Hyper
+
+	(setq-default ring-bell-function 'ignore) ; Disable the audible bell
+	(setq-default sentence-end-double-space nil) ; End sentences with single spaces
+	(setq-default display-line-numbers t) ; Show line numbers
+	(delete-selection-mode 1) ; Delete selected text when starting to type
+	(setq-default fill-column 80) ; Wrap at 80 characters
+	(add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
+	(add-hook 'text-mode-hook #'auto-fill-mode) ; Autowrap when writing
+	(global-hl-line-mode 1) ; Highlight cursor line
+
+	;; Unicode everywhere
+	(set-charset-priority 'unicode)
+	(set-default-coding-systems 'utf-8)
+	(set-terminal-coding-system 'utf-8)
+	(set-keyboard-coding-system 'utf-8)
+	(set-selection-coding-system 'utf-8)
+	(prefer-coding-system 'utf-8)
+	(setq-default buffer-file-coding-system 'utf-8)
+	(setq-default default-process-coding-system '(utf-8-unix . utf-8-unix))
+
+	(when (and (eq system-type 'darwin) (display-graphic-p)))
 </pre>
 </div>
 </div>
@@ -428,9 +437,20 @@ formatting on a language-agnostic basis.</p>
 </pre>
 </div>
 </div>
+<p>
+Some automatic indentation:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>    (straight-use-package 'aggressive-indent-mode)
+<pre>  (straight-use-package 'aggressive-indent-mode)
+</pre>
+</div>
+</div>
+<p>
+And some tools to better format copied text (via <code class="verbatim">ox-clip-formatted-copy</code>):</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'ox-clip)
+  (global-set-key (kbd "H-k") 'ox-clip-formatted-copy)
 </pre>
 </div>
 </div>
@@ -763,15 +783,20 @@ First, we'll set up some basic configuration.</p>
 <div class="highlight">
 <pre>  (setq-default org-directory "~/org")
   (setq-default org-default-notes-file (concat org-directory "/notes.org"))
-  (setq-default org-agenda-files '("~/org/notes.org"))
+  (setq-default org-agenda-files '("~/org/notes.org" "~/sync/org-roam"))
 </pre>
 </div>
 </div>
 <p>
-And clean it up visually. Hide the first n-1 stars on level n headlines:</p>
+And clean it up visually a bit:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq-default org-startup-indented t)
+<pre>  ; Hide the first n-1 asterisks in level n headings
+  (setq-default org-startup-indented t)
+
+  ; Don't wrap lines in plaintext exports of Org files
+  (setq-default org-export-preserve-breaks nil)
+  (setq-default org-ascii-text-width 99999)
 </pre>
 </div>
 </div>
@@ -891,6 +916,8 @@ We'll also add <a href="https://www.orgroam.com/">Org-roam</a>, which is like wi
 <div class="highlight">
 <pre>  (straight-use-package 'org-roam)
   (straight-use-package 'org-roam-ui)
+  (straight-use-package 'emacsql)
+  (straight-use-package 'emacsql-sqlite)
   (setq-default org-roam-directory "~/sync/org-roam")
   (org-roam-db-autosync-mode)
   (setq-default org-roam-completion-everywhere t)
@@ -905,7 +932,6 @@ And add some more Org packages:</p>
   (straight-use-package 'org-modern)
   (add-hook 'org-mode-hook #'org-modern-mode)
   (add-hook 'org-agenda-finalize-hook #'org-modern-agenda)
-  (straight-use-package 'emacsql)
 </pre>
 </div>
 </div>
@@ -1089,9 +1115,11 @@ SPC s</code> performs <code class="verbatim">C-x s</code>)</li>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'god-mode)
+  (require 'god-mode)
+  (define-key god-local-mode-map (kbd "i") #'god-local-mode)
+  (define-key god-local-mode-map (kbd ".") #'repeat)
   (global-set-key (kbd "&lt;escape&gt;") #'god-local-mode)
   (setq-default god-mode-enable-function-key-translation nil) ; Except function keys
-  (require 'god-mode)
 
   ;; Change cursor to box outside god mode, bar inside it
   (defun my-god-mode-update-cursor-type ()
