@@ -5,8 +5,48 @@
     <description>misc thoughts</description>
     <copyright>Copyright 2021–2023 Benjamin Carlsson</copyright>
     <managingEditor>ben@twos.dev (Benjamin Carlsson)</managingEditor>
-    <pubDate>Mon, 27 Mar 2023 10:17:49 +0000</pubDate>
-    <lastBuildDate>Mon, 27 Mar 2023 10:17:49 +0000</lastBuildDate>
+    <pubDate>Tue, 28 Mar 2023 20:58:09 +0000</pubDate>
+    <lastBuildDate>Tue, 28 Mar 2023 20:58:09 +0000</lastBuildDate>
+    <item>
+      <title>90 &gt; 100</title>
+      <link>https://twos.dev/90.html.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;90 &amp;gt; 100&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;More people should do things at 90% effort. If you believe you can only choose 0% or 100%, you’ll often choose 0% because you cannot afford 100%.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I became very engaged in helping with the climate emergency in the last couple of years. One big line item on the list of emitters is meat. A 100g serving of beef emits the equivalent of &lt;a href=&#34;https://www.co2everything.com/co2e-of/beef&#34;&gt;15kg&lt;/a&gt; of CO₂ into the atmosphere, the same as driving 78km (48mi). A 100g serving of tofu emits 0.08 kg of CO₂ equivalent.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:CO-equivalent-CO&#34;&gt;&lt;a href=&#34;#fn:CO-equivalent-CO&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; In other words, a week of eating beef emits more CO₂e than three years of eating tofu.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3x-meals-daily-o&#34;&gt;&lt;a href=&#34;#fn:3x-meals-daily-o&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For someone wanting to reduce emissions, vegetarianism is a clear candidate. But there are some things about being vegetarian I can&#39;t do:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Summer is deeply carnivorous and I don&#39;t want to put her through the effects of my choice (we did try).&lt;/li&gt;&#xA;&lt;li&gt;I don&#39;t want to be that person in the friend group people have to plan around, the person whose presence at a barbecue makes an unprepared host feel guilty.&lt;/li&gt;&#xA;&lt;li&gt;There are formats of meat I get occasional cravings for, like a burger or a ball park hot dog.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;I can&#39;t be 100% vegetarian. But that&#39;s no reason to stay at 0%. I can cut meat from the ~90% of meals that don&#39;t cause any of these issues.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;So I became &lt;a href=&#34;https://en.wikipedia.org/Flexitarianism&#34;&gt;flexitarian&lt;/a&gt; which for me means &#34;vegetarian except when it would inconvenience people&#34;. If 90% of the world could become 90% vegetarian the benefit would be nearly that of 100%/100% but orders of magnitude easier to achieve.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We need to adopt this strategy more. It&#39;s similar to the &lt;a href=&#34;https://en.wikipedia.org/80-20_rule&#34;&gt;80/20 rule&lt;/a&gt;, but 80/20 optimizes bang-for-buck when building things. 90 &amp;gt; 100 is about recognizing that &lt;code&gt;impact per success&lt;/code&gt; is a worse thing to optimize for than &lt;code&gt;success rate * impact per success&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:CO-equivalent-CO&#34;&gt;CO₂ equivalent (&#34;CO₂e&#34;) is how we describe climate change impact in a way agnostic to the method. For example cows emit methane, which impacts the climate in a far greater way than CO₂.&lt;/li&gt;&#xA;&#xA;&lt;li id=&#34;fn:3x-meals-daily-o&#34;&gt;3x meals daily of 100g protein each&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>90 &gt; 100</h1>
+
+<p>More people should do things at 90% effort. If you believe you can only choose 0% or 100%, you’ll often choose 0% because you cannot afford 100%.</p>
+
+<p>I became very engaged in helping with the climate emergency in the last couple of years. One big line item on the list of emitters is meat. A 100g serving of beef emits the equivalent of <a href="https://www.co2everything.com/co2e-of/beef">15kg</a> of CO₂ into the atmosphere, the same as driving 78km (48mi). A 100g serving of tofu emits 0.08 kg of CO₂ equivalent.<sup class="footnote-ref" id="fnref:CO-equivalent-CO"><a href="#fn:CO-equivalent-CO">1</a></sup> In other words, a week of eating beef emits more CO₂e than three years of eating tofu.<sup class="footnote-ref" id="fnref:3x-meals-daily-o"><a href="#fn:3x-meals-daily-o">2</a></sup></p>
+
+<p>For someone wanting to reduce emissions, vegetarianism is a clear candidate. But there are some things about being vegetarian I can't do:</p>
+
+<ol>
+<li>Summer is deeply carnivorous and I don't want to put her through the effects of my choice (we did try).</li>
+<li>I don't want to be that person in the friend group people have to plan around, the person whose presence at a barbecue makes an unprepared host feel guilty.</li>
+<li>There are formats of meat I get occasional cravings for, like a burger or a ball park hot dog.</li>
+</ol>
+
+<p>I can't be 100% vegetarian. But that's no reason to stay at 0%. I can cut meat from the ~90% of meals that don't cause any of these issues.</p>
+
+<p>So I became <a href="https://en.wikipedia.org/Flexitarianism">flexitarian</a> which for me means "vegetarian except when it would inconvenience people". If 90% of the world could become 90% vegetarian the benefit would be nearly that of 100%/100% but orders of magnitude easier to achieve.</p>
+
+<p>We need to adopt this strategy more. It's similar to the <a href="https://en.wikipedia.org/80-20_rule">80/20 rule</a>, but 80/20 optimizes bang-for-buck when building things. 90 &gt; 100 is about recognizing that <code>impact per success</code> is a worse thing to optimize for than <code>success rate * impact per success</code>.</p>
+
+<div class="footnotes">
+
+<hr/>
+
+<ol>
+<li id="fn:CO-equivalent-CO">CO₂ equivalent ("CO₂e") is how we describe climate change impact in a way agnostic to the method. For example cows emit methane, which impacts the climate in a far greater way than CO₂.</li>
+
+<li id="fn:3x-meals-daily-o">3x meals daily of 100g protein each</li>
+</ol>
+
+</div>
+</body></html>]]></content:encoded>
+      <author>Benjamin Carlsson</author>
+      <guid>90.html</guid>
+      <pubDate>Tue, 28 Mar 2023 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Form is Function</title>
       <link>https://twos.dev/form.html.html</link>
@@ -1253,46 +1293,6 @@ because I wanted something to tinker with at the time.</p>
       <author>Benjamin Carlsson</author>
       <guid>now.html</guid>
       <pubDate>Thu, 16 Feb 2023 00:00:00 +0000</pubDate>
-    </item>
-    <item>
-      <title>90 &gt; 100</title>
-      <link>https://twos.dev/90.html.html</link>
-      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;90 &amp;gt; 100&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;More people should do things at 90% effort. If you believe you can only choose 0% or 100%, you’ll often choose 0% because you cannot afford 100%.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;I became very engaged in helping with the climate emergency in the last couple of years. One big line item on the list of emitters is meat. A 100g serving of beef emits the equivalent of &lt;a href=&#34;https://www.co2everything.com/co2e-of/beef&#34;&gt;15kg&lt;/a&gt; of CO₂ into the atmosphere, the same as driving 78km (48mi). A 100g serving of tofu emits 0.08 kg of CO₂ equivalent.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:CO-equivalent-CO&#34;&gt;&lt;a href=&#34;#fn:CO-equivalent-CO&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; In other words, a week of eating beef emits more CO₂e than three years of eating tofu.&lt;sup class=&#34;footnote-ref&#34; id=&#34;fnref:3x-meals-daily-o&#34;&gt;&lt;a href=&#34;#fn:3x-meals-daily-o&#34;&gt;2&lt;/a&gt;&lt;/sup&gt;&lt;/p&gt;&#xA;&#xA;&lt;p&gt;For someone wanting to reduce emissions, vegetarianism is a clear candidate. But there are some things about being vegetarian I can&#39;t do:&lt;/p&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;Summer is deeply carnivorous and I don&#39;t want to put her through the effects of my choice (we did try).&lt;/li&gt;&#xA;&lt;li&gt;I don&#39;t want to be that person in the friend group people have to plan around, the person whose presence at a barbecue makes an unprepared host feel guilty.&lt;/li&gt;&#xA;&lt;li&gt;There are formats of meat I get occasional cravings for, like a burger or a ball park hot dog.&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;p&gt;I can&#39;t be 100% vegetarian. But that&#39;s no reason to stay at 0%. I can cut meat from the ~90% of meals that don&#39;t cause any of these issues.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;So I became &lt;a href=&#34;https://en.wikipedia.org/Flexitarianism&#34;&gt;flexitarian&lt;/a&gt; which for me means &#34;vegetarian except when it would inconvenience people&#34;. If 90% of the world could become 90% vegetarian the benefit would be nearly that of 100%/100% but orders of magnitude easier to achieve.&lt;/p&gt;&#xA;&#xA;&lt;p&gt;We need to adopt this strategy more. It&#39;s similar to the &lt;a href=&#34;https://en.wikipedia.org/80-20_rule&#34;&gt;80/20 rule&lt;/a&gt;, but 80/20 optimizes bang-for-buck when building things. 90 &amp;gt; 100 is about recognizing that &lt;code&gt;impact per success&lt;/code&gt; is a worse thing to optimize for than &lt;code&gt;success rate * impact per success&lt;/code&gt;.&lt;/p&gt;&#xA;&#xA;&lt;div class=&#34;footnotes&#34;&gt;&#xA;&#xA;&lt;hr/&gt;&#xA;&#xA;&lt;ol&gt;&#xA;&lt;li id=&#34;fn:CO-equivalent-CO&#34;&gt;CO₂ equivalent (&#34;CO₂e&#34;) is how we describe climate change impact in a way agnostic to the method. For example cows emit methane, which impacts the climate in a far greater way than CO₂.&lt;/li&gt;&#xA;&#xA;&lt;li id=&#34;fn:3x-meals-daily-o&#34;&gt;3x meals daily of 100g protein each&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&#xA;&lt;/div&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
-      <content:encoded><![CDATA[<html><head></head><body><h1>90 &gt; 100</h1>
-
-<p>More people should do things at 90% effort. If you believe you can only choose 0% or 100%, you’ll often choose 0% because you cannot afford 100%.</p>
-
-<p>I became very engaged in helping with the climate emergency in the last couple of years. One big line item on the list of emitters is meat. A 100g serving of beef emits the equivalent of <a href="https://www.co2everything.com/co2e-of/beef">15kg</a> of CO₂ into the atmosphere, the same as driving 78km (48mi). A 100g serving of tofu emits 0.08 kg of CO₂ equivalent.<sup class="footnote-ref" id="fnref:CO-equivalent-CO"><a href="#fn:CO-equivalent-CO">1</a></sup> In other words, a week of eating beef emits more CO₂e than three years of eating tofu.<sup class="footnote-ref" id="fnref:3x-meals-daily-o"><a href="#fn:3x-meals-daily-o">2</a></sup></p>
-
-<p>For someone wanting to reduce emissions, vegetarianism is a clear candidate. But there are some things about being vegetarian I can't do:</p>
-
-<ol>
-<li>Summer is deeply carnivorous and I don't want to put her through the effects of my choice (we did try).</li>
-<li>I don't want to be that person in the friend group people have to plan around, the person whose presence at a barbecue makes an unprepared host feel guilty.</li>
-<li>There are formats of meat I get occasional cravings for, like a burger or a ball park hot dog.</li>
-</ol>
-
-<p>I can't be 100% vegetarian. But that's no reason to stay at 0%. I can cut meat from the ~90% of meals that don't cause any of these issues.</p>
-
-<p>So I became <a href="https://en.wikipedia.org/Flexitarianism">flexitarian</a> which for me means "vegetarian except when it would inconvenience people". If 90% of the world could become 90% vegetarian the benefit would be nearly that of 100%/100% but orders of magnitude easier to achieve.</p>
-
-<p>We need to adopt this strategy more. It's similar to the <a href="https://en.wikipedia.org/80-20_rule">80/20 rule</a>, but 80/20 optimizes bang-for-buck when building things. 90 &gt; 100 is about recognizing that <code>impact per success</code> is a worse thing to optimize for than <code>success rate * impact per success</code>.</p>
-
-<div class="footnotes">
-
-<hr/>
-
-<ol>
-<li id="fn:CO-equivalent-CO">CO₂ equivalent ("CO₂e") is how we describe climate change impact in a way agnostic to the method. For example cows emit methane, which impacts the climate in a far greater way than CO₂.</li>
-
-<li id="fn:3x-meals-daily-o">3x meals daily of 100g protein each</li>
-</ol>
-
-</div>
-</body></html>]]></content:encoded>
-      <author>Benjamin Carlsson</author>
-      <guid>90.html</guid>
-      <pubDate>Tue, 01 Nov 2022 00:00:00 +0000</pubDate>
     </item>
     <item>
       <title>Orange Creamsicle</title>
