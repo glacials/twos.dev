@@ -52,7 +52,13 @@ body {
 /* End root elements */
 /* Start naked elements */
 
-a,
+/* When linked to an anchor, leave some space between top-of-window and the element. */
+a[name] {
+	scroll-margin-top: 1em;
+}
+
+/* Only lowercase links, not anchor targets */
+a[href],
 a:visited {
   color: var(--fg-a-b);
   text-transform: lowercase;
