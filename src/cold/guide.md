@@ -27,19 +27,19 @@ at your discretion, and share your own guide with me!
 -->
 
 1. **I like to synchronize *why*s but not *how*s.** Coordination is slow. As long as we share a
-   common vision, I trust you to make decisions in motion without blocking on consensus
-   every step of the way. I ask that you trust me to do the same. We can continue to share progress in
+   common vision, I trust you to make [two-way door](https://shit.management/one-way-and-two-way-door-decisions/) decisions in motion without blocking on consensus. I ask that you trust me to do the same. We can continue to share progress in
    nonblocking
-   ways^[To be clear, I don't mean "don't do code reviews". I mean don't call a team
-   meeting to get tacit approval on a [two-way door](https://shit.management/one-way-and-two-way-door-decisions/). I trust you to make the call.].
+   ways^[To be clear I don't mean "don't do code reviews". I mean don't call team
+   meetings for approval at every small-to-medium fork in the road. I trust you
+   to do the research and make the call, then share your findings async.].
    [More](https://communitywiki.org/wiki/DoOcracy)
 2. **I prefer asynchrony.** Social interaction [costs me
    brainpower](autism.html#masking) so I am more helpful
    when writing than speaking. In either case I'll understand your words
    better when given
    time to digest.
-3. **I don't handle interruptions well,** so notifications for my Slack and email are
-   permanently off—even DMs. A thirty second Slack conversation sets my brain back 15
+3. **I don't handle interruptions well** so notifications for my Slack and email are
+   permanently off, even for DMs. A thirty second Slack conversation sets my brain back 15
    minutes, so this is how I protect my productivity.
    I'll see the red badge in my dock
    when I come up for air. If it's urgent, use the oncall flow.
@@ -49,7 +49,7 @@ at your discretion, and share your own guide with me!
    but I can more easily regain context when information and discussion are concentrated
    in one source of truth like
    a ticket. I practice inbox zero, so I promise you won't have to ping me to
-   tell me about an update that's already in my email.
+   tell me something already in my inbox.
 5. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
    ask what customer problem it solves.
 6. **[Don't say hello](https://nohello.net/)**.
@@ -57,7 +57,7 @@ at your discretion, and share your own guide with me!
 ## Warnings
 
 - **I go rogue.** Sometimes I'm so passionate about fixing or building something
-  that I'll do it without tracking, because the overhead—or its emotional
+  that I'll do it without tracking because the overhead—or its emotional
   burden—is bigger than the job itself. Some [adored
   features](https://twitter.com/search?q=https%3A%2F%2Ftwitter.com%2Fglcls%2Fstatus%2F720689621466619904&src=typed_query)
   have come out of having the freedom to do this; see #1 above :D
