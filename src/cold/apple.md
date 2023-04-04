@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-03-08
+updated: 2023-03-30
 ---
 
 # From Google to Apple
@@ -176,7 +176,15 @@ contributes to more product deaths.
 Below are my notes on moving between the ecosystems at specific touchpoints. To
 see an overview, visit the [table of contents](#toc).
 
-### ArchLinux → macOS {#macos}
+### Key {#key}
+
+✔ = Switch successful; happily using Apple product
+
+ⅹ = Switch unsuccessful; moved back to Google or to another product
+
+⚠️ = Nuance ahead
+
+### ✔ ArchLinux → macOS {#macos}
 
 I have used one or another Mac as a development machine for nearly a decade,
 so this is the only swap not done as part of my mass migration. I grew up
@@ -206,7 +214,7 @@ review](https://developer.apple.com/documentation/storekit/requesting_app_store_
 I generally look there first when searching for an app, then Homebrew (if I know
 what I'm looking for), then Google.
 
-### Nexus 7 → iPad {#ipad}
+### ✔ Nexus 7 → iPad {#ipad}
 
 My minimum goal for a tablet is to replace all at-home phone use; it should
 give a strictly upgraded experience. As a habit, I carry it room-to-room.
@@ -249,7 +257,7 @@ Preview app allows iPad to be used as an input device for signing documents
 and marking up images. This is something I did before by manually transferring
 files, but now it’s two clicks with instant sync.
 
-### Pixel → iPhone {#iphone}
+### ✔ Pixel → iPhone {#iphone}
 
 I was initially surprised iPhone and iPad lack feature parity. This first came
 up trying to swipe-type on iPad. Another is iPad can show multiple apps on the
@@ -337,7 +345,7 @@ on any device.
    "Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
 }}
 
-### Moto 360 → Apple Watch {#watch}
+### ✔ Moto 360 → Apple Watch {#watch}
 
 My relationship with the Moto 360 was on and off. To me it served two
 functions:
@@ -367,7 +375,7 @@ wear it daily:
 Apart from the above, the third-party app ecosystem plays ball with Apple
 Watch a lot more than the Android app ecosystem does with Wear OS.
 
-### Chromecast/Google TV → Apple TV {#appletv}
+### ✔ Chromecast/Google TV → Apple TV {#appletv}
 
 We don’t have HomePods and Summer forbids me to get any (reasonably) after
 filling our home with Google Home Minis, so we’ve had to migrate away from “hey
@@ -398,7 +406,7 @@ the Apple TV, a notification shows on my iOS devices allowing me to use them
 as a keyboard. Password manager support works as normal; this is helpful for
 invoking 1Password to fill logins.
 
-### Google Home → Apple Home {#home}
+### ✔ Google Home → Apple Home {#home}
 
 My biggest fear with this change was losing the decade I’ve spent building up
 our Google Nest devices, but running Homemanager on a Raspberry Pi made it all
@@ -413,7 +421,7 @@ Ecosystem effects of Apple Home include using Apple TV as your IoT gateway,
 having home controls in the iOS and macOS control center pull-down menus, and
 hooking up more devices through automation with Shortcuts.
 
-### Pixel Buds → AirPods Pro {#airpods}
+### ✔ Pixel Buds → AirPods Pro {#airpods}
 
 Everything you’ve heard about the AirPods Pro noise cancellation is true.
 Transparency mode is so good that more than once I’ve forgotten they’re in my
@@ -428,7 +436,7 @@ Ecosystem effects of AirPods include automatic switching between devices based
 on attention, a Siri integration slightly worse than Pixel Buds's Google
 Assistant integration, and spatial audio.
 
-### Gmail → iCloud Mail {#mail}
+### ⚠️ Gmail → iCloud Mail {#mail}
 
 The big one. I’ve been wanting to switch my email to a domain I control
 anyway, and iCloud+ supports that.
@@ -502,7 +510,7 @@ Mail's junk filter sorts ~one legitimate email per week into the junk folder,
 even after months of correcting it.
 
 When attaching large files Mail allows you to send them as iCloud Drive links
-instead, but I've had recipients experience trouble downloading them.
+instead (Google has this same behavior with Drive), but I've had recipients experience trouble downloading them.
 
 Mail's search is bad. On macOS, it searches only the mailbox being viewed
 (e.g. Inbox) by default. Because I do inbox zero, this is never what I want to
@@ -514,11 +522,16 @@ Ignoring that, Gmail still wins search by an order of magnitude. For example,
 Gmail searches the contents of PDFs attached to emails; I’ve found this
 invaluable finding old leases and whatnot.
 
-Mail is okay at displaying emails as conversations. Once in a while, it omits
-something it shouldn’t. When I click Send while replying to a thread it
-doesn't immediately append my message, causing me to believe something went
-wrong. I experience long, uncollapsible nested quotes in some emails, where
+Mail is below average at threading emails. Once in a while, it omits
+an email it shouldn’t. When replying to a thread the sent email doesn't appear immediately
+in the local view of the thread, which makes it seem like something has gone wrong with
+the sending.
+
+I experience long, uncollapsible nested quotes in some threads, where
 Gmail was always good at collapsing them automatically.
+
+Mail is bad at converting text to rich text. For example, it will not automatically
+convert markdown-esque lists (e.g. `1. Some text` or `- Some text`) to rich text lists.
 
 macOS Mail supports filters, but only locally. The iCloud Mail service has a
 separate filter system with the same effect, but the two have disparate
@@ -542,7 +555,7 @@ Apple Mail engineer to have a similar UX but using proper Gmail APIs.
 Ecosystem effects of Mail include having search results show up in Spotlight
 and behaving super well as a multitasking app on iPadOS.
 
-### Google Calendar → Apple Calendar {#calendar}
+### ⚠️ Google Calendar → Apple Calendar {#calendar}
 
 I switched to Apple Calendar as both an app and a calendar provider. I'd
 forgotten how limited and finicky calendar protocols are at their core—so many
@@ -593,7 +606,7 @@ to” and “travel from” events based on the travel time between locations.
 Ecosystem effects of Calendar include context-aware Maps, Siri suggestions
 for navigation destinations and video calls, and the ability to longpress dates and times in iMessage to create events.
 
-### Google Maps → Apple Maps {#maps}
+### ⚠️ Google Maps → Apple Maps {#maps}
 
 Apple Maps gets a lot of flak for its initial release state, rightly so. But
 that was years ago, and they’ve kept at it. It’s improved. Unfortunately it’s
@@ -606,9 +619,6 @@ routed to the delivery entrance for a museum, the back entrance for an airport,
 and the wrong parking lot (15 minutes of walking wrong) for a store in a large
 shopping center.
 
-I’m continuing to give it chances because I know more data helps, but for tight
-schedules I go back to Google Maps.
-
 Then there's the other dimension of Google Maps: reviews, photos, menus,
 ordering, and reservations. Apple is a generation behind here; their purchase
 of Yelp means they inherit photos & reviews, but even that can't beat the
@@ -619,6 +629,13 @@ notice, but I'm just one person.
 Ecosystem effects of Apple Maps include rich links in iMessage and Calendar,
 Siri suggestions for destinations based on those and other sources, and Apple
 Watch vibration patterns to indicate upcoming turns.
+
+#### Departure {#byemaps}
+
+I’d like to continue to give Apple Maps chances because I know more data helps, but for tight
+schedules I wouldn't chance it. Incidentally, we purchased a Polestar which has Google
+Maps built right into it, so I've begun to softly switch back to that even on my other
+devices simply for the cross-integration.
 
 #### Location Sharing → Find My {#findmy}
 
@@ -637,7 +654,7 @@ have peace of mind. The app sends a notification when I leave `$DEVICE` at
 `$LOCATION`, with easy controls to disable future notifications for any such
 combination.
 
-### Google Photos → Apple Photos {#photos}
+### ✔ Google Photos → Apple Photos {#photos}
 
 Mostly, these two products are equivalent. Apple Photos has more powerful
 editing tools but Google Photos has more powerful search. Both have similar
@@ -667,7 +684,7 @@ Ecosystem effects include rich embeds & commenting in iMessage, and photos
 appearing in upload prompts on all platforms (e.g. when uploading an avatar to
 some random internet account) with full face search embedded.
 
-### Chrome → Safari {#safari}
+### ⚠️ Chrome → Safari {#safari}
 
 This was a far less noticeable change than I expected. Everything from
 bookmark sync to my extensions to rendering works the same.
@@ -715,7 +732,7 @@ I moved back to 1Password.
 Ecosystem effects of iCloud Keychain include faster and more fluid autofill
 support in Safari, on both macOS and iOS.
 
-### Google Sheets → Numbers {#numbers}
+### ✔ Google Sheets → Numbers {#numbers}
 
 As a casual spreadsheets user, Sheets and Numbers are nearly identical.
 Numbers has nicer UX when editing formulae that visualizes cell(s) being
@@ -723,30 +740,97 @@ referenced. It tries to humanize references, e.g. “Ben age” for a cell in a
 row with header “Ben” and a column with header “Age”, instead of A:123. This
 is nice until headers get long and multiworded. Overall it’s a wash.
 
+However, there's obviously a real social benefit to using Google Sheets if you have need of
+sharing them.
+
+Ecosystem effects of Numbers include Spotlight integration for quickly opening a sheet.
+
+<!--
 ### Google Docs → Pages {#pages}
 
 (To be filled in; I have not had much Pages experience.)
+-->
 
-### Keep → Notes {#notes}
+### ⅹ Keep → Apple Notes {#notes}
 
 I value simplicity and elasticity in notetaking—get out of my way and let me
-write, then let me deal with it later. Keep supplies that. Its layout is hard to
-browse, but it makes up for it with great search.
+write. Let me deal with organization later. Keep gives me that. Its layout is hard to
+browse and hasn't aged well visually, but it makes up for it with great search.
 
-Notes is simple and elastic in a different way. Where Keep focuses on
-shortform sticky-style notes, Notes focuses on longform, with roughly the same
-text formatting options as Markdown (unfortunately without the markup).
-Instead of adding several notes to a category or color in Keep, I append to an
-existing note that contains several thoughts. This keeps the number of notes
-down, which makes categorization more reasonable, which improves browsing.
+Apple Notes is simple and elastic in a different way. Where Keep focuses on
+shortform sticky-style notes, Notes focuses on longform notes with rich text
+support like headers, tables, monospaced text, etc.
 
-For me, it’s a wash between the two.
+So where Keep is best used as a searchable cloud or swarm of notes, Notes is best used as
+a curated and categorized filing cabinet. One note in Notes might be several dozen in
+Keep, so the effort spent on curation is not so large, and neither is the impact of
+only-okay search.
 
-Ecosystem effects of Notes include Shortcuts and cross-app drag-and-drop. I
+But honestly neither of them is fantastic, and the choice between them is a wash.
+
+Ecosystem effects of Notes include Shortcuts, cross-app drag-and-drop, "quick notes"
+(make a note using a universal gesture anywhere on macOS or iOS. I
 use a shortcut to create a new note titled and sorted correctly before
 starting a Chinese lesson.
 
-### Tasks → Reminders {#reminders}
+#### Departure {#byenotes}
+
+I switched off Apple Notes late 2022 because I
+discovered the difficulty of getting notes out of it. There are third party
+solutions that work okay, but the thought that Apple could break them at any moment
+caused me to switch out of principle and fear. I exported what I could and started
+looking for alternatives.
+
+My foray into Emacs had been happening in the background, so I tried
+[Org-mode](https://orgmode.org/) and quickly became enamored. It took over
+my notetaking duties because of how much its flexibility and breadth
+dwarfed what I was used to. I never truly understood the adage "Emacs is a great
+operating system but lacks a good text editor" until I tried Emacs + Org-mode. It's more
+appropriate to draw comparisons between software suites (e.g. Google Workspace vs.
+Microsoft Office vs. Emacs) than it is to compare it to other text editors.
+
+<!-- Maybe a good future blog post but doesn't belong on this page
+Org files can in an instant become calendar
+items, reminders, source code, web pages, anything. Source code blocks can be
+evaluated. Todo lists can have
+custom states per-file like `TODO`/`BLOCKED`/`KILLED`/ `DONE` in one and
+`INVITED`/`ACCEPTED`/`DECLINED` in another. TODO item states
+of course can be changed lexicographically, but also _logically_—Org understands them
+and can remix them in any way. A few keystrokes (`C-c a t`) can collect TODOs
+from all files and show them in one place (where you can still mark them off and persist
+to the right file). Another can show them on a calendar according to due date.
+
+I expected Org-mode to be a syntax, but it's also the visual language that comes with
+it. Note "source code" is plaintext, but Emacs can render the characters into UI as you type them, with no
+separate render step or view, like how
+ligatures work in code editors but with complexity reaching all the way to buttons,
+checkboxes, input fields, and dropdowns, all usable with a mouse or keyboard.
+
+{{ img
+   "Blue text can be clicked to perform actions. Underlined text is links. The search box can be typed in."
+   "emacs"
+   "A screenshot of an Emacs help page that is clearly a text file, with line numbers and a cursor and all, but that also has interactive components like buttons, and links, and a search box rendered inline with the text. The interactive components still feel like they are rendered with basic unicode, as they are boxy without pretty gradients and such."
+}}
+
+With the Emacs extensions ecosystem, you can even sychronize a lot of these features
+with other tools like Google Calendar, Apple Reminders, etc.
+-->
+
+However, it is still plagued by a lack of good mobile options. As well, after 12 years of Vim I know how much work I'll put into
+achieving a perfect setup, and I just don't have it in me this time. As the years tick by,
+the long-term benefits of that up-front investment tick down.
+
+[Obsidian](https://obsidian.md/) has been my saving grace, which is like Org-mode if it
+were made twenty years later. Its plugin ecosystem handles 80% of the crazy things Org's
+does for 20% of the hassle. Browsing Obsidian
+plugins gives me the same feeling of wonder browsing [MELPA](https://melpa.org/)
+did.
+
+It has a fantastic mobile experience and built-in sync of everything from notes to
+preferences to plugins. Most importantly, it all "just works". So I've switched to
+Obsidian as of March 2023 and haven't looked back.
+
+### ✔ Tasks → Reminders {#reminders}
 
 Reminders is one of the best-designed apps on iOS. Reminders can be scheduled
 to “pop” at a date, a date and time, a location, and/or when messaging
@@ -774,16 +858,16 @@ native apps (e.g. sharing from Safari automatically fills in the URL field)
 and the ability to persistently show a popped reminder (if any) on my Apple
 Watch homescreen.
 
-### Google Assistant → Siri {#siri}
+### ⅹ Google Assistant → Siri {#siri}
 
 Siri is nearly strictly worse than Google Assistant. It can't answer questions
 like "What temperature do I need to cook chicken to?" or "Who played Alan in
-Tron Legacy?".
+Tron Legacy?". Its best uses are for deep integrations like setting reminders or alarms.
 
 Ecosystem effects of Siri include surface-level interaction with native apps:
 setting reminders, playing music, controlling Home devices, etc.
 
-### Google Assistant Routines → Shortcuts {#shortcuts}
+### ✔ Google Assistant Routines → Shortcuts {#shortcuts}
 
 I can’t say enough good things about Shortcuts. It is the most
 power-user-friendly thing about iOS and goes against all expectations I had
@@ -813,7 +897,7 @@ I’m a software engineer and am comfortable coding, but the fact that I could
 do all this without any was impressive. It’s also fun to say that my phone is
 a vital part of my CI/CD pipeline.
 
-### Google Drive → iCloud Drive {#drive}
+### ⚠️ Google Drive → iCloud Drive {#drive}
 
 Most Dropbox-esque apps are the same and iCloud Drive is no exception. Use it
 if you're in the Apple ecosystem, and don't if you're not. The biggest downside
@@ -838,7 +922,7 @@ compared to the industry standard of trying to open a broken file, but when you
 first encounter it with a large file like a video it's easy to perceive it as
 OS-level slowness or stalling.
 
-### YouTube Music → Apple Music {#music}
+### ⅹ YouTube Music → Apple Music {#music}
 
 Apple Music is a great example of the big place Apple still struggles:
 services.
@@ -855,13 +939,15 @@ transitions to get where you’re going. For details on its UX failings, see [Ja
 from Cinnamon's
 post](https://cinnamon.agency/blog/post/apple_musics_ux_problem).
 
-I miss Google Play Music. I've softly switched to Spotify which, in a vacuum, is
-strictly better.
+Ecosystem effects of Apple Music include tighter Shazam integration, Spotlight integration, and better
+Siri support for playing things handsfree.
 
-Ecosystem effects of Apple Music include tighter Shazam integration and better
-Siri support for when I’m driving and want to play something.
+#### Departure {#byemusic}
 
-### Google Pay → Apple Pay {#pay}
+I miss Google Play Music, which solved all my problems. I've softly switched to Spotify
+which seems overall better, almost strictly so if it weren't for ecosystem effects.
+
+### ✔ Google Pay → Apple Pay {#pay}
 
 I always felt that Google Pay was finicky, and that made me embarrassed to use
 it. It was hard to find "the spot" on credit card machines to tap. Apple Pay
@@ -889,7 +975,7 @@ Card and it's been a fantastic and financially beneficial switch.
 
 {{ video "Drilling into Apple Card transactions using Wallet." "card" }}
 
-### Google Podcasts → Apple Podcasts {#podcasts}
+### ⚠️ Google Podcasts → Apple Podcasts {#podcasts}
 
 Google Podcasts and Apple Podcasts are very comparable. Google Podcasts has a
 bit plainer UI, but they're both good enough.
@@ -906,6 +992,11 @@ The biggest downside to Apple Podcasts has been stability. Roughly 1-5% of
 the time I go to play a podcast, the player gets stuck loading it forever.
 
 Ecosystem effects of Apple Podcasts include tight Siri support.
+
+#### Departure {#byepodcasts}
+
+Because of the stability issues and because we got a Polestar which has no Apple
+Podcasts app, I've switched to Pocket Casts.
 
 ## Conclusion {#conclusion}
 
