@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-03-30
+updated: 2023-04-03
 ---
 
 # From Google to Apple
