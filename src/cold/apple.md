@@ -522,10 +522,15 @@ Ignoring that, Gmail still wins search by an order of magnitude. For example,
 Gmail searches the contents of PDFs attached to emails; I’ve found this
 invaluable finding old leases and whatnot.
 
-Mail is below average at threading emails. Once in a while, it omits
-an email it shouldn’t. When replying to a thread the sent email doesn't appear immediately
-in the local view of the thread, which makes it seem like something has gone wrong with
-the sending.
+Mail is below average at threading emails:
+
+- Once in a while, it omits an email from a thread that it shouldn’t have.
+- When replying to a thread, the sent email doesn't appear immediately in the local
+  view, which makes it seem like something has gone wrong with the sending.
+- When marking a thread as "Notify" (a nice feature which forces updates to the thread
+  to send a push notification even when they're off), emails sent into the thread by you
+  trigger the push. Even emails from the same platform and app that is in charge of
+  notifying.
 
 I experience long, uncollapsible nested quotes in some threads, where
 Gmail was always good at collapsing them automatically.
