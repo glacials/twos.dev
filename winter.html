@@ -453,7 +453,7 @@ extensions replaced with <code>.html</code>. For example, <code>envy.html.tmpl</
 <code>envy.md</code> would both become <code>envy.html</code> (though if two source files
 would produce the same destination file, Winter will error).</p>
 
-<p>A document's <strong>shortname</strong> is defined as its extensionless filename.
+<p>A document's <strong>shortname</strong> is defined as its extensionless <code>filename</code>.
 The shortname is accessible to templates using the <a href="#shortname"><code>{{
 .Shortname }}</code></a> template variable. The filename is not
 accessible to templates, but can be calculated by appending <code>.html</code> to
