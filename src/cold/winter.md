@@ -189,7 +189,7 @@ extensions replaced with `.html`. For example, `envy.html.tmpl` and
 `envy.md` would both become `envy.html` (though if two source files
 would produce the same destination file, Winter will error).
 
-A document's **shortname** is defined as its extensionless filename.
+A document's **shortname** is defined as its extensionless `filename`.
 The shortname is accessible to templates using the [`{{"{{"}}
 .Shortname }}`](#shortname) template variable. The filename is not
 accessible to templates, but can be calculated by appending `.html` to
