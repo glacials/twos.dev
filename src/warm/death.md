@@ -4,7 +4,7 @@ filename: death.html
 type: draft
 ---
 
-# Death Planning for Engineers
+# Death Planning for Engineers / Succession
 In Sweden there is a concept called döstädning, or death cleaning. This is the practice of cleaning your house and belongings such that if you died tomorrow, your next-of-kin would have a pleasant, not burdensome, time cleaning up your things. It can be used in the contexts of end-of-life planning, sure, but I’ve found it useful even as an exercise in increasing what I’d call “meaning density” among my things.
 
 "End of life planning", or continuity, is something familiar to the professions of law and medicine. But these professions deal with inheritances and end-of life care, not with day-to-day items like your six spatulas or the scattered change in your kitchen drawer.
