@@ -44,15 +44,15 @@ at your discretion, and share your own guide with me!
    I'll see the red badge in my dock
    when I come up for air. If it's urgent, use the oncall flow.
    [More](img/guide-programmerinterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
-4. **I prefer tickets to Slack.** I'm forgetful. I curb this with [external
-   brain](<https://en.wikipedia.org/wiki/External_memory_(psychology)>) techniques,
+4. **I prefer tickets et al. over Slack.** I'm forgetful. I curb this with [external
+   brain](<https://en.wikipedia.org/wiki/External_memory_(psychology)>) tricks,
    but I can more easily regain context when information and discussion are concentrated
-   in one source of truth like
-   a ticket. I practice inbox zero, so I promise you won't have to ping me to
-   tell me something already in my inbox.
-5. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
+   in one place like
+   a ticket or pull request. I practice inbox zero, so I promise you won't have to ping me to
+   tell me about something already in my inbox. For code reviews I have a one business day SLA.
+6. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
    ask what customer problem it solves.
-6. **[Don't say hello](https://nohello.net/)**.
+7. **[Don't say hello](https://nohello.net/)**.
 
 ## Warnings
 
