@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta name="go-import" content="twos.dev
+           git https://github.com/glacials/twos.dev" />
+<meta name="go-source" content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
+<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<script>
+  window.dataLayer = window.dataLayer || []
+  function gtag() {
+    dataLayer.push(arguments)
+  }
+  gtag("js", new Date())
+  gtag("config", "UA-2876079-11")
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws"
+    const socket = new WebSocket(wsurl)
+    socket.addEventListener("message", (event) => location.reload())
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating")
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws")
+        sock.addEventListener("open", (event) => {
+          location.reload()
+        })
+      }, 1000)
+    })
+  }
+</script>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Recommendations" />
+<link rel="icon" href="favicon.ico" />
+<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
+<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
+<title>Recommendations</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"></script>
+
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
+<link rel="manifest" href="/site.webmanifest" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
+<link rel="me" href="https://twos.dev/@ben" />
+<link rel="me" href="https://ma.twos.dev/@ben" />
+<meta name="msapplication-TileColor" content="#da7987" />
+
+  </head>
+
+  <body>
+    <div class="container">
+      <header>
+        <nav>
+  <p style="text-align:center">
+    <span class="arrow"></span>
+    <a href="/" >index</a>
+    <span class="arrow"></span>
+    
+    <a href="/guide.html" >User Guide</a>
+    <span class="arrow"></span>
+    <a href="/software.html" >Software</a>
+    <span class="arrow"></span>
+    
+</nav>
+
+        
+          <small style="text-align:center; display: block">
+            <i>
+              published
+              2023 June</i
+            >
+          </small>
+        
+      </header>
+      <article>
+        
+        
+          <div
+            style="text-align:center;text-transform:uppercase;margin-top:3em;"
+          >
+            living document
+          </div>
+        
+        <html><head></head><body><h1>Recommendations</h1>
+
+<p>There are a small number of products or behaviors in my life that, in little ways, are
+life-changers. They either last a lifetime or they impact me for a lifetime.</p>
+
+<p>These are them.</p>
+
+<h2>5.11 Belt</h2>
+
+<p><a href="https://amzn.to/3ptyErI">Amazon</a> /
+<a href="https://www.511tactical.com/tdu-belt-15-plastic-buckle.html">5.11</a></p>
+
+<p>I wear a belt every day. I used to replace them every 1<span style="font-family: sans-serif">–</span>2 years, then I got this belt.
+That was 10 years ago. I have worn it &gt; 95% of days since then and it shows nearly no
+signs of wear. It's light. It has continuous adjustment. I expect I will never buy
+another belt.</p>
+
+<h2>Micro Four Thirds</h2>
+
+<p>e.g. OM System (formerly Olympus) OM-D E-M5 Mark III (<a href="https://amzn.to/3PtUO81">Amazon</a>
+/ <a href="https://explore.omsystem.com/us/en/om-d-e-m5-mark-iii">OM System</a>)</p>
+
+<p>Micro Four Thirds is not one product but a camera and lens system (like Canon EF or
+Fujifilm X). It's an open standard with cameras and lenses manufactured by many
+companies. The two de facto flagships are OM System (formerly Olympus) and Panasonic,
+but others include Xiaomi, Blackmagic, and DJI.</p>
+
+<p>Its biggest advantage for amateur photographers like me is its size. It is a far higher
+<code>photo quality : bag space required</code> ratio than I'm used to. My biggest photography
+enemy has always been simply not having my camera with me; every time I have to settle
+for my phone camera I question the point of continuing my photography hobby at all.</p>
+
+<p>With a micro 4/3 setup I can bring everything I need in a <a href="https://amzn.to/3CNYgmr">6L
+sling</a>. I'm someone who always has a backpack anyway, so it's a
+small ask. Without it, I don't think I'd still be taking photos and posting them to
+twos.dev.</p>
+
+<h2>Any Giant Mountable Power Strip</h2>
+
+<p><a href="https://amzn.to/44e4c3W">Amazon</a> /
+<a href="https://kungfukingsocket.com/products/power-strip-6">KungFuKingSocket</a></p>
+
+<p>Mounting one of these on the bottom of every desk in the house, paired with <a href="https://amzn.to/3XAxIPa">any
+cheap</a> cable basket, was the easiest form of cable management
+I've ever leveraged. Using a skinny frame and allowing for ~double the number of outlets
+you actually need means every cable can plug in <em>where it is</em>, instead of routing all
+cables to a central rat's nest whose residents constantly play musical chairs.</p>
+
+<h2>Noctua Fans</h2>
+
+<p><a href="https://amzn.to/3pyrIJU">Amazon</a></p>
+
+<p>As a <a href="autism.html">noise-sensitive</a> person whose major hobbies are mostly in front of
+computers, silence is important to me in a gaming machine. Noctua is a very simple
+business. They make giant, silent, long-lasting fans. That's it.</p>
+
+<p>Once I got one I could never switch back, and my next build was centered around their
+giant fan-based heatsink. That build in that exact state has been purring for six years
+now. I haven't even opened it up for cleaning in three. I expect to reuse the same fans
+for my next build, whenever it is.</p>
+
+<h2>Jetz Scrubz Sponges</h2>
+
+<p><a href="https://amzn.to/46nSjKq">Amazon</a></p>
+
+<p>Despite the 90s name these lil buddies are easily a 10x<span style="font-family: sans-serif">–</span>100x improvement over your
+traditional yellow and green sponges in all of these categories: lifespan before being
+damaged, lifespan before being permanently gross, tendancy to get temporarily gross,
+ease of cleaning once temporarily gross.</p>
+
+<h1>In Search Of</h1>
+
+<p>I'm in search of a life-changing product for these categories. Please reach out to me if
+you have recommendations.</p>
+
+<h2>Water Bottle</h2>
+
+<p>I am in search of a reusable water bottle that can last 10+ years with the following
+qualities:</p>
+
+<ul>
+<li>Can last a week of no washing without getting funky</li>
+<li>Is less than ~9cm in diameter (i.e. a comfortable size for a Peak Design Everyday
+Backpack V1 20L cup holder)</li>
+<li>Is at least 500 mL</li>
+<li>Ability to stay cold ~1 day preferred but not required</li>
+</ul>
+
+<p>The closest I ever came was the <a href="https://amzn.to/42XJaoR">Thermos Element 5 32 oz</a>, but
+I lost mine and the product is discontinued.</p>
+</body></html>
+      </article>
+      <footer>
+        <hr />
+        <p>
+          
+            
+              &larr; <a href="/">twos.dev</a>
+            
+          
+        </p>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/recs.md"
+                  >src/cold/recs.md</a
+                >
+              
+              <br />
+              
+                published
+                2023 June
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+  </body>
+</html>
