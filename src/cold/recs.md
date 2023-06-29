@@ -88,8 +88,8 @@ qualities:
 - Can last a week of no washing without getting funky
 - Is less than ~9cm in diameter (i.e. a comfortable size for a Peak Design Everyday
   Backpack V1 20L cup holder)
-- Is at least 500 mL
-- Ability to stay cold ~1 day preferred but not required
+- Holds about 1L
+- Ability to stay cold ~1 day preferred
 
 The closest I ever came was the [Thermos Element 5 32 oz](https://amzn.to/42XJaoR), but
 I lost mine and the product has since discontinued.
