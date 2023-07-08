@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-04-03
+updated: 2023-07-08
 ---
 
 # From Google to Apple
@@ -331,7 +331,7 @@ Apple account to use iMessage, but it has quite a few papercuts. I recently
 changed my email address but I need to keep my old one in my Apple account
 indefinitely so my friends’ threads with me (read: with my old email address)
 won’t retroactively split. I've also encountered unsolvable problems spinning up
-group chats with [Jordan](https://jm.dev) since he moved to Japan.
+group chats with [Jordan](https://jm.dev) since he switched to a Japanese phone number.
 
 Beyond these rare issues I'm very happy with iMessage.
 
