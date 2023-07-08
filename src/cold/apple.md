@@ -642,7 +642,7 @@ schedules I wouldn't chance it. Incidentally, we purchased a Polestar which has 
 Maps built right into it, so I've begun to softly switch back to that even on my other
 devices simply for the cross-integration.
 
-#### Location Sharing → Find My {#findmy}
+#### ✔ Location Sharing → Find My {#findmy}
 
 I use persistent location sharing with a small set of close friends and
 family. The Google offering (built into Google Maps) and the Apple offering (a
@@ -714,7 +714,7 @@ more types of screen sharing in Chrome, like sharing one tab.
 Ecosystem effects of Safari include Handoff (move a browsing session between
 devices smoothly) and the downright bonkers power efficiency of Safari on macOS.
 
-#### iCloud Keychain {#keychain}
+#### ⅹ iCloud Keychain {#keychain}
 
 While moving to Safari, I replaced 1Password with iCloud Keychain. It serves
 basic needs, but that’s it. It can store a username, a password, a 2FA code,
@@ -773,8 +773,8 @@ only-okay search.
 
 But honestly neither of them is fantastic, and the choice between them is a wash.
 
-Ecosystem effects of Notes include Shortcuts, cross-app drag-and-drop, "quick notes"
-(make a note using a universal gesture anywhere on macOS or iOS. I
+Ecosystem effects of Notes include Shortcuts, cross-app drag-and-drop, and "quick notes"
+(make a note using an OS-universal gesture on macOS or iOS). I
 use a shortcut to create a new note titled and sorted correctly before
 starting a Chinese lesson.
 
