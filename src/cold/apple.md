@@ -885,9 +885,9 @@ scripts.
    "A screenshot of a shortcut on iOS"
 }}
 
-As one example, I like to write in an app called iA Writer. I use Shortcuts to
-automatically commit and push my writing to this website daily. Because iA
-Writer stores files in iCloud, and another app called Working Copy can
+As one example, when I wrote in the iA Writer mobile app I would use Shortcuts to
+automatically commit and push my writing to twos.dev daily. Because iA
+Writer stores files in iCloud, and another iOS app called Working Copy can
 interact with Git repositories, Shortcuts lets me glue them together:
 
 1. (Working Copy) Pull from `twos.dev` remote
