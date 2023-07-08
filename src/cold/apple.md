@@ -429,7 +429,7 @@ ears. They’ve more than replaced my Bose QuietComfort 35 IIs, even for flights
 
 [Spatial audio](https://support.apple.com/en-us/HT211775) is literally too good;
 I had to turn it off. Again and again I became very nervous that I was blasting
-sound from my speakers that I would have to briefly remove one earbud to ensure
+sound from my speakers, so I would have to briefly remove one earbud to ensure
 I wasn't. The anxiety of this was so distracting as to be counterproductive.
 
 Ecosystem effects of AirPods include automatic switching between devices based
