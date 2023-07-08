@@ -973,7 +973,7 @@ snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on 
 
 {{ video "Drilling into Apple Card transactions using Wallet." "card" }}
 
-### ⚠️ Google Podcasts → Apple Podcasts {#podcasts}
+### ✔ Google Podcasts → Apple Podcasts {#podcasts}
 
 Google Podcasts and Apple Podcasts are very comparable. Google Podcasts has a
 bit plainer UI, but they're both good enough.
@@ -990,11 +990,6 @@ The biggest downside to Apple Podcasts has been stability. Roughly 1-5% of
 the time I go to play a podcast, the player gets stuck loading it forever.
 
 Ecosystem effects of Apple Podcasts include tight Siri support.
-
-#### Departure {#byepodcasts}
-
-Because of the stability issues and because we got a Polestar which has no Apple
-Podcasts app, I've switched to Pocket Casts.
 
 ## Conclusion {#conclusion}
 
