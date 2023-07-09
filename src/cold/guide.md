@@ -44,7 +44,7 @@ at your discretion, and share your own guide with me!
    I'll see the red badge in my dock
    when I come up for air. If it's urgent, use the oncall flow.
    [More](img/guide-programmerinterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
-4. **I prefer tickets et al. over Slack.** I'm forgetful. I curb this with [external
+4. **I prefer tickets (or similar) over Slack.** I'm forgetful. I curb this with [external
    brain](<https://en.wikipedia.org/wiki/External_memory_(psychology)>) tricks,
    but I can more easily regain context when information and discussion are concentrated
    in one place like
