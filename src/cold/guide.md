@@ -11,7 +11,7 @@ and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._
 
 ---
 
-# The Ben Carlsson User Guide
+# User Guide
 
 This page describes things I value at work. This is descriptive of me, not
 prescriptive to you; treat it as a set of FYIs, not requirements. Use or ignore
