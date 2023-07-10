@@ -5,8 +5,100 @@
     <description>misc thoughts</description>
     <copyright>Copyright 2021–2023 Benjamin Carlsson</copyright>
     <managingEditor>ben@twos.dev (Benjamin Carlsson)</managingEditor>
-    <pubDate>Mon, 10 Jul 2023 03:30:56 +0000</pubDate>
-    <lastBuildDate>Mon, 10 Jul 2023 03:30:56 +0000</lastBuildDate>
+    <pubDate>Mon, 10 Jul 2023 03:35:50 +0000</pubDate>
+    <lastBuildDate>Mon, 10 Jul 2023 03:35:50 +0000</lastBuildDate>
+    <item>
+      <title>Obsidian Plugin Recommendations</title>
+      <link>https://twos.dev/obsidian.html.html</link>
+      <description>&lt;html&gt;&lt;head&gt;&lt;/head&gt;&lt;body&gt;&lt;h1&gt;Obsidian Plugin Recommendations&lt;/h1&gt;&#xA;&#xA;&lt;p&gt;I run many Obsidian plugins and they&#39;re constantly changing, but below are the ones that&#xA;have stuck around.&lt;/p&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/jenningsb2/copy-as-html&#34;&gt;Copy as HTML&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;I treat this as “copy with formatting” so I can copy e.g. bulleted lists from my notes and paste them into an email to send to others; without it, the copied text is unparsed markdown&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/deathau/cm-editor-syntax-highlight-obsidian&#34;&gt;Editor Syntax Highlight&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Syntax highlighting for fenced code blocks, just like GitHub&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/zsviczian/obsidian-excalidraw-plugin&#34;&gt;Excalidraw&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Unbelievably well-integrated Excalidraw support; embed drawings in notes but also let specific elements in drawings link to notes or dynamically inherit content from notes, and a lot more&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/MahmoudFawzyKhalil/obsidian-global-search-and-replace&#34;&gt;Global Search and Replace&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Does what it says on the tin; I expect this will become a first-party feature soon&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/platers/obsidian-linter&#34;&gt;Linter&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Automatically apply Markdown linting on save&lt;/li&gt;&#xA;&lt;li&gt;Cleans up inconsistencies like # line breaks between paragraphs, heading capitalization, re-index ordered lists, etc.&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/gtg922r/obsidian-numerals&#34;&gt;Numerals&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Adds a code block type for math, including calculating and rendering answers for each line&lt;/li&gt;&#xA;&lt;li&gt;Basically Jupyter Notebooks for math; easy to show work and avoid mistakes since the answers are calculated on render&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/mcndt/obsidian-quickshare&#34;&gt;QuickShare&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Publish a note to an auto-expiring shareable URL&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/kemayo/obsidian-smart-links&#34;&gt;Smart Links&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Allows specifying patterns to automatically link&lt;/li&gt;&#xA;&lt;li&gt;I use it so I can write e.g. OPSFLOW-123 to link to a Jira ticket&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;I use the &lt;strong&gt;Daily notes&lt;/strong&gt; core plugin, which adds a button/command to create a note for today with a predesignated place and title (e.g. &lt;code&gt;Daily/YYYY-MM-DD.md&lt;/code&gt;). These community plugins extend that:&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/iiz00/obsidian-daily-note-outline&#34;&gt;Daily Note Outline&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;A single pane that shows an outline of &lt;em&gt;all&lt;/em&gt; daily notes in reverse chronological order&lt;/li&gt;&#xA;&lt;li&gt;I have this persistently in my right sidebar&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/reorx/obsidian-daily-notes-opener&#34;&gt;Daily Notes Opener&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Auto open today’s note when opening Obsidian&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/larslockefeer/obsidian-plugin-todo&#34;&gt;Obsidian TODO&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Collects TODOs from all notes (daily or not) and shows them in one pane&lt;/li&gt;&#xA;&lt;li&gt;This is also persistently in my right sidebar&lt;/li&gt;&#xA;&lt;li&gt;These are markdown todos, which Obsidian natively supports (e.g. &lt;code&gt;- [ ] Go shopping&lt;/code&gt;); for a more powerful experience look at &lt;a href=&#34;https://github.com/obsidian-tasks-group/obsidian-tasks&#34;&gt;Tasks&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/argenos/nldates-obsidian&#34;&gt;Natural Language Dates&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Type e.g. &lt;code&gt;@yesterday&lt;/code&gt; or &lt;code&gt;@tomorrow&lt;/code&gt; to link to the daily note for those days&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;li&gt;&lt;a href=&#34;https://github.com/ryanjamurphy/review-obsidian&#34;&gt;Review&lt;/a&gt;&#xA;&#xA;&lt;ul&gt;&#xA;&lt;li&gt;Mark the current spot (any note, any header) as needing review at whatever date you want (e.g. tomorrow); it will be added to that day&#39;s daily note&lt;/li&gt;&#xA;&lt;li&gt;For a different workflow see &lt;a href=&#34;https://github.com/uphy/obsidian-reminder&#34;&gt;Reminder&lt;/a&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&lt;/li&gt;&#xA;&lt;/ul&gt;&#xA;&lt;/body&gt;&lt;/html&gt;</description>
+      <content:encoded><![CDATA[<html><head></head><body><h1>Obsidian Plugin Recommendations</h1>
+
+<p>I run many Obsidian plugins and they're constantly changing, but below are the ones that
+have stuck around.</p>
+
+<ul>
+<li><a href="https://github.com/jenningsb2/copy-as-html">Copy as HTML</a>
+
+<ul>
+<li>I treat this as “copy with formatting” so I can copy e.g. bulleted lists from my notes and paste them into an email to send to others; without it, the copied text is unparsed markdown</li>
+</ul></li>
+<li><a href="https://github.com/deathau/cm-editor-syntax-highlight-obsidian">Editor Syntax Highlight</a>
+
+<ul>
+<li>Syntax highlighting for fenced code blocks, just like GitHub</li>
+</ul></li>
+<li><a href="https://github.com/zsviczian/obsidian-excalidraw-plugin">Excalidraw</a>
+
+<ul>
+<li>Unbelievably well-integrated Excalidraw support; embed drawings in notes but also let specific elements in drawings link to notes or dynamically inherit content from notes, and a lot more</li>
+</ul></li>
+<li><a href="https://github.com/MahmoudFawzyKhalil/obsidian-global-search-and-replace">Global Search and Replace</a>
+
+<ul>
+<li>Does what it says on the tin; I expect this will become a first-party feature soon</li>
+</ul></li>
+<li><a href="https://github.com/platers/obsidian-linter">Linter</a>
+
+<ul>
+<li>Automatically apply Markdown linting on save</li>
+<li>Cleans up inconsistencies like # line breaks between paragraphs, heading capitalization, re-index ordered lists, etc.</li>
+</ul></li>
+<li><a href="https://github.com/gtg922r/obsidian-numerals">Numerals</a>
+
+<ul>
+<li>Adds a code block type for math, including calculating and rendering answers for each line</li>
+<li>Basically Jupyter Notebooks for math; easy to show work and avoid mistakes since the answers are calculated on render</li>
+</ul></li>
+<li><a href="https://github.com/mcndt/obsidian-quickshare">QuickShare</a>
+
+<ul>
+<li>Publish a note to an auto-expiring shareable URL</li>
+</ul></li>
+<li><a href="https://github.com/kemayo/obsidian-smart-links">Smart Links</a>
+
+<ul>
+<li>Allows specifying patterns to automatically link</li>
+<li>I use it so I can write e.g. OPSFLOW-123 to link to a Jira ticket</li>
+</ul></li>
+<li>I use the <strong>Daily notes</strong> core plugin, which adds a button/command to create a note for today with a predesignated place and title (e.g. <code>Daily/YYYY-MM-DD.md</code>). These community plugins extend that:
+
+<ul>
+<li><a href="https://github.com/iiz00/obsidian-daily-note-outline">Daily Note Outline</a>
+
+<ul>
+<li>A single pane that shows an outline of <em>all</em> daily notes in reverse chronological order</li>
+<li>I have this persistently in my right sidebar</li>
+</ul></li>
+<li><a href="https://github.com/reorx/obsidian-daily-notes-opener">Daily Notes Opener</a>
+
+<ul>
+<li>Auto open today’s note when opening Obsidian</li>
+</ul></li>
+<li><a href="https://github.com/larslockefeer/obsidian-plugin-todo">Obsidian TODO</a>
+
+<ul>
+<li>Collects TODOs from all notes (daily or not) and shows them in one pane</li>
+<li>This is also persistently in my right sidebar</li>
+<li>These are markdown todos, which Obsidian natively supports (e.g. <code>- [ ] Go shopping</code>); for a more powerful experience look at <a href="https://github.com/obsidian-tasks-group/obsidian-tasks">Tasks</a></li>
+</ul></li>
+<li><a href="https://github.com/argenos/nldates-obsidian">Natural Language Dates</a>
+
+<ul>
+<li>Type e.g. <code>@yesterday</code> or <code>@tomorrow</code> to link to the daily note for those days</li>
+</ul></li>
+<li><a href="https://github.com/ryanjamurphy/review-obsidian">Review</a>
+
+<ul>
+<li>Mark the current spot (any note, any header) as needing review at whatever date you want (e.g. tomorrow); it will be added to that day's daily note</li>
+<li>For a different workflow see <a href="https://github.com/uphy/obsidian-reminder">Reminder</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</body></html>]]></content:encoded>
+      <author>Benjamin Carlsson</author>
+      <guid>obsidian.html</guid>
+      <pubDate>Sun, 09 Jul 2023 00:00:00 +0000</pubDate>
+    </item>
     <item>
       <title>Recommendations</title>
       <link>https://twos.dev/recs.html.html</link>
