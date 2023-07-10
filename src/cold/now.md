@@ -3,6 +3,7 @@ category: living document
 date: 2023-02-16
 filename: now.html
 type: post
+updated: 2023-07-09
 ---
 
 _This page is in the form of [Derek Sivers's =/now= page](https://sive.rs/now)._
