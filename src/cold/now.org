@@ -26,14 +26,11 @@ to ~days. It involves a lot of learning and has been super fun so
 far. I'm working with two people who are also ex-[[https://twitch.tv][Twitch]], which has
 been a fun bonding experience.
 
-** Emacs
+** Obsidian
 
-I've started using Emacs and org-mode. Both are great and it really
-feels like Emacs : Vim :: Vim : nano. It's pretty rocky here and there
-but I can feel the power lurking under the surface. Time will tell if
-the rocks eventually erode my motivation and I jump back to VSCode
-again, as I tended to do on six-month rotations between Vim and
-VSCode.
+After about six months full-steam in Emacs and Org mode, I grew impatient with the subpar mobile experience for Org and accidentally stumbled upon [Obsidian](https://obsidian.md). It honestly has handled 80% of the crazy Org mode superpowers for 20% of the effort. The plugin ecosystem is fantastic, and synchronization of config, plugins, and themes to all platforms—including mobile—"just works".
+
+I've moved my notetaking from a mix of Apple Notes and Org mode completely to Obsidian, and am back on a mix of VS Code and Vim for coding.
 
 ** This Website
 
