@@ -44,12 +44,10 @@ at your discretion, and share your own guide with me!
    I'll see the red badge in my dock
    when I come up for air. If it's urgent, use the oncall flow.
    [More](img/guide-programmerinterrupted.png), [even more](http://www.paulgraham.com/makersschedule.html)
-4. **I prefer tickets (or similar) over Slack.** I'm forgetful. I curb this with [external
+4. **I prefer tickets to Slack.** I'm forgetful. I curb this with [external
    brain](<https://en.wikipedia.org/wiki/External_memory_(psychology)>) tricks,
-   but I can more easily regain context when information and discussion are concentrated
-   in one place like
-   a ticket or pull request. I practice inbox zero, so I promise you won't have to ping me to
-   tell me about something already in my inbox. For code reviews I have a one business day SLA.
+   but I can more easily regain context when discussion is concentrated. I practice inbox zero, so you won't have to ping me
+   about anything already in my inbox. I have a one business day SLA.
 6. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
    ask what customer problem it solves.
 7. **[Don't say hello](https://nohello.net/)**.
@@ -60,9 +58,9 @@ at your discretion, and share your own guide with me!
   that I'll do it without tracking because the overhead—or its emotional
   burden—is bigger than the job itself. Some [adored
   features](https://twitter.com/search?q=https%3A%2F%2Ftwitter.com%2Fglcls%2Fstatus%2F720689621466619904&src=typed_query)
-  have come out of having the freedom to do this; see #1 above :D
+  have come out of having the freedom to do this; see #1 above.
 - **I work weird hours.** Motivation strikes me randomly—sometimes during a
   workday but sometimes on a Sunday or at 4 AM or for 16 hours straight. To
-  counterbalance, I shorten my workdays and the math roughly works out. So if
+  counterbalance, I shorten my workdays and the math roughly works out. If
   you see emails or commits from me with unhealthy-feeling timestamps, keep in
   mind my default workday is at ~70% capacity.
