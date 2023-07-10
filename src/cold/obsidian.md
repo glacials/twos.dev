@@ -5,7 +5,7 @@ filename: obsidian.html
 type: post
 ---
 
-# Obsidian Plugin Recommendations
+# Obsidian Plugins
 
 I run many Obsidian plugins and they're constantly changing, but below are the ones that
 have stuck around.
