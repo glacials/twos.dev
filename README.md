@@ -8,7 +8,7 @@ other random things here.
 twos.dev is a low-tech website. It does not require JavaScript and it is
 composed entirely of static files served by GitHub Pages.
 
-These static files are built by a bespoke static website generator called
+These static files are built by a bespoke static website generator created for twos.dev called
 Winter, which is written in Go and embedded in this repository at `winter/`. See
 more about Winter below.
 
@@ -21,11 +21,13 @@ more about Winter below.
 ### Starting a dev server
 
 ```sh
+go install
+go install github.com/mitranim/gow@latest
 make serve
 ```
 
 Files will be watched for changes. Changes to documents or graphics will
-automatically trigger the right transformations. Changes to the builder
+automatically trigger the right transformations. Changes to the generator
 itself will trigger a program recompilation and restart. In both cases, a
 WebSocket connection on the local page will listen for the change and trigger a
 refresh automatically.

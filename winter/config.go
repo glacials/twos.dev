@@ -32,6 +32,6 @@ type Config struct {
 	// TODO: Use this for copyright in page footer
 	Since int
 	// SourceDirectories is an additional list of directories to search
-	// for source files beyond ./src/cold and ./src/warm.
+	// for source files beyond ./src.
 	SourceDirectories []string
 }
