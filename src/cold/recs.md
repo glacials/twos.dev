@@ -89,6 +89,7 @@ qualities:
 - Is less than ~9cm in diameter (i.e. a comfortable size for a Peak Design Everyday
   Backpack V1 20L cup holder)
 - Holds about 1L
+- Unlosable lid (i.e. attached to body, even when off)
 - Ability to stay cold ~1 day preferred
 
 The closest I ever came was the [Thermos Element 5 32 oz](https://amzn.to/42XJaoR), but
