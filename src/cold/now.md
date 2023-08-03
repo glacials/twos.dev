@@ -63,5 +63,4 @@ I wrote about it in an article titled [Anonymously Autistic](/autism.html).
 ## Mastodon
 
 I've mostly jumped ship from Twitter and have switched to Mastodon:
-[ben@m.twos.dev](https://m.twos.dev/@ben). I run my own instance with signups closed just
-because I wanted something to tinker with at the time.
+[@glacials@hachyderm.io](https://hachyderm.io/@glacials).
