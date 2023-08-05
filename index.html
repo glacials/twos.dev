@@ -1,105 +1,138 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta name="go-import" content="twos.dev
-           git https://github.com/glacials/twos.dev" />
-<meta name="go-source" content="twos.dev
+
+<head>
+  <meta
+  name="go-import"
+  content="twos.dev
+           git https://github.com/glacials/twos.dev"
+/>
+<meta
+  name="go-source"
+  content="twos.dev
            https://github.com/glacials/twos.dev
            https://github.com/glacials/twos.dev/tree/main{/dir}
-           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}" />
-<script async src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
+/>
+<script
+  async
+  src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+></script>
 <link rel="preconnect" href="https://fonts.googleapis.com" />
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap" rel="stylesheet" />
+<link
+  href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap"
+  rel="stylesheet"
+/>
 <script>
-  window.dataLayer = window.dataLayer || []
+  window.dataLayer = window.dataLayer || [];
   function gtag() {
-    dataLayer.push(arguments)
+    dataLayer.push(arguments);
   }
-  gtag("js", new Date())
-  gtag("config", "UA-2876079-11")
+  gtag("js", new Date());
+  gtag("config", "UA-2876079-11");
 
   
   if (document.location.hostname == "localhost") {
-    const wsurl = "ws://localhost:8100/ws"
-    const socket = new WebSocket(wsurl)
-    socket.addEventListener("message", (event) => location.reload())
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
     socket.addEventListener("close", (event) => {
-      console.log("backup initiating")
+      console.log("backup initiating");
       setInterval(() => {
-        const sock = new WebSocket("ws://localhost:8100/ws")
+        const sock = new WebSocket("ws://localhost:8100/ws");
         sock.addEventListener("open", (event) => {
-          location.reload()
-        })
-      }, 1000)
-    })
+          location.reload();
+        });
+      }, 1000);
+    });
   }
 </script>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="twos.dev" />
+<meta name="description" content="Index" />
 <link rel="icon" href="favicon.ico" />
-<link rel="alternate" type="application/rss+xml" title="twos.dev" href="/feed.rss" />
-<link rel="alternate" type="application/atom+xml" title="twos.dev" href="/feed.atom" />
-<title>twos.dev</title>
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="twos.dev"
+  href="/feed.rss"
+/>
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="twos.dev"
+  href="/feed.atom"
+/>
+<title>Index</title>
 <link rel="stylesheet" href="/style.css" />
 
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
-  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC" crossorigin="anonymous" />
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
-  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
-<script defer src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
-  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous"
-  onload="renderMathInElement(document.body);"></script>
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+  crossorigin="anonymous"
+/>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"
+></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
 <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png" />
 <link rel="manifest" href="/site.webmanifest" />
 <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5" />
-<link rel="me" href="https://twos.dev/@ben" />
-<link rel="me" href="https://m.twos.dev/@ben" />
+<link rel="me" href="https://hachyderm.io/@glacials" />
 <meta name="msapplication-TileColor" content="#da7987" />
 
-  </head>
+</head>
 
-  <body>
-    <div class="container">
-      <header>
-        <nav>
-  <p style="text-align:center">
-    ben carlsson<br />
-    <span class="arrow"></span>
-    <a href="/" class="selected" >index</a>
-    <span class="arrow"></span>
+<body>
+  <div class="container">
+    <header>
+      
+<div style="text-align:center">
+</div>
+<nav>
+  <p style="text-align:center">Ben Carlsson's…
+    <a href="/" class="selected" >Index</a>
     
     <a href="/guide.html" >User Guide</a>
-    <span class="arrow"></span>
     <a href="/software.html" >Software</a>
-    <span class="arrow"></span>
     
 </nav>
 
-        
-      </header>
-      <article>
-        
-        
-        <html><head></head><body><div style="margin: auto; text-align: center">
-  <h1>twos.dev</h1>
-  <p>happily experiencing clouds in Seattle, WA</p>
+
+      
+      
+      
+    </header>
+    <article>
+      <html><head></head><body><div style="margin: auto; text-align: center">
+  <h1>Index</h1>
+  <p>Happily experiencing clouds in Seattle.</p>
   <p>
     <a href="benjamincarlsson.vcf">Contact card</a>
   </p>
-  <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>,
-  <a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a>,
-  <a href="https://github.com/glacials" style="white-space: nowrap">github.com/glacials</a>,
-  <a href="https://linkedin.com/in/ben" style="white-space:
-  nowrap">linkedin.com/in/ben</a>, <a href="https://twos.dev/@ben">@ben@twos.dev</a>
+  <code><a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a></code>
+  <code><a href="https://linkedin.com/in/ben" style="white-space: nowrap">linkedin.com/in/ben</a></code> <code><a href="https://hachyderm.io/@glacials">@glacials@hachyderm.io</a></code>
+  <code><a href="https://github.com/glacials" style="white-space:
+  nowrap">github.com/glacials</a></code>
+  <code><a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a></code>
 </div>
 
-<div style="display:flex;flex-wrap:wrap">
+<div style="display: flex; flex-wrap: wrap">
   <div>
     <h2>Writing</h2>
     <ul>
@@ -278,33 +311,33 @@
   <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"><img class="silly" src="/img/thumb/photography/2021/IMG_1270.JPG"/></a>
 </div>
 </body></html>
-      </article>
-      <footer>
-        <hr />
-        <p>
-          
-        </p>
-        <p>
-          <small>
-            <i>
-              
-                source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/index.html.tmpl"
-                  >src/cold/index.html.tmpl</a
-                >
-              
-              <br />
-              
-                published
-                2021 April
-                  / last updated
-                  2022 December
-                
-              
-            </i>
-          </small>
-        </p>
-      </footer>
-    </div>
-  </body>
+    </article>
+    <footer>
+      <hr />
+      <p>
+        
+      </p>
+      <p>
+        <small>
+          <i>
+            
+            source:
+            <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/index.html.tmpl">src/cold/index.html.tmpl</a>
+            
+            <br />
+            
+            published
+            2021 April
+            
+            / last updated
+            2022 December
+            
+            
+          </i>
+        </small>
+      </p>
+    </footer>
+  </div>
+</body>
+
 </html>
