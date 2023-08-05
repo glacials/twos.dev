@@ -59,7 +59,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		1,
 	)
 
-	if err := os.MkdirAll(filepath.Dir(imgdest), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(imgdest), 0o755); err != nil {
 		return nil, fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdest), err)
 	}
 
@@ -84,7 +84,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	if err := genThumbnail(d.localPath, thmdest, 32); err != nil {
+	if err := genThumbnail(d.localPath, thmdest, 512); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
@@ -313,7 +313,7 @@ func genThumbnail(src, dst string, width int) error {
 		nil,
 	)
 
-	if err := os.MkdirAll(filepath.Dir(dst), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
 		return fmt.Errorf(
 			"can't make thumbnail directory `%s`: %w",
 			filepath.Dir(dst),

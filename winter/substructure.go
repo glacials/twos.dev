@@ -537,7 +537,7 @@ func (s *Substructure) writefeed() error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile("dist/feed.atom", []byte(atom), 0644); err != nil {
+	if err := ioutil.WriteFile("dist/feed.atom", []byte(atom), 0o644); err != nil {
 		return err
 	}
 
@@ -545,7 +545,7 @@ func (s *Substructure) writefeed() error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile("dist/feed.rss", []byte(rss), 0644); err != nil {
+	if err := ioutil.WriteFile("dist/feed.rss", []byte(rss), 0o644); err != nil {
 		return err
 	}
 
@@ -618,7 +618,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	}
 	dest = filepath.Join(dist, dest)
 
-	if err := os.MkdirAll(filepath.Dir(dest), 0755); err != nil {
+	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 		return fmt.Errorf(
 			"can't create %s directory `%s`: %w",
 			tmplPathToName(galTmplPath),
@@ -632,7 +632,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 		return fmt.Errorf("can't build %s: %w", d.Shortname(), err)
 	}
 	if d.Layout() == "" {
-		return os.WriteFile(dest, bodyBytes, 0644)
+		return os.WriteFile(dest, bodyBytes, 0o644)
 	}
 
 	layoutBytes, err := tmplByName(d.Layout())
@@ -671,7 +671,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 		return fmt.Errorf("can't load dependencies: %s", err)
 	}
 
-	// Hardcode that every document with a layout depends on style.css
+	// Hardcode that every document with a layout depends on our CSS
 	deps := d.Dependencies() // TODO: Consider a d.AddDependency method
 	deps[filepath.Join("public", "style.css")] = struct{}{}
 

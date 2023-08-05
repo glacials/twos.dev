@@ -7,7 +7,7 @@ updated: 2022-09-03
 
 # Advanced Dashes
 
-{{ img 
+{{ img
    "I love pizza-liquor, but I've never had it New York style."
    "supreme"
    "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
@@ -30,8 +30,8 @@ The em dash can be used as a more powerful parenthetical, a replacement for a co
 A myth states the em dash is so named because it is "one `M` wide", and the en dash "one `N` wide". This is... almost true. The confusing correction is that an em dash is so named because it is `1em` wide. Incidentally, the en is defined as half of one em; much of my focus will be on the em.
 
 ### The Em
-    
-To talk about the em dash necessitates talk about the [em](https://en.wikipedia.org/wiki/Em_(typography)). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is a unit of length defined as the height of the character bounding box.[^boundingbox] This height changes with font family and size, so the length of the em changes with it: `1em` is always one *font-heighth* long.
+
+To talk about the em dash necessitates talk about the [em](<https://en.wikipedia.org/wiki/Em_(typography)>). The em (pronounced [/ɛm/](https://en.wiktionary.org/wiki/Appendix:English_pronunciation)) is a unit of length defined as the height of the character bounding box.[^boundingbox] This height changes with font family and size, so the length of the em changes with it: `1em` is always one _font-heighth_ long.
 
 [^boundingbox]: "Bounding box" is strong; font designers are free to design outside it.
 
@@ -56,7 +56,7 @@ html: 16pt              (default     = 16pt)
       → h1: 4em         (18pt * 4    = 72pt)
       → p: 1em          (18pt * 1    = 18pt)
     → footer: 0.5rem    (16pt * 0.5  =  8pt)
-      
+
 key:
 context: requested size (calculation = final size)
   → child element
@@ -109,23 +109,25 @@ It's crude, but dependable.
 If a line soft-wraps immediately before or after a dash, what should its behavior be? It's accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.
 
 ```plain
-v left page edge             v right page edge
-|                            |
+↓ left page edge             ↓ right page edge
 I am looking at dates about 20
 –30 days out.
 ```
+
 ```plain
-|                            |
+↓                            ↓
 I'm looking at dates about 20–
 30 days out.
 ```
+
 ```plain
-|                            |
+↓                            ↓
 I am pleased they thought that
 —however odd it may be.
 ```
+
 ```plain
-|                            |
+↓                            ↓
 I'm pleased they thought that—
 however odd it may be.
 ```
@@ -139,8 +141,7 @@ When using [justified text](https://en.wikipedia.org/wiki/Typographic_alignment#
 For example, see this simulation of left-aligned text:
 
 ```plain
-v left page edge             v right page edge
-|                            |
+↓ left page edge             ↓ right page edge
 I said they were—wolf
 playdates don't last forever!
 ```
@@ -148,7 +149,7 @@ playdates don't last forever!
 And this simulation of justified text:
 
 ```plain
-|                            |
+↓                            ↓
 I    said    they   were—wolf
 playdates don't last forever!
 ```
@@ -158,7 +159,7 @@ In the justified simulation, "were—wolf" may read like the mythical creature "
 A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:
 
 ```plain
-|                            |
+↓                            ↓
 I   said  they  were  —  wolf
 playdates don't last forever!
 ```
@@ -170,11 +171,11 @@ Standard US keyboards support only the hyphen, so many en and em dash users simp
 No one should ever fault that, but for those who are willing to commit something new to memory:
 
 - macOS
-	- En dash: `⌥ + -`
-	- Em dash: `⌥ + Shift + -`
+  - En dash: `⌥ + -`
+  - Em dash: `⌥ + Shift + -`
 - Windows
-	- En dash: `Alt + 0150`
-	- Em dash: `Alt + 0151`
+  - En dash: `Alt + 0150`
+  - Em dash: `Alt + 0151`
 
 For all others, read on.
 
@@ -207,8 +208,8 @@ The **swung dash** (⁓) is an elongated tilde used to stand in for a word being
 The **horizontal bar** is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.
 
 > ― O Miss Douce! Miss Kennedy protested. You horrid thing!
-> 
-> *James Joyce's Ulysses p. 335*
+>
+> _James Joyce's Ulysses p. 335_
 
 The **hyphen bullet** is a hyphen to be used in place of a bullet point.
 
@@ -226,7 +227,7 @@ En dash:     867–5309
 Hyphen:      867-5309
 ```
 
-Lastly, my favorite: the **soft hyphen** is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is *welcome* to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
+Lastly, my favorite: the **soft hyphen** is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is _welcome_ to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
 
 ```plain
 v left page edge            v right page edge

@@ -6,9 +6,9 @@ type: post
 updated: 2023-07-09
 ---
 
-_This page is in the form of [Derek Sivers's =/now= page](https://sive.rs/now)._
-
 # What I'm Doing Now
+
+<center>_This page is in the form of [Derek Sivers's `/now` page](https://sive.rs/now)._</center>
 
 ## SunPower
 
@@ -64,3 +64,8 @@ I wrote about it in an article titled [Anonymously Autistic](/autism.html).
 
 I've mostly jumped ship from Twitter and have switched to Mastodon:
 [@glacials@hachyderm.io](https://hachyderm.io/@glacials).
+
+I self-hosted Mastodon and Lemmy instances for a year or so and I don't regret it; I
+know a lot more about the fediverse than when I started. But the benefits started to
+flatten and the costs were high, so I recently moved to Hachyderm. Their code of ethics
+and governance model is impressive.

@@ -5,15 +5,17 @@ type: page
 updated: 2023-03-28
 ---
 
+# User Guide
+
+<center>
 _This page is in the form of [Abby Falik's user
 guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
 and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._
+</center>
 
 ---
 
-# User Guide
-
-This page describes things I value at work. This is descriptive of me, not
+Below is what I value at work. This is descriptive of me, not
 prescriptive to you; treat it as a set of FYIs, not requirements. Use or ignore
 at your discretion, and share your own guide with me!
 
@@ -48,9 +50,9 @@ at your discretion, and share your own guide with me!
    brain](<https://en.wikipedia.org/wiki/External_memory_(psychology)>) tricks,
    but I can more easily regain context when discussion is concentrated. I practice inbox zero, so you won't have to ping me
    about anything already in my inbox. I have a one business day SLA.
-6. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
+5. **I focus on customer problems.** Even if a solution "feels right" be prepared for me to
    ask what customer problem it solves.
-7. **[Don't say hello](https://nohello.net/)**.
+6. **[Don't say hello](https://nohello.net/)**.
 
 ## Warnings
 

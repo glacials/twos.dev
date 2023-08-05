@@ -182,7 +182,7 @@ see an overview, visit the [table of contents](#toc).
 
 ⅹ = Switch unsuccessful; moved back to Google or to another product
 
-⚠️ = Nuance ahead
+⚠ = Nuance ahead
 
 ### ✔ ArchLinux → macOS {#macos}
 
@@ -436,7 +436,7 @@ Ecosystem effects of AirPods include automatic switching between devices based
 on attention, a Siri integration slightly worse than Pixel Buds's Google
 Assistant integration, and spatial audio.
 
-### ⚠️ Gmail → iCloud Mail {#mail}
+### ⚠ Gmail → iCloud Mail {#mail}
 
 The big one. I’ve been wanting to switch my email to a domain I control
 anyway, and iCloud+ supports that.
@@ -560,7 +560,7 @@ Apple Mail engineer to have a similar UX but using proper Gmail APIs.
 Ecosystem effects of Mail include having search results show up in Spotlight
 and behaving super well as a multitasking app on iPadOS.
 
-### ⚠️ Google Calendar → Apple Calendar {#calendar}
+### ⚠ Google Calendar → Apple Calendar {#calendar}
 
 I switched to Apple Calendar as both an app and a calendar provider. I'd
 forgotten how limited and finicky calendar protocols are at their core—so many
@@ -611,7 +611,7 @@ to” and “travel from” events based on the travel time between locations.
 Ecosystem effects of Calendar include context-aware Maps, Siri suggestions
 for navigation destinations and video calls, and the ability to longpress dates and times in iMessage to create events.
 
-### ⚠️ Google Maps → Apple Maps {#maps}
+### ⚠ Google Maps → Apple Maps {#maps}
 
 Apple Maps gets a lot of flak for its initial release state, rightly so. But
 that was years ago, and they’ve kept at it. It’s improved. Unfortunately it’s
@@ -689,7 +689,7 @@ Ecosystem effects include rich embeds & commenting in iMessage, and photos
 appearing in upload prompts on all platforms (e.g. when uploading an avatar to
 some random internet account) with full face search embedded.
 
-### ⚠️ Chrome → Safari {#safari}
+### ⚠ Chrome → Safari {#safari}
 
 This was a far less noticeable change than I expected. Everything from
 bookmark sync to my extensions to rendering works the same.
@@ -902,7 +902,7 @@ I’m a software engineer and am comfortable coding, but the fact that I could
 do all this without any was impressive. It’s also fun to say that my phone is
 a vital part of my CI/CD pipeline.
 
-### ⚠️ Google Drive → iCloud Drive {#drive}
+### ⚠ Google Drive → iCloud Drive {#drive}
 
 Most Dropbox-esque apps are the same and iCloud Drive is no exception. Use it
 if you're in the Apple ecosystem, and don't if you're not. The biggest downside

@@ -8,37 +8,34 @@ type: post
 # Recommendations
 
 There are a small number of products or behaviors in my life that, in little ways, are
-life-changers. They either last a lifetime or they impact me for a lifetime.
-
-These are them.
+life-changing. These are them.
 
 ## 5.11 Belt
 
 I wear a belt every day. I used to replace them every 1–2 years, then I got [this
 belt](https://amzn.to/3ptyErI). That was 10 years ago. I have worn it > 95% of days
-since then and it shows nearly no signs of wear. It's light. It has continuous
-adjustment. I expect I will never buy another belt.
+since then and it shows nearly no signs of wear. I expect I will never buy another belt.
 
 [Amazon](https://amzn.to/3ptyErI) /
 [5.11](https://www.511tactical.com/tdu-belt-15-plastic-buckle.html)
 
 ## Micro Four Thirds
 
-Micro Four Thirds is not one product but a camera and lens system (like Canon EF or
-Fujifilm X). It's an open standard with cameras and lenses manufactured by many
-companies. The two de facto flagships are OM System (formerly Olympus) and Panasonic,
-but others include Xiaomi, Blackmagic, and DJI.
+Micro Four Thirds is a camera + lens conector and system (like Canon EF or Fujifilm X).
+It's an open standard with many companies participating, although the de facto flagships
+are OM System (formerly Olympus) and Panasonic.
 
-Its biggest advantage for amateur photographers like me is its size. It is a far higher
-`photo quality : bag space required` ratio than I'm used to. My biggest photography
-enemy has always been simply not having my camera with me; every time I have to settle
-for my phone camera I question the point of continuing my photography hobby at all.
+Its biggest advantage is its high `photo quality : bag space required` ratio. My general
+photography archenemy is not having my camera with me; every time I have to settle for
+my phone camera I question the point of continuing my photography hobby at all.
 
-With my micro 4/3 setup I can bring everything I need in a 6L sling. I'm someone who
-always has a backpack anyway, so it's a small ask.
+Since I switched to micro 4/3 I can bring roughly 2x the gear per bag volume. Or put
+another way, I can travel with half the bag volume. For me this means a larger setup
+fits in a 20L backpack, a camera + couple lenses fits in a 6L sling, and a camera + lens
+squeezes into a 2L chest pouch.
 
-e.g. OM System (formerly Olympus) OM-D E-M5 Mark III ([Amazon](https://amzn.to/3PtUO81)
-/ [OM System](https://explore.omsystem.com/us/en/om-d-e-m5-mark-iii))
+I'm using the Olympus OM-D E-M5 Mark III ([Amazon](https://amzn.to/3PtUO81) / [OM
+System](https://explore.omsystem.com/us/en/om-d-e-m5-mark-iii))
 
 ## Any Giant Mountable Power Strip
 
