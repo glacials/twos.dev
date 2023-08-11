@@ -17,9 +17,11 @@ var initCmd = &cobra.Command{
 	Use:   "init",
 	Short: "Initialize a new Winter project",
 	Long: wrap(`
-		Create a new Winter project in the current directory. This creates the
-		necessary directory structure and creates a simplistic set of templates for
-		minimal operation.
+		Create a new Winter project in the current directory.
+
+
+		This creates the necessary directory structure, configuration, and
+		a simplistic set of templates for minimal operation.
 	`),
 	Args: cobra.ExactArgs(0),
 	RunE: func(cmd *cobra.Command, args []string) error {

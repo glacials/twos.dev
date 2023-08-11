@@ -1,0 +1,13 @@
+# Winter configuration
+author:
+  name: Benjamin Carlsson
+  email: ben@twos.dev
+debug: false
+description: misc thoughts
+dist: dist
+hostname: twos.dev
+name: twos.dev
+since: 2021
+src:
+  - ./src
+  - ~/.config/emacs/config.org

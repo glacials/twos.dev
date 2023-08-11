@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -93,7 +94,7 @@ func (s *Substructure) add(d *substructureDocument) {
 // discover clears the substructure of any known documents and
 // discovers all documents from scratch on the filesystem.
 func (s *Substructure) discover() error {
-	paths := append(s.cfg.SourceDirectories, "src")
+	paths := append(s.cfg.Src, "src")
 	for _, path := range paths {
 		if err := s.discoverAtPath(path); err != nil {
 			return err
@@ -492,17 +493,17 @@ func (s *Substructure) writefeed() error {
 	now := time.Now()
 	feed := feeds.Feed{
 		Title:       s.cfg.Name,
-		Description: s.cfg.Desc,
+		Description: s.cfg.Description,
 		Author: &feeds.Author{
-			Name:  s.cfg.AuthorName,
-			Email: s.cfg.AuthorEmail,
+			Name:  s.cfg.Author.Name,
+			Email: s.cfg.Author.Email,
 		},
-		Link: &feeds.Link{Href: s.cfg.Domain.String()},
+		Link: &feeds.Link{Href: (&url.URL{Scheme: "https", Host: s.cfg.Hostname}).String()},
 		Copyright: fmt.Sprintf(
 			"Copyright %d–%d %s",
 			s.cfg.Since,
 			now.Year(),
-			s.cfg.AuthorName,
+			s.cfg.Author.Name,
 		),
 		Items: []*feeds.Item{},
 
@@ -566,7 +567,7 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 				"both %s and %s wanted to build to %s/%s; remove one",
 				d.Source,
 				prev.Source,
-				cfg.Domain.Host,
+				cfg.Hostname,
 				dest,
 			)
 		}

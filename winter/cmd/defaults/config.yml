@@ -1,0 +1,12 @@
+# Winter configuration
+author:
+  name: changeme
+  email: changeme
+debug: false
+description: My Winter website.
+dist: dist
+hostname: changeme.com
+name: Change Me
+since: 2021
+src:
+  - ./src # ./src is implied so unneeded, but included for example

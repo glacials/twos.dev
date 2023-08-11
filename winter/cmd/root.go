@@ -2,6 +2,7 @@
 package cmd
 
 import (
+	"context"
 	"os"
 
 	"github.com/spf13/cobra"
@@ -22,14 +23,17 @@ var (
 )
 
 func Execute() {
-	err := rootCmd.Execute()
+	f := rootCmd.PersistentFlags()
+	_ = *f.StringArrayP("source", "i", []string{}, "supplemental source file or directory to build (can be specified multiple times)")
+	rootCmd.AddCommand(newConfigCmd())
+	rootCmd.AddCommand(newBuildCmd())
+	rootCmd.AddCommand(newServeCmd())
+	err := rootCmd.ExecuteContext(context.Background())
 	if err != nil {
 		os.Exit(1)
 	}
 }
 
 func init() {
-	f := rootCmd.PersistentFlags()
 
-	_ = *f.StringArrayP("source", "i", []string{}, "supplemental source file or directory to build (can be specified multiple times)")
 }

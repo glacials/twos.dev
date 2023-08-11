@@ -11,6 +11,7 @@ require (
 	github.com/gorilla/feeds v1.1.1
 	github.com/lithammer/dedent v1.1.0
 	github.com/mitchellh/go-wordwrap v1.0.1
+	github.com/mitchellh/mapstructure v1.5.0
 	github.com/mitranim/gow v0.0.0-20230418123246-87df6e48eec6
 	github.com/niklasfasching/go-org v1.6.6-0.20230219175512-fa3e6f91d96b
 	github.com/otiai10/copy v1.7.0
@@ -20,6 +21,7 @@ require (
 	golang.org/x/image v0.5.0
 	golang.org/x/net v0.7.0
 	golang.org/x/text v0.7.0
+	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
 )
 
 require (

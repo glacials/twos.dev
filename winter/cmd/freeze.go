@@ -34,7 +34,7 @@ var freezeCmd = &cobra.Command{
 		}
 
 		for _, shortname := range args {
-			s, err := winter.NewSubstructure(winter.Config{SourceDirectories: sources})
+			s, err := winter.NewSubstructure(winter.Config{Src: sources})
 			if err != nil {
 				return err
 			}

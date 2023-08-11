@@ -1,0 +1,42 @@
+#+DATE: 2023-02-23
+#+FILENAME: infra.html
+
+* My Infrastructure
+
+I've had a lot of side projects. Some are global in nature and get a lot of
+users. Some are meant just for me. Some start one way and end the other.
+
+In some areas of dealing with all these side projects I've developed some
+patterns. In others I'm still exploring. On this page I'll detail where those
+lines lie and where they're still shifting.
+
+** Version Control
+We'll get the easy stuff out of the way first. My projects are open source by
+default. Starting a GitHub repository is emotionally necessary for me to begin
+to write software. It is the source of truth for everything in my life that
+involves code, whether projects or dotfiles or the file you're reading right
+now.
+
+** Deploys
+I am staunchly [[https://en.wikipedia.org/wiki/Continuous_deployment][CD]]. Pushes to =main= automatically deploy any given project
+whether it's a service with 10k users or a dinky home automation script. I don't
+need another step between writing code and getting it out there.
+
+** Infrastructure
+I'm just starting to understand the appeal of the Kubernetes train, but it
+honestly seems like a bit much for my lil old dinky side projects. I was within
+an inch of getting things up and running in Docker Swarm, which I'm honestly
+surprised didn't take off more with how simple it is in comparison.
+
+I have two directions I go here for big projects, which I'll represent as
+[[https://whatsinstandard.com/][What's in Standard?]] and [[https://splits.io][Splits.io]].
+
+For static or mostly static websites like /What's in Standard?/ I will opt to
+use the heck out of GitHub Pages and GitHub Actions to avoid having to manage or
+pay for any "real" infrastructure.
+
+** Tests
+I don't write tests when I start a side project. I might never, depending on the
+specific risks. I mainly use Go and Ruby. In Ruby tests verify you're calling
+things correctly and they're returning things correctly. In Go your tests
+generally just check the latter, because the former is enforced at compile time.
