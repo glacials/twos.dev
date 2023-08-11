@@ -22,13 +22,13 @@
 				<span class="arrow"></span>-->
 </nav>
 {{ else }}
-<p>
+<nav>
   {{ if ne .Shortname "index" }}
   {{ with parent }}
-  &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+  <div class="back">&larr; <a href="{{ .Source }}">{{ .Shortname }}</a></div>
   {{ else }}
-  &larr; <a href="/">twos.dev</a>
+  <div class="back">&larr; <a href="/">twos.dev</a></div>
   {{ end }}
   {{ end }}
-</p>
+</nav>
 {{ end }}

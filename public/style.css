@@ -10,12 +10,12 @@ first word looks good with or on each other. */
   --inverse-bg: rgba(255, 255, 240, 0.19);
   --inverse-fg: rgba(245, 222, 153, 1);
 
-  --darker-bg: rgb(39, 39, 59);
-  --darker-bg-shadow: rgba(56, 56, 56, 1);
+  --darker-bg: rgb(31, 31, 47);
+  --darker-bg-shadow: rgb(23, 14, 34);
   --darker-fg: rgba(248, 248, 242, 1);
 
   --lighter-bg: rgba(48, 48, 78, 1);
-  --lighter-fg: rgb(255, 227, 86);
+  --lighter-fg: rgba(255, 227, 86, 1);
 }
 
 @keyframes appear {
@@ -32,22 +32,24 @@ html {
   line-height: 1.5em;
   text-align: justify;
 
-  font-smoothing: antialiased;
-  -webkit-font-smoothing: antialiased;
-
   hyphens: auto;
   -webkit-hyphens: auto;
 }
 
 body {
-  background: var(--traditional-bg);
+  background: var(--darker-bg);
   color: var(--traditional-fg-a);
+  height: 100%;
   margin: 0;
 }
 
 .container {
-  margin: auto;
+  background: var(--traditional-bg);
   max-width: 50em;
+
+  margin: auto;
+  padding-bottom: .5em;
+  padding-top: .5em;
 }
 
 /* End root elements */
@@ -120,7 +122,7 @@ h1 {
 h1 + figure,
 h1 + p + figure {
   margin: auto;
-  max-width: 40em;
+  max-width: var(--container-width);
 }
 
 h2,
@@ -153,12 +155,13 @@ h6 {
   padding-bottom: 0;
 }
 
+/* Small headers but no special background */
 h4,
 h5,
 h6 {
   color: var(--traditional-fg-b);
   display: block;
-  padding-left: 0;
+  padding-left: 1em;
 }
 
 hr {
@@ -175,19 +178,24 @@ li {
   margin: 0.5em 0;
 }
 
-/* Anything that could possibly be an immediate child of .container. Don't want
- * a margin on .container because I want the headings' backgrounds to extend to
- * the left page edge. */
-ol,
-p,
-ul {
-  margin-left: 1rem;
-  margin-right: 1rem;
+/* We want headings' backgrounds to extend to the left page edge,
+   so use margin on contained elements instead of padding on .container. */
+p {
+  margin-left: 2rem;
+  margin-right: 2rem;
+}
+
+ol, ul {
+  margin-left: 2em;
+  margin-right: 1em;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 ul {
   list-style-type: "- ";
 }
+
 
 video + video {
   margin-left: 1em;
@@ -210,29 +218,10 @@ nav a {
   margin: 0 0.2em;
 }
 
-/* In case none of the below rules trigger, display a backup.
-   This can happen if we're not on any of these pages.
-*/
-nav .arrow::before {
-  content: "↔";
-}
-
-/* Hovered/selected nav links should make arrows on their right point left */
-nav a:hover ~ .arrow::before {
-  content: "←" !important;
-}
-
-nav a.selected ~ .arrow::before {
-  content: "←" !important;
-}
-
-/* Hovered/selected  nav links should make arrows on their left point right */
-nav .arrow:has(~ a:hover)::before {
-  content: "→" !important;
-}
-
-nav .arrow:has(~ a.selected)::before {
-  content: "→";
+nav .back {
+  display: inline;
+  font-size: 1rem;
+  margin-left: 1em;
 }
 
 /* End nav */
@@ -330,20 +319,6 @@ h3.company {
 
 .role {
   padding-left: 1rem;
-}
-
-@media (min-width: 34em) {
-  .left {
-    float: left;
-    margin-top: 1em;
-  }
-
-  .right {
-    float: right;
-    text-align: right;
-    margin-top: 1em;
-    margin-right: 10px;
-  }
 }
 
 /* Background */
@@ -693,3 +668,41 @@ h3.company {
 }
 
 /* End syntax highlighting (see https://github.com/alecthomas/chroma) */
+
+@media (max-width: 50em) {
+  .container {
+    border: .1em solid var(--darker-bg-shadow);
+  }
+
+  .left {
+    float: left;
+    margin-top: 1em;
+  }
+
+  .right {
+    float: right;
+    text-align: right;
+    margin-top: 1em;
+    margin-right: 10px;
+  }
+
+
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6, p, figcaption {
+      margin-left: 0;
+      margin-right: 0;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+  }
+
+  ol,
+  ul {
+    margin-left: 1.5em;
+    margin-right: .75em;
+    list-style-position: inside;
+  }
+}
