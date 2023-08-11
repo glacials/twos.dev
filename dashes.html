@@ -102,13 +102,13 @@
   <div class="container">
     <header>
       
-<p>
+<nav>
   
   
-  &larr; <a href="/">twos.dev</a>
+  <div class="back">&larr; <a href="/">twos.dev</a></div>
   
   
-</p>
+</nav>
 
 
       
@@ -118,7 +118,7 @@
           published
           2022 July
           / last updated
-          2022 September
+          2023 August
           </i>
       </small>
       
@@ -312,7 +312,12 @@
 
 <h3>Output Difficulties</h3>
 
-<p>At the time of writing, twos.dev renders in a monospaced font for aesthetic reasons. Unfortunately, the glyphs for many dashes are virtually indistinguishable in monospaced fonts. To make the differences visible, I wrote <a href="https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47">a bespoke preprocessing step</a> to render twos.dev's dashes in a variable width font.</p>
+<p>When rendering monospaced fonts, the glyphs for many dashes are virtually
+indistinguishable from each other. To make the differences visible, I wrote <a href="https://github.com/glacials/twos.dev/blob/a61379f9c0f121e9e98033c2a32c3ef47f975f48/winter/document.go#L41-L47">a bespoke
+preprocessing
+step</a>
+to render twos.dev's dashes in a variable width font, even when among monospaced
+characters.</p>
 
 <p>I'd love for there to be a "monospace with exceptions" font that takes this chore out of my hands.</p>
 
@@ -400,7 +405,7 @@
             2022 July
             
             / last updated
-            2022 September
+            2023 August
             
             
           </i>

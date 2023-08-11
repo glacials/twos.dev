@@ -51,7 +51,9 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="90 &gt; 100" />
+<meta name="description" content="
+My Infrastructure
+" />
 <link rel="icon" href="favicon.ico" />
 <link
   rel="alternate"
@@ -65,7 +67,9 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>90 &gt; 100</title>
+<title>
+My Infrastructure
+</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
@@ -112,50 +116,78 @@
 
 
       
+      <div style="background-color: var(--bg-c); text-align: center">
+        DRAFT
+      </div>
       
-      <small style="text-align: center; display: block">
-        <i>
-          published
-          2023 March
-          / last updated
-          2023 August
-          </i>
-      </small>
       
       
     </header>
     <article>
-      <html><head></head><body><h1>90 &gt; 100</h1>
-
-<p>Do more things at 90% effort. If you believe you can only choose 0% or 100%, you’ll
-often choose 0% because you cannot afford 100%.</p>
-
-<p>I became very engaged in helping with the climate emergency in the last couple of years. One big line item on the list of emitters is meat. A 100g serving of beef emits the equivalent of <a href="https://www.co2everything.com/co2e-of/beef">15kg</a> of CO₂ into the atmosphere, the same as driving 78km (48mi). A 100g serving of tofu emits 0.08 kg of CO₂ equivalent.<sup class="footnote-ref" id="fnref:CO-equivalent-CO"><a href="#fn:CO-equivalent-CO">1</a></sup> In other words, a week of eating beef emits more CO₂e than three years of eating tofu.<sup class="footnote-ref" id="fnref:3x-meals-daily-o"><a href="#fn:3x-meals-daily-o">2</a></sup></p>
-
-<p>For someone wanting to reduce emissions, vegetarianism is a clear candidate. But there are some things about being vegetarian I can't do:</p>
-
-<ol>
-<li>Summer is deeply carnivorous and I don't want to put her through the effects of my choice (we did try).</li>
-<li>I don't want to be that person in the friend group people have to plan around, the person whose presence at a barbecue makes an unprepared host feel guilty.</li>
-<li>There are formats of meat I get occasional cravings for, like a burger or a ball park hot dog.</li>
-</ol>
-
-<p>I can't be 100% vegetarian. But that's no reason to stay at 0%. I can cut meat from the ~90% of meals that don't cause any of these issues.</p>
-
-<p>So I became <a href="https://en.wikipedia.org/wiki/Flexitarianism">flexitarian</a> which for me means "vegetarian except when it would inconvenience people". If 90% of the world could become 90% vegetarian the benefit would be nearly that of 100%/100% but orders of magnitude easier to achieve.</p>
-
-<p>We need to adopt this strategy more. It's similar to the <a href="https://en.wikipedia.org/80-20_rule">80/20 rule</a>, but 80/20 optimizes bang-for-buck when building things. 90 &gt; 100 is about recognizing that <code>impact per success</code> is a worse thing to optimize for than <code>success rate * impact per success</code>.</p>
-
-<div class="footnotes">
-
-<hr/>
-
-<ol>
-<li id="fn:CO-equivalent-CO">CO₂ equivalent ("CO₂e") is how we describe climate change impact in a way agnostic to the method. For example cows emit methane, which impacts the climate in a far greater way than CO₂.</li>
-
-<li id="fn:3x-meals-daily-o">3x meals daily of 100g protein each</li>
-</ol>
-
+      <html><head></head><body><div id="outline-container-headline-1" class="outline-1">
+<h1 id="headline-1">
+My Infrastructure
+</h1>
+<div id="outline-text-headline-1" class="outline-text-1">
+<p>
+I've had a lot of side projects. Some are global in nature and get a lot of
+users. Some are meant just for me. Some start one way and end the other.</p>
+<p>
+In some areas of dealing with all these side projects I've developed some
+patterns. In others I'm still exploring. On this page I'll detail where those
+lines lie and where they're still shifting.</p>
+<div id="outline-container-headline-2" class="outline-2">
+<h2 id="headline-2">
+Version Control
+</h2>
+<div id="outline-text-headline-2" class="outline-text-2">
+<p>We'll get the easy stuff out of the way first. My projects are open source by
+default. Starting a GitHub repository is emotionally necessary for me to begin
+to write software. It is the source of truth for everything in my life that
+involves code, whether projects or dotfiles or the file you're reading right
+now.</p>
+</div>
+</div>
+<div id="outline-container-headline-3" class="outline-2">
+<h2 id="headline-3">
+Deploys
+</h2>
+<div id="outline-text-headline-3" class="outline-text-2">
+<p>I am staunchly <a href="https://en.wikipedia.org/wiki/Continuous_deployment">CD</a>. Pushes to <code class="verbatim">main</code> automatically deploy any given project
+whether it's a service with 10k users or a dinky home automation script. I don't
+need another step between writing code and getting it out there.</p>
+</div>
+</div>
+<div id="outline-container-headline-4" class="outline-2">
+<h2 id="headline-4">
+Infrastructure
+</h2>
+<div id="outline-text-headline-4" class="outline-text-2">
+<p>I'm just starting to understand the appeal of the Kubernetes train, but it
+honestly seems like a bit much for my lil old dinky side projects. I was within
+an inch of getting things up and running in Docker Swarm, which I'm honestly
+surprised didn't take off more with how simple it is in comparison.</p>
+<p>
+I have two directions I go here for big projects, which I'll represent as
+<a href="https://whatsinstandard.com/">What's in Standard?</a> and <a href="https://splits.io">Splits.io</a>.</p>
+<p>
+For static or mostly static websites like <em>What's in Standard?</em> I will opt to
+use the heck out of GitHub Pages and GitHub Actions to avoid having to manage or
+pay for any "real" infrastructure.</p>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Tests
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
+<p>I don't write tests when I start a side project. I might never, depending on the
+specific risks. I mainly use Go and Ruby. In Ruby tests verify you're calling
+things correctly and they're returning things correctly. In Go your tests
+generally just check the latter, because the former is enforced at compile time.</p>
+</div>
+</div>
+</div>
 </div>
 </body></html>
     </article>
@@ -173,15 +205,12 @@ often choose 0% because you cannot afford 100%.</p>
           <i>
             
             source:
-            <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/90.md">src/cold/90.md</a>
+            <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/infra.org">src/cold/infra.org</a>
             
             <br />
             
             published
-            2023 March
-            
-            / last updated
-            2023 August
+            2023 February
             
             
           </i>
