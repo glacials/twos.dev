@@ -20,17 +20,67 @@ In some ways these goals work against each other; easy creation usually means ea
 
 I used to write drafts in my notes app then migrate to HTML when the piece became less amorphous; from then on I would write and edit directly in HTML. This was surprisingly refreshing as it allowed me to have wild one-off customizations for individual posts, but it had three problems:
 
-- Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in `$EDITOR`)
-- Writing was slowed down by cruft like `<p>` and `<li>`
-- The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring
+1. Writing HTML is a rough context switch (what was scribbling drafts on my phone became sitting at my computer in `$EDITOR`)
+2. Writing was slowed down by cruft like `<p>` and `<li>`
+3. The reading experience can flow differently on a web page than in a notes app, leading to large rewrites after transferring
 
 To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.
 
-I first focused on changing my drafting app to something with more robust exporting tools. I found [iA Writer](https://ia.net/writer), which has been great to get my thoughts out quickly. It looks nice and has tools for reducing filler words and cliches. Importantly, it stores writing as Markdown files in an online drive of my choosing.
+I first focused on changing my drafting app to something with more robust exporting
+tools. I've jumped between [iA Writer](https://ia.net/writer) and
+[Obsidian](https://obsidian.md), both of which let me get my thoughts out quickly, each
+with their own strengths. Importantly, they store writing as Markdown. This solves `1`
+and `2` above.
+
+To solve `3`, we need to automate getting those rough drafts published to an unlisted
+twos.dev page every time they change. This means we need programmatic access to the
+drafts, but neither app has a third-party web API. Luckily, the editors can store the
+files in the location of your choosing, including some natively supported cloud storage
+services. We need to get at those files.
+
+There are several ways to do this. The simplest would be to point your writing "vault"
+directly at a cloud storage service with an API like Google Drive, then use something
+like a cron-based GitHub Actions workflow to ensure your writing always gets published.
+
+Since I'm still undergoing [my Apple experiment](apple.html), I've set myself a
+constraint of only using iCloud Drive for cloud storage, which doesn't have an API. That
+leaves two options.
 
 ### Shortcuts
 
-iOS and macOS ship with [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the iA Writer app. The automation adds a 1-2 line YAML frontmatter section to each document, then pushes it to the `src/warm` directory in the twos.dev Git repository by invoking [Working Copy](https://workingcopyapp.com).
+iOS and macOS ship with
+[Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), a no-code
+event-driven automation app. Using Shortcuts, I set up an automation that triggers when
+I switch away from the my writing app, and additionally on a cron. The automation adds a
+1-2 line [Winter frontmatter](winter.html#frontmatter) section to each document if
+needed, then pushes it to the `src/warm` directory in the twos.dev Git repository by
+invoking [Working Copy](https://workingcopyapp.com). No interruption to UX; this happens
+in the background.
+
+I never thought a phone would be an integral part of my CI/CD pipeline, but here we are.
+It actually hummed along in the background for several months until an iOS update
+changed some minor behavior somewhere that broke it. I didn't have the motivation to fix
+it because the debugging experience for Shortcuts isn't great, but otherwise this was a
+surprisingly effective solution and it always triggered exactly when it was needed.
+
+That leads us to our second option.
+
+### `launchd`
+
+There's no network API into iCloud Drive, but there is a local one: the filesystem. If
+we control a Mac that will be online enough to satisfy our synchronization needs, which
+are not necessarily 24/7, we can snatch the files from there.
+
+Enter
+[launchd](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2),
+a hidden gem of macOS. It's a few things, but for our purposes it's basically cron
+purpose-built for laptops. It intelligently handles sleep, network loss, and ([charge
+state](https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac)). The
+specifics aren't important; suffice it to say It Just Works.
+
+As long as we install this on a machine or machines that get enough use—or that are
+[Caffeinated](https://caffeinated.app) enough—this will be a good enough pipeline. We
+have our draft synchronization.
 
 ### Preprocessing
 
