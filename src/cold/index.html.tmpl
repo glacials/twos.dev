@@ -11,12 +11,27 @@ type: page
   <p>
     <a href="benjamincarlsson.vcf">Contact card</a>
   </p>
-  <code><a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a></code>
-  <code><a href="https://linkedin.com/in/ben" style="white-space: nowrap">linkedin.com/in/ben</a></code> <code><a
-    href="https://hachyderm.io/@glacials">@glacials@hachyderm.io</a></code>
-  <code><a href="https://github.com/glacials" style="white-space:
-  nowrap">github.com/glacials</a></code>
-  <code><a href="https://twitter.com/glcls" style="white-space: nowrap">@glcls</a></code>
+  <nav class="socials">
+    <ul>
+      <li><a href="mailto:ben@twos.dev" target="_blank">ben@twos.dev</a></li>
+      <li>
+        <a href="https://linkedin.com/in/ben" target="_blank"
+          >linkedin.com/in/ben</a
+        >
+      </li>
+      <li>
+        <a href="https://hachyderm.io/@glacials" target="_blank"
+          >@glacials@hachyderm.io</a
+        >
+      </li>
+      <li>
+        <a href="https://github.com/glacials" target="_blank"
+          >github.com/glacials</a
+        >
+      </li>
+      <li><a href="https://twitter.com/glcls" target="_blank">@glcls</a></li>
+    </ul>
+  </nav>
 </div>
 
 <div style="display: flex; flex-wrap: wrap">
@@ -24,28 +39,28 @@ type: page
     <h2>Writing</h2>
     <ul>
       {{ range posts }}
-      {{ if .Category }}{{ continue }}{{ end }}
-      {{ if lt .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
-      <li>
-        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-      </li>
+        {{ if .Category }}{{ continue }}{{ end }}
+        {{ if lt .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
+        <li>
+          <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+        </li>
       {{ end }}
       <li><a href="/archives.html">archives</a> &rarr;</li>
     </ul>
   </div>
 
   {{ range $category, $posts := categories }}
-  {{ if not $category }}{{ continue }}{{ end }}
-  <div>
-    <h2>{{ $category }}s</h2>
-    <ul>
-      {{ range $posts }}
-      <li>
-        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-      </li>
-      {{ end }}
-    </ul>
-  </div>
+    {{ if not $category }}{{ continue }}{{ end }}
+    <div>
+      <h2>{{ $category }}s</h2>
+      <ul>
+        {{ range $posts }}
+          <li>
+            <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+          </li>
+        {{ end }}
+      </ul>
+    </div>
   {{ end }}
 </div>
 
@@ -55,62 +70,88 @@ type: page
   started writing more.
 </p>
 <div class="photo-grid">
-  <a href="/img/photography/2022/IMG_8359.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8359.JPG" /></a>
-  <a href="/img/photography/2022/IMG_8524.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8524.JPG" /></a>
-  <a href="/img/photography/2022/IMG_8536.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8536.JPG" /></a>
-  <a href="/img/photography/2022/IMG_8659.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8659.JPG" /></a>
-  <a href="/img/photography/2022/IMG_8742.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8742.JPG" /></a>
-  <a href="/img/photography/2022/IMG_8798.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_8798.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9004.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9004.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9090.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9090.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9095.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9095.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9159.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9159.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9370.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9370.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9506.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9506.JPG" /></a>
-  <a href="/img/photography/2022/IMG_9516.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2022/IMG_9516.JPG" /></a>
+  <a href="/img/photography/2022/IMG_8359.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8359.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_8524.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8524.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_8536.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8536.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_8659.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8659.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_8742.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8742.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_8798.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_8798.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9004.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9004.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9090.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9090.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9095.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9095.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9159.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9159.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9370.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9370.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9506.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9506.JPG"
+  /></a>
+  <a href="/img/photography/2022/IMG_9516.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2022/IMG_9516.JPG"
+  /></a>
 </div>
 
 <h2>2021</h2>
 <p>In 2021 I started learning interior design and photography.</p>
 
 <div class="photo-grid">
-  <a href="/img/photography/2021/IMG_0385.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0385.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0501.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0501.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0597.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0597.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0602.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0602.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0615.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0615.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0629.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0629.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0638.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0638.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0644.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0644.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0661.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0661.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0711.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0711.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0818.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0818.JPG" /></a>
-  <a href="/img/photography/2021/IMG_0859.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_0859.JPG" /></a>
-  <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"><img class="silly"
-      src="/img/thumb/photography/2021/IMG_1270.JPG" /></a>
+  <a href="/img/photography/2021/IMG_0385.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0385.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0501.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0501.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0597.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0597.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0602.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0602.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0615.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0615.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0629.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0629.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0638.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0638.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0644.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0644.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0661.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0661.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0711.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0711.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0818.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0818.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_0859.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_0859.JPG"
+  /></a>
+  <a href="/img/photography/2021/IMG_1270.JPG.html" class="img"
+    ><img class="silly" src="/img/thumb/photography/2021/IMG_1270.JPG"
+  /></a>
 </div>

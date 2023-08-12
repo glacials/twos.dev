@@ -1,34 +1,55 @@
 {{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "software.html") }}
-<div style="text-align:center">
-</div>
-<nav>
-  <p style="text-align:center">Ben Carlsson's…
-    <a href="/" {{ if eq .Dest "index.html" }}class="selected" {{ end }}>Index</a>
-    <!--
+  <div style="text-align:center"></div>
+  <nav>
+    <div style="font-size: 1.5em; text-align: center;">Ben Carlsson's…</div>
+    <ul>
+      <li>
+        <a
+          href="/"
+          {{ if eq .Dest "index.html" }}class="selected"{{ end }}
+          >Index</a
+        >
+      </li>
+      <!--
     <a
       href="/cv.html"
       {{ if eq .Dest "cv.html" }}class="selected"{{ end }}
       >CV</a
     >
     -->
-    <a href="/guide.html" {{ if eq .Dest "guide.html" }}class="selected" {{ end }}>User Guide</a>
-    <a href="/software.html" {{ if eq .Dest "software.html" }}class="selected" {{ end }}>Software</a>
-    <!--
+      <li>
+        <a
+          href="/guide.html"
+          {{ if eq .Dest "guide.html" }}class="selected"{{ end }}
+          >User Guide</a
+        >
+      </li>
+      <li>
+        <a
+          href="/software.html"
+          {{ if eq .Dest "software.html" }}class="selected"{{ end }}
+          >Software</a
+        >
+      </li>
+      <!--
 				<a
 					href="/newsletter.html"
 					{{ if eq .Dest "newsletter.html" }}class="selected"{{ end }}
 					>Newsletter</a
 											 >
 				<span class="arrow"></span>-->
-</nav>
+    </ul>
+  </nav>
 {{ else }}
-<nav>
-  {{ if ne .Shortname "index" }}
-  {{ with parent }}
-  <div class="back">&larr; <a href="{{ .Source }}">{{ .Shortname }}</a></div>
-  {{ else }}
-  <div class="back">&larr; <a href="/">twos.dev</a></div>
-  {{ end }}
-  {{ end }}
-</nav>
+  <nav>
+    {{ if ne .Shortname "index" }}
+      {{ with parent }}
+        <div class="back">
+          &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+        </div>
+      {{ else }}
+        <div class="back">&larr; <a href="/">twos.dev</a></div>
+      {{ end }}
+    {{ end }}
+  </nav>
 {{ end }}

@@ -1,5 +1,6 @@
 ---
 date: 2022-06-23
+filename: software.html
 type: page
 updated: 2023-02-10
 ---
@@ -10,25 +11,20 @@ updated: 2023-02-10
 
 _Solid hearts are active; hollow hearts are inactive but stable._
 
-- ♥ [Winter](https://twos.dev/winter): Static website generator powering this
-  website (Go)
-- ♥ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails,
-  Vue)
-- ♥ [What's in Standard?](https://whatsinstandard.com): Reference tool for
-  Magic: The Gathering (Vue, Flutter)
-- ♡ [Pricegun](https://pricegun.twos.dev): Estimate how much to charge for a
-  side project (React)
-- ♡ [Licenseland](https://license.land): Dual-license provider for open source
-  developers (Vue)
-- ♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Zero-config
-  stateless UUID-based URL slugs (Ruby on Rails)
-- ♡ [Indenter](https://github.com/glacials/indenter): Syntactic sugar for
-  neatly-indented CLI output (Python)
-- [Housebot](https://github.com/glacials/housebot): Twitch-controlled smart
-  lights (Node, CoffeeScript)
-- [Mainframe](https://github.com/glacials/mainframe): A bespoke home server
-  running on an RPi in my closet (Go)
-- [kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)
+<!-- Align these left because justified text stretches the space
+between the project name and the heart. -->
+
+- <div style="text-align:left">♥ [Winter](https://twos.dev/winter): Static website generator powering this
+  website (Go)</div>
+- <div style="text-align:left">♥ [What's in Standard?](https://whatsinstandard.com): Reference tool for Magic: The Gathering (Vue, Flutter)</div>
+- <div style="text-align:left">♡ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails, Vue)</div>
+- <div style="text-align:left">♡ [Pricegun](https://pricegun.twos.dev): Estimate how much to charge for a side project (React)</div>
+- <div style="text-align:left">♡ [Licenseland](https://license.land): Dual-license provider for open source developers (Vue)</div>
+- <div style="text-align:left">♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Zero-config stateless UUID-based URL slugs (Ruby on Rails)</div>
+- <div style="text-align:left">♡ [Indenter](https://github.com/glacials/indenter): Syntactic sugar for neatly-indented CLI output (Python)</div>
+- <div style="text-align:left">[Housebot](https://github.com/glacials/housebot): Twitch-controlled smart lights (Node, CoffeeScript)</div>
+- <div style="text-align:left">[Mainframe](https://github.com/glacials/mainframe): A bespoke home server running on an RPi in my closet (Go)</div>
+- <div style="text-align:left">[kure](https://github.com/glacials/kure): A flat-file blogging engine (PHP)</div>
 
 ## Contributions
 
