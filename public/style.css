@@ -48,8 +48,7 @@ body {
   max-width: 50em;
 
   margin: auto;
-  padding-bottom: .5em;
-  padding-top: .5em;
+  padding: .5em 2em;
 }
 
 /* End root elements */
@@ -112,6 +111,7 @@ h1 {
   color: var(--traditional-fg);
   display: block;
   font-size: 3em;
+  hyphens: auto;
   line-height: 0.85em;
   /* Undoes weird inheritance of html line-height w/ display:block */
   text-align: center;
@@ -268,12 +268,6 @@ a:hover img.silly {
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
-code {
-  background-color: var(--darker-bg);
-  color: var(--darker-fg);
-  padding: 0.25em 0.5em;
-}
-
 pre code {
   display: block;
   padding: 1rem 0;
@@ -282,9 +276,15 @@ pre code {
   color: var(--darker-fg);
 }
 
-@media (max-width: 800px) {
+@media (max-width: 50em) {
   pre {
-    min-width: 100%;
+    overflow-x: auto;
+  }
+}
+
+@media (min-width: 50em) {
+  pre {
+    box-shadow: .5em .5em var(--darker-bg-shadow);
   }
 }
 
@@ -296,6 +296,7 @@ pre .ln {
 
 pre .cl {
   margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 pre .line {
@@ -672,6 +673,7 @@ h3.company {
 @media (max-width: 50em) {
   .container {
     border: .1em solid var(--darker-bg-shadow);
+    padding: .5em 0;
   }
 
   .left {

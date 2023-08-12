@@ -5,7 +5,7 @@ type: post
 updated: 2022-07-20
 ---
 
-# Why Be Synchronous?
+# Why Be Synch&#xAD;ronous?
 
 Asynchrony vs. synchrony is a constant struggle. Design meeting or design doc?
 Pair programming or code review? [Pop-in](thepopin.html) or Slack message?

@@ -63,14 +63,18 @@ var (
 	}
 	replacements = map[string]string{
 		// Break some special characters out of monospace homogeneity
+		"—":       styleWrapper, // Em dash
+		"&mdash;": styleWrapper, // Em dash
 		"–":       styleWrapper, // En dash
 		"&ndash;": styleWrapper, // En dash
-		"—":       styleWrapper, // Em dash
-		"&mdash;": styleWrapper, // En dash
-		"⁓":       styleWrapper, // Swung dash
-		"―":       styleWrapper, // Horizontal bar
-		"⁃":       styleWrapper, // Hyphen bullet
 		"ƒ":       styleWrapper, // f-stop symbol
+		// Figure dash is included but commented to call out that we do NOT want
+		// to change its font as it would violate the whole point of the figure dash to make its font
+		// different from surrounding digits.
+		// "‒":       styleWrapper, // Figure dash
+		"―": styleWrapper, // Horizontal bar
+		"⁃": styleWrapper, // Hyphen bullet
+		"⁓": styleWrapper, // Swung dash
 
 		"&#34;": "\"",
 		"&#39;": "'",
@@ -350,8 +354,7 @@ func (d *textDocument) parseMarkdown() error {
 
 func (d *textDocument) parseOrg() error {
 	orgparser := org.New()
-	orgparser.DefaultSettings["OPTIONS"] =
-		strings.Replace(orgparser.DefaultSettings["OPTIONS"], "toc:t", "toc:nil", 1)
+	orgparser.DefaultSettings["OPTIONS"] = strings.Replace(orgparser.DefaultSettings["OPTIONS"], "toc:t", "toc:nil", 1)
 	orgdoc := orgparser.Parse(
 		bytes.NewBuffer(d.body),
 		d.SrcPath,

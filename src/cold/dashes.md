@@ -225,14 +225,13 @@ The **hyphen bullet** is a hyphen to be used in place of a bullet point.
 
 The **figure dash** is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.
 
-```plain
-Figure dash: 867‒5309
-Number:      86705309
-En dash:     867–5309
-Hyphen:      867-5309
-```
+<pre><span style="font-family:serif"><span style="font-family:monospace">Figure dash: </span><span style="font-size:2em">867‒5309</span> ← same as below
+<span style="font-family:monospace">Number:      </span><span style="font-size:2em">86705309</span> ← same as above
+<span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867–5309</span> ← longer
+<span style="font-family:monospace">Hyphen:      </span><span style="font-size:2em">867-5309</span> ← shorter
+</span></pre>
 
-Lastly, my favorite: the **soft hyphen** is a zero-width, invisible character that (opposite to the hard hyphen) denotes a place the word wrapper is _welcome_ to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
+Lastly, my favorite: the **soft hyphen** is a zero-width, **invisible** character that (opposite to the hard hyphen) denotes a place the word wrapper is _welcome_ to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
 
 ```plain
 v left page edge            v right page edge
@@ -246,4 +245,10 @@ Supercalifragilistic-
 expialidocious
 ```
 
-How dashing!
+You can see the soft hyphen in action when viewing the article titles of [Why Be
+Synchronous?](async.html) and [Anonymously Autistic](autism.html) on a small screen,
+where their respective long words would otherwise break the right margin.
+With soft hyphens we can ensure the word splits when needed, as well as be in control
+of where it splits so it doesn't happen mid-syllable.
+
+Dashing!
