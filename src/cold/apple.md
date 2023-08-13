@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-07-08
+updated: 2023-08-13
 ---
 
 # From Google to Apple
@@ -251,25 +251,30 @@ are:
 Only a handful of apps support multiple windows at this time, but being able
 to e.g. view one email in a thread while composing a reply feels great.
 
+Apple also takes a strong stance on whether a feature will be available on both platforms.
+For example, iPad does not allow swipe-typing;
+iPad can show multiple apps on the screen at a time, but iPhone cannot; and
+iPad has no Wallet or Apple Pay.
+I felt confused about these inconsistencies at first, but I see Apple’s angle—
+none of them quite make sense on the other form factor.
+Apple would rather withhold the feature than allow using it to be confusing or unintuitive.
+Infamously, there is no calculator app for iPad because
+Apple hasn’t found the time to adapt the iPhone calculator design.
+
 Ecosystem effects of iPad are the ability to use it as a second monitor, and
-the ability to use my Mac’s mouse and keyboard to control the iPad. macOS’s
+the ability to use a Mac’s mouse and keyboard to control it. macOS’s
 Preview app allows iPad to be used as an input device for signing documents
 and marking up images. This is something I did before by manually transferring
 files, but now it’s two clicks with instant sync.
 
 ### ✔ Pixel → iPhone {#iphone}
 
-I was initially surprised iPhone and iPad lack feature parity. This first came
-up trying to swipe-type on iPad. Another is iPad can show multiple apps on the
-screen at a time, but iPhone cannot. iPad has no Wallet or Apple Pay. I felt
-confused at first, but I see Apple’s angle—none of these quite make sense on
-the other form factor. They’d rather deny you the feature than allow using it to
-be confusing or unintuitive. Infamously, there is no calculator app for iPad
-because Apple hasn’t found the time to adapt the iPhone calculator design.
+As I said earlier, iOS shines when you use native apps.
+Apple apps especially, but also any (rare) third party app
+that takes the care to support all the small UX goodies.
+The more native apps, the better the UX.
 
-The more native apps I use on iOS, the better the UX gets. For example, you
-can use multi-touch to drag-and-drop items between apps. Third-party apps only
-implement this functionality sometimes.
+For example, multi-touch can be used to drag-and-drop items between apps.
 
 {{ videos
 "Using multi-touch to drag and drop items between apps."
@@ -277,9 +282,9 @@ implement this functionality sometimes.
 "drag-text"
 }}
 
-FaceID is about on par with fingerprint unlock on Pixel. They each encounter
-their own situational troubles, but both are great overall and I'm no more or
-less happy.
+FaceID is about on par with fingerprint unlock on Pixel.
+They each encounter their own troubles,
+but both are great overall and I'm no more or less happy.
 
 #### Google Fi {#fi}
 
@@ -316,6 +321,8 @@ corners of app icons that are stateful in the same way Android notifications
 are, so can be used as a todo list. They're a decent enough substitute that
 although I still prefer Android’s notifications, the difference is a couple of
 orders of magnitude less impactful than I scoped it out as.
+iOS doesn't have Android's support for natively granular notification muting,
+so this separation is sometimes useful to not completely black hole a misbehaving app.
 
 #### iMessage {#imessage}
 
@@ -324,14 +331,16 @@ I finally know why none of my iPhone friends were as excited as me about
 gold standard of chat apps. I’m even feeling the guilty urge to nudge friends
 towards iPhone so I can use it with them.
 
-To users iMessage threads appear to be between contacts, but on the backend
-they're between contact methods like phone numbers or email addresses. Along
-with Apple's device-first philosophy I presume this is so people don't need an
-Apple account to use iMessage, but it has quite a few papercuts. I recently
-changed my email address but I need to keep my old one in my Apple account
-indefinitely so my friends’ threads with me (read: with my old email address)
-won’t retroactively split. I've also encountered unsolvable problems spinning up
-group chats with [Jordan](https://jm.dev) since he switched to a Japanese phone number.
+Like I mentioned re: Apple's device-first philosophy,
+to users iMessage threads appear to be between contacts,
+but behind the scenes they're between contact *methods* like phone numbers or email addresses.
+I presume this is so people don't need an Apple account to use iMessage,
+but it has quite a few papercuts.
+I recently changed my email address,
+but because of this behavior I need to keep my old email in my Apple account indefinitely
+so my friends’ threads with me (read: with my old email) don’t retroactively split.
+I've also encountered unsolvable problems spinning up group chats with [Jordan](https://jm.dev)
+since he switched to a Japanese phone number.
 
 Beyond these rare issues I'm very happy with iMessage.
 
@@ -402,8 +411,8 @@ be lost or have sticky liquids spiked into it like any other. We’ve 3D printed
 miss the remote-free life.
 
 Ecosystem effects of Apple TV include typing: when a text input is selected on
-the Apple TV, a notification shows on my iOS devices allowing me to use them
-as a keyboard. Password manager support works as normal; this is helpful for
+the Apple TV, a notification shows on your iOS devices allowing you to use them
+as keyboards. Password manager support works as normal; this is helpful for
 invoking 1Password to fill logins.
 
 ### ✔ Google Home → Apple Home {#home}
@@ -433,8 +442,8 @@ sound from my speakers, so I would have to briefly remove one earbud to ensure
 I wasn't. The anxiety of this was so distracting as to be counterproductive.
 
 Ecosystem effects of AirPods include automatic switching between devices based
-on attention, a Siri integration slightly worse than Pixel Buds's Google
-Assistant integration, and spatial audio.
+on attention, and a Siri integration slightly worse than Pixel Buds's Google
+Assistant integration.
 
 ### ⚠ Gmail → iCloud Mail {#mail}
 
@@ -452,11 +461,11 @@ chosen to live the life of searching in two places when I need something.
 
 To migrate email addresses I made a very tough decision that I'm still
 frustrated years later that I had to make, which was to change Google accounts
-during the transition. To use iCloud Mail means I can't use `@gmail.com`, and
-I've been wanting to migrate to a domain I control anyway.
+during the transition. To use iCloud Mail means I can't use `@gmail.com`,
+and like I said I've been wanting to migrate to a domain I control anyway.
 
 But I wanted my email address on my Google account to match
-my true email address, and Google doesn't let you change your primary email
+my canonical email address (the one I share with people), and Google doesn't let you change your primary email
 address. You can add additional "contact" email addresses, but your account is
 still very much bound to the original address you signed up for. If you try to
 do this anyway, like I did, there are a lot of little knock-on effects.
@@ -468,11 +477,11 @@ meetings means you first get dumped into a waiting room from which the
 organizer has to approve you. This is especially frustrating when the
 organizer doesn't show up, but the meeting is still happening.
 
-Google Groups also behaves poorly, as you'll get added to groups by your true
+Google Groups also behaves poorly, as you'll get added to groups by your canonical
 email address but you'll join as a Google account, forcing your web-based
 replies to be from your Google account's email address.
 
-In my first effort to migrate Google accounts, I coopted ben@twos.dev from
+In my first effort to migrate Google accounts, I coopted `ben@twos.dev` from
 Google Workspace which I had used for a little consulting. This caused a
 few minor issues and UX hiccups because Workspace Gmail believed it was
 still my provider, even though a non-Gmail server was receiving my emails.
@@ -482,9 +491,9 @@ But many Google features don't support Workspace accounts, like Google One,
 family sharing, some security features, and (for better and worse) some types
 of data harvesting and therefore ad/search targeting.
 
-I've now landed on creating a new personal Google account with ben@twos.dev as
-its primary email address. I needed to delete the twos.dev Google Workspace
-organization to do this, as it had claim to ben@twos.dev already. Signing up
+I've now landed on creating a new personal Google account with `ben@twos.dev` as
+its primary email address. I needed to delete the `twos.dev` Google Workspace
+organization to do this, as it had claim to `ben@twos.dev` already. Signing up
 to Google without an `@gmail.com` address is a somewhat hidden option, but it
 exists. You just can't ever fall into their "upgrade" funnel which assigns you
 an `@gmail.com` address, because that _does_ change your primary email address
@@ -532,7 +541,8 @@ Mail is below average at threading emails:
   trigger the push. Even emails from the same platform and app that is in charge of
   notifying.
 
-I experience long, uncollapsible nested quotes in some threads, where
+Mail has a high failure rate for autocollapsing quotes in email replies,
+causing some frustratingly long nested quotes in long threads.
 Gmail was always good at collapsing them automatically.
 
 Mail is bad at converting text to rich text. For example, it will not automatically
@@ -548,7 +558,7 @@ macOS Mail has horrible keyboard shortcuts by default, e.g. ⌘^A to archive.
 Thankfully macOS natively supports rebinding shortcuts for any app.
 
 {{ img
-   "Any app's menu actions (e.g. File → Save) can be [re]bound."
+   "Any macOS app's menu actions (e.g. File → Save) can be [re]bound natively."
    "rebind"
    "A screenshot of macOS's Settings.app rebinding a key for Mail.app"
 }}
@@ -563,7 +573,7 @@ and behaving super well as a multitasking app on iPadOS.
 ### ⚠ Google Calendar → Apple Calendar {#calendar}
 
 I switched to Apple Calendar as both an app and a calendar provider. I'd
-forgotten how limited and finicky calendar protocols are at their core—so many
+forgotten how limited and finicky calendar protocols are at their core. Many
 things just stop working when you leave Google Calendar. Folks send me
 invitations that don't show, my RSVPs don't make it back to them, and I
 sometimes don't receive updates to events. Even unfurling invited mailing lists
@@ -638,9 +648,7 @@ Watch vibration patterns to indicate upcoming turns.
 #### Departure {#byemaps}
 
 I’d like to continue to give Apple Maps chances because I know more data helps, but for tight
-schedules I wouldn't chance it. Incidentally, we purchased a Polestar which has Google
-Maps built right into it, so I've begun to softly switch back to that even on my other
-devices simply for the cross-integration.
+schedules I wouldn't chance it.
 
 #### ✔ Location Sharing → Find My {#findmy}
 
@@ -650,10 +658,10 @@ separate Find My app) are similar; anyone happy with one would be happy with
 the other.
 
 I can see why Apple decided to contain the feature in an app you must launch
-with intention, but it's a wash for me—I've had serendipitous encounters
+with intention, but it's a wash for me. I've had several serendipitous encounters
 enabled by seeing a friend is close by in Google Maps accidentally.
 
-AirTags and device tracking are the big Apple killer feature here, which work
+AirTags and device tracking are the big killer features here, which work
 as seamlessly as advertised. I threw one in my car and one in my bag just to
 have peace of mind. The app sends a notification when I leave `$DEVICE` at
 `$LOCATION`, with easy controls to disable future notifications for any such
@@ -674,18 +682,20 @@ import experience is in macOS—insert SD card, Photos.app automatically opens u
 to the Import window, I tick "Automatically delete photos after import" and tell
 it go, and it's done. I can take the SD card out and the photos will upload in
 the background. The Google equivalent isn't _hard_ but it takes more
-babysitting.
+babysitting,
+either messing with the filesystem or leaving the SD card in for the entire duration of the upload
+(and in my case, forgetting to retrieve it later).
 
 The migration from Google Photos to Apple Photos was simple, but long. Google
 Takeout produced hundreds of gigabytes of exports, which I downloaded onto a Mac
 and then imported with Photos.app. Due to Apple's offline-first approach
-synchronization took place in the background at reduced speeds. This meant it
+synchronization
 tried to take place while the laptop was closed and charging. This was jarring
 at first when trying to babysit the process, as by design it stops performing
 well when you start using the machine. When I learned to let go, it showed its
 colors.
 
-Ecosystem effects include rich embeds & commenting in iMessage, and photos
+Ecosystem effects include rich support for embeds & commenting in iMessage, and photos
 appearing in upload prompts on all platforms (e.g. when uploading an avatar to
 some random internet account) with full face search embedded.
 
@@ -707,9 +717,9 @@ When it works it's beautiful and useful, but when it doesn't it's jarring.
 
 {{ video "Navigating through history in Safari with swipe gestures." "back"}}
 
-I tend to switch back to Chrome for Meet meetings, as I’ve experienced some
-webcam freezing in Safari of myself or others (local only); Meet also supports
-more types of screen sharing in Chrome, like sharing one tab.
+I tend to switch back to Chrome for Meet meetings, as I’ve experienced some local-only
+webcam freezing in Safari of myself or others.
+Meet also supports more types of screen sharing in Chrome, like sharing one tab.
 
 Ecosystem effects of Safari include Handoff (move a browsing session between
 devices smoothly) and the downright bonkers power efficiency of Safari on macOS.
@@ -720,10 +730,10 @@ While moving to Safari, I replaced 1Password with iCloud Keychain. It serves
 basic needs, but that’s it. It can store a username, a password, a 2FA code,
 and a domain name for each entry.
 
-It cannot store two domains for one entry, e.g. gmail.com and google.com. It
+It cannot store two domains for one entry, e.g. `gmail.com` and `google.com`. It
 cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer
 service agents ask for. It cannot name an entry, e.g. Washington Corporations
-and Charities System instead of ccfs.sos.wa.gov. It cannot store non-login
+and Charities System instead of `ccfs.sos.wa.gov`. It cannot store non-login
 entries like documents, ID numbers, or insurance information.
 
 Using the 2FA field involves manual effort. Scanning rarely works, so I enter
@@ -740,7 +750,7 @@ support in Safari, on both macOS and iOS.
 ### ✔ Google Sheets → Numbers {#numbers}
 
 As a casual spreadsheets user, Sheets and Numbers are nearly identical.
-Numbers has nicer UX when editing formulae that visualizes cell(s) being
+Numbers has nicer formula editing UX that visualizes cell(s) being
 referenced. It tries to humanize references, e.g. “Ben age” for a cell in a
 row with header “Ben” and a column with header “Age”, instead of A:123. This
 is nice until headers get long and multiworded. Overall it’s a wash.
@@ -843,10 +853,9 @@ to “pop” at a date, a date and time, a location, and/or when messaging
 shared (e.g. family chores), and reminders within shared lists can be assigned
 to people.
 
-Reminders have a name, description, URL field, and priority (higher priority
-reminders are sorted higher and given special UI treatment). Reminders can
-have images attached to them, and any number of subtasks. They can be tagged
-and flagged.
+Reminders have a name, description, URL field, and priority.
+Reminders can have images attached to them, and any number of subtasks.
+They can be tagged and flagged.
 
 It’s a powerful app, but everything is presented simply. There is a native
 macOS app that synchronizes, so I get proper notifications on most of my
@@ -869,7 +878,7 @@ Siri is nearly strictly worse than Google Assistant. It can't answer questions
 like "What temperature do I need to cook chicken to?" or "Who played Alan in
 Tron Legacy?". Its best uses are for deep integrations like setting reminders or alarms.
 
-Ecosystem effects of Siri include surface-level interaction with native apps:
+Ecosystem effects of Siri include interaction with native apps:
 setting reminders, playing music, controlling Home devices, etc.
 
 ### ✔ Google Assistant Routines → Shortcuts {#shortcuts}
@@ -919,7 +928,7 @@ saves documents there, Numbers saves spreadsheets there).
 
 macOS also pulls a trick where it invisibly queues up actions on iCloud Drive
 files that haven't yet fully synced to your machine yet. For example, if you are
-on your iPhone and download an image to iCloud Drive, then you open your Mac,
+on your iPhone and place an image in iCloud Drive, then open a Mac,
 the image will show up ~immediately in macOS Finder, before it has finished
 syncing. If you try to open the file in macOS before it finishes, the open
 action will queue until the sync finishes, then execute. This behavior is nice
@@ -997,7 +1006,7 @@ This is a living document.
 
 Its goal is to document whether the Apple ecosystem is bigger than the sum of
 its parts. It is. But the more interesting detail I’ve learned is that it’s
-the long tail of ecosystem benefits that makes up most of that excess. Not the
+the long tail of tiny ecosystem benefits that makes up most of that excess. Not the
 two or three things per product I’ve mentioned above, but the dozens that
 happen without me noticing that add up to make a more enjoyable experience.
 
