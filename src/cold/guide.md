@@ -98,7 +98,7 @@ see #1 above.
 
 <h4>B. I work weird hours.</h4>
 
-Motivation strikes me randomly—sometimes during aworkday,
+Motivation strikes me randomly—sometimes during a workday,
 but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight.
 To counterbalance, I shorten my workdays and the math roughly works out.
 If you see emails or commits from me with unhealthy-feeling timestamps,
