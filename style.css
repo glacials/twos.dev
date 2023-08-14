@@ -1,5 +1,3 @@
-/* Start root elements */
-
 /* Each set of variables that shares the same
 first word looks good with or on each other. */
 :root {
@@ -16,6 +14,9 @@ first word looks good with or on each other. */
 
   --lighter-bg: rgba(48, 48, 78, 1);
   --lighter-fg: rgba(255, 227, 86, 1);
+
+  --container-horz-padding: 2em;
+  --container-width: 50em;
 }
 
 @keyframes appear {
@@ -27,32 +28,6 @@ first word looks good with or on each other. */
     opacity: 1;
   }
 }
-
-html {
-  line-height: 1.5em;
-  text-align: justify;
-
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
-
-body {
-  background: var(--darker-bg);
-  color: var(--traditional-fg-a);
-  height: 100%;
-  margin: 0;
-}
-
-.container {
-  background: var(--traditional-bg);
-  max-width: 50em;
-
-  margin: auto;
-  padding: 0.5em 2em;
-}
-
-/* End root elements */
-/* Start naked elements */
 
 /* When linked to an anchor, leave some space between top-of-window and the element. */
 a[name] {
@@ -66,17 +41,44 @@ a:visited {
 }
 
 a:hover {
-  background-color: var(--darker-bg);
-  color: var(--darker-fg-b);
+  background-color: var(--inverse-bg);
+  color: var(--inverse-fg);
 }
 
 a:hover:has(img) {
   background: inherit;
 }
 
+a img.silly {
+  filter: grayscale(100%);
+  -webkit-filter: grayscale(100%);
+
+  opacity: 0.8;
+}
+
+a:hover img.silly {
+  filter: contrast(100%) grayscale(0%) !important;
+  -webkit-filter: contrast(100%) grayscale(0%) !important;
+
+  transform: rotate(360deg);
+  transition: 900s;
+}
+
+article {
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
 blockquote {
   border-left: 1px solid var(--traditional-fg-a);
   padding-left: 1em;
+}
+
+body {
+  background: var(--darker-bg);
+  color: var(--traditional-fg-a);
+  height: 100%;
+  margin: 0;
 }
 
 button,
@@ -117,7 +119,7 @@ h1 {
   text-transform: uppercase;
 }
 
-/* Hero image */
+/* Text document hero images */
 h1 + figure,
 h1 + p + figure {
   margin: auto;
@@ -125,14 +127,12 @@ h1 + p + figure {
 }
 
 h2 {
-  font-size: 2.25em;
+  font-size: 2em;
 }
 
 h2,
 h3 {
-  background-color: var(--inverse-bg);
   color: var(--inverse-fg);
-  padding-left: 1rem;
 }
 
 h3,
@@ -151,20 +151,14 @@ h3,
 h4,
 h5,
 h6 {
-  display: inline-block;
-  margin-top: 2em;
-  padding-top: 0em;
-  padding-right: 1rem;
-  padding-bottom: 0;
+  margin-top: 1.5em;
 }
 
-/* Small headers but no special background */
 h4,
 h5,
 h6 {
   color: var(--traditional-fg-b);
   display: block;
-  padding-left: 1em;
 }
 
 hr {
@@ -177,38 +171,23 @@ hr::before {
   text-align: center;
 }
 
+html {
+  line-height: 1.5em;
+  text-align: justify;
+
+  hyphens: auto;
+  -webkit-hyphens: auto;
+}
+
 li {
   margin: 0.5em 0;
 }
 
-/* We want headings' backgrounds to extend to the left page edge,
-   so use margin on contained elements instead of padding on .container. */
-p {
-  margin-left: 2rem;
-  margin-right: 2rem;
-}
-
-ol,
-ul {
-  margin-left: 2em;
-  margin-right: 1em;
-  padding-left: 0;
-  padding-right: 0;
-}
-
-ul {
-  list-style-type: "- ";
-}
-
-video + video {
-  margin-left: 1em;
-}
-
-/* End naked elements */
-/* Start nav */
-
 nav {
-  font-size: 1.3em;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 1em;
+  max-width: calc(var(--container-width) + var(--container-horz-padding) * 2);
 }
 
 nav ul {
@@ -221,77 +200,96 @@ nav ul li {
   margin: 0 0.5em;
 }
 
-.selected,
-a.selected {
-  background: var(--inverse-bg);
+nav ul {
+  display: flex;
+  flex-wrap: wrap;
+  margin: 0;
+  padding: 0;
+}
+
+nav ul li a {
+  display: block;
+  margin-bottom: 0.25em;
+  margin-top: 0.25em;
+}
+
+nav ul li a:active,
+nav ul li a.selected {
   color: var(--inverse-fg);
 }
 
-nav a {
-  margin: 0 0.2em;
-}
-
-nav .back {
-  display: inline;
-  font-size: 1rem;
-  margin-left: 1em;
-}
-
 @media (max-width: 35em) {
-  nav ul {
-    display: block;
-    margin: 0.5rem;
-  }
-
-  nav ul li:first-child {
-    display: block;
-  }
-
-  nav ul li {
-    margin-bottom: 0.5rem;
-    margin-left: 0;
-    margin-right: 0;
-  }
-
-  nav ul li a:any-link,
-  nav ul li a[href] {
+  nav ul li a:any-link {
     background: var(--darker-bg);
-    display: flex;
-    justify-content: space-between;
-    margin-left: 0;
-    margin-right: 0;
-    padding: 0.5rem;
+    padding: 0.75em;
     text-decoration: none;
   }
 }
 
-/* End nav */
-/* Start socials */
+nav .back {
+  font-size: 1rem;
+  margin-bottom: 1em;
+}
 
-nav {
-  font-size: 1em;
+@media (max-width: 55em) {
+  nav .back {
+    margin-left: 1em;
+  }
+}
+
+@media (min-width: 25em) {
+  nav.socials ul li a {
+    margin-left: 1em;
+    margin-right: 1em;
+  }
+}
+
+@media (max-width: 25em) {
+  nav.socials ul {
+    flex-direction: column;
+  }
+}
+
+nav.socials ul li {
+  margin: 0;
 }
 
 @media (max-width: 35em) {
-  nav ul {
-    display: flex;
-    flex-wrap: wrap;
+  nav.socials ul li a:active,
+  nav.socials ul li a.selected {
+    box-shadow: 0.25em 0.25em var(--darker-bg-shadow) inset;
   }
-  nav ul li {
-    margin: 0.25em;
-  }
-  nav ul li a {
-    display: flex;
-    padding-left: 1em;
-    padding-right: 1em;
-  }
-  nav ul li a::after {
-    content: "";
+
+  nav.socials ul li a {
+    box-shadow: 0.25em 0.25em var(--darker-bg-shadow);
   }
 }
 
-/* End socials */
-/* Start classes */
+.container {
+  background: var(--traditional-bg);
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 1em var(--container-horz-padding);
+}
+
+@media (min-width: 55rem) {
+  .container {
+    border-color: var(--darker-bg-shadow);
+    border-style: solid;
+    border-width: 0.1em;
+    box-shadow: 0.5em 0.5em var(--darker-bg-shadow);
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+}
+
+ul {
+  list-style-type: "- ";
+}
+
+video + video {
+  margin-left: 1em;
+}
 
 .dark-only {
   display: block;
@@ -299,21 +297,6 @@ nav {
 
 .light-only {
   display: none;
-}
-
-a img.silly {
-  filter: grayscale(100%);
-  -webkit-filter: grayscale(100%);
-
-  opacity: 0.8;
-}
-
-a:hover img.silly {
-  filter: contrast(100%) grayscale(0%) !important;
-  -webkit-filter: contrast(100%) grayscale(0%) !important;
-
-  transform: rotate(360deg);
-  transition: 900s;
 }
 
 .footnotes {
@@ -330,7 +313,10 @@ a:hover img.silly {
   width: 100%;
 }
 
-/* End classes */
+.selected {
+  color: var(--inverse-fg);
+  cursor: default;
+}
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
@@ -738,7 +724,7 @@ h3.company {
 
 @media (max-width: 50em) {
   .container {
-    border: 0.1em solid var(--darker-bg-shadow);
+    border: none;
     padding: 0.5em 0;
   }
 
@@ -752,26 +738,5 @@ h3.company {
     text-align: right;
     margin-top: 1em;
     margin-right: 10px;
-  }
-
-  h1,
-  h2,
-  h3,
-  h4,
-  h5,
-  h6,
-  p,
-  figcaption {
-    margin-left: 0;
-    margin-right: 0;
-    padding-left: 0.5em;
-    padding-right: 0.5em;
-  }
-
-  ol,
-  ul {
-    margin-left: 1.5em;
-    margin-right: 0.75em;
-    list-style-position: inside;
   }
 }
