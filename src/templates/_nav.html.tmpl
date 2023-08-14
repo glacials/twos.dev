@@ -1,5 +1,4 @@
 {{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "software.html") }}
-  <div style="text-align:center"></div>
   <nav>
     <div style="font-size: 1.5em; text-align: center;">Ben Carlsson's…</div>
     <ul>
@@ -45,7 +44,7 @@
     {{ if ne .Shortname "index" }}
       {{ with parent }}
         <div class="back">
-          &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+          &larr; <a href="{{ .Shortname }}.html">{{ .Shortname }}.html</a>
         </div>
       {{ else }}
         <div class="back">&larr; <a href="/">twos.dev</a></div>
