@@ -155,7 +155,7 @@ Writer</a> hooked up to a shared or cloud directory;
 simplistically, it can be a cron job that runs <code>rsync</code>.</p>
 
 <p><strong>Cold</strong> content should not be touched by automated tools. This content must be
-preseved for years or decades, so less exposed surface area is better. When a
+preseved for years or decades, so fewer moving parts is better. When a
 piece of warm content is stable, it can be "frozen" into cold content using
 <code>winter freeze</code>.</p>
 
@@ -360,19 +360,19 @@ documentation, see
 <li><code>./src</code><span style="font-family: sans-serif">—</span>Content to be built
 
 <ul>
-<li><code>./src/cold</code><span style="font-family: sans-serif">—</span>Stable content
+<li><code>./src/cold</code><span style="font-family: sans-serif">—</span>Stable content, optionally <a href="https://pkg.go.dev/text/template">templated</a>
 
 <ul>
 <li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
 <li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML files</li>
-<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML files compatible with Go's <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> package</li>
+<li><code>*.org</code><span style="font-family: sans-serif">—</span>Org mode files</li>
 </ul></li>
-<li><code>./src/warm</code><span style="font-family: sans-serif">—</span>Unstable content
+<li><code>./src/warm</code><span style="font-family: sans-serif">—</span>Unstable content, optionally <a href="https://pkg.go.dev/text/template">templated</a>
 
 <ul>
 <li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
 <li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML files</li>
-<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML files compatible with Go's <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> package</li>
+<li><code>*.org</code><span style="font-family: sans-serif">—</span>Org mode files</li>
 </ul></li>
 <li><code>./src/templates</code><span style="font-family: sans-serif">—</span>Reusable content
 
@@ -380,7 +380,6 @@ documentation, see
 <li><code>text_document.html.tmpl</code><span style="font-family: sans-serif">—</span>Default page container</li>
 <li><code>imgcontainer.html.tmpl</code><span style="font-family: sans-serif">—</span>Gallery container</li>
 <li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML templates</li>
-<li><code>*.html.tmpl</code><span style="font-family: sans-serif">—</span>HTML templates compatible with Go's <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> package</li>
 </ul></li>
 <li><code>./src/img</code><span style="font-family: sans-serif">—</span>Gallery images
 
@@ -547,12 +546,12 @@ via the <a href="#cat"><code>{{ .Category }}</code></a> field.</p>
 visual treatment to the listing and display of documents with
 categories.</p>
 
-<p>Otherwise, the category is semantic. There is no programmatic access
-to documents by category.</p>
+<p>Otherwise, the category is semantic.
+There is no programmatic access to documents by category.</p>
 
 <h3 id="templates">Templates</h3>
 
-<p>Templates use the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
+<p>Any file in <code>./src</code> can be templated using the format expressed in the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
 library.</p>
 
 <h4 id="fields">Document Fields</h4>
