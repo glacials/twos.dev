@@ -14,7 +14,7 @@ _Solid hearts are active; hollow hearts are inactive but stable._
 <!-- Align these left because justified text stretches the space
 between the project name and the heart. -->
 
-- <div style="text-align:left">♥ [Winter](https://twos.dev/winter): Static website generator powering this
+- <div style="text-align:left">♥ [Winter](/winter): Static website generator powering this
   website (Go)</div>
 - <div style="text-align:left">♥ [What's in Standard?](https://whatsinstandard.com): Reference tool for Magic: The Gathering (Vue, Flutter)</div>
 - <div style="text-align:left">♡ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails, Vue)</div>

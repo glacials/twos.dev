@@ -28,6 +28,7 @@ func Execute() {
 	rootCmd.AddCommand(newConfigCmd())
 	rootCmd.AddCommand(newBuildCmd())
 	rootCmd.AddCommand(newServeCmd())
+	rootCmd.AddCommand(newTestCmd())
 	err := rootCmd.ExecuteContext(context.Background())
 	if err != nil {
 		os.Exit(1)
@@ -35,5 +36,4 @@ func Execute() {
 }
 
 func init() {
-
 }

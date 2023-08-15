@@ -9,8 +9,8 @@ func newServeCmd() *cobra.Command {
 		Long: wrap(`
 			Build, serve, and continually rebuild the website.
 
-			winter serve is an alias of winter build --serve.
-			It builds the website, starts a web server,
+			Alias of winter build --serve.
+			Builds the website, starts a web server,
 			and monitors the filesystem for changes.
 			When a change occurs, the website is selectively rebuilt
 			according to the scope of the change.

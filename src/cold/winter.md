@@ -51,7 +51,7 @@ Writer](https://ia.net/writer) hooked up to a shared or cloud directory;
 simplistically, it can be a cron job that runs `rsync`.
 
 **Cold** content should not be touched by automated tools. This content must be
-preseved for years or decades, so less exposed surface area is better. When a
+preseved for years or decades, so fewer moving parts is better. When a
 piece of warm content is stable, it can be "frozen" into cold content using
 `winter freeze`.
 
@@ -75,19 +75,18 @@ documentation, see
 ### Directory Structure {#layout}
 
 - `./src`—Content to be built
-  - `./src/cold`—Stable content
+  - `./src/cold`—Stable content, optionally [templated](https://pkg.go.dev/text/template)
     - `*.md`—Markdown files
     - `*.html`—HTML files
-    - `*.html.tmpl`—HTML files compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
-  - `./src/warm`—Unstable content
+    - `*.org`—Org mode files
+  - `./src/warm`—Unstable content, optionally [templated](https://pkg.go.dev/text/template)
     - `*.md`—Markdown files
     - `*.html`—HTML files
-    - `*.html.tmpl`—HTML files compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
+    - `*.org`—Org mode files
   - `./src/templates`—Reusable content
     - `text_document.html.tmpl`—Default page container
     - `imgcontainer.html.tmpl`—Gallery container
     - `*.html`—HTML templates
-    - `*.html.tmpl`—HTML templates compatible with Go's [`text/template`](https://pkg.go.dev/text/template) package
   - `./src/img`—Gallery images
     - `...`—Any directory structure
 - `./public`—Static files copied directly to the build directory
@@ -249,12 +248,12 @@ The default template set provided by `winter init` gives a minor
 visual treatment to the listing and display of documents with
 categories.
 
-Otherwise, the category is semantic. There is no programmatic access
-to documents by category.
+Otherwise, the category is semantic.
+There is no programmatic access to documents by category.
 
 ### Templates {#templates}
 
-Templates use the [`text/template`](https://pkg.go.dev/text/template) Go
+Any file in `./src` can be templated using the format expressed in the [`text/template`](https://pkg.go.dev/text/template) Go
 library.
 
 #### Document Fields {#fields}

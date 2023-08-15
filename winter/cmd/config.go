@@ -42,9 +42,10 @@ func newConfigCmd() *cobra.Command {
 	cmd.AddCommand(newConfigClearCmd())
 	return cmd
 }
+
 func newConfigGetCmd() *cobra.Command {
 	return &cobra.Command{
-		Use:   "get [KEY]",
+		Use:   "get [key]",
 		Short: "Get or list Winter config",
 		Long: wrap(`
 			Get the value of the Winter configuration variable named KEY,
