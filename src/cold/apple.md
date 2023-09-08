@@ -521,15 +521,17 @@ even after months of correcting it.
 When attaching large files Mail allows you to send them as iCloud Drive links
 instead (Google has this same behavior with Drive), but I've had recipients experience trouble downloading them.
 
-Mail's search is bad. On macOS, it searches only the mailbox being viewed
-(e.g. Inbox) by default. Because I do inbox zero, this is never what I want to
-search. (iOS and iPadOS correctly search everything by default.) When you are
-done searching and click Inbox to "return home" the search field doesn't
-clear, leading you to believe your Inbox is empty.
-
-Ignoring that, Gmail still wins search by an order of magnitude. For example,
-Gmail searches the contents of PDFs attached to emails; I’ve found this
-invaluable finding old leases and whatnot.
+Unsurprisingly, Gmail's search is an order of magnitude better than Mail's.
+It's what I miss most.
+In Mail, what I'm searching for is often buried beneath piles of things I'm not.
+Clicking on results sometimes lands me in the right thread but on the wrong email.
+On macOS searches only happen in the mailbox being viewed (e.g. Inbox)
+and it takes an extra click to search everything,
+which is easy to forget.
+(iOS and iPadOS correctly search everything by default.)
+And when you are done searching and click Inbox to "return home"
+the search field doesn't clear,
+leading you to a seemingly empty Inbox.
 
 Mail is below average at threading emails:
 
