@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-08-13
+updated: 2023-09-22
 ---
 
 # From Google to Apple
@@ -460,52 +460,33 @@ chosen to live the life of searching in two places when I need something.
 #### Migrating Email Addresses {#migratingaddresses}
 
 To migrate email addresses I made a very tough decision that I'm still
-frustrated years later that I had to make, which was to change Google accounts
-during the transition. To use iCloud Mail means I can't use `@gmail.com`,
-and like I said I've been wanting to migrate to a domain I control anyway.
+frustrated years later that I had to make, which was to change Google accounts.
+This is because I want my Google account's primary email address to be the one I give to people,
+as small usability quirks abound when it isn't.
 
-But I wanted my email address on my Google account to match
-my canonical email address (the one I share with people), and Google doesn't let you change your primary email
-address. You can add additional "contact" email addresses, but your account is
-still very much bound to the original address you signed up for. If you try to
-do this anyway, like I did, there are a lot of little knock-on effects.
+For example, I give you my email address, ben@twos.dev.
+You invite that email address to a meeting on Google Calendar with an attached Meet meeting.
+When I accept, it accepts from my Google account, not from the invited email address, so you see an unknown person added to the meeting, while I appear to have not responded.
+When it's time for the meeting, I attempt to join the Meet but get thrown into a waiting room because my Google account wasn't invited by you. Even worse, if you don't show up but the meeting should still happen (let's say a team meeting), I have no way to join.
+Google Groups experiences similar problems.
 
-One is that accepting calendar invitations adds your Google account as an
-invitee to the event (confusing the organizer, who won't recognize it). And
-because your Google account wasn't invited by the organizer, joining Meet
-meetings means you first get dumped into a waiting room from which the
-organizer has to approve you. This is especially frustrating when the
-organizer doesn't show up, but the meeting is still happening.
+I tried to use a twos.dev Google Workspace account as my primary Google account first but many Google features don't support Workspace accounts,
+like Google One,
+family sharing,
+some security features,
+and (for better and worse) some types of data harvesting and therefore ad/search targeting.
 
-Google Groups also behaves poorly, as you'll get added to groups by your canonical
-email address but you'll join as a Google account, forcing your web-based
-replies to be from your Google account's email address.
-
-In my first effort to migrate Google accounts, I coopted `ben@twos.dev` from
-Google Workspace which I had used for a little consulting. This caused a
-few minor issues and UX hiccups because Workspace Gmail believed it was
-still my provider, even though a non-Gmail server was receiving my emails.
-
-I tried to use this Google Workspace account as my new primary Google account.
-But many Google features don't support Workspace accounts, like Google One,
-family sharing, some security features, and (for better and worse) some types
-of data harvesting and therefore ad/search targeting.
-
-I've now landed on creating a new personal Google account with `ben@twos.dev` as
-its primary email address. I needed to delete the `twos.dev` Google Workspace
-organization to do this, as it had claim to `ben@twos.dev` already. Signing up
-to Google without an `@gmail.com` address is a somewhat hidden option, but it
-exists. You just can't ever fall into their "upgrade" funnel which assigns you
-an `@gmail.com` address, because that _does_ change your primary email address
-and there's no way back.
+So I'm left to creating a new personal Google account with `ben@twos.dev` as its primary email address.
+Signing up to Google without an `@gmail.com` address is a somewhat hidden option,
+but it exists.
+You just can't ever fall into the "upgrade" funnel that assigns you an `@gmail.com` address, because that can never be undone.
+And of course, this means you can never use Gmail.
 
 None of this would be so frustrating if there weren't so many things tied to my
-Google account, like all my Maps reviews, my Chat/Hangouts history from decades
-ago, and my purchased Play content. I really wanted to keep my account, but
-there's just no way to do that with a new email address without experiencing too
-many little hiccups to be worth it. The one thing I could smoothly transfer over
-was YouTube. Everything else was surprisingly as "walled garden" as you'd expect
-from an Apple product, just in subtler ways.
+Google account, like Maps reviews, decades of chat history, and purchased content.
+I desperately wanted to keep my account,
+but there's just no way around all the little hiccups.
+For a brain like mine that can't handle those, things are as "walled garden" as you'd expect from an Apple product.
 
 #### Daily Use {#daily}
 
