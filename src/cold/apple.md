@@ -829,7 +829,6 @@ Reminders can be scheduled to “pop” (send a push notification and become "du
 
 - A due date
 - A due date and time
--
 - When arriving at a location
 - When leaving a location
 - When getting in a car
