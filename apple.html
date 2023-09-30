@@ -300,7 +300,7 @@ ecosystem. It is occasionally updated.</p>
         <ol>
   
     <li>
-      <a href="#keychain"><span>ⅹ iCloud Keychain</span></a>
+      <a href="#keychain"><span>⚠ iCloud Keychain</span></a>
       
     </li>
   
@@ -1214,39 +1214,31 @@ Meet also supports more types of screen sharing in Chrome, like sharing one tab.
 <p>Ecosystem effects of Safari include Handoff (move a browsing session between
 devices smoothly) and the downright bonkers power efficiency of Safari on macOS.</p>
 
-<h4 id="keychain">ⅹ iCloud Keychain</h4>
+<h4 id="keychain">⚠ iCloud Keychain</h4>
 
-<p>While moving to Safari, I replaced 1Password with iCloud Keychain. It serves
-basic needs, but that’s it. It can store a username, a password, a 2FA code,
-and a domain name for each entry.</p>
+<p>When I initially moved to Safari,
+iCloud Keychain was not powerful enough to replace my use of 1Password.
+It did not support multiple domain names per website,
+arbitrary text notes,
+or custom names for entries.</p>
 
-<p>It cannot store two domains for one entry, e.g. <code>gmail.com</code> and <code>google.com</code>. It
-cannot store arbitrary notes on an entry, e.g. the PIN that T-Mobile customer
-service agents ask for. It cannot name an entry, e.g. Washington Corporations
-and Charities System instead of <code>ccfs.sos.wa.gov</code>. It cannot store non-login
-entries like documents, ID numbers, or insurance information.</p>
+<p>As of 2023-09, these problems seem solved.
+I've started a second attempt to move over and will update this section with my thoughts.</p>
 
-<p>Using the 2FA field involves manual effort. Scanning rarely works, so I enter
-the 2FA secret by copying and pasting the code. Some sites provide a raw code,
-while others wrap the code in a URL that contains other metadata. 1Password
-accepts either, but iCloud Keychain assumes you hand it a code; if you hand it
-a URL it will silently accept it but produce incorrect codes.</p>
-
-<p>I moved back to 1Password.</p>
-
-<p>Ecosystem effects of iCloud Keychain include faster and more fluid autofill
-support in Safari, on both macOS and iOS.</p>
+<p>Ecosystem effects of iCloud Keychain include
+faster and more fluid autofill support in Safari, on both macOS and iOS.</p>
 
 <h3 id="numbers">✔ Google Sheets → Numbers</h3>
 
-<p>As a casual spreadsheets user, Sheets and Numbers are nearly identical.
-Numbers has nicer formula editing UX that visualizes cell(s) being
-referenced. It tries to humanize references, e.g. “Ben age” for a cell in a
-row with header “Ben” and a column with header “Age”, instead of A:123. This
-is nice until headers get long and multiworded. Overall it’s a wash.</p>
+<p>To a casual user like me,
+Sheets and Numbers are ~identical.
+Numbers has a slightly nicer UX for editing formulae and tries to humanize references,
+e.g. “Ben age” for a cell in a row with header “Ben” and a column with header “Age”, instead of A:123.
+This is nice until headers get long and multiworded, and you use them in long formulae.
+Overall it’s a wash.</p>
 
-<p>However, there's obviously a real social benefit to using Google Sheets if you have need of
-sharing them.</p>
+<p>Google Sheets has a network effect going for it,
+so I still use it whenever I need to share a sheet with someone not on an Apple platform.</p>
 
 <p>Ecosystem effects of Numbers include Spotlight integration for quickly opening a sheet.</p>
 
@@ -1308,25 +1300,39 @@ Obsidian as of March 2023 and haven't looked back.</p>
 
 <h3 id="reminders">✔ Tasks → Reminders</h3>
 
-<p>Reminders is one of the best-designed apps on iOS. Reminders can be scheduled
-to “pop” at a date, a date and time, a location, and/or when messaging
-<code>$PERSON</code>. Reminders can belong to lists (e.g. work vs. personal), lists can be
-shared (e.g. family chores), and reminders within shared lists can be assigned
-to people.</p>
+<p>Reminders is one of the best-designed apps on iOS.
+It is simple and powerful.</p>
 
-<p>Reminders have a name, description, URL field, and priority.
-Reminders can have images attached to them, and any number of subtasks.
-They can be tagged and flagged.</p>
+<p>Reminders can be scheduled to “pop” (send a push notification and become "due") at:</p>
 
-<p>It’s a powerful app, but everything is presented simply. There is a native
-macOS app that synchronizes, so I get proper notifications on most of my
-devices. In app, I use the “Today” view which shows reminders ready to be
-addressed.</p>
+<ul>
+<li>A due date</li>
+<li>A due date and time
+-</li>
+<li>When arriving at a location</li>
+<li>When leaving a location</li>
+<li>When getting in a car</li>
+<li>When leaving a car</li>
+<li>When messaging <code>$PERSON</code></li>
+</ul>
 
-<p>As one use case, Summer and I share a family reminders list. On that list, a
-reminder to take out the trash pops every trash day when I arrive home. It’s
-assigned to me, but if she happens to do it before I get home she can check it
-off; it then won't pop for me.</p>
+<p>Reminders can belong to lists (e.g. work vs. personal).
+Lists can have sections (e.g. pack bedroom items vs. pack kitchen items).
+Lists can be shared,
+and reminders within shared lists can be assigned to people.</p>
+
+<p>Reminders can have priorities, notes, URLs, tags, and subtasks.
+Reminders can have images attached to them.
+Reminders can repeat on schedules.</p>
+
+<p>Reminders are synchronized between devices, even Macs,
+so popped reminders show up where you are.</p>
+
+<p>For example, Summer and I share a family reminders list.
+On that list is a single reminder that repeats every trash day,
+and pops when I arrive home.
+It’s assigned to me, so it only pops for me.
+But if Summer takes out the trash before I get home, the reminder doesn't pop.</p>
 
 <p>Ecosystem effects of Reminders include integration with the share sheet in
 native apps (e.g. sharing from Safari automatically fills in the URL field)
