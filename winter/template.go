@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io/ioutil"
+	"os"
 	"path/filepath"
 	"strings"
 	"text/template/parse"
@@ -21,6 +22,25 @@ const (
 	imgTmplPath = "src/templates/_imgs.html.tmpl"
 	vidTmplPath = "src/templates/_videos.html.tmpl"
 )
+
+type archivesVars []archiveVars
+
+func (a archivesVars) Less(i, j int) bool {
+	return a[i].Year > a[j].Year
+}
+
+func (a archivesVars) Len() int {
+	return len(a)
+}
+
+func (a archivesVars) Swap(i, j int) {
+	a[i], a[j] = a[j], a[i]
+}
+
+type archiveVars struct {
+	Year      int
+	Documents documents
+}
 
 // CommonVars holds several methods accessible to all templates. Note that this
 // is a subset of the methods available to any one template both because the
@@ -53,25 +73,6 @@ func (v commonVars) Now() time.Time {
 // Document.
 func (v commonVars) Parent() *substructureDocument {
 	return v.substructureDocument.Parent
-}
-
-type archivesVars []archiveVars
-
-func (a archivesVars) Less(i, j int) bool {
-	return a[i].Year > a[j].Year
-}
-
-func (a archivesVars) Len() int {
-	return len(a)
-}
-
-func (a archivesVars) Swap(i, j int) {
-	a[i], a[j] = a[j], a[i]
-}
-
-type archiveVars struct {
-	Year      int
-	Documents documents
 }
 
 type iconfunc func(graphic.Shortname, graphic.Alt) (template.HTML, error)
@@ -179,6 +180,7 @@ func tmplByName(name string) ([]byte, error) {
 func add(a, b int) int {
 	return a + b
 }
+
 func sub(a, b int) int {
 	return a - b
 }
@@ -253,7 +255,7 @@ func imgs(docShortname string) (imgsfunc, error) {
 // The given shortname must be the page shortname the images will appear on, or
 // the rendered images won't point to the right URLs.
 func icon(docShortname string) (iconfunc, error) {
-	partial, err := ioutil.ReadFile(icnTmplPath)
+	partial, err := os.ReadFile(icnTmplPath)
 	if err != nil {
 		return nil, err
 	}

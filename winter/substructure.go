@@ -9,6 +9,7 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
+	"strconv"
 	"strings"
 	"time"
 
@@ -23,6 +24,8 @@ import (
 type Substructure struct {
 	cfg  Config
 	docs documents
+	// photos is a map of year to slice of photos taken in that year.
+	photos map[int][]*galleryDocument
 }
 
 // substructureDocument is a wrapper around Document so Substructure can store
@@ -36,6 +39,10 @@ type substructureDocument struct {
 }
 
 var (
+	galYear = regexp.MustCompile(
+		`img\/photography\/(\d\d\d\d)\/.*`,
+	)
+
 	// ignorePaths are file path regex patterns that should not be
 	// treated as documents to be generated, even though they are in source
 	// directories. The regex is a full match so must start with ^ and end with $.
@@ -86,6 +93,21 @@ func (s *Substructure) add(d *substructureDocument) {
 			s.docs[i] = d
 			return
 		}
+	}
+
+	if gal, ok := d.Document.(*galleryDocument); ok {
+		if s.photos == nil {
+			s.photos = map[int][]*galleryDocument{}
+		}
+		match := galYear.FindStringSubmatch(gal.WebPath)
+		if len(match) < 1 {
+			panic(fmt.Sprintf("can't find a year string in photo path %s", gal.WebPath))
+		}
+		y, err := strconv.Atoi(match[1])
+		if err != nil {
+			panic(fmt.Sprintf("invalid year in photo path %q: %s", match[1], err))
+		}
+		s.photos[y] = append(s.photos[y], gal)
 	}
 
 	s.docs = append(s.docs, d)
@@ -163,7 +185,9 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 	}
 
 	var prev, next *galleryDocument
-	for _, src := range append(jpgFiles, jpegFiles...) {
+	galFiles := append(jpgFiles, jpegFiles...)
+	sort.Sort(sort.Reverse((sort.StringSlice(galFiles))))
+	for _, src := range galFiles {
 		if shouldIgnore(src) {
 			continue
 		}
@@ -479,6 +503,11 @@ func (s *Substructure) categories() map[string]documents {
 	return cats
 }
 
+// gallery returns the gallery pages to be shown, grouped by year.
+func (s *Substructure) gallery() map[int][]*galleryDocument {
+	return s.photos
+}
+
 // posts returns text documents of type post.
 func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
@@ -652,6 +681,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 
 		"archives":   s.archives,
 		"categories": s.categories,
+		"gallery":    s.gallery,
 		"icon":       iconFunc,
 		"img":        imgsFunc,
 		"imgs":       imgsFunc,
