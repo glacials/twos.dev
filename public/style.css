@@ -64,7 +64,8 @@ a:hover img.silly {
   transition: 900s;
 }
 
-article {
+article,
+footer {
   margin-left: 1em;
   margin-right: 1em;
 }
