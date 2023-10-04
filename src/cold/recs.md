@@ -3,6 +3,7 @@ category: living document
 date: 2023-06-24
 filename: recs.html
 type: post
+updated: 2023-10-04
 ---
 
 # Recommendations
