@@ -340,13 +340,13 @@ piece of warm content is stable, it can be "frozen" into cold content using
 </ol>
 </body></html><h2 id="installation">Installation</h2>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># CLI</span>
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="c1"># CLI</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">go install twos.dev/winter@latest
 </span></span><span class="line"><span class="ln">3</span><span class="cl">winter --help
 </span></span><span class="line"><span class="ln">4</span><span class="cl">
 </span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="c1"># Go library</span>
 </span></span><span class="line"><span class="ln">6</span><span class="cl">go get -u twos.dev/winter@latest
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <h2 id="documentation">Documentation</h2>
 
@@ -431,7 +431,7 @@ Markdown, <code>*</code> in Org) will be used as the document title.</p>
 
 <p>This is an example document called <code>example.md</code>:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">---
 </span></span><span class="line"><span class="ln">2</span><span class="cl">date: 2022-07-07
 </span></span><span class="line"><span class="ln">3</span><span class="cl">filename: example.html
 </span></span><span class="line"><span class="ln">4</span><span class="cl">type: post
@@ -440,7 +440,7 @@ Markdown, <code>*</code> in Org) will be used as the document title.</p>
 </span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="gh"># My Example Document
 </span></span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="gh"></span>
 </span></span><span class="line"><span class="ln">9</span><span class="cl">This is an example document.
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <h3 id="frontmatter">Frontmatter</h3>
 
@@ -451,23 +451,23 @@ optional.</p>
 
 <p>The available frontmatter fields for HTML and Markdown are:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l">example.html</span><span class="w">
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">filename</span><span class="p">:</span><span class="w"> </span><span class="l">example.html</span><span class="w">
 </span></span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="w"></span><span class="nt">date</span><span class="p">:</span><span class="w"> </span><span class="ld">2022-07-07</span><span class="w">
 </span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="w"></span><span class="nt">updated</span><span class="p">:</span><span class="w"> </span><span class="ld">2022-11-10</span><span class="w">
 </span></span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="w"></span><span class="nt">category</span><span class="p">:</span><span class="w"> </span><span class="l">arbitrary string</span><span class="w">
 </span></span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="w"></span><span class="nt">toc</span><span class="p">:</span><span class="w"> </span><span class="kc">true</span><span class="l">|false</span><span class="w">
 </span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="w"></span><span class="nt">type</span><span class="p">:</span><span class="w"> </span><span class="l">post|page|draft</span><span class="w">
-</span></span></span></code></pre></body></html>
+</span></span></span></code></pre></body>
 
 <p>The same fields are available in Org files:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="cs">#+FILENAME</span><span class="c">: example.html</span>
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="cs">#+FILENAME</span><span class="c">: example.html</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="cs">#+DATE</span><span class="c">: 2022-07-07</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="cs">#+UPDATED</span><span class="c">: 2022-11-10</span>
 </span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="cs">#+CATEGORY</span><span class="c">: arbitrary string</span>
 </span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="cs">#+TOC</span><span class="c">: true|false</span>
 </span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="cs">#+TYPE</span><span class="c">: post|page|draft</span>
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <p>See below for details of each.</p>
 
@@ -608,17 +608,17 @@ document's extensionless filename otherwise.</p>
 <p>This value can be formatted using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time)
 Format</code></a> function:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ .CreatedAt.Format "2006 January" }} &lt;!-- Renders 2022 July  --&gt;
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ .CreatedAt.Format "2006 January" }} &lt;!-- Renders 2022 July  --&gt;
 </span></span><span class="line"><span class="ln">2</span><span class="cl">{{ .CreatedAt.Format "2006-01-02" }}   &lt;!-- Renders 2022-07-08 --&gt;
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <p>Use <code>{{ .CreatedAt.IsZero }}</code> to see if the date was not set.
 You can use this to hide unset dates:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ if not .CreatedAt.IsZero }}
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ if not .CreatedAt.IsZero }}
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  published {{ .CreatedAt.Format "2006 January" }}
 </span></span><span class="line"><span class="ln">3</span><span class="cl">{{ end }}
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <h5 id="updatedat"><code>{{ .UpdatedAt }}</code></h5>
 
@@ -660,19 +660,19 @@ documents). This allows you to display posts sectioned by year.</p>
 <p>Render an image or images with a single caption. Image files must be present in
 this format:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">public/img/&lt;pageshortname&gt;-&lt;imageshortname&gt;[-&lt;light|dark&gt;].&lt;png|jpg|jpeg&gt;
-</span></span></code></pre></body></html>
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">public/img/&lt;pageshortname&gt;-&lt;imageshortname&gt;[-&lt;light|dark&gt;].&lt;png|jpg|jpeg&gt;
+</span></span></code></pre></body>
 
 <p>For example, to render one image with a caption and alt text:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">&lt;!-- mypage.md --&gt;
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">&lt;!-- mypage.md --&gt;
 </span></span><span class="line"><span class="ln">2</span><span class="cl">
 </span></span><span class="line"><span class="ln">3</span><span class="cl">{{ img
 </span></span><span class="line"><span class="ln">4</span><span class="cl">   "A caption."
 </span></span><span class="line"><span class="ln">5</span><span class="cl">   "test1"
 </span></span><span class="line"><span class="ln">6</span><span class="cl">   "Descriptive alt text of what the image is of, for assistive tech"
 </span></span><span class="line"><span class="ln">7</span><span class="cl">}}
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <p>Result:</p>
 
@@ -712,14 +712,14 @@ in the respective dark mode setting.</p>
 group by passing multiple images and alt texts. They will appear next to each
 other when the page width allows it, or stacked vertically otherwise.</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ imgs
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ imgs
 </span></span><span class="line"><span class="ln">2</span><span class="cl">   "A pair of images."
 </span></span><span class="line"><span class="ln">3</span><span class="cl">   "test1"
 </span></span><span class="line"><span class="ln">4</span><span class="cl">   "Descriptive text of test1"
 </span></span><span class="line"><span class="ln">5</span><span class="cl">   "test1"
 </span></span><span class="line"><span class="ln">6</span><span class="cl">   "Descriptive text of test2"
 </span></span><span class="line"><span class="ln">7</span><span class="cl">}}
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <p>Result:</p>
 

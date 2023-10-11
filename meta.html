@@ -226,8 +226,8 @@ have our draft synchronization.</p>
 
 <p>To handle this bookkeeping along with the other build pipeline steps, I wrote the <a href="https://twos.dev/winter">Winter</a> CLI. Winter can handle the process of converting warm content to cold like so:</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter freeze DOCUMENT
-</span></span></code></pre></body></html>
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter freeze DOCUMENT
+</span></span></code></pre></body>
 
 <p>which more or less performs a <code>git mv src/{cold,warm}/DOCUMENT.md</code> plus chips.</p>
 
@@ -251,11 +251,11 @@ rendering it to HTML if I've built more than a little code into it. Sure I can
 always embed HTML in Markdown, but taking this extra step gives me all my editor
 doodads and hardens the file against future changes to preprocessing.</p>
 
-<html><head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter build
+<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter build
 </span></span><span class="line"><span class="ln">2</span><span class="cl">mv dist/DOCUMENT.html src/cold/DOCUMENT.html
 </span></span><span class="line"><span class="ln">3</span><span class="cl">git rm src/cold/DOCUMENT.md
 </span></span><span class="line"><span class="ln">4</span><span class="cl">git add src/cold/DOCUMENT.html
-</span></span></code></pre></body></html>
+</span></span></code></pre></body>
 
 <p>This brings back the weight of editing prose in HTML, but these cases are the minority and at this point most of the writing is done.</p>
 
