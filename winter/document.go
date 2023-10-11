@@ -592,7 +592,14 @@ func (d *textDocument) highlightCode() error {
 		}
 		originalPre := codeBlock.Parent
 		for _, fragment := range pre {
-			originalPre.Parent.InsertBefore(fragment, originalPre)
+			if fragment.DataAtom == atom.Head {
+				continue
+			}
+			if fragment.DataAtom == atom.Body {
+				f := fragment.FirstChild
+				f.Parent = nil
+				originalPre.Parent.InsertBefore(f, originalPre)
+			}
 		}
 		originalPre.Parent.RemoveChild(originalPre)
 	}
