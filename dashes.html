@@ -178,7 +178,7 @@
 
 <p>The <code>rem</code> or <strong>root em</strong> is a twist on the em. Where the em is defined using the current context's font size, the root em is defined using the root context's font size (in a web page, <code>&lt;html&gt;</code>). This allows escape from relativity hell without reverting to absolutes:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">html: 16pt              (default     = 16pt)
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln"> 1</span><span class="cl">html: 16pt              (default     = 16pt)
 </span></span><span class="line"><span class="ln"> 2</span><span class="cl">  → body: 1.5em         (16pt * 1.5  = 24pt)
 </span></span><span class="line"><span class="ln"> 3</span><span class="cl">    → .container: .75em (24pt *  .75 = 18pt)
 </span></span><span class="line"><span class="ln"> 4</span><span class="cl">      → h1: 4em         (18pt * 4    = 72pt)
@@ -188,7 +188,7 @@
 </span></span><span class="line"><span class="ln"> 8</span><span class="cl">key:
 </span></span><span class="line"><span class="ln"> 9</span><span class="cl">context: requested size (calculation = final size)
 </span></span><span class="line"><span class="ln">10</span><span class="cl">  → child element
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <h4>Aside: The Point</h4>
 
@@ -216,13 +216,13 @@
 
 <p><span class="math inline">\(\LaTeX\)</span> users can replace each space with a <a href="https://en.wikipedia.org/wiki/Thin_space"><code>\thinspace</code></a> to de-emphasize them relative to hyphens, though the difference is subtle enough that you may also consider elongating nearby spaces:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt time
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt time
 </span></span><span class="line"><span class="ln">2</span><span class="cl">a<span class="k">\enspace</span><span class="nb">{}</span>pre-frozen<span class="k">\thinspace</span><span class="nb">{}</span>yogurt<span class="k">\enspace</span><span class="nb">{}</span>time
-</span></span></code></pre></body>
+</span></span></code></pre>
 <p><span class="math display">\[\text{a pre-frozen\thinspace{}yogurt time}\]</span></p><p><span class="math display">\[\text{a\enspace{}pre-frozen\thinspace{}yogurt\enspace{}time}\]</span></p><p>Personally, the most common tool I reach for is to restructure the sentence to avoid the problem:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a time before frozen yogurt
-</span></span></code></pre></body>
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">a time before frozen yogurt
+</span></span></code></pre>
 
 <p>It's crude, but dependable.</p>
 
@@ -230,25 +230,25 @@
 
 <p>If a line soft-wraps immediately before or after a dash, what should its behavior be? It's accepted that a hyphen can appear as the last character on a line, whether it was already there or is being introduced to join a word split across lines. En and em dashes are a little harder to parse.</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I am looking at dates about 20
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span style="font-family: sans-serif">–</span>30 days out.
-</span></span></code></pre></body>
+</span></span></code></pre>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20<span style="font-family: sans-serif">–</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
-</span></span></code></pre></body>
+</span></span></code></pre>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I am pleased they thought that
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span style="font-family: sans-serif">—</span>however odd it may be.
-</span></span></code></pre></body>
+</span></span></code></pre>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that<span style="font-family: sans-serif">—</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <p>Strangely, the hyphen is the only dash that has an option here: the <a href="https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens">non-breaking hyphen</a> or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.</p>
 
@@ -258,26 +258,26 @@
 
 <p>For example, see this simulation of left-aligned text:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I said they were<span style="font-family: sans-serif">—</span>wolf
 </span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <p>And this simulation of justified text:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were<span style="font-family: sans-serif">—</span>wolf
 </span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" may read like the mythical creature "were-wolf" because the em dash looks short relative to the longer spaces.</p>
 
 <p>A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  <span style="font-family: sans-serif">—</span>  wolf
 </span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <h3>Input Difficulties</h3>
 
@@ -343,9 +343,9 @@ characters.</p>
 
 <p>The <strong>hyphen bullet</strong> is a hyphen to be used in place of a bullet point.</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">- This is a hyphen
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">- This is a hyphen
 </span></span><span class="line"><span class="ln">2</span><span class="cl"><span style="font-family: sans-serif">⁃</span> This is a hyphen bullet
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <p>The <strong>figure dash</strong> is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.</p>
 
@@ -357,7 +357,7 @@ characters.</p>
 
 <p>Lastly, my favorite: the <strong>soft hyphen</strong> is a zero-width, <strong>invisible</strong> character that (opposite to the hard hyphen) denotes a place the word wrapper is <em>welcome</em> to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.</p>
 
-<head></head><body><pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge            v right page edge
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">v left page edge            v right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">|                           |
 </span></span><span class="line"><span class="ln">3</span><span class="cl">No soft hyphen:
 </span></span><span class="line"><span class="ln">4</span><span class="cl">Supercalifragilisticexpialid-
@@ -366,7 +366,7 @@ characters.</p>
 </span></span><span class="line"><span class="ln">7</span><span class="cl">Soft hyphen after 'istic':
 </span></span><span class="line"><span class="ln">8</span><span class="cl">Supercalifragilistic-
 </span></span><span class="line"><span class="ln">9</span><span class="cl">expialidocious
-</span></span></code></pre></body>
+</span></span></code></pre>
 
 <p>You can see the soft hyphen in action when viewing the article titles of <a href="async.html">Why Be
 Synchronous?</a> and <a href="autism.html">Anonymously Autistic</a> on a small screen,
