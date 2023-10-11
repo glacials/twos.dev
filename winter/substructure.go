@@ -1,9 +1,9 @@
 package winter
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -549,11 +549,29 @@ func (s *Substructure) writefeed() error {
 		if err != nil {
 			return err
 		}
+		t := template.New(post.Source)
+		funcs, err := s.funcmap(post)
+		if err != nil {
+			return fmt.Errorf("can't generate funcmap: %w", err)
+		}
+		_ = t.Funcs(funcs)
+		_, err = t.Parse(string(body))
+		if err != nil {
+			return fmt.Errorf("cannot parse page for feed: %w", err)
+		}
+		if err := loadAllDeps(t); err != nil {
+			return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
+		}
+		var buf bytes.Buffer
+		if err = post.Execute(&buf, t); err != nil {
+			return fmt.Errorf("cannot execute document %q: %w", post.Source, err)
+		}
+
 		feed.Items = append(feed.Items, &feeds.Item{
 			Id:          dest,
 			Title:       post.Title(),
 			Author:      feed.Author,
-			Content:     string(body),
+			Content:     string(buf.String()),
 			Description: string(body),
 			Link: &feeds.Link{
 				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, dest),
@@ -567,7 +585,7 @@ func (s *Substructure) writefeed() error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile("dist/feed.atom", []byte(atom), 0o644); err != nil {
+	if err := os.WriteFile("dist/feed.atom", []byte(atom), 0o644); err != nil {
 		return err
 	}
 
@@ -575,7 +593,7 @@ func (s *Substructure) writefeed() error {
 	if err != nil {
 		return err
 	}
-	if err := ioutil.WriteFile("dist/feed.rss", []byte(rss), 0o644); err != nil {
+	if err := os.WriteFile("dist/feed.rss", []byte(rss), 0o644); err != nil {
 		return err
 	}
 
@@ -629,19 +647,6 @@ func (s *Substructure) internalize(d Document) (*substructureDocument, error) {
 // execute builds the given document into the given directory. To build a
 // document and its dependencies and dependants, use Rebuild instead.
 func (s *Substructure) execute(d *substructureDocument, dist string) error {
-	iconFunc, err := icon(d.Shortname())
-	if err != nil {
-		return err
-	}
-	imgsFunc, err := imgs(d.Shortname())
-	if err != nil {
-		return err
-	}
-	videoFunc, err := videos(d.Shortname())
-	if err != nil {
-		return err
-	}
-
 	dest, err := d.Dest()
 	if err != nil {
 		return err
@@ -670,25 +675,11 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 		return fmt.Errorf("can't find `%s`: %w", d.Layout(), err)
 	}
 	t := template.New(d.Layout())
-	now := time.Now()
-	_ = t.Funcs(template.FuncMap{
-		"add": add,
-		"sub": sub,
-
-		"now":    func() time.Time { return now },
-		"parent": func() *substructureDocument { return d.Parent },
-		"src":    func() string { return d.Source },
-
-		"archives":   s.archives,
-		"categories": s.categories,
-		"gallery":    s.gallery,
-		"icon":       iconFunc,
-		"img":        imgsFunc,
-		"imgs":       imgsFunc,
-		"posts":      s.posts,
-		"video":      videoFunc,
-		"videos":     videoFunc,
-	})
+	funcs, err := s.funcmap(d)
+	if err != nil {
+		return fmt.Errorf("can't generate funcmap: %w", err)
+	}
+	_ = t.Funcs(funcs)
 	_, err = t.Parse(string(layoutBytes))
 	if err != nil {
 		return fmt.Errorf("can't parse `%s`: %w", d.Layout(), err)
@@ -723,6 +714,41 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	}
 
 	return nil
+}
+
+func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error) {
+	iconFunc, err := icon(d.Shortname())
+	if err != nil {
+		return nil, err
+	}
+	imgsFunc, err := imgs(d.Shortname())
+	if err != nil {
+		return nil, err
+	}
+	videoFunc, err := videos(d.Shortname())
+	if err != nil {
+		return nil, err
+	}
+	now := time.Now()
+
+	return template.FuncMap{
+		"add": add,
+		"sub": sub,
+
+		"now":    func() time.Time { return now },
+		"parent": func() *substructureDocument { return d.Parent },
+		"src":    func() string { return d.Source },
+
+		"archives":   s.archives,
+		"categories": s.categories,
+		"gallery":    s.gallery,
+		"icon":       iconFunc,
+		"img":        imgsFunc,
+		"imgs":       imgsFunc,
+		"posts":      s.posts,
+		"video":      videoFunc,
+		"videos":     videoFunc,
+	}, nil
 }
 
 // shouldIgnore returns true if the given file path should not be built into the
