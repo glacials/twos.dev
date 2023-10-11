@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"io/ioutil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -532,7 +531,7 @@ func (d *textDocument) fillTOC() error {
 	}
 	f(d.root)
 
-	tocbody, err := ioutil.ReadFile("src/templates/_toc.html.tmpl")
+	tocbody, err := os.ReadFile("src/templates/_toc.html.tmpl")
 	if err != nil {
 		return err
 	}
@@ -541,7 +540,7 @@ func (d *textDocument) fillTOC() error {
 		return err
 	}
 
-	subtocbody, err := ioutil.ReadFile("src/templates/_subtoc.html.tmpl")
+	subtocbody, err := os.ReadFile("src/templates/_subtoc.html.tmpl")
 	if err != nil {
 		return err
 	}
@@ -583,13 +582,18 @@ func (d *textDocument) highlightCode() error {
 			return err
 		}
 
-		pre, err := html.Parse(strings.NewReader(formatted))
-		if err != nil {
-			return err
+		ancestry := d.root
+		if ancestry.Type == html.DocumentNode {
+			ancestry = ancestry.FirstChild
 		}
-
+		pre, err := html.ParseFragment(strings.NewReader(formatted), ancestry)
+		if err != nil {
+			return fmt.Errorf("can't parse HTML %q: %w", formatted, err)
+		}
 		originalPre := codeBlock.Parent
-		originalPre.Parent.InsertBefore(pre, originalPre)
+		for _, fragment := range pre {
+			originalPre.Parent.InsertBefore(fragment, originalPre)
+		}
 		originalPre.Parent.RemoveChild(originalPre)
 	}
 
@@ -620,15 +624,17 @@ func lang(code *html.Node) string {
 
 func syntaxHighlight(lang, code string) (string, error) {
 	// Determine lexer.
-	l := lexers.Get(lang)
-	if l == nil {
-		l = lexers.Analyse(code)
+	lexer := lexers.Get(lang)
+	if lexer == nil {
+		lexer = lexers.Analyse(code)
 	}
-	if l == nil {
-		l = lexers.Fallback
+	if lexer == nil {
+		lexer = lexers.Fallback
 	}
-	l = chroma.Coalesce(l)
-	f := chromahtml.New(
+	lexer = chroma.Coalesce(lexer)
+	formatter := chromahtml.New(
+		chromahtml.Standalone(false),
+		chromahtml.TabWidth(2),
 		chromahtml.WithClasses(true),
 		chromahtml.WithLineNumbers(true),
 	)
@@ -636,13 +642,13 @@ func syntaxHighlight(lang, code string) (string, error) {
 	// This has ~no effect because we specify colors in style.css manually, and
 	// pass chromahtml.WithClasses(true) above, meaning no inline styles get added
 	s := styles.Get("dracula")
-	it, err := l.Tokenise(nil, code)
+	it, err := lexer.Tokenise(nil, code)
 	if err != nil {
 		return "", err
 	}
 
 	var buf bytes.Buffer
-	if err := f.Format(&buf, s, it); err != nil {
+	if err := formatter.Format(&buf, s, it); err != nil {
 		return "", err
 	}
 	return buf.String(), nil
