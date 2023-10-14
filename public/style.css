@@ -220,10 +220,6 @@ nav .items {
   }
 }
 
-nav a:active {
-  color: var(--inverse-fg);
-}
-
 nav a.selected {
   background-color: var(--inverse-bg);
   color: var(--inverse-fg);
