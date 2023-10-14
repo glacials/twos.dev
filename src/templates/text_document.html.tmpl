@@ -60,17 +60,7 @@
           </small>
         </p>
       </footer>
-      <nav>
-        {{ if ne .Shortname "index" }}
-          <div class="back">
-            {{ with parent }}
-              &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
-            {{ else }}
-              &larr; <a href="/">twos.dev</a>
-            {{ end }}
-          </div>
-        {{ end }}
-      </nav>
+      {{ template "nav" }}
     </div>
   </body>
 </html>

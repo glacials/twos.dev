@@ -1,0 +1,35 @@
+---
+date: 2023-10-13
+filename: writing.html
+type: page
+---
+
+<h1>Writing</h1>
+<div class="writing" style="display: flex; flex-wrap: wrap">
+  <div>
+    <h2>General</h2>
+    <ul>
+      {{ range posts }} {{ if .Category }}{{ continue }}{{ end }} {{ if lt
+      .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
+      <li>
+        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+      </li>
+      {{ end }}
+      <li><a href="/archives.html">Archives &rarr;</a></li>
+    </ul>
+  </div>
+
+  {{ range $category, $posts := categories }} {{ if not $category }}{{ continue
+  }}{{ end }}
+  <div>
+    <h2>{{ $category }}s</h2>
+    <ul>
+      {{ range $posts }}
+      <li>
+        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+      </li>
+      {{ end }}
+    </ul>
+  </div>
+  {{ end }}
+</div>

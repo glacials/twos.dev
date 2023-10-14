@@ -1,6 +1,6 @@
 ---
 date: 2021-04-27
-updated: 2022-12-16
+updated: 2023-10-13
 filename: index.html
 type: page
 ---
@@ -25,36 +25,6 @@ type: page
       ><img alt="X logo" src="/img/index-x.svg"
     /></a>
   </nav>
-</div>
-
-<div style="display: flex; flex-wrap: wrap">
-  <div>
-    <h2>Writing</h2>
-    <ul>
-      {{ range posts }}
-        {{ if .Category }}{{ continue }}{{ end }}
-        {{ if lt .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
-        <li>
-          <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-        </li>
-      {{ end }}
-      <li><a href="/archives.html">Archives</a> &rarr;</li>
-    </ul>
-  </div>
-
-  {{ range $category, $posts := categories }}
-    {{ if not $category }}{{ continue }}{{ end }}
-    <div>
-      <h2>{{ $category }}s</h2>
-      <ul>
-        {{ range $posts }}
-          <li>
-            <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
-          </li>
-        {{ end }}
-      </ul>
-    </div>
-  {{ end }}
 </div>
 
 <!--

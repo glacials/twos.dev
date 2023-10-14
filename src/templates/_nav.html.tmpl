@@ -1,4 +1,4 @@
-{{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "software.html") }}
+{{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "software.html") (eq .Dest "writing.html") }}
   <nav class="mt-0">
     <div class="brand">twos.dev</div>
     <div class="items">
@@ -15,14 +15,19 @@
     >
     -->
       <a
+        href="/software.html"
+        {{ if eq .Dest "software.html" }}class="selected"{{ end }}
+        >Software</a
+      >
+      <a
         href="/guide.html"
         {{ if eq .Dest "guide.html" }}class="selected"{{ end }}
         >User Guide</a
       >
       <a
-        href="/software.html"
-        {{ if eq .Dest "software.html" }}class="selected"{{ end }}
-        >Software</a
+        href="/writing.html"
+        {{ if eq .Dest "writing.html" }}class="selected"{{ end }}
+        >Writing</a
       >
       <!--
 				<a
