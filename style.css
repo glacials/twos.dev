@@ -112,7 +112,7 @@ h1 {
   color: var(--traditional-fg);
   display: block;
   font-size: 3em;
-  hyphens: auto;
+  hyphens: none;
   line-height: 0.85em;
   /* Undoes weird inheritance of html line-height w/ display:block */
   text-align: center;
@@ -190,12 +190,17 @@ nav {
   letter-spacing: -1px;
 }
 
+@media (max-width: 30rem) {
+  nav {
+    display: block;
+    text-align: center;
+  }
+}
+
 nav > .brand,
 nav > .items > a {
   color: var(--traditional-fg);
   display: block;
-  margin-bottom: 0.25em;
-  margin-top: 0.25em;
   padding: 0.5em 0.75em;
   text-decoration: none;
 }
@@ -207,6 +212,12 @@ nav .items {
   list-style: none;
   margin: 0;
   padding: 0;
+}
+
+@media (max-width: 30rem) {
+  nav .items {
+    display: block;
+  }
 }
 
 nav a:active {
@@ -283,6 +294,26 @@ video + video {
 .selected {
   color: var(--inverse-fg);
   cursor: default;
+}
+
+.writing a {
+  display: block;
+  padding: 0.2em;
+  text-decoration: none;
+}
+
+.writing div {
+  margin: 0 1em;
+}
+
+.writing li {
+  margin: 0;
+}
+
+.writing ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
 }
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
