@@ -5,8 +5,8 @@
   </head>
 
   <body>
-    {{ template "nav" . }}
     <div class="container">
+      {{ template "nav" . }}
       <header>
         {{ if .IsDraft }}
           <div style="background-color: var(--bg-c); text-align: center">
@@ -60,17 +60,17 @@
           </small>
         </p>
       </footer>
-    </div>
-    <nav>
-      <div class="back">
+      <nav>
         {{ if ne .Shortname "index" }}
-          {{ with parent }}
-            &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
-          {{ else }}
-            &larr; <a href="/">twos.dev</a>
-          {{ end }}
+          <div class="back">
+            {{ with parent }}
+              &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+            {{ else }}
+              &larr; <a href="/">twos.dev</a>
+            {{ end }}
+          </div>
         {{ end }}
-      </div>
-    </nav>
+      </nav>
+    </div>
   </body>
 </html>
