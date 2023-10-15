@@ -16,7 +16,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="Haunted Phones and Shampooed Carpet" />
+<meta name="description" content="" />
 <link rel="icon" href="favicon.ico" />
 <link
   rel="alternate"
@@ -30,7 +30,7 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Haunted Phones and Shampooed Carpet</title>
+<title></title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
@@ -64,58 +64,42 @@
 
       <header>
         
+          <div style="background-color: var(--bg-c); text-align: center">
+            DRAFT
+          </div>
         
-          <small style="text-align: center; display: block">
-            <i>
-              published
-              2007 October</i
-            >
-          </small>
         
         
       </header>
       <article>
-        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/">I FEEL
-ASLEEP</a>, which was shared with
-Neverhitboxes.</em></p>
+        <html><head><script async="" defer="" src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js" integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja" crossorigin="anonymous"></script>
+<script defer="" src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js" integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR" crossorigin="anonymous" onload="renderMathInElement(document.body);"></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "UA-2876079-11");
 
-<hr/>
-
-<h1>Haunted Phones and Shampooed Carpet</h1>
-
-<p>So I’m sitting here in my chair with a portable house phone by my side. Okay,
-normal situation <span style="font-family: sans-serif">—</span> but at very odd intervals, this phone is beeping several
-times because it is being paged. And this is no soft sound <span style="font-family: sans-serif">—</span> it BEEPS, and
-LOUDLY. Understandably, because the page function is meant to assist location of
-the phone, but still <span style="font-family: sans-serif">—</span> this is LOUD.</p>
-
-<p>The even stranger part is that I’m the only person home. Nobody’s trying to
-locate this phone. Now, I’ve got four cats, so I assume one of them is laying
-down on, playing with, or knocking over the station, but I can’t do a thing
-about it. You know why? <em>I have no idea where the hell it even is.</em> I don’t have
-a big house <span style="font-family: sans-serif">—</span> it’s not terribly small, but I don’t live in a mansion or anything
-<span style="font-family: sans-serif">—</span> but I can’t seem to locate this stupid station. Before you think I’m weird for
-not knowing where my home phone’s charger is, know that it’s probably been moved
-in the last week or so because of our attempts at cleaning up the house for
-selling.</p>
-
-<p>In fact, I think it’s an open house today once our realtor gets here, so she’s
-going to be just showing people around while I’m sitting here trying to do
-whatever. People are going to be walking into my room and assessing it while I’m
-just gaming or something. Weird.</p>
-
-<p>Anyways, back to the subject at hand. I’ve given up looking for this
-mysteriously-located phone station, because the more I do the more my feet get
-wet from our carpet, which was shampooed yesterday for the same reason mentioned
-above. So I’ve confined myself to just sitting in my chair with my legs pulled
-up; my own little island in the sea of wet carpet that is my house.</p>
-
-<p>I’ll finish off this entry with a thoughtful comic I worked on for like five
-minutes a number of months ago, and just today decided to finish off. I know the
-trophy sucks, I know the white background looks horrible on this page, and I
-know it’s not funny (it’s not supposed to be). I just needed to finish this and
-get some feel of completion for myself.</p>
-</body></html>
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+</script>
+</head><body></body></html>
       </article>
       <footer>
         <p>
@@ -123,15 +107,11 @@ get some feel of completion for myself.</p>
             <i>
               
                 source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/haunted.md"
-                  >src/cold/haunted.md</a
+                <a href="https://github.com/glacials/twos.dev/blob/main/src/templates/_js.html.tmpl"
+                  >src/templates/_js.html.tmpl</a
                 >
               
               <br />
-              
-                published
-                2007 October
-                
               
             </i>
           </small>

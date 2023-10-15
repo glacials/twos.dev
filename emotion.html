@@ -13,40 +13,6 @@
            https://github.com/glacials/twos.dev/tree/main{/dir}
            https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
 />
-<script
-  async
-  src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
-></script>
-<link rel="preconnect" href="https://fonts.googleapis.com" />
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-<link
-  href="https://fonts.googleapis.com/css2?family=DM+Mono&display=swap"
-  rel="stylesheet"
-/>
-<script>
-  window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-  gtag("config", "UA-2876079-11");
-
-  
-  if (document.location.hostname == "localhost") {
-    const wsurl = "ws://localhost:8100/ws";
-    const socket = new WebSocket(wsurl);
-    socket.addEventListener("message", (event) => location.reload());
-    socket.addEventListener("close", (event) => {
-      console.log("backup initiating");
-      setInterval(() => {
-        const sock = new WebSocket("ws://localhost:8100/ws");
-        sock.addEventListener("open", (event) => {
-          location.reload();
-        });
-      }, 1000);
-    });
-  }
-</script>
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
@@ -73,19 +39,6 @@
   integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
   crossorigin="anonymous"
 />
-<script
-  defer
-  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
-  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
-  crossorigin="anonymous"
-></script>
-<script
-  defer
-  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
-  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
-  crossorigin="anonymous"
-  onload="renderMathInElement(document.body);"
-></script>
 
 <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
 <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
@@ -222,5 +175,48 @@ Answer</a>.</p>
 
 
     </div>
+    <script
+  async
+  defer
+  src="https://www.googletagmanager.com/gtag/js?id=UA-2876079-11"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  crossorigin="anonymous"
+></script>
+<script
+  defer
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  crossorigin="anonymous"
+  onload="renderMathInElement(document.body);"
+></script>
+<script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag() {
+    dataLayer.push(arguments);
+  }
+  gtag("js", new Date());
+  gtag("config", "UA-2876079-11");
+
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+</script>
+
   </body>
 </html>
