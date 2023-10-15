@@ -57,7 +57,18 @@ type: page
       <label class="gallery-item">
         <input type="checkbox" name="gallery" />
         <img class="silly" src="{{ .WebPath }}" />
-        <div class="caption"></div>
+        <div class="caption">
+          <span style="font-style:italic;"> {{ .Camera }}</span><br />
+          <span style="font-style:italic;">
+            {{ .FocalLength }}mm &bull; ƒ{{ .Aperture }} &bull;
+            {{ .ShutterSpeed }}s &bull; ISO
+            {{ .ISO }}
+          </span>
+          <br />
+          <span style="font-style: italic">
+            &copy; {{ .TakenAt.Year }} Benjamin Carlsson
+          </span>
+        </div>
       </label>
     {{ end }}
   {{ end }}

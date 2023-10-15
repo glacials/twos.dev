@@ -41,7 +41,17 @@ func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
 		return nil, fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
 	}
 
+	exif, err := photodata(src)
+	if err != nil {
+		return nil, fmt.Errorf(
+			"can't get EXIF data for `%s`: %w",
+			src,
+			err,
+		)
+	}
+
 	return &galleryDocument{
+		EXIF:      exif,
 		localPath: src,
 		PageLink:  fmt.Sprintf("/%s.html", relpath),
 		WebPath:   relpath,
@@ -86,15 +96,6 @@ func (d *galleryDocument) Build() ([]byte, error) {
 
 	if err := genThumbnail(d.localPath, thmdest, 512); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
-	}
-
-	d.EXIF, err = photodata(d.localPath)
-	if err != nil {
-		return nil, fmt.Errorf(
-			"can't get camera for `%s`: %w",
-			d.localPath,
-			err,
-		)
 	}
 
 	b, err := tmplByName(tmplPathToName(galTmplPath))
