@@ -287,6 +287,47 @@ video + video {
   width: 100%;
 }
 
+.photo-grid input[type="checkbox"] {
+  display: none;
+}
+
+.photo-grid img {
+  cursor: zoom-in;
+}
+
+.photo-grid input[type="checkbox"]:checked ~ img {
+  cursor: zoom-out;
+  height: 100vmin;
+  left: 0;
+  object-fit: scale-down;
+  position: fixed;
+  top: 0;
+  width: 100vmin;
+  z-index: 2;
+}
+
+/* Disable page scrolling when viewing a fullscreen image. */
+body:has(.photo-grid input[type="checkbox"]:checked) {
+  overflow: hidden;
+}
+
+.photo-grid .overlay {
+  background: black;
+  cursor: zoom-out;
+  display: none;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.photo-grid input[type="checkbox"]:checked ~ .overlay {
+  display: block;
+}
+
 .selected {
   color: var(--inverse-fg);
   cursor: default;

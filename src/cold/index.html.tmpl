@@ -54,9 +54,11 @@ type: page
 <div class="photo-grid">
   {{ with 2022 }}
     {{ range (index gallery .) }}
-      <a href="{{ .PageLink }}">
+      <label>
+        <input type="checkbox" name="gallery" />
+        <div class="overlay"></div>
         <img class="silly" src="{{ .WebPath }}" />
-      </a>
+      </label>
     {{ end }}
   {{ end }}
 </div>
@@ -66,9 +68,11 @@ type: page
 <div class="photo-grid">
   {{ with 2021 }}
     {{ range (index gallery .) }}
-      <a href="{{ .PageLink }}">
+      <label>
+        <input type="checkbox" name="gallery" />
+        <div class="overlay"></div>
         <img class="silly" src="{{ .WebPath }}" />
-      </a>
+      </label>
     {{ end }}
   {{ end }}
 </div>
