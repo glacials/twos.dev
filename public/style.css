@@ -352,7 +352,7 @@ pre .line {
 pre {
   background-color: var(--darker-bg);
   color: var(--darker-fg);
-  font-family: "PT Mono", monospace;
+  font-family: monospace;
   letter-spacing: 0;
   margin-bottom: 2em;
   padding: 1rem;
