@@ -291,41 +291,53 @@ video + video {
   display: none;
 }
 
-.photo-grid img {
+.photo-grid .gallery-item {
   cursor: zoom-in;
 }
 
-.photo-grid input[type="checkbox"]:checked ~ img {
+.photo-grid .gallery-item:has(input:checked) {
+  background: var(--darker-bg);
   cursor: zoom-out;
-  height: 100vmin;
+  height: 100vh;
   left: 0;
   object-fit: scale-down;
   position: fixed;
   top: 0;
-  width: 100vmin;
+  width: 100vw;
   z-index: 2;
 }
 
+.photo-grid .gallery-item:has(input:checked) img {
+  height: 100vmin;
+  width: 100vmin;
+}
+
+.photo-grid .gallery-item .caption {
+  color: var(--darker-fg);
+  display: none;
+  z-index: 2;
+}
+
+.photo-grid .gallery-item input:checked ~ .caption {
+  display: block;
+}
+
 /* Disable page scrolling when viewing a fullscreen image. */
-body:has(.photo-grid input[type="checkbox"]:checked) {
+body:has(.gallery-item input[type="checkbox"]:checked) {
   overflow: hidden;
 }
 
-.photo-grid .overlay {
-  background: black;
+.gallery-item:has(.photo-grid input[type="checkbox"]:checked) {
+  background: var(--darker-bg);
   cursor: zoom-out;
-  display: none;
-  height: 100vh;
+  display: fixed;
+  height: 100vmin;
   left: 0;
   overflow: hidden;
   position: fixed;
   top: 0;
-  width: 100vw;
+  width: 100vmin;
   z-index: 1;
-}
-
-.photo-grid input[type="checkbox"]:checked ~ .overlay {
-  display: block;
 }
 
 .selected {
