@@ -5,8 +5,8 @@
     <description>misc thoughts</description>
     <copyright>Copyright 2021–2023 Benjamin Carlsson</copyright>
     <managingEditor>ben@twos.dev (Benjamin Carlsson)</managingEditor>
-    <pubDate>Sun, 15 Oct 2023 06:34:17 +0000</pubDate>
-    <lastBuildDate>Sun, 15 Oct 2023 06:34:17 +0000</lastBuildDate>
+    <pubDate>Wed, 18 Oct 2023 05:55:44 +0000</pubDate>
+    <lastBuildDate>Wed, 18 Oct 2023 05:55:44 +0000</lastBuildDate>
     <item>
       <title>Obsidian Plugins</title>
       <link>https://twos.dev/obsidian.html.html</link>
@@ -428,17 +428,22 @@ next try 1 part orange juice to 1 part coffee.)</p>
       <content:encoded><![CDATA[<html><head></head><body><h1>Skyhopper</h1>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Photo of a pale blue drink"
-      src="img/skyhopper-smallglass.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>A grasshopper-adjacent cocktail.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/skyhopper-smallglass.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Photo of a pale blue drink"
+            src="img/skyhopper-smallglass.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    A grasshopper-adjacent cocktail.
+  </figcaption>
 </figure>
 </p>
 
@@ -545,17 +550,22 @@ anything that doesn't.</p>
       <content:encoded><![CDATA[<html><head></head><body><h1>Advanced Dashes</h1>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
-      src="img/dashes-supreme.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>I love pizza-liquor, but I&#39;ve never had it New York style.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/dashes-supreme.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
+            src="img/dashes-supreme.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    I love pizza-liquor, but I&#39;ve never had it New York style.
+  </figcaption>
 </figure>
 </p>
 
@@ -1044,17 +1054,22 @@ from two -- one via self-service for $25 and one via phone call for free.</p>
 work.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
-      src="img/hotsauce-trialing.jpg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Taste testing hot sauces.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/hotsauce-trialing.jpg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
+            src="img/hotsauce-trialing.jpg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Taste testing hot sauces.
+  </figcaption>
 </figure>
 </p>
 
@@ -1067,17 +1082,22 @@ spiciness as 8/10 (no Scoville rating).</p>
 long making way too ugly a label.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="a hot sauce label reading &#39;Race to the bottom: A speedrunner&#39;s hot sauce&#39; in the Splits.io colors"
-      src="img/hotsauce-label.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/hotsauce-label.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="a hot sauce label reading &#39;Race to the bottom: A speedrunner&#39;s hot sauce&#39; in the Splits.io colors"
+            src="img/hotsauce-label.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute.
+  </figcaption>
 </figure>
 </p>
 
@@ -1100,26 +1120,32 @@ The response when the clock struck midnight was exactly as we hoped.</p>
 <a href="https://twitter.com/DarkRTA/status/1245495897875759108">April 1, 2020</a></p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/hotsauce-feedback-1-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Screenshot a Discord channel where someone asks &#39;it is at this point that I begin to wonder how far I&#39;ll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says &#39;Pay&#39;. Below that, they say &#39;I had to know&#39; and attached another screenshot of the order being completed. They then said &#39;this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn&#39;t it?&#39;"
-      src="img/hotsauce-feedback-1-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <picture>
-    <source srcset="img/hotsauce-feedback-2-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Screenshot a Discord channel where someone asks &#39;did anyone get the item&#39; and then someone else replies with a photo of their hot sauce bottle saying &#39;Yep lmao&#39;. A third person says &#39;whoa you got yours already? nice. i can&#39;t believe it&#39;s real lol. @Glacials the madman&#39;"
-      src="img/hotsauce-feedback-2-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Feedback during and after launch.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/hotsauce-feedback-1-light.png" target="_blank">
+        <picture>
+          <source srcset="img/hotsauce-feedback-1-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Screenshot a Discord channel where someone asks &#39;it is at this point that I begin to wonder how far I&#39;ll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says &#39;Pay&#39;. Below that, they say &#39;I had to know&#39; and attached another screenshot of the order being completed. They then said &#39;this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn&#39;t it?&#39;"
+            src="img/hotsauce-feedback-1-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+      <a href="img/hotsauce-feedback-2-light.png" target="_blank">
+        <picture>
+          <source srcset="img/hotsauce-feedback-2-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Screenshot a Discord channel where someone asks &#39;did anyone get the item&#39; and then someone else replies with a photo of their hot sauce bottle saying &#39;Yep lmao&#39;. A third person says &#39;whoa you got yours already? nice. i can&#39;t believe it&#39;s real lol. @Glacials the madman&#39;"
+            src="img/hotsauce-feedback-2-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Feedback during and after launch.
+  </figcaption>
 </figure>
 </p>
 
@@ -1506,26 +1532,32 @@ of everything. As a user, this means one central place where I can manage
 service agents.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-subscriptions-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Screenshot of iOS App Store showing multiple active subscriptions"
-      src="img/apple-subscriptions-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <picture>
-    <source srcset="img/apple-subscription-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="iOS App Store showing options to change or cancel a subscription"
-      src="img/apple-subscription-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>The App Store&#39;s subscriptions management menus.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-subscriptions-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-subscriptions-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Screenshot of iOS App Store showing multiple active subscriptions"
+            src="img/apple-subscriptions-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+      <a href="img/apple-subscription-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-subscription-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="iOS App Store showing options to change or cancel a subscription"
+            src="img/apple-subscription-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    The App Store&#39;s subscriptions management menus.
+  </figcaption>
 </figure>
 </p>
 
@@ -1536,18 +1568,18 @@ one-tap, FaceID sign-in.</p>
 
 <p><figure style="text-align: center">
   
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-signin-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-signin-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
-  
-    
-      <source src="img/apple-signin-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-signin-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
   <figcaption>Signing in with Apple.</figcaption>
 </figure>
 </p>
@@ -1694,26 +1726,32 @@ extra horizontal space is used to persistently display a nav menu or the
 previous screen.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-iphone-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of the Wikipedia app on iPhone"
-      src="img/apple-iphone-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <picture>
-    <source srcset="img/apple-ipad-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of the Wikipedia app on iPad, using extra space for navigation"
-      src="img/apple-ipad-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Wikipedia on iPhone vs. iPad.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-iphone-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-iphone-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of the Wikipedia app on iPhone"
+            src="img/apple-iphone-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+      <a href="img/apple-ipad-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-ipad-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of the Wikipedia app on iPad, using extra space for navigation"
+            src="img/apple-ipad-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Wikipedia on iPhone vs. iPad.
+  </figcaption>
 </figure>
 </p>
 
@@ -1758,30 +1796,30 @@ The more native apps, the better the UX.</p>
 
 <p><figure style="text-align: center">
   
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-drag-photos-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-drag-photos-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-drag-text-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-drag-text-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
-    
-      <source src="img/apple-drag-photos-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-drag-photos-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
-  
-  
-    
-      <source src="img/apple-drag-text-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-drag-text-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
   <figcaption>Using multi-touch to drag and drop items between apps.</figcaption>
 </figure>
 </p>
@@ -1853,17 +1891,22 @@ products like Photos, Music, and Maps, and automatically entering SMS 2FA codes
 on any device.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-2fa-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
-      src="img/apple-2fa-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Signing into a website on macOS using the SMS 2FA code from iPhone.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-2fa-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-2fa-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
+            src="img/apple-2fa-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Signing into a website on macOS using the SMS 2FA code from iPhone.
+  </figcaption>
 </figure>
 </p>
 
@@ -2060,17 +2103,22 @@ check one condition per filter, and I just have my iMac stay awake 24/7.</p>
 Thankfully macOS natively supports rebinding shortcuts for any app.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-rebind-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of macOS&#39;s Settings.app rebinding a key for Mail.app"
-      src="img/apple-rebind-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Any macOS app&#39;s menu actions (e.g. File → Save) can be [re]bound natively.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-rebind-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-rebind-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of macOS&#39;s Settings.app rebinding a key for Mail.app"
+            src="img/apple-rebind-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Any macOS app&#39;s menu actions (e.g. File → Save) can be [re]bound natively.
+  </figcaption>
 </figure>
 </p>
 
@@ -2103,17 +2151,22 @@ represent the current time of day; but this bar extends 100% of the width of the
 week, and does not do a good job showing you which day today is.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-calendar-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of Calendar.app on macOS showing a week with a red line across it."
-      src="img/apple-calendar-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Week view in Apple Calendar. At a glance, can you tell what day it is?</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-calendar-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-calendar-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of Calendar.app on macOS showing a week with a red line across it."
+            src="img/apple-calendar-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Week view in Apple Calendar. At a glance, can you tell what day it is?
+  </figcaption>
 </figure>
 </p>
 
@@ -2131,18 +2184,18 @@ Calendar UI.</p>
 
 <p><figure style="text-align: center">
   
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-mail-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-mail-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
-  
-    
-      <source src="img/apple-mail-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-mail-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
   <figcaption>Opening a Google Calendar invitation from within the Apple ecosystem.</figcaption>
 </figure>
 </p>
@@ -2250,18 +2303,18 @@ identify.</p>
 
 <p><figure style="text-align: center">
   
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-back-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-back-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
-  
-    
-      <source src="img/apple-back-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-back-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
   <figcaption>Navigating through history in Safari with swipe gestures.</figcaption>
 </figure>
 </p>
@@ -2414,17 +2467,22 @@ around Apple and power users. For life automation, I prefer it to shell
 scripts.</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/apple-shortcuts-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of a shortcut on iOS"
-      src="img/apple-shortcuts-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>I use Shortcuts.app to block times on my work calendar based on personal events.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/apple-shortcuts-light.png" target="_blank">
+        <picture>
+          <source srcset="img/apple-shortcuts-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of a shortcut on iOS"
+            src="img/apple-shortcuts-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    I use Shortcuts.app to block times on my work calendar based on personal events.
+  </figcaption>
 </figure>
 </p>
 
@@ -2518,18 +2576,18 @@ snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on 
 
 <p><figure style="text-align: center">
   
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      
+      
+        
+          <source src="img/apple-card-light.mp4" type="video/quicktime" />
+        
+        
+          <source src="img/apple-card-light.mp4" type="video/mp4" />
+        
+      
+    </video>
   
-  
-    
-      <source src="img/apple-card-light.mp4" type="video/quicktime" />
-    
-    
-      <source src="img/apple-card-light.mp4" type="video/mp4" />
-    
-  
-</video>
-
   <figcaption>Drilling into Apple Card transactions using Wallet.</figcaption>
 </figure>
 </p>
@@ -3029,17 +3087,22 @@ to document my journey here.</p>
 </p>
 <h3>The Setup</h3>
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="img/thepopin-0-dark.png" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of a Discord server with several voice channels, some empty, some having one person in them"
-      src="img/thepopin-0-light.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>The company Discord server on a workday.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/thepopin-0-light.png" target="_blank">
+        <picture>
+          <source srcset="img/thepopin-0-dark.png" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of a Discord server with several voice channels, some empty, some having one person in them"
+            src="img/thepopin-0-light.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    The company Discord server on a workday.
+  </figcaption>
 </figure>
 
 <p>
@@ -3137,17 +3200,22 @@ to document my journey here.</p>
   perfect, but the risk paid off.
 </p>
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A screenshot of Assassin&#39;s Creed&#39;s crowdplay mechanic."
-      src="img/gut-assassinscreed.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Assassin&#39;s Creed&#39;s crowdplay mechanic was unheard of at the time.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-assassinscreed.png" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A screenshot of Assassin&#39;s Creed&#39;s crowdplay mechanic."
+            src="img/gut-assassinscreed.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Assassin&#39;s Creed&#39;s crowdplay mechanic was unheard of at the time.
+  </figcaption>
 </figure>
 
 <p>(source: <a href="https://youtu.be/S0k2oSu-nSo?t=267">YouTube</a>)</p>
@@ -3168,17 +3236,22 @@ to document my journey here.</p>
 </p>
 
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A timeline of Assassin&#39;s Creed teams, totaling at times six teams at once."
-      src="img/gut-acteams.png"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Once Assassin&#39;s Creed was proven, it became a well-oiled machine.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-acteams.png" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A timeline of Assassin&#39;s Creed teams, totaling at times six teams at once."
+            src="img/gut-acteams.png"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Once Assassin&#39;s Creed was proven, it became a well-oiled machine.
+  </figcaption>
 </figure>
 
 <p>
@@ -3213,17 +3286,22 @@ to document my journey here.</p>
 </p>
 
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A marketing photo of a family playing Wii together."
-      src="img/gut-wii.jpg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>Nintendo&#39;s family vision for the Wii never took off like they wanted.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-wii.jpg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A marketing photo of a family playing Wii together."
+            src="img/gut-wii.jpg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    Nintendo&#39;s family vision for the Wii never took off like they wanted.
+  </figcaption>
 </figure>
 
 <p>
@@ -3262,17 +3340,22 @@ to document my journey here.</p>
 </p>
 
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A long but calm line of people waiting outside an EB Games, busy with their various devices."
-      src="img/gut-wiilaunch.jpg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>The chillest crowd.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-wiilaunch.jpg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A long but calm line of people waiting outside an EB Games, busy with their various devices."
+            src="img/gut-wiilaunch.jpg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    The chillest crowd.
+  </figcaption>
 </figure>
 
 <p>
@@ -3315,17 +3398,22 @@ to document my journey here.</p>
 </p>
 
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A meme comic where a racoon asks a stranger to buy a house."
-      src="img/gut-animalcrossing.jpg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>The premise of Animal Crossing.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-animalcrossing.jpg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A meme comic where a racoon asks a stranger to buy a house."
+            src="img/gut-animalcrossing.jpg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    The premise of Animal Crossing.
+  </figcaption>
 </figure>
 
 <p>
@@ -3360,17 +3448,22 @@ to document my journey here.</p>
 </p>
 
 <figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="A monochromatic illustration of a butterfly."
-      src="img/gut-butterfly.svg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption></figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/gut-butterfly.svg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="A monochromatic illustration of a butterfly."
+            src="img/gut-butterfly.svg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    
+  </figcaption>
 </figure>
 
 <p>If you're unconvinced, run an A/B test.</p>
@@ -4354,17 +4447,22 @@ scrolling past this cah-RAHZY blob of text you saw), here’s an
 intellect without losing ties to pure humor (assuming you can get the comic).</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt=""
-      src="img/2142-xkcd.jpg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption></figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/2142-xkcd.jpg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt=""
+            src="img/2142-xkcd.jpg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    
+  </figcaption>
 </figure>
 </p>
 </body></html>]]></content:encoded>

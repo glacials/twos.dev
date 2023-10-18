@@ -630,17 +630,22 @@ this format:</p>
 <p>Result:</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Descriptive alt text of what the image is of, for assistive tech"
-      src="img/winter-test1.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>A caption.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/winter-test1.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Descriptive alt text of what the image is of, for assistive tech"
+            src="img/winter-test1.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    A caption.
+  </figcaption>
 </figure>
 </p>
 
@@ -677,26 +682,32 @@ other when the page width allows it, or stacked vertically otherwise.</p>
 <p>Result:</p>
 
 <p><figure style="text-align: center">
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Descriptive text of imagename1"
-      src="img/winter-test1.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <picture>
-    <source srcset="" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="Descriptive text of imagename2"
-      src="img/winter-test2.jpeg"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  
-  <figcaption>A pair of images.</figcaption>
+  <div class="photo-grid">
+    
+      <a href="img/winter-test1.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Descriptive text of imagename1"
+            src="img/winter-test1.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+      <a href="img/winter-test2.jpeg" target="_blank">
+        <picture>
+          <source srcset="" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="Descriptive text of imagename2"
+            src="img/winter-test2.jpeg"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    A pair of images.
+  </figcaption>
 </figure>
 </p>
 
