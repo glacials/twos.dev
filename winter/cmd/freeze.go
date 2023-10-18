@@ -20,10 +20,11 @@ var freezeCmd = &cobra.Command{
 		destructive issues caused by the hotbed of src/warm.
 	`),
 	Example: wrap(`
-		The command ` + "`" + `winter freeze DOCUMENT` + "`" + ` searches for a file
-		with the shortname ` + "`" + `DOCUMENT` + "`" + ` in src/cold (whether
-		explicitly in frontmatter or implicitly in filename) and moves it to
-		src/cold.
+		This command:
+
+		    winter freeze hello
+
+		moves the file with shortname "hello" from src/warm to src/cold.
 	`),
 	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {

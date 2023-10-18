@@ -36,39 +36,16 @@ type: page
     >Micro Four Thirds</a
   >.
 </p>
-<div class="photo-grid">
-  {{ with 2023 }}
-  {{ range index gallery . }}
-    <a href="{{ .PageLink }}">
-      <img class="silly" src="{{ .WebPath }}" />
-    </a>
-  {{ end }}
-{{ end }}
-</div>
+{{ template "gallery" "2023" }}
 -->
 <h2>2022</h2>
 <p>
   In 2022 I came out as autistic, continued with my photography hobby, and
   started writing more.
 </p>
-<div class="photo-grid">
-  {{ with 2022 }}
-    {{ range (index gallery .) }}
-      <a href="{{ .PageLink }}">
-        <img class="silly" src="{{ .WebPath }}" />
-      </a>
-    {{ end }}
-  {{ end }}
-</div>
+{{ template "gallery" "2022" }}
+
 
 <h2>2021</h2>
 <p>In 2021 I started learning interior design and photography.</p>
-<div class="photo-grid">
-  {{ with 2021 }}
-    {{ range (index gallery .) }}
-      <a href="{{ .PageLink }}">
-        <img class="silly" src="{{ .WebPath }}" />
-      </a>
-    {{ end }}
-  {{ end }}
-</div>
+{{ template "gallery" "2021" }}

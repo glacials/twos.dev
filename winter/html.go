@@ -23,21 +23,6 @@ func firstTag(n *html.Node, t atom.Atom) *html.Node {
 	return nil
 }
 
-// firstText returns the first descendant node of n which is a text node.
-func firstText(n *html.Node) *html.Node {
-	if n.Type == html.TextNode {
-		return n
-	}
-
-	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		if el := firstText(child); el != nil {
-			return el
-		}
-	}
-
-	return nil
-}
-
 // clone returns a deep copy of n.
 func clone(n *html.Node) (*html.Node, error) {
 	var buf bytes.Buffer

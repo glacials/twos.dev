@@ -99,8 +99,8 @@ var (
 	}
 )
 
-// Discover tries to find a graphic on the filesystem with the given arguments
-// embedded in its filename, under any of the given extensions.
+// Discover tries to find a graphic on the filesystem with the given arguments in its filename,
+// with any of the given extensions.
 func discover(
 	page string,
 	graphic Shortname,

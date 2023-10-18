@@ -1,13 +1,18 @@
 <figure style="text-align: center">
-  {{range .Images}}
-  <picture>
-    <source srcset="{{.Dark}}" media="(prefers-color-scheme: dark)" />
-    <img
-      alt="{{.Alt}}"
-      src="{{.Light}}"
-      style="max-height: 40em; max-width: 100%"
-    />
-  </picture>
-  {{end}}
-  <figcaption>{{.Caption}}</figcaption>
+  <div class="photo-grid">
+    {{ range .Images }}
+      <a href="{{ .Light }}" target="_blank">
+        <picture>
+          <source srcset="{{ .Dark }}" media="(prefers-color-scheme: dark)" />
+          <img
+            alt="{{ .Alt }}"
+            src="{{ .Light }}"
+            style="max-height: 40em; max-width: 100%; object-fit:contain"
+          /> </picture
+      ></a>
+    {{ end }}
+  </div>
+  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
+    {{ .Caption }}
+  </figcaption>
 </figure>

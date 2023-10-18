@@ -1,4 +1,4 @@
-.PHONY : download build_winter prep_twos.dev build_twos.dev build serve
+.PHONY : download build_winter clean build_twos.dev build serve
 
 UNAME := $(shell uname -s)
 
@@ -8,13 +8,13 @@ download:
 build_winter:
 	go build -o w .
 
-prep_twos.dev:
+clean:
 	@rm -rf dist
 
-build_twos.dev:
+build_twos.dev: build_winter
 	./w build $(WINTER_ARGS)
 
-build: build_winter prep_twos.dev build_twos.dev
+build: build_winter clean build_twos.dev
 
-serve: prep_twos.dev
+serve: clean
 	gow run . serve

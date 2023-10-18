@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io/ioutil"
 	"os"
 	"path/filepath"
 	"strings"
@@ -141,8 +140,9 @@ type videoVars struct {
 	DarkMP4  graphic.SRC
 }
 
-// tmplPathToName converts a template path to a template name. This is
-// a lexicographical calculation; the filesystem is not looked at.
+// tmplPathToName converts a template path to a template name.
+// This is a lexicographic calculation.
+// The filesystem is not looked at.
 func tmplPathToName(src string) string {
 	name := filepath.Base(src)
 	name = strings.TrimPrefix(name, "_")
@@ -174,7 +174,7 @@ func tmplByName(name string) ([]byte, error) {
 		)
 	}
 
-	return ioutil.ReadFile(paths[0])
+	return os.ReadFile(paths[0])
 }
 
 func add(a, b int) int {
@@ -185,23 +185,39 @@ func sub(a, b int) int {
 	return a - b
 }
 
-// imgs returns a function that can be inserted into a template's FuncMap for
-// calling by the template. The returned function takes a caption followed by
-// any number of pairs of image shortnames and alt texts; the total number of
-// arguments must therefore be odd. The images are rendered next to each other
-// with the caption below them. If light and dark mode images are both present,
-// the correct ones will be rendered based on the user's mode.
+// imgs returns a function that can be inserted into a template's FuncMap.
+// The returned function is a context-aware image renderer.
+// It renders images which have been namespaced to the calling document.
+// It can render any number of such images together, with a single caption below them.
 //
-// The images must be named in the format SHORTNAME-IMAGE-STYLE.EXTENSION, where
-// SHORTNAME is the page shortname (e.g. "apple" for apple.html), IMAGE is any
-// arbitrary string that must be passed to the returned function as its imgsrc,
-// STYLE is one of "light" or "dark", and EXTENSION is one of "png", "jpg", or
-// "jpeg".
+// Its first argument must be a caption string.
+// Then, it takes alternating arguments of image shortname strings and alt text strings.
 //
-// The given shortname must be the page shortname the images will appear on, or
-// the rendered images won't point to the right URLs.
-func imgs(docShortname string) (imgsfunc, error) {
-	partial, err := ioutil.ReadFile(imgTmplPath)
+// For example:
+//
+//	{{
+//	  imgs
+//	  "Photos of my pets."
+//	  "banana" "A photo of a gray and white shorthair cat rolling on his back."
+//	  "split" "A photo of a black and white shorthair cat staring at the camera."
+//	  "sundae" "A photo of a brown, black, and white beagle-mix dog napping."
+//	}}
+//
+// When called, the returned function renders the images together, with the caption below them.
+// If both light and dark modes of the image(s) are present,
+// the correct one will be rendered based on the user's preference.
+//
+// The images on disk must match one of two patterns to be found:
+//
+//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
+//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
+//
+// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
+// IMAGESHORTNAME is an arbitrary string,
+// STYLE, if present, is one of "light" or "dark",
+// and EXTENSION is one of "png", "jpg", "jpeg", or "svg".
+func (d *substructureDocument) imgs() (imgsfunc, error) {
+	partial, err := os.ReadFile(imgTmplPath)
 	if err != nil {
 		return nil, err
 	}
@@ -212,11 +228,15 @@ func imgs(docShortname string) (imgsfunc, error) {
 	}
 
 	return func(c graphic.Caption, srcsAndAlts ...string) (template.HTML, error) {
+		// The template called us, so make sure it recompiles if this template changes.
+		deps := d.Dependencies()
+		deps["imgs"] = struct{}{}
+
 		v := imgsPartialVars{Caption: c}
 
 		for i := 0; i < len(srcsAndAlts); i += 2 {
 			light, dark, err := graphic.LightDark(
-				docShortname,
+				d.Shortname(),
 				graphic.Shortname(srcsAndAlts[i]),
 				graphic.ImageExts,
 			)
@@ -240,21 +260,31 @@ func imgs(docShortname string) (imgsfunc, error) {
 	}, nil
 }
 
-// icon returns a function that can be inserted into a template's FuncMap for
-// calling by the template. The returned function takes an image shortname and
-// alt text. The image is rendered inline (1em tall). If light and dark mode
-// images are both present, the correct one will be rendered based on the user's
-// mode.
+// icon returns a function that can be inserted into a template's FuncMap.
+// The returned function is a context-aware image renderer.
+// It renders an image which has been namespaced to the calling document.
+// It always renders it 1em tall.
 //
-// The image must be named in the format SHORTNAME-IMAGE-STYLE.EXTENSION, where
-// SHORTNAME is the page shortname (e.g. "apple" for apple.html), IMAGE is any
-// arbitrary string that must be passed to the returned function as its imgsrc,
-// STYLE is one of "light" or "dark", and EXTENSION is one of "png", "jpg", or
-// "jpeg".
+// Its arguments are an image shortname string followed by an alt text string.
 //
-// The given shortname must be the page shortname the images will appear on, or
-// the rendered images won't point to the right URLs.
-func icon(docShortname string) (iconfunc, error) {
+// For example:
+//
+//	{{ icon "banana" "A photo of a banana." }}
+//
+// When called, the returned function renders the image inline.
+// If both light and dark modes of the image are present,
+// the correct one will be rendered based on the user's preference.
+//
+// The image on disk must match one of two patterns to be found:
+//
+//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
+//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
+//
+// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
+// IMAGESHORTNAME is an arbitrary string,
+// STYLE, if present, is one of "light" or "dark",
+// and EXTENSION is one of "png", "jpg", "jpeg", or "svg".
+func (d *substructureDocument) icon() (iconfunc, error) {
 	partial, err := os.ReadFile(icnTmplPath)
 	if err != nil {
 		return nil, err
@@ -266,8 +296,12 @@ func icon(docShortname string) (iconfunc, error) {
 	}
 
 	return func(imgShortname graphic.Shortname, alt graphic.Alt) (template.HTML, error) {
+		// The template called us, so make sure it recompiles if this template changes.
+		deps := d.Dependencies()
+		deps["icon"] = struct{}{}
+
 		light, dark, err := graphic.LightDark(
-			docShortname,
+			d.Shortname(),
 			graphic.Shortname(imgShortname),
 			graphic.ImageExts,
 		)
@@ -290,22 +324,34 @@ func icon(docShortname string) (iconfunc, error) {
 	}, nil
 }
 
-// videos returns a function that can be inserted into a template's FuncMap for
-// calling by the template. The returned function takes a caption followed by
-// any number of video shortnames. The videos are rendered next to each other
-// with the caption below them. If light and dark mode videos are both present,
-// the correct ones will be rendered based on the user's mode.
+// videos returns a function that can be inserted into a template's FuncMap.
+// The returned function is a context-aware video renderer.
+// It renders videos which have been namespaced to the calling document.
+// It can render any number of such videos together, with a single caption below them.
 //
-// The videos must be named in the format SHORTNAME-VIDEO-STYLE.EXTENSION, where
-// SHORTNAME is the page shortname (e.g. "apple" for apple.html), VIDEO is any
-// arbitrary string that must be passed to the returned function as its
-// videosrc., STYLE is one of "light" or "dark". EXTENSION is "mp4" and/or
-// "mov"; if both are present, the user agent will choose which to load.
+// Its first argument must be a caption string.
+// Then, it takes any number of video shortname strings.
 //
-// The given shortname must be the page shortname the videos will appear on, or
-// the rendered videos won't point to the right URLs.
-func videos(docShortname string) (videosfunc, error) {
-	partial, err := ioutil.ReadFile("src/templates/_videos.html.tmpl")
+// For example:
+//
+//	{{ videos "Videos of my pets. "banana" "split" "sundae" }}
+//
+// When called, the returned function renders the videos together, with the caption below them.
+// The function supports finding dark, light, or unspecified versions of the videos;
+// but CSS media queries do not yet allow varying the displayed video based on user preference.
+// If both are available, the function will render the light one for now.
+//
+// The videos on disk must match one of two patterns to be found:
+//
+//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
+//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
+//
+// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
+// IMAGESHORTNAME is an arbitrary string,
+// STYLE, if present, is one of "light" or "dark",
+// and EXTENSION is "mp4".
+func (d *substructureDocument) videos() (videosfunc, error) {
+	partial, err := os.ReadFile("src/templates/_videos.html.tmpl")
 	if err != nil {
 		return nil, err
 	}
@@ -316,11 +362,14 @@ func videos(docShortname string) (videosfunc, error) {
 	}
 
 	return func(c graphic.Caption, videoShortnames ...graphic.Shortname) (template.HTML, error) {
+		// The template called us, so make sure it recompiles if this template changes.
+		deps := d.Dependencies()
+		deps["videos"] = struct{}{}
 		v := videosPartialVars{Caption: c}
 
 		for _, videoShortname := range videoShortnames {
 			lightMP4, darkMP4, err := graphic.LightDark(
-				docShortname,
+				d.Shortname(),
 				videoShortname,
 				map[string]struct{}{"mp4": {}},
 			)
@@ -329,7 +378,7 @@ func videos(docShortname string) (videosfunc, error) {
 			}
 
 			lightMOV, darkMOV, err := graphic.LightDark(
-				docShortname,
+				d.Shortname(),
 				videoShortname,
 				map[string]struct{}{"mp4": {}},
 			)
@@ -350,7 +399,7 @@ func videos(docShortname string) (videosfunc, error) {
 		if err := t.Execute(&buf, v); err != nil {
 			return "", fmt.Errorf(
 				"can't execute video template for `%s`/`%s`: %w",
-				docShortname,
+				d.Shortname(),
 				videoShortnames,
 				err,
 			)

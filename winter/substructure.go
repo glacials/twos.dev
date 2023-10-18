@@ -9,7 +9,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"sort"
-	"strconv"
 	"strings"
 	"time"
 
@@ -24,23 +23,25 @@ import (
 type Substructure struct {
 	cfg  Config
 	docs documents
-	// photos is a map of year to slice of photos taken in that year.
-	photos map[int][]*galleryDocument
+	// photos is a map of gallery name to slice of photos in that gallery.
+	photos map[string][]*galleryDocument
 }
 
-// substructureDocument is a wrapper around Document so Substructure can store
-// some extra fields on it.
+// substructureDocument is a Document wrapper allowing the Substructure to manage its own data.
 type substructureDocument struct {
 	Document
 
+	// Parent, if non-nil, points to the document that this one is a child of.
+	// A child document can be used to provide a navigational hierarchy to documents.
 	Parent *substructureDocument
-	// Source is the path to the source file for the document.
+	// Source is the path to the source file for the document,
+	// relative to the project root.
 	Source string
 }
 
 var (
-	galYear = regexp.MustCompile(
-		`img\/photography\/(\d\d\d\d)\/.*`,
+	galName = regexp.MustCompile(
+		`img\/.+\/(.+)/.*`,
 	)
 
 	// ignorePaths are file path regex patterns that should not be
@@ -49,18 +50,18 @@ var (
 	//
 	// TODO: Migrate some of these to a directory blocklist instead.
 	ignorePaths = map[*regexp.Regexp]struct{}{
-		regexp.MustCompile("(^\\.)|(^.*\\/\\.)\\.[^\\/]*$"):     {},
-		regexp.MustCompile("^(.*\\/)?#.*$"):                     {},
-		regexp.MustCompile("^(.*\\/)?README.md$"):               {},
-		regexp.MustCompile("^(.*\\/)?.DS_Store$"):               {},
-		regexp.MustCompile("^(.*\\/)?imgcontainer.html.tmpl$"):  {},
-		regexp.MustCompile("^(.*\\/)?text_document.html.tmpl$"): {},
-		regexp.MustCompile("^(.*\\/)?_icon.html.tmpl$"):         {},
-		regexp.MustCompile("^(.*\\/)?_imgs.html.tmpl$"):         {},
-		regexp.MustCompile("^(.*\\/)?_nav.html.tmpl$"):          {},
-		regexp.MustCompile("^(.*\\/)?_subtoc.html.tmpl$"):       {},
-		regexp.MustCompile("^(.*\\/)?_toc.html.tmpl$"):          {},
-		regexp.MustCompile("^(.*\\/)?_videos.html.tmpl$"):       {},
+		regexp.MustCompile(`(^\.)|(^.*\/\.)\.[^\/]*$`):         {},
+		regexp.MustCompile(`^(.*\/)?#.*$`):                     {},
+		regexp.MustCompile(`^(.*\/)?README.md$`):               {},
+		regexp.MustCompile(`^(.*\/)?.DS_Store$`):               {},
+		regexp.MustCompile(`^(.*\/)?imgcontainer.html.tmpl$`):  {},
+		regexp.MustCompile(`^(.*\/)?text_document.html.tmpl$`): {},
+		regexp.MustCompile(`^(.*\/)?_icon.html.tmpl$`):         {},
+		regexp.MustCompile(`^(.*\/)?_imgs.html.tmpl$`):         {},
+		regexp.MustCompile(`^(.*\/)?_nav.html.tmpl$`):          {},
+		regexp.MustCompile(`^(.*\/)?_subtoc.html.tmpl$`):       {},
+		regexp.MustCompile(`^(.*\/)?_toc.html.tmpl$`):          {},
+		regexp.MustCompile(`^(.*\/)?_videos.html.tmpl$`):       {},
 	}
 	pad = newPadder()
 )
@@ -97,17 +98,14 @@ func (s *Substructure) add(d *substructureDocument) {
 
 	if gal, ok := d.Document.(*galleryDocument); ok {
 		if s.photos == nil {
-			s.photos = map[int][]*galleryDocument{}
+			s.photos = map[string][]*galleryDocument{}
 		}
-		match := galYear.FindStringSubmatch(gal.WebPath)
+		match := galName.FindStringSubmatch(gal.WebPath)
 		if len(match) < 1 {
-			panic(fmt.Sprintf("can't find a year string in photo path %s", gal.WebPath))
+			panic(fmt.Sprintf("cannot find a year string in photo path %s", gal.WebPath))
 		}
-		y, err := strconv.Atoi(match[1])
-		if err != nil {
-			panic(fmt.Sprintf("invalid year in photo path %q: %s", match[1], err))
-		}
-		s.photos[y] = append(s.photos[y], gal)
+		name := match[1]
+		s.photos[name] = append(s.photos[name], gal)
 	}
 
 	s.docs = append(s.docs, d)
@@ -503,8 +501,8 @@ func (s *Substructure) categories() map[string]documents {
 	return cats
 }
 
-// gallery returns the gallery pages to be shown, grouped by year.
-func (s *Substructure) gallery() map[int][]*galleryDocument {
+// gallery returns the gallery pages to be shown, grouped by gallery name.
+func (s *Substructure) gallery() map[string][]*galleryDocument {
 	return s.photos
 }
 
@@ -633,17 +631,6 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 	return nil
 }
 
-func (s *Substructure) internalize(d Document) (*substructureDocument, error) {
-	for _, subdoc := range s.docs {
-		fmt.Println("subdoc.Document is", subdoc.Document, "d is", d)
-		if d == subdoc.Document {
-			return subdoc, nil
-		}
-	}
-
-	return nil, ErrNotTracked{path: d.Title()}
-}
-
 // execute builds the given document into the given directory. To build a
 // document and its dependencies and dependants, use Rebuild instead.
 func (s *Substructure) execute(d *substructureDocument, dist string) error {
@@ -717,15 +704,15 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 }
 
 func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error) {
-	iconFunc, err := icon(d.Shortname())
+	iconFunc, err := d.icon()
 	if err != nil {
 		return nil, err
 	}
-	imgsFunc, err := imgs(d.Shortname())
+	imgsFunc, err := d.imgs()
 	if err != nil {
 		return nil, err
 	}
-	videoFunc, err := videos(d.Shortname())
+	videoFunc, err := d.videos()
 	if err != nil {
 		return nil, err
 	}

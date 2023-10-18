@@ -5,7 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"io"
-	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -139,9 +138,6 @@ type textDocument struct {
 	body     []byte
 	encoding encoding
 	root     *html.Node
-	incoming []*textDocument
-	outgoing []*textDocument
-	t        *template.Template
 
 	// dependencies is the set of files that building this document depends on,
 	// inferred automatically.
@@ -460,31 +456,6 @@ func (d *textDocument) Title() string  { return d.metadata.Title }
 func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
 func (d *textDocument) UpdatedAt() time.Time { return d.metadata.UpdatedAt }
 
-func (d *textDocument) linksout() (hrfs []string, err error) {
-	var f func(*html.Node)
-	f = func(n *html.Node) {
-		if n.Type == html.ElementNode && n.DataAtom == atom.A {
-			for _, a := range n.Attr {
-				if a.Key == "href" {
-					uri, err := url.Parse(a.Val)
-					if err != nil {
-						return
-					}
-
-					if uri.Host == "" {
-						hrfs = append(hrfs, strings.TrimSuffix(a.Val, filepath.Ext(a.Val)))
-					}
-				}
-			}
-		}
-		for c := n.FirstChild; c != nil; c = c.NextSibling {
-			f(c)
-		}
-	}
-	f(d.root)
-	return
-}
-
 // fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
 // and makes a reflective table of contents.
 func (d *textDocument) fillTOC() error {
@@ -529,7 +500,9 @@ func (d *textDocument) fillTOC() error {
 		}
 		return nil
 	}
-	f(d.root)
+	if err := f(d.root); err != nil {
+		return fmt.Errorf("cannot recurse into HTML: %w", err)
+	}
 
 	tocbody, err := os.ReadFile("src/templates/_toc.html.tmpl")
 	if err != nil {
@@ -549,7 +522,7 @@ func (d *textDocument) fillTOC() error {
 		return err
 	}
 
-	// Ensure updates to TOC templates cause rebuilds
+	// Ensure updates to some templates cause rebuilds
 	d.dependencies[toctmpl.Name()] = struct{}{}
 	d.dependencies[subtoctmpl.Name()] = struct{}{}
 

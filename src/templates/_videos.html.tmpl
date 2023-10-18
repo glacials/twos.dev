@@ -1,7 +1,7 @@
 <figure style="text-align: center">
-  {{range .Videos}}
-<video autoplay loop muted style="max-height: 40em; max-width: 100%">
-  <!-- video->source->media queries not supportd :( commented for now
+  {{ range .Videos }}
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      <!-- video->source->media queries not supported :( commented for now
   <source
   src="{{ .LightMOV }}"
     type="video/quicktime"
@@ -22,22 +22,22 @@
     type="video/mp4"
     media="(prefers-color-scheme:dark)"
   /> -->
-  {{ if or .LightMOV .LightMP4 }}
-    {{ if .LightMOV }}
-      <source src="{{ .LightMOV }}" type="video/quicktime" />
-    {{ end }}
-    {{ if .LightMP4 }}
-      <source src="{{ .LightMP4 }}" type="video/mp4" />
-    {{ end }}
-  {{ else }}
-    {{ if .DarkMOV }}
-      <source src="{{ .DarkMOV }}" type="video/quicktime" />
-    {{ end }}
-    {{ if .DarkMP4 }}
-      <source src="{{ .DarkMP4 }}" type="video/mp4" />
-    {{ end }}
+      {{ if or .LightMOV .LightMP4 }}
+        {{ if .LightMOV }}
+          <source src="{{ .LightMOV }}" type="video/quicktime" />
+        {{ end }}
+        {{ if .LightMP4 }}
+          <source src="{{ .LightMP4 }}" type="video/mp4" />
+        {{ end }}
+      {{ else }}
+        {{ if .DarkMOV }}
+          <source src="{{ .DarkMOV }}" type="video/quicktime" />
+        {{ end }}
+        {{ if .DarkMP4 }}
+          <source src="{{ .DarkMP4 }}" type="video/mp4" />
+        {{ end }}
+      {{ end }}
+    </video>
   {{ end }}
-</video>
-{{end}}
-  <figcaption>{{.Caption}}</figcaption>
+  <figcaption>{{ .Caption }}</figcaption>
 </figure>

@@ -8,6 +8,3 @@ dist: dist
 hostname: twos.dev
 name: twos.dev
 since: 2021
-src:
-  - ./src
-  - ~/.config/emacs/config.org
