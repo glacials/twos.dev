@@ -90,7 +90,9 @@ func (r *Reloader) Watch(paths []string) error {
 		if stat, err := os.Stat(path); err != nil {
 			return fmt.Errorf("cannot stat %s: %w", path, err)
 		} else if !stat.IsDir() {
-			r.watcher.Add(path)
+			if err := r.watcher.Add(path); err != nil {
+				return fmt.Errorf("cannot add %q to watcher: %w", path, err)
+			}
 			continue
 		}
 
@@ -137,6 +139,9 @@ func (r *Reloader) listen() {
 			if !ok {
 				log.Println("fsnotify watcher closed")
 				return
+			}
+			if event.Op == fsnotify.Chmod {
+				continue
 			}
 			fmt.Println("event:", event)
 			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {

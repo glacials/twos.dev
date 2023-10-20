@@ -179,10 +179,6 @@ html {
   -webkit-hyphens: auto;
 }
 
-li {
-  margin: 0.5em 0;
-}
-
 nav {
   display: flex;
   font-size: 1.25em;
@@ -271,6 +267,10 @@ video + video {
 
 .light-only {
   display: none;
+}
+
+.footnote-ref {
+  margin: 0.1em;
 }
 
 .footnotes {

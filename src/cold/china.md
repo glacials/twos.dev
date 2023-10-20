@@ -4,24 +4,31 @@ filename: china.html
 type: draft
 ---
 
-# China
+# Surprises in North China
 
-Summer and I recently returned from China. We hit Harbin, where her family lives, and Daqing, where she grew up. Both of these cities are in the far north of China, near the borders with Mongolia and Russia. They don’t see many westerners.
+Summer and I recently stayed a few weeks with her parents in Harbin, China.
+They don’t see many westerners.
+
+It gets damn cold.
 
 {{
   imgs
-  "Harbin (red) on a map of China."
+  "Harbin is near the northern border, far beyond the popular cities."
   "harbin"
   "A satellite map zoomed out to see most of china. Harbin is circled in the far northeast."
 }}
 
+A few things surprised me about the culture there.
+What follows is a list of my miniature culture shocks.
+
 ## Natural Refrigeration
 
-Kitchens this far north use their pantries as natural refrigerators, with the framing of the building set to expose 2–3 pantry walls to the exterior, with a closable door connecting to the kitchen.
+Kitchens this far north use their pantries as natural refrigerators, with the framing of the building set to expose 2–3 pantry walls to the exterior.
+
 Many residences do not have powered refrigerators.
 
 {{ imgs
-  "By exposing more surface area to the outside, food cools more and more quickly."
+  "More exposed surface area means more and faster cooling."
   "pantries1" "A photo of the outside of an apartment building, having a vertical slice jutting out with three walls of windows on it."
   "pantries3" "Another photo of the same, but a different building."
   "pantries4" "Another photo of the same, but a different building."
@@ -35,20 +42,19 @@ Many residences do not have powered refrigerators.
   "A photo of a wire rack with vegetables laying on it, like cabbage and green onions."
 }}
 
-Summer shared a joke that in the winter, when restaurants ask if you want a beer from the fridge or the pantry, the fridge ones are 0ºC (32ºF) while the pantry ones are -30ºC (-22ºF).
+Summer shared an anecdote that in the winter, when a restaurant asks if you want a beer from the fridge or the pantry,
+the fridge ones are _warmer_.
 
-## Drinking Together
+## Water
 
-Many countries have moments when everyone raises their glasses and drinks: "cheers", "skål", "salud", etc.
+Tap water in China is not potable.
+Filters are around but after generations of boiling water, everyone just likes hot water more than cold.
 
-China has the same (干杯 _ganbei_, literally "dry cup"), but it seems less acceptable to drink outside of these times.
-Whenever I attempted to sip independently someone would steal a glance and interject with a cheery “干杯！ganbei!” that brought the table to the moment.
-
-Meals were filled with dozens upon dozens of "干杯 ganbei!"s.
+In retrospect, it makes total sense evolutionarily why some cultures would benefit from cold water and some from hot.
 
 ## Smoking
 
-Smoking in China is technically banned in restaurants, but everyone does it anyway. There’s no enforcement, and the tobacco industry is nationalized. Tobacco comprises 5–10% of government revenue. (TODO: Stats, citation)
+Smoking in restaurants is technically banned, but everyone does it because there's no enforcement. And there's no incentive to enforce it because tobacco is nationalized and comprises 7% of government revenue.^[https://www.theexamination.org/articles/how-china-became-addicted-to-its-tobacco-monopoly]
 
 ## Purchasing Unfinished Homes
 
@@ -93,15 +99,33 @@ Some various interesting snacks I saw and tried:
 
 Pay-by-phone is universally accepted and expected in businesses, but there’s no tap-to-pay. Business have QR codes posted that point to WeChat accounts. The cashier tells you how much to pay and you send it over the internet like you would to a Venmo account. A nearby store speaker announces the incoming payment and amount automatically, signaling to the shopkeeper that you have paid.
 
-## Red sugar (dongbei) vs black sugar vs brown sugar
+## City Limits
 
-## Westerners in social media
+Harbin's population is 5M, which sounds dense.
+But geographically, China's cities tend to be more like US counties or metropolitan areas.
+
+{{
+  img
+  "New York City (solid red) is \~2% the area of Harbin (dotted red)."
+  "ny"
+  "The city limits of New York, NY, USA overlaid on the city limits of Harbin, Heilongjiang, China. New York City's city limits are tiny in comparison, only about 2% of the size."
+}}
+
+For reference, some densities:
+
+- Harbin, China: \~100 people / km^[\~5M people in 53,068 km²]
+- Seattle, WA: \~2k people / km^[737k people in 367 km²]
+- Greater Seattle Area^[https://en.wikipedia.org/wiki/Seattle_metropolitan_area]: \~250 people / km^[\~4M people in \~15k km²]
+- New York, NY: \~6500 people / km^[\~8M people in 1213 km²]
+- New York Metropolitan Area^[https://en.wikipedia.org/wiki/New_York_metropolitan_area]: \~2100 people / km^[\~19M people in 8936 km²]
+
+## Westerners in Social Media
 
 After two weeks In Harbin, a city with a small international airport, I saw only one obviously non-Chinese person. In Daqing, children in the street abruptly stopped playing and talking to stare agape as I walked by. Adults sitting at nearby tables in restaurants struck up conversation or stared.
 
 It’s no surprise then that Summer’s family had never met an American, but they had been exposed to tropes, stereotypes, and the extreme political right on social media. They were surprised by my politeness and slightly sunny disposition.
 
-## Advertising with noise, megaphones
+## Megaphones
 
 China cities are much noisier at advertising. It's common to hear background megaphones in the distance that at first give you a City 17 vibe, until you realize they're advertising their fruit or some such on repeat.
 
@@ -112,13 +136,3 @@ About 1 in 100 inhalations had a strong sewage odor, both on the street and when
 (TODO: Diagram)
 
 A trap is a vertical doubling-back of the drain such that a buffer of water prevents airflow. It makes the piping airtight but not watertight.
-
-## Public restrooms toilet paper and soap
-
-Public restrooms generally don’t have toilet paper or soap.
-
-## Pooping in a Hole
-
-I heard I'd have to "poop in a hole", which it's technically true, but the phrasing was a bit harsh. It's more like the extreme version of a [squatty potty](https://amzn.to/3Qpa864).
-
-(TODO: Photo)
