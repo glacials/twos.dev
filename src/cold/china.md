@@ -63,9 +63,12 @@ It's common to see groups of nearby buildings sharing a single design. You see t
 
 (TODO: Photos)
 
-## Interesting Snacks
+## Food
 
-Some various interesting snacks I saw and tried:
+The food was by far the best part of China,
+though I've had a few years to acclimate my taste due to the popularity of authentic Chinese food in Seattle and Vancouver.
+
+Some notable items I tried:
 
 ![A photo of a clear bottle of gold-colored fizzy liquid, with a label depicting a loaf of bread.](/img/china-breadsoda.jpg)
 
@@ -79,9 +82,31 @@ Bread soda. Watch out for bloating.
 
 Plain donuts (油条 yóutiáo) dipped in soy milk (豆浆 dòujiāng), a common if unhealthy breakfast.
 
+![A photo of seemingly normal cheese pizza.](/img/china-pizza.jpeg)
+
+Pizza Hut is considered a slight delicacy in China, like sushi is in the US.
+It looks the same, but Chinese pizza is anything but—this pizza uses cream cheese.
+
+![A photo of an egg tart in KFC packaging.](/img/china-kfc.jpeg)
+
+KFC sells egg tarts and a few other Chinese items.
+Neither of us enjoyed them, but it's interesting to see local menus for international chains.
+
+![A photo of yumi lao, which looks like like (and is) a sugary mass of fried corn.](/img/china-yumilao.jpeg)
+
+Fried corn fritters (玉米烙 yùmǐ lào) taste like a cross between popcorn, kettle corn, and corn.
+If you like those flavors individually, you'll love these.
+
 ## Internet QR payments with audio announcements
 
-Pay-by-phone is universally accepted and expected in businesses, but there’s no tap-to-pay. Business have QR codes posted that point to WeChat accounts. The cashier tells you how much to pay and you send it over the internet like you would to a Venmo account. A nearby store speaker announces the incoming payment and amount automatically, signaling to the shopkeeper that you have paid.
+Pay-by-phone is universally accepted and expected in businesses, but there’s no tap-to-pay.
+
+Instead, business have QR codes posted that point to WeChat accounts.
+The cashier tells you how much to pay and you send it over the internet like you would to a Venmo account.
+
+A nearby store speaker announces the incoming payment and amount automatically,
+signaling to the shopkeeper that you have paid.
+For small corner shops, I never saw any sort of scanner in use.
 
 ## City Limits
 
@@ -102,18 +127,33 @@ For reference, some densities:
 
 ## Westerners in Social Media
 
-After two weeks In Harbin, a city with a small international airport, I saw only one obviously non-Chinese person. In Daqing, children in the street abruptly stopped playing and talking to stare agape as I walked by. Adults sitting at nearby tables in restaurants struck up conversation or stared.
+After two weeks in Harbin,
+a city with a small international airport,
+I saw only one obviously non-Chinese person.
+In Daqing, children in the street stopped playing to stare at me.
+Adults at nearby tables in restaurants struck up conversation or stared.
 
-It’s no surprise then that Summer’s family had never met an American, but they had been exposed to tropes, stereotypes, and the extreme political right on social media. They were surprised by my politeness and slightly sunny disposition.
+Summer’s family had never met an American,
+but they had been exposed to extreme tropes and stereotypes on social media,
+mostly focused on the political right.
+They were surprised by my kindness, politeness, and sunny disposition.
 
 ## Megaphones
 
-China cities are much noisier at advertising. It's common to hear background megaphones in the distance that at first give you a City 17 vibe, until you realize they're advertising their fruit or some such on repeat.
+China advertising is noisy.
+It's common to hear indecipherable megaphones in the distance that give [City 17](https://www.youtube.com/watch?v=ObELK2bGCS8) vibes,
+until you realize they're just advertising fruit or noodles on repeat.
 
 ## Sewage Smell
 
-About 1 in 100 inhalations had a strong sewage odor, both on the street and when home. Western countries use "traps” in their plumbing, which prevent smells from traveling backwards through pipes and coming out of places like your shower drain.
+It's not omnipresent, but every few dozen breaths carry a sewage smell. Chinese plumbing doesn't leverage traps like we do, which are plumbing tricks that prevent smells from traveling backwards up sewer liens.
 
-(TODO: Diagram)
+![A sketch of two types of traps, which look like capital 'N' shapes where the water comes in the top-right of the 'N' and leaves the bottom-left of it, leaving the middle section always full with a buffer of water, preventing air from traveling from the bottom-left to the top-right.](/img/china-trap.png)
 
-A trap is a vertical doubling-back of the drain such that a buffer of water prevents airflow. It makes the piping airtight but not watertight.
+A trap is a plumbing trick that makes a pipe airtight but not watertight. (Image: public domain via [Nordisk Familjebok, 1921](https://commons.wikimedia.org/wiki/File:Vattenlaas.png))
+
+Traps are all over the place in western plumbing.
+You can retrofit a trapless system with an aftermarket component,
+but the one we tried drained prohibitively slowly,
+so was effectively a plug.
+Better than nothing, but not worth the money.

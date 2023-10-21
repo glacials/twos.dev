@@ -9,9 +9,7 @@
       {{ template "nav" . }}
       <header>
         {{ if .IsDraft }}
-          <div style="background-color: var(--bg-c); text-align: center">
-            DRAFT
-          </div>
+          <div class="draft">Draft</div>
         {{ end }}
         {{ if and (.IsPost) (not .CreatedAt.IsZero) }}
           <small style="text-align: center; display: block">

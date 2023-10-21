@@ -9,11 +9,12 @@ first word looks good with or on each other. */
   --inverse-fg: rgba(245, 222, 153, 1);
 
   --darker-bg: rgb(31, 31, 47);
-  --darker-bg-shadow: rgb(23, 14, 34);
   --darker-fg: rgba(248, 248, 242, 1);
 
-  --lighter-bg: rgba(48, 48, 78, 1);
+  --lighter-bg: rgba(65, 65, 95, 1);
   --lighter-fg: rgba(255, 227, 86, 1);
+
+  --shadow: rgb(23, 14, 34);
 
   --container-horz-padding: 2em;
   --container-width: 50em;
@@ -279,10 +280,10 @@ video + video {
 
 @media (min-width: 55rem) {
   .container {
-    border-color: var(--darker-bg-shadow);
+    border-color: var(--shadow);
     border-style: solid;
     border-width: 0.1em;
-    box-shadow: 0.5em 0.5em var(--darker-bg-shadow);
+    box-shadow: 0.5em 0.5em var(--shadow);
     margin-bottom: 2em;
     margin-top: 2em;
   }
@@ -292,12 +293,24 @@ video + video {
   display: block;
 }
 
+.draft {
+  color: var(--traditional-fg-b);
+  font-size: 2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
 .gallery-item img {
   cursor: zoom-in;
+  margin: auto;
 }
 
 .gallery-item input {
   display: none;
+}
+
+p:has(.gallery-item) {
+  text-align: center;
 }
 
 .gallery-item:has(input:checked) {
@@ -401,7 +414,7 @@ pre code {
 
 @media (min-width: 50em) {
   pre {
-    box-shadow: 0.5em 0.5em var(--darker-bg-shadow);
+    box-shadow: 0.5em 0.5em var(--shadow);
   }
 }
 
