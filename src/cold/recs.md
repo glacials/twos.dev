@@ -3,7 +3,7 @@ category: living document
 date: 2023-06-24
 filename: recs.html
 type: post
-updated: 2023-10-04
+updated: 2023-10-21
 ---
 
 # Recommendations
@@ -84,6 +84,46 @@ in all of these categories:
 They're pricier upfront, but cheaper long-term.
 
 [Amazon](https://amzn.to/46nSjKq)
+
+## Bidets
+
+If someone came up to you in the street and smeared poop all over you,
+would you wipe it off with a paper towel, or would you take a shower?
+
+Before I tried one, I had three fundamental misunderstandings about bidets:
+
+1. Bidets are separate from toilets.
+2. Bidets are expensive.
+3. It's a big deal to install a bidet.
+
+**None of these is true.**
+It takes about 15 minutes to install a bidet onto your toilet,
+and you can get one for [under fifty bucks](https://amzn.to/3McRz2a).
+It's just a piece of plastic that goes between the toilet and the seat.
+You do not need to put your hands inside the toilet bowl to install it.
+
+Bidets pay for themselves in unused toilet paper.
+I use between 1–10% of the toilet paper I used before.
+Its only function now is drying.
+
+Bidets feel weird for about 10 seconds, then never again.
+It's honestly disgusting _not_ to use one now.
+
+Buy whichever one makes you try it, but here are some options:
+
+- ($) [Attachment](https://amzn.to/3McRz2a):
+  Simple, replaces nothing about your toilet, sprays cold water only.
+  I promise it doesn't feel like a cold shower.
+  That area of your body doesn't experience temperature the same.
+- ($$) [Seat](https://amzn.to/3PYqFwc):
+  The weight distribution of my seat got worse with just an attachment,
+  so a combination seat/bidet is something to consider if that bugs you.
+  Otherwise, the functions are ~the same as the attachment.
+- ($$$) [Air Dry](https://amzn.to/3S9PBn9);
+  Seats that plug in jump in price and feature set drastically,
+  but I think air dry is the only big one to consider.
+  Warm water is overrated.
+  If you're not sure if you need a heated seat, you don't.
 
 # In Search Of
 
