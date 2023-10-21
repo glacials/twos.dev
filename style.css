@@ -9,11 +9,12 @@ first word looks good with or on each other. */
   --inverse-fg: rgba(245, 222, 153, 1);
 
   --darker-bg: rgb(31, 31, 47);
-  --darker-bg-shadow: rgb(23, 14, 34);
   --darker-fg: rgba(248, 248, 242, 1);
 
-  --lighter-bg: rgba(48, 48, 78, 1);
+  --lighter-bg: rgba(65, 65, 95, 1);
   --lighter-fg: rgba(255, 227, 86, 1);
+
+  --shadow: rgb(23, 14, 34);
 
   --container-horz-padding: 2em;
   --container-width: 50em;
@@ -68,6 +69,17 @@ footer {
   margin-right: 1em;
 }
 
+article img {
+  max-width: 100%;
+}
+
+article p:has(img) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  margin-bottom: 0;
+  margin-top: 3em;
+}
+
 blockquote {
   border-left: 1px solid var(--traditional-fg-a);
   padding-left: 1em;
@@ -79,6 +91,11 @@ body {
   font-family: monospace;
   height: 100%;
   margin: 0;
+}
+
+/* Disable page scrolling when viewing a fullscreen image. */
+body:has(.gallery-item input:checked) {
+  overflow: hidden;
 }
 
 button,
@@ -179,10 +196,6 @@ html {
   -webkit-hyphens: auto;
 }
 
-li {
-  margin: 0.5em 0;
-}
-
 nav {
   display: flex;
   font-size: 1.25em;
@@ -239,22 +252,15 @@ nav.socials img {
   width: 1.1em;
 }
 
-.container {
-  background: var(--traditional-bg);
-  max-width: var(--container-width);
-  margin: auto;
-  padding: 1em var(--container-horz-padding);
-}
-
-@media (min-width: 55rem) {
-  .container {
-    border-color: var(--darker-bg-shadow);
-    border-style: solid;
-    border-width: 0.1em;
-    box-shadow: 0.5em 0.5em var(--darker-bg-shadow);
-    margin-bottom: 2em;
-    margin-top: 2em;
-  }
+/*
+ * The paragraph after an image or image set must be a caption.
+ * Captions are italic.
+ */
+p:has(.gallery-item) + p {
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 4em;
+  text-align: center;
 }
 
 ul {
@@ -265,12 +271,90 @@ video + video {
   margin-left: 1em;
 }
 
+.container {
+  background: var(--traditional-bg);
+  max-width: var(--container-width);
+  margin: auto;
+  padding: 1em var(--container-horz-padding);
+}
+
+@media (min-width: 55rem) {
+  .container {
+    border-color: var(--shadow);
+    border-style: solid;
+    border-width: 0.1em;
+    box-shadow: 0.5em 0.5em var(--shadow);
+    margin-bottom: 2em;
+    margin-top: 2em;
+  }
+}
+
 .dark-only {
   display: block;
 }
 
+.draft {
+  color: var(--traditional-fg-b);
+  font-size: 2em;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.gallery-item img {
+  cursor: zoom-in;
+  margin: auto;
+}
+
+.gallery-item input {
+  display: none;
+}
+
+p:has(.gallery-item) {
+  text-align: center;
+}
+
+.gallery-item:has(input:checked) {
+  background: var(--darker-bg);
+  cursor: zoom-out;
+  display: fixed;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.gallery-item:has(input:checked) img {
+  cursor: zoom-out;
+  left: 50%;
+  max-height: 100vh;
+  max-width: 100vw;
+  object-fit: scale-down;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Show caption on top of zoomed image. */
+p:has(.gallery-item input:checked) + p {
+  background: var(--darker-bg);
+  display: block;
+  left: 15%;
+  padding: 1em;
+  position: fixed;
+  top: 15%;
+  transform: translate(-15%, -15%);
+  z-index: 2;
+}
+
 .light-only {
   display: none;
+}
+
+.footnote-ref {
+  margin: 0.1em;
 }
 
 .footnotes {
@@ -330,7 +414,7 @@ pre code {
 
 @media (min-width: 50em) {
   pre {
-    box-shadow: 0.5em 0.5em var(--darker-bg-shadow);
+    box-shadow: 0.5em 0.5em var(--shadow);
   }
 }
 
