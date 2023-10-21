@@ -11,12 +11,9 @@ They don’t see many westerners.
 
 It gets damn cold.
 
-{{
-  imgs
-  "Harbin is near the northern border, far beyond the popular cities."
-  "harbin"
-  "A satellite map zoomed out to see most of china. Harbin is circled in the far northeast."
-}}
+[![A satellite map zoomed out to see most of china. Harbin is circled in the far northeast.](/img/china-harbin.png)](/img/china-harbin.png)
+
+Harbin is near the northern border, far beyond the popular cities.
 
 A few things surprised me about the culture there.
 What follows is a list of my miniature culture shocks.
@@ -27,20 +24,16 @@ Kitchens this far north use their pantries as natural refrigerators, with the fr
 
 Many residences do not have powered refrigerators.
 
-{{ imgs
-  "More exposed surface area means more and faster cooling."
-  "pantries1" "A photo of the outside of an apartment building, having a vertical slice jutting out with three walls of windows on it."
-  "pantries3" "Another photo of the same, but a different building."
-  "pantries4" "Another photo of the same, but a different building."
-  "pantries6" "Another photo of the same, but a different building."
-}}
+![A photo of the outside of an apartment building, having a vertical slice jutting out with three walls of windows on it.](/img/china-pantries1.jpeg)
+![Another photo of the same, but a different building.](/img/china-pantries3.jpeg)
+![Another photo of the same, but a different building.](/img/china-pantries4.jpeg)
+![Another photo of the same, but a different building.](/img/china-pantries6.jpeg)
 
-{{
-  img
-  "Everything from vegetables to leftovers from a hot meal are stored."
-  "pantry"
-  "A photo of a wire rack with vegetables laying on it, like cabbage and green onions."
-}}
+More exposed surface area means more and faster cooling.
+
+![A photo of a wire rack with vegetables laying on it, like cabbage and green onions.](/img/china-pantry.jpeg)
+
+The pantry can be used to both cool and dry food.
 
 Summer shared an anecdote that in the winter, when a restaurant asks if you want a beer from the fridge or the pantry,
 the fridge ones are _warmer_.
@@ -74,26 +67,17 @@ It's common to see groups of nearby buildings sharing a single design. You see t
 
 Some various interesting snacks I saw and tried:
 
-{{
-  img
-  "Bread soda. Watch out for bloating."
-  "breadsoda"
-  "A photo of a clear bottle of gold-colored fizzy liquid, with a label depicting a loaf of bread."
-}}
+![A photo of a clear bottle of gold-colored fizzy liquid, with a label depicting a loaf of bread.](/img/china-breadsoda.jpg)
 
-{{
-  img
-  "烤冷面 kǎolěngmiàn (\"grilled cold noodles\"), my years-long favorite Chinese food."
-  "kaolengmian"
-  "A photo of a small disposable bowl of wide noodles with veggies mixed in. In the background is a night market."
-}}
+Bread soda. Watch out for bloating.
 
-{{
-  img
-  "Plain donuts (油条 yóutiáo) dipped in soy milk (豆浆 dòujiāng), a common if unhealthy breakfast."
-  "youtiao"
-  "A photo of me, a white man, dipping a long donut-looking item in a cup of soy milk. We are sitting at a table on the street and the sun is rising."
-}}
+![A photo of a small disposable bowl of wide noodles with veggies mixed in. In the background is a night market.](/img/china-kaolengmian.jpeg)
+
+烤冷面 kǎolěngmiàn ("grilled cold noodles"), my years-long favorite Chinese food.
+
+![A photo of me, a white man, dipping a long donut-looking item in a cup of soy milk. We are sitting at a table on the street and the sun is rising.](/img/china-youtiao.jpeg)
+
+Plain donuts (油条 yóutiáo) dipped in soy milk (豆浆 dòujiāng), a common if unhealthy breakfast.
 
 ## Internet QR payments with audio announcements
 
@@ -104,12 +88,9 @@ Pay-by-phone is universally accepted and expected in businesses, but there’s n
 Harbin's population is 5M, which sounds dense.
 But geographically, China's cities tend to be more like US counties or metropolitan areas.
 
-{{
-  img
-  "New York City (solid red) is \~2% the area of Harbin (dotted red)."
-  "ny"
-  "The city limits of New York, NY, USA overlaid on the city limits of Harbin, Heilongjiang, China. New York City's city limits are tiny in comparison, only about 2% of the size."
-}}
+![The city limits of New York, NY, USA overlaid on the city limits of Harbin, Heilongjiang, China. New York City's city limits are tiny in comparison, only about 2% of the size.](/img/china-ny.png)
+
+New York City (solid red) is ~2% the area of Harbin (dotted red).
 
 For reference, some densities:
 

@@ -68,6 +68,17 @@ footer {
   margin-right: 1em;
 }
 
+article img {
+  max-width: 100%;
+}
+
+article p:has(img) {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+  margin-bottom: 0;
+  margin-top: 3em;
+}
+
 blockquote {
   border-left: 1px solid var(--traditional-fg-a);
   padding-left: 1em;
@@ -79,6 +90,11 @@ body {
   font-family: monospace;
   height: 100%;
   margin: 0;
+}
+
+/* Disable page scrolling when viewing a fullscreen image. */
+body:has(.gallery-item input:checked) {
+  overflow: hidden;
 }
 
 button,
@@ -235,6 +251,25 @@ nav.socials img {
   width: 1.1em;
 }
 
+/*
+ * The paragraph after an image or image set must be a caption.
+ * Captions are italic.
+ */
+p:has(.gallery-item) + p {
+  font-style: italic;
+  margin-top: 0;
+  margin-bottom: 4em;
+  text-align: center;
+}
+
+ul {
+  list-style-type: "⁃ ";
+}
+
+video + video {
+  margin-left: 1em;
+}
+
 .container {
   background: var(--traditional-bg);
   max-width: var(--container-width);
@@ -253,16 +288,52 @@ nav.socials img {
   }
 }
 
-ul {
-  list-style-type: "⁃ ";
-}
-
-video + video {
-  margin-left: 1em;
-}
-
 .dark-only {
   display: block;
+}
+
+.gallery-item img {
+  cursor: zoom-in;
+}
+
+.gallery-item input {
+  display: none;
+}
+
+.gallery-item:has(input:checked) {
+  background: var(--darker-bg);
+  cursor: zoom-out;
+  display: fixed;
+  height: 100vh;
+  left: 0;
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  width: 100vw;
+  z-index: 1;
+}
+
+.gallery-item:has(input:checked) img {
+  cursor: zoom-out;
+  left: 50%;
+  max-height: 100vh;
+  max-width: 100vw;
+  object-fit: scale-down;
+  position: fixed;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+
+/* Show caption on top of zoomed image. */
+p:has(.gallery-item input:checked) + p {
+  background: var(--darker-bg);
+  display: block;
+  left: 15%;
+  padding: 1em;
+  position: fixed;
+  top: 15%;
+  transform: translate(-15%, -15%);
+  z-index: 2;
 }
 
 .light-only {

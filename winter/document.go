@@ -17,7 +17,6 @@ import (
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
 	"github.com/gomarkdown/markdown"
-	mdhtml "github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
 	"github.com/niklasfasching/go-org/org"
 	"golang.org/x/net/html"
@@ -335,7 +334,7 @@ func (d *textDocument) parseMarkdown() error {
 						parser.Strikethrough|
 						parser.Tables,
 				),
-				mdhtml.NewRenderer(mdhtml.RendererOptions{Flags: mdhtml.FlagsNone}),
+				newCustomizedRender(),
 			),
 		),
 	)
