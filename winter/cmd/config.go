@@ -17,15 +17,15 @@ func newConfigCmd() *cobra.Command {
 		Long: wrap(`
 			Interact with Winter configuration.
 
-			Configuration in ./config.yml takes first precedence.
+			Configuration in ./winter.yml takes first precedence.
 			Otherwise, configuration is stored according to the XDG spec.
 			This is typically
 
-			    ~/.config/winter/config.yml
+			    ~/.config/winter/winter.yml
 
 			on Linux and
 
-			    ~/Library/Application Support/winter/config.yml
+			    ~/Library/Application Support/winter/winter.yml
 
 			on macOS. For more information on possible locations, see the XDG specification:
 			https://specifications.freedesktop.org/basedir-spec/basedir-spec-latest.html

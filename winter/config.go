@@ -12,8 +12,10 @@ import (
 	"gopkg.in/yaml.v3"
 )
 
-const configRelDir = "winter"
-const configFileName = "config.yml"
+const (
+	configRelDir   = "winter"
+	configFileName = "winter.yml"
+)
 
 // Config is a configuration for the Winter build.
 type Config struct {
@@ -71,7 +73,7 @@ func InteractiveConfig() error {
 	if err != nil {
 		return err
 	}
-	w, err := os.OpenFile(p, os.O_CREATE, 0644)
+	w, err := os.OpenFile(p, os.O_CREATE, 0o644)
 	if err != nil {
 		return err
 	}
