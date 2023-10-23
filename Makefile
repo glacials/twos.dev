@@ -1,7 +1,5 @@
 .PHONY : download build_winter clean build_twos.dev build serve
 
-UNAME := $(shell uname -s)
-
 download:
 	go mod download
 

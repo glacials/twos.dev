@@ -12,7 +12,7 @@ Summer and I recently stayed a few weeks with her parents in Harbin, China.
 
 Harbin is near the northern border, far beyond the popular cities.
 
-A few things caught me off guard about the culture there.
+A few things caught me off guard about the culture.
 
 ## Natural Refrigeration
 
