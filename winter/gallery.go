@@ -387,6 +387,7 @@ func (d *galleryDocument) genThumbnails(src, dst string) error {
 		if err != nil {
 			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dst, err)
 		}
+		webPath = fmt.Sprintf("/%s", webPath)
 		d.Thumbnails = append(d.Thumbnails, &thumbnail{
 			WebPath: webPath,
 			Width:   width,
