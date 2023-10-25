@@ -19,18 +19,26 @@ import (
 	"golang.org/x/image/draw"
 )
 
+var extensionRegex = regexp.MustCompile(`(.*)\.([^\.]*)`)
+
 type galleryDocument struct {
 	EXIF
 
-	PageLink string
-	Alt      string
-	WebPath  string
+	PageLink   string
+	Alt        string
+	WebPath    string
+	Thumbnails []*thumbnail
 
 	Prev *galleryDocument
 	Next *galleryDocument
 
 	cfg       Config
 	localPath string
+}
+
+type thumbnail struct {
+	WebPath string
+	Width   int
 }
 
 // NewGalleryDocument returns a Document that represents an HTML page which
@@ -44,7 +52,7 @@ func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
 	return &galleryDocument{
 		localPath: src,
 		PageLink:  fmt.Sprintf("/%s.html", relpath),
-		WebPath:   relpath,
+		WebPath:   fmt.Sprintf("/%s", relpath),
 		cfg:       cfg,
 	}, nil
 }
@@ -84,7 +92,7 @@ func (d *galleryDocument) Build() ([]byte, error) {
 		)
 	}
 
-	if err := genThumbnail(d.localPath, thmdest, 512); err != nil {
+	if err := d.genThumbnails(d.localPath, thmdest); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
@@ -277,12 +285,17 @@ func exifFractionToDecimal(
 	return float64(numer) / float64(denom), nil
 }
 
-// genThumbnail makes thumbnails from every photo (recursively) in src, copying
-// them to equivalent paths in a "thumb" subdirectory of dst.
+// genThumbnails makes thumbnails of several sizes from the photo located at src,
+// placing them in dst with dimensions added to the filename, just before the extension.
 //
-// The thumbnails have the given width. Height is automatically calculated to
-// maintain ratio.
-func genThumbnail(src, dst string, width int) error {
+// It generates thumbnails with widths of powers of 2,
+// from 1 until the largest width possible that is still smaller than the source image.
+// Heights are automatically calculated to mantain aspect ratio.
+//
+// For example, a 500x500 image would have thumbnails of
+// 1x1, 2x2, 4x4, 8x8, 16x16, 32x32, 64x64, 128x128, and 256x256
+// generated.
+func (d *galleryDocument) genThumbnails(src, dst string) error {
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
@@ -298,68 +311,86 @@ func genThumbnail(src, dst string, width int) error {
 		)
 	}
 	p := srcPhoto.Bounds().Size()
-	w, h := width, ((width*p.X/p.Y)+1)&-1
-	dstPhoto := image.NewRGBA(image.Rect(0, 0, w, h))
 
-	draw.CatmullRom.Scale(
-		dstPhoto,
-		image.Rectangle{
-			image.Point{0, 0},
-			image.Point{width, width},
-		},
-		srcPhoto,
-		image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
-		draw.Over,
-		nil,
-	)
+	for width := 1; width < p.X; width *= 2 {
+		height := (width * p.X / p.Y) & -1
+		dstPhoto := image.NewRGBA(image.Rect(0, 0, width, height))
 
-	if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
-		return fmt.Errorf(
-			"can't make thumbnail directory `%s`: %w",
-			filepath.Dir(dst),
-			err,
+		draw.CatmullRom.Scale(
+			dstPhoto,
+			image.Rectangle{
+				image.Point{0, 0},
+				image.Point{width, width},
+			},
+			srcPhoto,
+			image.Rectangle{image.Point{0, 0}, srcPhoto.Bounds().Size()},
+			draw.Over,
+			nil,
 		)
-	}
 
-	destinationFile, err := os.Create(dst)
-	if err != nil {
-		return fmt.Errorf(
-			"can't create thumbnail file for photo at path `%s`: %w",
-			src,
-			err,
-		)
-	}
-	defer destinationFile.Close()
-
-	/*
-		palette := []color.Color{
-			color.RGBA{0x00, 0x00, 0x00, 0xff},
-			color.RGBA{0x00, 0x00, 0xff, 0xff},
-			//		color.RGBA{0x00, 0xff, 0x00, 0xff},
-			//		color.RGBA{0x00, 0xff, 0xff, 0xff},
-			color.RGBA{0xff, 0x00, 0x00, 0xff},
-			color.RGBA{0xff, 0x00, 0xff, 0xff},
-			//		color.RGBA{0xff, 0xff, 0x00, 0xff},
-			//		color.RGBA{0x00, 0xff, 0xff, 0xff},
-			color.RGBA{0xff, 0xff, 0xff, 0xff},
+		if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+			return fmt.Errorf(
+				"can't make thumbnail directory `%s`: %w",
+				filepath.Dir(dst),
+				err,
+			)
 		}
-		d := dither.NewDitherer(palette)
-		d.Matrix = dither.FloydSteinberg
 
-		// Dither tries to modify the original first, and may return nil if it does,
-		// so guard against that.
-		new := d.Dither(dstPhoto)
-		if new != nil {
-			dstPhoto = nil
+		srcFilename := filepath.Base(src)
+		matches := extensionRegex.FindStringSubmatch(srcFilename)
+		if len(matches) < 3 {
+			return fmt.Errorf("cannot add dimensions to filename %q with no extension", srcFilename)
 		}
-	*/
+		dstFilename := fmt.Sprintf("%s.%dx%d.%s", matches[1], width, height, matches[2])
+		dstPath := filepath.Join(filepath.Dir(dst), dstFilename)
+		destinationFile, err := os.Create(dstPath)
+		if err != nil {
+			return fmt.Errorf(
+				"can't create thumbnail file for photo at path `%s`: %w",
+				src,
+				err,
+			)
+		}
+		defer destinationFile.Close()
 
-	if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
-		return fmt.Errorf(
-			"can't encode to destination file at path `%s`: %w",
-			dst,
-			err,
-		)
+		/*
+			palette := []color.Color{
+				color.RGBA{0x00, 0x00, 0x00, 0xff},
+				color.RGBA{0x00, 0x00, 0xff, 0xff},
+				//		color.RGBA{0x00, 0xff, 0x00, 0xff},
+				//		color.RGBA{0x00, 0xff, 0xff, 0xff},
+				color.RGBA{0xff, 0x00, 0x00, 0xff},
+				color.RGBA{0xff, 0x00, 0xff, 0xff},
+				//		color.RGBA{0xff, 0xff, 0x00, 0xff},
+				//		color.RGBA{0x00, 0xff, 0xff, 0xff},
+				color.RGBA{0xff, 0xff, 0xff, 0xff},
+			}
+			d := dither.NewDitherer(palette)
+			d.Matrix = dither.FloydSteinberg
+
+			// Dither tries to modify the original first, and may return nil if it does,
+			// so guard against that.
+			new := d.Dither(dstPhoto)
+			if new != nil {
+				dstPhoto = nil
+			}
+		*/
+
+		if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
+			return fmt.Errorf(
+				"can't encode to destination file at path `%s`: %w",
+				dst,
+				err,
+			)
+		}
+		webPath, err := filepath.Rel("dist", dstPath)
+		if err != nil {
+			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dst, err)
+		}
+		d.Thumbnails = append(d.Thumbnails, &thumbnail{
+			WebPath: webPath,
+			Width:   width,
+		})
 	}
 
 	return nil

@@ -7,9 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
-	"os/exec"
 	"os/signal"
-	"runtime"
 	"syscall"
 
 	"github.com/spf13/cobra"
@@ -53,11 +51,13 @@ func newBuildCmd() *cobra.Command {
 				return err
 			}
 
+			log.Println("Creating substructure.")
 			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
 				return err
 			}
 
+			log.Println("Executing substructure.")
 			if err := s.ExecuteAll(dist, cfg); err != nil {
 				return err
 			}
@@ -88,7 +88,6 @@ func newBuildCmd() *cobra.Command {
 
 				url := fmt.Sprintf("http://localhost:%d", port)
 				log.Printf("Serving %s on %s", dist, url)
-				openBrowser(url)
 
 				<-stop
 				return nil
@@ -122,22 +121,5 @@ func startFileServer(server *http.Server) {
 			return
 		}
 		log.Fatal(fmt.Errorf("can't listen and serve: %w", err))
-	}
-}
-
-func openBrowser(url string) {
-	var err error
-
-	switch runtime.GOOS {
-	case "linux":
-		err = exec.Command("xdg-open", url).Start()
-	case "windows":
-		err = exec.Command("rundll32", "url.dll,FileProtocolHandler", url).Start()
-	case "darwin":
-		err = exec.Command("open", url).Start()
-	default:
-	}
-	if err != nil {
-		log.Fatal(err)
 	}
 }

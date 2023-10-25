@@ -71,7 +71,12 @@
       style="text-align: center; margin-bottom: 0; position: absolute; top: 0; left: 0; z-index: -1;"
       ><img
         alt="{{ .Alt }}"
-        src="/{{ .WebPath }}"
+        class="silly"
+        src="{{ .WebPath }}"
+        srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
+        sizes="{{ range .Thumbnails }}
+          (max-width: {{ .Width }}px) {{ .Width }}px,
+        {{ end }}"
         style="max-width: 100%; max-height: 100vh; display:block;"
     /></a>
     <div style="position:absolute; left:0; bottom:1.5rem;">

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"log"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -194,6 +195,9 @@ func (s *Substructure) discoverGalleriesAtPath(path string) error {
 			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
 		}
 		doc.Prev, prev = prev, doc
+		if _, err := doc.Build(); err != nil {
+			return fmt.Errorf("cannot build gallery document %q: %w", doc.localPath, err)
+		}
 		s.add(&substructureDocument{Document: doc, Source: src})
 	}
 	for d := prev; d != nil; d = d.Prev {
@@ -616,6 +620,7 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 				dest,
 			)
 		}
+		log.Printf("Executing %s.", d.Shortname())
 		if err := s.execute(d, dist); err != nil {
 			return fmt.Errorf(
 				"can't execute %s while executing all: %w",
