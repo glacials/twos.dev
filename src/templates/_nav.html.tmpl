@@ -1,12 +1,13 @@
-{{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "software.html") (eq .Dest "writing.html") }}
-  <nav class="mt-0">
-    <div class="brand">twos.dev</div>
+<nav class="mt-0">
+  <div class="brand">
+    <a
+      href="/"
+      {{ if eq .Dest "index.html" }}class="selected"{{ end }}
+      >twos.dev</a
+    >
+  </div>
+  {{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "photos.html") (eq .Dest "software.html") (eq .Dest "writing.html") }}
     <div class="items">
-      <a
-        href="/"
-        {{ if eq .Dest "index.html" }}class="selected"{{ end }}
-        >Index</a
-      >
       <!--
     <a
       href="/cv.html"
@@ -14,6 +15,11 @@
       >CV</a
     >
     -->
+      <a
+        href="/photos.html"
+        {{ if eq .Dest "photos.html" }}class="selected"{{ end }}
+        >Photos</a
+      >
       <a
         href="/software.html"
         {{ if eq .Dest "software.html" }}class="selected"{{ end }}
@@ -37,17 +43,5 @@
 											 >
 				<span class="arrow"></span>-->
     </div>
-  </nav>
-{{ else }}
-  <nav class="mt-0">
-    {{ if ne .Shortname "index" }}
-      {{ with parent }}
-        <a class="brand" href="{{ .Shortname }}.html"
-          >{{ .Shortname }}.html &larr;</a
-        >
-      {{ else }}
-        <a class="brand" href="/">twos.dev &larr;</a>
-      {{ end }}
-    {{ end }}
-  </nav>
-{{ end }}
+  {{ end }}
+</nav>

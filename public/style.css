@@ -210,7 +210,7 @@ nav {
   }
 }
 
-nav > .brand,
+nav .brand a,
 nav > .items > a {
   color: var(--traditional-fg);
   display: block;
@@ -364,6 +364,12 @@ p:has(.gallery-item input:checked) + p {
 .photo-grid {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(10em, 1fr));
+}
+
+.photo-grid h2 {
+  margin: auto;
+  text-align: center;
+  vertical-align: middle;
 }
 
 .photo-grid img {

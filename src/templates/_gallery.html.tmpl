@@ -1,5 +1,6 @@
 {{ define "gallery" }}
   <div class="photo-grid">
+    <h2>{{ . }}</h2>
     {{ range (index gallery .) }}
       <a href="{{ .PageLink }}">
         <img class="silly" src="{{ .WebPath }}" />
