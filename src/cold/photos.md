@@ -8,6 +8,6 @@ type: page
 
 I post thirteen photos at the end of every year.
 
+{{ template "gallery" "2023" }}
 {{ template "gallery" "2022" }}
-
 {{ template "gallery" "2021" }}
