@@ -2,8 +2,8 @@ package winter
 
 import "strings"
 
-// newPadder returns a function that pads every string given to it to the longest
-// length it has seen so far.
+// newPadder returns a function that pads, with spaces, the ends of strings given to it.
+// The padding is enough to make it the length of the longest string seen so far.
 //
 // For example:
 //

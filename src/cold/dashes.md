@@ -1,17 +1,16 @@
 ---
 date: 2022-07-05
 filename: dashes.html
+preview: Everything you never wanted to know about the various dashes of the English language.
 type: post
 updated: 2023-08-11
 ---
 
 # Advanced Dashes
 
-{{ img
-   "I love pizza-liquor, but I've never had it New York style."
-   "supreme"
-   "A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen"
-}}
+![A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen.](/img/dashes-supreme.jpeg)
+
+I love pizza-liquor, but I've never had it New York style.
 
 There are three common dashes in written English:
 

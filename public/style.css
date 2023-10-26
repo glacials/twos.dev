@@ -49,6 +49,21 @@ a:hover:has(img) {
   background: inherit;
 }
 
+a:has(h1),
+a:has(h2),
+a:has(h3),
+a:has(h4),
+a:has(h5),
+a:has(h6) {
+  display: block;
+  margin-top: 4rem;
+}
+
+a:not([href]):hover {
+  background: inherit;
+  color: inherit;
+}
+
 a img.silly {
   opacity: 0.8;
 }
@@ -135,6 +150,11 @@ figcaption {
   font-style: italic;
 }
 
+footer {
+  font-size: 0.75em;
+  line-height: 1.1em;
+}
+
 h1 {
   color: var(--traditional-fg);
   display: block;
@@ -155,6 +175,8 @@ h1 + p + figure {
 
 h2 {
   font-size: 2rem;
+  margin-bottom: 0;
+  margin-top: 4rem;
 }
 
 h2,
@@ -165,15 +187,9 @@ h3 {
 h3,
 h3 a,
 h3 a:visited {
-  color: var(--inverse-fg);
   font-size: 1.1em;
 }
-h3 a:hover {
-  background-color: var(--traditional-bg);
-  color: var(--traditional-fg-a);
-}
 
-h2,
 h3,
 h4,
 h5,
@@ -209,6 +225,10 @@ html {
 
 li {
   margin: 0.4rem 0;
+}
+
+li p {
+  margin: 0 0 2rem 1rem;
 }
 
 nav {
@@ -325,6 +345,11 @@ video + video {
   text-transform: uppercase;
 }
 
+.gallery-item {
+  margin: 0.25em;
+  text-align: center;
+}
+
 .gallery-item img {
   cursor: zoom-in;
   margin: auto;
@@ -408,13 +433,16 @@ p:has(.gallery-item input:checked) + p {
 }
 
 .writing a {
-  display: block;
   padding: 0.2rem;
   text-decoration: none;
 }
 
 .writing li {
   margin: 0;
+}
+
+.writing h2 {
+  font-size: 2em;
 }
 
 .writing ul {

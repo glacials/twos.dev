@@ -286,6 +286,13 @@ _Type: `bool`_
 
 Whether the document is a post (i.e. has frontmatter specifying `type: post`).
 
+##### `{{"{{"}} .Preview }}` {#preview}
+
+_Type: `string`_
+
+A teaser for the document, such as a summary of its contents.
+If unset, the document's first paragraph will be used, if possible.
+
 ##### `{{"{{"}} .Shortname }}` {#shortname}
 
 _Type: `string`_
@@ -355,87 +362,66 @@ documents). This allows you to display posts sectioned by year.
 
 See [Document Fields](#fields) for a list of fields available to documents.
 
-##### `img` {#img}
-
-_Alias: `imgs`_
-
-Usage: `{{"{{"}} img[s] <caption> <imageshortname alttext>... }}`
-
-Render an image or images with a single caption. Image files must be present in
-this format:
-
-```plain
-public/img/<pageshortname>-<imageshortname>[-<light|dark>].<png|jpg|jpeg>
-```
-
-For example, to render one image with a caption and alt text:
-
-```template
-<!-- mypage.md -->
-
-{{"{{"}} img
-   "A caption."
-   "test1"
-   "Descriptive alt text of what the image is of, for assistive tech"
-}}
-```
-
-Result:
-
-{{ img
-   "A caption."
-   "test1"
-   "Descriptive alt text of what the image is of, for assistive tech"
-}}
-
-In this example, the image file must hold one or more of these forms:
-
-- `public/img/mypage-test1.jpg`
-- `public/img/mypage-test1-light.jpg`
-- `public/img/mypage-test1-dark.jpg`
-- `public/img/mypage-test1.jpeg`
-- `public/img/mypage-test1-light.jpeg`
-- `public/img/mypage-test1-dark.jpeg`
-- `public/img/mypage-test1.png`
-- `public/img/mypage-test1-light.png`
-- `public/img/mypage-test1-dark.png`
-
-If `-light` and/or `-dark` variants exist, they will be used when the user is
-in the respective dark mode setting.
-
-Any number of images can be rendered together with one caption beneath the
-group by passing multiple images and alt texts. They will appear next to each
-other when the page width allows it, or stacked vertically otherwise.
-
-```template
-{{"{{"}} imgs
-   "A pair of images."
-   "test1"
-   "Descriptive text of test1"
-   "test1"
-   "Descriptive text of test2"
-}}
-```
-
-Result:
-
-{{ imgs
-   "A pair of images."
-   "test1"
-   "Descriptive text of imagename1"
-   "test2"
-   "Descriptive text of imagename2"
-}}
-
 ##### `video` {#video}
 
 _Alias: `videos`_
 
 Usage: `{{"{{"}} video[s] <caption> <videoshortname alttext>... }}`
 
-Behaves exactly as `img` but searches for `mp4`/`mov` files instead
-and renders them in `<video>` tags.
+Render a video or videos with a single caption.
+Video files must be present in this format:
 
-Note that most browsers do not currently support varying a video
-source by light/dark mode setting, so the wrong variant may be
-displayed.
+```plain
+public/img/<pageshortname>-<videoshortname>[-<light|dark>].<mp4|mov>
+```
+
+For example, to render one video with a caption and alt text:
+
+```template
+<!-- mypage.md -->
+
+{{"{{"}} video
+   "A caption."
+   "example1"
+   "Descriptive alt text of what the video is, for assistive tech."
+}}
+```
+
+Result:
+
+{{ video
+   ""
+   "example1"
+   "Descriptive alt text of what the video is, for assistive tech"
+}}
+
+A caption.
+
+In this example, the video file must match one of:
+
+- `public/img/mypage-example1.mp4`
+- `public/img/mypage-example1.mov`
+
+Any number of images can be rendered together with one caption beneath the
+group by passing multiple images and alt texts. They will appear next to each
+other when the page width allows it, or stacked vertically otherwise.
+
+```template
+{{"{{"}} videos
+   "A pair of videos."
+   "example1"
+   "Descriptive text of example1."
+   "example22]"
+   "Descriptive text of example2."
+}}
+```
+
+Result:
+
+{{ videos
+   "A pair of videos."
+   "example1"
+   "Descriptive text of example1."
+   "example2"
+   "Descriptive text of example2."
+}}

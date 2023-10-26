@@ -117,6 +117,7 @@ type Document interface {
 	// If Layout returns an empty string, the document will be treated as a static
 	// asset and will be directly copied over without any template execution.
 	Layout() string
+	Preview() string
 	// Title returns the human-readable title of the document.
 	Title() string
 
@@ -157,6 +158,9 @@ type metadata struct {
 	// context, this is called "type". In Go we cannot use the "type"
 	// keyword, so we use "kind" instead.
 	Kind kind `yaml:"type"`
+	// Preview is a sentence-long blurb of the document,
+	// to be shown along with its title as a teaser of its contents.
+	Preview string `yaml:"preview"`
 	// Shortname is the short name of the document. This is used when
 	// picking a filename for the document, among other small and
 	// mostly-internal bookkeeping measures. It must never change.
@@ -287,8 +291,7 @@ func (d *textDocument) load() error {
 	}
 }
 
-// slurpHTML runs after HTML parsing has completed, extracting any information
-// from the HTML needed for processing.
+// slurpHTML extracts information needed for processing from the document's HTML.
 func (d *textDocument) slurpHTML() error {
 	if h1 := firstTag(d.root, atom.H1); h1 != nil {
 		for child := h1.FirstChild; child != nil; child = child.NextSibling {
@@ -305,6 +308,15 @@ func (d *textDocument) slurpHTML() error {
 		d.Shortname = filepath.Base(d.SrcPath)
 	}
 	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
+	if d.metadata.Preview == "" {
+		if p := firstTag(d.root, atom.P); p != nil {
+			for child := p.FirstChild; child != nil && d.metadata.Preview == ""; child = child.NextSibling {
+				if child.Type == html.TextNode {
+					d.metadata.Preview = child.Data
+				}
+			}
+		}
+	}
 
 	return nil
 }
@@ -446,11 +458,12 @@ func (d *textDocument) Execute(w io.Writer, t *template.Template) error {
 	return t.Execute(w, d)
 }
 
-func (d *textDocument) Layout() string { return "text_document" }
-func (d *textDocument) IsPost() bool   { return d.Kind == post }
-func (d *textDocument) IsDraft() bool  { return d.Kind == draft }
-func (d *textDocument) Now() time.Time { return time.Now() }
-func (d *textDocument) Title() string  { return d.metadata.Title }
+func (d *textDocument) Layout() string  { return "text_document" }
+func (d *textDocument) IsPost() bool    { return d.Kind == post }
+func (d *textDocument) IsDraft() bool   { return d.Kind == draft }
+func (d *textDocument) Now() time.Time  { return time.Now() }
+func (d *textDocument) Preview() string { return d.metadata.Preview }
+func (d *textDocument) Title() string   { return d.metadata.Title }
 
 func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
 func (d *textDocument) UpdatedAt() time.Time { return d.metadata.UpdatedAt }
@@ -640,8 +653,6 @@ func (d documents) Len() int {
 }
 
 func (d documents) Less(i, j int) bool {
-	// Index must be rendered after others in order for all writing to show on
-	// index. TODO: Fix, maybe by having posts() lazily evaluate the rest.
 	return d[i].CreatedAt().After(d[j].CreatedAt())
 }
 

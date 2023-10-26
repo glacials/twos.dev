@@ -157,6 +157,9 @@ func (d *galleryDocument) LoadTemplates(t *template.Template) error {
 // Layout returns the image container template name.
 func (d *galleryDocument) Layout() string { return "imgcontainer" }
 
+// Preview returns the empty string.
+func (d *galleryDocument) Preview() string { return "" }
+
 // Title returns a generic gallery title.
 func (d *galleryDocument) Title() string { return fmt.Sprintf("%s Photo Viewer", d.cfg.Name) }
 

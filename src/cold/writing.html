@@ -12,24 +12,25 @@ type: page
       {{ range posts }}{{ if .Category }}{{ continue }}{{ end }}{{ if lt
       .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
       <li>
-        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+        <h3><a href="/{{ .Shortname }}.html">{{ .Title }}</a></h3>
+        <p>{{ .Preview }} <a href="/{{ .Shortname }}.html">More &rarr;</a></p>
       </li>
       {{ end }}
       <li><a href="/archives.html">Archives &rarr;</a></li>
     </ul>
   </div>
 
-  {{ range $category, $posts := categories }}{{ if not $category }}{{ continue
-  }}{{ end }}
+  {{ range $category, $posts := categories }} {{ with $category }}
   <div>
     <h2>{{ $category }}s</h2>
     <ul>
       {{ range $posts }}
       <li>
-        <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+        <h3><a href="/{{ .Shortname }}.html">{{ .Title }}</a></h3>
+        <p>{{ .Preview }}</p>
       </li>
       {{ end }}
     </ul>
   </div>
-  {{ end }}
+  {{ end }} {{ end }}
 </div>

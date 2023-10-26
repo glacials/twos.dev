@@ -426,6 +426,11 @@ func (s *Substructure) Rebuild(src, dist string) error {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
+			fmt.Printf("  ↘ %s", pad("writing.html"))
+			if err := s.execute(s.DocByShortname("writing"), dist); err != nil {
+				return fmt.Errorf("can't rebuild index: %w", err)
+			}
+			fmt.Println(" ✓")
 			built = true
 		}
 
@@ -452,7 +457,7 @@ func (s *Substructure) DocByShortname(shortname string) *substructureDocument {
 			continue
 		}
 		base := filepath.Base(dest)
-		base, _, _ = strings.Cut(dest, ".")
+		base, _, _ = strings.Cut(base, ".")
 		if base == shortname {
 			return d
 		}

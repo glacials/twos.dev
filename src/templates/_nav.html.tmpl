@@ -17,6 +17,11 @@
     >
     -->
     <a
+      href="/now.html"
+      {{ if eq .Dest "now.html" }}class="selected"{{ end }}
+      >Now</a
+    >
+    <a
       href="/photos.html"
       {{ if eq .Dest "photos.html" }}class="selected"{{ end }}
       >Photos</a

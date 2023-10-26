@@ -2,14 +2,15 @@
 category: cocktail
 date: 2022-07-20
 filename: skyhopper.html
+preview: A recipe for a grasshopper-adjacent cocktail.
 type: post
 ---
 
 # Skyhopper
 
-{{img
-  "A grasshopper-adjacent cocktail." "smallglass" "Photo of a pale blue drink"
-}}
+![Photo of a pale blue drink.](/img/skyhopper-smallglass.JPEG)
+
+A grasshopper-adjacent cocktail.
 
 ## Recipe
 

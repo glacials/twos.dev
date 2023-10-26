@@ -6,8 +6,8 @@ type: post
 
 # Obsidian Plugins
 
-I run many Obsidian plugins and they're constantly changing, but below are the ones that
-have stuck around.
+I run many Obsidian plugins and they're constantly changing.
+These are the ones that have stuck around.
 
 - [Copy as HTML](https://github.com/jenningsb2/copy-as-html)
   - I treat this as “copy with formatting” so I can copy e.g. bulleted lists from my notes and paste them into an email to send to others; without it, the copied text is unparsed markdown

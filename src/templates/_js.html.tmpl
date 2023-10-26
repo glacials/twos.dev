@@ -27,4 +27,17 @@
       }, 1000);
     });
   }
+
+  // For Go developers, it's common to access the documentation for a package
+  // by navigating to the package's import path in the browser.
+  //
+  // GitHub Pages allows omitting ".html" from the path when rendering pages,
+  // so we'll selectively redirect to the package documentation if and only if
+  // ".html" is not present.
+  //
+  // Therefore, twos.dev/winter.html is the command documentation,
+  // and twos.dev/winter is the package documentation.
+  if (document.location.path === "/winter") {
+    window.location.replace("https://pkg.go.dev/twos.dev/winter");
+  }
 </script>

@@ -80,11 +80,9 @@ from two -- one via self-service for $25 and one via phone call for free.
 Then I made some chips, invited some friends over (pre-pandemic), and got to
 work.
 
-{{ img
-  "Taste testing hot sauces."
-  "trialing"
-  "several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping"
-}}
+![Several hot sauce bottles around a plate, with part of each bottle poured into a spot on the plate that allows for dipping](/img/hotsauce-trialing.jpg)
+
+Taste testing hot sauces.
 
 We selected a hot sauce called Pale Ale Chipotle and the company rated its
 spiciness as 8/10 (no Scoville rating).
@@ -94,11 +92,9 @@ spiciness as 8/10 (no Scoville rating).
 We're a small team with no designer, so I cracked open Acorn and spent way too
 long making way too ugly a label.
 
-{{ img
-  "The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute."
-  "label"
-  "a hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors"
-}}
+![A hot sauce label reading 'Race to the bottom: A speedrunner's hot sauce' in the Splits.io colors.](/img/hotsauce-label.jpeg)
+
+The final label for Race to the Bottom. We were also trialing an energy drink, but scrapped it at the last minute.
 
 The white label company sent me a template with requirements such as how to
 print the volume of the sauce within compliance, and the right proportions for
@@ -116,13 +112,10 @@ The response when the clock struck midnight was exactly as we hoped.
 —Dark (@DarkRTA)
 [April 1, 2020](https://twitter.com/DarkRTA/status/1245495897875759108)
 
-{{ imgs
-  "Feedback during and after launch."
-  "feedback-1"
-  "Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'"
-  "feedback-2"
-  "Screenshot a Discord channel where someone asks 'did anyone get the item' and then someone else replies with a photo of their hot sauce bottle saying 'Yep lmao'. A third person says 'whoa you got yours already? nice. i can't believe it's real lol. @Glacials the madman'"
-}}
+![Screenshot a Discord channel where someone asks 'it is at this point that I begin to wonder how far I'll go for the meme, with a screenshot of them at the last step of the hot sauce payment flow, with an unclicked button that says 'Pay'. Below that, they say 'I had to know' and attached another screenshot of the order being completed. They then said 'this is gonna be like that movie Accepted where you accidentally make a clickable button on a fake website and then end up learning how to meet the demand, isn't it?'](/img/hotsauce-feedback-1-dark.png)
+![Screenshot a Discord channel where someone asks 'did anyone get the item' and then someone else replies with a photo of their hot sauce bottle saying 'Yep lmao'. A third person says 'whoa you got yours already? nice. i can't believe it's real lol. @Glacials the madman'](/img/hotsauce-feedback-2-dark.png)
+
+Feedback during and after launch.
 
 ### Shipping
 
