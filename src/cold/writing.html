@@ -5,11 +5,11 @@ type: page
 ---
 
 <h1>Writing</h1>
-<div class="writing" style="display: flex; flex-wrap: wrap">
+<div class="writing">
   <div>
     <h2>General</h2>
     <ul>
-      {{ range posts }} {{ if .Category }}{{ continue }}{{ end }} {{ if lt
+      {{ range posts }}{{ if .Category }}{{ continue }}{{ end }}{{ if lt
       .CreatedAt.Year (add now.Year -1) }}{{ continue }}{{ end }}
       <li>
         <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
@@ -19,7 +19,7 @@ type: page
     </ul>
   </div>
 
-  {{ range $category, $posts := categories }} {{ if not $category }}{{ continue
+  {{ range $category, $posts := categories }}{{ if not $category }}{{ continue
   }}{{ end }}
   <div>
     <h2>{{ $category }}s</h2>

@@ -4,7 +4,7 @@ date: 2022-05-25
 filename: apple.html
 toc: true
 type: post
-updated: 2023-09-27
+updated: 2023-10-25
 ---
 
 # From Google to Apple
@@ -178,11 +178,9 @@ see an overview, visit the [table of contents](#toc).
 
 ### Key {#key}
 
-✔ = Switch successful; happily using Apple product
-
-ⅹ = Switch unsuccessful; moved back to Google or to another product
-
-⚠ = Nuance ahead
+- ✔ Switch successful; happily using Apple product
+- ⅹ Switch unsuccessful; moved back to Google or to another product
+- ⚠ Nuanced
 
 ### ✔ ArchLinux → macOS {#macos}
 
@@ -707,7 +705,7 @@ Meet also supports more types of screen sharing in Chrome, like sharing one tab.
 Ecosystem effects of Safari include Handoff (move a browsing session between
 devices smoothly) and the downright bonkers power efficiency of Safari on macOS.
 
-#### ⚠ iCloud Keychain {#keychain}
+#### ✔ iCloud Keychain {#keychain}
 
 When I initially moved to Safari,
 iCloud Keychain was not powerful enough to replace my use of 1Password.
@@ -715,11 +713,26 @@ It did not support multiple domain names per website,
 arbitrary text notes,
 or custom names for entries.
 
-As of 2023-09, these problems seem solved.
-I've started a second attempt to move over and will update this section with my thoughts.
+As of 2023 September, these problems seem solved.
+There are stil some shortfalls,
+but [Simon Støvring's post](https://simonbs.dev/posts/moving-from-1password-to-icloud-keychain/) helped shore them up;
+I've used his locked-notes strategy for non-password things I previously kept in 1Password,
+and all is well so far.
+
+However, there are still some small downsides:
+
+- Passwords are accessed from within the Preferences pane of Safari, macOS, or iOS.
+  - The difficulty of accessing them can be completely solved using [this Shortcut](https://www.icloud.com/shortcuts/4cd82a3e2a5c4fc78b8f1a488c5b76e7), but it can be awkward to refresh authentication with e.g. an Exchange account, as you cannot have two System Settings windows open at once.
+- Domain names for passwords are not directly editable, possibly for security reasons. To assign one password to multiple domains, you have to use the same credentials for another website and depend on it to invisibly merge them behind the scenes, which it often does, but in a way that's hard to diagnose if it doesn't.
+- There's no "Archive" feature, so I have to decide if passwords I _probably_ won't need again should be front-and-center or deleted forever.
+- Windows support for Chrome exists via an extension that talks to the local iCloud background application, but requires typing a verification code every reboot and sometimes doesn't autofill quickly or at all.
+
+I'm hoping these get fixed, but for now I'm happy enough working around them for the benefits.
 
 Ecosystem effects of iCloud Keychain include
-faster and more fluid autofill support in Safari, on both macOS and iOS.
+faster and more fluid autofill support in Safari, on both macOS and iOS;
+automatic iCloud synchronization,
+and easily setup of password groups.
 
 ### ✔ Google Sheets → Numbers {#numbers}
 
@@ -741,7 +754,7 @@ Ecosystem effects of Numbers include Spotlight integration for quickly opening a
 (To be filled in; I have not had much Pages experience.)
 -->
 
-### ⅹ Keep → Apple Notes {#notes}
+### ✔ Keep → Apple Notes {#notes}
 
 I value simplicity and elasticity in notetaking—get out of my way and let me
 write. Let me deal with organization later. Keep gives me that. Its layout is hard to
@@ -756,69 +769,17 @@ a curated and categorized filing cabinet. One note in Notes might be several doz
 Keep, so the effort spent on curation is not so large, and neither is the impact of
 only-okay search.
 
-But honestly neither of them is fantastic, and the choice between them is a wash.
+After moving to Notes.app I jumped around to Org-mode, Bear, and Obsidian,
+but ultimately landed up back in Notes.
+I only wish there were a non-hacky way to export from it,
+but I landed back in Notes despite that absence, not because of it.
+(I started jumping around specifically because of it.)
 
-Ecosystem effects of Notes include Shortcuts, cross-app drag-and-drop, and "quick notes"
-(make a note using an OS-universal gesture on macOS or iOS). I
-use a shortcut to create a new note titled and sorted correctly before
-starting a Chinese lesson.
-
-#### Departure {#byenotes}
-
-I switched off Apple Notes late 2022 because I
-discovered the difficulty of getting notes out of it. There are third party
-solutions that work okay, but the thought that Apple could break them at any moment
-caused me to switch out of principle and fear. I exported what I could and started
-looking for alternatives.
-
-My foray into Emacs had been happening in the background, so I tried
-[Org-mode](https://orgmode.org/) and quickly became enamored. It took over
-my notetaking duties because of how much its flexibility and breadth
-dwarfed what I was used to. I never truly understood the adage "Emacs is a great
-operating system but lacks a good text editor" until I tried Emacs + Org-mode. It's more
-appropriate to draw comparisons between software suites (e.g. Google Workspace vs.
-Microsoft Office vs. Emacs) than it is to compare it to other text editors.
-
-<!-- Maybe a good future blog post but doesn't belong on this page
-Org files can in an instant become calendar
-items, reminders, source code, web pages, anything. Source code blocks can be
-evaluated. Todo lists can have
-custom states per-file like `TODO`/`BLOCKED`/`KILLED`/ `DONE` in one and
-`INVITED`/`ACCEPTED`/`DECLINED` in another. TODO item states
-of course can be changed lexicographically, but also _logically_—Org understands them
-and can remix them in any way. A few keystrokes (`C-c a t`) can collect TODOs
-from all files and show them in one place (where you can still mark them off and persist
-to the right file). Another can show them on a calendar according to due date.
-
-I expected Org-mode to be a syntax, but it's also the visual language that comes with
-it. Note "source code" is plaintext, but Emacs can render the characters into UI as you type them, with no
-separate render step or view, like how
-ligatures work in code editors but with complexity reaching all the way to buttons,
-checkboxes, input fields, and dropdowns, all usable with a mouse or keyboard.
-
-{{ img
-   "Blue text can be clicked to perform actions. Underlined text is links. The search box can be typed in."
-   "emacs"
-   "A screenshot of an Emacs help page that is clearly a text file, with line numbers and a cursor and all, but that also has interactive components like buttons, and links, and a search box rendered inline with the text. The interactive components still feel like they are rendered with basic unicode, as they are boxy without pretty gradients and such."
-}}
-
-With the Emacs extensions ecosystem, you can even sychronize a lot of these features
-with other tools like Google Calendar, Apple Reminders, etc.
--->
-
-However, it is still plagued by a lack of good mobile options. As well, after 12 years of Vim I know how much work I'll put into
-achieving a perfect setup, and I just don't have it in me this time. As the years tick by,
-the long-term benefits of that up-front investment tick down.
-
-[Obsidian](https://obsidian.md/) has been my saving grace, which is like Org-mode if it
-were made twenty years later. Its plugin ecosystem handles 80% of the crazy things Org's
-does for 20% of the hassle. Browsing Obsidian
-plugins gives me the same feeling of wonder browsing [MELPA](https://melpa.org/)
-did.
-
-It has a fantastic mobile experience and built-in sync of everything from notes to
-preferences to plugins. Most importantly, it all "just works". So I've switched to
-Obsidian as of March 2023 and haven't looked back.
+Ecosystem effects of Notes include Shortcuts,
+one-click "upgrade" to a Pages document,
+a collaboration UX that spans Messages, Mail, AirDrop, and Reminders,
+cross-app drag-and-drop,
+and "quick notes" which use OS-wide gestures to capture ideas into a staging area quickly à la [Org Capture](https://orgmode.org/manual/Capture.html).
 
 ### ✔ Tasks → Reminders {#reminders}
 

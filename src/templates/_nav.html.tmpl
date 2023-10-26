@@ -1,47 +1,47 @@
 <nav class="mt-0">
   <div class="brand">
-    <a
-      href="/"
-      {{ if eq .Dest "index.html" }}class="selected"{{ end }}
-      >twos.dev</a
-    >
+    {{ if (ne .Dest "index.html") }}
+      <a
+        href="/"
+        {{ if eq .Dest "index.html" }}class="selected"{{ end }}
+        >Ben Carlsson</a
+      >
+    {{ end }}
   </div>
-  {{ if or (eq .Dest "index.html") (eq .Dest "guide.html") (eq .Dest "photos.html") (eq .Dest "software.html") (eq .Dest "writing.html") }}
-    <div class="items">
-      <!--
+  <div class="items">
+    <!--
     <a
       href="/cv.html"
       {{ if eq .Dest "cv.html" }}class="selected"{{ end }}
       >CV</a
     >
     -->
-      <a
-        href="/photos.html"
-        {{ if eq .Dest "photos.html" }}class="selected"{{ end }}
-        >Photos</a
-      >
-      <a
-        href="/software.html"
-        {{ if eq .Dest "software.html" }}class="selected"{{ end }}
-        >Software</a
-      >
-      <a
-        href="/guide.html"
-        {{ if eq .Dest "guide.html" }}class="selected"{{ end }}
-        >User Guide</a
-      >
-      <a
-        href="/writing.html"
-        {{ if eq .Dest "writing.html" }}class="selected"{{ end }}
-        >Writing</a
-      >
-      <!--
+    <a
+      href="/photos.html"
+      {{ if eq .Dest "photos.html" }}class="selected"{{ end }}
+      >Photos</a
+    >
+    <a
+      href="/software.html"
+      {{ if eq .Dest "software.html" }}class="selected"{{ end }}
+      >Software</a
+    >
+    <a
+      href="/guide.html"
+      {{ if eq .Dest "guide.html" }}class="selected"{{ end }}
+      >User Guide</a
+    >
+    <a
+      href="/writing.html"
+      {{ if eq .Dest "writing.html" }}class="selected"{{ end }}
+      >Writing</a
+    >
+    <!--
 				<a
 					href="/newsletter.html"
 					{{ if eq .Dest "newsletter.html" }}class="selected"{{ end }}
 					>Newsletter</a
 											 >
 				<span class="arrow"></span>-->
-    </div>
-  {{ end }}
+  </div>
 </nav>

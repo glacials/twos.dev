@@ -6,7 +6,7 @@ type: page
 
 # Photos
 
-I post thirteen photos at the end of every year.
+I post thirteen photos per year.
 
 {{ template "gallery" "2022" }}
 {{ template "gallery" "2021" }}

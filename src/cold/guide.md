@@ -7,11 +7,9 @@ updated: 2023-03-28
 
 # User Guide
 
-<center>
-_This page is in the form of [Abby Falik's user
+This page is in the form of [Abby Falik's user
 guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
-and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._
-</center>
+and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide.
 
 ---
 
@@ -33,7 +31,7 @@ Ask me about it some time.
 
 Here are the cliffs notes.
 
-<h4>1. I work best with coordinated *why*s and uncoordinated *how*s.</h4>
+#### 1. I work best with coordinated *why*s and uncoordinated *how*s.
 
 Coordination is slow. As long as we share a common vision,
 I trust you to make
@@ -47,13 +45,13 @@ I trust you to do the research and make the call, then share your findings async
 ].
 [More](https://communitywiki.org/wiki/DoOcracy)
 
-<h4>2. I prefer asynchrony.</h4>
+#### 2. I prefer asynchrony.
 
 Social interaction [costs me brainpower](autism.html#masking)
 so I am more helpful and better at problem-solving when writing than when speaking.
 In either case I'll understand your words better when given time to digest.
 
-<h4>3. I don't handle interruptions well.</h4>
+#### 3. I don't handle interruptions well.
 
 Notifications for my Slack and email are often off, even for DMs.
 A thirty second conversation sets my brain back 15 minutes, so this is how I protect my productivity.
@@ -62,7 +60,7 @@ If it's urgent, use the oncall flow.
 [More](img/guide-programmerinterrupted.png),
 [even more](http://www.paulgraham.com/makersschedule.html)
 
-<h4>4. I prefer tickets to Slack.</h4>
+#### 4. I prefer tickets to Slack.
 
 I'm forgetful.
 I curb this with
@@ -74,11 +72,11 @@ like code reviews or ticket comments.
 
 I have a one-business-day SLA on anything in my email inbox.
 
-<h4>5. I focus on customer problems.</h4>
+#### 5. I focus on customer problems.
 
 Even if a solution "feels right" be prepared for me to ask what customer problem it solves.
 
-<h4>6. [Don't say hello](https://nohello.net/).</h4>
+#### 6. [Don't say hello](https://nohello.net/).
 
 See `2` and `3`.
 
@@ -86,7 +84,7 @@ See `2` and `3`.
 
 I'm always working on myself, but some dimensions are tougher to crack than others. Beware the following.
 
-<h4>A. I go rogue.</h4>
+#### A. I go rogue.
 
 Sometimes I'm so passionate about fixing or building something that
 I'll do it without tracking because the overhead—or its emotional burden—
@@ -96,7 +94,7 @@ Some
 have come out of having the freedom to do this;
 see #1 above.
 
-<h4>B. I work weird hours.</h4>
+#### B. I work weird hours.
 
 Motivation strikes me randomly—sometimes during a workday,
 but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight.
