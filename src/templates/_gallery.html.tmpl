@@ -8,7 +8,6 @@
   {{ range (index gallery .) }}
     <a href="{{ .PageLink }}">
       <img
-        class="silly"
         src="{{ .WebPath }}"
         srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
         sizes="{{ range .Thumbnails }}

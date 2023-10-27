@@ -12,7 +12,7 @@
           <div class="draft">Draft</div>
         {{ end }}
         {{ if and (.IsPost) (not .CreatedAt.IsZero) }}
-          <small style="text-align: center; display: block">
+          <div class="publish-date">
             <i>
               published
               {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
@@ -20,7 +20,7 @@
                 {{ .UpdatedAt.Format "2006 January" }}
               {{ end }}</i
             >
-          </small>
+          </div>
         {{ end }}
         {{ with .Category }}
           <div
@@ -58,7 +58,6 @@
           </small>
         </p>
       </footer>
-      {{ template "src/templates/_nav.html.tmpl" }}
     </div>
     {{ template "src/templates/_js.html.tmpl" }}
   </body>
