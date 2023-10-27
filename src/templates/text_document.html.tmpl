@@ -39,11 +39,15 @@
             <i>
               {{ with src }}
                 source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                  target="_blank"
                   >{{ . }}</a
                 >
               {{ else }}
-                <a href="https://github.com/glacials/twos.dev">Source</a>
+                <a href="https://github.com/glacials/twos.dev" target="_blank"
+                  >Source</a
+                >
               {{ end }}
               <br />
               {{ if not .CreatedAt.IsZero }}

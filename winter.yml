@@ -5,6 +5,13 @@ author:
 debug: false
 description: misc thoughts
 dist: dist
-hostname: twos.dev
 name: twos.dev
 since: 2021
+
+development:
+  protocol: http
+  host: localhost
+  port: 8100
+production:
+  protocol: https
+  host: twos.dev

@@ -143,7 +143,6 @@ func (r *Reloader) listen() {
 			if event.Op == fsnotify.Chmod {
 				continue
 			}
-			fmt.Println("event:", event)
 			if err := r.Substructure.Rebuild(event.Name, dist); err != nil {
 				log.Println(err.Error())
 			}

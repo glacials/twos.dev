@@ -7,12 +7,6 @@ updated: 2023-03-28
 
 # User Guide
 
-This page is in the form of [Abby Falik's user
-guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
-and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide.
-
----
-
 Below is what I value at work. This is descriptive of me, not
 prescriptive to you; treat it as a set of FYIs, not requirements. Use or ignore
 at your discretion, and share your own guide with me!
@@ -92,12 +86,18 @@ is bigger than the job itself.
 Some
 [adored features](https://twitter.com/search?q=https%3A%2F%2Ftwitter.com%2Fglcls%2Fstatus%2F720689621466619904&src=typed_query)
 have come out of having the freedom to do this;
-see #1 above.
+see `1` above.
 
 #### B. I work weird hours.
 
-Motivation strikes me randomly—sometimes during a workday,
+Inspiration strikes me randomly—sometimes during a workday,
 but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight.
-To counterbalance, I shorten my workdays and the math roughly works out.
+It's better for both of us if I harness that energy before it evaporates.
+
+To counterbalance, I shorten my standard workday and the math roughly works out.
 If you see emails or commits from me with unhealthy-feeling timestamps,
 keep in mind my default workday is at ~70% capacity.
+
+<small><center>_This page is in the form of [Abby Falik's user
+guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
+and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._</center></small>

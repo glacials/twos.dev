@@ -8,8 +8,6 @@ updated: 2023-10-26
 
 # What I'm Doing Now
 
-<center>_This page is in the form of [Derek Sivers's `/now` page](https://sive.rs/now)._</center>
-
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
@@ -103,3 +101,7 @@ I know a lot more about the fediverse than when I started.
 But the benefits started to flatten and the costs were high,
 so I recently moved to Hachyderm.
 Their code of ethics and governance model is impressive.
+
+---
+
+<small><center>_This page is in the form of [Derek Sivers's `/now` page](https://sive.rs/now)._</center></small>

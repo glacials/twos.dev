@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"log"
 	"net/http"
+	"net/url"
 	"os"
 	"os/signal"
 	"syscall"
@@ -56,6 +57,10 @@ func newBuildCmd() *cobra.Command {
 			}
 
 			if *serve {
+				baseURL := url.URL{
+					Scheme: "http",
+					Host:   fmt.Sprintf("%s:%d", "localhost", port),
+				}
 				stop := make(chan struct{})
 				reloader := Reloader{
 					Ignore:       ignoreDirectories,
@@ -79,8 +84,7 @@ func newBuildCmd() *cobra.Command {
 					return err
 				}
 
-				url := fmt.Sprintf("http://localhost:%d", port)
-				log.Printf("Serving %s on %s", dist, url)
+				log.Printf("Serving %s on %s", dist, baseURL.String())
 
 				<-stop
 				return nil

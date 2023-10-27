@@ -19,32 +19,38 @@ const (
 
 // Config is a configuration for the Winter build.
 type Config struct {
-	// Author is the information for the website author. This is used in metadata such as
-	// that of the RSS feed.
-	Author feeds.Author `yaml:",omitempty"`
+	// Author is the information for the website author.
+	// This is used in metadata such as that of the RSS feed.
+	Author feeds.Author `yaml:"author,omitempty"`
 	// Debug is a flag that enables debug mode.
-	Debug bool `yaml:",omitempty"`
-	// Description is the Description of the website. This is used as metadata
-	// for the RSS feed.
-	Description string `yaml:",omitempty"`
-	// Dist is the path to the distribution directory. If blank,
-	// defaults to "./dist" relative to the working directory.
-	Dist string `yaml:",omitempty"`
-	// Hostname is the host portion of the website URL (e.g. "one.twos.dev" for a URL of
-	// "https://one.twos.dev/index.html"). This is used in various backlinks, like those
-	// in the RSS feed.
-	Hostname string `yaml:",omitempty"`
-	// Name is the name of the website. This is used in various places
-	// in and out of templates.
-	Name string `yaml:",omitempty"`
-	// Since is the year the website was established, whether through
-	// Winter or otherwise. This is used as metadata for the RSS feed.
+	Debug bool `yaml:"debug,omitempty"`
+	// Development contains options specific to development.
+	// They have no impact when building for production.
+	Development struct {
+		// URL is the base URL you will connect to while developing your website or Winter.
+		// If blank, it defaults to "http://localhost:8100".
+		URL string `yaml:"url,omitempty"`
+	} `yaml:"development,omitempty"`
+	// Description is the Description of the website.
+	// This is used as metadata for the RSS feed.
+	Description string `yaml:"description,omitempty"`
+	// Dist is the path to the distribution directory.
+	// If blank, defaults to "./dist" relative to the working directory.
+	Dist string `yaml:"dist,omitempty"`
+	// Hostname is the host portion of the website URL
+	// (e.g. "one.twos.dev" for a URL of "https://one.twos.dev/index.html").
+	// This is used in various backlinks, like those in the RSS feed.
+	Hostname string `yaml:"hostname,omitempty"`
+	// Name is the name of the website.
+	// This is used in various places in and out of templates.
+	Name string `yaml:"name,omitempty"`
+	// Since is the year the website was established, whether through Winter or otherwise.
+	// This is used as metadata for the RSS feed.
 	//
 	// TODO: Use this for copyright in page footer
-	Since int `yaml:",omitempty"`
-	// Src is an additional list of directories to search
-	// for source files beyond ./src.
-	Src []string `yaml:",omitempty"`
+	Since int `yaml:"since,omitempty"`
+	// Src is an additional list of directories to search for source files beyond ./src.
+	Src []string `yaml:"srca,omitempty"`
 }
 
 func NewConfig() (Config, error) {
@@ -61,6 +67,9 @@ func NewConfig() (Config, error) {
 	}
 	if err := yaml.Unmarshal(f, &c); err != nil {
 		return Config{}, err
+	}
+	if c.Development.URL == "" {
+		c.Development.URL = "http://localhost:8100"
 	}
 	for i := range c.Src {
 		c.Src[i] = os.ExpandEnv(strings.ReplaceAll(c.Src[i], "~", "$HOME"))

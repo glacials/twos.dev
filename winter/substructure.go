@@ -21,8 +21,10 @@ import (
 // Substructure is a graph of documents on the website, generated with read-only
 // operations. It will later be fed into a renderer.
 type Substructure struct {
-	cfg  Config
-	docs documents
+	cfg Config
+	// devURL is [twos.dev/winter.Substructure.cfg.Development.URL] unmarshaled into a [net/url.URL].
+	devURL *url.URL
+	docs   documents
 	// photos is a map of gallery name to slice of photos in that gallery.
 	photos map[string][]*galleryDocument
 }
@@ -82,7 +84,14 @@ func (d *substructureDocument) Shortname() string {
 // on the filesystem. Further calls are needed to build the full graph of
 // content and render it to HTML.
 func NewSubstructure(cfg Config) (*Substructure, error) {
-	s := Substructure{cfg: cfg}
+	devURL, err := url.Parse(cfg.Development.URL)
+	if err != nil {
+		return nil, fmt.Errorf("cannot parse config development.url %q: %w", cfg.Development.URL, err)
+	}
+	s := Substructure{
+		cfg:    cfg,
+		devURL: devURL,
+	}
 	return &s, s.discover()
 }
 
@@ -389,7 +398,7 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			}
 			for d := range doc.Dependencies() {
 				if d == src {
-					fmt.Printf("  ↗ %s", pad(dest))
+					fmt.Printf("  ↗ %s", pad(s.devURL.JoinPath(dest).String()))
 					if err := s.execute(doc, dist); err != nil {
 						return fmt.Errorf(
 							"can't rebuild %s upstream dependency %s: %w",
@@ -403,7 +412,7 @@ func (s *Substructure) Rebuild(src, dist string) error {
 				}
 			}
 			if doc.Source == src {
-				fmt.Printf("  → %s", pad(dest))
+				fmt.Printf("  → %s", pad(s.devURL.JoinPath(dest).String()))
 				if err := s.execute(doc, dist); err != nil {
 					return fmt.Errorf("can't rebuild changed file %s: %w", src, err)
 				}
@@ -412,12 +421,12 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			}
 		}
 		if d := s.DocBySrc(src); d != nil && d.IsPost() {
-			fmt.Printf("  ↘ %s", pad("archives.html"))
+			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("archives.html").String()))
 			if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
-			fmt.Printf("  ↘ %s", pad("writing.html"))
+			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("writing.html").String()))
 			if err := s.execute(s.DocByShortname("writing"), dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}

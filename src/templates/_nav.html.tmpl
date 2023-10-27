@@ -1,9 +1,13 @@
 <nav class="primary">
   <div class="brand">
     <a
-      href="/"
       {{ if eq .Dest "index.html" }}class="selected"{{ end }}
-      >Ben Carlsson</a
+      href="/"
+      style="display: flex; align-items: center;"
+      ><img alt="" src="/img/me.jpg" style="height: 3rem;" /><span
+        style="margin-left: 1rem"
+        >Ben Carlsson</span
+      ></a
     >
   </div>
   <div class="items">

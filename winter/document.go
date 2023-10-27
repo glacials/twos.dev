@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"html/template"
 	"io"
+	"net/url"
 	"os"
 	"path/filepath"
 	"regexp"
@@ -435,6 +436,9 @@ func (d *textDocument) Build() ([]byte, error) {
 	if err := d.highlightCode(); err != nil {
 		return nil, fmt.Errorf("cannot highlight %q: %w", d.Shortname, err)
 	}
+	if err := d.openExternalLinksInNewTab(); err != nil {
+		return nil, fmt.Errorf("cannot set targets on <a> tags for %q: %w", d.Shortname, err)
+	}
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
 		return nil, fmt.Errorf("cannot render HTML to build %q: %w", d.Shortname, err)
@@ -491,9 +495,9 @@ func (d *textDocument) fillTOC() error {
 			}
 			// Replace the <h*> tag with a <span>
 			wrapper := &html.Node{
-				Type:     html.ElementNode,
 				Data:     atom.Span.String(),
 				DataAtom: atom.Span,
+				Type:     html.ElementNode,
 			}
 			for child := n.FirstChild; child != nil; child = child.NextSibling {
 				child, err := clone(child)
@@ -540,7 +544,7 @@ func (d *textDocument) fillTOC() error {
 		return err
 	}
 
-	// Ensure updates to some templates cause rebuilds
+	// Ensure updates to TOC templates cause rebuilds for this document.
 	d.dependencies[toctmpl.Name()] = struct{}{}
 	d.dependencies[subtoctmpl.Name()] = struct{}{}
 
@@ -595,6 +599,45 @@ func (d *textDocument) highlightCode() error {
 		originalPre.Parent.RemoveChild(originalPre)
 	}
 
+	return nil
+}
+
+func (d *textDocument) openExternalLinksInNewTab() error {
+	for _, a := range allOfTypes(d.root, map[atom.Atom]struct{}{atom.A: {}}) {
+		if err := d.openExternalLinkInNewTab(a); err != nil {
+			return err
+		}
+	}
+	return nil
+}
+
+func (d *textDocument) openExternalLinkInNewTab(a *html.Node) error {
+	var href *html.Attribute
+	for _, attr := range a.Attr {
+		switch attr.Key {
+		case "target":
+			// Don't overwrite explicitly set targets.
+			return nil
+		case "href":
+			href = &attr
+		}
+	}
+	if href == nil {
+		// Probably an <a name="..."> element.
+		return nil
+	}
+	url, err := url.Parse(href.Val)
+	if err != nil {
+		return fmt.Errorf("cannot parse link %q: %w", href.Val, err)
+	}
+	if url.Host == "" {
+		// Don't make internal links open in new tabs.
+		return nil
+	}
+	a.Attr = append(a.Attr, html.Attribute{
+		Key: "target",
+		Val: "_blank",
+	})
 	return nil
 }
 

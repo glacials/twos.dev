@@ -79,8 +79,8 @@ We've even fallen into some typical office behaviors:
   Enabling it using Discord has worked very well for us over the last six
   months, and we didn't even have to build anything.
 
-  Thanks to <a href="https://discordapp.com">Discord</a> for making such a
-  flexible platform. Thanks to <a href="https://yourbase.io">YourBase</a> for
+  Thanks to <a href="https://discordapp.com" target="_blank">Discord</a> for making such a
+  flexible platform. Thanks to <a href="https://yourbase.io" target="_blank">YourBase</a> for
   being so open to crazy ideas. (Check us out if your CI is slow.)
 
   ["The Pop-In"](https://www.youtube.com/watch?v=KzOv2jrC1I8)
