@@ -35,13 +35,12 @@ const (
 	encodingMarkdown
 	encodingOrg
 
-	styleWrapper = "<span style=\"font-family: sans-serif\">$0</span>"
-	tocEl        = atom.Ol
-	toc          = "<ol id=\"toc\">{{.Entries}}</ol>"
-	tocEntry     = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
-	tocMax       = 5
-	tocMin       = 2
-	tocReturn    = `
+	tocEl     = atom.Ol
+	toc       = "<ol id=\"toc\">{{.Entries}}</ol>"
+	tocEntry  = "<li><a href=\"#{{.Anchor}}\">{{.Section}}</a></li>"
+	tocMax    = 5
+	tocMin    = 2
+	tocReturn = `
 <span style="margin-left:0.5em">
 	<a href="#{{.Anchor}}" style="text-decoration:none">#</a>
 	<a href="#toc" style="text-decoration:none">&uarr;</a>
@@ -58,7 +57,9 @@ var (
 		atom.H5: 5,
 		atom.H6: 6,
 	}
-	replacements = map[string]string{
+
+	styleWrapper = []byte("<span style=\"font-family: sans-serif\">$0</span>")
+	replacements = map[string][]byte{
 		// Break some special characters out of monospace homogeneity
 		"—":       styleWrapper, // Em dash
 		"&mdash;": styleWrapper, // Em dash
@@ -73,8 +74,8 @@ var (
 		"⁃": styleWrapper, // Hyphen bullet
 		"⁓": styleWrapper, // Swung dash
 
-		"&#34;": "\"",
-		"&#39;": "'",
+		"&#34;": []byte("\""),
+		"&#39;": []byte("'"),
 	}
 )
 
@@ -85,37 +86,37 @@ type Document interface {
 	// Category returns an optional category for the document. This is used
 	// by templates for styling and display.
 	Category() string
-	// Dependencies returns a set of filepaths this document depends on. A
-	// dependency is defined as a file that, when changed, should cause any
-	// browser displaying this document to refresh.
+	// Dependencies returns a set of filepaths this document depends on.
+	// A dependency is defined as a file that, when changed,
+	// should cause any browser displaying this document to refresh.
 	Dependencies() map[string]struct{}
-	// Dest returns the desired final path of the document, relative to the web
-	// root.
+	// Dest returns the desired final path of the document.
+	// The path is relative to the web root and includes the filename.
 	Dest() (string, error)
-	// Execute executes the given template in the context of the document (i.e.
-	// with whatever variables the template needs to execute successfully). It
-	// writes the resulting bytes to the given writer.
+	// Execute executes the given template in the context of the document
+	// (i.e. with whatever variables the template needs to execute successfully).
+	// It writes the resulting bytes to the given writer.
 	//
-	// If the document does not use templates, Execute writes the final document
-	// bytes to the given writer directly.
+	// If the document does not use templates,
+	// Execute writes the final document bytes to the given writer directly.
 	Execute(w io.Writer, t *template.Template) error
 	// IsDraft returns whether the document is of type draft.
 	IsDraft() bool
 	// IsPost returns whether the document is of type post.
 	IsPost() bool
-	// Layout returns the extensionless name of the base template to use for the
-	// document. It must be in src/templates. For example, to use
-	// src/templates/text_document.html.tmpl as the layout, Layout should return
-	// "text_document".
+	// Layout returns the path to the base template to use for the document,
+	// relative to the project root.
 	//
-	// This will be the template that gets executed to render the document. This
-	// is usually not the document itself, but a template used by all documents of
-	// its type. The document will dynamically be inserted into a template called
-	// "body", so this template should embed that template like `{{ template
-	// "body" }}`.
+	// This will be the template that gets executed to render the document.
+	// This is usually not the document itself,
+	// but a base template that embeds it while adding headers, footers, etc.
 	//
-	// If Layout returns an empty string, the document will be treated as a static
-	// asset and will be directly copied over without any template execution.
+	// The layout template must embed the document template with:
+	//
+	//     {{ template "body" }}
+	//
+	// If Layout returns an empty string,
+	// the document is a static asset and will be copied without any template execution.
 	Layout() string
 	Preview() string
 	// Title returns the human-readable title of the document.
@@ -421,22 +422,22 @@ func (d *textDocument) parseOrg() error {
 
 func (d *textDocument) Build() ([]byte, error) {
 	if err := d.load(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cannot load %q: %w", d.Shortname, err)
 	}
 	if err := d.slurpHTML(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cannot slurp HTML to build %q: %w", d.Shortname, err)
 	}
 	if d.TOC {
 		if err := d.fillTOC(); err != nil {
-			return nil, err
+			return nil, fmt.Errorf("cannot generate table of contents for %q: %w", d.Shortname, err)
 		}
 	}
 	if err := d.highlightCode(); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cannot highlight %q: %w", d.Shortname, err)
 	}
 	var buf bytes.Buffer
 	if err := html.Render(&buf, d.root); err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cannot render HTML to build %q: %w", d.Shortname, err)
 	}
 	b := buf.Bytes()
 	for old, new := range replacements {
@@ -444,7 +445,7 @@ func (d *textDocument) Build() ([]byte, error) {
 		if err != nil {
 			return nil, err
 		}
-		b = re.ReplaceAll(b, []byte(new))
+		b = re.ReplaceAll(b, new)
 	}
 	return b, nil
 }
@@ -458,18 +459,23 @@ func (d *textDocument) Execute(w io.Writer, t *template.Template) error {
 	return t.Execute(w, d)
 }
 
-func (d *textDocument) Layout() string  { return "text_document" }
+func (d *textDocument) Layout() string  { return "src/templates/text_document.html.tmpl" }
 func (d *textDocument) IsPost() bool    { return d.Kind == post }
 func (d *textDocument) IsDraft() bool   { return d.Kind == draft }
 func (d *textDocument) Now() time.Time  { return time.Now() }
 func (d *textDocument) Preview() string { return d.metadata.Preview }
 func (d *textDocument) Title() string   { return d.metadata.Title }
 
+// CreatedAt returns the time at which the document was published.
+// This is not generated automatically; it is up to the author's discretion.
 func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
+
+// UpdatedAt returns the time at which the document was most recently meaningfully updated.
+// This is not generated automatically; it is up to the author's discretion.
 func (d *textDocument) UpdatedAt() time.Time { return d.metadata.UpdatedAt }
 
-// fillTOC iterates over the document looking for headings (<h1>, <h2>, etc.)
-// and makes a reflective table of contents.
+// fillTOC iterates over the document looking for non-first-level headings (<h2>, <h3>, etc.)
+// and inserts a table of contents for them immediately before the first <h2>.
 func (d *textDocument) fillTOC() error {
 	var (
 		f func(*html.Node) error
@@ -520,16 +526,16 @@ func (d *textDocument) fillTOC() error {
 	if err != nil {
 		return err
 	}
-	toctmpl, err := template.New("toc").Parse(string(tocbody))
+	toctmpl, err := template.New("src/templates/_toc.html.tmpl").Parse(string(tocbody))
 	if err != nil {
 		return err
 	}
 
 	subtocbody, err := os.ReadFile("src/templates/_subtoc.html.tmpl")
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot read subtoc template: %w", err)
 	}
-	subtoctmpl, err := toctmpl.New("subtoc").Parse(string(subtocbody))
+	subtoctmpl, err := toctmpl.New("src/templates/_subtoc.html.tmpl").Parse(string(subtocbody))
 	if err != nil {
 		return err
 	}

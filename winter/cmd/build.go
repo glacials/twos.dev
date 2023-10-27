@@ -15,18 +15,13 @@ import (
 )
 
 const (
-	photoGalleryTemplatePath = "src/templates/imgcontainer.html.tmpl"
-	port                     = 8100
-	serveFlag                = "serve"
-	sourceDir                = "src"
-	staticAssetsDir          = "public"
+	port            = 8100
+	serveFlag       = "serve"
+	sourceDir       = "src"
+	staticAssetsDir = "public"
 )
 
 var (
-	ignoreFiles = map[string]struct{}{
-		"README.md": {},
-		".DS_Store": {},
-	}
 	ignoreDirectories = map[string]struct{}{
 		".git":         {},
 		".github":      {},
@@ -51,13 +46,11 @@ func newBuildCmd() *cobra.Command {
 				return err
 			}
 
-			log.Println("Creating substructure.")
 			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
 				return err
 			}
 
-			log.Println("Executing substructure.")
 			if err := s.ExecuteAll(dist, cfg); err != nil {
 				return err
 			}

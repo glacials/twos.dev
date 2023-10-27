@@ -1,10 +1,9 @@
 ---
-category: living document
 date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
-type: post
-updated: 2023-10-25
+type: page
+updated: 2023-10-26
 ---
 
 # What I'm Doing Now

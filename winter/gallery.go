@@ -1,8 +1,10 @@
 package winter
 
 import (
+	"bytes"
 	"errors"
 	"fmt"
+	"hash/fnv"
 	"html/template"
 	"image"
 	"image/jpeg"
@@ -24,21 +26,38 @@ var extensionRegex = regexp.MustCompile(`(.*)\.([^\.]*)`)
 type galleryDocument struct {
 	EXIF
 
-	PageLink   string
 	Alt        string
-	WebPath    string
-	Thumbnails []*thumbnail
+	Thumbnails thumbnails
+	PageLink   string
+	// Source is the path to the image this gallery document was built around.
+	// It is relative to the repository root.
+	Source string
+	// WebPath is the path component of the URL to the image as it will exist after building.
+	WebPath string
 
-	Prev *galleryDocument
 	Next *galleryDocument
+	Prev *galleryDocument
 
-	cfg       Config
-	localPath string
+	cfg Config
 }
 
 type thumbnail struct {
 	WebPath string
 	Width   int
+}
+
+type thumbnails []*thumbnail
+
+func (t thumbnails) Len() int {
+	return len(t)
+}
+
+func (t thumbnails) Less(i, j int) bool {
+	return t[i].Width < t[j].Width
+}
+
+func (t thumbnails) Swap(i, j int) {
+	t[i], t[j] = t[j], t[i]
 }
 
 // NewGalleryDocument returns a Document that represents an HTML page which
@@ -50,30 +69,30 @@ func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
 	}
 
 	return &galleryDocument{
-		localPath: src,
-		PageLink:  fmt.Sprintf("/%s.html", relpath),
-		WebPath:   fmt.Sprintf("/%s", relpath),
-		cfg:       cfg,
+		PageLink: fmt.Sprintf("/%s.html", relpath),
+		Source:   src,
+		WebPath:  fmt.Sprintf("/%s", relpath),
+		cfg:      cfg,
 	}, nil
 }
 
 // Build builds the gallery document.
 func (d *galleryDocument) Build() ([]byte, error) {
-	imgdest := filepath.Join("dist", d.WebPath) // TODO: Do from substructure
-	thmdest := strings.Replace(
+	imgdest := filepath.Join("dist", d.WebPath)
+	thmdest := filepath.Dir(strings.Replace(
 		imgdest,
 		filepath.FromSlash("/img/"),
 		filepath.FromSlash("/img/thumb/"),
 		1,
-	)
+	))
 
 	if err := os.MkdirAll(filepath.Dir(imgdest), 0o755); err != nil {
 		return nil, fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdest), err)
 	}
 
-	srcf, err := os.Open(d.localPath)
+	srcf, err := os.Open(d.Source)
 	if err != nil {
-		return nil, fmt.Errorf("can't read `%s`: %w", d.localPath, err)
+		return nil, fmt.Errorf("can't read `%s`: %w", d.Source, err)
 	}
 	defer srcf.Close()
 
@@ -86,36 +105,32 @@ func (d *galleryDocument) Build() ([]byte, error) {
 	if _, err := io.Copy(dstf, srcf); err != nil {
 		return nil, fmt.Errorf(
 			"can't copy `%s` to `%s`: %w",
-			d.localPath,
+			d.Source,
 			imgdest,
 			err,
 		)
 	}
 
-	if err := d.genThumbnails(d.localPath, thmdest); err != nil {
+	if err := d.thumbnails(d.Source, thmdest); err != nil {
 		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	d.EXIF, err = photodata(d.localPath)
+	d.EXIF, err = photodata(d.Source)
 	if err != nil {
 		return nil, fmt.Errorf(
-			"can't get camera for `%s`: %w",
-			d.localPath,
+			"cannot get camera for `%s`: %w",
+			d.Source,
 			err,
 		)
 	}
 
-	b, err := tmplByName(tmplPathToName(galTmplPath))
+	b, err := os.ReadFile(galTmplPath)
 	if err != nil {
-		return nil, err
+		return nil, fmt.Errorf("cannot read template: %w", err)
 	}
 
 	for old, new := range replacements {
-		re, err := regexp.Compile(old)
-		if err != nil {
-			return nil, err
-		}
-		b = re.ReplaceAll(b, []byte(new))
+		b = bytes.ReplaceAll(b, []byte(old), new)
 	}
 
 	return b, nil
@@ -125,16 +140,16 @@ func (d *galleryDocument) Category() string { return "" }
 
 // Dependencies returns the filepaths the gallery document depends on.
 func (d *galleryDocument) Dependencies() map[string]struct{} {
-	return map[string]struct{}{tmplPathToName(galTmplPath): {}}
+	return map[string]struct{}{galTmplPath: {}}
 }
 
 // Dest returns the destination path for the final gallery document.
 func (d *galleryDocument) Dest() (string, error) {
-	relpath, err := filepath.Rel("src", d.localPath)
+	relpath, err := filepath.Rel("src", d.Source)
 	if err != nil {
 		return "", fmt.Errorf(
 			"can't get relpath for photo `%s`: %w",
-			d.localPath,
+			d.Source,
 			err,
 		)
 	}
@@ -154,8 +169,8 @@ func (d *galleryDocument) LoadTemplates(t *template.Template) error {
 	return nil
 }
 
-// Layout returns the image container template name.
-func (d *galleryDocument) Layout() string { return "imgcontainer" }
+// Layout returns the image container template path.
+func (d *galleryDocument) Layout() string { return "src/templates/imgcontainer.html.tmpl" }
 
 // Preview returns the empty string.
 func (d *galleryDocument) Preview() string { return "" }
@@ -288,8 +303,8 @@ func exifFractionToDecimal(
 	return float64(numer) / float64(denom), nil
 }
 
-// genThumbnails makes thumbnails of several sizes from the photo located at src,
-// placing them in dst with dimensions added to the filename, just before the extension.
+// thumbnails makes thumbnails of several sizes from the photo located at src,
+// placing them in directory dst with dimensions added to the filename, just before the extension.
 //
 // It generates thumbnails with widths of powers of 2,
 // from 1 until the largest width possible that is still smaller than the source image.
@@ -298,25 +313,57 @@ func exifFractionToDecimal(
 // For example, a 500x500 image would have thumbnails of
 // 1x1, 2x2, 4x4, 8x8, 16x16, 32x32, 64x64, 128x128, and 256x256
 // generated.
-func (d *galleryDocument) genThumbnails(src, dst string) error {
+//
+// The file at src is read at least once every time this function is called,
+// but the thumbnails are only regenerated if src has changed since their last generation.
+func (d *galleryDocument) thumbnails(src, dest string) error {
+	fresh, err := d.thumbnailsAreFresh(src, dest)
+	if err != nil {
+		return err
+	}
+
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
 	}
 	defer sourceFile.Close()
 
+	if _, err := sourceFile.Seek(0, 0); err != nil {
+		return fmt.Errorf("cannot seek to start of file: %w", err)
+	}
+
 	srcPhoto, err := jpeg.Decode(sourceFile)
 	if err != nil {
 		return fmt.Errorf(
-			"can't decode photo at path `%s` (maybe not an image?): %w",
+			"cannot decode photo %q (maybe not an image?): %w",
 			src,
 			err,
 		)
 	}
 	p := srcPhoto.Bounds().Size()
+	srcFilename := filepath.Base(src)
+	matches := extensionRegex.FindStringSubmatch(srcFilename)
+	if len(matches) < 3 {
+		return fmt.Errorf("cannot add dimensions to filename %q with no extension", srcFilename)
+	}
 
 	for width := 1; width < p.X; width *= 2 {
 		height := (width * p.X / p.Y) & -1
+		dstFilename := fmt.Sprintf("%s.%dx%d.%s", matches[1], width, height, matches[2])
+		dstPath := filepath.Join(filepath.Dir(dest), dstFilename)
+		webPath, err := filepath.Rel("dist", dstPath)
+		if err != nil {
+			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dest, err)
+		}
+		webPath = fmt.Sprintf("/%s", webPath)
+		d.Thumbnails = append(d.Thumbnails, &thumbnail{
+			WebPath: webPath,
+			Width:   width,
+		})
+		if fresh {
+			continue
+		}
+
 		dstPhoto := image.NewRGBA(image.Rect(0, 0, width, height))
 
 		draw.CatmullRom.Scale(
@@ -331,21 +378,14 @@ func (d *galleryDocument) genThumbnails(src, dst string) error {
 			nil,
 		)
 
-		if err := os.MkdirAll(filepath.Dir(dst), 0o755); err != nil {
+		if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 			return fmt.Errorf(
 				"can't make thumbnail directory `%s`: %w",
-				filepath.Dir(dst),
+				filepath.Dir(dest),
 				err,
 			)
 		}
 
-		srcFilename := filepath.Base(src)
-		matches := extensionRegex.FindStringSubmatch(srcFilename)
-		if len(matches) < 3 {
-			return fmt.Errorf("cannot add dimensions to filename %q with no extension", srcFilename)
-		}
-		dstFilename := fmt.Sprintf("%s.%dx%d.%s", matches[1], width, height, matches[2])
-		dstPath := filepath.Join(filepath.Dir(dst), dstFilename)
 		destinationFile, err := os.Create(dstPath)
 		if err != nil {
 			return fmt.Errorf(
@@ -356,46 +396,54 @@ func (d *galleryDocument) genThumbnails(src, dst string) error {
 		}
 		defer destinationFile.Close()
 
-		/*
-			palette := []color.Color{
-				color.RGBA{0x00, 0x00, 0x00, 0xff},
-				color.RGBA{0x00, 0x00, 0xff, 0xff},
-				//		color.RGBA{0x00, 0xff, 0x00, 0xff},
-				//		color.RGBA{0x00, 0xff, 0xff, 0xff},
-				color.RGBA{0xff, 0x00, 0x00, 0xff},
-				color.RGBA{0xff, 0x00, 0xff, 0xff},
-				//		color.RGBA{0xff, 0xff, 0x00, 0xff},
-				//		color.RGBA{0x00, 0xff, 0xff, 0xff},
-				color.RGBA{0xff, 0xff, 0xff, 0xff},
-			}
-			d := dither.NewDitherer(palette)
-			d.Matrix = dither.FloydSteinberg
-
-			// Dither tries to modify the original first, and may return nil if it does,
-			// so guard against that.
-			new := d.Dither(dstPhoto)
-			if new != nil {
-				dstPhoto = nil
-			}
-		*/
-
 		if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
 			return fmt.Errorf(
 				"can't encode to destination file at path `%s`: %w",
-				dst,
+				dest,
 				err,
 			)
 		}
-		webPath, err := filepath.Rel("dist", dstPath)
-		if err != nil {
-			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dst, err)
-		}
-		webPath = fmt.Sprintf("/%s", webPath)
-		d.Thumbnails = append(d.Thumbnails, &thumbnail{
-			WebPath: webPath,
-			Width:   width,
-		})
 	}
 
 	return nil
+}
+
+// thumbnailsAreFresh returns true if the file at src,
+// with its thumbnails to be placed in dest,
+// has the same content as the last time this function was called.
+func (d *galleryDocument) thumbnailsAreFresh(src, dest string) (bool, error) {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return false, fmt.Errorf("can't open photo at path `%s`: %w", src, err)
+	}
+	defer sourceFile.Close()
+	buf, err := io.ReadAll(sourceFile)
+	if err != nil {
+		return false, fmt.Errorf("cannot hash file %q: %w", src, err)
+	}
+
+	hash := fnv.New32()
+	_, err = hash.Write(buf)
+	if err != nil {
+		return false, fmt.Errorf("cannot compute hash for %q: %w", src, err)
+	}
+
+	sumPath := fmt.Sprintf("%s.sum", filepath.Join(dest, filepath.Base(src)))
+	newSum := hash.Sum32()
+	oldSum, err := os.ReadFile(sumPath)
+	if err != nil {
+		if !errors.Is(err, os.ErrNotExist) {
+			return false, fmt.Errorf("cannot read old sum at %q: %w", oldSum, err)
+		}
+	}
+	if fmt.Sprintf("%d", newSum) == string(oldSum) {
+		return true, nil
+	}
+	if err := os.MkdirAll(filepath.Dir(sumPath), 0o755); err != nil {
+		return false, fmt.Errorf("cann't make thumbnail directory for sums %q: %w", filepath.Dir(sumPath), err)
+	}
+	if err := os.WriteFile(sumPath, []byte(fmt.Sprintf("%d", newSum)), 0o644); err != nil {
+		return false, fmt.Errorf("cannot write hash for %q: %w", src, err)
+	}
+	return false, nil
 }

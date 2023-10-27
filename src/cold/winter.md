@@ -26,7 +26,7 @@ migrated to Winter._
 # Winter
 
 [![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter) [{{ icon
-    "github"
+    "/img/index-github-dark.svg"
     "GitHub logo"
 }}](https://github.com/glacials/twos.dev#winter)
 
@@ -361,67 +361,3 @@ Returns a list of `archive` types ordered from most to least recent. An
 documents). This allows you to display posts sectioned by year.
 
 See [Document Fields](#fields) for a list of fields available to documents.
-
-##### `video` {#video}
-
-_Alias: `videos`_
-
-Usage: `{{"{{"}} video[s] <caption> <videoshortname alttext>... }}`
-
-Render a video or videos with a single caption.
-Video files must be present in this format:
-
-```plain
-public/img/<pageshortname>-<videoshortname>[-<light|dark>].<mp4|mov>
-```
-
-For example, to render one video with a caption and alt text:
-
-```template
-<!-- mypage.md -->
-
-{{"{{"}} video
-   "A caption."
-   "example1"
-   "Descriptive alt text of what the video is, for assistive tech."
-}}
-```
-
-Result:
-
-{{ video
-   ""
-   "example1"
-   "Descriptive alt text of what the video is, for assistive tech"
-}}
-
-A caption.
-
-In this example, the video file must match one of:
-
-- `public/img/mypage-example1.mp4`
-- `public/img/mypage-example1.mov`
-
-Any number of images can be rendered together with one caption beneath the
-group by passing multiple images and alt texts. They will appear next to each
-other when the page width allows it, or stacked vertically otherwise.
-
-```template
-{{"{{"}} videos
-   "A pair of videos."
-   "example1"
-   "Descriptive text of example1."
-   "example22]"
-   "Descriptive text of example2."
-}}
-```
-
-Result:
-
-{{ videos
-   "A pair of videos."
-   "example1"
-   "Descriptive text of example1."
-   "example2"
-   "Descriptive text of example2."
-}}

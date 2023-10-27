@@ -21,7 +21,7 @@ updated: 2022-12-14
 # Mainframe
 
 [![Go Reference](https://pkg.go.dev/badge/twos.dev/mainframe.svg)](https://pkg.go.dev/twos.dev/mainframe) [{{ icon
-    "github"
+    "/img/index-github-dark.svg"
     "GitHub logo"
 }}](https://github.com/glacials/mainframe)
 

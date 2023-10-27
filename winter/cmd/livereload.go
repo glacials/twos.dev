@@ -45,7 +45,7 @@ func (r *Reloader) Handler() websocket.Handler {
 // Reload notifies all connected browsers to reload the page.
 func (r *Reloader) Reload() {
 	for conn, lastRefreshed := range r.listeners {
-		if time.Now().Sub(lastRefreshed) < 2*time.Second {
+		if time.Since(lastRefreshed) < 2*time.Second {
 			// debounce
 			continue
 		}

@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"log"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -57,6 +56,7 @@ var (
 		regexp.MustCompile(`^(.*\/)?.DS_Store$`):               {},
 		regexp.MustCompile(`^(.*\/)?imgcontainer.html.tmpl$`):  {},
 		regexp.MustCompile(`^(.*\/)?text_document.html.tmpl$`): {},
+		regexp.MustCompile(`^(.*\/)?_gallery.html.tmpl$`):      {},
 		regexp.MustCompile(`^(.*\/)?_icon.html.tmpl$`):         {},
 		regexp.MustCompile(`^(.*\/)?_imgs.html.tmpl$`):         {},
 		regexp.MustCompile(`^(.*\/)?_nav.html.tmpl$`):          {},
@@ -103,7 +103,7 @@ func (s *Substructure) add(d *substructureDocument) {
 		}
 		match := galName.FindStringSubmatch(gal.WebPath)
 		if len(match) < 1 {
-			panic(fmt.Sprintf("cannot find a year string in photo path %s", gal.WebPath))
+			panic(fmt.Sprintf("cannot find a gallery name in photo path %s", gal.WebPath))
 		}
 		name := match[1]
 		s.photos[name] = append(s.photos[name], gal)
@@ -151,57 +151,54 @@ func (s *Substructure) discoverAtPath(path string) error {
 	return nil
 }
 
+// galleryGlobs are the relative path components with which to discover gallery images.
+// Each is appended to the path supplied to discoverGalleriesAtPath and used to perform a glob.
+//
+// The glob supports double asterisks, which mean "any character, including a path separator".
+// Otherwise, syntax is identical to that of [filepath.Glob].
+var galleryGlobs []string = []string{
+	"img/**/*.[jJ][pP][gG]",
+	"img/**/*.[jJ][pP][eE][gG]",
+}
+
 // discoverGalleriesAtPath discovers all galleries in or at the given path glob.
 // The files are wrapped in galleryDocument types and then added to the
 // substructure.
-func (s *Substructure) discoverGalleriesAtPath(path string) error {
-	var jpgFiles []string
-	if stat, err := os.Stat(path); err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-	} else if stat.IsDir() {
-		jpgFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][gG]"))
+func (s *Substructure) discoverGalleriesAtPath(src string) error {
+	stat, err := os.Stat(src)
+	if err != nil {
+		return fmt.Errorf("cannot discovery galleries at %q: %w", src, err)
+	}
+	if !stat.IsDir() {
+		return fmt.Errorf("discoverGalleriesAtPath expects a directory, but got a file: %q", src)
+	}
+
+	var files []string
+	for _, g := range galleryGlobs {
+		f, err := filepathx.Glob(filepath.Join(src, g))
 		if err != nil {
 			return err
 		}
-	} else if strings.ToLower(filepath.Ext(path)) == ".jpg" {
-		jpgFiles = append(jpgFiles, path)
+		files = append(files, f...)
 	}
-
-	var jpegFiles []string
-	if stat, err := os.Stat(path); err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-	} else if stat.IsDir() {
-		jpegFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.[jJ][pP][eE][gG]"))
-		if err != nil {
-			return err
-		}
-	} else if strings.ToLower(filepath.Ext(path)) == ".jpeg" {
-		jpegFiles = append(jpegFiles, path)
-	}
-
-	var prev, next *galleryDocument
-	galFiles := append(jpgFiles, jpegFiles...)
-	sort.Sort(sort.Reverse((sort.StringSlice(galFiles))))
-	for _, src := range galFiles {
+	sort.Sort(sort.Reverse((sort.StringSlice(files))))
+	var prev *galleryDocument
+	for _, src := range files {
 		if shouldIgnore(src) {
-			continue
+			return nil
 		}
 		doc, err := NewGalleryDocument(src, s.cfg)
 		if err != nil {
 			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
 		}
-		doc.Prev, prev = prev, doc
-		if _, err := doc.Build(); err != nil {
-			return fmt.Errorf("cannot build gallery document %q: %w", doc.localPath, err)
+		// Set the last doc's next to this doc.
+		if prev != nil {
+			prev.Next = doc
 		}
-		s.add(&substructureDocument{Document: doc, Source: src})
-	}
-	for d := prev; d != nil; d = d.Prev {
-		d.Next, next = next, d
+		// Set this doc's previous to the last doc.
+		// Update prev so the next doc can do the same.
+		doc.Prev, prev = prev, doc
+		s.add(&substructureDocument{Document: doc, Source: doc.Source})
 	}
 
 	return nil
@@ -390,9 +387,8 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			if err != nil {
 				return err
 			}
-			name := tmplPathToName(src)
 			for d := range doc.Dependencies() {
-				if d == name || d == src {
+				if d == src {
 					fmt.Printf("  ↗ %s", pad(dest))
 					if err := s.execute(doc, dist); err != nil {
 						return fmt.Errorf(
@@ -416,11 +412,6 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			}
 		}
 		if d := s.DocBySrc(src); d != nil && d.IsPost() {
-			fmt.Printf("  ↘ %s", pad("index.html"))
-			if err := s.execute(s.DocByShortname("index"), dist); err != nil {
-				return fmt.Errorf("can't rebuild index: %w", err)
-			}
-			fmt.Println(" ✓")
 			fmt.Printf("  ↘ %s", pad("archives.html"))
 			if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
@@ -566,7 +557,7 @@ func (s *Substructure) writefeed() error {
 		if err != nil {
 			return fmt.Errorf("cannot parse page for feed: %w", err)
 		}
-		if err := loadAllDeps(t); err != nil {
+		if err := loadDeps(t); err != nil {
 			return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
 		}
 		var buf bytes.Buffer
@@ -607,8 +598,8 @@ func (s *Substructure) writefeed() error {
 	return nil
 }
 
-// ExecuteAll builds all documents known to the substructure, as well as any
-// site-scoped non-documents such as RSS feeds.
+// ExecuteAll builds all documents known to the substructure,
+// as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 	built := map[string]*substructureDocument{}
 	for _, d := range s.docs {
@@ -625,10 +616,9 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 				dest,
 			)
 		}
-		log.Printf("Executing %s.", d.Shortname())
 		if err := s.execute(d, dist); err != nil {
 			return fmt.Errorf(
-				"can't execute %s while executing all: %w",
+				"cannot execute %s while executing all: %w",
 				d.Source,
 				err,
 			)
@@ -636,9 +626,7 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 		built[dest] = d
 	}
 
-	s.writefeed()
-
-	return nil
+	return s.writefeed()
 }
 
 // execute builds the given document into the given directory. To build a
@@ -653,7 +641,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 		return fmt.Errorf(
 			"can't create %s directory `%s`: %w",
-			tmplPathToName(galTmplPath),
+			galTmplPath,
 			filepath.Dir(dest),
 			err,
 		)
@@ -661,42 +649,38 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 
 	bodyBytes, err := d.Build()
 	if err != nil {
-		return fmt.Errorf("can't build %s: %w", d.Shortname(), err)
+		return fmt.Errorf("cannot build document %q: %w", d.Shortname(), err)
 	}
 	if d.Layout() == "" {
 		return os.WriteFile(dest, bodyBytes, 0o644)
 	}
 
-	layoutBytes, err := tmplByName(d.Layout())
+	layoutBytes, err := os.ReadFile(d.Layout())
 	if err != nil {
-		return fmt.Errorf("can't find `%s`: %w", d.Layout(), err)
+		return fmt.Errorf("cannot read %q to execute %q: %w", d.Layout(), d.Source, err)
 	}
-	t := template.New(d.Layout())
 	funcs, err := s.funcmap(d)
 	if err != nil {
 		return fmt.Errorf("can't generate funcmap: %w", err)
 	}
-	_ = t.Funcs(funcs)
-	_, err = t.Parse(string(layoutBytes))
+	t, err := template.New(d.Layout()).Funcs(funcs).Parse(string(layoutBytes))
 	if err != nil {
 		return fmt.Errorf("can't parse `%s`: %w", d.Layout(), err)
 	}
-
 	if _, err := t.New("body").Parse(string(bodyBytes)); err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.Shortname(), err)
 	}
-
-	if err := loadAllDeps(t); err != nil {
+	if err := loadDeps(t); err != nil {
 		return fmt.Errorf("can't load dependencies: %s", err)
 	}
 
-	// Hardcode that every document with a layout depends on our CSS
+	// Hardcode that every document with a layout depends on our CSS.
 	deps := d.Dependencies() // TODO: Consider a d.AddDependency method
 	deps[filepath.Join("public", "style.css")] = struct{}{}
 
-	for _, dep := range t.Templates() {
-		if dep.Name() != "body" && dep.Name() != d.Shortname() {
-			deps[dep.Name()] = struct{}{}
+	for _, depTmpl := range t.Templates() {
+		if depTmpl.Name() != "body" && depTmpl.Name() != d.Source {
+			deps[depTmpl.Name()] = struct{}{}
 		}
 	}
 
@@ -718,18 +702,12 @@ func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error
 	if err != nil {
 		return nil, err
 	}
-	imgsFunc, err := d.imgs()
-	if err != nil {
-		return nil, err
-	}
-	videoFunc, err := d.videos()
-	if err != nil {
-		return nil, err
-	}
 	now := time.Now()
 
 	return template.FuncMap{
 		"add": add,
+		"div": div,
+		"mul": mul,
 		"sub": sub,
 
 		"now":    func() time.Time { return now },
@@ -740,11 +718,7 @@ func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error
 		"categories": s.categories,
 		"gallery":    s.gallery,
 		"icon":       iconFunc,
-		"img":        imgsFunc,
-		"imgs":       imgsFunc,
 		"posts":      s.posts,
-		"video":      videoFunc,
-		"videos":     videoFunc,
 	}, nil
 }
 

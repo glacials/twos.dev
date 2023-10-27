@@ -51,6 +51,7 @@ func (d *staticDocument) IsDraft() bool { return false }
 func (d *staticDocument) IsPost() bool { return false }
 
 // Layout returns the empty string.
+// This signals that the document does not use templates.
 func (d *staticDocument) Layout() string { return "" }
 
 // Preview returns the empty string.

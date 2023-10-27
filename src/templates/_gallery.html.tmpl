@@ -1,17 +1,20 @@
-{{ define "gallery" }}
-  <div class="photo-grid">
-    <h2>{{ . }}</h2>
-    {{ range (index gallery .) }}
-      <a href="{{ .PageLink }}">
-        <img
-          class="silly"
-          src="{{ .WebPath }}"
-          srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
-          sizes="{{ range .Thumbnails }}
-            (max-width: {{ .Width }}px) {{ .Width }}px,
-          {{ end }}"
-        />
-      </a>
-    {{ end }}
-  </div>
-{{ end }}
+<div class="photo-grid">
+  <h2>{{ . }}</h2>
+  <!--
+    TODO: This loads images based on viewport size, not image size.
+    It's complicated to find out the right size because the photo grid has a variable number of columns.
+    See: https://stackoverflow.com/q/47750594/392225
+  -->
+  {{ range (index gallery .) }}
+    <a href="{{ .PageLink }}">
+      <img
+        class="silly"
+        src="{{ .WebPath }}"
+        srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
+        sizes="{{ range .Thumbnails }}
+          (max-width: {{ mul .Width 2 }}px) {{ .Width }}px,
+        {{ end }}"
+      />
+    </a>
+  {{ end }}
+</div>

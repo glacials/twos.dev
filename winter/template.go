@@ -5,8 +5,6 @@ import (
 	"fmt"
 	"html/template"
 	"os"
-	"path/filepath"
-	"strings"
 	"text/template/parse"
 	"time"
 
@@ -15,11 +13,8 @@ import (
 
 const (
 	galTmplPath = "src/templates/imgcontainer.html.tmpl"
-	txtTmplPath = "src/templates/text_document.html.tmpl"
-
 	icnTmplPath = "src/templates/_icon.html.tmpl"
-	imgTmplPath = "src/templates/_imgs.html.tmpl"
-	vidTmplPath = "src/templates/_videos.html.tmpl"
+	txtTmplPath = "src/templates/text_document.html.tmpl"
 )
 
 type archivesVars []archiveVars
@@ -74,40 +69,12 @@ func (v commonVars) Parent() *substructureDocument {
 	return v.substructureDocument.Parent
 }
 
-type iconfunc func(graphic.Shortname, graphic.Alt) (template.HTML, error)
+type iconfunc func(graphic.SRC, graphic.Alt) (template.HTML, error)
 
 type iconPartialVars struct {
 	commonVars
-	Alt   graphic.Alt
-	Light graphic.SRC
-	Dark  graphic.SRC
-}
-
-type imgsfunc func(graphic.Caption, ...string) (template.HTML, error)
-
-// imgsPartialVars are the template variables given to
-// src/templates/_imgs.html.tmpl to render multiple images inline. At least one
-// of its {Light,Dark} fields must be set to an image path.
-type imgsPartialVars struct {
-	commonVars
-	Images  []imageVars
-	Caption graphic.Caption
-}
-
-// imageVars are the template variables used to render a single image. At least
-// one field must be set. If both are set, the rendered image will depend on
-// the user agent.
-type imageVars struct {
-	commonVars
-	Alt   graphic.Alt
-	Light graphic.SRC
-	Dark  graphic.SRC
-}
-
-type textDocumentVars struct {
-	commonVars
-	*textDocument
-	*Substructure
+	Alt graphic.Alt
+	SRC graphic.SRC
 }
 
 type tocPartialVars struct {
@@ -121,198 +88,52 @@ type tocVars struct {
 	HTML   template.HTML
 }
 
-type videosfunc func(graphic.Caption, ...graphic.Shortname) (template.HTML, error)
-
-// videosPartialVars are the template variables given to
-// src/templates/_videos.html.tmpl to render any number of videos inline.
-type videosPartialVars struct {
-	Videos  []videoVars
-	Caption graphic.Caption
-}
-
-// videoVars are the template variables used to render a single video. At least
-// one field must be set. If multiple are set, the rendered video will depend on
-// the user agent.
-type videoVars struct {
-	LightMOV graphic.SRC
-	DarkMOV  graphic.SRC
-	LightMP4 graphic.SRC
-	DarkMP4  graphic.SRC
-}
-
-// tmplPathToName converts a template path to a template name.
-// This is a lexicographic calculation.
-// The filesystem is not looked at.
-func tmplPathToName(src string) string {
-	name := filepath.Base(src)
-	name = strings.TrimPrefix(name, "_")
-	name, _, _ = strings.Cut(name, ".") // Trim extensions, even e.g. .html.tmpl
-	return name
-}
-
-// tmplByName returns the raw bytes of the template specified by name. If no
-// such template exists, returns an error.
-//
-// A template name in Winter is equivalent to the <name> component of
-// src/templates/[_]<name>.html[.tmpl].
-func tmplByName(name string) ([]byte, error) {
-	paths, err := filepath.Glob(
-		filepath.Join("src", "templates", fmt.Sprintf("*%s.*", name)),
-	)
-	if err != nil {
-		return nil, fmt.Errorf("can't glob for templates: %w", err)
-	}
-
-	if len(paths) > 1 {
-		return nil, fmt.Errorf("multiple files match template name `%s`", name)
-	}
-	if len(paths) == 0 {
-		return nil, fmt.Errorf(
-			"error opening file for template `%s` at src/templates/[_]%s.html[.tmpl]",
-			name,
-			name,
-		)
-	}
-
-	return os.ReadFile(paths[0])
-}
-
 func add(a, b int) int {
 	return a + b
+}
+
+func div(a, b int) int {
+	return a / b
+}
+
+func mul(a, b int) int {
+	return a * b
 }
 
 func sub(a, b int) int {
 	return a - b
 }
 
-// imgs returns a function that can be inserted into a template's FuncMap.
-// The returned function is a context-aware image renderer.
-// It renders images which have been namespaced to the calling document.
-// It can render any number of such images together, with a single caption below them.
-//
-// Its first argument must be a caption string.
-// Then, it takes alternating arguments of image shortname strings and alt text strings.
-//
-// For example:
-//
-//	{{
-//	  imgs
-//	  "Photos of my pets."
-//	  "banana" "A photo of a gray and white shorthair cat rolling on his back."
-//	  "split" "A photo of a black and white shorthair cat staring at the camera."
-//	  "sundae" "A photo of a brown, black, and white beagle-mix dog napping."
-//	}}
-//
-// When called, the returned function renders the images together, with the caption below them.
-// If both light and dark modes of the image(s) are present,
-// the correct one will be rendered based on the user's preference.
-//
-// The images on disk must match one of two patterns to be found:
-//
-//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
-//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
-//
-// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
-// IMAGESHORTNAME is an arbitrary string,
-// STYLE, if present, is one of "light" or "dark",
-// and EXTENSION is one of "png", "jpg", "jpeg", or "svg".
-func (d *substructureDocument) imgs() (imgsfunc, error) {
-	partial, err := os.ReadFile(imgTmplPath)
-	if err != nil {
-		return nil, err
-	}
-
-	t := template.New(tmplPathToName(imgTmplPath))
-	if _, err := t.Parse(string(partial)); err != nil {
-		return nil, err
-	}
-
-	return func(c graphic.Caption, srcsAndAlts ...string) (template.HTML, error) {
-		// The template called us, so make sure it recompiles if this template changes.
-		deps := d.Dependencies()
-		deps["imgs"] = struct{}{}
-
-		v := imgsPartialVars{Caption: c}
-
-		for i := 0; i < len(srcsAndAlts); i += 2 {
-			light, dark, err := graphic.LightDark(
-				d.Shortname(),
-				graphic.Shortname(srcsAndAlts[i]),
-				graphic.ImageExts,
-			)
-			if err != nil {
-				return "", err
-			}
-
-			v.Images = append(v.Images, imageVars{
-				Alt:   graphic.Alt(srcsAndAlts[i+1]),
-				Light: light,
-				Dark:  dark,
-			})
-		}
-
-		var buf bytes.Buffer
-		if err := t.Execute(&buf, v); err != nil {
-			return "", fmt.Errorf("can't execute imgs template: %w", err)
-		}
-
-		return template.HTML(buf.String()), nil
-	}, nil
-}
-
 // icon returns a function that can be inserted into a template's FuncMap.
-// The returned function is a context-aware image renderer.
-// It renders an image which has been namespaced to the calling document.
+// The returned function renders the image at the given path.
 // It always renders it 1em tall.
 //
-// Its arguments are an image shortname string followed by an alt text string.
+// Its arguments are a path relative to the web root, followed by an alt text string.
 //
 // For example:
 //
-//	{{ icon "banana" "A photo of a banana." }}
+//	{{ icon "/img/banana.png" "A photo of a banana." }}
 //
 // When called, the returned function renders the image inline.
-// If both light and dark modes of the image are present,
-// the correct one will be rendered based on the user's preference.
-//
-// The image on disk must match one of two patterns to be found:
-//
-//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
-//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
-//
-// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
-// IMAGESHORTNAME is an arbitrary string,
-// STYLE, if present, is one of "light" or "dark",
-// and EXTENSION is one of "png", "jpg", "jpeg", or "svg".
 func (d *substructureDocument) icon() (iconfunc, error) {
 	partial, err := os.ReadFile(icnTmplPath)
 	if err != nil {
 		return nil, err
 	}
 
-	t := template.New(tmplPathToName(icnTmplPath))
+	t := template.New(icnTmplPath)
 	if _, err := t.Parse(string(partial)); err != nil {
 		return nil, err
 	}
 
-	return func(imgShortname graphic.Shortname, alt graphic.Alt) (template.HTML, error) {
+	return func(src graphic.SRC, alt graphic.Alt) (template.HTML, error) {
 		// The template called us, so make sure it recompiles if this template changes.
 		deps := d.Dependencies()
 		deps["icon"] = struct{}{}
 
-		light, dark, err := graphic.LightDark(
-			d.Shortname(),
-			graphic.Shortname(imgShortname),
-			graphic.ImageExts,
-		)
-		if err != nil {
-			return "", err
-		}
-
 		v := iconPartialVars{
-			Alt:   alt,
-			Light: light,
-			Dark:  dark,
+			Alt: alt,
+			SRC: src,
 		}
 
 		var buf bytes.Buffer
@@ -324,132 +145,32 @@ func (d *substructureDocument) icon() (iconfunc, error) {
 	}, nil
 }
 
-// videos returns a function that can be inserted into a template's FuncMap.
-// The returned function is a context-aware video renderer.
-// It renders videos which have been namespaced to the calling document.
-// It can render any number of such videos together, with a single caption below them.
-//
-// Its first argument must be a caption string.
-// Then, it takes any number of video shortname strings.
-//
-// For example:
-//
-//	{{ videos "Videos of my pets. "banana" "split" "sundae" }}
-//
-// When called, the returned function renders the videos together, with the caption below them.
-// The function supports finding dark, light, or unspecified versions of the videos;
-// but CSS media queries do not yet allow varying the displayed video based on user preference.
-// If both are available, the function will render the light one for now.
-//
-// The videos on disk must match one of two patterns to be found:
-//
-//	"public/img/DOCSHORTNAME-IMAGESHORTNAME[-STYLE].EXTENSION"
-//	"src/img/documents/SHORTNAME/IMAGESHORTNAME[-STYLE].EXTENSION"
-//
-// where DOCSHORTNAME is the document shortname (e.g. "apple" for apple.html),
-// IMAGESHORTNAME is an arbitrary string,
-// STYLE, if present, is one of "light" or "dark",
-// and EXTENSION is "mp4".
-func (d *substructureDocument) videos() (videosfunc, error) {
-	partial, err := os.ReadFile("src/templates/_videos.html.tmpl")
-	if err != nil {
-		return nil, err
-	}
-
-	t := template.New("videos")
-	if _, err := t.Parse(string(partial)); err != nil {
-		return nil, err
-	}
-
-	return func(c graphic.Caption, videoShortnames ...graphic.Shortname) (template.HTML, error) {
-		// The template called us, so make sure it recompiles if this template changes.
-		deps := d.Dependencies()
-		deps["videos"] = struct{}{}
-		v := videosPartialVars{Caption: c}
-
-		for _, videoShortname := range videoShortnames {
-			lightMP4, darkMP4, err := graphic.LightDark(
-				d.Shortname(),
-				videoShortname,
-				map[string]struct{}{"mp4": {}},
-			)
-			if err != nil {
-				return "", fmt.Errorf("can't process video: %w", err)
-			}
-
-			lightMOV, darkMOV, err := graphic.LightDark(
-				d.Shortname(),
-				videoShortname,
-				map[string]struct{}{"mp4": {}},
-			)
-			if err != nil {
-				return "", fmt.Errorf("can't process video: %w", err)
-			}
-
-			v.Videos = append(v.Videos, videoVars{
-				DarkMOV:  darkMOV,
-				DarkMP4:  darkMP4,
-				LightMOV: lightMOV,
-				LightMP4: lightMP4,
-			},
-			)
-		}
-
-		var buf bytes.Buffer
-		if err := t.Execute(&buf, v); err != nil {
-			return "", fmt.Errorf(
-				"can't execute video template for `%s`/`%s`: %w",
-				d.Shortname(),
-				videoShortnames,
-				err,
-			)
-		}
-
-		return template.HTML(buf.String()), nil
-	}, nil
-}
-
-// loadAllDeps takes a parsed template t and searches it and all associated
-// parsed templates for references to other templates (e.g. `{{template
-// "foo"}}`), and loads, parses, and attaches those to t as well. It repeats
-// this recursively until all templates originally in t are fully resolved.
+// loadDeps takes a parsed template t,
+// searches it and associated templates for references to other templates
+// (e.g. `{{ template "src/templates/_foo.html.tmpl" }}`),
+// and loads, parses, and attaches those to t.
+// It repeats this recursively until t and all associated templates are fully resolved.
 //
 // No templates are executed.
-func loadAllDeps(t *template.Template) error {
-	for _, tmpl := range t.Templates() {
-		if err := loadDeps(tmpl); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-// loadDeps takes a parsed template t, searches it for references to other
-// templates (e.g. `{{template "foo"}}`), and loads, parses, and attaches those
-// to t. It repeats this recursively until all templates originally in t are
-// fully resolved.
-//
-// No templates are executed.
-//
-// It is rare to call this function directly. Instead, use loadAllDeps to
-// perform this operation on t and all associated templates.
 func loadDeps(t *template.Template) error {
-	for _, node := range t.Tree.Root.Nodes {
-		if node.Type() == parse.NodeTemplate {
-			name := node.(*parse.TemplateNode).Name
-			if t.Lookup(name) != nil {
-				continue
-			}
-			b, err := tmplByName(name)
-			if err != nil {
-				return err
-			}
-			t2, err := t.New(name).Parse(string(b))
-			if err != nil {
-				return err
-			}
-			if err := loadDeps(t2); err != nil {
-				return err
+	for _, tmpl := range t.Templates() {
+		for _, node := range tmpl.Tree.Root.Nodes {
+			if node.Type() == parse.NodeTemplate {
+				name := node.(*parse.TemplateNode).Name
+				if t.Lookup(name) != nil {
+					continue
+				}
+				b, err := os.ReadFile(name)
+				if err != nil {
+					return fmt.Errorf("cannot read template file: %w", err)
+				}
+				t2, err := tmpl.New(name).Parse(string(b))
+				if err != nil {
+					return err
+				}
+				if err := loadDeps(t2); err != nil {
+					return err
+				}
 			}
 		}
 	}

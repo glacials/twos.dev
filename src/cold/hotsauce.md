@@ -1,6 +1,7 @@
 ---
 date: 2022-06-05
 filename: hotsauce.html
+preview: How to fake a product launch, and then actually launch it.
 type: post
 ---
 
@@ -14,7 +15,7 @@ works, but brings you to a page that says "Fooled you!".
 
 I was never satisfied by these seams after witnessing first-hand the gold wacky
 standard: On April 1, 2004, a popular search engine pranked that it was pivoting
-into becoming an email service -- and then [it
+into becoming an email service—and then [it
 did](http://googlepress.blogspot.com/2004/04/google-gets-message-launches-gmail.html).
 This was especially surprising in the age before every startup was a data
 company.
@@ -67,15 +68,13 @@ A surprising number of household brands use white label products behind the
 scenes, namely store brands. Because the customers of these white label
 companies are often large businesses, there's not a pressing need for
 self-service like in consumer retail. That means it can take some phone tag
-and email threads to get the relationship hammered out. But still, it works --
-19% of the US economy is made up of white label goods
-([source](https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper)).
+and email threads to get the relationship hammered out. But still, it works—19% of the US economy is made up of white label goods.^[[From statista.com](https://www.statista.com/topics/1076/private-label-market/#topicHeader__wrapper)]
 
 Luckily the last few years have seen some self-service white label products
 enter the market, propelled I think by the demand for startup swag. For
 something as niche as hot sauce, though, the best we could hope for was
 partial automation. I engaged with several vendors and ordered sample packs
-from two -- one via self-service for $25 and one via phone call for free.
+from two—one via self-service for $25 and one via phone call for free.
 
 Then I made some chips, invited some friends over (pre-pandemic), and got to
 work.
@@ -120,17 +119,17 @@ Feedback during and after launch.
 ### Shipping
 
 I went into this expecting to make bulk trips to the post office, but I
-actually never had to leave the house -- usps.com allows you to schedule a
+actually never had to leave the house—usps.com allows you to schedule a
 mail carrier to pick up packages during their mail route. I had padded
 flat-rate envelopes ready, also delivered from their website. On April 1st,
 here was my pipeline:
 
-1. (Trigger) Receive “payment completed” email from Stripe</li>
-2. Pay for a shipping label at usps.com (~$9)</li>
-3. Print shipping label, affix to a padded envelope with scotch tape</li>
-4. Pack in hot sauce and extra packing material</li>
-5. Schedule a pickup at usps.com</li>
-6. (On pickup day) Put queued package(s) on the porch</li>
+1. (Trigger) Receive “payment completed” email from Stripe
+2. Pay for a shipping label at usps.com (~$9)
+3. Print shipping label, affix to a padded envelope with scotch tape
+4. Pack in hot sauce and extra packing material
+5. Schedule a pickup at usps.com
+6. (On pickup day) Put queued package(s) on the porch
 
 ## Final Surprises
 
@@ -138,14 +137,14 @@ I built the full-page takeover to check if the day was April 1 when deciding
 whether to take over or lie dormant, but I didn't think about checking the
 year. So one year later, we suddenly got another influx of orders. Luckily I
 still had plenty of stock with expiration dates still over a year away, so
-spent a little surprise day packing hot sauce again -- and again a third time,
+spent a little surprise day packing hot sauce again—and again a third time,
 another year later.
 
 ## Finances
 
 After the sample packs and the bulk order of 48 bottles (the minimum), upfront
-costs came to $$192.05. Over three April Fool's Days we sold 28 bottles in 25
-orders at $$15 / bottle.
+costs came to $192.05. Over three April Fool's Days we sold 28 bottles in 25
+orders at $15 / bottle.
 
 The cost of my labor and the boon to the brand are harder to calculate. I'll
 call them a wash.

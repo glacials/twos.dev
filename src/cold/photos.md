@@ -8,5 +8,5 @@ type: page
 
 I post thirteen photos per year.
 
-{{ template "gallery" "2022" }}
-{{ template "gallery" "2021" }}
+{{ template "src/templates/\_gallery.html.tmpl" "2022" }}
+{{ template "src/templates/\_gallery.html.tmpl" "2021" }}

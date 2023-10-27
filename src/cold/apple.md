@@ -2,6 +2,7 @@
 category: living document
 date: 2022-05-25
 filename: apple.html
+preview: Notes on my years-long journey to switch from Google products to Apple products.
 toc: true
 type: post
 updated: 2023-10-25
@@ -87,7 +88,7 @@ providers, Apple must be one of them. As a developer, this means building
 another sign-in flow and database table. As a user, this means I get a native,
 one-tap, FaceID sign-in.
 
-{{ video "Signing in with Apple." "signin" }}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-signin" }}
 
 These examples continue throughout the ecosystem, and the more I see the more
 I believe Apple thinks of itself as a government providing "public goods",
@@ -268,11 +269,10 @@ The more native apps, the better the UX.
 
 For example, multi-touch can be used to drag-and-drop items between apps.
 
-{{ videos
-"Using multi-touch to drag and drop items between apps."
-"drag-photos"
-"drag-text"
-}}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-drag-photos" }}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-drag-text" }}
+
+Using multi-touch to drag and drop items between apps.
 
 FaceID is about on par with fingerprint unlock on Pixel.
 They each encounter their own troubles,
@@ -577,10 +577,9 @@ switching to Google Calendar as a backend I've learned to RSVP using the
 embedded buttons which (outside of Gmail) open a web browser to the Google
 Calendar UI.
 
-{{ video
-  "Opening a Google Calendar invitation from within the Apple ecosystem."
-  "mail"
-}}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-mail" }}
+
+Opening a Google Calendar invitation from within the Apple ecosystem.
 
 Apple Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to
 have a refresh in a decade. Apple Calendar can automatically generate “travel
@@ -683,7 +682,8 @@ identify.
 
 When it works it's beautiful and useful, but when it doesn't it's jarring.
 
-{{ video "Navigating through history in Safari with swipe gestures." "back"}}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-back"}}
+Navigating through history in Safari with swipe gestures.
 
 I tend to switch back to Chrome for Meet meetings, as I’ve experienced some local-only
 webcam freezing in Safari of myself or others.
@@ -912,7 +912,8 @@ The experience of managing an Apple Card in Wallet is also the first credit card
 experience that feels like it was made this century. The app is beautiful,
 snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on everything else) are good but beatable; several banks now have universal 2% cashback cards.
 
-{{ video "Drilling into Apple Card transactions using Wallet." "card" }}
+{{ template "src/templates/\_videos.html.tmpl" "/img/apple-card" }}
+Drilling into Apple Card transactions using Wallet.
 
 ### ✔ Google Podcasts → Apple Podcasts {#podcasts}
 
