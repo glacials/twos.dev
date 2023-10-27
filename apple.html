@@ -54,13 +54,43 @@
     <div class="container">
       <nav class="mt-0">
   <div class="brand">
-    <a
-      href="/"
-      
-      >twos.dev</a
-    >
+    
+      <a
+        href="/"
+        
+        >Ben Carlsson</a
+      >
+    
   </div>
-  
+  <div class="items">
+    
+    <a
+      href="/now.html"
+      
+      >Now</a
+    >
+    <a
+      href="/photos.html"
+      
+      >Photos</a
+    >
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <a
+      href="/writing.html"
+      
+      >Writing</a
+    >
+    
+  </div>
 </nav>
 
       <header>
@@ -71,7 +101,7 @@
               published
               2022 May
                 / last updated
-                2023 September
+                2023 October
               </i
             >
           </small>
@@ -254,7 +284,7 @@ ecosystem. It is occasionally updated.</p>
         <ol>
   
     <li>
-      <a href="#keychain"><span>⚠ iCloud Keychain</span></a>
+      <a href="#keychain"><span>✔ iCloud Keychain</span></a>
       
     </li>
   
@@ -269,17 +299,7 @@ ecosystem. It is occasionally updated.</p>
     </li>
   
     <li>
-      <a href="#notes"><span>ⅹ Keep → Apple Notes</span></a>
-      
-        <ol>
-  
-    <li>
-      <a href="#byenotes"><span>Departure</span></a>
-      
-    </li>
-  
-</ol>
-
+      <a href="#notes"><span>✔ Keep → Apple Notes</span></a>
       
     </li>
   
@@ -400,35 +420,18 @@ of everything. As a user, this means one central place where I can manage
 (read: cancel) subscriptions<span style="font-family: sans-serif">—</span>no digging through menus or talking to customer
 service agents.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-subscriptions-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-subscriptions-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="Screenshot of iOS App Store showing multiple active subscriptions"
-            src="img/apple-subscriptions-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-      <a href="img/apple-subscription-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-subscription-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="iOS App Store showing options to change or cancel a subscription"
-            src="img/apple-subscription-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    The App Store&#39;s subscriptions management menus.
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="Screenshot of iOS App Store showing multiple active subscriptions" src="/img/apple-subscriptions-dark.png" title=""/>
+				</label>
+
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="iOS App Store showing options to change or cancel a subscription" src="/img/apple-subscription-dark.png" title=""/>
+				</label></p>
+
+<p>The App Store's subscriptions management menus.</p>
 
 <p>Another example: If your app allows signing in with any third party auth
 providers, Apple must be one of them. As a developer, this means building
@@ -436,20 +439,10 @@ another sign-in flow and database table. As a user, this means I get a native,
 one-tap, FaceID sign-in.</p>
 
 <p><figure style="text-align: center">
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-signin-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-signin-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-  <figcaption>Signing in with Apple.</figcaption>
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-signin.mov" type="video/quicktime" />
+    <source src="/img/apple-signin.mp4" type="video/mp4" />
+  </video>
 </figure>
 </p>
 
@@ -541,11 +534,11 @@ see an overview, visit the <a href="#toc">table of contents</a>.</p>
 
 <h3 id="key">Key</h3>
 
-<p>✔ = Switch successful; happily using Apple product</p>
-
-<p>ⅹ = Switch unsuccessful; moved back to Google or to another product</p>
-
-<p>⚠ = Nuance ahead</p>
+<ul>
+<li>✔ Switch successful; happily using Apple product</li>
+<li>ⅹ Switch unsuccessful; moved back to Google or to another product</li>
+<li>⚠ Nuanced</li>
+</ul>
 
 <h3 id="macos">✔ ArchLinux → macOS</h3>
 
@@ -594,35 +587,18 @@ use it to display more and differently laid out information. Generally, the
 extra horizontal space is used to persistently display a nav menu or the
 previous screen.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-iphone-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-iphone-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="A screenshot of the Wikipedia app on iPhone"
-            src="img/apple-iphone-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-      <a href="img/apple-ipad-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-ipad-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="A screenshot of the Wikipedia app on iPad, using extra space for navigation"
-            src="img/apple-ipad-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    Wikipedia on iPhone vs. iPad.
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="A screenshot of the Wikipedia app on iPhone." src="/img/apple-iphone-dark.png" title=""/>
+				</label>
+
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="A screenshot of the Wikipedia app on iPad, using extra space for navigation." src="/img/apple-ipad-dark.png" title=""/>
+				</label></p>
+
+<p>Wikipedia on iPhone vs. iPad.</p>
 
 <p>A bit ago, Apple rebranded iOS-on-iPad to iPadOS. At the time I saw this as a
 marketing move, but I've learned they really did push the needle more in the
@@ -664,34 +640,21 @@ The more native apps, the better the UX.</p>
 <p>For example, multi-touch can be used to drag-and-drop items between apps.</p>
 
 <p><figure style="text-align: center">
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-drag-photos-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-drag-photos-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-drag-text-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-drag-text-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-  <figcaption>Using multi-touch to drag and drop items between apps.</figcaption>
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-drag-photos.mov" type="video/quicktime" />
+    <source src="/img/apple-drag-photos.mp4" type="video/mp4" />
+  </video>
+</figure>
+
+<figure style="text-align: center">
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-drag-text.mov" type="video/quicktime" />
+    <source src="/img/apple-drag-text.mp4" type="video/mp4" />
+  </video>
 </figure>
 </p>
+
+<p>Using multi-touch to drag and drop items between apps.</p>
 
 <p>FaceID is about on par with fingerprint unlock on Pixel.
 They each encounter their own troubles,
@@ -755,29 +718,16 @@ since he switched to a Japanese phone number.</p>
 
 <p>Beyond these rare issues I'm very happy with iMessage.</p>
 
-<p>Ecosystem effects of iMessage include rich embedded media from all other Apple
-products like Photos, Music, and Maps, and automatically entering SMS 2FA codes
-on any device.</p>
+<p>Ecosystem effects of iMessage include rich embedded media from Apple products like Photos, Music, and Maps,
+and automatically entering SMS or email 2FA codes on any device.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-2fa-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-2fa-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="Screenshot of a 2FA prompt suggesting an auto-fill from iMessage"
-            src="img/apple-2fa-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    Signing into a website on macOS using the SMS 2FA code from iPhone.
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="Screenshot of a 2FA prompt suggesting an auto-fill from iMessage." src="/img/apple-2fa-dark.png" title=""/>
+				</label></p>
+
+<p>Signing into a website on macOS using the SMS 2FA code from iPhone.</p>
 
 <h3 id="watch">✔ Moto 360 → Apple Watch</h3>
 
@@ -971,25 +921,13 @@ check one condition per filter, and I just have my iMac stay awake 24/7.</p>
 <p>macOS Mail has horrible keyboard shortcuts by default, e.g. ⌘^A to archive.
 Thankfully macOS natively supports rebinding shortcuts for any app.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-rebind-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-rebind-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="A screenshot of macOS&#39;s Settings.app rebinding a key for Mail.app"
-            src="img/apple-rebind-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    Any macOS app&#39;s menu actions (e.g. File → Save) can be [re]bound natively.
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="A screenshot of macOS's Settings.app rebinding a key for Mail.app." src="/img/apple-rebind-dark.png" title=""/>
+				</label></p>
+
+<p>Any macOS app's menu actions (e.g. File → Save) can be [re]bound natively.</p>
 
 <p>If you want a Mail-like experience with Gmail as a backend, instead of using
 SMTP I recommend <a href="https://mimestream.com">Mimestream</a>; it is written by a former
@@ -1019,25 +957,13 @@ view. Like Google Calendar, Apple Calendar uses a horizontal red bar to
 represent the current time of day; but this bar extends 100% of the width of the
 week, and does not do a good job showing you which day today is.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-calendar-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-calendar-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="A screenshot of Calendar.app on macOS showing a week with a red line across it."
-            src="img/apple-calendar-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    Week view in Apple Calendar. At a glance, can you tell what day it is?
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="A screenshot of Calendar.app on macOS showing a week with a red line across it." src="/img/apple-calendar-dark.png" title=""/>
+				</label></p>
+
+<p>Week view in Apple Calendar. At a glance, can you tell what day it is?</p>
 
 <p>This has led me to misread the current day multiple times, inducing panic
 about being late for meetings. I now use Day view, where the bar only shows
@@ -1052,22 +978,14 @@ embedded buttons which (outside of Gmail) open a web browser to the Google
 Calendar UI.</p>
 
 <p><figure style="text-align: center">
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-mail-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-mail-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-  <figcaption>Opening a Google Calendar invitation from within the Apple ecosystem.</figcaption>
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-mail.mov" type="video/quicktime" />
+    <source src="/img/apple-mail.mp4" type="video/mp4" />
+  </video>
 </figure>
 </p>
+
+<p>Opening a Google Calendar invitation from within the Apple ecosystem.</p>
 
 <p>Apple Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to
 have a refresh in a decade. Apple Calendar can automatically generate “travel
@@ -1171,22 +1089,13 @@ identify.</p>
 <p>When it works it's beautiful and useful, but when it doesn't it's jarring.</p>
 
 <p><figure style="text-align: center">
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-back-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-back-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-  <figcaption>Navigating through history in Safari with swipe gestures.</figcaption>
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-back.mov" type="video/quicktime" />
+    <source src="/img/apple-back.mp4" type="video/mp4" />
+  </video>
 </figure>
-</p>
+
+Navigating through history in Safari with swipe gestures.</p>
 
 <p>I tend to switch back to Chrome for Meet meetings, as I’ve experienced some local-only
 webcam freezing in Safari of myself or others.
@@ -1195,7 +1104,7 @@ Meet also supports more types of screen sharing in Chrome, like sharing one tab.
 <p>Ecosystem effects of Safari include Handoff (move a browsing session between
 devices smoothly) and the downright bonkers power efficiency of Safari on macOS.</p>
 
-<h4 id="keychain">⚠ iCloud Keychain</h4>
+<h4 id="keychain">✔ iCloud Keychain</h4>
 
 <p>When I initially moved to Safari,
 iCloud Keychain was not powerful enough to replace my use of 1Password.
@@ -1203,11 +1112,31 @@ It did not support multiple domain names per website,
 arbitrary text notes,
 or custom names for entries.</p>
 
-<p>As of 2023-09, these problems seem solved.
-I've started a second attempt to move over and will update this section with my thoughts.</p>
+<p>As of 2023 September, these problems seem solved.
+There are stil some shortfalls,
+but <a href="https://simonbs.dev/posts/moving-from-1password-to-icloud-keychain/">Simon Støvring's post</a> helped shore them up;
+I've used his locked-notes strategy for non-password things I previously kept in 1Password,
+and all is well so far.</p>
+
+<p>However, there are still some small downsides:</p>
+
+<ul>
+<li>Passwords are accessed from within the Preferences pane of Safari, macOS, or iOS.
+
+<ul>
+<li>The difficulty of accessing them can be completely solved using <a href="https://www.icloud.com/shortcuts/4cd82a3e2a5c4fc78b8f1a488c5b76e7">this Shortcut</a>, but it can be awkward to refresh authentication with e.g. an Exchange account, as you cannot have two System Settings windows open at once.</li>
+</ul></li>
+<li>Domain names for passwords are not directly editable, possibly for security reasons. To assign one password to multiple domains, you have to use the same credentials for another website and depend on it to invisibly merge them behind the scenes, which it often does, but in a way that's hard to diagnose if it doesn't.</li>
+<li>There's no "Archive" feature, so I have to decide if passwords I <em>probably</em> won't need again should be front-and-center or deleted forever.</li>
+<li>Windows support for Chrome exists via an extension that talks to the local iCloud background application, but requires typing a verification code every reboot and sometimes doesn't autofill quickly or at all.</li>
+</ul>
+
+<p>I'm hoping these get fixed, but for now I'm happy enough working around them for the benefits.</p>
 
 <p>Ecosystem effects of iCloud Keychain include
-faster and more fluid autofill support in Safari, on both macOS and iOS.</p>
+faster and more fluid autofill support in Safari, on both macOS and iOS;
+automatic iCloud synchronization,
+and easily setup of password groups.</p>
 
 <h3 id="numbers">✔ Google Sheets → Numbers</h3>
 
@@ -1225,7 +1154,7 @@ so I still use it whenever I need to share a sheet with someone not on an Apple 
 
 
 
-<h3 id="notes">ⅹ Keep → Apple Notes</h3>
+<h3 id="notes">✔ Keep → Apple Notes</h3>
 
 <p>I value simplicity and elasticity in notetaking<span style="font-family: sans-serif">—</span>get out of my way and let me
 write. Let me deal with organization later. Keep gives me that. Its layout is hard to
@@ -1240,44 +1169,17 @@ a curated and categorized filing cabinet. One note in Notes might be several doz
 Keep, so the effort spent on curation is not so large, and neither is the impact of
 only-okay search.</p>
 
-<p>But honestly neither of them is fantastic, and the choice between them is a wash.</p>
+<p>After moving to Notes.app I jumped around to Org-mode, Bear, and Obsidian,
+but ultimately landed up back in Notes.
+I only wish there were a non-hacky way to export from it,
+but I landed back in Notes despite that absence, not because of it.
+(I started jumping around specifically because of it.)</p>
 
-<p>Ecosystem effects of Notes include Shortcuts, cross-app drag-and-drop, and "quick notes"
-(make a note using an OS-universal gesture on macOS or iOS). I
-use a shortcut to create a new note titled and sorted correctly before
-starting a Chinese lesson.</p>
-
-<h4 id="byenotes">Departure</h4>
-
-<p>I switched off Apple Notes late 2022 because I
-discovered the difficulty of getting notes out of it. There are third party
-solutions that work okay, but the thought that Apple could break them at any moment
-caused me to switch out of principle and fear. I exported what I could and started
-looking for alternatives.</p>
-
-<p>My foray into Emacs had been happening in the background, so I tried
-<a href="https://orgmode.org/">Org-mode</a> and quickly became enamored. It took over
-my notetaking duties because of how much its flexibility and breadth
-dwarfed what I was used to. I never truly understood the adage "Emacs is a great
-operating system but lacks a good text editor" until I tried Emacs + Org-mode. It's more
-appropriate to draw comparisons between software suites (e.g. Google Workspace vs.
-Microsoft Office vs. Emacs) than it is to compare it to other text editors.</p>
-
-
-
-<p>However, it is still plagued by a lack of good mobile options. As well, after 12 years of Vim I know how much work I'll put into
-achieving a perfect setup, and I just don't have it in me this time. As the years tick by,
-the long-term benefits of that up-front investment tick down.</p>
-
-<p><a href="https://obsidian.md/">Obsidian</a> has been my saving grace, which is like Org-mode if it
-were made twenty years later. Its plugin ecosystem handles 80% of the crazy things Org's
-does for 20% of the hassle. Browsing Obsidian
-plugins gives me the same feeling of wonder browsing <a href="https://melpa.org/">MELPA</a>
-did.</p>
-
-<p>It has a fantastic mobile experience and built-in sync of everything from notes to
-preferences to plugins. Most importantly, it all "just works". So I've switched to
-Obsidian as of March 2023 and haven't looked back.</p>
+<p>Ecosystem effects of Notes include Shortcuts,
+one-click "upgrade" to a Pages document,
+a collaboration UX that spans Messages, Mail, AirDrop, and Reminders,
+cross-app drag-and-drop,
+and "quick notes" which use OS-wide gestures to capture ideas into a staging area quickly à la <a href="https://orgmode.org/manual/Capture.html">Org Capture</a>.</p>
 
 <h3 id="reminders">✔ Tasks → Reminders</h3>
 
@@ -1335,25 +1237,13 @@ power-user-friendly thing about iOS and goes against all expectations I had
 around Apple and power users. For life automation, I prefer it to shell
 scripts.</p>
 
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/apple-shortcuts-light.png" target="_blank">
-        <picture>
-          <source srcset="img/apple-shortcuts-dark.png" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="A screenshot of a shortcut on iOS"
-            src="img/apple-shortcuts-light.png"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    I use Shortcuts.app to block times on my work calendar based on personal events.
-  </figcaption>
-</figure>
-</p>
+<p>
+				<label class="gallery-item">
+			    <input type="checkbox"/>
+				  <img alt="A screenshot of a shortcut on iOS." src="/img/apple-shortcuts-dark.png" title=""/>
+				</label></p>
+
+<p>I use Shortcuts.app to block times on my work calendar based on personal events.</p>
 
 <p>As one example, when I wrote in the iA Writer mobile app I would use Shortcuts to
 automatically commit and push my writing to twos.dev daily. Because iA
@@ -1444,22 +1334,13 @@ experience that feels like it was made this century. The app is beautiful,
 snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on everything else) are good but beatable; several banks now have universal 2% cashback cards.</p>
 
 <p><figure style="text-align: center">
-  
-    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
-      
-      
-        
-          <source src="img/apple-card-light.mp4" type="video/quicktime" />
-        
-        
-          <source src="img/apple-card-light.mp4" type="video/mp4" />
-        
-      
-    </video>
-  
-  <figcaption>Drilling into Apple Card transactions using Wallet.</figcaption>
+  <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+    <source src="/img/apple-card.mov" type="video/quicktime" />
+    <source src="/img/apple-card.mp4" type="video/mp4" />
+  </video>
 </figure>
-</p>
+
+Drilling into Apple Card transactions using Wallet.</p>
 
 <h3 id="podcasts">✔ Google Podcasts → Apple Podcasts</h3>
 
@@ -1516,7 +1397,7 @@ to document my journey here.</p>
                 2022 May
                 
                   / last updated
-                  2023 September
+                  2023 October
                 
               
             </i>
@@ -1525,13 +1406,43 @@ to document my journey here.</p>
       </footer>
       <nav class="mt-0">
   <div class="brand">
-    <a
-      href="/"
-      
-      >twos.dev</a
-    >
+    
+      <a
+        href="/"
+        
+        >Ben Carlsson</a
+      >
+    
   </div>
-  
+  <div class="items">
+    
+    <a
+      href="/now.html"
+      
+      >Now</a
+    >
+    <a
+      href="/photos.html"
+      
+      >Photos</a
+    >
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <a
+      href="/writing.html"
+      
+      >Writing</a
+    >
+    
+  </div>
 </nav>
 
     </div>
@@ -1563,6 +1474,19 @@ to document my journey here.</p>
         });
       }, 1000);
     });
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if (document.location.path === "/winter") {
+    window.location.replace("https://pkg.go.dev/twos.dev/winter");
   }
 </script>
 

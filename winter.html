@@ -54,13 +54,43 @@
     <div class="container">
       <nav class="mt-0">
   <div class="brand">
-    <a
-      href="/"
-      
-      >twos.dev</a
-    >
+    
+      <a
+        href="/"
+        
+        >Ben Carlsson</a
+      >
+    
   </div>
-  
+  <div class="items">
+    
+    <a
+      href="/now.html"
+      
+      >Now</a
+    >
+    <a
+      href="/photos.html"
+      
+      >Photos</a
+    >
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <a
+      href="/writing.html"
+      
+      >Writing</a
+    >
+    
+  </div>
 </nav>
 
       <header>
@@ -87,8 +117,7 @@ migrated to Winter.</em></p>
 			    <input type="checkbox"/>
 				  <img alt="Go Reference" src="https://pkg.go.dev/badge/twos.dev/winter.svg" title=""/>
 				</label></a> <a href="https://github.com/glacials/twos.dev#winter"><picture>
-  <source srcset="img/winter-github-dark.png" media="(prefers-color-scheme: dark)" />
-  <img alt="GitHub logo" src="img/winter-github-light.png" style="max-height: 1.35em" />
+  <img alt="GitHub logo" src="/img/index-github-dark.svg" style="max-height: 1.35em" />
 </picture>
 </a></p>
 
@@ -232,6 +261,11 @@ piece of warm content is stable, it can be "frozen" into cold content using
     </li>
   
     <li>
+      <a href="#preview"><span><code>{{ .Preview }}</code></span></a>
+      
+    </li>
+  
+    <li>
       <a href="#shortname"><span><code>{{ .Shortname }}</code></span></a>
       
     </li>
@@ -268,16 +302,6 @@ piece of warm content is stable, it can be "frozen" into cold content using
   
     <li>
       <a href="#archives"><span><code>archives</code></span></a>
-      
-    </li>
-  
-    <li>
-      <a href="#img"><span><code>img</code></span></a>
-      
-    </li>
-  
-    <li>
-      <a href="#video"><span><code>video</code></span></a>
       
     </li>
   
@@ -542,6 +566,13 @@ relative to the web root.</p>
 
 <p>Whether the document is a post (i.e. has frontmatter specifying <code>type: post</code>).</p>
 
+<h5 id="preview"><code>{{ .Preview }}</code></h5>
+
+<p><em>Type: <code>string</code></em></p>
+
+<p>A teaser for the document, such as a summary of its contents.
+If unset, the document's first paragraph will be used, if possible.</p>
+
 <h5 id="shortname"><code>{{ .Shortname }}</code></h5>
 
 <p><em>Type: <code>string</code></em></p>
@@ -608,126 +639,6 @@ documentation.</p>
 documents). This allows you to display posts sectioned by year.</p>
 
 <p>See <a href="#fields">Document Fields</a> for a list of fields available to documents.</p>
-
-<h5 id="img"><code>img</code></h5>
-
-<p><em>Alias: <code>imgs</code></em></p>
-
-<p>Usage: <code>{{ img[s] &lt;caption&gt; &lt;imageshortname alttext&gt;... }}</code></p>
-
-<p>Render an image or images with a single caption. Image files must be present in
-this format:</p>
-
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">public/img/&lt;pageshortname&gt;-&lt;imageshortname&gt;[-&lt;light|dark&gt;].&lt;png|jpg|jpeg&gt;
-</span></span></code></pre>
-
-<p>For example, to render one image with a caption and alt text:</p>
-
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">&lt;!-- mypage.md --&gt;
-</span></span><span class="line"><span class="ln">2</span><span class="cl">
-</span></span><span class="line"><span class="ln">3</span><span class="cl">{{ img
-</span></span><span class="line"><span class="ln">4</span><span class="cl">   "A caption."
-</span></span><span class="line"><span class="ln">5</span><span class="cl">   "test1"
-</span></span><span class="line"><span class="ln">6</span><span class="cl">   "Descriptive alt text of what the image is of, for assistive tech"
-</span></span><span class="line"><span class="ln">7</span><span class="cl">}}
-</span></span></code></pre>
-
-<p>Result:</p>
-
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/winter-test1.jpeg" target="_blank">
-        <picture>
-          <source srcset="" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="Descriptive alt text of what the image is of, for assistive tech"
-            src="img/winter-test1.jpeg"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    A caption.
-  </figcaption>
-</figure>
-</p>
-
-<p>In this example, the image file must hold one or more of these forms:</p>
-
-<ul>
-<li><code>public/img/mypage-test1.jpg</code></li>
-<li><code>public/img/mypage-test1-light.jpg</code></li>
-<li><code>public/img/mypage-test1-dark.jpg</code></li>
-<li><code>public/img/mypage-test1.jpeg</code></li>
-<li><code>public/img/mypage-test1-light.jpeg</code></li>
-<li><code>public/img/mypage-test1-dark.jpeg</code></li>
-<li><code>public/img/mypage-test1.png</code></li>
-<li><code>public/img/mypage-test1-light.png</code></li>
-<li><code>public/img/mypage-test1-dark.png</code></li>
-</ul>
-
-<p>If <code>-light</code> and/or <code>-dark</code> variants exist, they will be used when the user is
-in the respective dark mode setting.</p>
-
-<p>Any number of images can be rendered together with one caption beneath the
-group by passing multiple images and alt texts. They will appear next to each
-other when the page width allows it, or stacked vertically otherwise.</p>
-
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ imgs
-</span></span><span class="line"><span class="ln">2</span><span class="cl">   "A pair of images."
-</span></span><span class="line"><span class="ln">3</span><span class="cl">   "test1"
-</span></span><span class="line"><span class="ln">4</span><span class="cl">   "Descriptive text of test1"
-</span></span><span class="line"><span class="ln">5</span><span class="cl">   "test1"
-</span></span><span class="line"><span class="ln">6</span><span class="cl">   "Descriptive text of test2"
-</span></span><span class="line"><span class="ln">7</span><span class="cl">}}
-</span></span></code></pre>
-
-<p>Result:</p>
-
-<p><figure style="text-align: center">
-  <div class="photo-grid">
-    
-      <a href="img/winter-test1.jpeg" target="_blank">
-        <picture>
-          <source srcset="" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="Descriptive text of imagename1"
-            src="img/winter-test1.jpeg"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-      <a href="img/winter-test2.jpeg" target="_blank">
-        <picture>
-          <source srcset="" media="(prefers-color-scheme: dark)" />
-          <img
-            alt="Descriptive text of imagename2"
-            src="img/winter-test2.jpeg"
-            style="max-height: 40em; max-width: 100%; object-fit:contain"
-          /> </picture
-      ></a>
-    
-  </div>
-  <figcaption style="margin-bottom: 3em; margin-top: 1em;">
-    A pair of images.
-  </figcaption>
-</figure>
-</p>
-
-<h5 id="video"><code>video</code></h5>
-
-<p><em>Alias: <code>videos</code></em></p>
-
-<p>Usage: <code>{{ video[s] &lt;caption&gt; &lt;videoshortname alttext&gt;... }}</code></p>
-
-<p>Behaves exactly as <code>img</code> but searches for <code>mp4</code>/<code>mov</code> files instead
-and renders them in <code>&lt;video&gt;</code> tags.</p>
-
-<p>Note that most browsers do not currently support varying a video
-source by light/dark mode setting, so the wrong variant may be
-displayed.</p>
 </body></html>
       </article>
       <footer>
@@ -755,13 +666,43 @@ displayed.</p>
       </footer>
       <nav class="mt-0">
   <div class="brand">
-    <a
-      href="/"
-      
-      >twos.dev</a
-    >
+    
+      <a
+        href="/"
+        
+        >Ben Carlsson</a
+      >
+    
   </div>
-  
+  <div class="items">
+    
+    <a
+      href="/now.html"
+      
+      >Now</a
+    >
+    <a
+      href="/photos.html"
+      
+      >Photos</a
+    >
+    <a
+      href="/software.html"
+      
+      >Software</a
+    >
+    <a
+      href="/guide.html"
+      
+      >User Guide</a
+    >
+    <a
+      href="/writing.html"
+      
+      >Writing</a
+    >
+    
+  </div>
 </nav>
 
     </div>
@@ -793,6 +734,19 @@ displayed.</p>
         });
       }, 1000);
     });
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if (document.location.path === "/winter") {
+    window.location.replace("https://pkg.go.dev/twos.dev/winter");
   }
 </script>
 
