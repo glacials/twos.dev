@@ -30,7 +30,7 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Winter</title>
+<title>Ben / Winter</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
@@ -55,9 +55,13 @@
       <nav class="primary">
   <div class="brand">
     <a
-      href="/"
       
-      >Ben Carlsson</a
+      href="/"
+      style="display: flex; align-items: center;"
+      ><img alt="" src="/img/me.jpg" style="height: 3rem;" /><span
+        style="margin-left: 1rem"
+        >Ben Carlsson</span
+      ></a
     >
   </div>
   <div class="items">
@@ -110,11 +114,11 @@ migrated to Winter.</em></p>
 
 <h1>Winter</h1>
 
-<p><a href="https://pkg.go.dev/twos.dev/winter">
+<p><a href="https://pkg.go.dev/twos.dev/winter" target="_blank">
 				<label class="gallery-item">
 			    <input type="checkbox"/>
 				  <img alt="Go Reference" src="https://pkg.go.dev/badge/twos.dev/winter.svg" title=""/>
-				</label></a> <a href="https://github.com/glacials/twos.dev#winter"><picture>
+				</label></a> <a href="https://github.com/glacials/twos.dev#winter" target="_blank"><picture>
   <img alt="GitHub logo" src="/img/index-github-dark.svg" style="max-height: 1.35em" />
 </picture>
 </a></p>
@@ -135,7 +139,7 @@ break. These goals work against each other by default, so Winter splits content
 into two modes: <strong>warm</strong> and <strong>cold</strong>.</p>
 
 <p><strong>Warm</strong> content should be synchronized into the project directory from an
-outside tool of your choice. Generally this is a writing program such as <a href="https://ia.net/writer">iA
+outside tool of your choice. Generally this is a writing program such as <a href="https://ia.net/writer" target="_blank">iA
 Writer</a> hooked up to a shared or cloud directory;
 simplistically, it can be a cron job that runs <code>rsync</code>.</p>
 
@@ -332,7 +336,7 @@ piece of warm content is stable, it can be "frozen" into cold content using
 
 <p>This section details the <code>winter</code> CLI documentation. For Go library
 documentation, see
-<a href="https://pkg.go.dev/twos.dev/winter">pkg.go.dev/twos.dev/winter</a>.</p>
+<a href="https://pkg.go.dev/twos.dev/winter" target="_blank">pkg.go.dev/twos.dev/winter</a>.</p>
 
 <h3 id="layout">Directory Structure</h3>
 
@@ -340,14 +344,14 @@ documentation, see
 <li><code>./src</code><span style="font-family: sans-serif">—</span>Content to be built
 
 <ul>
-<li><code>./src/cold</code><span style="font-family: sans-serif">—</span>Stable content, optionally <a href="https://pkg.go.dev/text/template">templated</a>
+<li><code>./src/cold</code><span style="font-family: sans-serif">—</span>Stable content, optionally <a href="https://pkg.go.dev/text/template" target="_blank">templated</a>
 
 <ul>
 <li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
 <li><code>*.html</code><span style="font-family: sans-serif">—</span>HTML files</li>
 <li><code>*.org</code><span style="font-family: sans-serif">—</span>Org mode files</li>
 </ul></li>
-<li><code>./src/warm</code><span style="font-family: sans-serif">—</span>Unstable content, optionally <a href="https://pkg.go.dev/text/template">templated</a>
+<li><code>./src/warm</code><span style="font-family: sans-serif">—</span>Unstable content, optionally <a href="https://pkg.go.dev/text/template" target="_blank">templated</a>
 
 <ul>
 <li><code>*.md</code><span style="font-family: sans-serif">—</span>Markdown files</li>
@@ -474,7 +478,7 @@ the shortname.</p>
 
 <p>Date is the publish date of the document written as <code>YYYY-MM-DD</code>. It
 is available to templates as a Go
-<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a> using <a href="#createdat"><code>{{
+<a href="https://pkg.go.dev/time#Time" target="_blank"><code>time.Time</code></a> using <a href="#createdat"><code>{{
 .CreatedAt }}</code></a>.</p>
 
 <p>When not set the document will not have a publish date attached to it.</p>
@@ -483,7 +487,7 @@ is available to templates as a Go
 
 <p>Updated is the date the document was last meaningfully updated, if
 any, written as <code>YYYY-MM-DD</code>. It is available to templates as a Go
-<a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a> using <a href="#updatedat"><code>{{
+<a href="https://pkg.go.dev/time#Time" target="_blank"><code>time.Time</code></a> using <a href="#updatedat"><code>{{
 .UpdatedAt }}</code></a>.</p>
 
 <p>When not set the document will not have an update date attached to it.</p>
@@ -531,7 +535,7 @@ There is no programmatic access to documents by category.</p>
 
 <h3 id="templates">Templates</h3>
 
-<p>Any file in <code>./src</code> can be templated using the format expressed in the <a href="https://pkg.go.dev/text/template"><code>text/template</code></a> Go
+<p>Any file in <code>./src</code> can be templated using the format expressed in the <a href="https://pkg.go.dev/text/template" target="_blank"><code>text/template</code></a> Go
 library.</p>
 
 <h4 id="fields">Document Fields</h4>
@@ -587,12 +591,12 @@ document's extensionless filename otherwise.</p>
 
 <h5 id="createdat"><code>{{ .CreatedAt }}</code></h5>
 
-<p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
+<p><em>Type: <a href="https://pkg.go.dev/time#Time" target="_blank"><code>time.Time</code></a></em></p>
 
 <p>The publish date of the document as specified by the frontmatter
 <a href="#date"><code>date</code></a> attribute.</p>
 
-<p>This value can be formatted using Go's <a href="https://pkg.go.dev/time#Time.Format"><code>func (time.Time)
+<p>This value can be formatted using Go's <a href="https://pkg.go.dev/time#Time.Format" target="_blank"><code>func (time.Time)
 Format</code></a> function:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">{{ .CreatedAt.Format "2006 January" }} &lt;!-- Renders 2022 July  --&gt;
@@ -609,7 +613,7 @@ You can use this to hide unset dates:</p>
 
 <h5 id="updatedat"><code>{{ .UpdatedAt }}</code></h5>
 
-<p><em>Type: <a href="https://pkg.go.dev/time#Time"><code>time.Time</code></a></em></p>
+<p><em>Type: <a href="https://pkg.go.dev/time#Time" target="_blank"><code>time.Time</code></a></em></p>
 
 <p>The date the document was last meaningfully updated, as specified by
 the frontmatter <a href="#updated"><code>updated</code></a> attribute.</p>
@@ -645,7 +649,9 @@ documents). This allows you to display posts sectioned by year.</p>
             <i>
               
                 source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/winter.md"
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/winter.md"
+                  target="_blank"
                   >src/cold/winter.md</a
                 >
               

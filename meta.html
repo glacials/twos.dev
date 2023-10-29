@@ -30,7 +30,7 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Inside twos.dev</title>
+<title>Ben / Inside twos.dev</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
@@ -55,9 +55,13 @@
       <nav class="primary">
   <div class="brand">
     <a
-      href="/"
       
-      >Ben Carlsson</a
+      href="/"
+      style="display: flex; align-items: center;"
+      ><img alt="" src="/img/me.jpg" style="height: 3rem;" /><span
+        style="margin-left: 1rem"
+        >Ben Carlsson</span
+      ></a
     >
   </div>
   <div class="items">
@@ -133,8 +137,8 @@
 <p>To solve these issues and work towards my first goal, I needed tooling in the space between amorphous notes and strict HTML.</p>
 
 <p>I first focused on changing my drafting app to something with more robust exporting
-tools. I've jumped between <a href="https://ia.net/writer">iA Writer</a> and
-<a href="https://obsidian.md">Obsidian</a>, both of which let me get my thoughts out quickly, each
+tools. I've jumped between <a href="https://ia.net/writer" target="_blank">iA Writer</a> and
+<a href="https://obsidian.md" target="_blank">Obsidian</a>, both of which let me get my thoughts out quickly, each
 with their own strengths. Importantly, they store writing as Markdown. This solves <code>1</code>
 and <code>2</code> above.</p>
 
@@ -155,12 +159,12 @@ leaves two options.</p>
 <h3>Shortcuts</h3>
 
 <p>iOS and macOS ship with
-<a href="https://apps.apple.com/us/app/shortcuts/id1462947752">Shortcuts</a>, a no-code
+<a href="https://apps.apple.com/us/app/shortcuts/id1462947752" target="_blank">Shortcuts</a>, a no-code
 event-driven automation app. Using Shortcuts, I set up an automation that triggers when
 I switch away from the my writing app, and additionally on a cron. The automation adds a
 1-2 line <a href="winter.html#frontmatter">Winter frontmatter</a> section to each document if
 needed, then pushes it to the <code>src/warm</code> directory in the twos.dev Git repository by
-invoking <a href="https://workingcopyapp.com">Working Copy</a>. No interruption to UX; this happens
+invoking <a href="https://workingcopyapp.com" target="_blank">Working Copy</a>. No interruption to UX; this happens
 in the background.</p>
 
 <p>I never thought a phone would be an integral part of my CI/CD pipeline, but here we are.
@@ -178,19 +182,19 @@ we control a Mac that will be online enough to satisfy our synchronization needs
 are not necessarily 24/7, we can snatch the files from there.</p>
 
 <p>Enter
-<a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2">launchd</a>,
+<a href="https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2" target="_blank">launchd</a>,
 a hidden gem of macOS. It's a few things, but for our purposes it's basically cron
-purpose-built for laptops. It intelligently handles sleep, network loss, and (<a href="https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac">charge
+purpose-built for laptops. It intelligently handles sleep, network loss, and (<a href="https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac" target="_blank">charge
 state</a>). The
 specifics aren't important; suffice it to say It Just Works.</p>
 
 <p>As long as we install this on a machine or machines that get enough use<span style="font-family: sans-serif">—</span>or that are
-<a href="https://caffeinated.app">Caffeinated</a> enough<span style="font-family: sans-serif">—</span>this will be a good enough pipeline. We
+<a href="https://caffeinated.app" target="_blank">Caffeinated</a> enough<span style="font-family: sans-serif">—</span>this will be a good enough pipeline. We
 have our draft synchronization.</p>
 
 <h3>Preprocessing</h3>
 
-<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/c59cc1a/winter/document.go#L408-L436">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
+<p>On push, GitHub Actions builds the Markdown file into HTML with all the <a href="https://github.com/glacials/twos.dev/blob/c59cc1a/winter/document.go#L408-L436" target="_blank">right preprocessing</a> required to make it look like twos.dev. I use a small subset of <a href="https://pkg.go.dev/html/template" target="_blank"><code>html/template</code></a> to allow myself to put things like MP4 screen recordings and dark-mode-aware images into Markdown. This is also where the frontmatter from before is stripped and parsed into metadata inserted elsewhere on the page.</p>
 
 <p>Technically at this point the page is now published, just not linked to from anywhere. I can see how it looks in the context of twos.dev, and send the link to friends who have offered to review.</p>
 
@@ -206,7 +210,7 @@ have our draft synchronization.</p>
 
 <h3>Winter</h3>
 
-<p>To handle this bookkeeping along with the other build pipeline steps, I wrote the <a href="https://twos.dev/winter">Winter</a> CLI. Winter can handle the process of converting warm content to cold like so:</p>
+<p>To handle this bookkeeping along with the other build pipeline steps, I wrote the <a href="https://twos.dev/winter" target="_blank">Winter</a> CLI. Winter can handle the process of converting warm content to cold like so:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">winter freeze DOCUMENT
 </span></span></code></pre>
@@ -249,7 +253,7 @@ doodads and hardens the file against future changes to preprocessing.</p>
 
 <p>I use my website as a test bed for interesting technology. As a side effect, content has been lost over the years as it becomes hard to migrate to overhauled versions.</p>
 
-<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
+<p>It so happens that by keeping my writing in Markdown or raw HTML/CSS, I make it easy to accomplish my second goal: <a href="https://www.w3.org/Provider/Style/URI" target="_blank">cool URLs don’t change</a>. I've removed the possibility that changing frontend or backend frameworks will leave my documents behind; Markdown is not going anywhere, and all the HTML files need to look decent is a header and footer. In the worst case scenario I'll simply <code>cp -r dist</code> to my next crazy system's web root.</p>
 
 <p>If I’ve done things right, this web page will be accessible at twos.dev/meta.html for at least as long as I live.</p>
 </body></html>
@@ -260,7 +264,9 @@ doodads and hardens the file against future changes to preprocessing.</p>
             <i>
               
                 source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/src/cold/meta.md"
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/meta.md"
+                  target="_blank"
                   >src/cold/meta.md</a
                 >
               

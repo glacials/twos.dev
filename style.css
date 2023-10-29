@@ -1,44 +1,40 @@
 /*
  * Each set of variables that shares the same first word looks good with or on each other.
  */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --traditional-bg: rgba(34, 34, 34, 1);
-    --traditional-fg-a: rgba(235, 255, 240, 1);
-    --traditional-fg-b: rgb(245, 222, 153);
-
-    --inverse-bg: rgba(255, 255, 240, 0.19);
-    --inverse-fg: rgba(245, 222, 153, 1);
-
-    --darker-bg: rgb(34, 34, 34);
-    --darker-fg: rgba(248, 248, 242, 1);
-
-    --lighter-bg: rgba(65, 65, 95, 1);
-    --lighter-fg: rgba(255, 227, 86, 1);
-
-    --shadow: rgb(34, 34, 34);
-    --under-white: rgba(34, 34, 34, 1);
-
-    --container-width: 50rem;
-  }
-}
 @media (prefers-color-scheme: light) {
   :root {
     --traditional-bg: rgba(255, 255, 255, 1);
-    --traditional-fg-a: rgba(0, 0, 0, 1);
-    --traditional-fg-b: rgb(100, 100, 100);
+    --traditional-fg: rgba(0, 0, 0, 1);
+    --traditional-fg-pop: rgba(200, 100, 100, 1);
 
-    --inverse-bg: rgba(255, 255, 240, 0.19);
-    --inverse-fg: rgba(200, 100, 100, 1);
-
-    --darker-bg: rgb(100, 100, 100);
-    --darker-fg: rgba(0, 0, 0, 1);
+    --page-bg: rgb(235, 235, 235);
+    --page-border: rgb(0, 0, 0);
+    --page-fg: rgba(0, 0, 0, 1);
 
     --lighter-bg: rgba(255, 255, 255, 1);
     --lighter-fg: rgba(200, 200, 200, 1);
 
-    --shadow: rgb(50, 50, 50);
+    --shadow: rgb(100, 100, 100);
     --under-white: rgba(200, 100, 100, 1);
+
+    --container-width: 50rem;
+  }
+}
+@media (prefers-color-scheme: dark) {
+  :root {
+    --traditional-bg: rgba(34, 34, 34, 1);
+    --traditional-fg: rgba(235, 255, 240, 1);
+    --traditional-fg-pop: rgba(245, 222, 153, 1);
+
+    --page-bg: rgb(34, 34, 34);
+    --page-border: rgb(34, 34, 34);
+    --page-fg: rgba(248, 248, 242, 1);
+
+    --lighter-bg: rgba(240, 240, 240, 1);
+    --lighter-fg: rgb(132, 117, 45);
+
+    --shadow: rgb(34, 34, 34);
+    --under-white: rgba(34, 34, 34, 1);
 
     --container-width: 50rem;
   }
@@ -62,12 +58,12 @@ a[name] {
 /* Only lowercase links, not anchor targets */
 a[href],
 a:visited {
-  color: var(--inverse-fg);
+  color: var(--traditional-fg-pop);
 }
 
 a:hover {
-  background-color: var(--inverse-bg);
-  color: var(--inverse-fg);
+  background-color: var(--traditional-fg-pop);
+  color: var(--traditional-bg);
 }
 
 a:hover:has(img) {
@@ -120,13 +116,13 @@ article p:has(img) {
 }
 
 blockquote {
-  border-left: 1px solid var(--traditional-fg-a);
+  border-left: 1px solid var(--traditional-fg);
   padding-left: 1rem;
 }
 
 body {
-  background: var(--darker-bg);
-  color: var(--traditional-fg-a);
+  background: var(--page-bg);
+  color: var(--traditional-fg);
   font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial;
   font-size: 1.3em;
   height: 100%;
@@ -149,7 +145,7 @@ body:has(.gallery-item input:checked) {
 button,
 input[type="submit"] {
   background: none;
-  border: 1px solid var(--traditional-fg-a);
+  border: 1px solid var(--traditional-fg);
   color: inherit;
 }
 
@@ -196,7 +192,7 @@ h2 {
 
 h2,
 h3 {
-  color: var(--darker-fg);
+  color: var(--page-fg);
 }
 
 h3,
@@ -215,7 +211,7 @@ h6 {
 h4,
 h5,
 h6 {
-  color: var(--traditional-fg-b);
+  color: var(--traditional-fg-pop);
   display: block;
 }
 
@@ -249,7 +245,10 @@ li p {
 nav {
   display: flex;
   justify-content: space-between;
-  padding: 1rem;
+}
+
+nav.primary {
+  margin-bottom: 2rem;
 }
 
 @media (max-width: 30rem) {
@@ -266,11 +265,36 @@ nav {
 }
 
 nav .brand a,
-nav > .items > a {
+nav .items a {
   color: var(--traditional-fg);
   display: block;
   padding: 0.5em 0.75em;
   text-decoration: none;
+}
+
+nav .brand img {
+  border-radius: 0.5rem;
+}
+
+nav a {
+  margin: auto;
+}
+
+nav a:hover {
+  background: inherit;
+  color: var(--traditional-fg-pop);
+}
+
+nav.socials a:hover {
+  background-color: var(--traditional-fg-pop);
+}
+
+nav.socials a:hover {
+  background-color: var(--lighter-bg);
+}
+
+nav.socials a:hover img {
+  filter: invert();
 }
 
 nav .items {
@@ -289,8 +313,7 @@ nav .items {
 }
 
 nav a.selected {
-  background-color: var(--inverse-bg);
-  color: var(--inverse-fg);
+  color: var(--traditional-fg-pop);
 }
 
 nav.socials {
@@ -300,9 +323,8 @@ nav.socials {
 }
 
 nav.socials a {
-  margin: 0 0.75rem;
-  margin-bottom: auto;
-  margin-top: auto;
+  margin: auto 0;
+  padding: 1rem;
 }
 
 nav.socials img {
@@ -342,7 +364,7 @@ video + video {
 
 @media (min-width: 50rem) {
   .container {
-    border-color: var(--shadow);
+    border-color: var(--page-border);
     border-style: solid;
     border-width: 0.1rem;
     box-shadow: 0.5rem 0.5rem var(--shadow);
@@ -361,7 +383,7 @@ video + video {
 }
 
 .draft {
-  color: var(--traditional-fg-b);
+  color: var(--traditional-fg-pop);
   font-size: 2rem;
   text-align: center;
   text-transform: uppercase;
@@ -395,7 +417,7 @@ p:has(.gallery-item) {
 }
 
 .gallery-item:has(input:checked) {
-  background: var(--darker-bg);
+  background: var(--page-bg);
   cursor: zoom-out;
   display: fixed;
   height: 100vh;
@@ -420,7 +442,7 @@ p:has(.gallery-item) {
 
 /* Show caption on top of zoomed image. */
 p:has(.gallery-item input:checked) + p {
-  background: var(--darker-bg);
+  background: var(--page-bg);
   display: block;
   left: 15%;
   padding: 1rem;
@@ -449,14 +471,23 @@ p:has(.gallery-item input:checked) + p {
   width: 100%;
 }
 
+@media (prefers-color-scheme: light) {
+  .photo-grid img {
+    filter: contrast(0.8);
+  }
+
+  .photo-grid a:hover img {
+    filter: none;
+  }
+}
 @media (prefers-color-scheme: dark) {
   .photo-grid img {
     filter: grayscale(100);
   }
-}
 
-.photo-grid a:hover img {
-  filter: none;
+  .photo-grid a:hover img {
+    filter: none;
+  }
 }
 
 .publish-date {
@@ -466,7 +497,7 @@ p:has(.gallery-item input:checked) + p {
 }
 
 .selected {
-  color: var(--inverse-fg);
+  color: var(--traditional-fg-pop);
   cursor: default;
 }
 
@@ -495,8 +526,8 @@ pre code {
   display: block;
   padding: 1rem 0;
 
-  background-color: var(--darker-bg);
-  color: var(--darker-fg);
+  background-color: var(--page-bg);
+  color: var(--page-fg);
 }
 
 @media (max-width: 50rem) {
@@ -527,8 +558,8 @@ pre .line {
 }
 
 pre {
-  background-color: var(--darker-bg);
-  color: var(--darker-fg);
+  background-color: var(--page-bg);
+  color: var(--page-fg);
   font-family: monospace;
   letter-spacing: 0;
   margin-bottom: 2rem;
@@ -547,20 +578,20 @@ h3.company {
 
 /* Background */
 .bg {
-  color: var(--darker-fg);
-  background-color: var(--darker-bg);
+  color: var(--page-fg);
+  background-color: var(--page-bg);
 }
 
 /* PreWrapper */
 .chroma {
-  color: var(--darker-fg);
-  background-color: var(--darker-bg);
+  color: var(--page-fg);
+  background-color: var(--page-bg);
 }
 
 /* LineNumbers targeted by URL anchor */
 .chroma .ln:target {
-  color: var(--darker-fg);
-  background-color: var(--darker-bg);
+  color: var(--page-fg);
+  background-color: var(--page-bg);
 }
 
 /* LineNumbersTable targeted by URL anchor */

@@ -32,7 +32,7 @@ Emacs Config
   title="twos.dev"
   href="/feed.atom"
 />
-<title>
+<title>Ben / 
 Emacs Config
 </title>
 <link rel="stylesheet" href="/style.css" />
@@ -59,9 +59,13 @@ Emacs Config
       <nav class="primary">
   <div class="brand">
     <a
-      href="/"
       
-      >Ben Carlsson</a
+      href="/"
+      style="display: flex; align-items: center;"
+      ><img alt="" src="/img/me.jpg" style="height: 3rem;" /><span
+        style="margin-left: 1rem"
+        >Ben Carlsson</span
+      ></a
     >
   </div>
   <div class="items">
@@ -113,9 +117,9 @@ Emacs Config
 </h1>
 <div id="outline-text-headline-1" class="outline-text-1">
 <p>
-This is my Emacs config, expressed in <a href="https://en.wikipedia.org/wiki/Literate_programming">literate programming</a>. That is,
+This is my Emacs config, expressed in <a href="https://en.wikipedia.org/wiki/Literate_programming" target="_blank">literate programming</a>. That is,
 my Emacs config and the documentation for my Emacs config are the same
-file, and it's the one you're reading (<a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org">source</a>). <a href="https://twos.dev/winter">Winter</a> has rendered it
+file, and it's the one you're reading (<a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org" target="_blank">source</a>). <a href="https://twos.dev/winter" target="_blank">Winter</a> has rendered it
 from Org to HTML.</p>
 <div id="outline-container-headline-2" class="outline-2">
 <html><head></head><body><ol id="toc">
@@ -301,7 +305,7 @@ The following block makes dired mouseclicks open the in same window,
 not a new one.</p>
 <p>
 For details on why this binds mouse-2 even though we're trying to
-affect mouse-1, see <a href="https://emacs.stackexchange.com/questions/35536/dired-mouse-click-open-folder-in-the-same-window">this link</a>.</p>
+affect mouse-1, see <a href="https://emacs.stackexchange.com/questions/35536/dired-mouse-click-open-folder-in-the-same-window" target="_blank">this link</a>.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (eval-after-load "dired"
@@ -459,7 +463,7 @@ Integrations
 <p>
 Magit is the de facto Git interface in Emacs. This package surprised
 me with its convenience; having come from Vim I was expecting
-something along the lines of <a href="https://github.com/tpope/vim-fugitive">fugitive.vim</a>, but Magit is far more
+something along the lines of <a href="https://github.com/tpope/vim-fugitive" target="_blank">fugitive.vim</a>, but Magit is far more
 efficient than that. It's even more efficient to open Emacs and use
 Magit than it is to use Git at the command line.</p>
 <p>
@@ -548,7 +552,7 @@ The following code sets up the splash screen that shows when Emacs
 boots, which is usually an empty buffer. It pulls some info from
 history like recent files and projects opened, and some info from
 <code class="verbatim">org-mode</code> like upcoming agenda. I also configure mine here to shell
-out to <code class="verbatim">fortune</code> to render a random quote from my <a href="https://github.com/glacials/dotfiles">dotfiles repo</a>.</p>
+out to <code class="verbatim">fortune</code> to render a random quote from my <a href="https://github.com/glacials/dotfiles" target="_blank">dotfiles repo</a>.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>   (straight-use-package 'dashboard)
@@ -635,7 +639,7 @@ Display
 <div id="outline-text-headline-11" class="outline-text-3">
 <p>A beautiful editor is important to me whether it was made in 2015 or 1976.</p>
 <p>
-I started my Emacs journey with <a href="https://doomemacs.org">Doom</a> and eventually migrated to
+I started my Emacs journey with <a href="https://doomemacs.org" target="_blank">Doom</a> and eventually migrated to
 vanilla, but missed the Doom themeset. Thankfully, Doom is very
 modular and much of their custom code is available as individual
 packages. I import and use <code class="verbatim">doom-monokai-pro</code>; in some way shape or
@@ -906,7 +910,7 @@ headline a bit:</p>
 </div>
 </div>
 <p>
-We'll also add <a href="https://www.orgroam.com/">Org-roam</a>, which is like wiki mode for Org mode:</p>
+We'll also add <a href="https://www.orgroam.com/" target="_blank">Org-roam</a>, which is like wiki mode for Org mode:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'org-roam)
@@ -1042,7 +1046,7 @@ significance between the two and being unable to lean on a stable
 working directory given that you also have <code class="verbatim">~/anotherproject/main.go</code>
 open in another buffer.</p>
 <p>
-<a href="https://github.com/bbatsov/projectile"><code class="verbatim">projectile</code></a> is a fantastic Emacs package that fixes this. At its most
+<a href="https://github.com/bbatsov/projectile" target="_blank"><code class="verbatim">projectile</code></a> is a fantastic Emacs package that fixes this. At its most
 basic level it brings a hidden Emacs feature (<code class="verbatim">project.el</code>) into the
 limelight and attaches a bunch of modern quality-of-life improvements
 to it. It uses a combination of autodetection and prompts to establish
@@ -1096,7 +1100,7 @@ Efficiencies
 </div>
 </div>
 <p>
-Use <a href="https://github.com/emacsorphanage/god-mode"><code class="verbatim">god-mode</code></a>, which is like normal mode in Vim but using traditional Emacs
+Use <a href="https://github.com/emacsorphanage/god-mode" target="_blank"><code class="verbatim">god-mode</code></a>, which is like normal mode in Vim but using traditional Emacs
 bindings. It has these effects:</p>
 <ul>
 <li>All <code class="verbatim">C-</code> are removed from commands (e.g. <code class="verbatim">x s</code> performs <code class="verbatim">C-x C-s</code>)</li>
@@ -1155,7 +1159,7 @@ up to speed with modern standard practices.</p>
 </div>
 </div>
 <p>
-We'll install <a href="https://github.com/oantolin/orderless"><code class="verbatim">orderless</code></a> for completion:</p>
+We'll install <a href="https://github.com/oantolin/orderless" target="_blank"><code class="verbatim">orderless</code></a> for completion:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'orderless)
@@ -1163,7 +1167,7 @@ We'll install <a href="https://github.com/oantolin/orderless"><code class="verba
 </div>
 </div>
 <p>
-And <a href="https://github.com/minad/vertico"><code class="verbatim">vertico</code></a> for more completion improvements:</p>
+And <a href="https://github.com/minad/vertico" target="_blank"><code class="verbatim">vertico</code></a> for more completion improvements:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>(straight-use-package 'vertico)
@@ -1195,7 +1199,9 @@ questions or improvement suggestions! <a href="mailto:ben@twos.dev">ben@twos.dev
             <i>
               
                 source:
-                <a href="https://github.com/glacials/twos.dev/blob/main/src/warm/config.org"
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/warm/config.org"
+                  target="_blank"
                   >src/warm/config.org</a
                 >
               
