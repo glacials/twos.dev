@@ -17,7 +17,7 @@ require (
 	github.com/rwcarlsen/goexif v0.0.0-20190401172101-9e8deecbddbd
 	github.com/spf13/cobra v1.5.0
 	github.com/yargevad/filepathx v1.0.0
-	golang.org/x/image v0.5.0
+	golang.org/x/image v0.10.0
 	golang.org/x/net v0.17.0
 	golang.org/x/text v0.13.0
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
