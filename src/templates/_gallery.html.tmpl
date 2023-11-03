@@ -11,7 +11,7 @@
         src="{{ .WebPath }}"
         srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
         sizes="{{ range .Thumbnails }}
-          (max-width: {{ mul .Width 2 }}px) {{ .Width }}px,
+          (max-width: {{ mul .Width 4 }}px) {{ .Width }}px,
         {{ end }}"
       />
     </a>
