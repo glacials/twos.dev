@@ -5,6 +5,7 @@
   :root {
     --traditional-bg: rgba(255, 255, 255, 1);
     --traditional-fg: rgba(0, 0, 0, 1);
+    --traditional-fg-mute: rgba(0, 0, 0, 0.6);
     --traditional-fg-pop: rgba(200, 100, 100, 1);
 
     --page-bg: rgb(235, 235, 235);
@@ -24,6 +25,7 @@
   :root {
     --traditional-bg: rgba(34, 34, 34, 1);
     --traditional-fg: rgba(235, 255, 240, 1);
+    --traditional-fg-mute: rgba(235, 255, 240, 0.6);
     --traditional-fg-pop: rgba(245, 222, 153, 1);
 
     --page-bg: rgb(34, 34, 34);
@@ -185,6 +187,30 @@ h1 + p + figure {
   max-width: var(--container-width);
 }
 
+h1 small,
+h2 small,
+h3 small,
+h4 small,
+h5 small,
+h6 small {
+  color: var(--traditional-fg-mute);
+  display: block;
+  font-family: monospace;
+  font-size: 0.9rem;
+  font-weight: normal;
+  letter-spacing: -1px;
+  margin-left: 1rem;
+}
+
+h1:has(small),
+h2:has(small),
+h3:has(small),
+h4:has(small),
+h5:has(small),
+h6:has(small) {
+  margin-bottom: 0;
+}
+
 h2 {
   font-size: 2rem;
   margin-bottom: 0;
@@ -212,7 +238,6 @@ h6 {
 h4,
 h5,
 h6 {
-  color: var(--traditional-fg-pop);
   display: block;
 }
 

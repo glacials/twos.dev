@@ -1,0 +1,25 @@
+<h2>Posts</h2>
+<div class="writing">
+  <div>
+    <ul>
+      {{ range posts }}
+        {{ if lt
+          .CreatedAt.Year (add now.Year -1)
+        }}
+          {{ continue }}
+        {{ end }}
+        <li>
+          <h3>
+            <a href="/{{ .Shortname }}.html">{{ .Title }}</a>
+            <small>
+              {{ .CreatedAt.Year }}
+              {{ .CreatedAt.Month }}
+            </small>
+          </h3>
+          <p>{{ .Preview }} <a href="/{{ .Shortname }}.html">More &rarr;</a></p>
+        </li>
+      {{ end }}
+      <li><a href="/archives.html">Archives &rarr;</a></li>
+    </ul>
+  </div>
+</div>
