@@ -275,6 +275,9 @@ func (d *textDocument) load() error {
 	}
 	defer f.Close()
 
+	// Reset metadata to the zero value.
+	// Fields removed from frontmatter shouldn't hold onto previous values.
+	d.metadata = metadata{}
 	body, err := frontmatter.Parse(f, &d.metadata)
 	if err != nil {
 		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)

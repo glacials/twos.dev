@@ -379,13 +379,13 @@ func (err ErrNotTracked) Error() string {
 // Rebuild rebuilds the document or template at the given path into the given
 // dist directory.
 //
-// If the path is a template, any documents that use it will be rebuilt
-// afterwards. If the path is a document, any templates it uses will be rebuilt
-// first. If the path isn't known to the substructure, Rebuild returns
-// ErrNotTracked.
+// If src is a template, any documents that use it will be rebuilt afterwards.
 //
-// As a special case, the index page will be rebuilt after any post is built, so
-// that it can display its up to date title.
+// If src is a document, any templates it uses will be rebuilt first.
+//
+// If src is a post, the index, writing, and archives pages will be rebuilt after.
+//
+// If src isn't known to the substructure, Rebuild returns ErrNotTracked.
 func (s *Substructure) Rebuild(src, dist string) error {
 	var built bool
 
@@ -428,6 +428,11 @@ func (s *Substructure) Rebuild(src, dist string) error {
 			fmt.Println(" ✓")
 			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("writing.html").String()))
 			if err := s.execute(s.DocByShortname("writing"), dist); err != nil {
+				return fmt.Errorf("can't rebuild index: %w", err)
+			}
+			fmt.Println(" ✓")
+			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("index.html").String()))
+			if err := s.execute(s.DocByShortname("index"), dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
