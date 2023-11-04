@@ -1,18 +1,17 @@
 ---
-category: living document
 date: 2022-05-25
 filename: apple.html
 preview: Notes on my years-long journey to switch from Google products to Apple products.
 toc: true
 type: post
-updated: 2023-10-25
+updated: 2023-11-03
 ---
 
 # From Google to Apple
 
-This is a one-page website within twos.dev where I detail my multi-year
-journey of migrating from deep in the Google ecosystem to deep in the Apple
-ecosystem. It is occasionally updated.
+This is a collection of notes on my multi-year journey of migrating
+from deep in the Google ecosystem
+to deep in the Apple ecosystem.
 
 ## Why? {#why}
 
