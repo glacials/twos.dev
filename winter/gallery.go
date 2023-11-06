@@ -157,10 +157,6 @@ func (d *galleryDocument) Dest() (string, error) {
 	return fmt.Sprintf("%s.html", relpath), nil
 }
 
-func (d *galleryDocument) Execute(w io.Writer, t *template.Template) error {
-	return t.Execute(w, d)
-}
-
 func (d *galleryDocument) IsPost() bool  { return false }
 func (d *galleryDocument) IsDraft() bool { return false }
 

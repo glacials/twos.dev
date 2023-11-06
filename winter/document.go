@@ -80,6 +80,14 @@ var (
 	}
 )
 
+// Document is something that can be built,
+// usually from a source file on disk to a destination file on disk.
+//
+// After a document has been built by calling [Build],
+// it can be passed to a template during execution like so:
+//
+//	var buf bytes.Buffer
+//	t.Execute(&buf, d)
 type Document interface {
 	// Build returns the document HTML as it will be just before being executed as
 	// a template.
@@ -94,13 +102,6 @@ type Document interface {
 	// Dest returns the desired final path of the document.
 	// The path is relative to the web root and includes the filename.
 	Dest() (string, error)
-	// Execute executes the given template in the context of the document
-	// (i.e. with whatever variables the template needs to execute successfully).
-	// It writes the resulting bytes to the given writer.
-	//
-	// If the document does not use templates,
-	// Execute writes the final document bytes to the given writer directly.
-	Execute(w io.Writer, t *template.Template) error
 	// IsDraft returns whether the document is of type draft.
 	IsDraft() bool
 	// IsPost returns whether the document is of type post.

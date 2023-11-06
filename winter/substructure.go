@@ -575,7 +575,7 @@ func (s *Substructure) writefeed() error {
 			return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
 		}
 		var buf bytes.Buffer
-		if err = post.Execute(&buf, t); err != nil {
+		if err = t.Execute(&buf, post); err != nil {
 			return fmt.Errorf("cannot execute document %q: %w", post.Source, err)
 		}
 
@@ -704,7 +704,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	}
 	defer f.Close()
 
-	if err = d.Execute(f, t); err != nil {
+	if err = t.Execute(f, d.Document); err != nil {
 		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
 	}
 
