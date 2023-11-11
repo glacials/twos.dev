@@ -43,16 +43,12 @@ func (r *Reloader) Handler() websocket.Handler {
 }
 
 // Reload notifies all connected browsers to reload the page.
+// It also notifies any browsers that connect in the next second,
 func (r *Reloader) Reload() {
 	r.listeners.Range(func(key any, val any) bool {
 		conn := key.(*websocket.Conn)
-		lastRefreshed := val.(time.Time)
-		if time.Since(lastRefreshed) < 2*time.Second {
-			// debounce
-			return true
-		}
-		// If the browser gets our message, it'll close this via refresh. If not,
-		// we'll want to prune it anyway.
+		// If the browser gets our message, it'll close this via refresh.
+		// If not, we'll want to prune it anyway.
 		r.listeners.Delete(conn)
 		_, err := conn.Write([]byte("refresh"))
 		if err != nil {
