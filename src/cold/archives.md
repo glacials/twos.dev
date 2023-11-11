@@ -10,21 +10,15 @@ type: page
 {{range archives}}
 
 {{if lt .Year (sub $prev 1) }}
-
 .
-
 .
-
 .
-
 {{end}}
 
 ## {{.Year}}
 
 {{range .Documents}}
-
-- {{with .Category}}{{.}}:{{end}} [{{.Title}}]({{.Shortname}}.html)
-
+• {{with .Category}}{{.}}:{{end}} [{{.Title}}]({{.Shortname}}.html)
 {{end}}
 {{$prev = .Year}}
 {{end}}

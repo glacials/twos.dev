@@ -3,7 +3,7 @@
  */
 @media (prefers-color-scheme: light) {
   :root {
-    --traditional-bg: rgba(255, 255, 255, 1);
+    --traditional-bg: rgba(235, 235, 235, 1);
     --traditional-fg: rgba(0, 0, 0, 1);
     --traditional-fg-mute: rgba(0, 0, 0, 0.6);
     --traditional-fg-pop: rgba(200, 100, 100, 1);
@@ -12,11 +12,14 @@
     --page-border: rgb(0, 0, 0);
     --page-fg: rgba(0, 0, 0, 1);
 
-    --lighter-bg: rgba(255, 255, 255, 1);
+    --lighter-bg: rgba(235, 235, 235, 1);
     --lighter-fg: rgba(200, 200, 200, 1);
 
     --shadow: rgb(100, 100, 100);
-    --under-white: rgba(200, 100, 100, 1);
+    /* --under-white looks good as a background under a white foreground,
+     * regardless of color scheme. e.g. nav.socials uses white images.
+     */
+    --under-white: rgba(50, 50, 50, 1);
 
     --container-width: 70rem;
   }
@@ -347,6 +350,16 @@ nav a:hover {
   color: var(--traditional-fg-pop);
 }
 
+nav a.selected {
+  color: var(--traditional-fg-pop);
+}
+
+nav.socials {
+  background-color: var(--under-white);
+  display: block;
+  margin: auto;
+}
+
 nav.socials a:hover {
   background-color: var(--traditional-fg-pop);
 }
@@ -373,16 +386,6 @@ nav .items {
     display: block;
     text-align: right;
   }
-}
-
-nav a.selected {
-  color: var(--traditional-fg-pop);
-}
-
-nav.socials {
-  background-color: var(--under-white);
-  display: block;
-  margin: auto;
 }
 
 nav.socials a {
@@ -427,10 +430,6 @@ video + video {
 
 @media (min-width: 50rem) {
   .container {
-    border-color: var(--page-border);
-    border-style: solid;
-    border-width: 0.1rem;
-    box-shadow: 0.5rem 0.5rem var(--shadow);
     margin-bottom: 2rem;
   }
 }
@@ -555,16 +554,12 @@ p:has(.gallery-item input:checked) + p {
 }
 
 .post {
-  border-color: var(--page-border);
-  border-style: dashed;
-  border-width: 1px 0;
   margin: 0;
   padding: 2rem 0 0 0;
 }
 
 @media (min-width: 50rem) {
   .post {
-    border-width: 1px;
     padding: 2rem;
     margin-bottom: 6rem;
   }
