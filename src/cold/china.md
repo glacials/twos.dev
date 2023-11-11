@@ -1,7 +1,7 @@
 ---
-date: 2023-10-15
+date: 2023-11-10
 filename: china.html
-type: draft
+type: post
 ---
 
 # Surprises in North China
@@ -257,3 +257,7 @@ things Summer hadn't consciously realized were different after emigrating.
 
 I hope documenting them has helped you out.
 If so, I'd love to hear about it on [Mastodon](https://hachyderm.io/@glacials).
+
+---
+
+_Thanks to Summer for feedback on drafts of this._
