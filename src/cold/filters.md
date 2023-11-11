@@ -31,7 +31,6 @@ There’s a lot of talk about Great Filters as a concept,
 but less about specific Great Filters that we might one day reach.
 
 That’s disappointing, because anticipating these obstacles is an important first step to overcoming or avoiding them.
-I’m no astrophysicist, but I’ve thought a lot about this.
 Here are some candidates I’ve never heard discussed.
 
 ## Sub-replacement Reproduction
@@ -39,29 +38,28 @@ Here are some candidates I’ve never heard discussed.
 As populations advance, birth rates decline.
 Contraceptives, family planning, education, they all stand in the way of reproduction.
 
-When each person on average produces 1.0 children,
-this is called *replacement*.
-Historically this has been very easy, and it is why we are now 8 billion strong.
+When speaking about population levels, an average person producing 1.0 children is called **replacement**.
+Mathematically, it's vital to the continuation of the species that we are at or above replacement.
+An average production of even 0.9 children per person means that each generation gets smaller than the last,
+until there is no next generation.
+
+Historically reaching replacement has been easy, and it is why we are now 8 billion strong.
 It turns out when the process that makes children is fun, children get made.
 
 But do we, as individuals, even want replacement?
-I don't know a single person who plans for their children to outnumber them.
+I don't know a single person who plans to have more than 1 child per parent.
+It's possible we'll reach a point where
+individual freedoms, education, and opportunity all converge to lower the desire for children below replacement.
 
-It's possible we develop—or have already developed—into an inclination where,
-on average, humans want `< 1` children each.
-It's possible we've been there emotionally for a long time,
-and just hadn't developed the contraceptive means and distribution to achieve it.
-
-We're going to get there. Soon.
-And it's a good thing that every individual human has access to contraceptives.
+It's possible we're already there, and the only reason we keep growing is poor availability of contraceptives.
+But that's being fixed.
+It's a good thing that every individual human has access to contraceptives.
 But it also might end the species.
+It may have already ended countless others out there.
 
 Perhaps we’re the most populous generation of humans the universe will ever see, and it will just go down from here.
-Perhaps this has already happened to countless other species on countless other worlds.
 Lack of birth control is an evolutionary necessity,
-so once a species advances enough to fix that,
-evolution can’t do its job.
-Great Filter found, species over.
+so perhaps once a species advances enough to fix it... species over.
 
 # Low Desire for Development
 
