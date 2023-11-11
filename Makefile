@@ -15,4 +15,5 @@ build_twos.dev: build_winter
 build: build_winter clean build_twos.dev
 
 serve: clean
-	gow run . serve
+	@echo Building.
+	@gow run . serve

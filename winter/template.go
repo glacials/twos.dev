@@ -145,10 +145,12 @@ func (d *substructureDocument) icon() (iconfunc, error) {
 	}, nil
 }
 
-// loadDeps takes a parsed template t,
-// searches it and associated templates for references to other templates
-// (e.g. `{{ template "src/templates/_foo.html.tmpl" }}`),
-// and loads, parses, and attaches those to t.
+// loadDeps searches a parsed template t and its associated templates
+// for references to other templates, e.g.
+//
+//	{{ template "src/templates/_foo.html.tmpl" }}
+//
+// It loads any referenced files, parses them into templates, and attaches those templates to t.
 // It repeats this recursively until t and all associated templates are fully resolved.
 //
 // No templates are executed.

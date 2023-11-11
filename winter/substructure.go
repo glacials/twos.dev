@@ -12,14 +12,12 @@ import (
 	"strings"
 	"time"
 
-	"github.com/gorilla/feeds"
 	"github.com/yargevad/filepathx"
 	"golang.org/x/text/cases"
 	"golang.org/x/text/language"
 )
 
-// Substructure is a graph of documents on the website, generated with read-only
-// operations. It will later be fed into a renderer.
+// Substructure is a graph of documents on the website.
 type Substructure struct {
 	cfg Config
 	// devURL is [twos.dev/winter.Substructure.cfg.Development.URL] unmarshaled into a [net/url.URL].
@@ -29,8 +27,10 @@ type Substructure struct {
 	photos map[string][]*galleryDocument
 }
 
-// substructureDocument is a Document wrapper allowing the Substructure to manage its own data.
+// substructureDocument is a [Document] wrapper for use by the substructure.
+// This allows the Substructure to manage its own document-specific data.
 type substructureDocument struct {
+	// Document is the [Document] being wrapped.
 	Document
 
 	// Parent, if non-nil, points to the document that this one is a child of.
@@ -39,6 +39,11 @@ type substructureDocument struct {
 	// Source is the path to the source file for the document,
 	// relative to the project root.
 	Source string
+
+	// HTML is the document's parsed, executed, final HTML without any layout.
+	//
+	// HTML is empty until the document's first execution.
+	HTML template.HTML
 }
 
 var (
@@ -79,10 +84,9 @@ func (d *substructureDocument) Shortname() string {
 	return shortname
 }
 
-// NewSubstructure returns a substructure with the given configuration. Upon
-// initialization, a substructure is the result of a discovery phase of content
-// on the filesystem. Further calls are needed to build the full graph of
-// content and render it to HTML.
+// NewSubstructure returns a substructure with the given configuration.
+// Upon initialization, a substructure is the result of a discovery phase of content on the filesystem.
+// Further calls are needed to build the full graph of content and render it to HTML.
 func NewSubstructure(cfg Config) (*Substructure, error) {
 	devURL, err := url.Parse(cfg.Development.URL)
 	if err != nil {
@@ -95,8 +99,8 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 	return &s, s.discover()
 }
 
-// add adds the given document to the substructure, removing any old
-// versions in the process.
+// add adds the given document to the substructure,
+// removing any old versions in the process.
 func (s *Substructure) add(d *substructureDocument) {
 	// dedupe
 	for i, doc := range s.docs {
@@ -530,88 +534,6 @@ func (s *Substructure) posts() (docs documents) {
 	return
 }
 
-func (s *Substructure) writefeed() error {
-	now := time.Now()
-	feed := feeds.Feed{
-		Title:       s.cfg.Name,
-		Description: s.cfg.Description,
-		Author: &feeds.Author{
-			Name:  s.cfg.Author.Name,
-			Email: s.cfg.Author.Email,
-		},
-		Link: &feeds.Link{Href: (&url.URL{Scheme: "https", Host: s.cfg.Hostname}).String()},
-		Copyright: fmt.Sprintf(
-			"Copyright %d–%d %s",
-			s.cfg.Since,
-			now.Year(),
-			s.cfg.Author.Name,
-		),
-		Items: []*feeds.Item{},
-
-		Created: now,
-		Updated: now,
-	}
-
-	for _, post := range s.posts() {
-		body, err := post.Build()
-		if err != nil {
-			return err
-		}
-		dest, err := post.Dest()
-		if err != nil {
-			return err
-		}
-		t := template.New(post.Source)
-		funcs, err := s.funcmap(post)
-		if err != nil {
-			return fmt.Errorf("can't generate funcmap: %w", err)
-		}
-		_ = t.Funcs(funcs)
-		_, err = t.Parse(string(body))
-		if err != nil {
-			return fmt.Errorf("cannot parse page for feed: %w", err)
-		}
-		if err := loadDeps(t); err != nil {
-			return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
-		}
-		var buf bytes.Buffer
-		if err = t.Execute(&buf, post); err != nil {
-			return fmt.Errorf("cannot execute document %q: %w", post.Source, err)
-		}
-
-		feed.Items = append(feed.Items, &feeds.Item{
-			Id:          dest,
-			Title:       post.Title(),
-			Author:      feed.Author,
-			Content:     string(buf.String()),
-			Description: string(body),
-			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, dest),
-			},
-			Created: post.CreatedAt(),
-			Updated: post.UpdatedAt(),
-		})
-	}
-
-	atom, err := feed.ToAtom()
-	if err != nil {
-		return err
-	}
-	if err := os.WriteFile("dist/feed.atom", []byte(atom), 0o644); err != nil {
-		return err
-	}
-
-	rss, err := feed.ToRss()
-	if err != nil {
-		return err
-	}
-	if err := os.WriteFile("dist/feed.rss", []byte(rss), 0o644); err != nil {
-		return err
-	}
-
-	return nil
-}
-
 // ExecuteAll builds all documents known to the substructure,
 // as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
@@ -643,8 +565,8 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 	return s.writefeed()
 }
 
-// execute builds the given document into the given directory. To build a
-// document and its dependencies and dependants, use Rebuild instead.
+// execute builds the given document into the given directory.
+// To also build its dependencies and dependants, use Rebuild instead.
 func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	dest, err := d.Dest()
 	if err != nil {
@@ -668,14 +590,15 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	if d.Layout() == "" {
 		return os.WriteFile(dest, bodyBytes, 0o644)
 	}
-
-	layoutBytes, err := os.ReadFile(d.Layout())
-	if err != nil {
-		return fmt.Errorf("cannot read %q to execute %q: %w", d.Layout(), d.Source, err)
-	}
 	funcs, err := s.funcmap(d)
 	if err != nil {
 		return fmt.Errorf("can't generate funcmap: %w", err)
+	}
+
+	// First, execute the document with its layout and save to its *.html file.
+	layoutBytes, err := os.ReadFile(d.Layout())
+	if err != nil {
+		return fmt.Errorf("cannot read %q to execute %q: %w", d.Layout(), d.Source, err)
 	}
 	t, err := template.New(d.Layout()).Funcs(funcs).Parse(string(layoutBytes))
 	if err != nil {
@@ -705,12 +628,23 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	defer f.Close()
 
 	if err = t.Execute(f, d.Document); err != nil {
-		return fmt.Errorf("can't execute document `%s`: %w", d.Shortname(), err)
+		return fmt.Errorf("can't execute document `%s` (with layout): %w", d.Source, err)
 	}
+
+	// Second, execute the document without its layout and save it in memory,
+	// so other templates (e.g. _writing.html.tmpl, which shows all posts)
+	// can embed it programmatically.
+	var buf bytes.Buffer
+	if err = t.ExecuteTemplate(&buf, "body", d.Document); err != nil {
+		return fmt.Errorf("can't execute document `%s` (without layout): %w", d.Source, err)
+	}
+	d.HTML = template.HTML(buf.String())
 
 	return nil
 }
 
+// funcmap returns a [template.FuncMap] for the given substructure document,
+// which can be used with [html/template.Template.Funcs].
 func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error) {
 	iconFunc, err := d.icon()
 	if err != nil {
@@ -736,8 +670,8 @@ func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error
 	}, nil
 }
 
-// shouldIgnore returns true if the given file path should not be built into the
-// substructure, or false otherwise.
+// shouldIgnore returns true if the given file path should not be built into the substructure,
+// or false otherwise.
 func shouldIgnore(src string) bool {
 	for r := range ignorePaths {
 		if r.MatchString(src) {

@@ -7,7 +7,7 @@
   <body>
     <div class="container">
       {{ template "src/templates/_nav.html.tmpl" . }}
-      <header>
+      <article>
         {{ if .IsDraft }}
           <div class="draft">Draft</div>
         {{ end }}
@@ -29,8 +29,6 @@
             — a {{ . }} —
           </div>
         {{ end }}
-      </header>
-      <article>
         {{ template "body" . }}
       </article>
       <footer>

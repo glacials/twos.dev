@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"sync"
 	"time"
 
 	"github.com/fsnotify/fsnotify"
@@ -25,7 +26,9 @@ type Reloader struct {
 	closeSockets chan struct{}
 	// listeners is a mapping of WebSocket connections browsers have open with us
 	// to the last time they were refreshed.
-	listeners map[*websocket.Conn]time.Time
+	//
+	// It is a thread-safe map[*websocket.Conn]time.Time.
+	listeners sync.Map
 	stop      chan struct{}
 	watcher   *fsnotify.Watcher
 }
@@ -33,25 +36,24 @@ type Reloader struct {
 // Handler returns a function that handles incoming WebSocket connections which
 // implements http.Handler.
 func (r *Reloader) Handler() websocket.Handler {
-	if r.listeners == nil {
-		r.listeners = map[*websocket.Conn]time.Time{}
-	}
 	return websocket.Handler(func(conn *websocket.Conn) {
-		r.listeners[conn] = time.Now()
+		r.listeners.Store(conn, time.Now())
 		<-r.closeSockets
 	})
 }
 
 // Reload notifies all connected browsers to reload the page.
 func (r *Reloader) Reload() {
-	for conn, lastRefreshed := range r.listeners {
+	r.listeners.Range(func(key any, val any) bool {
+		conn := key.(*websocket.Conn)
+		lastRefreshed := val.(time.Time)
 		if time.Since(lastRefreshed) < 2*time.Second {
 			// debounce
-			continue
+			return true
 		}
 		// If the browser gets our message, it'll close this via refresh. If not,
 		// we'll want to prune it anyway.
-		delete(r.listeners, conn)
+		r.listeners.Delete(conn)
 		_, err := conn.Write([]byte("refresh"))
 		if err != nil {
 			log.Printf("can't refresh browser: %s", err.Error())
@@ -59,7 +61,8 @@ func (r *Reloader) Reload() {
 				log.Printf("can't close browser connection: %s", err.Error())
 			}
 		}
-	}
+		return true
+	})
 }
 
 // Watch starts watching the filesystem for changes asynchronously, building any
@@ -161,10 +164,12 @@ func (r *Reloader) listen() {
 // Shutdown stops watching the filesystem for changes and gracefully closes any
 // open WebSocket connections.
 func (r *Reloader) Shutdown() {
-	for conn := range r.listeners {
+	r.listeners.Range(func(key any, val any) bool {
+		conn := key.(*websocket.Conn)
 		conn.Close()
-	}
-	r.listeners = map[*websocket.Conn]time.Time{}
+		r.listeners.Delete(conn)
+		return true
+	})
 	r.stop <- struct{}{}
 	r.closeSockets <- struct{}{}
 }

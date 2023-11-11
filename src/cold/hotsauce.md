@@ -74,7 +74,7 @@ Luckily the last few years have seen some self-service white label products
 enter the market, propelled I think by the demand for startup swag. For
 something as niche as hot sauce, though, the best we could hope for was
 partial automation. I engaged with several vendors and ordered sample packs
-from two—one via self-service for $25 and one via phone call for free.
+from two—one via self-service for `$25` and one via phone call for free.
 
 Then I made some chips, invited some friends over (pre-pandemic), and got to
 work.
@@ -125,7 +125,7 @@ flat-rate envelopes ready, also delivered from their website. On April 1st,
 here was my pipeline:
 
 1. (Trigger) Receive “payment completed” email from Stripe
-2. Pay for a shipping label at usps.com (~$9)
+2. Pay for a shipping label at usps.com (~`$9`)
 3. Print shipping label, affix to a padded envelope with scotch tape
 4. Pack in hot sauce and extra packing material
 5. Schedule a pickup at usps.com
@@ -143,8 +143,8 @@ another year later.
 ## Finances
 
 After the sample packs and the bulk order of 48 bottles (the minimum), upfront
-costs came to $192.05. Over three April Fool's Days we sold 28 bottles in 25
-orders at $15 / bottle.
+costs came to `$192.05`. Over three April Fool's Days we sold 28 bottles in 25
+orders at `$15` / bottle.
 
 The cost of my labor and the boon to the brand are harder to calculate. I'll
 call them a wash.
@@ -166,7 +166,7 @@ I'll take it.
 
 ## Conclusion
 
-Getting paid $2.95 to live out a minor dream of building a seamless April Fool's
+Getting paid `$2.95` to live out a minor dream of building a seamless April Fool's
 Day joke was a great deal. I'd have paid a lot more just for the joy of seeing
 people's reactions in real time.
 

@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
-	"io"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -308,6 +307,22 @@ func (d *textDocument) slurpHTML() error {
 		if d.metadata.Title == "" {
 			return fmt.Errorf("no title found in %s", d.SrcPath)
 		}
+		dest, err := d.Dest()
+		if err != nil {
+			return fmt.Errorf("cannot linkify post title for %q: %w", d.SrcPath, err)
+		}
+		link := html.Node{
+			Attr: []html.Attribute{
+				{Key: "href", Val: dest},
+				{Key: "class", Val: "post-title"},
+			},
+			DataAtom: atom.A,
+			Data:     "a",
+			Type:     html.ElementNode,
+		}
+		h1.Parent.InsertBefore(&link, h1)
+		h1.Parent.RemoveChild(h1)
+		link.InsertBefore(h1, nil)
 	}
 
 	if d.Shortname == "" {
@@ -460,13 +475,11 @@ func (d *textDocument) Build() ([]byte, error) {
 
 func (d *textDocument) Category() string { return d.metadata.Category }
 func (d *textDocument) Dest() (string, error) {
+	if strings.HasSuffix(d.metadata.Shortname, ".html") {
+		return d.metadata.Shortname, nil
+	}
 	return fmt.Sprintf("%s.html", d.metadata.Shortname), nil
 }
-
-func (d *textDocument) Execute(w io.Writer, t *template.Template) error {
-	return t.Execute(w, d)
-}
-
 func (d *textDocument) Layout() string  { return "src/templates/text_document.html.tmpl" }
 func (d *textDocument) IsPost() bool    { return d.Kind == post }
 func (d *textDocument) IsDraft() bool   { return d.Kind == draft }

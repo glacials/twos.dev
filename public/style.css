@@ -18,7 +18,7 @@
     --shadow: rgb(100, 100, 100);
     --under-white: rgba(200, 100, 100, 1);
 
-    --container-width: 50rem;
+    --container-width: 70rem;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -79,7 +79,18 @@ a:has(h4),
 a:has(h5),
 a:has(h6) {
   display: block;
-  margin-top: 4rem;
+  text-decoration: none;
+}
+
+a:hover:has(h1) {
+  background: none !important;
+  color: var(--traditional-fg-pop) !important;
+  text-decoration: none;
+}
+a:hover:has(h1) h1 {
+  background: none !important;
+  color: var(--traditional-fg-pop) !important;
+  text-decoration: none;
 }
 
 a:not([href]):hover {
@@ -125,7 +136,6 @@ blockquote {
 body {
   background: var(--page-bg);
   color: var(--traditional-fg);
-  font-family: -apple-system, BlinkMacSystemFont, Helvetica, Arial;
   font-size: 1.3em;
   height: 100%;
   line-height: 1.7em;
@@ -177,7 +187,11 @@ h1 {
   font-size: 3rem;
   hyphens: none;
   line-height: 0.9;
-  text-align: center;
+}
+
+a.post-title h1 {
+  font-size: 2.5rem;
+  margin-top: 0;
 }
 
 /* Text document hero images */
@@ -211,9 +225,12 @@ h6:has(small) {
   margin-bottom: 0;
 }
 
+h1.site-title {
+  font-size: 3rem !important;
+}
+
 h2 {
   font-size: 2rem;
-  margin-bottom: 0;
   margin-top: 4rem;
 }
 
@@ -252,9 +269,15 @@ hr::before {
   text-align: center;
 }
 
-html {
-  text-align: justify;
+/* Postfaces will be <hr> followed by an italicized <p>. */
+hr + p:has(i),
+hr + p:has(em) {
+  font-size: 0.8rem;
+  margin: auto;
+  text-align: center;
+}
 
+html {
   hyphens: auto;
   -webkit-hyphens: auto;
 }
@@ -270,7 +293,7 @@ li p {
 nav {
   align-items: center;
   display: flex;
-  justify-content: space-around;
+  justify-content: space-between;
 }
 
 nav.primary {
@@ -446,6 +469,7 @@ video + video {
 .gallery-item img {
   cursor: zoom-in;
   margin: auto;
+  max-height: 60vh;
 }
 
 .gallery-item input {
@@ -530,34 +554,34 @@ p:has(.gallery-item input:checked) + p {
   }
 }
 
+.post {
+  border-color: var(--page-border);
+  border-style: dashed;
+  border-width: 1px 0;
+  margin: 0;
+  padding: 2rem 0 0 0;
+}
+
+@media (min-width: 50rem) {
+  .post {
+    border-width: 1px;
+    padding: 2rem;
+    margin-bottom: 6rem;
+  }
+}
+
+.post-title {
+  border-bottom: 1px solid var(--shadow);
+}
+
 .publish-date {
   display: block;
   font-size: 0.75em;
-  text-align: center;
 }
 
 .selected {
   color: var(--traditional-fg-pop);
   cursor: default;
-}
-
-.writing a {
-  padding: 0.2rem;
-  text-decoration: none;
-}
-
-.writing li {
-  margin: 0;
-}
-
-.writing h2 {
-  font-size: 2em;
-}
-
-.writing ul {
-  list-style-type: none;
-  margin: 0;
-  padding: 0;
 }
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
