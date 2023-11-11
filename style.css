@@ -3,16 +3,16 @@
  */
 @media (prefers-color-scheme: light) {
   :root {
-    --traditional-bg: rgba(235, 235, 235, 1);
+    --traditional-bg: rgba(255, 255, 255, 1);
     --traditional-fg: rgba(0, 0, 0, 1);
     --traditional-fg-mute: rgba(0, 0, 0, 0.6);
     --traditional-fg-pop: rgba(200, 100, 100, 1);
 
-    --page-bg: rgb(235, 235, 235);
+    --page-bg: rgb(255, 255, 255);
     --page-border: rgb(0, 0, 0);
     --page-fg: rgba(0, 0, 0, 1);
 
-    --lighter-bg: rgba(235, 235, 235, 1);
+    --lighter-bg: rgba(255, 255, 255, 1);
     --lighter-fg: rgba(200, 200, 200, 1);
 
     --shadow: rgb(100, 100, 100);
@@ -354,24 +354,6 @@ nav a.selected {
   color: var(--traditional-fg-pop);
 }
 
-nav.socials {
-  background-color: var(--under-white);
-  display: block;
-  margin: auto;
-}
-
-nav.socials a:hover {
-  background-color: var(--traditional-fg-pop);
-}
-
-nav.socials a:hover {
-  background-color: var(--lighter-bg);
-}
-
-nav.socials a:hover img {
-  filter: invert();
-}
-
 nav .items {
   display: flex;
   flex-wrap: wrap;
@@ -388,9 +370,30 @@ nav .items {
   }
 }
 
+nav.socials {
+  display: block;
+  margin: auto;
+}
+
 nav.socials a {
-  margin: auto 0;
+  margin: 0 0.25rem;
   padding: 1rem;
+}
+
+a.black-icon:hover {
+  filter: invert();
+}
+
+a.white-icon:hover img {
+  filter: invert();
+}
+
+nav.socials a:hover {
+  background-color: var(--traditional-fg-pop);
+}
+
+nav.socials a:hover {
+  background-color: var(--lighter-bg);
 }
 
 nav.socials img {
@@ -529,28 +532,15 @@ p:has(.gallery-item input:checked) + p {
   text-align: center;
   vertical-align: middle;
 }
+
 .photo-grid img {
   float: left;
   width: 100%;
 }
 
-@media (prefers-color-scheme: light) {
-  .photo-grid img {
-    filter: contrast(0.8);
-  }
-
-  .photo-grid a:hover img {
-    filter: none;
-  }
-}
-@media (prefers-color-scheme: dark) {
-  .photo-grid img {
-    filter: grayscale(100);
-  }
-
-  .photo-grid a:hover img {
-    filter: none;
-  }
+.photo-grid a:hover img {
+  box-shadow: -0.5rem -0.5rem 0 0.5rem var(--traditional-fg-pop);
+  z-index: 99;
 }
 
 .post {
@@ -565,7 +555,7 @@ p:has(.gallery-item input:checked) + p {
   }
 }
 
-.post-title {
+.post-title:not(:has(.site-title)) {
   border-bottom: 1px solid var(--shadow);
 }
 
@@ -577,6 +567,12 @@ p:has(.gallery-item input:checked) + p {
 .selected {
   color: var(--traditional-fg-pop);
   cursor: default;
+}
+
+@media (prefers-color-scheme: light) {
+  .white-icon {
+    filter: invert();
+  }
 }
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
