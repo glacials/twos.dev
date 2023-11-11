@@ -98,6 +98,8 @@ To counterbalance, I shorten my standard workday and the math roughly works out.
 If you see emails or commits from me with unhealthy-feeling timestamps,
 keep in mind my default workday is at ~70% capacity.
 
-<small><center>_This page is in the form of [Abby Falik's user
-guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
-and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._</center></small>
+---
+
+_This page is in the form of
+[Abby Falik's user guide](https://www.linkedin.com/pulse/leaders-need-user-manuals-what-i-learned-writing-mine-abby-falik/)
+and inspired by [Dina Levitan](http://dinalevitan.com/)'s user guide._

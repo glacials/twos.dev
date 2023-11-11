@@ -62,7 +62,7 @@ I've been into amateur photography since 2021,
 as you can see in the navigation menu above.
 For my first two years I used an old hobby-grade Canon DSLR my mom had lying around.
 For 2023, I decided to switch to the [Micro Four Thirds](https://www.four-thirds.org/en/) system for its open standard and smaller size.
-I use an [Olympus OM-D E-M5 Mark III](https://amzn.to/3Qaj7qm)
+I use an [Olympus OM-D E-M5 Mark III](https://amzn.to/3Qaj7qm).
 
 ## This Website
 
@@ -96,7 +96,7 @@ If you know me and your first reaction to this is that I don't seem autistic, I 
 I've mostly jumped ship from Twitter and have switched to Mastodon:
 [@glacials@hachyderm.io](https://hachyderm.io/@glacials).
 
-I self-hosted a single-user instance for a year I don't regret it.
+I self-hosted a single-user instance for a year and don't regret it.
 I know a lot more about the fediverse than when I started.
 But the benefits started to flatten and the costs were high,
 so I recently moved to Hachyderm.
