@@ -16,6 +16,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/nickalie/go-webpbin"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/image/draw"
@@ -68,16 +69,27 @@ func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
 		return nil, fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
 	}
 
+	matches := extensionRegex.FindStringSubmatch(relpath)
+	if len(matches) < 3 {
+		return nil, fmt.Errorf("cannot read filename %q with no extension", src)
+	}
+	webpath := fmt.Sprintf("%s.webp", matches[1])
+
 	return &galleryDocument{
 		PageLink: fmt.Sprintf("/%s.html", relpath),
 		Source:   src,
-		WebPath:  fmt.Sprintf("/%s", relpath),
+		WebPath:  fmt.Sprintf("/%s", webpath),
 		cfg:      cfg,
 	}, nil
 }
 
 // Build builds the gallery document.
 func (d *galleryDocument) Build() ([]byte, error) {
+	matches := extensionRegex.FindStringSubmatch(d.WebPath)
+	if len(matches) < 3 {
+		return nil, fmt.Errorf("cannot build filename %q with no extension", d.WebPath)
+	}
+
 	imgdest := filepath.Join("dist", d.WebPath)
 	thmdest := filepath.Dir(strings.Replace(
 		imgdest,
@@ -102,13 +114,17 @@ func (d *galleryDocument) Build() ([]byte, error) {
 	}
 	defer dstf.Close()
 
-	if _, err := io.Copy(dstf, srcf); err != nil {
+	srcPhoto, err := jpeg.Decode(srcf)
+	if err != nil {
 		return nil, fmt.Errorf(
-			"can't copy `%s` to `%s`: %w",
+			"cannot decode photo %q (maybe not an image?): %w",
 			d.Source,
-			imgdest,
 			err,
 		)
+	}
+
+	if err := webpbin.Encode(dstf, srcPhoto); err != nil {
+		return nil, fmt.Errorf("cannot encode source image %q to WebP: %w", d.Source, err)
 	}
 
 	if err := d.thumbnails(d.Source, thmdest); err != nil {
@@ -345,7 +361,7 @@ func (d *galleryDocument) thumbnails(src, dest string) error {
 
 	for width := 1; width < p.X; width *= 2 {
 		height := (width * p.X / p.Y) & -1
-		dstFilename := fmt.Sprintf("%s.%dx%d.%s", matches[1], width, height, matches[2])
+		dstFilename := fmt.Sprintf("%s.%dx%d.webp", matches[1], width, height)
 		dstPath := filepath.Join(filepath.Dir(dest), dstFilename)
 		webPath, err := filepath.Rel("dist", dstPath)
 		if err != nil {
@@ -392,12 +408,8 @@ func (d *galleryDocument) thumbnails(src, dest string) error {
 		}
 		defer destinationFile.Close()
 
-		if err := jpeg.Encode(destinationFile, dstPhoto, nil); err != nil {
-			return fmt.Errorf(
-				"can't encode to destination file at path `%s`: %w",
-				dest,
-				err,
-			)
+		if err := webpbin.Encode(destinationFile, dstPhoto); err != nil {
+			return fmt.Errorf("cannot encode WebP thumbnail to %q: %w", dstPath, err)
 		}
 	}
 

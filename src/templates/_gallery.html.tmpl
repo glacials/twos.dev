@@ -16,7 +16,7 @@
           (max-width: {{ mul .Width 8 }}px) {{ .Width }}px,
         {{ end }}"
       />
-      <img class="fullsize" src="{{ .WebPath }}" />
+      <img class="fullsize" loading="lazy" src="{{ .WebPath }}" />
     </label>
   {{ end }}
 </div>
