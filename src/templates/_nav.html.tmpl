@@ -7,6 +7,16 @@
     ><span class="separator">&bull;</span><a href="/guide.html">User Guide</a
     ><span class="separator">&bull;</span><a href="/archives.html">Writing</a>
   {{- else -}}
-    <span class="separator">/</span><span></span>
+    <span class="separator">/</span>
+    {{- if .IsPost -}}
+      <a href="archives.html">Writing</a><span class="separator">/</span>
+    {{- end -}}
+    {{- if parent -}}
+      {{- if parent.IsPost -}}
+        <a href="archives.html">Writing</a><span class="separator">/</span>
+      {{- end -}}
+      <a href="/{{ parent.Shortname }}.html">{{ parent.Title }}</a
+      ><span class="separator">/</span>
+    {{- end -}}
   {{- end -}}
 </nav>

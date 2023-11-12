@@ -15,8 +15,8 @@
           <div class="publish-date">
             <i>
               published
-              {{ .CreatedAt.Format "2006 January" }}{{ if not .UpdatedAt.IsZero }}
-                / last updated
+              {{ .CreatedAt.Format "2006 January" }}{{- if not .UpdatedAt.IsZero -}}
+                , last updated
                 {{ .UpdatedAt.Format "2006 January" }}
               {{ end }}</i
             >

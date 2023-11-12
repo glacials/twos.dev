@@ -140,6 +140,10 @@ input[type="submit"] {
   color: inherit;
 }
 
+code {
+  background-color: var(--shadow);
+}
+
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
 em em,
 em i,
