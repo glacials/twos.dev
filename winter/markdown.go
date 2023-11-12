@@ -17,8 +17,12 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 			fmt.Sprintf(`
 				<label class="gallery-item">
 			    <input type="checkbox" />
+					<img alt="%s" class="thumbnail" src="%s" title="%s" />
 				  <img alt="%s" class="fullsize" src="%s" title="%s" />
 				`,
+				img.Children[0].AsLeaf().Literal,
+				img.Destination,
+				img.Title,
 				img.Children[0].AsLeaf().Literal,
 				img.Destination,
 				img.Title,
