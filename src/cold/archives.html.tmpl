@@ -4,12 +4,12 @@ filename: archives.html
 type: page
 ---
 
-<h1>Archives</h1>
+<h1>Writing</h1>
 
 {{ $prev := (index archives 0).Year }}
 {{ range archives }}
   {{ if lt .Year (sub $prev 1) }}
-    …
+    <p>…</p>
   {{ end }}
 
 

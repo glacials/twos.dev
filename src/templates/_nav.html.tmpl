@@ -1,53 +1,12 @@
 <nav class="primary">
-  <div class="brand">
-    <a
-      {{ if eq .Dest "index.html" }}class="selected"{{ end }}
-      href="/"
-      style="display: flex; align-items: center;"
-      ><img alt="" src="/img/me.jpg" /><span style="margin-left: 1rem"
-        >Ben Carlsson</span
-      ></a
-    >
-  </div>
-  <div class="items">
-    <!--
-    <a
-      href="/cv.html"
-      {{ if eq .Dest "cv.html" }}class="selected"{{ end }}
-      >CV</a
-    >
-    -->
-    <a
-      href="/now.html"
-      {{ if eq .Dest "now.html" }}class="selected"{{ end }}
-      >Now</a
-    >
-    <a
-      href="/photos.html"
-      {{ if eq .Dest "photos.html" }}class="selected"{{ end }}
-      >Photos</a
-    >
-    <a
-      href="/software.html"
-      {{ if eq .Dest "software.html" }}class="selected"{{ end }}
-      >Software</a
-    >
-    <a
-      href="/guide.html"
-      {{ if eq .Dest "guide.html" }}class="selected"{{ end }}
-      >User Guide</a
-    >
-    <a
-      href="/archives.html"
-      {{ if eq .Dest "archives.html" }}class="selected"{{ end }}
-      >Writing</a
-    >
-    <!--
-				<a
-					href="/newsletter.html"
-					{{ if eq .Dest "newsletter.html" }}class="selected"{{ end }}
-					>Newsletter</a
-				>
-    -->
-  </div>
+  <span class="brand"><a href="/">Ben Carlsson</a></span>
+  {{- if eq .Dest "index.html" -}}
+    <span class="separator">&bull;</span><a href="/now.html">Now</a
+    ><span class="separator">&bull;</span><a href="/photos.html">Photos</a
+    ><span class="separator">&bull;</span><a href="/software.html">Software</a
+    ><span class="separator">&bull;</span><a href="/guide.html">User Guide</a
+    ><span class="separator">&bull;</span><a href="/archives.html">Writing</a>
+  {{- else -}}
+    <span class="separator">/</span><span></span>
+  {{- end -}}
 </nav>
