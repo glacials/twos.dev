@@ -288,7 +288,7 @@ li p {
 
 nav {
   margin-left: 1.25rem;
-  overflow: scroll;
+  overflow-x: auto;
 }
 
 nav > * {
