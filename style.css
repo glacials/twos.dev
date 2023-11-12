@@ -464,14 +464,21 @@ video + video {
 }
 
 .gallery-item {
-  margin: 0.25em;
+  line-height: 0;
   text-align: center;
 }
 
 .gallery-item img {
   cursor: zoom-in;
   margin: auto;
+}
+
+.gallery-item:not(:has(input:checked)) img {
   max-height: 60vh;
+}
+
+.gallery-item:has(input:checked) img {
+  max-height: 100vh;
 }
 
 .gallery-item input {
@@ -488,6 +495,7 @@ p:has(.gallery-item) {
   display: fixed;
   height: 100vh;
   left: 0;
+  margin: 0;
   overflow: hidden;
   position: fixed;
   top: 0;
@@ -495,7 +503,17 @@ p:has(.gallery-item) {
   z-index: 1;
 }
 
-.gallery-item:has(input:checked) img {
+.gallery-item:has(input:checked) img.thumbnail,
+.gallery-item:not(:has(input:checked)) img.fullsize {
+  display: none;
+}
+
+.gallery-item:has(input:checked) img.fullsize,
+.gallery-item:not(:has(input:checked)) img.thumbnail {
+  display: block;
+}
+
+.gallery-item:has(input:checked) img.fullsize {
   cursor: zoom-out;
   left: 50%;
   max-height: 100vh;
@@ -511,9 +529,10 @@ p:has(.gallery-item input:checked) + p {
   background: var(--page-bg);
   display: block;
   left: 15%;
+  margin: 0;
   padding: 1rem;
   position: fixed;
-  top: 15%;
+  top: 5%;
   transform: translate(-15%, -15%);
   z-index: 2;
 }
