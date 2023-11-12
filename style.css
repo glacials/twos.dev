@@ -1,6 +1,11 @@
 /*
  * Each set of variables that shares the same first word looks good with or on each other.
  */
+
+:root {
+  --container-width: 70rem;
+}
+
 @media (prefers-color-scheme: light) {
   :root {
     --traditional-bg: rgba(255, 255, 255, 1);
@@ -15,13 +20,16 @@
     --lighter-bg: rgba(255, 255, 255, 1);
     --lighter-fg: rgba(200, 200, 200, 1);
 
-    --shadow: rgb(100, 100, 100);
+    /* Use raised colors for items that should appear as if they are above the page. */
+    --raised-bg: rgba(215, 215, 215, 1);
+    --raised-fg: rgba(10, 10, 10, 1);
+
+    --shadow: rgba(0, 0, 0, 0.5);
+
     /* --under-white looks good as a background under a white foreground,
      * regardless of color scheme. e.g. nav.socials uses white images.
      */
     --under-white: rgba(50, 50, 50, 1);
-
-    --container-width: 70rem;
   }
 }
 @media (prefers-color-scheme: dark) {
@@ -38,10 +46,13 @@
     --lighter-bg: rgba(240, 240, 240, 1);
     --lighter-fg: rgb(132, 117, 45);
 
-    --shadow: rgb(34, 34, 34);
-    --under-white: rgba(34, 34, 34, 1);
+    /* Use raised colors for items that should appear as if they are above the page. */
+    --raised-bg: rgba(50, 50, 50, 1);
+    --raised-fg: rgba(255, 255, 255, 1);
 
-    --container-width: 50rem;
+    --shadow: rgb(0, 0, 0);
+
+    --under-white: rgba(34, 34, 34, 1);
   }
 }
 
@@ -141,7 +152,9 @@ input[type="submit"] {
 }
 
 code {
-  background-color: var(--shadow);
+  color: var(--traditional-fg-mute);
+  padding-left: 0.5em;
+  padding-right: 0.5em;
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
@@ -418,9 +431,20 @@ p:has(.gallery-item) {
   z-index: 1;
 }
 
+/* Instead of hiding the fullsize images,
+ * we load them as 1x1 pixels so they can be "zoomed" instantly.
+ * Even changing this to 0x0 or to left:-1px;top:-1px;
+ * prevents the browser from (down?)loading them,
+ * causing a blip when zooming.
+ *
+ * This solution is not great, but it works.
+ * Downloading the fullsize images is at least deferred via <img loading="lazy" />.
+ */
 .gallery-item:has(input:checked) img.thumbnail,
 .gallery-item:not(:has(input:checked)) img.fullsize {
-  display: none;
+  height: 1px;
+  position: absolute;
+  width: 1px;
 }
 
 .gallery-item:has(input:checked) img.fullsize,
@@ -513,16 +537,19 @@ p:has(.gallery-item input:checked) + p {
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
 pre code {
+  background-color: var(--raised-bg);
+  color: var(--raised-fg);
   display: block;
   padding: 1rem 0;
-
-  background-color: var(--page-bg);
-  color: var(--page-fg);
 }
 
 @media (max-width: 50rem) {
   pre {
-    overflow-x: auto;
+    margin: 0 !important;
+  }
+
+  pre code {
+    overflow-x: scroll;
   }
 }
 
@@ -553,7 +580,6 @@ pre {
   font-family: monospace;
   letter-spacing: 0;
   margin-bottom: 2rem;
-  padding: 1rem;
 }
 
 /* CV-specific */
