@@ -8,7 +8,8 @@ import (
 	"github.com/gomarkdown/markdown/html"
 )
 
-// renderImage overrides the standard HTML renderer to make the image clickable for a gallery view.
+// renderImage overrides the standard HTML renderer.
+// It makes images clickable for a zoomed / gallery view.
 func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	if entering {
 		if _, err := io.WriteString(
@@ -16,7 +17,7 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 			fmt.Sprintf(`
 				<label class="gallery-item">
 			    <input type="checkbox" />
-				  <img alt="%s" src="%s" title="%s" />
+				  <img alt="%s" class="fullsize" src="%s" title="%s" />
 				`,
 				img.Children[0].AsLeaf().Literal,
 				img.Destination,

@@ -42,17 +42,20 @@ func newBuildCmd() *cobra.Command {
 		Short: "Build the website",
 		Long:  `Build the website into dist/.`,
 		RunE: func(cmd *cobra.Command, args []string) error {
+			log.Println("Reading config.")
 			cfg, err := winter.NewConfig()
 			if err != nil {
 				return err
 			}
 
+			log.Println("Building substructure.")
 			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
 				return err
 			}
 
-			if err := s.ExecuteAll(dist, cfg); err != nil {
+			log.Println("Executing templates.")
+			if err := s.ExecuteAll(dist); err != nil {
 				return err
 			}
 

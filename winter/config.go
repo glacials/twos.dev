@@ -41,6 +41,18 @@ type Config struct {
 	// (e.g. "one.twos.dev" for a URL of "https://one.twos.dev/index.html").
 	// This is used in various backlinks, like those in the RSS feed.
 	Hostname string `yaml:"hostname,omitempty"`
+	// Known helps the generated site follow the "Cool URIs don't change" rule
+	// by remembering certain facts about what the site looks like,
+	// and checking newly-generated sites against that memory.
+	Known struct {
+		// URIs holds the path to the known URIs file,
+		// which Winter will generate, update, and maintain.
+		//
+		// You should commit this file.
+		//
+		// If unset, defaults to src/uris.txt.
+		URIs string `yaml:"urls,omitempty"`
+	} `yaml:"known,omitempty"`
 	// Name is the name of the website.
 	// This is used in various places in and out of templates.
 	Name string `yaml:"name,omitempty"`
@@ -70,6 +82,9 @@ func NewConfig() (Config, error) {
 	}
 	if c.Development.URL == "" {
 		c.Development.URL = "http://localhost:8100"
+	}
+	if c.Known.URIs == "" {
+		c.Known.URIs = "src/uris.txt"
 	}
 	for i := range c.Src {
 		c.Src[i] = os.ExpandEnv(strings.ReplaceAll(c.Src[i], "~", "$HOME"))

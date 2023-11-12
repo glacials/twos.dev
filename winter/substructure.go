@@ -536,7 +536,7 @@ func (s *Substructure) posts() (docs documents) {
 
 // ExecuteAll builds all documents known to the substructure,
 // as well as any site-scoped non-documents such as RSS feeds.
-func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
+func (s *Substructure) ExecuteAll(dist string) error {
 	built := map[string]*substructureDocument{}
 	for _, d := range s.docs {
 		dest, err := d.Dest()
@@ -548,7 +548,7 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 				"both %s and %s wanted to build to %s/%s; remove one",
 				d.Source,
 				prev.Source,
-				cfg.Hostname,
+				s.cfg.Hostname,
 				dest,
 			)
 		}
@@ -562,7 +562,11 @@ func (s *Substructure) ExecuteAll(dist string, cfg Config) error {
 		built[dest] = d
 	}
 
-	return s.writefeed()
+	if err := s.writefeed(); err != nil {
+		return fmt.Errorf("cannot generate feed: %w", err)
+	}
+
+	return s.validateURIsDidNotChange(dist)
 }
 
 // execute builds the given document into the given directory.

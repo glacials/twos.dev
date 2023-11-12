@@ -11,13 +11,34 @@ import (
 	"twos.dev/winter"
 )
 
+const (
+	KnownURLsPath = "src/urls.txt"
+)
+
 var freezeCmd = &cobra.Command{
-	Use:   "freeze shortname...",
+	Use:   "freeze [shortname...]",
 	Short: "Turn a warm file cold",
 	Long: wrap(`
-		Convert the warm document specified into a cold document. Run this when a
-		document is no longer being actively updated in order to reduce exposure to
-		destructive issues caused by the hotbed of src/warm.
+		Converts warm documents specified into cold documents,
+		and commit to keeping them at those URLs forever.
+
+		"Warm documents" are those that are continually and/or automatically updated by other tools,
+		such as a shell script that automatically synchronizes Markdown files from your notes app.
+		Warm documents are stored in src/warm.
+
+		"Cold documents" are those that must never touched by automated tools,
+		reducing the surface area for bugs in your synchronization process to mangle or delete pages.
+		Cold documents are stored in src/cold.
+
+		Conventionally, a document is born warm and remains warm while you work on it;
+		when you are done or near done, you run ` + "`winter freeze <document>`" + ` to protect it from your future selves and tools.
+
+		` + "`winter freeze`" + ` also saves ALL public HTML URLs on the generated website to a file,
+		which you should commit to your repository.
+		` + "`winter test`" + ` will fail if any of these HTML URLs is ever removed from dist (read: not generated).
+
+		To perform this save step without freezing any documents,
+		simply run ` + "`winter freeze`" + ` with no arguments.
 	`),
 	Example: wrap(`
 		This command:
@@ -26,20 +47,21 @@ var freezeCmd = &cobra.Command{
 
 		moves the file with shortname "hello" from src/warm to src/cold.
 	`),
-	Args: cobra.MinimumNArgs(1),
 	RunE: func(cmd *cobra.Command, args []string) error {
-		// TODO: Allow an argument to also render .md to .html
-		sources, err := cmd.Flags().GetStringArray("source")
+		cfg, err := winter.NewConfig()
+		if err != nil {
+			return err
+		}
+		s, err := winter.NewSubstructure(cfg)
 		if err != nil {
 			return err
 		}
 
-		for _, shortname := range args {
-			s, err := winter.NewSubstructure(winter.Config{Src: sources})
-			if err != nil {
-				return err
-			}
+		if err := s.SaveNewURIs(dist); err != nil {
+			return fmt.Errorf("cannot freeze known URIs: %w", err)
+		}
 
+		for _, shortname := range args {
 			document := s.DocByShortname(shortname)
 			if document == nil || document.Document == nil {
 				return fmt.Errorf("cannot find document with shortname `%s`", shortname)

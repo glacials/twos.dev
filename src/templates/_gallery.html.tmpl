@@ -6,14 +6,17 @@
     See: https://stackoverflow.com/q/47750594/392225
   -->
   {{ range (index gallery .) }}
-    <a href="{{ .PageLink }}">
+    <label class="gallery-item">
+      <input type="checkbox" />
       <img
+        class="thumbnail"
         src="{{ .WebPath }}"
         srcset="{{ range .Thumbnails }}{{ .WebPath }} {{ .Width }}w,{{ end }}"
         sizes="{{ range .Thumbnails }}
           (max-width: {{ mul .Width 8 }}px) {{ .Width }}px,
         {{ end }}"
       />
-    </a>
+      <img class="fullsize" src="{{ .WebPath }}" />
+    </label>
   {{ end }}
 </div>
