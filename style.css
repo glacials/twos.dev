@@ -55,20 +55,11 @@
   }
 }
 
-/* When linked to an anchor, leave some space between top-of-window and the element. */
-a[name] {
-  scroll-margin-top: 1rem;
-}
-
-/* Only lowercase links, not anchor targets */
 a[href],
-a:visited {
-  color: var(--traditional-fg-pop);
-}
-
-a:hover {
-  background-color: var(--traditional-fg-pop);
-  color: var(--traditional-bg);
+a[href]:hover,
+a[href]:visited {
+  color: inherit;
+  text-decoration: underline;
 }
 
 a:hover:has(img) {
@@ -83,22 +74,6 @@ a:has(h5),
 a:has(h6) {
   display: block;
   text-decoration: none;
-}
-
-a:hover:has(h1) {
-  background: none !important;
-  color: var(--traditional-fg-pop) !important;
-  text-decoration: none;
-}
-a:hover:has(h1) h1 {
-  background: none !important;
-  color: var(--traditional-fg-pop) !important;
-  text-decoration: none;
-}
-
-a:not([href]):hover {
-  background: inherit;
-  color: inherit;
 }
 
 article {
@@ -139,6 +114,7 @@ blockquote {
 body {
   background: var(--page-bg);
   color: var(--traditional-fg);
+  font-family: monospace;
   font-size: 1.3em;
   height: 100%;
   line-height: 1.7em;
@@ -162,6 +138,10 @@ input[type="submit"] {
   background: none;
   border: 1px solid var(--traditional-fg);
   color: inherit;
+}
+
+code {
+  background-color: var(--shadow);
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
@@ -294,82 +274,17 @@ li p {
 }
 
 nav {
-  align-items: center;
-  display: flex;
-  justify-content: space-between;
+  margin-left: 1.25rem;
+  overflow: scroll;
 }
 
-nav.primary {
-  margin-bottom: 2rem;
+nav > * {
+  margin-right: 0.5rem;
 }
 
-@media (max-width: 30rem) {
-  nav {
-    display: block;
-    text-align: center;
-  }
+nav > *:not(:nth-child(1)) {
+  margin-left: 0.5rem;
 }
-
-@media (prefers-color-scheme: light) {
-  nav.primary {
-    border-bottom: 1px solid gray;
-  }
-}
-
-nav .brand a,
-nav .items a {
-  color: var(--traditional-fg);
-  display: block;
-  padding: 0.5em 0.75em;
-  text-decoration: none;
-}
-
-nav .brand a {
-  display: flex;
-  flex-wrap: wrap;
-}
-
-nav .brand img {
-  border-radius: 0.5rem;
-  max-height: 3rem;
-  max-width: 100%;
-}
-
-@media (max-width: 46rem) {
-  nav .brand img {
-    max-height: 10rem;
-  }
-}
-
-nav a {
-  margin: auto;
-}
-
-nav a:hover {
-  background: inherit;
-  color: var(--traditional-fg-pop);
-}
-
-nav a.selected {
-  color: var(--traditional-fg-pop);
-}
-
-nav .items {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-}
-
-@media (max-width: 46rem) {
-  nav .items {
-    display: block;
-    text-align: right;
-  }
-}
-
 nav.socials {
   display: inline;
   margin-left: 0.65rem;
@@ -563,7 +478,7 @@ p:has(.gallery-item input:checked) + p {
 }
 
 .post {
-  margin: 10rem 0 0 0;
+  margin: 5rem 0 0 0;
   padding: 2rem 0 0 0;
 }
 
@@ -572,10 +487,6 @@ p:has(.gallery-item input:checked) + p {
     padding: 0;
     margin-bottom: 6rem;
   }
-}
-
-.post-title:not(:has(.site-title)) {
-  border-bottom: 1px solid var(--shadow);
 }
 
 .publish-date {
