@@ -6,7 +6,13 @@ type: page
 updated: 2023-10-26
 ---
 
-# What I'm Doing Now
+# Now
+
+Has it been a while since you've caught up with me?
+Read on to answer the question "What is Ben doing now?".
+
+Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}**
+from my home in **Seattle, WA**.
 
 ## Video Games
 

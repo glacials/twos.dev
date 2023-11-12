@@ -7,6 +7,8 @@ updated: 2023-02-10
 
 # Software
 
+See also: [github.com/glacials](https://github.com/glacials)
+
 ## Creations
 
 _Solid hearts are active; hollow hearts are inactive but stable._
