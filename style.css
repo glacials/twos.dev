@@ -371,12 +371,12 @@ nav .items {
 }
 
 nav.socials {
-  display: block;
-  margin: auto;
+  display: inline;
+  margin-left: 0.65rem;
 }
 
 nav.socials a {
-  margin: 0 0.25rem;
+  margin: 0;
   padding: 1rem;
 }
 
@@ -563,13 +563,13 @@ p:has(.gallery-item input:checked) + p {
 }
 
 .post {
-  margin: 0;
+  margin: 10rem 0 0 0;
   padding: 2rem 0 0 0;
 }
 
 @media (min-width: 50rem) {
   .post {
-    padding: 2rem;
+    padding: 0;
     margin-bottom: 6rem;
   }
 }
@@ -586,6 +586,11 @@ p:has(.gallery-item input:checked) + p {
 .selected {
   color: var(--traditional-fg-pop);
   cursor: default;
+}
+
+.welcome {
+  margin: auto;
+  text-align: center;
 }
 
 @media (prefers-color-scheme: light) {
