@@ -30,6 +30,11 @@ func (s *Substructure) SaveNewURIs(dist string) error {
 		if len(path) == 0 {
 			continue
 		}
+		if stat, err := os.Stat(path); err != nil {
+			return fmt.Errorf("cannot stat path to save %q: %w", path, err)
+		} else if stat.IsDir() {
+			continue
+		}
 		uris[url.URL{Path: path}] = struct{}{}
 	}
 
@@ -94,20 +99,22 @@ func (s *Substructure) validateURIsDidNotChange(dist string) error {
 		}
 		return fmt.Errorf("cannot read known URLs file: %w", err)
 	}
+	changedURIs := []string{}
 	for _, pathBytes := range bytes.Split(paths, []byte{'\n'}) {
 		if len(pathBytes) == 0 {
 			continue
 		}
-		info, err := os.Stat(filepath.Join(dist, string(pathBytes)))
+		_, err := os.Stat(filepath.Join(dist, string(pathBytes)))
 		if err != nil {
 			if errors.Is(err, os.ErrNotExist) {
-				return fmt.Errorf("cool URLs do not change, but %q did: %w", pathBytes, err)
+				changedURIs = append(changedURIs, string(pathBytes))
+			} else {
+				return fmt.Errorf("cannot stat %q: %w", pathBytes, err)
 			}
-			return fmt.Errorf("cannot stat %q: %w", pathBytes, err)
 		}
-		if info.Size() <= 0 {
-			return fmt.Errorf("cool URLs do not change, but %q is now an empty file: %w", pathBytes, err)
-		}
+	}
+	if len(changedURIs) > 0 {
+		return fmt.Errorf("cool URIs do not change, but these ones were removed by this build:\n\n- %s", strings.Join(changedURIs, "\n- "))
 	}
 	return nil
 }

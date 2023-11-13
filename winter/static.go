@@ -1,67 +1,57 @@
 package winter
 
 import (
-	"html/template"
+	"fmt"
 	"io"
-	"os"
-	"path/filepath"
-	"time"
 )
 
-// staticDocument represents a file on disk that will be copied as-is to the web root.
+// StaticDocument represents a file on disk that will be copied as-is to the web root.
 // The subdirectory of the file relative to the web root will match the relative directory of the source file relative to the ./public directory.
-type staticDocument struct {
-	path string
+type StaticDocument struct {
+	SourcePath string
+
+	deps map[string]struct{}
+	meta *Metadata
+	r    io.Reader
 }
 
-// NewStaticDocument returns a document that represents a static asset. The
-// asset must be located in the public directory.
-func NewStaticDocument(path string) (*staticDocument, error) {
-	return &staticDocument{path: path}, nil
+// NewStaticDocument creates a new document whose original source is at path src,
+// and whose desired web path is webPath.
+//
+// Nothing is read from disk; src is metadata.
+// To read the static file, call [Load].
+func NewStaticDocument(src, webPath string) *StaticDocument {
+	m := NewMetadata(src)
+	m.WebPath = webPath
+	return &StaticDocument{
+		SourcePath: src,
+
+		deps: map[string]struct{}{
+			src: {},
+		},
+		meta: m,
+	}
 }
 
-// Build returns the raw bytes of the static file.
-func (d *staticDocument) Build() ([]byte, error) {
-	return os.ReadFile(d.path)
+func (doc *StaticDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	return false
 }
 
-// Category returns the empty string.
-func (d *staticDocument) Category() string { return "" }
-
-// Dependencies returns an empty set.
-func (d *staticDocument) Dependencies() map[string]struct{} {
-	return map[string]struct{}{}
-}
-
-// Dest returns the final destination for the static document,
-// relative to the web root.
-func (d *staticDocument) Dest() (string, error) {
-	return filepath.Rel("public", d.path)
-}
-
-// Execute does nothing.
-func (d *staticDocument) Execute(_ io.Writer, _ *template.Template) error {
+func (doc *StaticDocument) Load(r io.Reader) error {
+	doc.r = r
 	return nil
 }
 
-// IsDraft returns false.
-func (d *staticDocument) IsDraft() bool { return false }
+func (doc *StaticDocument) Metadata() *Metadata {
+	return doc.meta
+}
 
-// IsPost returns false.
-func (d *staticDocument) IsPost() bool { return false }
-
-// Layout returns the empty string.
-// This signals that the document does not use templates.
-func (d *staticDocument) Layout() string { return "" }
-
-// Preview returns the empty string.
-func (d *staticDocument) Preview() string { return "" }
-
-// Title returns the empty string.
-func (d *staticDocument) Title() string { return "" }
-
-// CreatedAt returns a zero time.
-func (d *staticDocument) CreatedAt() time.Time { return time.Time{} }
-
-// UpdatedAt returns a zero time.
-func (d *staticDocument) UpdatedAt() time.Time { return time.Time{} }
+func (doc *StaticDocument) Render(w io.Writer) error {
+	if _, err := io.Copy(w, doc.r); err != nil {
+		return fmt.Errorf("cannot copy static file %q for render: %w", doc.SourcePath, err)
+	}
+	return nil
+}

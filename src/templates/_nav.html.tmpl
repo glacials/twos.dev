@@ -1,6 +1,6 @@
 <nav class="primary">
   <span class="brand"><a href="/">Ben Carlsson</a></span>
-  {{- if eq .Dest "index.html" -}}
+  {{- if eq .WebPath "index.html" -}}
     <span class="separator">&bull;</span><a href="/now.html">Now</a
     ><span class="separator">&bull;</span><a href="/photos.html">Photos</a
     ><span class="separator">&bull;</span><a href="/software.html">Software</a
@@ -8,15 +8,15 @@
     ><span class="separator">&bull;</span><a href="/archives.html">Writing</a>
   {{- else -}}
     <span class="separator">/</span>
-    {{- if .IsPost -}}
+    {{- if .IsType "post" -}}
       <a href="archives.html">Writing</a><span class="separator">/</span>
     {{- end -}}
-    {{- if parent -}}
-      {{- if parent.IsPost -}}
+    {{- if .Parent -}}
+      {{- if .IsType "post" -}}
         <a href="archives.html">Writing</a><span class="separator">/</span>
       {{- end -}}
-      <a href="/{{ parent.Shortname }}.html">{{ parent.Title }}</a
-      ><span class="separator">/</span>
+      <a href="{{ .Parent }}">{{ .Parent }}</a><span class="separator">/</span>
     {{- end -}}
+    <a href="{{ .WebPath }}">{{ .Title }}</a>
   {{- end -}}
 </nav>

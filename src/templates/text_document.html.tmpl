@@ -1,17 +1,17 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{ template "src/templates/_head.html.tmpl" . }}
+    {{ template "_head.html.tmpl" . }}
   </head>
 
   <body>
     <div class="container">
-      {{ template "src/templates/_nav.html.tmpl" . }}
+      {{ template "_nav.html.tmpl" . }}
       <article>
-        {{ if .IsDraft }}
+        {{ if .IsType "draft" }}
           <div class="draft">Draft</div>
         {{ end }}
-        {{ if and (.IsPost) (not .CreatedAt.IsZero) }}
+        {{ if and (.IsType "post") (not .CreatedAt.IsZero) }}
           <div class="publish-date">
             <i>
               published
@@ -35,7 +35,7 @@
         <p>
           <small>
             <i>
-              {{ with src }}
+              {{ with .SourcePath }}
                 source:
                 <a
                   href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
@@ -61,6 +61,6 @@
         </p>
       </footer>
     </div>
-    {{ template "src/templates/_js.html.tmpl" }}
+    {{ template "_js.html.tmpl" }}
   </body>
 </html>

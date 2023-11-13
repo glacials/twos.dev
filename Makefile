@@ -1,18 +1,18 @@
-.PHONY : download build_winter clean build_twos.dev build serve
+.PHONY : build build_twos.dev build_winter clean download serve
 
-download:
-	go mod download
+build: clean build_winter build_twos.dev
+
+build_twos.dev:
+	./w build $(WINTER_ARGS)
 
 build_winter:
 	go build -o w .
 
-clean:
-	@rm -rf dist
+clean: build_winter
+	./w clean
 
-build_twos.dev: build_winter
-	./w build $(WINTER_ARGS)
-
-build: build_winter clean build_twos.dev
+download:
+	go mod download
 
 serve: clean
 	@echo Building.

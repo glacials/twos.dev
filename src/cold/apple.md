@@ -87,7 +87,7 @@ providers, Apple must be one of them. As a developer, this means building
 another sign-in flow and database table. As a user, this means I get a native,
 one-tap, FaceID sign-in.
 
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-signin" }}
+{{ template "_videos.html.tmpl" "/img/apple-signin" }}
 
 These examples continue throughout the ecosystem, and the more I see the more
 I believe Apple thinks of itself as a government providing "public goods",
@@ -268,8 +268,8 @@ The more native apps, the better the UX.
 
 For example, multi-touch can be used to drag-and-drop items between apps.
 
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-drag-photos" }}
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-drag-text" }}
+{{ template "_videos.html.tmpl" "/img/apple-drag-photos" }}
+{{ template "_videos.html.tmpl" "/img/apple-drag-text" }}
 
 Using multi-touch to drag and drop items between apps.
 
@@ -576,7 +576,7 @@ switching to Google Calendar as a backend I've learned to RSVP using the
 embedded buttons which (outside of Gmail) open a web browser to the Google
 Calendar UI.
 
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-mail" }}
+{{ template "_videos.html.tmpl" "/img/apple-mail" }}
 
 Opening a Google Calendar invitation from within the Apple ecosystem.
 
@@ -681,7 +681,7 @@ identify.
 
 When it works it's beautiful and useful, but when it doesn't it's jarring.
 
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-back"}}
+{{ template "_videos.html.tmpl" "/img/apple-back"}}
 Navigating through history in Safari with swipe gestures.
 
 I tend to switch back to Chrome for Meet meetings, as I’ve experienced some local-only
@@ -911,7 +911,7 @@ The experience of managing an Apple Card in Wallet is also the first credit card
 experience that feels like it was made this century. The app is beautiful,
 snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on everything else) are good but beatable; several banks now have universal 2% cashback cards.
 
-{{ template "src/templates/\_videos.html.tmpl" "/img/apple-card" }}
+{{ template "_videos.html.tmpl" "/img/apple-card" }}
 Drilling into Apple Card transactions using Wallet.
 
 ### ✔ Google Podcasts → Apple Podcasts {#podcasts}

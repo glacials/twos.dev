@@ -3,7 +3,6 @@ package winter
 import (
 	"bytes"
 	"fmt"
-	"html/template"
 	"net/url"
 	"os"
 	"time"
@@ -33,44 +32,27 @@ func (s *Substructure) writefeed() error {
 		Updated: now,
 	}
 
-	for _, post := range s.posts() {
-		body, err := post.Build()
-		if err != nil {
-			return err
-		}
-		dest, err := post.Dest()
-		if err != nil {
-			return err
-		}
-		t := template.New(post.Source)
-		funcs, err := s.funcmap(post)
-		if err != nil {
-			return fmt.Errorf("can't generate funcmap: %w", err)
-		}
-		_ = t.Funcs(funcs)
-		_, err = t.Parse(string(body))
-		if err != nil {
-			return fmt.Errorf("cannot parse page for feed: %w", err)
-		}
-		if err := loadDeps(t); err != nil {
-			return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
+	for _, doc := range s.docs {
+		if doc.Metadata().Kind != post {
+			continue
 		}
 		var buf bytes.Buffer
-		if err = t.Execute(&buf, post); err != nil {
-			return fmt.Errorf("cannot execute document %q: %w", post.Source, err)
+		if err := doc.Render(&buf); err != nil {
+			return err
 		}
 
+		bodyStr := buf.String()
 		feed.Items = append(feed.Items, &feeds.Item{
-			Id:          dest,
-			Title:       post.Title(),
+			Id:          doc.Metadata().WebPath,
+			Title:       doc.Metadata().Title,
 			Author:      feed.Author,
-			Content:     string(buf.String()),
-			Description: string(body),
+			Content:     bodyStr,
+			Description: bodyStr,
 			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, dest),
+				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, doc.Metadata().WebPath),
 			},
-			Created: post.CreatedAt(),
-			Updated: post.UpdatedAt(),
+			Created: doc.Metadata().CreatedAt,
+			Updated: doc.Metadata().UpdatedAt,
 		})
 	}
 

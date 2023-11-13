@@ -2,7 +2,7 @@
   {{ range .Items }}
     <li><a href="#{{ .Anchor }}">{{ .HTML }}</a></li>
     {{ if .Items }}
-      {{ template "src/templates/_subtoc.html.tmpl" .Items }}
+      {{ template "_subtoc.html.tmpl" .Items }}
     {{ end }}
   {{ end }}
 </ol>

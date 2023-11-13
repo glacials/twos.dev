@@ -1,7 +1,7 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{ template "src/templates/_head.html.tmpl" }}
+    {{ template "_head.html.tmpl" }}
     {{ with .Prev }}
       <link rel="preload" as="image" href="/{{ .WebPath }}" />
     {{ end }}
