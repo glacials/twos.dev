@@ -20,13 +20,14 @@ import (
 // The MarkdownDocument is transitory;
 // its only purpose is to create a [TemplateDocument].
 type MarkdownDocument struct {
-	meta *Metadata
-
 	// Next is the HTML document generated from this Markdown document.
 	Next *HTMLDocument
 	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
+
+	deps map[string]struct{}
+	meta *Metadata
 }
 
 // NewMarkdownDocument creates a new document whose original source is at path src.
@@ -34,13 +35,21 @@ type MarkdownDocument struct {
 // Nothing is read from disk; src is metadata.
 // To read and parse Markdown, call [Load].
 func NewMarkdownDocument(src string) *MarkdownDocument {
-	var m Metadata
+	m := NewMetadata(src)
 	return &MarkdownDocument{
-		Next:       &HTMLDocument{meta: &m},
+		Next:       &HTMLDocument{meta: m},
 		SourcePath: src,
 
-		meta: &m,
+		deps: map[string]struct{}{
+			src:                {},
+			"public/style.css": {},
+		},
+		meta: m,
 	}
+}
+
+func (doc *MarkdownDocument) Dependencies() map[string]struct{} {
+	return doc.deps
 }
 
 // Load reads Markdown from r and loads it into doc.

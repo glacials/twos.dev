@@ -22,6 +22,7 @@ type OrgDocument struct {
 	// The path is relative to the working directory.
 	SourcePath string
 
+	deps map[string]struct{}
 	meta *Metadata
 }
 
@@ -32,10 +33,18 @@ type OrgDocument struct {
 func NewOrgDocument(src string) *OrgDocument {
 	var m Metadata
 	return &OrgDocument{
-		meta:       &m,
 		Next:       &HTMLDocument{meta: &m},
 		SourcePath: src,
+
+		deps: map[string]struct{}{
+			"public/style.css": {},
+		},
+		meta: &m,
 	}
+}
+
+func (doc *OrgDocument) Dependencies() map[string]struct{} {
+	return doc.deps
 }
 
 // Load reads Org from r and loads it into doc.

@@ -6,6 +6,7 @@ import (
 	"html/template"
 	"io"
 	"os"
+	"sort"
 	"text/template/parse"
 	"time"
 
@@ -25,23 +26,38 @@ const (
 // The TemplateDocument is transitory;
 // its only purpose is to create an [HTMLDocument].
 type TemplateDocument struct {
-	meta *Metadata
-
 	// Next is the HTML document generated from this template document.
 	Next   *HTMLDocument
 	Parent *TemplateDocument
 	// SourcePath is the path on disk to the file this template document is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
+
+	deps map[string]struct{}
+	meta *Metadata
+	// posts is a reference to the substructure's set of posts.
+	// It should be populated fully before any call to [TemplateDocument.Load],
+	// so that those calls can use the posts function in their [html/template.FuncMap] to discover and list posts.
+	posts []Document
 }
 
-func NewTemplateDocument(src string) *TemplateDocument {
+func NewTemplateDocument(src string, collection []Document) *TemplateDocument {
 	var m Metadata
 	return &TemplateDocument{
-		meta:       &m,
 		Next:       &HTMLDocument{meta: &m},
 		SourcePath: src,
+
+		deps: map[string]struct{}{
+			src:                {},
+			"public/style.css": {},
+		},
+		meta:  &m,
+		posts: collection,
 	}
+}
+
+func (doc *TemplateDocument) Dependencies() map[string]struct{} {
+	return doc.deps
 }
 
 // Load reads a Go template from r and loads it into doc.
@@ -63,7 +79,7 @@ func (doc *TemplateDocument) Load(r io.Reader) error {
 		return fmt.Errorf("cannot read template document %q: %w", doc.SourcePath, err)
 	}
 	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent)
+		doc.Parent = NewTemplateDocument(doc.meta.Parent, doc.posts)
 	}
 	funcs, err := doc.funcmap()
 	if err != nil {
@@ -73,6 +89,27 @@ func (doc *TemplateDocument) Load(r io.Reader) error {
 	if err != nil {
 		return fmt.Errorf("cannot parse template document %q: %w", doc.SourcePath, err)
 	}
+	if doc.meta.Layout != "" {
+		tmain.Tree.Name = "body"
+		layoutBytes, err := os.ReadFile(doc.meta.Layout)
+		if err != nil {
+			return fmt.Errorf("cannot read %q to execute %q: %w", doc.Metadata().Layout, doc.Metadata().SourcePath, err)
+		}
+		tlayout, err := tmain.New(doc.meta.Layout).Funcs(funcs).Parse(string(layoutBytes))
+		if err != nil {
+			return fmt.Errorf("cannot read layout %q to execute %q: %w", doc.meta.Layout, doc.SourcePath, err)
+		}
+		tmain = tlayout
+	}
+	if err := loadDeps(tmain); err != nil {
+		return fmt.Errorf("can't load dependencies: %s", err)
+	}
+	for _, depTmpl := range tmain.Templates() {
+		if depTmpl.Name() != "body" && depTmpl.Name() != doc.meta.SourcePath {
+			doc.deps[depTmpl.Name()] = struct{}{}
+		}
+	}
+
 	var buf bytes.Buffer
 	if err := tmain.Execute(&buf, doc); err != nil {
 		return fmt.Errorf("cannot execute tmain for %q: %w", doc.SourcePath, err)
@@ -85,24 +122,7 @@ func (doc *TemplateDocument) Metadata() *Metadata {
 }
 
 func (doc *TemplateDocument) Render(w io.Writer) error {
-	t := template.New(doc.Metadata().SourcePath)
-	funcs, err := doc.funcmap()
-	if err != nil {
-		return fmt.Errorf("can't generate funcmap: %w", err)
-	}
-	_ = t.Funcs(funcs)
-	_, err = t.Parse(string(body))
-	if err != nil {
-		return fmt.Errorf("cannot parse page for feed: %w", err)
-	}
-	if err := loadDeps(t); err != nil {
-		return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
-	}
-	var buf2 bytes.Buffer
-	if err = t.Execute(&buf2, doc); err != nil {
-		return fmt.Errorf("cannot execute document %q: %w", doc.Metadata().SourcePath, err)
-	}
-	return nil
+	return doc.Next.Render(w)
 }
 
 // funcmap returns a [template.FuncMap] for the document.
@@ -126,10 +146,34 @@ func (doc *TemplateDocument) funcmap() (template.FuncMap, error) {
 		},
 		"src": func() string { return doc.SourcePath },
 
-		"archives": s.archives,
+		"archives": archives,
 		"icon":     iconFunc,
-		"posts":    s.posts,
+		"posts":    doc.posts,
 	}, nil
+}
+
+// archives returns posts grouped by year.
+func archives(docs []Document) (archivesVars, error) {
+	m := map[int]documents{}
+	for _, doc := range docs {
+		if doc.Metadata().Kind != post {
+			continue
+		}
+		year := doc.Metadata().CreatedAt.Year()
+		m[year] = append(m[year], doc)
+	}
+
+	var archives archivesVars
+	for year, docs := range m {
+		sort.Sort(docs)
+		archives = append(archives, archiveVars{
+			Year:      year,
+			Documents: docs,
+		})
+	}
+	sort.Sort(archives)
+
+	return archives, nil
 }
 
 // icon returns a function that can be inserted into a template's FuncMap.

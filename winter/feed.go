@@ -32,24 +32,27 @@ func (s *Substructure) writefeed() error {
 		Updated: now,
 	}
 
-	for _, post := range s.posts() {
+	for _, doc := range s.docs {
+		if doc.Metadata().Kind != post {
+			continue
+		}
 		var buf bytes.Buffer
-		if err := post.Render(&buf); err != nil {
+		if err := doc.Render(&buf); err != nil {
 			return err
 		}
 
 		bodyStr := buf.String()
 		feed.Items = append(feed.Items, &feeds.Item{
-			Id:          post.Metadata().Filename,
-			Title:       post.Metadata().Title,
+			Id:          doc.Metadata().Filename,
+			Title:       doc.Metadata().Title,
 			Author:      feed.Author,
 			Content:     bodyStr,
 			Description: bodyStr,
 			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, post.Metadata().Filename),
+				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, doc.Metadata().Filename),
 			},
-			Created: post.Metadata().CreatedAt,
-			Updated: post.Metadata().UpdatedAt,
+			Created: doc.Metadata().CreatedAt,
+			Updated: doc.Metadata().UpdatedAt,
 		})
 	}
 

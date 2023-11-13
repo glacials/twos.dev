@@ -8,9 +8,11 @@ import (
 // StaticDocument represents a file on disk that will be copied as-is to the web root.
 // The subdirectory of the file relative to the web root will match the relative directory of the source file relative to the ./public directory.
 type StaticDocument struct {
-	meta       *Metadata
-	r          io.Reader
 	SourcePath string
+
+	deps map[string]struct{}
+	meta *Metadata
+	r    io.Reader
 }
 
 // NewStaticDocument creates a new document whose original source is at path src.
@@ -18,7 +20,17 @@ type StaticDocument struct {
 // Nothing is read from disk; src is metadata.
 // To read the static file, call [Load].
 func NewStaticDocument(src string) *StaticDocument {
-	return &StaticDocument{SourcePath: src}
+	return &StaticDocument{
+		SourcePath: src,
+
+		deps: map[string]struct{}{
+			src: {},
+		},
+	}
+}
+
+func (doc *StaticDocument) Dependencies() map[string]struct{} {
+	return doc.deps
 }
 
 func (doc *StaticDocument) Load(r io.Reader) error {

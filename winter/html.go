@@ -10,7 +10,6 @@ import (
 	"path/filepath"
 	"regexp"
 	"strings"
-	"time"
 
 	"github.com/alecthomas/chroma"
 	chromahtml "github.com/alecthomas/chroma/formatters/html"
@@ -30,7 +29,13 @@ import (
 //
 // HTMLDocument implements [Document].
 type HTMLDocument struct {
+	// deps is a set of paths to source files that,
+	// when changed,
+	// should cause a rebuild of this document.
+	deps map[string]struct{}
 	meta *Metadata
+	// root is the topmost HTML tag in the parsed document,
+	// usually <html> or its parent.
 	root *html.Node
 }
 
@@ -41,25 +46,17 @@ type HTMLDocument struct {
 // To read and parse HTML, call [Load].
 func NewHTMLDocument(src string) *HTMLDocument {
 	d := HTMLDocument{
-		meta: &Metadata{SourcePath: src},
+		deps: map[string]struct{}{
+			src:                {},
+			"public/style.css": {},
+		},
+		meta: NewMetadata(src),
 	}
 	return &d
 }
 
-func (doc *HTMLDocument) Category() string {
-	return doc.meta.Category
-}
-
-func (doc *HTMLDocument) CreatedAt() time.Time {
-	return doc.meta.CreatedAt
-}
-
-func (doc *HTMLDocument) DestPath() string {
-	return doc.meta.Filename
-}
-
-func (doc *HTMLDocument) Draft() bool {
-	return doc.meta.Kind == draft
+func (doc *HTMLDocument) Dependencies() map[string]struct{} {
+	return doc.deps
 }
 
 // Load reads HTML from r and loads it into doc.
@@ -116,6 +113,9 @@ func (doc *HTMLDocument) Post() bool {
 
 // Render encodes any loaded content into HTML and writes it to w.
 func (doc *HTMLDocument) Render(w io.Writer) error {
+	if err := doc.Massage(); err != nil {
+		return err
+	}
 	if err := html.Render(w, doc.root); err != nil {
 		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.Filename, err)
 	}
