@@ -45,12 +45,14 @@ type HTMLDocument struct {
 // It may or may not point to a file containing HTML.
 // To read and parse HTML, call [Load].
 func NewHTMLDocument(src string) *HTMLDocument {
+	m := NewMetadata(src)
+	m.WebPath = filepath.Base(src)
 	d := HTMLDocument{
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta: NewMetadata(src),
+		meta: m,
 	}
 	return &d
 }
@@ -129,7 +131,7 @@ func (doc *HTMLDocument) Render(w io.Writer) error {
 		return err
 	}
 	if err := html.Render(w, doc.root); err != nil {
-		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.Filename, err)
+		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.WebPath, err)
 	}
 	return nil
 }
@@ -165,10 +167,10 @@ func (doc *HTMLDocument) GenerateReplacements() error {
 // GenerateShortname sets a shortname for the document if one was not manually specified,
 // and sanitizes any existing shortname to remove extensions.
 func (doc *HTMLDocument) GenerateShortname() {
-	if doc.meta.Filename == "" {
-		doc.meta.Filename = filepath.Base(doc.meta.SourcePath)
+	if doc.meta.WebPath == "" {
+		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
 	}
-	doc.meta.Filename, _, _ = strings.Cut(doc.meta.Filename, ".")
+	doc.meta.WebPath, _, _ = strings.Cut(doc.meta.WebPath, ".")
 }
 
 func (doc *HTMLDocument) GenerateTitle() error {
@@ -186,7 +188,7 @@ func (doc *HTMLDocument) GenerateTitle() error {
 	}
 	link := html.Node{
 		Attr: []html.Attribute{
-			{Key: "href", Val: doc.meta.Filename},
+			{Key: "href", Val: doc.meta.WebPath},
 			{Key: "class", Val: "post-title"},
 		},
 		DataAtom: atom.A,
@@ -205,6 +207,9 @@ func (doc *HTMLDocument) GenerateTitle() error {
 // Specifically, it iterates over the document looking for non-first-level headings (<h2>, <h3>, etc.)
 // and inserts an ordered hierarchical list of them immediately before the first <h2>.
 func (doc *HTMLDocument) GenerateTOC() error {
+	if !doc.Metadata().TOC {
+		return nil
+	}
 	var (
 		f func(*html.Node) error
 		v tocPartialVars

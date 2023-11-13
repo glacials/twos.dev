@@ -1,7 +1,6 @@
 package winter
 
 import (
-	"fmt"
 	"path/filepath"
 	"strings"
 	"time"
@@ -18,15 +17,10 @@ type Metadata struct {
 	// treatment will do. If this doesn't work for you, go fix that
 	// code.
 	Category string `yaml:"category"`
-	// Kind specifies the type of document this is. In every user-facing
-	// context, this is called "type". In Go we cannot use the "type"
-	// keyword, so we use "kind" instead.
+	// Kind specifies the type of document this is.
+	// In every user-facing context, this is called "type".
+	// In Go we cannot use the "type" keyword, so we use "kind" instead.
 	Kind kind `yaml:"type"`
-	// Filename is the path component of the URL that will point to this document,
-	// once rendered.
-	// Filename MUST NOT contain any slashes;
-	// everything is top-level.
-	Filename string `yaml:"filename"`
 	// Layout is the path to the source file for the layout this document should be rendered into.
 	//
 	// If unset, src/templates/text_document.html.tmpl is used.
@@ -53,6 +47,14 @@ type Metadata struct {
 	// document. If true, the table of contents is rendered immediately
 	// above the first non-first-level heading.
 	TOC bool `yaml:"toc"`
+	// WebPath is the path component of the URL that will point to this document,
+	// once rendered.
+	// WebPath MUST NOT contain any slashes;
+	// everything is top-level.
+	//
+	// WebPath is equivalent to the path to the destination file,
+	// relative to dist.
+	WebPath string `yaml:"filename"`
 
 	// CreatedAt is the time the document was first published.
 	CreatedAt time.Time `yaml:"date"`
@@ -74,10 +76,31 @@ func NewMetadata(src string) *Metadata {
 	}
 	noExt := filename[0:i]
 	return &Metadata{
-		Filename:   fmt.Sprintf("%s.html", noExt),
 		Kind:       draft,
 		Layout:     "src/templates/text_document.html.tmpl",
 		SourcePath: src,
 		Title:      noExt,
 	}
+}
+
+func (meta *Metadata) IsType(t string) bool {
+	k, err := parseKind(t)
+	if err != nil {
+		return false
+	}
+	return k == meta.Kind
+}
+
+type metadatas []*Metadata
+
+func (d metadatas) Len() int {
+	return len(d)
+}
+
+func (d metadatas) Less(i, j int) bool {
+	return d[i].CreatedAt.After(d[j].CreatedAt)
+}
+
+func (d metadatas) Swap(i, j int) {
+	d[i], d[j] = d[j], d[i]
 }

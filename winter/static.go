@@ -15,18 +15,21 @@ type StaticDocument struct {
 	r    io.Reader
 }
 
-// NewStaticDocument creates a new document whose original source is at path src.
+// NewStaticDocument creates a new document whose original source is at path src,
+// and whose desired web path is webPath.
 //
 // Nothing is read from disk; src is metadata.
 // To read the static file, call [Load].
-func NewStaticDocument(src string) *StaticDocument {
+func NewStaticDocument(src, webPath string) *StaticDocument {
+	m := NewMetadata(src)
+	m.WebPath = webPath
 	return &StaticDocument{
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			src: {},
 		},
-		meta: NewMetadata(src),
+		meta: m,
 	}
 }
 

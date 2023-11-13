@@ -4,9 +4,9 @@ type: page
 
 # Archives
 
-{{ if archives }}
-{{$prev := (index archives 0).Year}}
-{{range archives}}
+{{ if yearly posts }}
+{{$prev := (index (yearly posts) 0).Year}}
+{{range (yearly posts)}}
 
 {{if lt .Year (sub $prev 1) }}
 
@@ -22,7 +22,7 @@ type: page
 
 {{range .Documents}}
 
-- {{with .Category}}{{.}}:{{end}} [{{.Title}}]({{.Shortname}}.html)
+- {{with .Category}}{{.}}:{{end}} [{{.Title}}]({{.WebPath}})
 
 {{end}}
 {{$prev = .Year}}

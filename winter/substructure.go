@@ -164,7 +164,7 @@ func (s *Substructure) discoverHTML(path string) error {
 		s.add(NewHTMLDocument(src))
 	}
 	for _, d := range s.docs {
-		if p, _, ok := strings.Cut(d.Metadata().Filename, "_"); ok {
+		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
 			parent, ok := s.DocBySourcePath(p)
 			if ok {
 				d.Metadata().Parent = parent.Metadata().SourcePath
@@ -289,7 +289,11 @@ func (s *Substructure) discoverStatic(path string) error {
 		} else if stat.IsDir() {
 			continue
 		}
-		s.add(NewStaticDocument(src))
+		webPath, err := filepath.Rel(path, src)
+		if err != nil {
+			return fmt.Errorf("cannot determine desired web path of %q: %w", src, err)
+		}
+		s.add(NewStaticDocument(src, webPath))
 	}
 
 	return nil
@@ -341,24 +345,26 @@ func (err ErrNotTracked) Error() string {
 //
 // If src isn't known to the substructure, Rebuild returns ErrNotTracked.
 func (s *Substructure) Rebuild(src, dist string) error {
-	fmt.Printf("%s ↯", src)
+	fmt.Printf("%s ↓\n", src)
 	for _, doc := range s.docs {
 		if doc.Metadata().SourcePath != src && !doc.DependsOn(src) {
 			continue
 		}
 		r, err := os.Open(doc.Metadata().SourcePath)
 		if err != nil {
-			return fmt.Errorf("cannot read %q for rebuilding: %w", doc.Metadata().SourcePath, err)
+			return fmt.Errorf("cannot read %q for rebuilding %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 		}
 		if err := doc.Load(r); err != nil {
-			return fmt.Errorf("cannot load %q for rebuilding: %w", doc.Metadata().SourcePath, err)
+			return fmt.Errorf("cannot load %q for rebuilding %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 		}
-		dest := filepath.Join(dist, doc.Metadata().Filename)
+		dest := filepath.Join(dist, doc.Metadata().WebPath)
 		fmt.Printf("  → %s", pad(dest))
-
+		if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
+			return fmt.Errorf("cannot make directory structure for %q: %w", dest, err)
+		}
 		w, err := os.Create(dest)
 		if err != nil {
-			return fmt.Errorf("cannot build %q: %w", doc.Metadata().SourcePath, err)
+			return fmt.Errorf("cannot build %q (web path %q) into %q: %w", doc.Metadata().SourcePath, doc.Metadata().WebPath, dest, err)
 		}
 		defer w.Close()
 		if err := doc.Render(w); err != nil {
@@ -386,13 +392,15 @@ func (s *Substructure) DocBySourcePath(path string) (doc Document, ok bool) {
 func (s *Substructure) ExecuteAll(dist string) error {
 	built := map[string]Document{}
 	for _, doc := range s.docs {
-		if prev, ok := built[doc.Metadata().Filename]; ok {
+		if prev, ok := built[doc.Metadata().WebPath]; ok {
 			return fmt.Errorf(
-				"both %s and %s wanted to build to %s/%s; remove one",
+				"both %s (%T) and %s (%T) wanted to build to %s/%s; remove one",
 				doc.Metadata().SourcePath,
+				doc,
 				prev.Metadata().SourcePath,
+				prev,
 				s.cfg.Hostname,
-				doc.Metadata().Filename,
+				doc.Metadata().WebPath,
 			)
 		}
 		if err := s.Rebuild(doc.Metadata().SourcePath, dist); err != nil {
@@ -402,7 +410,7 @@ func (s *Substructure) ExecuteAll(dist string) error {
 				err,
 			)
 		}
-		built[doc.Metadata().Filename] = doc
+		built[doc.Metadata().WebPath] = doc
 	}
 
 	if err := s.writefeed(); err != nil {

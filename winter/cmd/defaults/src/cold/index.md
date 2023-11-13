@@ -20,7 +20,7 @@ some content. If that page has type `post`, it will be displayed below.
 
 {{ range posts }}
 
-- {{ with .Category }}{{ . }}: {{ end }}<a href="{{ .Shortname }}.html">{{ .Title }}</a> {{ if not .CreatedAt.IsZero }}({{ .CreatedAt.Format "2006 January" }}){{ end }}
+- {{ with .Category }}{{ . }}: {{ end }}<a href="{{ .WebPath }}">{{ .Title }}</a> {{ if not .CreatedAt.IsZero }}({{ .CreatedAt.Format "2006 January" }}){{ end }}
 
 {{ else }}
 

@@ -188,11 +188,8 @@ extensions replaced with `.html`. For example, `envy.html.tmpl` and
 `envy.md` would both become `envy.html` (though if two source files
 would produce the same destination file, Winter will error).
 
-A document's **shortname** is defined as its extensionless `filename`.
-The shortname is accessible to templates using the [`{{"{{"}}
-.Shortname }}`](#shortname) template variable. The filename is not
-accessible to templates, but can be calculated by appending `.html` to
-the shortname.
+A document's **web path** is defined as its `filename`.
+The web path is accessible to templates using the [`{{"{{"}} .WebPath }}`](#webpath) template variable.
 
 #### `date` {#date}
 
@@ -267,14 +264,14 @@ _Type: `string`_
 The value specified by the frontmatter [`category`](#category) field.
 This is an arbitrary string.
 
-##### `{{"{{"}} .Dest }}` {#dest}
+##### `{{"{{"}} .WebPath }}` {#webpath}
 
 _Type: `string`_
 
 The filesystem path of the document after having been rendered,
 relative to the web root.
 
-##### `{{"{{"}} .IsDraft }}` {#isdraft}
+##### `{{"{{"}} .IsType "draft" }}` {#isdraft}
 
 _Type: `bool`_
 
@@ -293,13 +290,15 @@ _Type: `string`_
 A teaser for the document, such as a summary of its contents.
 If unset, the document's first paragraph will be used, if possible.
 
-##### `{{"{{"}} .Shortname }}` {#shortname}
+##### `{{"{{"}} .WebPath }}` {#webpath}
 
 _Type: `string`_
 
-The shortname of the document. This is the extensionless
-[filename](#filename) frontmatter attribute if set, or the source
-document's extensionless filename otherwise.
+The path component of the URL to the document.
+This is the [filename](#filename) frontmatter attribute if set,
+or the source document's filename otherwise.
+
+Equivalent to the file's location on disk relative to `dist/`.
 
 ##### `{{"{{"}} .Title }}` {#title}
 
@@ -352,12 +351,12 @@ Returns a list of all documents with type `post`, from most to least recent.
 
 See [Document Fields](#fields) for a list of fields available to documents.
 
-##### `archives` {#archives}
+##### `yearly` {#yearly}
 
-Usage: `{{"{{"}} range archives }}{{"{{"}} .Year }}: {{"{{"}} range .Documents }} ... {{"{{"}} end }}{{"{{"}} end }}`
+Usage: `{{"{{"}} range yearly posts }}{{"{{"}} .Year }}: {{"{{"}} range .Documents }} ... {{"{{"}} end }}{{"{{"}} end }}`
 
-Returns a list of `archive` types ordered from most to least recent. An
-`archive` has two fields, `.Year` (integer) and `.Documents` (array of
-documents). This allows you to display posts sectioned by year.
+Returns a list of `year` types ordered from most to least recent.
+A `year` has two fields, `.Year` (integer) and `.Documents` (array of documents).
+This allows you to display posts sectioned by year.
 
 See [Document Fields](#fields) for a list of fields available to documents.

@@ -8,10 +8,10 @@
     <div class="container">
       {{ template "src/templates/_nav.html.tmpl" . }}
       <article>
-        {{ if .IsDraft }}
+        {{ if .IsType "draft" }}
           <div class="draft">Draft</div>
         {{ end }}
-        {{ if and (.IsPost) (not .CreatedAt.IsZero) }}
+        {{ if and (.IsType "post") (not .CreatedAt.IsZero) }}
           <div class="publish-date">
             <i>
               published
@@ -35,7 +35,7 @@
         <p>
           <small>
             <i>
-              {{ with src }}
+              {{ with .SourcePath }}
                 source:
                 <a
                   href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"

@@ -2,14 +2,14 @@
   <p style="text-align:center">
     <a
       href="/"
-      {{ if eq .Dest "index.html" }}class="selected"{{ end }}
+      {{ if eq .WebPath "index.html" }}class="selected"{{ end }}
       >Index</a
     >
   </p>
 
   <p style="text-align:center">
     {{ with parent }}
-      <a href="{{ parent.Source }}">back to {{ parent.Shortname }}</a>
+      <a href="{{ parent.WebPath }}">back to {{ parent.WebPath }}</a>
     {{ end }}
   </p>
 </nav>

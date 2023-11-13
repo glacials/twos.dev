@@ -84,7 +84,7 @@ func (d *OrgDocument) Load(r io.Reader) error {
 				return err
 			}
 		case "filename":
-			d.meta.Filename = v
+			d.meta.WebPath = v
 		case "title":
 			d.meta.Title = v
 		case "toc":

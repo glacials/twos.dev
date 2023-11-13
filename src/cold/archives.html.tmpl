@@ -6,8 +6,8 @@ type: page
 
 <h1>Writing</h1>
 
-{{ $prev := (index archives 0).Year }}
-{{ range archives }}
+{{ $prev := (index (yearly posts) 0).Year }}
+{{ range yearly posts }}
   {{ if lt .Year (sub $prev 1) }}
     <p>…</p>
   {{ end }}
@@ -16,10 +16,12 @@ type: page
   <h2>{{ .Year }}</h2>
 
   {{ range .Documents }}
-    <li>
-      {{ with .Category }}{{ . }}:{{ end }}
-      <a href="{{ .Shortname }}.html">{{ .Title }}</a>
-    </li>
+    {{ with .Metadata }}
+      <li>
+        {{ with .Category }}{{ . }}:{{ end }}
+        <a href="{{ .WebPath }}">{{ .Title }}</a>
+      </li>
+    {{ end }}
   {{ end }}
   {{ $prev = .Year }}
 {{ end }}

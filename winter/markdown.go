@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"path/filepath"
 
 	"github.com/adrg/frontmatter"
 	"github.com/gomarkdown/markdown"
@@ -36,6 +37,7 @@ type MarkdownDocument struct {
 // To read and parse Markdown, call [Load].
 func NewMarkdownDocument(src string) *MarkdownDocument {
 	m := NewMetadata(src)
+	m.WebPath = filepath.Base(src)
 	return &MarkdownDocument{
 		Next:       &HTMLDocument{meta: m},
 		SourcePath: src,
@@ -61,13 +63,10 @@ func (doc *MarkdownDocument) DependsOn(src string) bool {
 func (doc *MarkdownDocument) Load(r io.Reader) error {
 	// Reset metadata to the zero value.
 	// Fields removed from frontmatter shouldn't hold onto previous values.
-	var m Metadata
-	body, err := frontmatter.Parse(r, &m)
+	body, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {
 		return fmt.Errorf("can't parse %s: %w", doc.SourcePath, err)
 	}
-	doc.meta = &m
-	doc.Next.meta = &m
 
 	return doc.Next.Load(bytes.NewBuffer(markdown.ToHTML(
 		body,

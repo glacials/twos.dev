@@ -43,13 +43,13 @@ func (s *Substructure) writefeed() error {
 
 		bodyStr := buf.String()
 		feed.Items = append(feed.Items, &feeds.Item{
-			Id:          doc.Metadata().Filename,
+			Id:          doc.Metadata().WebPath,
 			Title:       doc.Metadata().Title,
 			Author:      feed.Author,
 			Content:     bodyStr,
 			Description: bodyStr,
 			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, doc.Metadata().Filename),
+				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, doc.Metadata().WebPath),
 			},
 			Created: doc.Metadata().CreatedAt,
 			Updated: doc.Metadata().UpdatedAt,

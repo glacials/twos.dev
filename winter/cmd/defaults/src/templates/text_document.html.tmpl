@@ -8,7 +8,7 @@
     <div class="container">
       <header>
         {{ template "src/templates/_nav.html.tmpl" . }}
-        {{ if and (.IsPost)  (not .CreatedAt.IsZero) }}
+        {{ if and (IsType "post")  (not .CreatedAt.IsZero) }}
           <small style="text-align:center; display: block">
             <i>
               published
@@ -21,7 +21,7 @@
         {{ end }}
       </header>
       <article>
-        {{ if .IsDraft }}
+        {{ if .IsType "draft" }}
           <div>DRAFT</div>
         {{ end }}
         {{ with .Category }}
@@ -36,9 +36,9 @@
       <footer>
         <hr />
         <p>
-          {{ if ne .Shortname "index" }}
+          {{ if ne .WebPath "index" }}
             {{ with parent }}
-              &larr; <a href="{{ .Source }}">{{ .Shortname }}</a>
+              &larr; <a href="{{ .Source }}">{{ .WebPath }}</a>
             {{ else }}
               &larr; <a href="/">Index</a>
             {{ end }}
