@@ -390,9 +390,9 @@ func (s *Substructure) DocBySourcePath(path string) (doc Document, ok bool) {
 // ExecuteAll builds all documents known to the substructure,
 // as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string) error {
-	built := map[string]Document{}
+	builtDocs := map[string]Document{}
 	for _, doc := range s.docs {
-		if prev, ok := built[doc.Metadata().WebPath]; ok {
+		if prev, ok := builtDocs[doc.Metadata().WebPath]; ok {
 			return fmt.Errorf(
 				"both %s (%T) and %s (%T) wanted to build to %s/%s; remove one",
 				doc.Metadata().SourcePath,
@@ -405,12 +405,41 @@ func (s *Substructure) ExecuteAll(dist string) error {
 		}
 		if err := s.Rebuild(doc.Metadata().SourcePath, dist); err != nil {
 			return fmt.Errorf(
-				"cannot execute %s while executing all: %w",
+				"cannot execute %q during ExecuteAll: %w",
 				doc.Metadata().SourcePath,
 				err,
 			)
 		}
-		built[doc.Metadata().WebPath] = doc
+		builtDocs[doc.Metadata().WebPath] = doc
+	}
+
+	builtIMGs := map[string]*img{}
+	for _, imgs := range s.photos {
+		for _, img := range imgs {
+			if prev, ok := builtIMGs[img.WebPath]; ok {
+				return fmt.Errorf(
+					"both %s (%T) and %q (%T) wanted to build to %q/%q; remove one",
+					img.SourcePath,
+					img,
+					prev.SourcePath,
+					prev,
+					s.cfg.Hostname,
+					img.WebPath,
+				)
+			}
+			dest := filepath.Join(dist, img.WebPath)
+			f, err := os.Create(dest)
+			if err != nil {
+				return fmt.Errorf("cannot write image %q to %q during ExecuteAll: %w", img.SourcePath, dest, err)
+			}
+			if err := img.Render(f); err != nil {
+				return err
+			}
+			if err := s.Rebuild(img.SourcePath, dist); err != nil {
+				return fmt.Errorf("cannot rebuild image %q during ExecuteAll: %w", img.SourcePath, err)
+			}
+			builtIMGs[img.WebPath] = img
+		}
 	}
 
 	if err := s.writefeed(); err != nil {
