@@ -48,8 +48,11 @@ func NewMarkdownDocument(src string) *MarkdownDocument {
 	}
 }
 
-func (doc *MarkdownDocument) Dependencies() map[string]struct{} {
-	return doc.deps
+func (doc *MarkdownDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	return false
 }
 
 // Load reads Markdown from r and loads it into doc.

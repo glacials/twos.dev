@@ -31,20 +31,23 @@ type OrgDocument struct {
 // Nothing is read from disk; src is metadata.
 // To read and parse Org, call [Load].
 func NewOrgDocument(src string) *OrgDocument {
-	var m Metadata
+	m := NewMetadata(src)
 	return &OrgDocument{
-		Next:       &HTMLDocument{meta: &m},
+		Next:       &HTMLDocument{meta: m},
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			"public/style.css": {},
 		},
-		meta: &m,
+		meta: m,
 	}
 }
 
-func (doc *OrgDocument) Dependencies() map[string]struct{} {
-	return doc.deps
+func (doc *OrgDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	return false
 }
 
 // Load reads Org from r and loads it into doc.

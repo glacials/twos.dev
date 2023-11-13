@@ -14,10 +14,12 @@ import (
 
 // Substructure is a graph of documents on the website.
 type Substructure struct {
+	// cfg holds user preferences, specified by winter.yml.
 	cfg Config
 	// devURL is [twos.dev/winter.Substructure.cfg.Development.URL] unmarshaled into a [net/url.URL].
 	devURL *url.URL
-	docs   documents
+	// docs holds the documents known to the substructure.
+	docs documents
 	// photos is a map of gallery name to slice of photos in that gallery.
 	photos map[string][]*img
 }
@@ -27,9 +29,9 @@ var (
 		`img\/.+\/(.+)/.*`,
 	)
 
-	// ignorePaths are file path regex patterns that should not be
-	// treated as documents to be generated, even though they are in source
-	// directories. The regex is a full match so must start with ^ and end with $.
+	// ignorePaths are file path regex patterns that should not be treated as documents to be generated,
+	// even though they are in source directories.
+	// The regex is a full match so must start with ^ and end with $.
 	//
 	// TODO: Migrate some of these to a directory blocklist instead.
 	ignorePaths = map[*regexp.Regexp]struct{}{
@@ -78,6 +80,8 @@ func (s *Substructure) add(d Document) {
 	s.docs = append(s.docs, d)
 }
 
+// addIMG adds the given image to the substructure,
+// removing any old versions in the process.
 func (s *Substructure) addIMG(im *img) error {
 	if s.photos == nil {
 		s.photos = map[string][]*img{}
@@ -91,8 +95,7 @@ func (s *Substructure) addIMG(im *img) error {
 	return nil
 }
 
-// discover clears the substructure of any known documents and
-// discovers all documents from scratch on the filesystem.
+// discover clears the substructure of any known documents and discovers all documents from scratch on the filesystem.
 func (s *Substructure) discover() error {
 	paths := append(s.cfg.Src, "src")
 	for _, path := range paths {
@@ -106,8 +109,7 @@ func (s *Substructure) discover() error {
 	return nil
 }
 
-// discoverAtPath discovers all documents in or at the given path
-// glob.
+// discoverAtPath discovers all documents in or at the given path glob.
 func (s *Substructure) discoverAtPath(path string) error {
 	if err := s.discoverHTML(path); err != nil {
 		return err
@@ -129,19 +131,17 @@ func (s *Substructure) discoverAtPath(path string) error {
 	return nil
 }
 
-// galleryGlobs are the relative path components with which to discover gallery images.
-// Each is appended to the path supplied to discoverGalleriesAtPath and used to perform a glob.
+// imgGlobs are the relative path components with which to discover images.
+// Each is appended to the path supplied to discoverPhotos and used to perform a glob.
 //
 // The glob supports double asterisks, which mean "any character, including a path separator".
 // Otherwise, syntax is identical to that of [filepath.Glob].
-var galleryGlobs []string = []string{
+var imgGlobs []string = []string{
 	"img/**/*.[jJ][pP][gG]",
 	"img/**/*.[jJ][pP][eE][gG]",
 }
 
-// discoverHTML discovers all HTML documents in or at the given path glob.
-// The files are wrapped in textDocument types and then added to the
-// substructure.
+// discoverHTML adds all *.html documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverHTML(path string) error {
 	var htmlFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -175,9 +175,7 @@ func (s *Substructure) discoverHTML(path string) error {
 	return nil
 }
 
-// discoverMarkdown discovers all Markdown documents in or at the given
-// path glob. The files are wrapped in textDocument types and then added to the
-// substructure.
+// discoverMarkdown adds all *.md documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverMarkdown(path string) error {
 	var markdownFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -203,9 +201,7 @@ func (s *Substructure) discoverMarkdown(path string) error {
 	return nil
 }
 
-// discoverOrg discovers all Org documents in or at the given path glob.
-// The files are wrapped in textDocument types and then added to the
-// substructure.
+// discoverOrg adds all *.org documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverOrg(path string) error {
 	// TODO: Allow looking in user's org directory.
 	// TODO: Allow rendering only a subsection of an org file.
@@ -233,7 +229,7 @@ func (s *Substructure) discoverOrg(path string) error {
 	return nil
 }
 
-// discoverPhotos discovers all photos in or at the given path glob.
+// discoverPhotos adds all documents matching galleryGlobs in or at the given path glob to the substructure.
 func (s *Substructure) discoverPhotos(src string) error {
 	stat, err := os.Stat(src)
 	if err != nil {
@@ -244,7 +240,7 @@ func (s *Substructure) discoverPhotos(src string) error {
 	}
 
 	var files []string
-	for _, g := range galleryGlobs {
+	for _, g := range imgGlobs {
 		f, err := filepathx.Glob(filepath.Join(src, g))
 		if err != nil {
 			return err
@@ -268,9 +264,7 @@ func (s *Substructure) discoverPhotos(src string) error {
 	return nil
 }
 
-// discoverStatic discovers all static files in or at the given path glob.
-// The files are wrapped with staticDocument types then added to the
-// substructure.
+// discoverStatic adds all documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverStatic(path string) error {
 	var staticFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -301,6 +295,7 @@ func (s *Substructure) discoverStatic(path string) error {
 	return nil
 }
 
+// discoverTemplates adds all *.tmpl documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverTemplates(path string) error {
 	var tmplFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -312,7 +307,7 @@ func (s *Substructure) discoverTemplates(path string) error {
 		if err != nil {
 			return err
 		}
-	} else if strings.HasSuffix(path, ".html") {
+	} else if strings.HasSuffix(path, ".tmpl") {
 		tmplFiles = append(tmplFiles, path)
 	}
 
@@ -346,77 +341,31 @@ func (err ErrNotTracked) Error() string {
 //
 // If src isn't known to the substructure, Rebuild returns ErrNotTracked.
 func (s *Substructure) Rebuild(src, dist string) error {
-	var built bool
+	fmt.Printf("%s ↯", src)
+	for _, doc := range s.docs {
+		if doc.Metadata().SourcePath != src && !doc.DependsOn(src) {
+			continue
+		}
+		r, err := os.Open(doc.Metadata().SourcePath)
+		if err != nil {
+			return fmt.Errorf("cannot read %q for rebuilding: %w", doc.Metadata().SourcePath, err)
+		}
+		if err := doc.Load(r); err != nil {
+			return fmt.Errorf("cannot load %q for rebuilding: %w", doc.Metadata().SourcePath, err)
+		}
+		dest := filepath.Join(dist, doc.Metadata().Filename)
+		fmt.Printf("  → %s", pad(dest))
 
-	// Try first as-is; if that fails we'll discover() and try again.
-	for i := 0; i < 2; i++ {
-		for _, doc := range s.docs {
-			for d := range doc.Dependencies() {
-				if d == src {
-					fmt.Printf("  ↗ %s", pad(s.devURL.JoinPath(doc.Metadata().Filename).String()))
-					if err := s.execute(doc, dist); err != nil {
-						return fmt.Errorf(
-							"can't rebuild %s upstream dependency %s: %w",
-							src,
-							d,
-							err,
-						)
-					}
-					fmt.Println(" ✓")
-					built = true
-				}
-			}
-			if doc.Metadata().SourcePath == src {
-				fmt.Printf("  → %s", pad(s.devURL.JoinPath(doc.Metadata().Filename).String()))
-				if err := s.execute(doc, dist); err != nil {
-					return fmt.Errorf("can't rebuild changed file %s: %w", src, err)
-				}
-				fmt.Println(" ✓")
-				built = true
-			}
+		w, err := os.Create(dest)
+		if err != nil {
+			return fmt.Errorf("cannot build %q: %w", doc.Metadata().SourcePath, err)
 		}
-		if d, ok := s.DocBySourcePath(src); ok && d.Metadata().Kind == post {
-			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("archives.html").String()))
-			archives, ok := s.DocBySourcePath("src/cold/archives.html.tmpl")
-			if !ok {
-				return fmt.Errorf("src/cold/archives.html.tmpl not found")
-			}
-			if err := s.execute(archives, dist); err != nil {
-				return fmt.Errorf("can't rebuild index: %w", err)
-			}
-			fmt.Println(" ✓")
-			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("writing.html").String()))
-			writing, ok := s.DocBySourcePath("src/cold/writing.html")
-			if !ok {
-				return fmt.Errorf("src/cold/writing.html not found")
-			}
-			if err := s.execute(writing, dist); err != nil {
-				return fmt.Errorf("can't rebuild index: %w", err)
-			}
-			fmt.Println(" ✓")
-			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("index.html").String()))
-			index, ok := s.DocBySourcePath("src/cold/index.md")
-			if !ok {
-				return fmt.Errorf("src/cold/index.md not found")
-			}
-			if err := s.execute(index, dist); err != nil {
-				return fmt.Errorf("can't rebuild index: %w", err)
-			}
-			fmt.Println(" ✓")
-			built = true
+		defer w.Close()
+		if err := doc.Render(w); err != nil {
+			return fmt.Errorf("cannot render %q for rebuilding: %w", doc.Metadata().SourcePath, err)
 		}
-
-		if !built {
-			if i == 0 {
-				if err := s.discover(); err != nil {
-					return err
-				}
-			} else {
-				return ErrNotTracked{src}
-			}
-		}
+		fmt.Println(" ✓")
 	}
-
 	return nil
 }
 
@@ -436,24 +385,24 @@ func (s *Substructure) DocBySourcePath(path string) (doc Document, ok bool) {
 // as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string) error {
 	built := map[string]Document{}
-	for _, d := range s.docs {
-		if prev, ok := built[d.Metadata().Filename]; ok {
+	for _, doc := range s.docs {
+		if prev, ok := built[doc.Metadata().Filename]; ok {
 			return fmt.Errorf(
 				"both %s and %s wanted to build to %s/%s; remove one",
-				d.Metadata().SourcePath,
+				doc.Metadata().SourcePath,
 				prev.Metadata().SourcePath,
 				s.cfg.Hostname,
-				d.Metadata().Filename,
+				doc.Metadata().Filename,
 			)
 		}
-		if err := s.execute(d, dist); err != nil {
+		if err := s.Rebuild(doc.Metadata().SourcePath, dist); err != nil {
 			return fmt.Errorf(
 				"cannot execute %s while executing all: %w",
-				d.Metadata().SourcePath,
+				doc.Metadata().SourcePath,
 				err,
 			)
 		}
-		built[d.Metadata().Filename] = d
+		built[doc.Metadata().Filename] = doc
 	}
 
 	if err := s.writefeed(); err != nil {
@@ -461,25 +410,6 @@ func (s *Substructure) ExecuteAll(dist string) error {
 	}
 
 	return s.validateURIsDidNotChange(dist)
-}
-
-// execute builds the given document into the given directory.
-// To also build its dependencies and dependants, use Rebuild instead.
-func (s *Substructure) execute(d Document, dist string) error {
-	dest := filepath.Join(dist, d.Metadata().Filename)
-	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
-		return fmt.Errorf(
-			"can't create %q directory: %w",
-			filepath.Dir(dest),
-			err,
-		)
-	}
-	f, err := os.Create(dest)
-	if err != nil {
-		return fmt.Errorf("can't create %s: %w", dest, err)
-	}
-	defer f.Close()
-	return d.Render(f)
 }
 
 // shouldIgnore returns true if the given file path should not be built into the substructure,

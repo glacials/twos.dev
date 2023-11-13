@@ -55,8 +55,20 @@ func NewHTMLDocument(src string) *HTMLDocument {
 	return &d
 }
 
-func (doc *HTMLDocument) Dependencies() map[string]struct{} {
-	return doc.deps
+func (doc *HTMLDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	if doc.meta.Layout == src {
+		return true
+	}
+	if doc.meta.Parent == src {
+		return true
+	}
+	if strings.HasSuffix(src, ".css") {
+		return true
+	}
+	return false
 }
 
 // Load reads HTML from r and loads it into doc.
@@ -238,14 +250,24 @@ func (doc *HTMLDocument) GenerateTOC() error {
 		return fmt.Errorf("cannot recurse into HTML: %w", err)
 	}
 
-	tocbody, err := os.ReadFile("src/templates/_toc.html.tmpl")
+	tocPath := "src/templates/_toc.html.tmpl"
+	tocbody, err := os.ReadFile(tocPath)
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot read toc for %q: %w", doc.meta.SourcePath, err)
 	}
-	toctmpl, err := template.New("src/templates/_toc.html.tmpl").Parse(string(tocbody))
+	toctmpl, err := template.New(tocPath).Parse(string(tocbody))
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot parse toc for %q: %w", doc.meta.SourcePath, err)
 	}
+	subtocPath := "src/templates/_subtoc.html.tmpl"
+	subtocbody, err := os.ReadFile(subtocPath)
+	if err != nil {
+		return fmt.Errorf("cannot read subtoc for %q: %w", doc.meta.SourcePath, err)
+	}
+	if _, err := toctmpl.New(subtocPath).Parse(string(subtocbody)); err != nil {
+		return fmt.Errorf("cannot parse subtoc for %q: %w", doc.meta.SourcePath, err)
+	}
+
 	var buf bytes.Buffer
 	if err := toctmpl.Execute(&buf, v); err != nil {
 		return err
@@ -267,8 +289,7 @@ func (doc *HTMLDocument) GenerateTOC() error {
 	return nil
 }
 
-// firstTag returns the first element with the given tag which is a descendant
-// of n.
+// firstTag returns the first and outermost descendant of n with the given tag.
 func firstTag(n *html.Node, t atom.Atom) *html.Node {
 	if n.Type == html.ElementNode && n.DataAtom == t {
 		return n

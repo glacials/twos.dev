@@ -68,10 +68,13 @@ var (
 //	var buf bytes.Buffer
 //	t.Execute(&buf, d)
 type Document interface {
-	// Dependencies returns a set of paths to files that,
+	// DependsOn returns true if and only if the given source path,
 	// when changed,
 	// should cause this document to be rebuilt.
-	Dependencies() map[string]struct{}
+	DependsOn(src string) bool
+	// Load reads or re-reads the source file from disk,
+	// overwriting any previously stored or parsed contents.
+	Load(r io.Reader) error
 	// Metadata returns data about the document,
 	// which may have been inferred automatically or set by frontmatter.
 	Metadata() *Metadata

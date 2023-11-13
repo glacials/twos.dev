@@ -69,6 +69,9 @@ type Metadata struct {
 func NewMetadata(src string) *Metadata {
 	filename := filepath.Base(src)
 	i := strings.IndexRune(filename, '.')
+	if i < 0 {
+		i = len(filename)
+	}
 	noExt := filename[0:i]
 	return &Metadata{
 		Filename:   fmt.Sprintf("%s.html", noExt),

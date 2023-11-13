@@ -26,11 +26,15 @@ func NewStaticDocument(src string) *StaticDocument {
 		deps: map[string]struct{}{
 			src: {},
 		},
+		meta: NewMetadata(src),
 	}
 }
 
-func (doc *StaticDocument) Dependencies() map[string]struct{} {
-	return doc.deps
+func (doc *StaticDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	return false
 }
 
 func (doc *StaticDocument) Load(r io.Reader) error {

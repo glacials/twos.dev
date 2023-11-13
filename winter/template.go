@@ -42,22 +42,25 @@ type TemplateDocument struct {
 }
 
 func NewTemplateDocument(src string, collection []Document) *TemplateDocument {
-	var m Metadata
+	m := NewMetadata(src)
 	return &TemplateDocument{
-		Next:       &HTMLDocument{meta: &m},
+		Next:       &HTMLDocument{meta: m},
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta:  &m,
+		meta:  m,
 		posts: collection,
 	}
 }
 
-func (doc *TemplateDocument) Dependencies() map[string]struct{} {
-	return doc.deps
+func (doc *TemplateDocument) DependsOn(src string) bool {
+	if _, ok := doc.deps[src]; ok {
+		return true
+	}
+	return false
 }
 
 // Load reads a Go template from r and loads it into doc.
