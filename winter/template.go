@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"html/template"
+	"io"
 	"os"
 	"text/template/parse"
 	"time"
@@ -12,10 +13,162 @@ import (
 )
 
 const (
-	galTmplPath = "src/templates/imgcontainer.html.tmpl"
 	icnTmplPath = "src/templates/_icon.html.tmpl"
 	txtTmplPath = "src/templates/text_document.html.tmpl"
 )
+
+// TemplateDocument represents a source file written in Go templates.
+// The surrounding syntax can be anything.
+//
+// TemplateDocument implements [Document].
+//
+// The TemplateDocument is transitory;
+// its only purpose is to create an [HTMLDocument].
+type TemplateDocument struct {
+	meta *Metadata
+
+	// Next is the HTML document generated from this template document.
+	Next   *HTMLDocument
+	Parent *TemplateDocument
+	// SourcePath is the path on disk to the file this template document is read from or generated from.
+	// The path is relative to the working directory.
+	SourcePath string
+}
+
+func NewTemplateDocument(src string) *TemplateDocument {
+	var m Metadata
+	return &TemplateDocument{
+		meta:       &m,
+		Next:       &HTMLDocument{meta: &m},
+		SourcePath: src,
+	}
+}
+
+// Load reads a Go template from r and loads it into doc.
+// Any templates referenced within are looked for looked for by name,
+// relative to the working directory.
+//
+// To use a template, treat its filepath as a name:
+//
+//	{{ template "src/templates/_foo.html.tmpl" }}
+//
+// Any referenced templates will be loaded as well,
+// and attached to the main template.
+// This operation is recursive.
+//
+// If called more than once, the last call wins.
+func (doc *TemplateDocument) Load(r io.Reader) error {
+	raw, err := io.ReadAll(r)
+	if err != nil {
+		return fmt.Errorf("cannot read template document %q: %w", doc.SourcePath, err)
+	}
+	if doc.meta.Parent != "" {
+		doc.Parent = NewTemplateDocument(doc.meta.Parent)
+	}
+	funcs, err := doc.funcmap()
+	if err != nil {
+		return fmt.Errorf("cannot generate funcmap for %q: %w", doc.SourcePath, err)
+	}
+	tmain, err := template.New(doc.SourcePath).Funcs(funcs).Parse(string(raw))
+	if err != nil {
+		return fmt.Errorf("cannot parse template document %q: %w", doc.SourcePath, err)
+	}
+	var buf bytes.Buffer
+	if err := tmain.Execute(&buf, doc); err != nil {
+		return fmt.Errorf("cannot execute tmain for %q: %w", doc.SourcePath, err)
+	}
+	return doc.Next.Load(&buf)
+}
+
+func (doc *TemplateDocument) Metadata() *Metadata {
+	return doc.meta
+}
+
+func (doc *TemplateDocument) Render(w io.Writer) error {
+	t := template.New(doc.Metadata().SourcePath)
+	funcs, err := doc.funcmap()
+	if err != nil {
+		return fmt.Errorf("can't generate funcmap: %w", err)
+	}
+	_ = t.Funcs(funcs)
+	_, err = t.Parse(string(body))
+	if err != nil {
+		return fmt.Errorf("cannot parse page for feed: %w", err)
+	}
+	if err := loadDeps(t); err != nil {
+		return fmt.Errorf("can't load dependency templates for %q: %w", t.Name(), err)
+	}
+	var buf2 bytes.Buffer
+	if err = t.Execute(&buf2, doc); err != nil {
+		return fmt.Errorf("cannot execute document %q: %w", doc.Metadata().SourcePath, err)
+	}
+	return nil
+}
+
+// funcmap returns a [template.FuncMap] for the document.
+// It can be used with [html/template.Template.Funcs].
+func (doc *TemplateDocument) funcmap() (template.FuncMap, error) {
+	iconFunc, err := icon()
+	if err != nil {
+		return nil, err
+	}
+	now := time.Now()
+
+	return template.FuncMap{
+		"add": add,
+		"div": div,
+		"mul": mul,
+		"sub": sub,
+
+		"now": func() time.Time { return now },
+		"parent": func() *TemplateDocument {
+			return doc.Parent
+		},
+		"src": func() string { return doc.SourcePath },
+
+		"archives": s.archives,
+		"icon":     iconFunc,
+		"posts":    s.posts,
+	}, nil
+}
+
+// icon returns a function that can be inserted into a template's FuncMap.
+// The returned function renders the image at the given path.
+// It always renders it 1em tall.
+//
+// Its arguments are a path relative to the web root,
+// followed by an alt text string.
+//
+// For example:
+//
+//	{{ icon "/img/banana.png" "A photo of a banana." }}
+//
+// When called, the returned function renders the image inline.
+func icon() (iconfunc, error) {
+	partial, err := os.ReadFile(icnTmplPath)
+	if err != nil {
+		return nil, err
+	}
+
+	t := template.New(icnTmplPath)
+	if _, err := t.Parse(string(partial)); err != nil {
+		return nil, err
+	}
+
+	return func(src graphic.SRC, alt graphic.Alt) (template.HTML, error) {
+		v := iconPartialVars{
+			Alt: alt,
+			SRC: src,
+		}
+
+		var buf bytes.Buffer
+		if err := t.Execute(&buf, v); err != nil {
+			return "", fmt.Errorf("can't execute icon template: %w", err)
+		}
+
+		return template.HTML(buf.String()), nil
+	}, nil
+}
 
 type archivesVars []archiveVars
 
@@ -55,18 +208,12 @@ type CommonVars interface {
 // commonVars implements CommonVars via Document, plus adds some additional
 // methods whose implementations don't differ by document type.
 type commonVars struct {
-	*substructureDocument
+	Document
 }
 
 // Now returns the current time.
 func (v commonVars) Now() time.Time {
 	return time.Now()
-}
-
-// Parent returns the document's parent, if any. The returned value implements
-// Document.
-func (v commonVars) Parent() *substructureDocument {
-	return v.substructureDocument.Parent
 }
 
 type iconfunc func(graphic.SRC, graphic.Alt) (template.HTML, error)
@@ -102,47 +249,6 @@ func mul(a, b int) int {
 
 func sub(a, b int) int {
 	return a - b
-}
-
-// icon returns a function that can be inserted into a template's FuncMap.
-// The returned function renders the image at the given path.
-// It always renders it 1em tall.
-//
-// Its arguments are a path relative to the web root, followed by an alt text string.
-//
-// For example:
-//
-//	{{ icon "/img/banana.png" "A photo of a banana." }}
-//
-// When called, the returned function renders the image inline.
-func (d *substructureDocument) icon() (iconfunc, error) {
-	partial, err := os.ReadFile(icnTmplPath)
-	if err != nil {
-		return nil, err
-	}
-
-	t := template.New(icnTmplPath)
-	if _, err := t.Parse(string(partial)); err != nil {
-		return nil, err
-	}
-
-	return func(src graphic.SRC, alt graphic.Alt) (template.HTML, error) {
-		// The template called us, so make sure it recompiles if this template changes.
-		deps := d.Dependencies()
-		deps["icon"] = struct{}{}
-
-		v := iconPartialVars{
-			Alt: alt,
-			SRC: src,
-		}
-
-		var buf bytes.Buffer
-		if err := t.Execute(&buf, v); err != nil {
-			return "", fmt.Errorf("can't execute icon template: %w", err)
-		}
-
-		return template.HTML(buf.String()), nil
-	}, nil
 }
 
 // loadDeps searches a parsed template t and its associated templates

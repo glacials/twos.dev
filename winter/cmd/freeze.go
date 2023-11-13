@@ -43,9 +43,10 @@ var freezeCmd = &cobra.Command{
 	Example: wrap(`
 		This command:
 
-		    winter freeze hello
+		    winter freeze src/warm/hello.md
 
-		moves the file with shortname "hello" from src/warm to src/cold.
+		moves the file src/warm/hello.md from src/warm to src/cold,
+		and adds it to the list of frozen URLs.
 	`),
 	RunE: func(cmd *cobra.Command, args []string) error {
 		cfg, err := winter.NewConfig()
@@ -62,13 +63,13 @@ var freezeCmd = &cobra.Command{
 		}
 
 		for _, shortname := range args {
-			document := s.DocByShortname(shortname)
-			if document == nil || document.Document == nil {
+			document, ok := s.DocBySourcePath(shortname)
+			if !ok {
 				return fmt.Errorf("cannot find document with shortname `%s`", shortname)
 			}
 
-			oldpath := document.Source
-			newpath := filepath.Join("src", "cold", filepath.Base(document.Source))
+			oldpath := document.Metadata().SourcePath
+			newpath := filepath.Join("src", "cold", filepath.Base(document.Metadata().SourcePath))
 
 			// The directory to remove warm files from, in addition to src/warm, so
 			// that the file doesn't just sync back to src/warm after removal. TODO:

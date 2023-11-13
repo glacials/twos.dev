@@ -1,24 +1,11 @@
 package winter
 
 import (
-	"bytes"
 	"fmt"
-	"html/template"
-	"net/url"
-	"os"
-	"path/filepath"
-	"regexp"
+	"io"
 	"strings"
 	"time"
 
-	"github.com/adrg/frontmatter"
-	"github.com/alecthomas/chroma"
-	chromahtml "github.com/alecthomas/chroma/formatters/html"
-	"github.com/alecthomas/chroma/lexers"
-	"github.com/alecthomas/chroma/styles"
-	"github.com/gomarkdown/markdown"
-	"github.com/gomarkdown/markdown/parser"
-	"github.com/niklasfasching/go-org/org"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
 )
@@ -27,7 +14,7 @@ const (
 	draft kind = iota
 	post
 	page
-	gallery
+	static
 )
 
 const (
@@ -83,57 +70,22 @@ var (
 // usually from a source file on disk to a destination file on disk.
 //
 // After a document has been built by calling [Build],
-// it can be passed to a template during execution like so:
+// it can be passed to a template during execution:
 //
 //	var buf bytes.Buffer
 //	t.Execute(&buf, d)
 type Document interface {
-	// Build returns the document HTML as it will be just before being executed as
-	// a template.
-	Build() ([]byte, error)
-	// Category returns an optional category for the document. This is used
-	// by templates for styling and display.
-	Category() string
-	// Dependencies returns a set of filepaths this document depends on.
-	// A dependency is defined as a file that, when changed,
-	// should cause any browser displaying this document to refresh.
-	Dependencies() map[string]struct{}
-	// Dest returns the desired final path of the document.
-	// The path is relative to the web root and includes the filename.
-	Dest() (string, error)
-	// IsDraft returns whether the document is of type draft.
-	IsDraft() bool
-	// IsPost returns whether the document is of type post.
-	IsPost() bool
-	// Layout returns the path to the base template to use for the document,
-	// relative to the project root.
-	//
-	// This will be the template that gets executed to render the document.
-	// This is usually not the document itself,
-	// but a base template that embeds it while adding headers, footers, etc.
-	//
-	// The layout template must embed the document template with:
-	//
-	//     {{ template "body" }}
-	//
-	// If Layout returns an empty string,
-	// the document is a static asset and will be copied without any template execution.
-	Layout() string
-	Preview() string
-	// Title returns the human-readable title of the document.
-	Title() string
-
-	// CreatedAt returns the time the document was first published.
-	CreatedAt() time.Time
-	// UpdatedAt returns the time the document was last meaningfully updated, or a
-	// zero time.Time if never.
-	UpdatedAt() time.Time
+	// Metadata returns data about the document,
+	// which may have been inferred automatically or set by frontmatter.
+	Metadata() *Metadata
+	// Render generates the final HTML for the document and writes it to w.
+	Render(w io.Writer) error
 }
 
 // textDocument is a single HTML or Markdown file that will be compiled into a
 // static HTML file.
 type textDocument struct {
-	metadata
+	Metadata
 
 	SrcPath string
 
@@ -146,7 +98,8 @@ type textDocument struct {
 	dependencies map[string]struct{}
 }
 
-type metadata struct {
+// Metadata holds information about a Document that isn't inside the document itself.
+type Metadata struct {
 	// Category is an optional category for the document. This is used
 	// only for a small visual treatment on the index page (if this is
 	// of kind post) and on the document page itself.
@@ -160,13 +113,27 @@ type metadata struct {
 	// context, this is called "type". In Go we cannot use the "type"
 	// keyword, so we use "kind" instead.
 	Kind kind `yaml:"type"`
+	// Filename is the path component of the URL that will point to this document,
+	// once rendered.
+	// Filename MUST NOT contain any slashes;
+	// everything is top-level.
+	Filename string `yaml:"filename"`
+	// Parent is the filename component of another document that this one is a child of.
+	// Parenthood is a purely semantic relationship;
+	// no rendering behavior is inherited.
+	//
+	// The parenthood relationship can be shown in templates from the child using a template function:
+	//
+	//   {{ parent }}
+	//
+	// This retrieves the parent document.
+	Parent string `yaml:"parent"`
 	// Preview is a sentence-long blurb of the document,
 	// to be shown along with its title as a teaser of its contents.
 	Preview string `yaml:"preview"`
-	// Shortname is the short name of the document. This is used when
-	// picking a filename for the document, among other small and
-	// mostly-internal bookkeeping measures. It must never change.
-	Shortname string `yaml:"filename"`
+	// SourcePath is the location on disk of the original file that this document represents.
+	// It is relative to the working directory.
+	SourcePath string `yaml:"-"`
 	// Title is the human-readable title of the document.
 	Title string `yaml:"title"`
 	// TOC is whether a table of contents should be rendered with the
@@ -211,515 +178,41 @@ func parseKind(s string) (kind, error) {
 	case "page":
 		return page, nil
 	case "gallery":
-		return gallery, nil
+		return static, nil
 	}
 	return -1, fmt.Errorf("unknown kind %q", s)
 }
 
-// NewHTMLDocument creates a new document from the HTML file at the given path.
-// High-level information about the document is parsed during this call, such as
-// frontmatter and structure. Heavier details like template execution are not
-// touched until Render is called.
-func NewHTMLDocument(src string) (*textDocument, error) {
-	d := textDocument{
-		SrcPath:      src,
-		encoding:     encodingHTML,
-		dependencies: map[string]struct{}{},
-	}
-	if err := d.load(); err != nil {
-		return nil, err
-	}
-	return &d, d.slurpHTML()
-}
-
-// NewMarkdownDocument creates a new document from the Markdown file at the
-// given path. High-level information about the document is parsed during this
-// call, such as frontmatter and structure. Heavier details like template
-// execution are not touched until Render is called.
-func NewMarkdownDocument(src string) (*textDocument, error) {
-	d := textDocument{
-		SrcPath:      src,
-		encoding:     encodingMarkdown,
-		dependencies: map[string]struct{}{},
-	}
-	if err := d.load(); err != nil {
-		return nil, err
-	}
-	return &d, d.slurpHTML()
-}
-
-// NewOrgDocument creates a new document from the Org file at the given
-// path. High-level information about the document is parsed during this call,
-// such as tags and structure. Heavier details like template execution are not
-// touched until Render is called.
-func NewOrgDocument(src string) (*textDocument, error) {
-	d := textDocument{
-		SrcPath:      src,
-		encoding:     encodingOrg,
-		dependencies: map[string]struct{}{},
-	}
-	if err := d.load(); err != nil {
-		return nil, err
-	}
-	return &d, d.slurpHTML()
-}
-
-func (d *textDocument) Dependencies() map[string]struct{} {
-	return d.dependencies
-}
-
-func (d *textDocument) load() error {
-	f, err := os.Open(d.SrcPath)
-	if err != nil {
-		return fmt.Errorf("cannot open text document source: %w", err)
-	}
-	defer f.Close()
-
-	// Reset metadata to the zero value.
-	// Fields removed from frontmatter shouldn't hold onto previous values.
-	d.metadata = metadata{}
-	body, err := frontmatter.Parse(f, &d.metadata)
-	if err != nil {
-		return fmt.Errorf("can't parse %s: %w", d.SrcPath, err)
-	}
-	d.body = body
-
-	switch d.encoding {
-	case encodingHTML:
-		return d.parseHTML()
-	case encodingMarkdown:
-		return d.parseMarkdown()
-	case encodingOrg:
-		return d.parseOrg()
-	default:
-		return fmt.Errorf("unknown encoding %d", d.encoding)
-	}
-}
-
-// slurpHTML extracts information needed for processing from the document's HTML.
-func (d *textDocument) slurpHTML() error {
-	if h1 := firstTag(d.root, atom.H1); h1 != nil {
-		for child := h1.FirstChild; child != nil; child = child.NextSibling {
-			if child.Type == html.TextNode {
-				d.metadata.Title = child.Data
-			}
-		}
-		if d.metadata.Title == "" {
-			return fmt.Errorf("no title found in %s", d.SrcPath)
-		}
-		dest, err := d.Dest()
-		if err != nil {
-			return fmt.Errorf("cannot linkify post title for %q: %w", d.SrcPath, err)
-		}
-		link := html.Node{
-			Attr: []html.Attribute{
-				{Key: "href", Val: dest},
-				{Key: "class", Val: "post-title"},
-			},
-			DataAtom: atom.A,
-			Data:     "a",
-			Type:     html.ElementNode,
-		}
-		h1.Parent.InsertBefore(&link, h1)
-		h1.Parent.RemoveChild(h1)
-		link.InsertBefore(h1, nil)
-	}
-
-	if d.Shortname == "" {
-		d.Shortname = filepath.Base(d.SrcPath)
-	}
-	d.Shortname, _, _ = strings.Cut(d.Shortname, ".")
-	if d.metadata.Preview == "" {
-		if p := firstTag(d.root, atom.P); p != nil {
-			for child := p.FirstChild; child != nil && d.metadata.Preview == ""; child = child.NextSibling {
-				if child.Type == html.TextNode {
-					d.metadata.Preview = child.Data
-				}
-			}
-		}
-	}
-
-	return nil
-}
-
-func (d *textDocument) parseHTML() error {
-	root, err := html.Parse(bytes.NewBuffer(d.body))
-	if err != nil {
-		return err
-	}
-
-	d.root = root
-	return nil
-}
-
-func (d *textDocument) parseMarkdown() error {
-	root, err := html.Parse(
-		bytes.NewBuffer(
-			markdown.ToHTML(
-				d.body,
-				parser.NewWithExtensions(
-					parser.Attributes|
-						parser.Autolink|
-						parser.FencedCode|
-						parser.Footnotes|
-						parser.HeadingIDs|
-						parser.MathJax|
-						parser.Strikethrough|
-						parser.Tables,
-				),
-				newCustomizedRender(),
-			),
-		),
-	)
-	if err != nil {
-		return err
-	}
-
-	d.root = root
-	return nil
-}
-
-func (d *textDocument) parseOrg() error {
-	orgparser := org.New()
-	orgparser.DefaultSettings["OPTIONS"] = strings.Replace(orgparser.DefaultSettings["OPTIONS"], "toc:t", "toc:nil", 1)
-	orgdoc := orgparser.Parse(
-		bytes.NewBuffer(d.body),
-		d.SrcPath,
-	)
-	orgdoc.BufferSettings["OPTIONS"] = strings.Replace(
-		orgdoc.BufferSettings["OPTIONS"],
-		"toc:t",
-		"toc:nil",
-		1,
-	)
-
-	orgwriter := org.NewHTMLWriter()
-	orgwriter.TopLevelHLevel = 1
-
-	var err error
-	for k, v := range orgdoc.BufferSettings {
-		switch strings.ToLower(k) {
-		case "category":
-			d.metadata.Category = v
-		case "date":
-			d.metadata.CreatedAt, err = time.Parse("2006-01-02", v)
-			if err != nil {
-				return err
-			}
-		case "type":
-			var err error
-			d.metadata.Kind, err = parseKind(v)
-			if err != nil {
-				return err
-			}
-		case "filename":
-			d.metadata.Shortname = v
-		case "title":
-			d.metadata.Title = v
-		case "toc":
-			d.metadata.TOC = (v == "t" || v == "true")
-		case "updated":
-			d.metadata.UpdatedAt, err = time.Parse("2006-01-02", v)
-			if err != nil {
-				return err
-			}
-		}
-	}
-
-	htm, err := orgdoc.Write(orgwriter)
-	if err != nil {
-		return err
-	}
-
-	root, err := html.Parse(strings.NewReader(htm))
-	if err != nil {
-		return err
-	}
-
-	d.root = root
-	return nil
-}
-
-func (d *textDocument) Build() ([]byte, error) {
-	if err := d.load(); err != nil {
-		return nil, fmt.Errorf("cannot load %q: %w", d.Shortname, err)
-	}
-	if err := d.slurpHTML(); err != nil {
-		return nil, fmt.Errorf("cannot slurp HTML to build %q: %w", d.Shortname, err)
-	}
-	if d.TOC {
-		if err := d.fillTOC(); err != nil {
-			return nil, fmt.Errorf("cannot generate table of contents for %q: %w", d.Shortname, err)
-		}
-	}
-	if err := d.highlightCode(); err != nil {
-		return nil, fmt.Errorf("cannot highlight %q: %w", d.Shortname, err)
-	}
-	if err := d.openExternalLinksInNewTab(); err != nil {
-		return nil, fmt.Errorf("cannot set targets on <a> tags for %q: %w", d.Shortname, err)
-	}
-	var buf bytes.Buffer
-	if err := html.Render(&buf, d.root); err != nil {
-		return nil, fmt.Errorf("cannot render HTML to build %q: %w", d.Shortname, err)
-	}
-	b := buf.Bytes()
-	for old, new := range replacements {
-		re, err := regexp.Compile(old)
-		if err != nil {
-			return nil, err
-		}
-		b = re.ReplaceAll(b, new)
-	}
-	return b, nil
-}
-
-func (d *textDocument) Category() string { return d.metadata.Category }
+func (d *textDocument) Category() string { return d.Metadata.Category }
 func (d *textDocument) Dest() (string, error) {
-	if strings.HasSuffix(d.metadata.Shortname, ".html") {
-		return d.metadata.Shortname, nil
+	if strings.HasSuffix(d.Metadata.Filename, ".html") {
+		return d.Metadata.Filename, nil
 	}
-	return fmt.Sprintf("%s.html", d.metadata.Shortname), nil
+	return fmt.Sprintf("%s.html", d.Metadata.Filename), nil
 }
 func (d *textDocument) Layout() string  { return "src/templates/text_document.html.tmpl" }
 func (d *textDocument) IsPost() bool    { return d.Kind == post }
 func (d *textDocument) IsDraft() bool   { return d.Kind == draft }
 func (d *textDocument) Now() time.Time  { return time.Now() }
-func (d *textDocument) Preview() string { return d.metadata.Preview }
-func (d *textDocument) Title() string   { return d.metadata.Title }
+func (d *textDocument) Preview() string { return d.Metadata.Preview }
+func (d *textDocument) Title() string   { return d.Metadata.Title }
 
 // CreatedAt returns the time at which the document was published.
 // This is not generated automatically; it is up to the author's discretion.
-func (d *textDocument) CreatedAt() time.Time { return d.metadata.CreatedAt }
+func (d *textDocument) CreatedAt() time.Time { return d.Metadata.CreatedAt }
 
 // UpdatedAt returns the time at which the document was most recently meaningfully updated.
 // This is not generated automatically; it is up to the author's discretion.
-func (d *textDocument) UpdatedAt() time.Time { return d.metadata.UpdatedAt }
+func (d *textDocument) UpdatedAt() time.Time { return d.Metadata.UpdatedAt }
 
-// fillTOC iterates over the document looking for non-first-level headings (<h2>, <h3>, etc.)
-// and inserts a table of contents for them immediately before the first <h2>.
-func (d *textDocument) fillTOC() error {
-	var (
-		f func(*html.Node) error
-		v tocPartialVars
-	)
-	f = func(n *html.Node) error {
-		if hi[n.DataAtom] >= tocMin && hi[n.DataAtom] <= tocMax {
-			grp := &v.Items
-			for i := tocMin; i < hi[n.DataAtom] && i < tocMax; i += 1 {
-				if len(*grp) > 0 {
-					grp = &((*grp)[len(*grp)-1].Items)
-				}
-			}
-			// Replace the <h*> tag with a <span>
-			wrapper := &html.Node{
-				Data:     atom.Span.String(),
-				DataAtom: atom.Span,
-				Type:     html.ElementNode,
-			}
-			for child := n.FirstChild; child != nil; child = child.NextSibling {
-				child, err := clone(child)
-				if err != nil {
-					return err
-				}
-				wrapper.AppendChild(child)
-			}
-			var buf bytes.Buffer
-			if err := html.Render(&buf, wrapper); err != nil {
-				return err
-			}
-			*grp = append(*grp, tocVars{
-				Anchor: attr(n, atom.Id),
-				HTML:   template.HTML(buf.String()),
-			})
-		}
-		for c := n.FirstChild; c != nil; c = c.NextSibling {
-			if err := f(c); err != nil {
-				return err
-			}
-		}
-		return nil
-	}
-	if err := f(d.root); err != nil {
-		return fmt.Errorf("cannot recurse into HTML: %w", err)
-	}
-
-	tocbody, err := os.ReadFile("src/templates/_toc.html.tmpl")
-	if err != nil {
-		return err
-	}
-	toctmpl, err := template.New("src/templates/_toc.html.tmpl").Parse(string(tocbody))
-	if err != nil {
-		return err
-	}
-
-	subtocbody, err := os.ReadFile("src/templates/_subtoc.html.tmpl")
-	if err != nil {
-		return fmt.Errorf("cannot read subtoc template: %w", err)
-	}
-	subtoctmpl, err := toctmpl.New("src/templates/_subtoc.html.tmpl").Parse(string(subtocbody))
-	if err != nil {
-		return err
-	}
-
-	// Ensure updates to TOC templates cause rebuilds for this document.
-	d.dependencies[toctmpl.Name()] = struct{}{}
-	d.dependencies[subtoctmpl.Name()] = struct{}{}
-
-	var buf bytes.Buffer
-	if err := toctmpl.Execute(&buf, v); err != nil {
-		return err
-	}
-	toc, err := html.Parse(&buf)
-	if err != nil {
-		return err
-	}
-
-	// Insert table of contents before first H2 (i.e. after introduction)
-	firstH2 := firstTag(d.root, atom.H2)
-	if firstH2 == nil {
-		return fmt.Errorf(
-			"please add at least one H2 heading to %s in order to provide a table of contents anchor point",
-			d.SrcPath,
-		)
-	}
-	firstH2.Parent.InsertBefore(toc, firstH2)
-	return nil
-}
-
-func (d *textDocument) highlightCode() error {
-	for codeBlock := range codeBlocks(d.root) {
-		lang := lang(codeBlock)
-		formatted, err := syntaxHighlight(lang, codeBlock.FirstChild.Data)
-		if err != nil {
-			return err
-		}
-
-		ancestry := d.root
-		if ancestry.Type == html.DocumentNode {
-			ancestry = ancestry.FirstChild
-		}
-		pre, err := html.ParseFragment(strings.NewReader(formatted), ancestry)
-		if err != nil {
-			return fmt.Errorf("can't parse HTML %q: %w", formatted, err)
-		}
-		originalPre := codeBlock.Parent
-		for _, fragment := range pre {
-			if fragment.DataAtom == atom.Head {
-				continue
-			}
-			if fragment.DataAtom == atom.Body {
-				f := fragment.FirstChild
-				f.Parent = nil
-				originalPre.Parent.InsertBefore(f, originalPre)
-			}
-		}
-		originalPre.Parent.RemoveChild(originalPre)
-	}
-
-	return nil
-}
-
-func (d *textDocument) openExternalLinksInNewTab() error {
-	for _, a := range allOfTypes(d.root, map[atom.Atom]struct{}{atom.A: {}}) {
-		if err := d.openExternalLinkInNewTab(a); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
-func (d *textDocument) openExternalLinkInNewTab(a *html.Node) error {
-	var href *html.Attribute
-	for _, attr := range a.Attr {
-		switch attr.Key {
-		case "target":
-			// Don't overwrite explicitly set targets.
-			return nil
-		case "href":
-			href = &attr
-		}
-	}
-	if href == nil {
-		// Probably an <a name="..."> element.
-		return nil
-	}
-	url, err := url.Parse(href.Val)
-	if err != nil {
-		return fmt.Errorf("cannot parse link %q: %w", href.Val, err)
-	}
-	if url.Host == "" {
-		// Don't make internal links open in new tabs.
-		return nil
-	}
-	a.Attr = append(a.Attr, html.Attribute{
-		Key: "target",
-		Val: "_blank",
-	})
-	return nil
-}
-
-// codeBlocks returns all code blocks in the document. A code block is defined
-// as a <code> tag which is a directy child of a <pre> tag.
-func codeBlocks(root *html.Node) map[*html.Node]struct{} {
-	blocks := map[*html.Node]struct{}{}
-	for _, node := range allOfTypes(root, map[atom.Atom]struct{}{atom.Code: {}}) {
-		if node.Parent.DataAtom == atom.Pre {
-			blocks[node] = struct{}{}
-		}
-	}
-	return blocks
-}
-
-func lang(code *html.Node) string {
-	for _, class := range strings.Fields(attr(code, atom.Class)) {
-		if _, l, ok := strings.Cut(class, "language-"); ok {
-			return l
-		}
-	}
-
-	return ""
-}
-
-func syntaxHighlight(lang, code string) (string, error) {
-	// Determine lexer.
-	lexer := lexers.Get(lang)
-	if lexer == nil {
-		lexer = lexers.Analyse(code)
-	}
-	if lexer == nil {
-		lexer = lexers.Fallback
-	}
-	lexer = chroma.Coalesce(lexer)
-	formatter := chromahtml.New(
-		chromahtml.Standalone(false),
-		chromahtml.TabWidth(2),
-		chromahtml.WithClasses(true),
-		chromahtml.WithLineNumbers(true),
-	)
-
-	// This has ~no effect because we specify colors in style.css manually, and
-	// pass chromahtml.WithClasses(true) above, meaning no inline styles get added
-	s := styles.Get("dracula")
-	it, err := lexer.Tokenise(nil, code)
-	if err != nil {
-		return "", err
-	}
-
-	var buf bytes.Buffer
-	if err := formatter.Format(&buf, s, it); err != nil {
-		return "", err
-	}
-	return buf.String(), nil
-}
-
-type documents []*substructureDocument
+type documents []Document
 
 func (d documents) Len() int {
 	return len(d)
 }
 
 func (d documents) Less(i, j int) bool {
-	return d[i].CreatedAt().After(d[j].CreatedAt())
+	return d[i].Metadata().CreatedAt.After(d[j].Metadata().CreatedAt)
 }
 
 func (d documents) Swap(i, j int) {

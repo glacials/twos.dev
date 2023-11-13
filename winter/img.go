@@ -1,7 +1,6 @@
 package winter
 
 import (
-	"bytes"
 	"errors"
 	"fmt"
 	"hash/fnv"
@@ -24,20 +23,16 @@ import (
 
 var extensionRegex = regexp.MustCompile(`(.*)\.([^\.]*)`)
 
-type galleryDocument struct {
+type img struct {
 	EXIF
 
 	Alt        string
 	Thumbnails thumbnails
-	PageLink   string
-	// Source is the path to the image this gallery document was built around.
+	// SourcePath is the path to the image this gallery document was built around.
 	// It is relative to the repository root.
-	Source string
+	SourcePath string
 	// WebPath is the path component of the URL to the image as it will exist after building.
 	WebPath string
-
-	Next *galleryDocument
-	Prev *galleryDocument
 
 	cfg Config
 }
@@ -61,9 +56,9 @@ func (t thumbnails) Swap(i, j int) {
 	t[i], t[j] = t[j], t[i]
 }
 
-// NewGalleryDocument returns a Document that represents an HTML page which
-// wraps a single, large-display image.
-func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
+// NewIMG returns a struct that represents an image to be built.
+// The returned value implements [Document].
+func NewIMG(src string, cfg Config) (*img, error) {
 	relpath, err := filepath.Rel("src", src)
 	if err != nil {
 		return nil, fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
@@ -75,128 +70,104 @@ func NewGalleryDocument(src string, cfg Config) (*galleryDocument, error) {
 	}
 	webpath := fmt.Sprintf("%s.webp", matches[1])
 
-	return &galleryDocument{
-		PageLink: fmt.Sprintf("/%s.html", relpath),
-		Source:   src,
-		WebPath:  fmt.Sprintf("/%s", webpath),
-		cfg:      cfg,
+	return &img{
+		SourcePath: src,
+		WebPath:    fmt.Sprintf("/%s", webpath),
+		cfg:        cfg,
 	}, nil
 }
 
-// Build builds the gallery document.
-func (d *galleryDocument) Build() ([]byte, error) {
+func (d *img) Category() string { return "" }
+
+// Dependencies returns the filepaths the image depends on.
+// This is an empty set.
+func (d *img) Dependencies() map[string]struct{} {
+	return map[string]struct{}{}
+}
+
+// Dest returns the destination path for the final image.
+//
+// Note that the destination will be a WebP file and so have extension .webp.
+//
+// Thumbnails are also generated, but are not represented in the value returned here.
+// See the thumbnails function for more information.
+func (d *img) DestPath() string {
+	return d.WebPath
+}
+
+// LoadTemplates loads the needed templates for the gallery document.
+func (d *img) LoadTemplates(t *template.Template) error {
+	return nil
+}
+
+// Layout returns the image container template path.
+func (d *img) Layout() string { return "src/templates/imgcontainer.html.tmpl" }
+
+// Preview returns the empty string.
+func (d *img) Preview() string { return "" }
+
+func (d *img) Render(w io.Writer) error {
 	matches := extensionRegex.FindStringSubmatch(d.WebPath)
 	if len(matches) < 3 {
-		return nil, fmt.Errorf("cannot build filename %q with no extension", d.WebPath)
+		return fmt.Errorf("cannot build filename %q with no extension", d.WebPath)
 	}
 
-	imgdest := filepath.Join("dist", d.WebPath)
 	thmdest := filepath.Dir(strings.Replace(
-		imgdest,
+		filepath.Join("dist", d.WebPath),
 		filepath.FromSlash("/img/"),
 		filepath.FromSlash("/img/thumb/"),
 		1,
 	))
 
-	if err := os.MkdirAll(filepath.Dir(imgdest), 0o755); err != nil {
-		return nil, fmt.Errorf("can't mkdir `%s`: %w", filepath.Dir(imgdest), err)
-	}
-
-	srcf, err := os.Open(d.Source)
+	srcf, err := os.Open(d.SourcePath)
 	if err != nil {
-		return nil, fmt.Errorf("can't read `%s`: %w", d.Source, err)
+		return fmt.Errorf("can't read `%s`: %w", d.SourcePath, err)
 	}
 	defer srcf.Close()
 
-	dstf, err := os.Create(imgdest)
-	if err != nil {
-		return nil, fmt.Errorf("can't write photo `%s`: %w", imgdest, err)
-	}
-	defer dstf.Close()
-
 	srcPhoto, err := jpeg.Decode(srcf)
 	if err != nil {
-		return nil, fmt.Errorf(
+		return fmt.Errorf(
 			"cannot decode photo %q (maybe not an image?): %w",
-			d.Source,
+			d.SourcePath,
 			err,
 		)
 	}
 
-	if err := webpbin.Encode(dstf, srcPhoto); err != nil {
-		return nil, fmt.Errorf("cannot encode source image %q to WebP: %w", d.Source, err)
+	if err := webpbin.Encode(w, srcPhoto); err != nil {
+		return fmt.Errorf("cannot encode source image %q to WebP: %w", d.SourcePath, err)
 	}
 
-	if err := d.thumbnails(d.Source, thmdest); err != nil {
-		return nil, fmt.Errorf("can't generate thumbnails: %w", err)
+	if err := d.thumbnails(d.SourcePath, thmdest); err != nil {
+		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
-	d.EXIF, err = photodata(d.Source)
+	d.EXIF, err = photodata(d.SourcePath)
 	if err != nil {
-		return nil, fmt.Errorf(
+		return fmt.Errorf(
 			"cannot get camera for `%s`: %w",
-			d.Source,
+			d.SourcePath,
 			err,
 		)
 	}
 
-	b, err := os.ReadFile(galTmplPath)
-	if err != nil {
-		return nil, fmt.Errorf("cannot read template: %w", err)
-	}
-
-	for old, new := range replacements {
-		b = bytes.ReplaceAll(b, []byte(old), new)
-	}
-
-	return b, nil
-}
-
-func (d *galleryDocument) Category() string { return "" }
-
-// Dependencies returns the filepaths the gallery document depends on.
-func (d *galleryDocument) Dependencies() map[string]struct{} {
-	return map[string]struct{}{galTmplPath: {}}
-}
-
-// Dest returns the destination path for the final gallery document.
-func (d *galleryDocument) Dest() (string, error) {
-	relpath, err := filepath.Rel("src", d.Source)
-	if err != nil {
-		return "", fmt.Errorf(
-			"can't get relpath for photo `%s`: %w",
-			d.Source,
-			err,
-		)
-	}
-
-	return fmt.Sprintf("%s.html", relpath), nil
-}
-
-func (d *galleryDocument) IsPost() bool  { return false }
-func (d *galleryDocument) IsDraft() bool { return false }
-
-// LoadTemplates loads the needed templates for the gallery document.
-func (d *galleryDocument) LoadTemplates(t *template.Template) error {
 	return nil
 }
 
-// Layout returns the image container template path.
-func (d *galleryDocument) Layout() string { return "src/templates/imgcontainer.html.tmpl" }
-
-// Preview returns the empty string.
-func (d *galleryDocument) Preview() string { return "" }
+func (doc *img) Src() string {
+	return doc.SourcePath
+}
 
 // Title returns a generic gallery title.
-func (d *galleryDocument) Title() string { return fmt.Sprintf("%s Photo Viewer", d.cfg.Name) }
+func (d *img) Title() string { return fmt.Sprintf("%s Photo Viewer", d.cfg.Name) }
 
 // CreatedAt returns the date and time the photo was taken, or a zero time if
 // unknown.
-func (d *galleryDocument) CreatedAt() time.Time { return d.EXIF.TakenAt }
+func (d *img) CreatedAt() time.Time { return d.EXIF.TakenAt }
 
 // UpdatedAt returns the date and time the photo was last updated, or a zero
 // time if unknown.
-func (d *galleryDocument) UpdatedAt() time.Time { return time.Time{} }
+func (d *img) UpdatedAt() time.Time { return time.Time{} }
 
 type EXIF struct {
 	Camera       string
@@ -315,20 +286,22 @@ func exifFractionToDecimal(
 	return float64(numer) / float64(denom), nil
 }
 
-// thumbnails makes thumbnails of several sizes from the photo located at src,
+// thumbnails makes WebP thumbnails of several sizes from the photo located at src,
 // placing them in directory dst with dimensions added to the filename, just before the extension.
 //
 // It generates thumbnails with widths of powers of 2,
 // from 1 until the largest width possible that is still smaller than the source image.
 // Heights are automatically calculated to mantain aspect ratio.
 //
-// For example, a 500x500 image would have thumbnails of
+// For example, a 500x500 image called foo.jpg would have thumbnails of sizes
 // 1x1, 2x2, 4x4, 8x8, 16x16, 32x32, 64x64, 128x128, and 256x256
 // generated.
+// The resulting thumbnails would be placed at
+// dest/foo.1x1.webp, dest/foo.2x2.webp, and so on.
 //
 // The file at src is read at least once every time this function is called,
 // but the thumbnails are only regenerated if src has changed since their last generation.
-func (d *galleryDocument) thumbnails(src, dest string) error {
+func (d *img) thumbnails(src, dest string) error {
 	fresh, err := d.thumbnailsAreFresh(src, dest)
 	if err != nil {
 		return err
@@ -416,10 +389,12 @@ func (d *galleryDocument) thumbnails(src, dest string) error {
 	return nil
 }
 
-// thumbnailsAreFresh returns true if the file at src,
-// with its thumbnails to be placed in dest,
+// thumbnailsAreFresh returns true if and only if the file at src
 // has the same content as the last time this function was called.
-func (d *galleryDocument) thumbnailsAreFresh(src, dest string) (bool, error) {
+//
+// dest can be anywhere, but must be the same between multiple calls.
+// Checksums for the files will be placed into dest.
+func (d *img) thumbnailsAreFresh(src, dest string) (bool, error) {
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return false, fmt.Errorf("can't open photo at path `%s`: %w", src, err)

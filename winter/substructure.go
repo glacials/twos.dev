@@ -13,8 +13,6 @@ import (
 	"time"
 
 	"github.com/yargevad/filepathx"
-	"golang.org/x/text/cases"
-	"golang.org/x/text/language"
 )
 
 // Substructure is a graph of documents on the website.
@@ -24,26 +22,7 @@ type Substructure struct {
 	devURL *url.URL
 	docs   documents
 	// photos is a map of gallery name to slice of photos in that gallery.
-	photos map[string][]*galleryDocument
-}
-
-// substructureDocument is a [Document] wrapper for use by the substructure.
-// This allows the Substructure to manage its own document-specific data.
-type substructureDocument struct {
-	// Document is the [Document] being wrapped.
-	Document
-
-	// Parent, if non-nil, points to the document that this one is a child of.
-	// A child document can be used to provide a navigational hierarchy to documents.
-	Parent *substructureDocument
-	// Source is the path to the source file for the document,
-	// relative to the project root.
-	Source string
-
-	// HTML is the document's parsed, executed, final HTML without any layout.
-	//
-	// HTML is empty until the document's first execution.
-	HTML template.HTML
+	photos map[string][]*img
 }
 
 var (
@@ -74,16 +53,6 @@ var (
 	pad = newPadder()
 )
 
-func (d *substructureDocument) Shortname() string {
-	dest, err := d.Dest()
-	if err != nil {
-		return ""
-	}
-	filename := filepath.Base(dest)
-	shortname, _, _ := strings.Cut(filename, ".")
-	return shortname
-}
-
 // NewSubstructure returns a substructure with the given configuration.
 // Upon initialization, a substructure is the result of a discovery phase of content on the filesystem.
 // Further calls are needed to build the full graph of content and render it to HTML.
@@ -101,28 +70,28 @@ func NewSubstructure(cfg Config) (*Substructure, error) {
 
 // add adds the given document to the substructure,
 // removing any old versions in the process.
-func (s *Substructure) add(d *substructureDocument) {
+func (s *Substructure) add(d Document) {
 	// dedupe
 	for i, doc := range s.docs {
-		if doc.Source == d.Source {
+		if doc.Metadata().SourcePath == d.Metadata().SourcePath {
 			s.docs[i] = d
 			return
 		}
 	}
-
-	if gal, ok := d.Document.(*galleryDocument); ok {
-		if s.photos == nil {
-			s.photos = map[string][]*galleryDocument{}
-		}
-		match := galName.FindStringSubmatch(gal.WebPath)
-		if len(match) < 1 {
-			panic(fmt.Sprintf("cannot find a gallery name in photo path %s", gal.WebPath))
-		}
-		name := match[1]
-		s.photos[name] = append(s.photos[name], gal)
-	}
-
 	s.docs = append(s.docs, d)
+}
+
+func (s *Substructure) addIMG(im *img) error {
+	if s.photos == nil {
+		s.photos = map[string][]*img{}
+	}
+	match := galName.FindStringSubmatch(im.WebPath)
+	if len(match) < 1 {
+		return fmt.Errorf("cannot find a gallery name in photo path %q", im.WebPath)
+	}
+	name := match[1]
+	s.photos[name] = append(s.photos[name], im)
+	return nil
 }
 
 // discover clears the substructure of any known documents and
@@ -143,19 +112,19 @@ func (s *Substructure) discover() error {
 // discoverAtPath discovers all documents in or at the given path
 // glob.
 func (s *Substructure) discoverAtPath(path string) error {
-	if err := s.discoverHTMLAtPath(path); err != nil {
+	if err := s.discoverHTML(path); err != nil {
 		return err
 	}
 
-	if err := s.discoverMarkdownAtPath(path); err != nil {
+	if err := s.discoverMarkdown(path); err != nil {
 		return err
 	}
 
-	if err := s.discoverOrgAtPath(path); err != nil {
+	if err := s.discoverOrg(path); err != nil {
 		return err
 	}
 
-	if err := s.discoverGalleriesAtPath(path); err != nil {
+	if err := s.discoverPhotos(path); err != nil {
 		return err
 	}
 
@@ -174,10 +143,8 @@ var galleryGlobs []string = []string{
 	"img/**/*.[jJ][pP][eE][gG]",
 }
 
-// discoverGalleriesAtPath discovers all galleries in or at the given path glob.
-// The files are wrapped in galleryDocument types and then added to the
-// substructure.
-func (s *Substructure) discoverGalleriesAtPath(src string) error {
+// discoverPhotos discovers all photos in or at the given path glob.
+func (s *Substructure) discoverPhotos(src string) error {
 	stat, err := os.Stat(src)
 	if err != nil {
 		return fmt.Errorf("cannot discovery galleries at %q: %w", src, err)
@@ -195,32 +162,24 @@ func (s *Substructure) discoverGalleriesAtPath(src string) error {
 		files = append(files, f...)
 	}
 	sort.Sort(sort.Reverse((sort.StringSlice(files))))
-	var prev *galleryDocument
 	for _, src := range files {
 		if shouldIgnore(src) {
 			return nil
 		}
-		doc, err := NewGalleryDocument(src, s.cfg)
+		im, err := NewIMG(src, s.cfg)
 		if err != nil {
 			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
 		}
-		// Set the last doc's next to this doc.
-		if prev != nil {
-			prev.Next = doc
-		}
-		// Set this doc's previous to the last doc.
-		// Update prev so the next doc can do the same.
-		doc.Prev, prev = prev, doc
-		s.add(&substructureDocument{Document: doc, Source: doc.Source})
+		s.addIMG(im)
 	}
 
 	return nil
 }
 
-// discoverHTMLAtPath discovers all HTML documents in or at the given path glob.
+// discoverHTML discovers all HTML documents in or at the given path glob.
 // The files are wrapped in textDocument types and then added to the
 // substructure.
-func (s *Substructure) discoverHTMLAtPath(path string) error {
+func (s *Substructure) discoverHTML(path string) error {
 	var htmlFiles []string
 	if stat, err := os.Stat(path); err != nil {
 		if !os.IsNotExist(err) {
@@ -235,43 +194,28 @@ func (s *Substructure) discoverHTMLAtPath(path string) error {
 		htmlFiles = append(htmlFiles, path)
 	}
 
-	var tmplFiles []string
-	if stat, err := os.Stat(path); err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-	} else if stat.IsDir() {
-		tmplFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
-		if err != nil {
-			return err
-		}
-	} else if strings.HasSuffix(path, ".tmpl") {
-		tmplFiles = append(tmplFiles, path)
-	}
-
-	for _, src := range append(htmlFiles, tmplFiles...) {
+	for _, src := range htmlFiles {
 		if shouldIgnore(src) {
 			continue
 		}
-		doc, err := NewHTMLDocument(src)
-		if err != nil {
-			return fmt.Errorf("cannot create HTML document from %s: %w", src, err)
-		}
-		s.add(&substructureDocument{Document: doc, Source: src})
+		s.add(NewHTMLDocument(src))
 	}
 	for _, d := range s.docs {
-		if p, _, ok := strings.Cut(d.Shortname(), "_"); ok {
-			d.Parent = s.DocByShortname(p)
+		if p, _, ok := strings.Cut(d.Metadata().Filename, "_"); ok {
+			parent, ok := s.DocBySourcePath(p)
+			if ok {
+				d.Metadata().Parent = parent.Metadata().SourcePath
+			}
 		}
 	}
 
 	return nil
 }
 
-// discoverMarkdownAtPath discovers all Markdown documents in or at the given
+// discoverMarkdown discovers all Markdown documents in or at the given
 // path glob. The files are wrapped in textDocument types and then added to the
 // substructure.
-func (s *Substructure) discoverMarkdownAtPath(path string) error {
+func (s *Substructure) discoverMarkdown(path string) error {
 	var markdownFiles []string
 	if stat, err := os.Stat(path); err != nil {
 		if !os.IsNotExist(err) {
@@ -290,20 +234,16 @@ func (s *Substructure) discoverMarkdownAtPath(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		doc, err := NewMarkdownDocument(src)
-		if err != nil {
-			return fmt.Errorf("cannot create Markdown document from %s: %w", src, err)
-		}
-		s.add(&substructureDocument{Document: doc, Source: src})
+		s.add(NewMarkdownDocument(src))
 	}
 
 	return nil
 }
 
-// discoverOrgAtPath discovers all Org documents in or at the given path glob.
+// discoverOrg discovers all Org documents in or at the given path glob.
 // The files are wrapped in textDocument types and then added to the
 // substructure.
-func (s *Substructure) discoverOrgAtPath(path string) error {
+func (s *Substructure) discoverOrg(path string) error {
 	// TODO: Allow looking in user's org directory.
 	// TODO: Allow rendering only a subsection of an org file.
 	var orgFiles []string
@@ -324,11 +264,7 @@ func (s *Substructure) discoverOrgAtPath(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		doc, err := NewOrgDocument(src)
-		if err != nil {
-			return err
-		}
-		s.add(&substructureDocument{Document: doc, Source: src})
+		s.add(NewOrgDocument(src))
 	}
 
 	return nil
@@ -361,11 +297,32 @@ func (s *Substructure) discoverStaticAtPath(path string) error {
 		} else if stat.IsDir() {
 			continue
 		}
-		doc, err := NewStaticDocument(src)
+		s.add(NewStaticDocument(src))
+	}
+
+	return nil
+}
+
+func (s *Substructure) discoverTemplates(path string) error {
+	var tmplFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		tmplFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
 		if err != nil {
 			return err
 		}
-		s.add(&substructureDocument{Document: doc, Source: src})
+	} else if strings.HasSuffix(path, ".html") {
+		tmplFiles = append(tmplFiles, path)
+	}
+
+	for _, src := range tmplFiles {
+		if shouldIgnore(src) {
+			continue
+		}
+		s.add(NewTemplateDocument(src))
 	}
 
 	return nil
@@ -396,13 +353,9 @@ func (s *Substructure) Rebuild(src, dist string) error {
 	// Try first as-is; if that fails we'll discover() and try again.
 	for i := 0; i < 2; i++ {
 		for _, doc := range s.docs {
-			dest, err := doc.Dest()
-			if err != nil {
-				return err
-			}
 			for d := range doc.Dependencies() {
 				if d == src {
-					fmt.Printf("  ↗ %s", pad(s.devURL.JoinPath(dest).String()))
+					fmt.Printf("  ↗ %s", pad(s.devURL.JoinPath(doc.Metadata().Filename).String()))
 					if err := s.execute(doc, dist); err != nil {
 						return fmt.Errorf(
 							"can't rebuild %s upstream dependency %s: %w",
@@ -415,8 +368,8 @@ func (s *Substructure) Rebuild(src, dist string) error {
 					built = true
 				}
 			}
-			if doc.Source == src {
-				fmt.Printf("  → %s", pad(s.devURL.JoinPath(dest).String()))
+			if doc.Metadata().SourcePath == src {
+				fmt.Printf("  → %s", pad(s.devURL.JoinPath(doc.Metadata().Filename).String()))
 				if err := s.execute(doc, dist); err != nil {
 					return fmt.Errorf("can't rebuild changed file %s: %w", src, err)
 				}
@@ -424,19 +377,31 @@ func (s *Substructure) Rebuild(src, dist string) error {
 				built = true
 			}
 		}
-		if d := s.DocBySrc(src); d != nil && d.IsPost() {
+		if d, ok := s.DocBySourcePath(src); ok && d.Metadata().Kind == post {
 			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("archives.html").String()))
-			if err := s.execute(s.DocByShortname("archives"), dist); err != nil {
+			archives, ok := s.DocBySourcePath("src/cold/archives.html.tmpl")
+			if !ok {
+				return fmt.Errorf("src/cold/archives.html.tmpl not found")
+			}
+			if err := s.execute(archives, dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
 			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("writing.html").String()))
-			if err := s.execute(s.DocByShortname("writing"), dist); err != nil {
+			writing, ok := s.DocBySourcePath("src/cold/writing.html")
+			if !ok {
+				return fmt.Errorf("src/cold/writing.html not found")
+			}
+			if err := s.execute(writing, dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
 			fmt.Printf("  ↘ %s", pad(s.devURL.JoinPath("index.html").String()))
-			if err := s.execute(s.DocByShortname("index"), dist); err != nil {
+			index, ok := s.DocBySourcePath("src/cold/index.md")
+			if !ok {
+				return fmt.Errorf("src/cold/index.md not found")
+			}
+			if err := s.execute(index, dist); err != nil {
 				return fmt.Errorf("can't rebuild index: %w", err)
 			}
 			fmt.Println(" ✓")
@@ -457,39 +422,23 @@ func (s *Substructure) Rebuild(src, dist string) error {
 	return nil
 }
 
-// DocByShortname returns the document with the given shortname, or nil if none
-// exists. The returned struct implements Document.
-func (s *Substructure) DocByShortname(shortname string) *substructureDocument {
-	for _, d := range s.docs {
-		dest, err := d.Dest()
-		if err != nil {
-			continue
-		}
-		base := filepath.Base(dest)
-		base, _, _ = strings.Cut(base, ".")
-		if base == shortname {
-			return d
+// DocBySourcePath returns the document that originated from the file at path.
+//
+// If no such document exists, ok is false.
+func (s *Substructure) DocBySourcePath(path string) (doc Document, ok bool) {
+	for _, doc := range s.docs {
+		if filepath.Clean(doc.Metadata().SourcePath) == filepath.Clean(path) {
+			return doc, true
 		}
 	}
-	return nil
-}
-
-// DocBySrc returns the document with the given source file path, or nil if none
-// exists. The returned struct implements Document.
-func (s *Substructure) DocBySrc(path string) *substructureDocument {
-	for _, d := range s.docs {
-		if d.Source == path {
-			return d
-		}
-	}
-	return nil
+	return nil, false
 }
 
 // archives returns posts grouped by year.
 func (s *Substructure) archives() (archivesVars, error) {
 	m := map[int]documents{}
 	for _, d := range s.posts() {
-		year := d.CreatedAt().Year()
+		year := d.Metadata().CreatedAt.Year()
 		m[year] = append(m[year], d)
 	}
 
@@ -506,28 +455,10 @@ func (s *Substructure) archives() (archivesVars, error) {
 	return archives, nil
 }
 
-// categories returns posts grouped by category. The key of the returned map is
-// the non-pluralized category name in title casing.
-//
-// The empty string is a valid category and will appear in the map.
-func (s *Substructure) categories() map[string]documents {
-	cats := map[string]documents{}
-	for _, d := range s.posts() {
-		cat := cases.Title(language.English).String(d.Category())
-		cats[cat] = append(cats[cat], d)
-	}
-	return cats
-}
-
-// gallery returns the gallery pages to be shown, grouped by gallery name.
-func (s *Substructure) gallery() map[string][]*galleryDocument {
-	return s.photos
-}
-
 // posts returns text documents of type post.
 func (s *Substructure) posts() (docs documents) {
 	for _, d := range s.docs {
-		if d.IsPost() {
+		if d.Metadata().Kind == post {
 			docs = append(docs, d)
 		}
 	}
@@ -537,29 +468,25 @@ func (s *Substructure) posts() (docs documents) {
 // ExecuteAll builds all documents known to the substructure,
 // as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string) error {
-	built := map[string]*substructureDocument{}
+	built := map[string]Document{}
 	for _, d := range s.docs {
-		dest, err := d.Dest()
-		if err != nil {
-			return err
-		}
-		if prev, ok := built[dest]; ok {
+		if prev, ok := built[d.Metadata().Filename]; ok {
 			return fmt.Errorf(
 				"both %s and %s wanted to build to %s/%s; remove one",
-				d.Source,
-				prev.Source,
+				d.Metadata().SourcePath,
+				prev.Metadata().SourcePath,
 				s.cfg.Hostname,
-				dest,
+				d.Metadata().Filename,
 			)
 		}
 		if err := s.execute(d, dist); err != nil {
 			return fmt.Errorf(
 				"cannot execute %s while executing all: %w",
-				d.Source,
+				d.Metadata().SourcePath,
 				err,
 			)
 		}
-		built[dest] = d
+		built[d.Metadata().Filename] = d
 	}
 
 	if err := s.writefeed(); err != nil {
@@ -571,28 +498,23 @@ func (s *Substructure) ExecuteAll(dist string) error {
 
 // execute builds the given document into the given directory.
 // To also build its dependencies and dependants, use Rebuild instead.
-func (s *Substructure) execute(d *substructureDocument, dist string) error {
-	dest, err := d.Dest()
-	if err != nil {
-		return err
-	}
-	dest = filepath.Join(dist, dest)
+func (s *Substructure) execute(d Document, dist string) error {
+	dest := filepath.Join(dist, d.Metadata().Filename)
 
 	if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 		return fmt.Errorf(
-			"can't create %s directory `%s`: %w",
-			galTmplPath,
+			"can't create %q directory: %w",
 			filepath.Dir(dest),
 			err,
 		)
 	}
 
-	bodyBytes, err := d.Build()
-	if err != nil {
-		return fmt.Errorf("cannot build document %q: %w", d.Shortname(), err)
+	var bodyBytes bytes.Buffer
+	if err := d.Render(&bodyBytes); err != nil {
+		return fmt.Errorf("cannot build document %q: %w", d.Metadata().Filename, err)
 	}
-	if d.Layout() == "" {
-		return os.WriteFile(dest, bodyBytes, 0o644)
+	if d.Metadata().Kind == static {
+		return os.WriteFile(dest, bodyBytes.Bytes(), 0o644)
 	}
 	funcs, err := s.funcmap(d)
 	if err != nil {
@@ -602,14 +524,14 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	// First, execute the document with its layout and save to its *.html file.
 	layoutBytes, err := os.ReadFile(d.Layout())
 	if err != nil {
-		return fmt.Errorf("cannot read %q to execute %q: %w", d.Layout(), d.Source, err)
+		return fmt.Errorf("cannot read %q to execute %q: %w", d.Layout(), d.Metadata().SourcePath, err)
 	}
 	t, err := template.New(d.Layout()).Funcs(funcs).Parse(string(layoutBytes))
 	if err != nil {
 		return fmt.Errorf("can't parse `%s`: %w", d.Layout(), err)
 	}
-	if _, err := t.New("body").Parse(string(bodyBytes)); err != nil {
-		return fmt.Errorf("can't parse %s: %w", d.Shortname(), err)
+	if _, err := t.New("body").Parse(string(bodyBytes.Bytes())); err != nil {
+		return fmt.Errorf("can't parse %s: %w", d.Metadata().Filename, err)
 	}
 	if err := loadDeps(t); err != nil {
 		return fmt.Errorf("can't load dependencies: %s", err)
@@ -620,7 +542,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	deps[filepath.Join("public", "style.css")] = struct{}{}
 
 	for _, depTmpl := range t.Templates() {
-		if depTmpl.Name() != "body" && depTmpl.Name() != d.Source {
+		if depTmpl.Name() != "body" && depTmpl.Name() != d.Metadata().SourcePath {
 			deps[depTmpl.Name()] = struct{}{}
 		}
 	}
@@ -631,16 +553,16 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 	}
 	defer f.Close()
 
-	if err = t.Execute(f, d.Document); err != nil {
-		return fmt.Errorf("can't execute document `%s` (with layout): %w", d.Source, err)
+	if err = t.Execute(f, d); err != nil {
+		return fmt.Errorf("can't execute document `%s` (with layout): %w", d.Metadata().SourcePath, err)
 	}
 
 	// Second, execute the document without its layout and save it in memory,
 	// so other templates (e.g. _writing.html.tmpl, which shows all posts)
 	// can embed it programmatically.
 	var buf bytes.Buffer
-	if err = t.ExecuteTemplate(&buf, "body", d.Document); err != nil {
-		return fmt.Errorf("can't execute document `%s` (without layout): %w", d.Source, err)
+	if err = t.ExecuteTemplate(&buf, "body", d); err != nil {
+		return fmt.Errorf("can't execute document `%s` (without layout): %w", d.Metadata().SourcePath, err)
 	}
 	d.HTML = template.HTML(buf.String())
 
@@ -649,7 +571,7 @@ func (s *Substructure) execute(d *substructureDocument, dist string) error {
 
 // funcmap returns a [template.FuncMap] for the given substructure document,
 // which can be used with [html/template.Template.Funcs].
-func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error) {
+func (s *Substructure) funcmap(d Document) (template.FuncMap, error) {
 	iconFunc, err := d.icon()
 	if err != nil {
 		return nil, err
@@ -662,9 +584,15 @@ func (s *Substructure) funcmap(d *substructureDocument) (template.FuncMap, error
 		"mul": mul,
 		"sub": sub,
 
-		"now":    func() time.Time { return now },
-		"parent": func() *substructureDocument { return d.Parent },
-		"src":    func() string { return d.Source },
+		"now": func() time.Time { return now },
+		"parent": func() Document {
+			parent, ok := s.DocBySourcePath(d.Metadata().Parent)
+			if !ok {
+				return nil
+			}
+			return parent
+		},
+		"src": func() string { return d.Metadata().SourcePath },
 
 		"archives":   s.archives,
 		"categories": s.categories,

@@ -1,14 +1,87 @@
 package winter
 
 import (
+	"bytes"
 	"fmt"
 	"io"
 
+	"github.com/adrg/frontmatter"
+	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/ast"
-	"github.com/gomarkdown/markdown/html"
+	mdhtml "github.com/gomarkdown/markdown/html"
+	"github.com/gomarkdown/markdown/parser"
 )
 
-// renderImage overrides the standard HTML renderer.
+// MarkdownDocument represents a source file written in Markdown,
+// with optional Go template syntax embedded in it.
+//
+// MarkdownDocument implements [Document].
+//
+// The MarkdownDocument is transitory;
+// its only purpose is to create a [TemplateDocument].
+type MarkdownDocument struct {
+	meta *Metadata
+
+	// Next is the HTML document generated from this Markdown document.
+	Next *HTMLDocument
+	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
+	// The path is relative to the working directory.
+	SourcePath string
+}
+
+// NewMarkdownDocument creates a new document whose original source is at path src.
+//
+// Nothing is read from disk; src is metadata.
+// To read and parse Markdown, call [Load].
+func NewMarkdownDocument(src string) *MarkdownDocument {
+	var m Metadata
+	return &MarkdownDocument{
+		Next:       &HTMLDocument{meta: &m},
+		SourcePath: src,
+
+		meta: &m,
+	}
+}
+
+// Load reads Markdown from r and loads it into doc.
+//
+// If called more than once, the last call wins.
+func (doc *MarkdownDocument) Load(r io.Reader) error {
+	// Reset metadata to the zero value.
+	// Fields removed from frontmatter shouldn't hold onto previous values.
+	var m Metadata
+	body, err := frontmatter.Parse(r, &m)
+	if err != nil {
+		return fmt.Errorf("can't parse %s: %w", doc.SourcePath, err)
+	}
+	doc.meta = &m
+	doc.Next.meta = &m
+
+	return doc.Next.Load(bytes.NewBuffer(markdown.ToHTML(
+		body,
+		parser.NewWithExtensions(
+			parser.Attributes|
+				parser.Autolink|
+				parser.FencedCode|
+				parser.Footnotes|
+				parser.HeadingIDs|
+				parser.MathJax|
+				parser.Strikethrough|
+				parser.Tables,
+		),
+		newCustomizedRender(),
+	)))
+}
+
+func (doc *MarkdownDocument) Metadata() *Metadata {
+	return doc.meta
+}
+
+func (doc *MarkdownDocument) Render(w io.Writer) error {
+	return doc.Next.Render(w)
+}
+
+// renderImage overrides the standard Markdown-to-HTML renderer.
 // It makes images clickable for a zoomed / gallery view.
 func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	if entering {
@@ -50,10 +123,10 @@ func markdownRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStat
 	return ast.GoToNext, false
 }
 
-func newCustomizedRender() *html.Renderer {
-	opts := html.RendererOptions{
-		Flags:          html.FlagsNone,
+func newCustomizedRender() *mdhtml.Renderer {
+	opts := mdhtml.RendererOptions{
+		Flags:          mdhtml.FlagsNone,
 		RenderNodeHook: markdownRenderHook,
 	}
-	return html.NewRenderer(opts)
+	return mdhtml.NewRenderer(opts)
 }
