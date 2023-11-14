@@ -1,3 +1,126 @@
+// Package winter supplies a static website generator.
+// It has these goals:
+//
+//  1. New content must be easy to edit. Old content must be hard to break.
+//  2. Be replaceable. Special syntax should look fine as plaintext if moved elsewhere.
+//
+// Winter is part of the [TadiWeb].
+//
+// # Easy to edit, hard to break
+//
+// To accomplish its first goal, Winter employs two mechanisms.
+//
+// First, content managed by Winter is either warm or cold.
+// Warm content is welcome to be synchronized into a Winter-managed directory by external tools,
+// such as your mobile text editor or note-taking app of choice.
+// These external tools and their synchronization steps are not provided by Winter,
+// and they are not required to use it,
+// but Winter's design goals assume they exist.
+// Warm content is content you are actively working on.
+// It is not ready to be listed anywhere,
+// but it is published to a page on your website so you can view it in context and share it with friends for review.
+//
+// Cold content is finished content. [Cool URIs don't change.]
+// When your warm content is ready to be published,
+// you should freeze it:
+//
+//	winter freeze src/cold/my_post.md
+//
+// This converts it into cold content.
+// The most important difference between the two is that your synchronization tools never, ever touch cold content.
+// Sychronization tools, jobs, and scripts are run frequently and probably aren't your most robust pipelines.
+// To limit the blast radius of any bugs they experience,
+// content that you don't expect to edit often must be moved away from the directories they control.
+// This is cold content.
+//
+// Cold content is also guaranteed by Winter's quality checks.
+// When a piece of content becomes cold, Winter commits its URL to memory and ensures that URL stays accessible in future runs.
+// If ever a URL that once was accessible becomes inaccessible, Winter alerts you and prevents that build from succeeding.
+// This protects cold content from you, your tools, and from Winter's current and future versions.
+//
+// # No lock-in
+//
+// To accomplish its second goal, Winter provides cherries on top of Markdown.
+// However, using the same Markdown with any other static website generator results in no degradation.
+// Just like Markdown itself, Winter Markdown looks great when not parsed.
+//
+// # Galleries
+//
+// A block containing only images is treated as a gallery,
+// with the images placed in a responsive grid.
+// Images can be clicked to zoom in or out.
+//
+//	![An image of a cat.](/img/cat.jpg)
+//	![An image of a dog.](/img/dog.jpg)
+//
+// # Image captions
+//
+// A block of all-italic text immediately below an image or gallery is treated as a caption,
+// and given a special visual treatment and accessibility structure.
+//
+//	![An image of a cat.](/img/cat.jpg)
+//	![An image of a dog.](/img/dog.jpg)
+//
+//	_My cat and dog like to play with each other._
+//
+// # Reduced load times
+//
+// Images and references to them are automatically converted into WebP format and several thumbnails are generated for each.
+// Each image renders with [<img srcset>] to ensure only the smallest possible image that saturates the display density is loaded.
+//
+// # LaTeX
+//
+// Surround text in $dollar signs$ to render LaTeX,
+// implemented via [KaTeX].
+//
+//	$\LaTeX$ users rejoice!
+//
+// # Tables of contents
+//
+// A table of contents can be requested by setting the toc variable to true in frontmatter.
+// Tables of contents are always rendered immediately above the first level-2 heading.
+//
+//	---
+//	toc: true
+//	---
+//
+//	# My Article
+//
+//	(table of contents will be rendered here)
+//
+//	## My Cat
+//
+//	...
+//
+//	## My Dog
+//
+//	...
+//
+// # Syntax highlighting
+//
+// Fenced code blocks that specify a language are syntax-highlighted.
+//
+//	```go
+//	package main
+//	func main() {
+//	  fmt.Println("I'm syntax highlighted!")
+//	}
+//	```
+//
+// # External links in new tabs
+//
+// Any links that navigate to external websites will automatically have a target=_blank set during generation.
+//
+// # Dark mode images
+//
+// If an image's extensionless filename ends in "-dark" or "-light",
+// and another image exists at the same path but with the opposite suffix,
+// the correct one will be rendered to the user based on their light-/dark-mode preference.
+//
+// [<img srcset>]: https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Responsive_images
+// [Cool URIs don't change.]: https://www.w3.org/Provider/Style/URI
+// [KaTeX]: https://katex.org
+// [TadiWeb]: https://www.tadiweb.com
 package winter
 
 import (
@@ -20,8 +143,8 @@ type Substructure struct {
 	devURL *url.URL
 	// docs holds the documents known to the substructure.
 	docs documents
-	// photos is a map of gallery name to slice of photos in that gallery.
-	photos map[string][]*img
+	// galleries is a map of gallery name to slice of galleries in that gallery.
+	galleries map[string][]*img
 }
 
 var (
@@ -41,13 +164,17 @@ var (
 		regexp.MustCompile(`^(.*\/)?.DS_Store$`):               {},
 		regexp.MustCompile(`^(.*\/)?imgcontainer.html.tmpl$`):  {},
 		regexp.MustCompile(`^(.*\/)?text_document.html.tmpl$`): {},
-		regexp.MustCompile(`^(.*\/)?_gallery.html.tmpl$`):      {},
-		regexp.MustCompile(`^(.*\/)?_icon.html.tmpl$`):         {},
-		regexp.MustCompile(`^(.*\/)?_imgs.html.tmpl$`):         {},
-		regexp.MustCompile(`^(.*\/)?_nav.html.tmpl$`):          {},
-		regexp.MustCompile(`^(.*\/)?_subtoc.html.tmpl$`):       {},
-		regexp.MustCompile(`^(.*\/)?_toc.html.tmpl$`):          {},
-		regexp.MustCompile(`^(.*\/)?_videos.html.tmpl$`):       {},
+		//		regexp.MustCompile(`^(.*\/)?_gallery.html.tmpl$`):      {},
+		//		regexp.MustCompile(`^(.*\/)?_icon.html.tmpl$`):         {},
+		//		regexp.MustCompile(`^(.*\/)?_imgs.html.tmpl$`):         {},
+		//		regexp.MustCompile(`^(.*\/)?_nav.html.tmpl$`):          {},
+		//		regexp.MustCompile(`^(.*\/)?_subtoc.html.tmpl$`):       {},
+		//		regexp.MustCompile(`^(.*\/)?_toc.html.tmpl$`):          {},
+		//		regexp.MustCompile(`^(.*\/)?_videos.html.tmpl$`):       {},
+	}
+	// ignoreDirs are file path directories from which no documents should be generated.
+	ignoreDirs = map[string]struct{}{
+		"src/templates/": {},
 	}
 	pad = newPadder()
 )
@@ -83,15 +210,15 @@ func (s *Substructure) add(d Document) {
 // addIMG adds the given image to the substructure,
 // removing any old versions in the process.
 func (s *Substructure) addIMG(im *img) error {
-	if s.photos == nil {
-		s.photos = map[string][]*img{}
+	if s.galleries == nil {
+		s.galleries = map[string][]*img{}
 	}
 	match := galName.FindStringSubmatch(im.WebPath)
 	if len(match) < 1 {
 		return fmt.Errorf("cannot find a gallery name in photo path %q", im.WebPath)
 	}
 	name := match[1]
-	s.photos[name] = append(s.photos[name], im)
+	s.galleries[name] = append(s.galleries[name], im)
 	return nil
 }
 
@@ -114,13 +241,14 @@ func (s *Substructure) discoverAtPath(path string) error {
 	if err := s.discoverHTML(path); err != nil {
 		return err
 	}
-	if err := s.discoverMarkdown(path); err != nil {
-		return err
-	}
+	// For now, Markdown files are gathered by discoverTemplates.
+	//	if err := s.discoverMarkdown(path); err != nil {
+	//		return err
+	//	}
 	if err := s.discoverOrg(path); err != nil {
 		return err
 	}
-	if err := s.discoverPhotos(path); err != nil {
+	if err := s.discoverGalleries(path); err != nil {
 		return err
 	}
 	if err := s.discoverTemplates(path); err != nil {
@@ -129,16 +257,6 @@ func (s *Substructure) discoverAtPath(path string) error {
 
 	sort.Sort(s.docs)
 	return nil
-}
-
-// imgGlobs are the relative path components with which to discover images.
-// Each is appended to the path supplied to discoverPhotos and used to perform a glob.
-//
-// The glob supports double asterisks, which mean "any character, including a path separator".
-// Otherwise, syntax is identical to that of [filepath.Glob].
-var imgGlobs []string = []string{
-	"img/**/*.[jJ][pP][gG]",
-	"img/**/*.[jJ][pP][eE][gG]",
 }
 
 // discoverHTML adds all *.html documents in or at the given path glob to the substructure.
@@ -161,7 +279,7 @@ func (s *Substructure) discoverHTML(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		s.add(NewHTMLDocument(src))
+		s.add(NewHTMLDocument(src, NewMetadata(src)))
 	}
 	for _, d := range s.docs {
 		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
@@ -195,7 +313,7 @@ func (s *Substructure) discoverMarkdown(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		s.add(NewMarkdownDocument(src))
+		s.add(NewMarkdownDocument(src, NewMetadata(src)))
 	}
 
 	return nil
@@ -223,14 +341,24 @@ func (s *Substructure) discoverOrg(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		s.add(NewOrgDocument(src))
+		s.add(NewOrgDocument(src, NewMetadata(src)))
 	}
 
 	return nil
 }
 
-// discoverPhotos adds all documents matching galleryGlobs in or at the given path glob to the substructure.
-func (s *Substructure) discoverPhotos(src string) error {
+// galleryGlobs are the relative path components with which to discover images.
+// Each is appended to the path supplied to discoverPhotos and used to perform a glob.
+//
+// The glob supports double asterisks, which mean "any character, including a path separator".
+// Otherwise, syntax is identical to that of [filepath.Glob].
+var galleryGlobs []string = []string{
+	"img/**/*.[jJ][pP][gG]",
+	"img/**/*.[jJ][pP][eE][gG]",
+}
+
+// discoverGalleries adds all documents matching galleryGlobs in or at the given path glob to the substructure.
+func (s *Substructure) discoverGalleries(src string) error {
 	stat, err := os.Stat(src)
 	if err != nil {
 		return fmt.Errorf("cannot discovery galleries at %q: %w", src, err)
@@ -240,7 +368,7 @@ func (s *Substructure) discoverPhotos(src string) error {
 	}
 
 	var files []string
-	for _, g := range imgGlobs {
+	for _, g := range galleryGlobs {
 		f, err := filepathx.Glob(filepath.Join(src, g))
 		if err != nil {
 			return err
@@ -307,11 +435,22 @@ func (s *Substructure) discoverTemplates(path string) error {
 			return err
 		}
 	} else if stat.IsDir() {
-		tmplFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
+		tmplf, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
 		if err != nil {
 			return err
 		}
-	} else if strings.HasSuffix(path, ".tmpl") {
+		tmplFiles = append(tmplFiles, tmplf...)
+		mdf, err := filepathx.Glob(filepath.Join(path, "**", "*.md"))
+		if err != nil {
+			return err
+		}
+		tmplFiles = append(tmplFiles, mdf...)
+		markdownf, err := filepathx.Glob(filepath.Join(path, "**", "*.markdown"))
+		if err != nil {
+			return err
+		}
+		tmplFiles = append(tmplFiles, markdownf...)
+	} else if strings.HasSuffix(path, ".tmpl") || strings.HasSuffix(path, ".md") || strings.HasSuffix(path, ".markdown") {
 		tmplFiles = append(tmplFiles, path)
 	}
 
@@ -319,7 +458,7 @@ func (s *Substructure) discoverTemplates(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		s.add(NewTemplateDocument(src, s.docs))
+		s.add(NewTemplateDocument(src, NewMetadata(src), s.docs, s.galleries))
 	}
 
 	return nil
@@ -352,10 +491,10 @@ func (s *Substructure) Rebuild(src, dist string) error {
 		}
 		r, err := os.Open(doc.Metadata().SourcePath)
 		if err != nil {
-			return fmt.Errorf("cannot read %q for rebuilding %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
+			return fmt.Errorf("cannot read %q for building %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 		}
 		if err := doc.Load(r); err != nil {
-			return fmt.Errorf("cannot load %q for rebuilding %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
+			return fmt.Errorf("cannot load %q for building %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 		}
 		dest := filepath.Join(dist, doc.Metadata().WebPath)
 		fmt.Printf("  → %s", pad(dest))
@@ -368,7 +507,7 @@ func (s *Substructure) Rebuild(src, dist string) error {
 		}
 		defer w.Close()
 		if err := doc.Render(w); err != nil {
-			return fmt.Errorf("cannot render %q for rebuilding: %w", doc.Metadata().SourcePath, err)
+			return fmt.Errorf("cannot render %q for building: %w", doc.Metadata().SourcePath, err)
 		}
 		fmt.Println(" ✓")
 	}
@@ -414,8 +553,8 @@ func (s *Substructure) ExecuteAll(dist string) error {
 	}
 
 	builtIMGs := map[string]*img{}
-	for _, imgs := range s.photos {
-		for _, img := range imgs {
+	for _, gallery := range s.galleries {
+		for _, img := range gallery {
 			if prev, ok := builtIMGs[img.WebPath]; ok {
 				return fmt.Errorf(
 					"both %s (%T) and %q (%T) wanted to build to %q/%q; remove one",
@@ -452,6 +591,11 @@ func (s *Substructure) ExecuteAll(dist string) error {
 // shouldIgnore returns true if the given file path should not be built into the substructure,
 // or false otherwise.
 func shouldIgnore(src string) bool {
+	for dir := range ignoreDirs {
+		if strings.HasPrefix(filepath.Clean(src), filepath.Clean(dir)) {
+			return true
+		}
+	}
 	for r := range ignorePaths {
 		if r.MatchString(src) {
 			return true

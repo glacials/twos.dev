@@ -4,13 +4,11 @@ import (
 	"errors"
 	"fmt"
 	"hash/fnv"
-	"html/template"
 	"image"
 	"image/jpeg"
 	"io"
 	"os"
 	"path/filepath"
-	"regexp"
 	"strconv"
 	"strings"
 	"time"
@@ -20,8 +18,6 @@ import (
 	"github.com/rwcarlsen/goexif/mknote"
 	"golang.org/x/image/draw"
 )
-
-var extensionRegex = regexp.MustCompile(`(.*)\.([^\.]*)`)
 
 type img struct {
 	EXIF
@@ -63,55 +59,15 @@ func NewIMG(src string, cfg Config) (*img, error) {
 	if err != nil {
 		return nil, fmt.Errorf("can't get relpath for photo `%s`: %w", src, err)
 	}
-
-	matches := extensionRegex.FindStringSubmatch(relpath)
-	if len(matches) < 3 {
-		return nil, fmt.Errorf("cannot read filename %q with no extension", src)
-	}
-	webpath := fmt.Sprintf("%s.webp", matches[1])
-
 	return &img{
 		SourcePath: src,
-		WebPath:    fmt.Sprintf("/%s", webpath),
-		cfg:        cfg,
+		WebPath:    fmt.Sprintf("%s.webp", strings.TrimSuffix(relpath, filepath.Ext(relpath))),
+
+		cfg: cfg,
 	}, nil
 }
 
-func (d *img) Category() string { return "" }
-
-// Dependencies returns the filepaths the image depends on.
-// This is an empty set.
-func (d *img) Dependencies() map[string]struct{} {
-	return map[string]struct{}{}
-}
-
-// Dest returns the destination path for the final image.
-//
-// Note that the destination will be a WebP file and so have extension .webp.
-//
-// Thumbnails are also generated, but are not represented in the value returned here.
-// See the thumbnails function for more information.
-func (d *img) DestPath() string {
-	return d.WebPath
-}
-
-// LoadTemplates loads the needed templates for the gallery document.
-func (d *img) LoadTemplates(t *template.Template) error {
-	return nil
-}
-
-// Layout returns the image container template path.
-func (d *img) Layout() string { return "src/templates/imgcontainer.html.tmpl" }
-
-// Preview returns the empty string.
-func (d *img) Preview() string { return "" }
-
 func (d *img) Render(w io.Writer) error {
-	matches := extensionRegex.FindStringSubmatch(d.WebPath)
-	if len(matches) < 3 {
-		return fmt.Errorf("cannot build filename %q with no extension", d.WebPath)
-	}
-
 	thmdest := filepath.Dir(strings.Replace(
 		filepath.Join("dist", d.WebPath),
 		filepath.FromSlash("/img/"),
@@ -138,7 +94,7 @@ func (d *img) Render(w io.Writer) error {
 		return fmt.Errorf("cannot encode source image %q to WebP: %w", d.SourcePath, err)
 	}
 
-	if err := d.thumbnails(d.SourcePath, thmdest); err != nil {
+	if err := d.thumbnails(srcPhoto, d.SourcePath, thmdest); err != nil {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
 
@@ -153,13 +109,6 @@ func (d *img) Render(w io.Writer) error {
 
 	return nil
 }
-
-func (doc *img) Src() string {
-	return doc.SourcePath
-}
-
-// Title returns a generic gallery title.
-func (d *img) Title() string { return fmt.Sprintf("%s Photo Viewer", d.cfg.Name) }
 
 // CreatedAt returns the date and time the photo was taken, or a zero time if
 // unknown.
@@ -286,8 +235,9 @@ func exifFractionToDecimal(
 	return float64(numer) / float64(denom), nil
 }
 
-// thumbnails makes WebP thumbnails of several sizes from the photo located at src,
-// placing them in directory dst with dimensions added to the filename, just before the extension.
+// thumbnails makes WebP thumbnails of several sizes from the photo srcPhoto located at srcPath,
+// placing them in directory dst,
+// with thumbnail dimensions added to the filename just before the extension.
 //
 // It generates thumbnails with widths of powers of 2,
 // from 1 until the largest width possible that is still smaller than the source image.
@@ -301,46 +251,22 @@ func exifFractionToDecimal(
 //
 // The file at src is read at least once every time this function is called,
 // but the thumbnails are only regenerated if src has changed since their last generation.
-func (d *img) thumbnails(src, dest string) error {
-	fresh, err := d.thumbnailsAreFresh(src, dest)
+func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
+	fresh, err := d.thumbnailsAreFresh(srcPath, dest)
 	if err != nil {
 		return err
 	}
-
-	sourceFile, err := os.Open(src)
-	if err != nil {
-		return fmt.Errorf("can't open photo at path `%s`: %w", src, err)
-	}
-	defer sourceFile.Close()
-
-	if _, err := sourceFile.Seek(0, 0); err != nil {
-		return fmt.Errorf("cannot seek to start of file: %w", err)
-	}
-
-	srcPhoto, err := jpeg.Decode(sourceFile)
-	if err != nil {
-		return fmt.Errorf(
-			"cannot decode photo %q (maybe not an image?): %w",
-			src,
-			err,
-		)
-	}
 	p := srcPhoto.Bounds().Size()
-	srcFilename := filepath.Base(src)
-	matches := extensionRegex.FindStringSubmatch(srcFilename)
-	if len(matches) < 3 {
-		return fmt.Errorf("cannot add dimensions to filename %q with no extension", srcFilename)
-	}
-
 	for width := 1; width < p.X; width *= 2 {
 		height := (width * p.X / p.Y) & -1
-		dstFilename := fmt.Sprintf("%s.%dx%d.webp", matches[1], width, height)
-		dstPath := filepath.Join(filepath.Dir(dest), dstFilename)
+		dstPath := filepath.Join(
+			dest,
+			fmt.Sprintf("%s.%dx%d.webp", strings.TrimSuffix(filepath.Base(srcPath), filepath.Ext(srcPath)), width, height),
+		)
 		webPath, err := filepath.Rel("dist", dstPath)
 		if err != nil {
 			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dest, err)
 		}
-		webPath = fmt.Sprintf("/%s", webPath)
 		d.Thumbnails = append(d.Thumbnails, &thumbnail{
 			WebPath: webPath,
 			Width:   width,
@@ -365,7 +291,7 @@ func (d *img) thumbnails(src, dest string) error {
 
 		if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
 			return fmt.Errorf(
-				"can't make thumbnail directory `%s`: %w",
+				"cannot make thumbnail directory `%s`: %w",
 				filepath.Dir(dest),
 				err,
 			)
@@ -374,8 +300,8 @@ func (d *img) thumbnails(src, dest string) error {
 		destinationFile, err := os.Create(dstPath)
 		if err != nil {
 			return fmt.Errorf(
-				"can't create thumbnail file for photo at path `%s`: %w",
-				src,
+				"cannot create thumbnail for %q: %w",
+				srcPath,
 				err,
 			)
 		}

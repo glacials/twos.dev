@@ -19,11 +19,11 @@ updated: 2022-07-13
              https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
 />
 
+# Winter
+
 _Warning: Winter is in early alpha and so is this documentation. You may find
 inconsistencies or pieces of code present in twos.dev that have not yet been
 migrated to Winter._
-
-# Winter
 
 [![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter) [{{ icon
     "/img/index-github-dark.svg"
@@ -189,13 +189,13 @@ extensions replaced with `.html`. For example, `envy.html.tmpl` and
 would produce the same destination file, Winter will error).
 
 A document's **web path** is defined as its `filename`.
-The web path is accessible to templates using the [`{{"{{"}} .WebPath }}`](#webpath) template variable.
+The web path is accessible to templates using the [`{ㅤ{ .WebPath }}`](#webpath) template variable.
 
 #### `date` {#date}
 
 Date is the publish date of the document written as `YYYY-MM-DD`. It
 is available to templates as a Go
-[`time.Time`](https://pkg.go.dev/time#Time) using [`{{"{{"}}
+[`time.Time`](https://pkg.go.dev/time#Time) using [`{ㅤ{
 .CreatedAt }}`](#createdat).
 
 When not set the document will not have a publish date attached to it.
@@ -204,7 +204,7 @@ When not set the document will not have a publish date attached to it.
 
 Updated is the date the document was last meaningfully updated, if
 any, written as `YYYY-MM-DD`. It is available to templates as a Go
-[`time.Time`](https://pkg.go.dev/time#Time) using [`{{"{{"}}
+[`time.Time`](https://pkg.go.dev/time#Time) using [`{ㅤ{
 .UpdatedAt }}`](#updatedat).
 
 When not set the document will not have an update date attached to it.
@@ -239,7 +239,7 @@ Beyond this, the types are only different in semantics.
 #### `category` {#category}
 
 The category of the document. Accepts any string. This is exposed to templates
-via the [`{{"{{"}} .Category }}`](#cat) field.
+via the [`{ㅤ{ .Category }}`](#cat) field.
 
 The default template set provided by `winter init` gives a minor
 visual treatment to the listing and display of documents with
@@ -257,40 +257,40 @@ library.
 
 The following fields are available to templates rendering documents.
 
-##### `{{"{{"}} .Category }}` {#cat}
+##### `{ㅤ{ .Category }}` {#cat}
 
 _Type: `string`_
 
 The value specified by the frontmatter [`category`](#category) field.
 This is an arbitrary string.
 
-##### `{{"{{"}} .WebPath }}` {#webpath}
+##### `{ㅤ{ .WebPath }}` {#webpath}
 
 _Type: `string`_
 
 The filesystem path of the document after having been rendered,
 relative to the web root.
 
-##### `{{"{{"}} .IsType "draft" }}` {#isdraft}
+##### `{ㅤ{ .IsType "draft" }}` {#isdraft}
 
 _Type: `bool`_
 
 Whether the document is a draft (i.e. has frontmatter specifying `type: draft`).
 
-##### `{{"{{"}} .IsPost }}` {#ispost}
+##### `{ㅤ{ .IsPost }}` {#ispost}
 
 _Type: `bool`_
 
 Whether the document is a post (i.e. has frontmatter specifying `type: post`).
 
-##### `{{"{{"}} .Preview }}` {#preview}
+##### `{ㅤ{ .Preview }}` {#preview}
 
 _Type: `string`_
 
 A teaser for the document, such as a summary of its contents.
 If unset, the document's first paragraph will be used, if possible.
 
-##### `{{"{{"}} .WebPath }}` {#webpath}
+##### `{ㅤ{ .WebPath }}` {#webpath}
 
 _Type: `string`_
 
@@ -300,13 +300,13 @@ or the source document's filename otherwise.
 
 Equivalent to the file's location on disk relative to `dist/`.
 
-##### `{{"{{"}} .Title }}` {#title}
+##### `{ㅤ{ .Title }}` {#title}
 
 _Type: `string`_
 
 The value of the document's first level 1 heading (`<h1>` in HTML, `#` in Markdown, `*` in Org).
 
-##### `{{"{{"}} .CreatedAt }}` {#createdat}
+##### `{ㅤ{ .CreatedAt }}` {#createdat}
 
 _Type: [`time.Time`](https://pkg.go.dev/time#Time)_
 
@@ -317,27 +317,27 @@ This value can be formatted using Go's [`func (time.Time)
 Format`](https://pkg.go.dev/time#Time.Format) function:
 
 ```template
-{{"{{"}} .CreatedAt.Format "2006 January" }} <!-- Renders 2022 July  -->
-{{"{{"}} .CreatedAt.Format "2006-01-02" }}   <!-- Renders 2022-07-08 -->
+{ㅤ{ .CreatedAt.Format "2006 January" }} <!-- Renders 2022 July  -->
+{ㅤ{ .CreatedAt.Format "2006-01-02" }}   <!-- Renders 2022-07-08 -->
 ```
 
-Use `{{"{{"}} .CreatedAt.IsZero }}` to see if the date was not set.
+Use `{ㅤ{ .CreatedAt.IsZero }}` to see if the date was not set.
 You can use this to hide unset dates:
 
 ```template
-{{"{{"}} if not .CreatedAt.IsZero }}
-  published {{"{{"}} .CreatedAt.Format "2006 January" }}
-{{"{{"}} end }}
+{ㅤ{ if not .CreatedAt.IsZero }}
+  published {ㅤ{ .CreatedAt.Format "2006 January" }}
+{ㅤ{ end }}
 ```
 
-##### `{{"{{"}} .UpdatedAt }}` {#updatedat}
+##### `{ㅤ{ .UpdatedAt }}` {#updatedat}
 
 _Type: [`time.Time`](https://pkg.go.dev/time#Time)_
 
 The date the document was last meaningfully updated, as specified by
 the frontmatter [`updated`](#updated) attribute.
 
-This value behaves identically to [`{{"{{"}} .CreatedAt
+This value behaves identically to [`{ㅤ{ .CreatedAt
 }}`](#createdat). For details on dealing with it, see that
 documentation.
 
@@ -345,7 +345,7 @@ documentation.
 
 ##### `posts` {#posts}
 
-Usage: `{{"{{"}} range posts }} ... {{"{{"}} end }}`
+Usage: `{ㅤ{ range posts }} ... {ㅤ{ end }}`
 
 Returns a list of all documents with type `post`, from most to least recent.
 
@@ -353,7 +353,7 @@ See [Document Fields](#fields) for a list of fields available to documents.
 
 ##### `yearly` {#yearly}
 
-Usage: `{{"{{"}} range yearly posts }}{{"{{"}} .Year }}: {{"{{"}} range .Documents }} ... {{"{{"}} end }}{{"{{"}} end }}`
+Usage: `{ㅤ{ range yearly posts }}{ㅤ{ .Year }}: {ㅤ{ range .Documents }} ... {ㅤ{ end }}{ㅤ{ end }}`
 
 Returns a list of `year` types ordered from most to least recent.
 A `year` has two fields, `.Year` (integer) and `.Documents` (array of documents).

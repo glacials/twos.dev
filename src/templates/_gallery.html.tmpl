@@ -5,7 +5,7 @@
     It's complicated to find out the right size because the photo grid has a variable number of columns.
     See: https://stackoverflow.com/q/47750594/392225
   -->
-  {{ range (index gallery .) }}
+  {{ range (gallery .) }}
     <label class="gallery-item">
       <input type="checkbox" />
       <img

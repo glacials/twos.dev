@@ -34,6 +34,7 @@ type HTMLDocument struct {
 	// should cause a rebuild of this document.
 	deps map[string]struct{}
 	meta *Metadata
+	next *LayoutDocument
 	// root is the topmost HTML tag in the parsed document,
 	// usually <html> or its parent.
 	root *html.Node
@@ -44,17 +45,15 @@ type HTMLDocument struct {
 // Nothing is read from disk; src is metadata.
 // It may or may not point to a file containing HTML.
 // To read and parse HTML, call [Load].
-func NewHTMLDocument(src string) *HTMLDocument {
-	m := NewMetadata(src)
-	m.WebPath = filepath.Base(src)
-	d := HTMLDocument{
+func NewHTMLDocument(src string, meta *Metadata) *HTMLDocument {
+	return &HTMLDocument{
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta: m,
+		meta: meta,
+		next: NewLayoutDocument(src, meta),
 	}
-	return &d
 }
 
 func (doc *HTMLDocument) DependsOn(src string) bool {
@@ -77,12 +76,19 @@ func (doc *HTMLDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *HTMLDocument) Load(r io.Reader) error {
-	root, err := html.Parse(r)
+	root, err := html.ParseFragment(r, nil)
 	if err != nil {
 		return err
 	}
-	doc.root = root
-	return nil
+	doc.root = root[0]
+	if err := doc.Massage(); err != nil {
+		return err
+	}
+	var buf bytes.Buffer
+	if err := html.Render(&buf, doc.root); err != nil {
+		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.WebPath, err)
+	}
+	return doc.next.Load(&buf)
 }
 
 // Massage messes with loaded content to improve the page when it is ultimately rendered.
@@ -127,13 +133,7 @@ func (doc *HTMLDocument) Post() bool {
 
 // Render encodes any loaded content into HTML and writes it to w.
 func (doc *HTMLDocument) Render(w io.Writer) error {
-	if err := doc.Massage(); err != nil {
-		return err
-	}
-	if err := html.Render(w, doc.root); err != nil {
-		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.WebPath, err)
-	}
-	return nil
+	return doc.next.Render(w)
 }
 
 // GeneratePreview extracts information needed for processing from the document's HTML.

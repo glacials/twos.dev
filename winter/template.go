@@ -6,11 +6,12 @@ import (
 	"html/template"
 	"io"
 	"os"
-	"path/filepath"
 	"sort"
+	"strings"
 	"text/template/parse"
 	"time"
 
+	"github.com/adrg/frontmatter"
 	"twos.dev/winter/graphic"
 )
 
@@ -19,38 +20,54 @@ const (
 	txtTmplPath = "src/templates/text_document.html.tmpl"
 )
 
-// TemplateDocument represents a source file written in Go templates.
+// TemplateDocument represents a source file containing Go template clauses.
 // The surrounding syntax can be anything.
+//
+// Note that TemplateDocument does not handle layout-style templates,
+// where the document itself should be embedded in another template.
+// For that behavior, use LayoutDocument further down the load/render chain.
 //
 // TemplateDocument implements [Document].
 //
 // The TemplateDocument is transitory;
-// its only purpose is to create an [HTMLDocument].
+// its only purpose is to resolve templates then hand off the resolved source to another Document type.
 type TemplateDocument struct {
-	// Next is the HTML document generated from this template document.
-	Next   *HTMLDocument
-	Parent *TemplateDocument
+	// Next is the next incarnation of this document after template execution is complete.
+	Next   Document
+	Parent Document
 
 	deps map[string]struct{}
 	meta *Metadata
+	// photos is a reference to the substructure's galleries.
+	// It should be populated fully before any call to [TemplateDocument.Load],
+	// so that those calls can use the gallery function in their [html/template.FuncMap] to discover and list images.
+	photos map[string][]*img
 	// posts is a reference to the substructure's set of posts.
 	// It should be populated fully before any call to [TemplateDocument.Load],
 	// so that those calls can use the posts function in their [html/template.FuncMap] to discover and list posts.
 	posts []Document
 }
 
-func NewTemplateDocument(src string, collection []Document) *TemplateDocument {
-	m := NewMetadata(src)
-	m.WebPath = filepath.Base(src)
+func NewTemplateDocument(src string, meta *Metadata, posts []Document, photos map[string][]*img) *TemplateDocument {
+	var next Document
+	html := NewHTMLDocument(src, meta)
+	if isMarkdown(strings.TrimSuffix(strings.ToLower(src), ".tmpl")) {
+		md := NewMarkdownDocument(src, meta)
+		md.Next = html
+		next = md
+	} else {
+		next = html
+	}
 	return &TemplateDocument{
-		Next: &HTMLDocument{meta: m},
+		Next: next,
 
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta:  m,
-		posts: collection,
+		meta:   meta,
+		photos: photos,
+		posts:  posts,
 	}
 }
 
@@ -75,47 +92,32 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *TemplateDocument) Load(r io.Reader) error {
-	raw, err := io.ReadAll(r)
+	docBytes, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {
-		return fmt.Errorf("cannot read template document %q: %w", doc.meta.SourcePath, err)
+		return fmt.Errorf("cannot load template frontmatter for %q: %w", doc.meta.SourcePath, err)
 	}
 	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent, doc.posts)
+		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.posts, doc.photos)
 	}
 	funcs, err := doc.funcmap()
 	if err != nil {
 		return fmt.Errorf("cannot generate funcmap for %q: %w", doc.meta.SourcePath, err)
 	}
-	tmain, err := template.New(doc.meta.SourcePath).Funcs(funcs).Parse(string(raw))
+	tdoc, err := template.New(doc.meta.SourcePath).Funcs(funcs).Parse(string(docBytes))
 	if err != nil {
 		return fmt.Errorf("cannot parse template document %q: %w", doc.meta.SourcePath, err)
 	}
-	if doc.meta.Layout != "" {
-		tmain, err = template.New("body").Funcs(funcs).Parse(string(raw))
-		if err != nil {
-			return fmt.Errorf("cannot parse template document %q: %w", doc.meta.SourcePath, err)
-		}
-		layoutBytes, err := os.ReadFile(doc.meta.Layout)
-		if err != nil {
-			return fmt.Errorf("cannot read %q to execute %q: %w", doc.Metadata().Layout, doc.Metadata().SourcePath, err)
-		}
-		tlayout, err := tmain.New(doc.meta.Layout).Funcs(funcs).Parse(string(layoutBytes))
-		if err != nil {
-			return fmt.Errorf("cannot read layout %q to execute %q: %w", doc.meta.Layout, doc.meta.SourcePath, err)
-		}
-		tmain = tlayout
-	}
-	if err := loadDeps(tmain); err != nil {
+	if err := loadDeps(tdoc); err != nil {
 		return fmt.Errorf("cannot load dependencies for %q: %s", doc.meta.SourcePath, err)
 	}
-	for _, depTmpl := range tmain.Templates() {
+	for _, depTmpl := range tdoc.Templates() {
 		if depTmpl.Name() != "body" && depTmpl.Name() != doc.meta.SourcePath {
 			doc.deps[depTmpl.Name()] = struct{}{}
 		}
 	}
 
 	var buf bytes.Buffer
-	if err := tmain.Execute(&buf, doc.meta); err != nil {
+	if err := tdoc.Execute(&buf, doc.meta); err != nil {
 		return fmt.Errorf("cannot execute tmain for %q: %w", doc.meta.SourcePath, err)
 	}
 	return doc.Next.Load(&buf)
@@ -146,14 +148,21 @@ func (doc *TemplateDocument) funcmap() (template.FuncMap, error) {
 
 		"now": func() time.Time { return now },
 
-		"icon":   iconFunc,
-		"render": render,
-		"parent": func() *TemplateDocument {
+		"gallery": doc.galleryFunc,
+		"icon":    iconFunc,
+		"render":  render,
+		"parent": func() Document {
 			return doc.Parent
 		},
 		"posts":  doc.postsFunc,
 		"yearly": yearly,
 	}, nil
+}
+
+// galleryFunc is a function to be used by templates.
+// It retrieves the slice of images contained in the gallery named by name.
+func (doc *TemplateDocument) galleryFunc(name string) []*img {
+	return doc.photos[name]
 }
 
 // postsFunc is a function to be used by templates.
@@ -162,6 +171,12 @@ func (doc *TemplateDocument) postsFunc() []Document {
 	return doc.posts
 }
 
+// render is a function available to templates.
+// It can be used to dynamically include a document inside another document.
+//
+//	{{ range posts }}
+//	  {{ render . }}
+//	{{ end }}
 func render(doc Document) (template.HTML, error) {
 	var buf bytes.Buffer
 	if err := doc.Render(&buf); err != nil {

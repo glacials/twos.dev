@@ -15,7 +15,7 @@
       {{- if .IsType "post" -}}
         <a href="archives.html">Writing</a><span class="separator">/</span>
       {{- end -}}
-      <a href="{{ parent.WebPath }}">{{ parent.Title }}</a
+      <a href="{{ parent.Metadata.WebPath }}">{{ parent.Metadata.Title }}</a
       ><span class="separator">/</span>
     {{- end -}}
   {{- end -}}

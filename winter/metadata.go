@@ -1,10 +1,20 @@
 package winter
 
 import (
+	"fmt"
+	"html/template"
 	"path/filepath"
 	"strings"
 	"time"
 )
+
+var textDocExts = map[string]struct{}{
+	"htm":      {},
+	"html":     {},
+	"md":       {},
+	"markdown": {},
+	"tmpl":     {},
+}
 
 // Metadata holds information about a Document that isn't inside the document itself.
 type Metadata struct {
@@ -75,11 +85,16 @@ func NewMetadata(src string) *Metadata {
 		i = len(filename)
 	}
 	noExt := filename[0:i]
+	webPath := noExt
+	if _, ok := textDocExts[strings.TrimPrefix(filepath.Ext(src), ".")]; ok {
+		webPath = fmt.Sprintf("%s.html", noExt)
+	}
 	return &Metadata{
 		Kind:       draft,
 		Layout:     "src/templates/text_document.html.tmpl",
 		SourcePath: src,
 		Title:      noExt,
+		WebPath:    webPath,
 	}
 }
 
@@ -91,16 +106,20 @@ func (meta *Metadata) IsType(t string) bool {
 	return k == meta.Kind
 }
 
-type metadatas []*Metadata
+// funcmap returns a [template.FuncMap] for the document.
+// It can be used with [html/template.Template.Funcs].
+func (meta *Metadata) funcmap() template.FuncMap {
+	now := time.Now()
 
-func (d metadatas) Len() int {
-	return len(d)
-}
+	return template.FuncMap{
+		"add": add,
+		"div": div,
+		"mul": mul,
+		"sub": sub,
 
-func (d metadatas) Less(i, j int) bool {
-	return d[i].CreatedAt.After(d[j].CreatedAt)
-}
+		"now": func() time.Time { return now },
 
-func (d metadatas) Swap(i, j int) {
-	d[i], d[j] = d[j], d[i]
+		"render": render,
+		"yearly": yearly,
+	}
 }

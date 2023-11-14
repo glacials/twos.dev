@@ -30,16 +30,15 @@ type OrgDocument struct {
 //
 // Nothing is read from disk; src is metadata.
 // To read and parse Org, call [Load].
-func NewOrgDocument(src string) *OrgDocument {
-	m := NewMetadata(src)
+func NewOrgDocument(src string, meta *Metadata) *OrgDocument {
 	return &OrgDocument{
-		Next:       &HTMLDocument{meta: m},
+		Next:       NewHTMLDocument(src, meta),
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			"public/style.css": {},
 		},
-		meta: m,
+		meta: meta,
 	}
 }
 

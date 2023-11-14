@@ -4,7 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
-	"path/filepath"
+	"strings"
 
 	"github.com/adrg/frontmatter"
 	"github.com/gomarkdown/markdown"
@@ -21,8 +21,8 @@ import (
 // The MarkdownDocument is transitory;
 // its only purpose is to create a [TemplateDocument].
 type MarkdownDocument struct {
-	// Next is the HTML document generated from this Markdown document.
-	Next *HTMLDocument
+	// Next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
+	Next Document
 	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
@@ -35,18 +35,16 @@ type MarkdownDocument struct {
 //
 // Nothing is read from disk; src is metadata.
 // To read and parse Markdown, call [Load].
-func NewMarkdownDocument(src string) *MarkdownDocument {
-	m := NewMetadata(src)
-	m.WebPath = filepath.Base(src)
+func NewMarkdownDocument(src string, meta *Metadata) *MarkdownDocument {
 	return &MarkdownDocument{
-		Next:       &HTMLDocument{meta: m},
+		Next:       NewHTMLDocument(src, meta),
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta: m,
+		meta: meta,
 	}
 }
 
@@ -92,8 +90,25 @@ func (doc *MarkdownDocument) Render(w io.Writer) error {
 	return doc.Next.Render(w)
 }
 
+var markdownExtensions = map[string]struct{}{
+	".md":       {},
+	".markdown": {},
+}
+
+// isMarkdown returns true if and only if src looks like a path to or filename of a Markdown file.
+// The file is not touched or inspected;
+// the calculation is purely lexicographic.
+func isMarkdown(src string) bool {
+	for ext := range markdownExtensions {
+		if strings.HasSuffix(strings.ToLower(src), ext) {
+			return true
+		}
+	}
+	return false
+}
+
 // renderImage overrides the standard Markdown-to-HTML renderer.
-// It makes images clickable for a zoomed / gallery view.
+// It makes unlinked images clickable for a zoomed / gallery view.
 func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	if entering {
 		if _, err := io.WriteString(
@@ -122,22 +137,24 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	return nil
 }
 
-func markdownRenderHook(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
-	if img, ok := node.(*ast.Image); ok {
-		if err := renderImage(w, img, entering); err != nil {
-			panic(err)
-		}
-		// Alt text is a "child" of ast.Image,
-		// but we handle it inside the tag in renderImage.
-		return ast.SkipChildren, true
-	}
-	return ast.GoToNext, false
-}
-
 func newCustomizedRender() *mdhtml.Renderer {
+	insideLink := false
 	opts := mdhtml.RendererOptions{
-		Flags:          mdhtml.FlagsNone,
-		RenderNodeHook: markdownRenderHook,
+		Flags: mdhtml.FlagsNone,
+		RenderNodeHook: func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
+			if img, ok := node.(*ast.Image); ok && !insideLink {
+				if err := renderImage(w, img, entering); err != nil {
+					panic(err)
+				}
+				// Alt text is a "child" of ast.Image,
+				// but we handle it inside the tag in renderImage.
+				return ast.SkipChildren, true
+			}
+			if _, ok := node.(*ast.Link); ok {
+				insideLink = entering
+			}
+			return ast.GoToNext, false
+		},
 	}
 	return mdhtml.NewRenderer(opts)
 }

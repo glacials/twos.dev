@@ -1,8 +1,6 @@
 <div class="writing">
   {{ range posts }}
-    {{ if lt
-      .Metadata.CreatedAt.Year now.Year
-    }}
+    {{ if lt .Metadata.CreatedAt.Year now.Year }}
       {{ continue }}
     {{ end }}
     <div class="post">
