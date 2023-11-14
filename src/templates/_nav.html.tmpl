@@ -11,12 +11,11 @@
     {{- if .IsType "post" -}}
       <a href="archives.html">Writing</a><span class="separator">/</span>
     {{- end -}}
-    {{- if parent -}}
+    {{- if .Parent -}}
       {{- if .IsType "post" -}}
         <a href="archives.html">Writing</a><span class="separator">/</span>
       {{- end -}}
-      <a href="{{ parent.Metadata.WebPath }}">{{ parent.Metadata.Title }}</a
-      ><span class="separator">/</span>
+      <a href="{{ .Parent }}">{{ .Parent }}</a><span class="separator">/</span>
     {{- end -}}
   {{- end -}}
 </nav>

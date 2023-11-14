@@ -46,7 +46,7 @@ func (doc *OrgDocument) DependsOn(src string) bool {
 	if _, ok := doc.deps[src]; ok {
 		return true
 	}
-	return false
+	return doc.Next.DependsOn(src)
 }
 
 // Load reads Org from r and loads it into doc.

@@ -41,12 +41,6 @@ type Metadata struct {
 	// Parent is the filename component of another document that this one is a child of.
 	// Parenthood is a purely semantic relationship;
 	// no rendering behavior is inherited.
-	//
-	// The parenthood relationship can be shown in templates from the child using a template function:
-	//
-	//   {{ parent }}
-	//
-	// This retrieves the parent document.
 	Parent string `yaml:"parent,omitempty"`
 	// Preview is a sentence-long blurb of the document,
 	// to be shown along with its title as a teaser of its contents.

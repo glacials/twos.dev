@@ -1,10 +1,13 @@
 package winter
 
 import (
+	"bytes"
 	"fmt"
 	"html/template"
 	"io"
 	"os"
+	"path/filepath"
+	"strings"
 )
 
 // LayoutDocument represents a document to be assembled by being placed inside a layout-style template.
@@ -17,7 +20,7 @@ import (
 // The LayoutDocument's job is to facilitate that embedding.
 // It will usually come last in the load/render chain.
 type LayoutDocument struct {
-	body io.Reader
+	body []byte
 	meta *Metadata
 }
 
@@ -27,8 +30,16 @@ func NewLayoutDocument(src string, meta *Metadata) *LayoutDocument {
 	}
 }
 
+func (doc *LayoutDocument) DependsOn(src string) bool {
+	return strings.HasPrefix(filepath.Clean(src), "src/templates/")
+}
+
 func (doc *LayoutDocument) Load(r io.Reader) error {
-	doc.body = r
+	body, err := io.ReadAll(r)
+	if err != nil {
+		return fmt.Errorf("cannot read %q into layout document: %w", doc.meta.SourcePath, err)
+	}
+	doc.body = body
 	return nil
 }
 
@@ -37,22 +48,33 @@ func (doc *LayoutDocument) Metadata() *Metadata {
 }
 
 func (doc *LayoutDocument) Render(w io.Writer) error {
-	docBytes, err := io.ReadAll(doc.body)
-	if err != nil {
-		return fmt.Errorf("cannot read body for %q: %w", doc.meta.SourcePath, err)
+	if doc.meta.Layout == "" {
+		_, err := io.Copy(w, bytes.NewBuffer(doc.body))
+		if err != nil {
+			return fmt.Errorf("cannot render non-layout document %q from layout renderer: %w", doc.meta.SourcePath, err)
+		}
+		return nil
 	}
 	layoutBytes, err := os.ReadFile(doc.meta.Layout)
 	if err != nil {
 		return fmt.Errorf("cannot read %q to execute %q: %w", doc.Metadata().Layout, doc.Metadata().SourcePath, err)
+	}
+	if len(layoutBytes) == 0 {
+		return fmt.Errorf("attempt to render %q using layout %q resulted in 0 bytes rendered", doc.meta.SourcePath, doc.meta.Layout)
 	}
 	funcs := doc.meta.funcmap()
 	tlayout, err := template.New(doc.meta.Layout).Funcs(funcs).Parse(string(layoutBytes))
 	if err != nil {
 		return fmt.Errorf("cannot read layout %q to execute %q: %w", doc.meta.Layout, doc.meta.SourcePath, err)
 	}
-	_, err = tlayout.New("body").Funcs(funcs).Parse(string(docBytes))
-	if err != nil {
+	if _, err = tlayout.New("body").Funcs(funcs).Parse(string(doc.body)); err != nil {
 		return fmt.Errorf("cannot parse template body %q: %w", doc.meta.SourcePath, err)
+	}
+	if err := loadDeps(tlayout); err != nil {
+		return fmt.Errorf("cannot load template dependencies for %q in layout %q: %w", doc.meta.SourcePath, doc.meta.Layout, err)
+	}
+	if err := tlayout.Execute(w, doc.meta); err != nil {
+		return fmt.Errorf("cannot execute layout document %q with layout %q: %w", doc.meta.SourcePath, doc.meta.Layout, err)
 	}
 	return nil
 }

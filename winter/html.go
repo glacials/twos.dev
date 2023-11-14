@@ -46,13 +46,17 @@ type HTMLDocument struct {
 // It may or may not point to a file containing HTML.
 // To read and parse HTML, call [Load].
 func NewHTMLDocument(src string, meta *Metadata) *HTMLDocument {
+	var next *LayoutDocument
+	if meta.Layout != "" {
+		next = NewLayoutDocument(src, meta)
+	}
 	return &HTMLDocument{
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
 		meta: meta,
-		next: NewLayoutDocument(src, meta),
+		next: next,
 	}
 }
 
@@ -69,7 +73,10 @@ func (doc *HTMLDocument) DependsOn(src string) bool {
 	if strings.HasSuffix(src, ".css") {
 		return true
 	}
-	return false
+	if strings.HasPrefix(filepath.Clean(src), "src/templates/") {
+		return true
+	}
+	return doc.next.DependsOn(src)
 }
 
 // Load reads HTML from r and loads it into doc.
@@ -101,14 +108,14 @@ func (doc *HTMLDocument) Load(r io.Reader) error {
 //   - Generates a preview for the document, if one wasn't manually specified
 //   - Syntax-highlights code blocks
 func (doc *HTMLDocument) Massage() error {
-	if err := doc.GenerateTitle(); err != nil {
+	if err := doc.setTitle(); err != nil {
 		return err
 	}
-	if err := doc.GeneratePreview(); err != nil {
+	if err := doc.setPreview(); err != nil {
 		return err
 	}
-	doc.SetFilename()
-	if err := doc.GenerateTOC(); err != nil {
+	doc.setFilename()
+	if err := doc.insertTOC(); err != nil {
 		return err
 	}
 	if err := doc.highlightCode(); err != nil {
@@ -117,7 +124,7 @@ func (doc *HTMLDocument) Massage() error {
 	if err := doc.openExternalLinksInNewTab(); err != nil {
 		return err
 	}
-	if err := doc.GenerateReplacements(); err != nil {
+	if err := doc.replaceSpecialText(); err != nil {
 		return err
 	}
 	return nil
@@ -136,68 +143,12 @@ func (doc *HTMLDocument) Render(w io.Writer) error {
 	return doc.next.Render(w)
 }
 
-// GeneratePreview extracts information needed for processing from the document's HTML.
-func (doc *HTMLDocument) GeneratePreview() error {
-	if doc.meta.Preview != "" {
-		return nil
-	}
-	if p := firstTag(doc.root, atom.P); p != nil {
-		for child := p.FirstChild; child != nil && doc.meta.Preview == ""; child = child.NextSibling {
-			if child.Type == html.TextNode {
-				doc.meta.Preview = child.Data
-			}
-		}
-	}
-	return nil
-}
-
-func (doc *HTMLDocument) GenerateReplacements() error {
-	for old, new := range replacements {
-		re, err := regexp.Compile(old)
-		if err != nil {
-			return err
-		}
-		for _, node := range allOfNodeTypes(doc.root, map[html.NodeType]struct{}{html.TextNode: {}}) {
-			node.Data = re.ReplaceAllString(node.Data, string(new))
-		}
-	}
-	return nil
-}
-
-func (doc *HTMLDocument) GenerateTitle() error {
-	h1 := firstTag(doc.root, atom.H1)
-	if h1 == nil {
-		return nil
-	}
-	for child := h1.FirstChild; child != nil; child = child.NextSibling {
-		if child.Type == html.TextNode {
-			doc.meta.Title = child.Data
-		}
-	}
-	if doc.meta.Title == "" {
-		return fmt.Errorf("no title found in %s", doc.meta.SourcePath)
-	}
-	link := html.Node{
-		Attr: []html.Attribute{
-			{Key: "href", Val: doc.meta.WebPath},
-			{Key: "class", Val: "post-title"},
-		},
-		DataAtom: atom.A,
-		Data:     "a",
-		Type:     html.ElementNode,
-	}
-	h1.Parent.InsertBefore(&link, h1)
-	h1.Parent.RemoveChild(h1)
-	link.InsertBefore(h1, nil)
-	return nil
-}
-
-// GenerateTOC creates and inserts a table of contents into the document,
+// insertTOC creates and inserts a table of contents into the document,
 // if one was requested via metadata.
 //
 // Specifically, it iterates over the document looking for non-first-level headings (<h2>, <h3>, etc.)
 // and inserts an ordered hierarchical list of them immediately before the first <h2>.
-func (doc *HTMLDocument) GenerateTOC() error {
+func (doc *HTMLDocument) insertTOC() error {
 	if !doc.Metadata().TOC {
 		return nil
 	}
@@ -285,9 +236,22 @@ func (doc *HTMLDocument) GenerateTOC() error {
 	return nil
 }
 
-// SetFilename sets a shortname for the document if one was not manually specified,
+func (doc *HTMLDocument) replaceSpecialText() error {
+	for old, new := range replacements {
+		re, err := regexp.Compile(old)
+		if err != nil {
+			return err
+		}
+		for _, node := range allOfNodeTypes(doc.root, map[html.NodeType]struct{}{html.TextNode: {}}) {
+			node.Data = re.ReplaceAllString(node.Data, string(new))
+		}
+	}
+	return nil
+}
+
+// setFilename sets a shortname for the document if one was not manually specified,
 // and sanitizes any existing shortname to remove extensions.
-func (doc *HTMLDocument) SetFilename() {
+func (doc *HTMLDocument) setFilename() {
 	if doc.meta.WebPath == "" {
 		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
 	}
@@ -295,19 +259,83 @@ func (doc *HTMLDocument) SetFilename() {
 	doc.meta.WebPath = fmt.Sprintf("%s.html", shortname)
 }
 
-// firstTag returns the first and outermost descendant of n with the given tag.
-func firstTag(n *html.Node, t atom.Atom) *html.Node {
-	if n.Type == html.ElementNode && n.DataAtom == t {
-		return n
+// setPreview extracts information needed for processing from the document's HTML.
+func (doc *HTMLDocument) setPreview() error {
+	if doc.meta.Preview != "" {
+		return nil
 	}
-
-	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		if el := firstTag(child, t); el != nil {
-			return el
+	if p := firstTag(doc.root, atom.P); p != nil {
+		for child := p.FirstChild; child != nil && doc.meta.Preview == ""; child = child.NextSibling {
+			if child.Type == html.TextNode {
+				doc.meta.Preview = child.Data
+			}
 		}
 	}
-
 	return nil
+}
+
+func (doc *HTMLDocument) setTitle() error {
+	h1 := firstTag(doc.root, atom.H1)
+	if h1 == nil {
+		return nil
+	}
+	for child := h1.FirstChild; child != nil; child = child.NextSibling {
+		if child.Type == html.TextNode {
+			doc.meta.Title = child.Data
+		}
+	}
+	if doc.meta.Title == "" {
+		return fmt.Errorf("no title found in %s", doc.meta.SourcePath)
+	}
+	link := html.Node{
+		Attr: []html.Attribute{
+			{Key: "href", Val: doc.meta.WebPath},
+			{Key: "class", Val: "post-title"},
+		},
+		DataAtom: atom.A,
+		Data:     "a",
+		Type:     html.ElementNode,
+	}
+	h1.Parent.InsertBefore(&link, h1)
+	h1.Parent.RemoveChild(h1)
+	link.InsertBefore(h1, nil)
+	return nil
+}
+
+// allOfNodeTypes returns all descendant nodes of n with any of the given types.
+// The returned slice is sorted in the same way the document was,
+// with parent nodes coming before their children.
+func allOfNodeTypes(n *html.Node, t map[html.NodeType]struct{}) (m []*html.Node) {
+	if _, ok := t[n.Type]; ok {
+		m = append(m, n)
+	}
+	for child := n.FirstChild; child != nil; child = child.NextSibling {
+		m = append(m, allOfNodeTypes(child, t)...)
+	}
+	return
+}
+
+// allOfTypes returns all descendant nodes of n with any of the given types. The
+// returned slice is sorted in the same way the document was, with parent nodes
+// coming before their children.
+func allOfTypes(n *html.Node, t map[atom.Atom]struct{}) (m []*html.Node) {
+	if _, ok := t[n.DataAtom]; ok {
+		m = append(m, n)
+	}
+	for child := n.FirstChild; child != nil; child = child.NextSibling {
+		m = append(m, allOfTypes(child, t)...)
+	}
+	return
+}
+
+// attr returns the attr attribute of the given element node.
+func attr(n *html.Node, attr atom.Atom) string {
+	for _, a := range n.Attr {
+		if a.Key == attr.String() {
+			return a.Val
+		}
+	}
+	return ""
 }
 
 // clone returns a deep copy of n.
@@ -324,40 +352,31 @@ func clone(n *html.Node) (*html.Node, error) {
 	return els[0], nil
 }
 
-// allOfTypes returns all descendant nodes of n with any of the given types. The
-// returned slice is sorted in the same way the document was, with parent nodes
-// coming before their children.
-func allOfTypes(n *html.Node, t map[atom.Atom]struct{}) (m []*html.Node) {
-	if _, ok := t[n.DataAtom]; ok {
-		m = append(m, n)
-	}
-	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		m = append(m, allOfTypes(child, t)...)
-	}
-	return
-}
-
-// allOfNodeTypes returns all descendant nodes of n with any of the given types.
-// The returned slice is sorted in the same way the document was,
-// with parent nodes coming before their children.
-func allOfNodeTypes(n *html.Node, t map[html.NodeType]struct{}) (m []*html.Node) {
-	if _, ok := t[n.Type]; ok {
-		m = append(m, n)
-	}
-	for child := n.FirstChild; child != nil; child = child.NextSibling {
-		m = append(m, allOfNodeTypes(child, t)...)
-	}
-	return
-}
-
-// attr returns the attr attribute of the given element node.
-func attr(n *html.Node, attr atom.Atom) string {
-	for _, a := range n.Attr {
-		if a.Key == attr.String() {
-			return a.Val
+// codeBlocks returns all code blocks in the document. A code block is defined
+// as a <code> tag which is a directy child of a <pre> tag.
+func codeBlocks(root *html.Node) map[*html.Node]struct{} {
+	blocks := map[*html.Node]struct{}{}
+	for _, node := range allOfTypes(root, map[atom.Atom]struct{}{atom.Code: {}}) {
+		if node.Parent.DataAtom == atom.Pre {
+			blocks[node] = struct{}{}
 		}
 	}
-	return ""
+	return blocks
+}
+
+// firstTag returns the first and outermost descendant of n with the given tag.
+func firstTag(n *html.Node, t atom.Atom) *html.Node {
+	if n.Type == html.ElementNode && n.DataAtom == t {
+		return n
+	}
+
+	for child := n.FirstChild; child != nil; child = child.NextSibling {
+		if el := firstTag(child, t); el != nil {
+			return el
+		}
+	}
+
+	return nil
 }
 
 func (doc *HTMLDocument) highlightCode() error {
@@ -393,13 +412,14 @@ func (doc *HTMLDocument) highlightCode() error {
 	return nil
 }
 
-func (doc *HTMLDocument) openExternalLinksInNewTab() error {
-	for _, a := range allOfTypes(doc.root, map[atom.Atom]struct{}{atom.A: {}}) {
-		if err := doc.openExternalLinkInNewTab(a); err != nil {
-			return err
+func lang(code *html.Node) string {
+	for _, class := range strings.Fields(attr(code, atom.Class)) {
+		if _, l, ok := strings.Cut(class, "language-"); ok {
+			return l
 		}
 	}
-	return nil
+
+	return ""
 }
 
 func (doc *HTMLDocument) openExternalLinkInNewTab(a *html.Node) error {
@@ -432,26 +452,13 @@ func (doc *HTMLDocument) openExternalLinkInNewTab(a *html.Node) error {
 	return nil
 }
 
-// codeBlocks returns all code blocks in the document. A code block is defined
-// as a <code> tag which is a directy child of a <pre> tag.
-func codeBlocks(root *html.Node) map[*html.Node]struct{} {
-	blocks := map[*html.Node]struct{}{}
-	for _, node := range allOfTypes(root, map[atom.Atom]struct{}{atom.Code: {}}) {
-		if node.Parent.DataAtom == atom.Pre {
-			blocks[node] = struct{}{}
+func (doc *HTMLDocument) openExternalLinksInNewTab() error {
+	for _, a := range allOfTypes(doc.root, map[atom.Atom]struct{}{atom.A: {}}) {
+		if err := doc.openExternalLinkInNewTab(a); err != nil {
+			return err
 		}
 	}
-	return blocks
-}
-
-func lang(code *html.Node) string {
-	for _, class := range strings.Fields(attr(code, atom.Class)) {
-		if _, l, ok := strings.Cut(class, "language-"); ok {
-			return l
-		}
-	}
-
-	return ""
+	return nil
 }
 
 func syntaxHighlight(lang, code string) (string, error) {

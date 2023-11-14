@@ -53,7 +53,10 @@ func (doc *MarkdownDocument) DependsOn(src string) bool {
 	if _, ok := doc.deps[src]; ok {
 		return true
 	}
-	return false
+	if strings.HasPrefix(filepath.Clean(src), "src/templates/") {
+		return true
+	}
+	return doc.Next.DependsOn(src)
 }
 
 // Load reads Markdown from r and loads it into doc.

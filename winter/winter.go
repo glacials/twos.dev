@@ -215,6 +215,7 @@ func (s *Substructure) Build(doc Document) error {
 	if err != nil {
 		return fmt.Errorf("cannot read %q for building %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 	}
+	defer r.Close()
 	if err := doc.Load(r); err != nil {
 		return fmt.Errorf("cannot load %q for building %q: %w", doc.Metadata().SourcePath, doc.Metadata().Title, err)
 	}

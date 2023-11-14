@@ -8,8 +8,8 @@
   </p>
 
   <p style="text-align:center">
-    {{ with parent }}
-      <a href="{{ parent.WebPath }}">back to {{ parent.WebPath }}</a>
+    {{ with .Parent }}
+      <a href="{{ . }}">back to {{ . }}</a>
     {{ end }}
   </p>
 </nav>

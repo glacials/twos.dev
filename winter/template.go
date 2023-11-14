@@ -75,7 +75,7 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 	if _, ok := doc.deps[src]; ok {
 		return true
 	}
-	return false
+	return doc.Next.DependsOn(src)
 }
 
 // Load reads a Go template from r and loads it into doc.
@@ -179,9 +179,12 @@ func (doc *TemplateDocument) postsFunc() []Document {
 //	{{ end }}
 func render(doc Document) (template.HTML, error) {
 	var buf bytes.Buffer
+	layout := doc.Metadata().Layout
+	doc.Metadata().Layout = ""
 	if err := doc.Render(&buf); err != nil {
 		return template.HTML(""), err
 	}
+	doc.Metadata().Layout = layout
 	return template.HTML(buf.String()), nil
 }
 
