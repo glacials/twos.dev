@@ -34,8 +34,15 @@ type Config struct {
 	// Description is the Description of the website.
 	// This is used as metadata for the RSS feed.
 	Description string `yaml:"description,omitempty"`
-	// Dist is the path to the distribution directory.
-	// If blank, defaults to "./dist" relative to the working directory.
+	// Dist is the location the site will be built into,
+	// relative to the working directory.
+	// After a build, this directory is suitable for deployment to the web as a set of static files.
+	//
+	// In other words, the path of any file in dist,
+	// relative to dist,
+	// is equivalent to the path component of the URL for that file.
+	//
+	// If blank, defaults to ./dist.
 	Dist string `yaml:"dist,omitempty"`
 	// Hostname is the host portion of the website URL
 	// (e.g. "one.twos.dev" for a URL of "https://one.twos.dev/index.html").

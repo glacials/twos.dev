@@ -13,6 +13,7 @@ import (
 	"strings"
 	"time"
 
+	"github.com/adrg/xdg"
 	"github.com/nickalie/go-webpbin"
 	"github.com/rwcarlsen/goexif/exif"
 	"github.com/rwcarlsen/goexif/mknote"
@@ -68,6 +69,13 @@ func NewIMG(src string, cfg Config) (*img, error) {
 }
 
 func (d *img) Render(w io.Writer) error {
+	fresh, err := d.generatedPhotosAreFresh(d.SourcePath)
+	if err != nil {
+		return err
+	}
+	if fresh {
+		return nil
+	}
 	thmdest := filepath.Dir(strings.Replace(
 		filepath.Join("dist", d.WebPath),
 		filepath.FromSlash("/img/"),
@@ -252,18 +260,14 @@ func exifFractionToDecimal(
 // The file at src is read at least once every time this function is called,
 // but the thumbnails are only regenerated if src has changed since their last generation.
 func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
-	fresh, err := d.thumbnailsAreFresh(srcPath, dest)
-	if err != nil {
-		return err
-	}
 	p := srcPhoto.Bounds().Size()
 	for width := 1; width < p.X; width *= 2 {
 		height := (width * p.X / p.Y) & -1
-		dstPath := filepath.Join(
+		destPath := filepath.Join(
 			dest,
 			fmt.Sprintf("%s.%dx%d.webp", strings.TrimSuffix(filepath.Base(srcPath), filepath.Ext(srcPath)), width, height),
 		)
-		webPath, err := filepath.Rel("dist", dstPath)
+		webPath, err := filepath.Rel("dist", destPath)
 		if err != nil {
 			return fmt.Errorf("cannot get relative path for thumbnail %q: %w", dest, err)
 		}
@@ -271,9 +275,6 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 			WebPath: webPath,
 			Width:   width,
 		})
-		if fresh {
-			continue
-		}
 
 		dstPhoto := image.NewRGBA(image.Rect(0, 0, width, height))
 
@@ -289,7 +290,7 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 			nil,
 		)
 
-		if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
+		if err := os.MkdirAll(filepath.Dir(destPath), 0o755); err != nil {
 			return fmt.Errorf(
 				"cannot make thumbnail directory `%s`: %w",
 				filepath.Dir(dest),
@@ -297,7 +298,7 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 			)
 		}
 
-		destinationFile, err := os.Create(dstPath)
+		destinationFile, err := os.Create(destPath)
 		if err != nil {
 			return fmt.Errorf(
 				"cannot create thumbnail for %q: %w",
@@ -308,19 +309,18 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 		defer destinationFile.Close()
 
 		if err := webpbin.Encode(destinationFile, dstPhoto); err != nil {
-			return fmt.Errorf("cannot encode WebP thumbnail to %q: %w", dstPath, err)
+			return fmt.Errorf("cannot encode WebP thumbnail to %q: %w", destPath, err)
 		}
 	}
 
 	return nil
 }
 
-// thumbnailsAreFresh returns true if and only if the file at src
-// has the same content as the last time this function was called.
+// generatedPhotosAreFresh returns true if and only if the file at src has the same content as the last time this function was called.
 //
-// dest can be anywhere, but must be the same between multiple calls.
-// Checksums for the files will be placed into dest.
-func (d *img) thumbnailsAreFresh(src, dest string) (bool, error) {
+// The XDG cache directory for Winter is used to store state.
+// To empty it, run winter clean.
+func (d *img) generatedPhotosAreFresh(src string) (bool, error) {
 	sourceFile, err := os.Open(src)
 	if err != nil {
 		return false, fmt.Errorf("can't open photo at path `%s`: %w", src, err)
@@ -337,7 +337,10 @@ func (d *img) thumbnailsAreFresh(src, dest string) (bool, error) {
 		return false, fmt.Errorf("cannot compute hash for %q: %w", src, err)
 	}
 
-	sumPath := fmt.Sprintf("%s.sum", filepath.Join(dest, filepath.Base(src)))
+	sumPath, err := xdg.CacheFile(fmt.Sprintf("%s.sum", filepath.Join(AppName, "generated", "img", filepath.Base(src))))
+	if err != nil {
+		return false, fmt.Errorf("cannot find Winter cache: %w", err)
+	}
 	newSum := hash.Sum32()
 	oldSum, err := os.ReadFile(sumPath)
 	if err != nil {

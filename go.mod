@@ -5,6 +5,7 @@ go 1.18
 require (
 	gg-scm.io/pkg/git v0.10.0
 	github.com/adrg/frontmatter v0.2.0
+	github.com/adrg/xdg v0.4.0
 	github.com/alecthomas/chroma v0.10.0
 	github.com/fsnotify/fsnotify v1.5.4
 	github.com/gomarkdown/markdown v0.0.0-20230922112808-5421fefb8386

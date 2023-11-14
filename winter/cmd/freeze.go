@@ -15,10 +15,11 @@ const (
 	KnownURLsPath = "src/urls.txt"
 )
 
-var freezeCmd = &cobra.Command{
-	Use:   "freeze [shortname...]",
-	Short: "Turn a warm file cold",
-	Long: wrap(`
+func newFreezeCmd() *cobra.Command {
+	cmd := &cobra.Command{
+		Use:   "freeze [shortname...]",
+		Short: "Turn a warm file cold",
+		Long: wrap(`
 		Converts warm documents specified into cold documents,
 		and commit to keeping them at those URLs forever.
 
@@ -40,7 +41,7 @@ var freezeCmd = &cobra.Command{
 		To perform this save step without freezing any documents,
 		simply run ` + "`winter freeze`" + ` with no arguments.
 	`),
-	Example: wrap(`
+		Example: wrap(`
 		This command:
 
 		    winter freeze src/warm/hello.md
@@ -48,85 +49,83 @@ var freezeCmd = &cobra.Command{
 		moves the file src/warm/hello.md from src/warm to src/cold,
 		and adds it to the list of frozen URLs.
 	`),
-	RunE: func(cmd *cobra.Command, args []string) error {
-		cfg, err := winter.NewConfig()
-		if err != nil {
-			return err
-		}
-		s, err := winter.NewSubstructure(cfg)
-		if err != nil {
-			return err
-		}
-
-		if err := s.SaveNewURIs(dist); err != nil {
-			return fmt.Errorf("cannot freeze known URIs: %w", err)
-		}
-
-		for _, shortname := range args {
-			document, ok := s.DocBySourcePath(shortname)
-			if !ok {
-				return fmt.Errorf("cannot find document with shortname `%s`", shortname)
+		RunE: func(cmd *cobra.Command, args []string) error {
+			cfg, err := winter.NewConfig()
+			if err != nil {
+				return err
 			}
-
-			oldpath := document.Metadata().SourcePath
-			newpath := filepath.Join("src", "cold", filepath.Base(document.Metadata().SourcePath))
-
-			// The directory to remove warm files from, in addition to src/warm, so
-			// that the file doesn't just sync back to src/warm after removal. TODO:
-			// Make configurable.
-			warmSourceOfTruth := "/Users/glacials/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/Published/"
-			if _, err := os.Stat(warmSourceOfTruth); err != nil {
-				// Allow dir to not exist, since it's hardcoded to my dir ;)
-				if !os.IsNotExist(err) {
-					return err
-				}
-			} else {
-				rel, err := filepath.Rel("src/warm", oldpath)
-				if err != nil {
-					return err
-				}
-				relpath := filepath.Join(warmSourceOfTruth, rel)
-				if _, err := os.Stat(relpath); err != nil {
-					if !os.IsNotExist(err) {
-						return err
-					}
-				} else if err := os.Remove(relpath); err != nil {
-					return err
-				}
-			}
-
-			g, err := git.New(git.Options{})
+			s, err := winter.NewSubstructure(cfg)
 			if err != nil {
 				return err
 			}
 
-			ctx := context.TODO()
-			if err := os.Rename(oldpath, newpath); err != nil {
-				return err
-			}
-			fmt.Println("git add", oldpath, newpath)
-			if err := g.Add(
-				ctx,
-				[]git.Pathspec{git.Pathspec(oldpath), git.Pathspec(newpath)},
-				git.AddOptions{},
-			); err != nil {
-				return err
+			if err := s.SaveNewURIs(dist); err != nil {
+				return fmt.Errorf("cannot freeze known URIs: %w", err)
 			}
 
-			fmt.Printf("git commit -m 'Freeze %s'\n", shortname)
-			if err := g.Commit(
-				ctx,
-				fmt.Sprintf("Freeze %s", shortname),
-				git.CommitOptions{},
-			); err != nil {
-				return err
+			for _, shortname := range args {
+				document, ok := s.DocBySourcePath(shortname)
+				if !ok {
+					return fmt.Errorf("cannot find document with shortname `%s`", shortname)
+				}
+
+				oldpath := document.Metadata().SourcePath
+				newpath := filepath.Join("src", "cold", filepath.Base(document.Metadata().SourcePath))
+
+				// The directory to remove warm files from, in addition to src/warm, so
+				// that the file doesn't just sync back to src/warm after removal. TODO:
+				// Make configurable.
+				warmSourceOfTruth := "/Users/glacials/Library/Mobile Documents/27N4MQEA55~pro~writer/Documents/Published/"
+				if _, err := os.Stat(warmSourceOfTruth); err != nil {
+					// Allow dir to not exist, since it's hardcoded to my dir ;)
+					if !os.IsNotExist(err) {
+						return err
+					}
+				} else {
+					rel, err := filepath.Rel("src/warm", oldpath)
+					if err != nil {
+						return err
+					}
+					relpath := filepath.Join(warmSourceOfTruth, rel)
+					if _, err := os.Stat(relpath); err != nil {
+						if !os.IsNotExist(err) {
+							return err
+						}
+					} else if err := os.Remove(relpath); err != nil {
+						return err
+					}
+				}
+
+				g, err := git.New(git.Options{})
+				if err != nil {
+					return err
+				}
+
+				ctx := context.TODO()
+				if err := os.Rename(oldpath, newpath); err != nil {
+					return err
+				}
+				fmt.Println("git add", oldpath, newpath)
+				if err := g.Add(
+					ctx,
+					[]git.Pathspec{git.Pathspec(oldpath), git.Pathspec(newpath)},
+					git.AddOptions{},
+				); err != nil {
+					return err
+				}
+
+				fmt.Printf("git commit -m 'Freeze %s'\n", shortname)
+				if err := g.Commit(
+					ctx,
+					fmt.Sprintf("Freeze %s", shortname),
+					git.CommitOptions{},
+				); err != nil {
+					return err
+				}
+
 			}
-
-		}
-		return nil
-	},
-}
-
-func init() {
-	rootCmd.AddCommand(freezeCmd)
+			return nil
+		},
+	}
+	return cmd
 }

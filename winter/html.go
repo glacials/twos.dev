@@ -76,11 +76,11 @@ func (doc *HTMLDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *HTMLDocument) Load(r io.Reader) error {
-	root, err := html.ParseFragment(r, nil)
+	root, err := html.Parse(r)
 	if err != nil {
 		return err
 	}
-	doc.root = root[0]
+	doc.root = root
 	if err := doc.Massage(); err != nil {
 		return err
 	}
@@ -107,7 +107,7 @@ func (doc *HTMLDocument) Massage() error {
 	if err := doc.GeneratePreview(); err != nil {
 		return err
 	}
-	doc.GenerateShortname()
+	doc.SetFilename()
 	if err := doc.GenerateTOC(); err != nil {
 		return err
 	}
@@ -162,15 +162,6 @@ func (doc *HTMLDocument) GenerateReplacements() error {
 		}
 	}
 	return nil
-}
-
-// GenerateShortname sets a shortname for the document if one was not manually specified,
-// and sanitizes any existing shortname to remove extensions.
-func (doc *HTMLDocument) GenerateShortname() {
-	if doc.meta.WebPath == "" {
-		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
-	}
-	doc.meta.WebPath, _, _ = strings.Cut(doc.meta.WebPath, ".")
 }
 
 func (doc *HTMLDocument) GenerateTitle() error {
@@ -292,6 +283,16 @@ func (doc *HTMLDocument) GenerateTOC() error {
 	}
 	firstH2.Parent.InsertBefore(toc, firstH2)
 	return nil
+}
+
+// SetFilename sets a shortname for the document if one was not manually specified,
+// and sanitizes any existing shortname to remove extensions.
+func (doc *HTMLDocument) SetFilename() {
+	if doc.meta.WebPath == "" {
+		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
+	}
+	shortname, _, _ := strings.Cut(doc.meta.WebPath, ".")
+	doc.meta.WebPath = fmt.Sprintf("%s.html", shortname)
 }
 
 // firstTag returns the first and outermost descendant of n with the given tag.

@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 	"io"
+	"path/filepath"
 	"strings"
 
 	"github.com/adrg/frontmatter"
@@ -22,7 +23,7 @@ import (
 // its only purpose is to create a [TemplateDocument].
 type MarkdownDocument struct {
 	// Next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
-	Next Document
+	Next *HTMLDocument
 	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
@@ -99,8 +100,9 @@ var markdownExtensions = map[string]struct{}{
 // The file is not touched or inspected;
 // the calculation is purely lexicographic.
 func isMarkdown(src string) bool {
+	srcext := strings.ToLower(filepath.Ext(src))
 	for ext := range markdownExtensions {
-		if strings.HasSuffix(strings.ToLower(src), ext) {
+		if ext == srcext {
 			return true
 		}
 	}

@@ -54,6 +54,5 @@ func (doc *LayoutDocument) Render(w io.Writer) error {
 	if err != nil {
 		return fmt.Errorf("cannot parse template body %q: %w", doc.meta.SourcePath, err)
 	}
-
 	return nil
 }
