@@ -54,8 +54,9 @@ var (
 		"⁃": styleWrapper, // Hyphen bullet
 		"⁓": styleWrapper, // Swung dash
 
-		"&#34;": []byte("\""),
-		"&#39;": []byte("'"),
+		"&#34;":  []byte("\""),
+		"&#39;":  []byte("'"),
+		"&quot;": []byte("\""),
 	}
 )
 

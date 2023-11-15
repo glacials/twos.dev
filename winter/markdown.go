@@ -14,6 +14,10 @@ import (
 	"github.com/gomarkdown/markdown/parser"
 )
 
+var mdrepl = map[string][]byte{
+	"&quot;": []byte("\""),
+}
+
 // MarkdownDocument represents a source file written in Markdown,
 // with optional Go template syntax embedded in it.
 //
@@ -22,23 +26,23 @@ import (
 // The MarkdownDocument is transitory;
 // its only purpose is to create a [TemplateDocument].
 type MarkdownDocument struct {
-	// Next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
-	Next *HTMLDocument
 	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
 
 	deps map[string]struct{}
 	meta *Metadata
+	// next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
+	next   Document
+	result *bytes.Buffer
 }
 
 // NewMarkdownDocument creates a new document whose original source is at path src.
 //
 // Nothing is read from disk; src is metadata.
 // To read and parse Markdown, call [Load].
-func NewMarkdownDocument(src string, meta *Metadata) *MarkdownDocument {
+func NewMarkdownDocument(src string, meta *Metadata, next Document) *MarkdownDocument {
 	return &MarkdownDocument{
-		Next:       NewHTMLDocument(src, meta),
 		SourcePath: src,
 
 		deps: map[string]struct{}{
@@ -46,6 +50,7 @@ func NewMarkdownDocument(src string, meta *Metadata) *MarkdownDocument {
 			"public/style.css": {},
 		},
 		meta: meta,
+		next: next,
 	}
 }
 
@@ -56,7 +61,7 @@ func (doc *MarkdownDocument) DependsOn(src string) bool {
 	if strings.HasPrefix(filepath.Clean(src), "src/templates/") {
 		return true
 	}
-	return doc.Next.DependsOn(src)
+	return doc.next.DependsOn(src)
 }
 
 // Load reads Markdown from r and loads it into doc.
@@ -70,7 +75,7 @@ func (doc *MarkdownDocument) Load(r io.Reader) error {
 		return fmt.Errorf("can't parse %s: %w", doc.SourcePath, err)
 	}
 
-	return doc.Next.Load(bytes.NewBuffer(markdown.ToHTML(
+	buf := markdown.ToHTML(
 		body,
 		parser.NewWithExtensions(
 			parser.Attributes|
@@ -83,7 +88,18 @@ func (doc *MarkdownDocument) Load(r io.Reader) error {
 				parser.Tables,
 		),
 		newCustomizedRender(),
-	)))
+	)
+	for old, new := range mdrepl {
+		buf = bytes.ReplaceAll(buf, []byte(old), new)
+	}
+	doc.result = bytes.NewBuffer(buf)
+	if doc.next == nil {
+		return nil
+	}
+	if err := doc.next.Load(doc.result); err != nil {
+		return fmt.Errorf("cannot load from %T to %T: %w", doc, doc.next, err)
+	}
+	return nil
 }
 
 func (doc *MarkdownDocument) Metadata() *Metadata {
@@ -91,25 +107,16 @@ func (doc *MarkdownDocument) Metadata() *Metadata {
 }
 
 func (doc *MarkdownDocument) Render(w io.Writer) error {
-	return doc.Next.Render(w)
-}
-
-var markdownExtensions = map[string]struct{}{
-	".md":       {},
-	".markdown": {},
-}
-
-// isMarkdown returns true if and only if src looks like a path to or filename of a Markdown file.
-// The file is not touched or inspected;
-// the calculation is purely lexicographic.
-func isMarkdown(src string) bool {
-	srcext := strings.ToLower(filepath.Ext(src))
-	for ext := range markdownExtensions {
-		if ext == srcext {
-			return true
-		}
+	if _, err := io.Copy(w, doc.result); err != nil {
+		return fmt.Errorf("cannot render Markdown: %w", err)
 	}
-	return false
+	if doc.next == nil {
+		return nil
+	}
+	if err := doc.next.Render(w); err != nil {
+		return fmt.Errorf("cannot render from %T to %T: %w", doc, doc.next, err)
+	}
+	return nil
 }
 
 // renderImage overrides the standard Markdown-to-HTML renderer.

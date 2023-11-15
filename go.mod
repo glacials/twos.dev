@@ -20,8 +20,9 @@ require (
 	github.com/spf13/cobra v1.5.0
 	github.com/yargevad/filepathx v1.0.0
 	golang.org/x/image v0.5.0
-	golang.org/x/net v0.17.0
+	golang.org/x/net v0.18.0
 	gopkg.in/yaml.v3 v3.0.0-20200313102051-9f266ea9e77c
+	gotest.tools/v3 v3.5.1
 )
 
 require (
@@ -42,7 +43,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
-	golang.org/x/sys v0.13.0 // indirect
+	golang.org/x/sys v0.14.0 // indirect
 	gopkg.in/check.v1 v1.0.0-20180628173108-788fd7840127 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 )

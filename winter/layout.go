@@ -22,11 +22,13 @@ import (
 type LayoutDocument struct {
 	body []byte
 	meta *Metadata
+	next Document
 }
 
-func NewLayoutDocument(src string, meta *Metadata) *LayoutDocument {
+func NewLayoutDocument(src string, meta *Metadata, next Document) *LayoutDocument {
 	return &LayoutDocument{
 		meta: meta,
+		next: next,
 	}
 }
 
@@ -70,7 +72,7 @@ func (doc *LayoutDocument) Render(w io.Writer) error {
 	if _, err = tlayout.New("body").Funcs(funcs).Parse(string(doc.body)); err != nil {
 		return fmt.Errorf("cannot parse template body %q: %w", doc.meta.SourcePath, err)
 	}
-	if err := loadDeps(tlayout); err != nil {
+	if err := loadDeps(tmplPath, tlayout); err != nil {
 		return fmt.Errorf("cannot load template dependencies for %q in layout %q: %w", doc.meta.SourcePath, doc.meta.Layout, err)
 	}
 	if err := tlayout.Execute(w, doc.meta); err != nil {

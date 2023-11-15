@@ -18,4 +18,4 @@ Some recent posts of mine are below.
 
 ---
 
-{{ template "src/templates/_writing.html.tmpl" }}
+{{ template "\_writing.html.tmpl" }}

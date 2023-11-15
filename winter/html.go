@@ -32,12 +32,14 @@ type HTMLDocument struct {
 	// deps is a set of paths to source files that,
 	// when changed,
 	// should cause a rebuild of this document.
-	deps map[string]struct{}
-	meta *Metadata
-	next *LayoutDocument
+	deps   map[string]struct{}
+	meta   *Metadata
+	next   Document
+	result *bytes.Buffer
 	// root is the topmost HTML tag in the parsed document,
 	// usually <html> or its parent.
-	root *html.Node
+	root    *html.Node
+	tmplDir string
 }
 
 // NewHTMLDocument creates a new document whose original source is at path src.
@@ -45,18 +47,15 @@ type HTMLDocument struct {
 // Nothing is read from disk; src is metadata.
 // It may or may not point to a file containing HTML.
 // To read and parse HTML, call [Load].
-func NewHTMLDocument(src string, meta *Metadata) *HTMLDocument {
-	var next *LayoutDocument
-	if meta.Layout != "" {
-		next = NewLayoutDocument(src, meta)
-	}
+func NewHTMLDocument(src string, meta *Metadata, tmplDir string, next Document) *HTMLDocument {
 	return &HTMLDocument{
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta: meta,
-		next: next,
+		meta:    meta,
+		next:    next,
+		tmplDir: tmplDir,
 	}
 }
 
@@ -91,11 +90,26 @@ func (doc *HTMLDocument) Load(r io.Reader) error {
 	if err := doc.Massage(); err != nil {
 		return err
 	}
-	var buf bytes.Buffer
-	if err := html.Render(&buf, doc.root); err != nil {
+	doc.result = &bytes.Buffer{}
+	if err := html.Render(doc.result, doc.root); err != nil {
 		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.WebPath, err)
 	}
-	return doc.next.Load(&buf)
+	buf := doc.result.Bytes()
+	for old, new := range replacements {
+		re, err := regexp.Compile(old)
+		if err != nil {
+			return err
+		}
+		buf = re.ReplaceAll(buf, new)
+	}
+	doc.result = bytes.NewBuffer(buf)
+	if doc.next == nil {
+		return nil
+	}
+	if err := doc.next.Load(doc.result); err != nil {
+		return fmt.Errorf("cannot load from %T to %T: %w", doc, doc.next, err)
+	}
+	return nil
 }
 
 // Massage messes with loaded content to improve the page when it is ultimately rendered.
@@ -140,7 +154,16 @@ func (doc *HTMLDocument) Post() bool {
 
 // Render encodes any loaded content into HTML and writes it to w.
 func (doc *HTMLDocument) Render(w io.Writer) error {
-	return doc.next.Render(w)
+	if _, err := io.Copy(w, doc.result); err != nil {
+		return fmt.Errorf("cannot render HTML: %w", err)
+	}
+	if doc.next == nil {
+		return nil
+	}
+	if err := doc.next.Render(w); err != nil {
+		return fmt.Errorf("cannot render from %T to %T: %w", doc, doc.next, err)
+	}
+	return nil
 }
 
 // insertTOC creates and inserts a table of contents into the document,
@@ -197,22 +220,22 @@ func (doc *HTMLDocument) insertTOC() error {
 		return fmt.Errorf("cannot recurse into HTML: %w", err)
 	}
 
-	tocPath := "src/templates/_toc.html.tmpl"
-	tocbody, err := os.ReadFile(tocPath)
+	tocPath := "_toc.html.tmpl"
+	tocbody, err := os.ReadFile(filepath.Join(doc.tmplDir, tocPath))
 	if err != nil {
 		return fmt.Errorf("cannot read toc for %q: %w", doc.meta.SourcePath, err)
 	}
 	toctmpl, err := template.New(tocPath).Parse(string(tocbody))
 	if err != nil {
-		return fmt.Errorf("cannot parse toc for %q: %w", doc.meta.SourcePath, err)
+		return fmt.Errorf("cannot parse toc for %q: %w; %s", doc.meta.SourcePath, err, tocbody)
 	}
-	subtocPath := "src/templates/_subtoc.html.tmpl"
-	subtocbody, err := os.ReadFile(subtocPath)
+	subtocPath := "_subtoc.html.tmpl"
+	subtocbody, err := os.ReadFile(filepath.Join(doc.tmplDir, subtocPath))
 	if err != nil {
 		return fmt.Errorf("cannot read subtoc for %q: %w", doc.meta.SourcePath, err)
 	}
 	if _, err := toctmpl.New(subtocPath).Parse(string(subtocbody)); err != nil {
-		return fmt.Errorf("cannot parse subtoc for %q: %w", doc.meta.SourcePath, err)
+		return fmt.Errorf("cannot parse subtoc for %q: %w; %s", doc.meta.SourcePath, err, subtocbody)
 	}
 
 	var buf bytes.Buffer

@@ -410,84 +410,15 @@ func (s *Substructure) discoverAtPath(path string) error {
 	if err := s.discoverGalleries(path); err != nil {
 		return err
 	}
+	if err := s.discoverMarkdown(path); err != nil {
+		return err
+	}
 	if err := s.discoverTemplates(path); err != nil {
 		return err
 	}
 
 	sort.Sort(s.docs)
 	return nil
-}
-
-// discoverHTML adds all *.html documents in or at the given path glob to the substructure.
-func (s *Substructure) discoverHTML(path string) error {
-	var htmlFiles []string
-	if stat, err := os.Stat(path); err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-	} else if stat.IsDir() {
-		htmlFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.html"))
-		if err != nil {
-			return err
-		}
-	} else if strings.HasSuffix(path, ".html") {
-		htmlFiles = append(htmlFiles, path)
-	}
-
-	for _, src := range htmlFiles {
-		if shouldIgnore(src) {
-			continue
-		}
-		s.add(NewHTMLDocument(src, NewMetadata(src)))
-	}
-	for _, d := range s.docs {
-		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
-			parent, ok := s.DocBySourcePath(p)
-			if ok {
-				d.Metadata().Parent = parent.Metadata().SourcePath
-			}
-		}
-	}
-
-	return nil
-}
-
-// discoverOrg adds all *.org documents in or at the given path glob to the substructure.
-func (s *Substructure) discoverOrg(path string) error {
-	// TODO: Allow looking in user's org directory.
-	// TODO: Allow rendering only a subsection of an org file.
-	var orgFiles []string
-	if stat, err := os.Stat(path); err != nil {
-		if !os.IsNotExist(err) {
-			return err
-		}
-	} else if stat.IsDir() {
-		orgFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.org"))
-		if err != nil {
-			return err
-		}
-	} else {
-		orgFiles = append(orgFiles, path)
-	}
-
-	for _, src := range orgFiles {
-		if shouldIgnore(src) {
-			continue
-		}
-		s.add(NewOrgDocument(src, NewMetadata(src)))
-	}
-
-	return nil
-}
-
-// galleryGlobs are the relative path components with which to discover images.
-// Each is appended to the path supplied to discoverPhotos and used to perform a glob.
-//
-// The glob supports double asterisks, which mean "any character, including a path separator".
-// Otherwise, syntax is identical to that of [filepath.Glob].
-var galleryGlobs []string = []string{
-	"img/**/*.[jJ][pP][gG]",
-	"img/**/*.[jJ][pP][eE][gG]",
 }
 
 // discoverGalleries adds all documents matching galleryGlobs in or at the given path glob to the substructure.
@@ -523,6 +454,123 @@ func (s *Substructure) discoverGalleries(src string) error {
 	}
 
 	return nil
+}
+
+// discoverHTML adds all *.html documents in or at the given path glob to the substructure.
+func (s *Substructure) discoverHTML(path string) error {
+	var htmlFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		htmlFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.html"))
+		if err != nil {
+			return err
+		}
+	} else if strings.HasSuffix(path, ".html") {
+		htmlFiles = append(htmlFiles, path)
+	}
+
+	for _, src := range htmlFiles {
+		if shouldIgnore(src) {
+			continue
+		}
+		meta := NewMetadata(src)
+		s.add(
+			NewHTMLDocument(src, meta, tmplPath,
+				NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+			),
+		)
+	}
+	for _, d := range s.docs {
+		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
+			parent, ok := s.DocBySourcePath(p)
+			if ok {
+				d.Metadata().Parent = parent.Metadata().SourcePath
+			}
+		}
+	}
+
+	return nil
+}
+
+// discoverMarkdown adds all *.md documents in or at the given path glob to the substructure.
+func (s *Substructure) discoverMarkdown(path string) error {
+	var mdFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		mdFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.md"))
+		if err != nil {
+			return err
+		}
+	} else {
+		mdFiles = append(mdFiles, path)
+	}
+
+	for _, src := range mdFiles {
+		if shouldIgnore(src) {
+			continue
+		}
+		meta := NewMetadata(src)
+		s.add(
+			NewMarkdownDocument(src, meta,
+				NewHTMLDocument(src, meta, tmplPath,
+					NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+				),
+			),
+		)
+	}
+
+	return nil
+}
+
+// discoverOrg adds all *.org documents in or at the given path glob to the substructure.
+func (s *Substructure) discoverOrg(path string) error {
+	// TODO: Allow looking in user's org directory.
+	// TODO: Allow rendering only a subsection of an org file.
+	var orgFiles []string
+	if stat, err := os.Stat(path); err != nil {
+		if !os.IsNotExist(err) {
+			return err
+		}
+	} else if stat.IsDir() {
+		orgFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.org"))
+		if err != nil {
+			return err
+		}
+	} else {
+		orgFiles = append(orgFiles, path)
+	}
+
+	for _, src := range orgFiles {
+		if shouldIgnore(src) {
+			continue
+		}
+		meta := NewMetadata(src)
+		s.add(
+			NewOrgDocument(src, meta,
+				NewHTMLDocument(src, meta, tmplPath,
+					NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+				),
+			),
+		)
+	}
+
+	return nil
+}
+
+// galleryGlobs are the relative path components with which to discover images.
+// Each is appended to the path supplied to discoverPhotos and used to perform a glob.
+//
+// The glob supports double asterisks, which mean "any character, including a path separator".
+// Otherwise, syntax is identical to that of [filepath.Glob].
+var galleryGlobs []string = []string{
+	"img/**/*.[jJ][pP][gG]",
+	"img/**/*.[jJ][pP][eE][gG]",
 }
 
 // discoverStatic adds all documents in or at the given path glob to the substructure.
@@ -568,22 +616,12 @@ func (s *Substructure) discoverTemplates(path string) error {
 			return err
 		}
 	} else if stat.IsDir() {
-		tmplf, err := filepathx.Glob(filepath.Join(path, "**", "*.tmpl"))
+		tmplf, err := filepathx.Glob(filepath.Join(path, "**", "*.html.tmpl"))
 		if err != nil {
 			return err
 		}
 		tmplFiles = append(tmplFiles, tmplf...)
-		mdf, err := filepathx.Glob(filepath.Join(path, "**", "*.md"))
-		if err != nil {
-			return err
-		}
-		tmplFiles = append(tmplFiles, mdf...)
-		markdownf, err := filepathx.Glob(filepath.Join(path, "**", "*.markdown"))
-		if err != nil {
-			return err
-		}
-		tmplFiles = append(tmplFiles, markdownf...)
-	} else if strings.HasSuffix(path, ".tmpl") || strings.HasSuffix(path, ".md") || strings.HasSuffix(path, ".markdown") {
+	} else if strings.HasSuffix(path, ".tmpl") {
 		tmplFiles = append(tmplFiles, path)
 	}
 
@@ -591,7 +629,12 @@ func (s *Substructure) discoverTemplates(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		s.add(NewTemplateDocument(src, NewMetadata(src), s.docs, s.galleries))
+		meta := NewMetadata(src)
+		s.add(
+			NewHTMLDocument(src, meta, tmplPath,
+				NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+			),
+		)
 	}
 
 	return nil

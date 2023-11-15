@@ -3,7 +3,7 @@
     <li>
       <a href="#{{ .Anchor }}">{{ .HTML }}</a>
       {{ if .Items }}
-        {{ template "src/templates/_subtoc.html.tmpl" .Items }}
+        {{ template "\_subtoc.html.tmpl" .Items }}
       {{ end }}
     </li>
   {{ end }}

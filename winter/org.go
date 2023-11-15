@@ -16,29 +16,29 @@ import (
 // The OrgDocument is transitory;
 // its only purpose is to create an [HTMLDocument].
 type OrgDocument struct {
-	// Next is the HTML document generated from this Org document.
-	Next *HTMLDocument
 	// SourcePath is the path on disk to the file this Org is read from or generated from.
 	// The path is relative to the working directory.
 	SourcePath string
 
 	deps map[string]struct{}
 	meta *Metadata
+	// next is the HTML document generated from this Org document.
+	next Document
 }
 
 // NewOrgDocument creates a new document whose original source is at path src.
 //
 // Nothing is read from disk; src is metadata.
 // To read and parse Org, call [Load].
-func NewOrgDocument(src string, meta *Metadata) *OrgDocument {
+func NewOrgDocument(src string, meta *Metadata, next Document) *OrgDocument {
 	return &OrgDocument{
-		Next:       NewHTMLDocument(src, meta),
 		SourcePath: src,
 
 		deps: map[string]struct{}{
 			"public/style.css": {},
 		},
 		meta: meta,
+		next: next,
 	}
 }
 
@@ -46,7 +46,7 @@ func (doc *OrgDocument) DependsOn(src string) bool {
 	if _, ok := doc.deps[src]; ok {
 		return true
 	}
-	return doc.Next.DependsOn(src)
+	return doc.next.DependsOn(src)
 }
 
 // Load reads Org from r and loads it into doc.
@@ -101,7 +101,7 @@ func (d *OrgDocument) Load(r io.Reader) error {
 		return err
 	}
 
-	return d.Next.Load(strings.NewReader(htm))
+	return d.next.Load(strings.NewReader(htm))
 }
 
 func (doc *OrgDocument) Metadata() *Metadata {
@@ -109,5 +109,5 @@ func (doc *OrgDocument) Metadata() *Metadata {
 }
 
 func (doc *OrgDocument) Render(w io.Writer) error {
-	return doc.Next.Render(w)
+	return doc.next.Render(w)
 }
