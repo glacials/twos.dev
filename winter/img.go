@@ -78,17 +78,9 @@ func NewIMG(src string, cfg Config) (*img, error) {
 }
 
 func (im *img) Render(w io.Writer) error {
-	fresh, err := im.generatedPhotosAreFresh(im.SourcePath)
-	if err != nil {
-		return err
-	}
-	if fresh {
-		return nil
-	}
-
 	srcf, err := os.Open(im.SourcePath)
 	if err != nil {
-		return fmt.Errorf("can't read `%s`: %w", im.SourcePath, err)
+		return fmt.Errorf("can't read %q: %w", im.SourcePath, err)
 	}
 	defer srcf.Close()
 	srcPhoto, err := jpeg.Decode(srcf)
@@ -106,7 +98,7 @@ func (im *img) Render(w io.Writer) error {
 	im.EXIF, err = photodata(im.SourcePath)
 	if err != nil {
 		return fmt.Errorf(
-			"cannot get camera for `%s`: %w",
+			"cannot get camera for %q: %w",
 			im.SourcePath,
 			err,
 		)
@@ -123,6 +115,86 @@ func (im *img) Render(w io.Writer) error {
 	}
 
 	return nil
+}
+
+func exifFractionToDecimal(
+	x *exif.Exif,
+	field exif.FieldName,
+) (float64, error) {
+	fraction, err := x.Get(field)
+	if err != nil {
+		return 0, fmt.Errorf("can't get field %s: %w", field, err)
+	}
+	parts := strings.Split(
+		strings.Replace(fraction.String(), "\"", "", 2),
+		"/",
+	)
+	numer, err := strconv.Atoi(parts[0])
+	if err != nil {
+		return 0, fmt.Errorf(
+			"can't convert %s (numerator of %s, %s) to int: %w",
+			parts[0],
+			field,
+			fraction,
+			err,
+		)
+	}
+	denom, err := strconv.Atoi(parts[1])
+	if err != nil {
+		return 0, fmt.Errorf(
+			"can't convert %s (denominator of %s, %s) to int: %w",
+			parts[0],
+			field,
+			fraction,
+			err,
+		)
+	}
+
+	return float64(numer) / float64(denom), nil
+}
+
+// generatedPhotosAreFresh returns true if and only if the file at src has the same content as the last time this function was called.
+//
+// The XDG cache directory for Winter is used to store state.
+// To empty it, run winter clean.
+func (d *img) generatedPhotosAreFresh(src string) (bool, error) {
+	sourceFile, err := os.Open(src)
+	if err != nil {
+		return false, fmt.Errorf("can't open photo at path `%s`: %w", src, err)
+	}
+	defer sourceFile.Close()
+	buf, err := io.ReadAll(sourceFile)
+	if err != nil {
+		return false, fmt.Errorf("cannot hash file %q: %w", src, err)
+	}
+
+	hash := fnv.New32()
+	_, err = hash.Write(buf)
+	if err != nil {
+		return false, fmt.Errorf("cannot compute hash for %q: %w", src, err)
+	}
+
+	sumPath, err := xdg.CacheFile(fmt.Sprintf("%s.sum", filepath.Join(AppName, "generated", "img", filepath.Base(src))))
+	if err != nil {
+		return false, fmt.Errorf("cannot find Winter cache: %w", err)
+	}
+	newSum := hash.Sum32()
+	oldSum, err := os.ReadFile(sumPath)
+	if err != nil {
+		if !errors.Is(err, os.ErrNotExist) {
+			return false, fmt.Errorf("cannot read old sum at %q: %w", oldSum, err)
+		}
+	}
+	if fmt.Sprintf("%d", newSum) == string(oldSum) {
+		return true, nil
+	}
+	if err := os.MkdirAll(filepath.Dir(sumPath), 0o755); err != nil {
+		return false, fmt.Errorf("cann't make thumbnail directory for sums %q: %w", filepath.Dir(sumPath), err)
+	}
+	if err := os.WriteFile(sumPath, []byte(fmt.Sprintf("%d", newSum)), 0o644); err != nil {
+		return false, fmt.Errorf("cannot write hash for %q: %w", src, err)
+	}
+	return false, nil
 }
 
 // photodata extracts the EXIF string (including lens, etc.) and timestamp from
@@ -197,42 +269,6 @@ func photodata(src string) (EXIF, error) {
 	}, nil
 }
 
-func exifFractionToDecimal(
-	x *exif.Exif,
-	field exif.FieldName,
-) (float64, error) {
-	fraction, err := x.Get(field)
-	if err != nil {
-		return 0, fmt.Errorf("can't get field %s: %w", field, err)
-	}
-	parts := strings.Split(
-		strings.Replace(fraction.String(), "\"", "", 2),
-		"/",
-	)
-	numer, err := strconv.Atoi(parts[0])
-	if err != nil {
-		return 0, fmt.Errorf(
-			"can't convert %s (numerator of %s, %s) to int: %w",
-			parts[0],
-			field,
-			fraction,
-			err,
-		)
-	}
-	denom, err := strconv.Atoi(parts[1])
-	if err != nil {
-		return 0, fmt.Errorf(
-			"can't convert %s (denominator of %s, %s) to int: %w",
-			parts[0],
-			field,
-			fraction,
-			err,
-		)
-	}
-
-	return float64(numer) / float64(denom), nil
-}
-
 // thumbnails makes WebP thumbnails of several sizes from the photo srcPhoto located at srcPath,
 // placing them in directory dst,
 // with thumbnail dimensions added to the filename just before the extension.
@@ -304,48 +340,4 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 	}
 
 	return nil
-}
-
-// generatedPhotosAreFresh returns true if and only if the file at src has the same content as the last time this function was called.
-//
-// The XDG cache directory for Winter is used to store state.
-// To empty it, run winter clean.
-func (d *img) generatedPhotosAreFresh(src string) (bool, error) {
-	sourceFile, err := os.Open(src)
-	if err != nil {
-		return false, fmt.Errorf("can't open photo at path `%s`: %w", src, err)
-	}
-	defer sourceFile.Close()
-	buf, err := io.ReadAll(sourceFile)
-	if err != nil {
-		return false, fmt.Errorf("cannot hash file %q: %w", src, err)
-	}
-
-	hash := fnv.New32()
-	_, err = hash.Write(buf)
-	if err != nil {
-		return false, fmt.Errorf("cannot compute hash for %q: %w", src, err)
-	}
-
-	sumPath, err := xdg.CacheFile(fmt.Sprintf("%s.sum", filepath.Join(AppName, "generated", "img", filepath.Base(src))))
-	if err != nil {
-		return false, fmt.Errorf("cannot find Winter cache: %w", err)
-	}
-	newSum := hash.Sum32()
-	oldSum, err := os.ReadFile(sumPath)
-	if err != nil {
-		if !errors.Is(err, os.ErrNotExist) {
-			return false, fmt.Errorf("cannot read old sum at %q: %w", oldSum, err)
-		}
-	}
-	if fmt.Sprintf("%d", newSum) == string(oldSum) {
-		return true, nil
-	}
-	if err := os.MkdirAll(filepath.Dir(sumPath), 0o755); err != nil {
-		return false, fmt.Errorf("cann't make thumbnail directory for sums %q: %w", filepath.Dir(sumPath), err)
-	}
-	if err := os.WriteFile(sumPath, []byte(fmt.Sprintf("%d", newSum)), 0o644); err != nil {
-		return false, fmt.Errorf("cannot write hash for %q: %w", src, err)
-	}
-	return false, nil
 }

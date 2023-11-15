@@ -42,13 +42,15 @@ type TemplateDocument struct {
 	// It should be populated fully before any call to [TemplateDocument.Load],
 	// so that those calls can use the gallery function in their [html/template.FuncMap] to discover and list images.
 	photos map[string][]*img
-	// posts is a reference to the substructure's set of posts.
+	// docs is a reference to the substructure's set of docs.
 	// It should be populated fully before any call to [TemplateDocument.Load],
-	// so that those calls can use the posts function in their [html/template.FuncMap] to discover and list posts.
-	posts []Document
+	// so that those calls can use the docs function in their [html/template.FuncMap] to discover and list docs.
+	docs []Document
 }
 
-func NewTemplateDocument(src string, meta *Metadata, posts []Document, photos map[string][]*img) *TemplateDocument {
+// NewTemplateDocument returns a template document with the given pointers to existing document metadata,
+// substructure docs, and substructure photos.
+func NewTemplateDocument(src string, meta *Metadata, docs []Document, photos map[string][]*img) *TemplateDocument {
 	var next Document
 	html := NewHTMLDocument(src, meta)
 	if isMarkdown(strings.TrimSuffix(strings.ToLower(src), ".tmpl")) {
@@ -67,7 +69,7 @@ func NewTemplateDocument(src string, meta *Metadata, posts []Document, photos ma
 		},
 		meta:   meta,
 		photos: photos,
-		posts:  posts,
+		docs:   docs,
 	}
 }
 
@@ -97,7 +99,7 @@ func (doc *TemplateDocument) Load(r io.Reader) error {
 		return fmt.Errorf("cannot load template frontmatter for %q: %w", doc.meta.SourcePath, err)
 	}
 	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.posts, doc.photos)
+		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.docs, doc.photos)
 	}
 	funcs, err := doc.funcmap()
 	if err != nil {
@@ -168,7 +170,13 @@ func (doc *TemplateDocument) galleryFunc(name string) []*img {
 // postsFunc is a function to be used by templates.
 // It retrieves a slice of metadatas for all documents of type post.
 func (doc *TemplateDocument) postsFunc() []Document {
-	return doc.posts
+	posts := make([]Document, 0, len(doc.docs))
+	for _, doc := range doc.docs {
+		if doc.Metadata().Kind == post {
+			posts = append(posts, doc)
+		}
+	}
+	return posts
 }
 
 // render is a function available to templates.

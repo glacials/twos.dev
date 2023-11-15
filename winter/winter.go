@@ -301,6 +301,13 @@ func (s *Substructure) ExecuteAll(dist string) error {
 				)
 			}
 			dest := filepath.Join(dist, img.WebPath)
+			fresh, err := img.generatedPhotosAreFresh(img.SourcePath)
+			if err != nil {
+				return fmt.Errorf("cannot check freshness of %q: %w", img.SourcePath, err)
+			}
+			if fresh {
+				continue
+			}
 			f, err := os.Create(dest)
 			if err != nil {
 				return fmt.Errorf("cannot write image %q to %q during ExecuteAll: %w", img.SourcePath, dest, err)
@@ -323,16 +330,10 @@ func (s *Substructure) ExecuteAll(dist string) error {
 	return s.validateURIsDidNotChange(dist)
 }
 
-// Rebuild rebuilds the document or template at the given path into the given
-// dist directory.
+// Rebuild rebuilds the document or template at the given path.
+// Then, it rebuilds any downstream dependencies.
 //
-// If src is a template, any documents that use it will be rebuilt afterwards.
-//
-// If src is a document, any templates it uses will be rebuilt first.
-//
-// If src is a post, the index, writing, and archives pages will be rebuilt after.
-//
-// If src isn't known to the substructure, Rebuild returns ErrNotTracked.
+// If src isn't known to the substructure, Rebuild no-ops and returns no error.
 func (s *Substructure) Rebuild(src string) error {
 	fmt.Printf("%s ↓\n", src)
 	if doc, ok := s.DocBySourcePath(src); ok {
@@ -357,10 +358,12 @@ func (s *Substructure) add(d Document) {
 	for i, doc := range s.docs {
 		if doc.Metadata().SourcePath == d.Metadata().SourcePath {
 			s.docs[i] = d
+			sort.Sort(s.docs)
 			return
 		}
 	}
 	s.docs = append(s.docs, d)
+	sort.Sort(s.docs)
 }
 
 // addIMG adds the given image to the substructure,
