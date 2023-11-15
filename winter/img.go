@@ -20,6 +20,15 @@ import (
 	"golang.org/x/image/draw"
 )
 
+type EXIF struct {
+	Camera       string
+	FocalLength  float64
+	Aperture     float64
+	ShutterSpeed string
+	ISO          string
+	TakenAt      time.Time
+}
+
 type img struct {
 	EXIF
 
@@ -68,71 +77,52 @@ func NewIMG(src string, cfg Config) (*img, error) {
 	}, nil
 }
 
-func (d *img) Render(w io.Writer) error {
-	fresh, err := d.generatedPhotosAreFresh(d.SourcePath)
+func (im *img) Render(w io.Writer) error {
+	fresh, err := im.generatedPhotosAreFresh(im.SourcePath)
 	if err != nil {
 		return err
 	}
 	if fresh {
 		return nil
 	}
-	thmdest := filepath.Dir(strings.Replace(
-		filepath.Join("dist", d.WebPath),
-		filepath.FromSlash("/img/"),
-		filepath.FromSlash("/img/thumb/"),
-		1,
-	))
 
-	srcf, err := os.Open(d.SourcePath)
+	srcf, err := os.Open(im.SourcePath)
 	if err != nil {
-		return fmt.Errorf("can't read `%s`: %w", d.SourcePath, err)
+		return fmt.Errorf("can't read `%s`: %w", im.SourcePath, err)
 	}
 	defer srcf.Close()
-
 	srcPhoto, err := jpeg.Decode(srcf)
 	if err != nil {
 		return fmt.Errorf(
 			"cannot decode photo %q (maybe not an image?): %w",
-			d.SourcePath,
+			im.SourcePath,
 			err,
 		)
 	}
-
 	if err := webpbin.Encode(w, srcPhoto); err != nil {
-		return fmt.Errorf("cannot encode source image %q to WebP: %w", d.SourcePath, err)
+		return fmt.Errorf("cannot encode source image %q to WebP: %w", im.SourcePath, err)
 	}
 
-	if err := d.thumbnails(srcPhoto, d.SourcePath, thmdest); err != nil {
-		return fmt.Errorf("can't generate thumbnails: %w", err)
-	}
-
-	d.EXIF, err = photodata(d.SourcePath)
+	im.EXIF, err = photodata(im.SourcePath)
 	if err != nil {
 		return fmt.Errorf(
 			"cannot get camera for `%s`: %w",
-			d.SourcePath,
+			im.SourcePath,
 			err,
 		)
 	}
 
+	thmdest := filepath.Dir(strings.Replace(
+		filepath.Join("dist", im.WebPath),
+		filepath.FromSlash("/img/"),
+		filepath.FromSlash("/img/thumb/"),
+		1,
+	))
+	if err := im.thumbnails(srcPhoto, im.SourcePath, thmdest); err != nil {
+		return fmt.Errorf("can't generate thumbnails: %w", err)
+	}
+
 	return nil
-}
-
-// CreatedAt returns the date and time the photo was taken, or a zero time if
-// unknown.
-func (d *img) CreatedAt() time.Time { return d.EXIF.TakenAt }
-
-// UpdatedAt returns the date and time the photo was last updated, or a zero
-// time if unknown.
-func (d *img) UpdatedAt() time.Time { return time.Time{} }
-
-type EXIF struct {
-	Camera       string
-	FocalLength  float64
-	Aperture     float64
-	ShutterSpeed string
-	ISO          string
-	TakenAt      time.Time
 }
 
 // photodata extracts the EXIF string (including lens, etc.) and timestamp from
@@ -156,7 +146,7 @@ func photodata(src string) (EXIF, error) {
 		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
 	}
 
-	camModel, err := x.Get(exif.Model) // normally, don't ignore errors!
+	camModel, err := x.Get(exif.Model)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't get camera model: %w", err)
 	}

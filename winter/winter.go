@@ -63,6 +63,18 @@
 //
 //	_My cat and dog like to play with each other._
 //
+// # Photos as first-class citizens
+//
+// For photographers, Winter supports photographs as first-class citizens.
+// EXIF data is automatically extracted and can be displayed using template variables.
+// Photos organized into galleries display next to each other neatly,
+// with a built-in lightbox.
+//
+// # Photo EXIF safety
+//
+// Any photos Winter processes that have GPS data embedded in them are loudly rejected,
+// failing the build.
+//
 // # Reduced load times
 //
 // Images and references to them are automatically converted into WebP format and several thumbnails are generated for each.
@@ -293,6 +305,7 @@ func (s *Substructure) ExecuteAll(dist string) error {
 			if err != nil {
 				return fmt.Errorf("cannot write image %q to %q during ExecuteAll: %w", img.SourcePath, dest, err)
 			}
+			defer f.Close()
 			if err := img.Render(f); err != nil {
 				return err
 			}
