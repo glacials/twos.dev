@@ -98,7 +98,7 @@ func (doc *HTMLDocument) DependsOn(src string) bool {
 	if doc.meta.Layout == src {
 		return true
 	}
-	if doc.meta.Parent == src {
+	if doc.meta.ParentFilename == src {
 		return true
 	}
 	if strings.HasSuffix(src, ".css") {

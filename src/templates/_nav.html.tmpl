@@ -27,14 +27,16 @@
         <a href="archives.html"><div class="nav-text">Writing</div></a>
       </div>
     {{- end -}}
-    {{- if .Parent -}}
-      {{- if .IsType "post" -}}
+    {{- if parent -}}
+      {{- if or (.IsType "post") (parent.Metadata.IsType "post") -}}
         <div class="breadcrumb">
           <a href="archives.html"><div class="nav-text">Writing</div></a>
         </div>
       {{- end -}}
       <div class="breadcrumb">
-        <a href="{{ .Parent }}"><div class="nav-text">{{ .Parent }}</div></a>
+        <a href="{{ parent.Metadata.WebPath }}"
+          ><div class="nav-text">{{ parent.Metadata.Title }}</div></a
+        >
       </div>
     {{- end -}}
   {{- end -}}

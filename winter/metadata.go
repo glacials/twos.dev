@@ -38,10 +38,10 @@ type Metadata struct {
 	//
 	// If unset, src/templates/text_document.html.tmpl is used.
 	Layout string `yaml:"layout,omitempty"`
-	// Parent is the filename component of another document that this one is a child of.
-	// Parenthood is a purely semantic relationship;
-	// no rendering behavior is inherited.
-	Parent string `yaml:"parent,omitempty"`
+	// ParentFilename is the filename component of another document that this one is a child of.
+	// Parenthood is a purely semantic relationship for the benefit of the user.
+	// Templates can access parents to influence rendering.
+	ParentFilename string `yaml:"parent,omitempty"`
 	// Preview is a sentence-long blurb of the document,
 	// to be shown along with its title as a teaser of its contents.
 	Preview string `yaml:"preview,omitempty"`

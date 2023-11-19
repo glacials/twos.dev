@@ -32,8 +32,6 @@ const (
 // The TemplateDocument is transitory;
 // its only purpose is to resolve templates then hand off the resolved source to another Document type.
 type TemplateDocument struct {
-	Parent Document
-
 	deps map[string]struct{}
 	// docs is a reference to the substructure's set of docs.
 	// It should be populated fully before any call to [TemplateDocument.Load],
@@ -89,9 +87,6 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *TemplateDocument) Load(r io.Reader) error {
-	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent, tmplPath), doc.docs, doc.photos, nil)
-	}
 	docBytes, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {
 		return fmt.Errorf("cannot load template frontmatter for %q: %w", doc.meta.SourcePath, err)
@@ -176,7 +171,23 @@ func (doc *TemplateDocument) funcmap(tmplPath string) (template.FuncMap, error) 
 		"icon":    iconFunc,
 		"render":  render,
 		"parent": func() Document {
-			return doc.Parent
+			if doc.meta.ParentFilename == "" {
+				return nil
+			}
+			for _, d := range doc.docs {
+				if d.Metadata().WebPath == doc.meta.ParentFilename {
+					fmt.Println("found parent", d.Metadata().WebPath)
+					return d
+				}
+			}
+			panic(
+				fmt.Sprintf(
+					"%q says it has parent %q, but no such document exists; %s",
+					doc.meta.SourcePath,
+					doc.meta.ParentFilename,
+					"make sure it matches the filename property of another document",
+				),
+			)
 		},
 		"posts":  doc.postsFunc,
 		"yearly": yearly,

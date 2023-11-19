@@ -1,6 +1,7 @@
 ---
 date: 2022-07-07
 filename: winter.html
+parent: software.html
 toc: true
 type: page
 updated: 2022-07-13

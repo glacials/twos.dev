@@ -487,7 +487,7 @@ func (s *Substructure) discoverHTML(path string) error {
 		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
 			parent, ok := s.DocBySourcePath(p)
 			if ok {
-				d.Metadata().Parent = parent.Metadata().SourcePath
+				d.Metadata().ParentFilename = parent.Metadata().WebPath
 			}
 		}
 	}
