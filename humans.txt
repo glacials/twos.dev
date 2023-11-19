@@ -2,7 +2,8 @@
 	Me: Benjamin Carlsson
 	Contact: ben@twos.dev
 	Twitter: @glcls
+	Mastodon: @glacials@hachyderm.io
 	Location: Seattle, WA
 
 /* SITE */
-	Software: Neovim, Git, Go, Node
+	Software: Git, Go, Neovim, Node, VSCode, Winter
