@@ -1,21 +1,41 @@
 <nav class="primary">
-  <span class="brand"><a href="/">Ben Carlsson</a></span>
   {{- if eq .WebPath "index.html" -}}
-    <span class="separator">&bull;</span><a href="/now.html">Now</a
-    ><span class="separator">&bull;</span><a href="/photos.html">Photos</a
-    ><span class="separator">&bull;</span><a href="/software.html">Software</a
-    ><span class="separator">&bull;</span><a href="/guide.html">User Guide</a
-    ><span class="separator">&bull;</span><a href="/archives.html">Writing</a>
+    <div class="nav-wrapper">
+      <a href="/"><div class="nav-text">Ben Carlsson</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/now.html"><div class="nav-text">Now</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/photos.html"><div class="nav-text">Photos</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/software.html"><div class="nav-text">Software</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/guide.html"><div class="nav-text">User Guide</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/archives.html"><div class="nav-text">Writing</div></a>
+    </div>
   {{- else -}}
-    <span class="separator">/</span>
+    <div class="breadcrumb">
+      <a href="/"><div class="nav-text">Ben Carlsson</div></a>
+    </div>
     {{- if .IsType "post" -}}
-      <a href="archives.html">Writing</a><span class="separator">/</span>
+      <div class="breadcrumb">
+        <a href="archives.html"><div class="nav-text">Writing</div></a>
+      </div>
     {{- end -}}
     {{- if .Parent -}}
       {{- if .IsType "post" -}}
-        <a href="archives.html">Writing</a><span class="separator">/</span>
+        <div class="breadcrumb">
+          <a href="archives.html"><div class="nav-text">Writing</div></a>
+        </div>
       {{- end -}}
-      <a href="{{ .Parent }}">{{ .Parent }}</a><span class="separator">/</span>
+      <div class="breadcrumb">
+        <a href="{{ .Parent }}"><div class="nav-text">{{ .Parent }}</div></a>
+      </div>
     {{- end -}}
   {{- end -}}
 </nav>
