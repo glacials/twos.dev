@@ -18,6 +18,11 @@ var mdrepl = map[string][]byte{
 	"&quot;": []byte("\""),
 }
 
+var (
+	templateStart = []byte("{{")
+	templateEnd   = []byte("}}")
+)
+
 // MarkdownDocument represents a source file written in Markdown,
 // with optional Go template syntax embedded in it.
 //
@@ -35,6 +40,11 @@ type MarkdownDocument struct {
 	// next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
 	next   Document
 	result *bytes.Buffer
+}
+
+type TemplateNode struct {
+	ast.Leaf
+	Raw []byte
 }
 
 // NewMarkdownDocument creates a new document whose original source is at path src.
@@ -75,20 +85,19 @@ func (doc *MarkdownDocument) Load(r io.Reader) error {
 		return fmt.Errorf("can't parse %s: %w", doc.SourcePath, err)
 	}
 
-	buf := markdown.ToHTML(
-		body,
-		parser.NewWithExtensions(
-			parser.Attributes|
-				parser.Autolink|
-				parser.FencedCode|
-				parser.Footnotes|
-				parser.HeadingIDs|
-				parser.MathJax|
-				parser.Strikethrough|
-				parser.Tables,
-		),
-		newCustomizedRender(),
+	p := parser.NewWithExtensions(
+		parser.Attributes |
+			parser.Autolink |
+			parser.FencedCode |
+			parser.Footnotes |
+			parser.HeadingIDs |
+			parser.MathJax |
+			parser.Strikethrough |
+			parser.Tables,
 	)
+	p.Opts.ParserHook = parserHook
+
+	buf := markdown.ToHTML(body, p, newRenderer())
 	for old, new := range mdrepl {
 		buf = bytes.ReplaceAll(buf, []byte(old), new)
 	}
@@ -149,7 +158,7 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	return nil
 }
 
-func newCustomizedRender() *mdhtml.Renderer {
+func newRenderer() *mdhtml.Renderer {
 	insideLink := false
 	opts := mdhtml.RendererOptions{
 		Flags: mdhtml.FlagsNone,
@@ -169,4 +178,16 @@ func newCustomizedRender() *mdhtml.Renderer {
 		},
 	}
 	return mdhtml.NewRenderer(opts)
+}
+
+func parserHook(data []byte) (ast.Node, []byte, int) {
+	if !(bytes.Contains(data, templateStart) && bytes.Contains(data, templateEnd)) {
+		return nil, nil, 0
+	}
+	end := bytes.Index(data, templateEnd)
+	if end < 0 {
+		panic("cannot find end of template (`}}`)")
+	}
+	fmt.Println("node is", string(data))
+	return &ast.Text{Leaf: ast.Leaf{Literal: data}}, nil, end + len(templateEnd)
 }

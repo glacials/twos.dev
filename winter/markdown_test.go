@@ -30,7 +30,7 @@ func TestMarkdown(t *testing.T) {
 		},
 		{
 			name:     "Template",
-			input:    `{{ template "\_writing.html.tmpl" }}`,
+			input:    `{{ template "_writing.html.tmpl" }}`,
 			expected: "<p>{{ template \"_writing.html.tmpl\" }}</p>\n",
 		},
 		{

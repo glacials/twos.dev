@@ -28,8 +28,8 @@ func TestHTML(t *testing.T) {
 		},
 		{
 			name:     "Template",
-			input:    `{{ template "\_writing.html.tmpl" }}`,
-			expected: surround("{{ template \"\\_writing.html.tmpl\" }}"),
+			input:    `{{ template "_writing.html.tmpl" }}`,
+			expected: surround("{{ template \"_writing.html.tmpl\" }}"),
 		},
 	} {
 		t.Run(test.name, func(t *testing.T) {

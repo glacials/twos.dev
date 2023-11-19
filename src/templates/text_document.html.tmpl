@@ -1,12 +1,12 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{ template "\_head.html.tmpl" . }}
+    {{ template "_head.html.tmpl" . }}
   </head>
 
   <body>
     <div class="container">
-      {{ template "\_nav.html.tmpl" . }}
+      {{ template "_nav.html.tmpl" . }}
       <article>
         {{ if .IsType "draft" }}
           <div class="draft">Draft</div>
@@ -61,6 +61,6 @@
         </p>
       </footer>
     </div>
-    {{ template "\_js.html.tmpl" }}
+    {{ template "_js.html.tmpl" }}
   </body>
 </html>

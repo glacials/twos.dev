@@ -1,13 +1,13 @@
 <!doctype html>
 <html lang="en">
   <head>
-    {{ template "\_head.html.tmpl" . }}
+    {{ template "_head.html.tmpl" . }}
   </head>
 
   <body>
     <div class="container">
       <header>
-        {{ template "\_nav.html.tmpl" . }}
+        {{ template "_nav.html.tmpl" . }}
         {{ if and (IsType "post")  (not .CreatedAt.IsZero) }}
           <small style="text-align:center; display: block">
             <i>

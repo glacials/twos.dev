@@ -4,4 +4,4 @@ filename: writing.html
 type: page
 ---
 
-{{ template "\_writing.html.tmpl" }}
+{{ template "_writing.html.tmpl" }}

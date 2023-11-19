@@ -80,7 +80,7 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 //
 // To use a template, treat its filepath as a name:
 //
-//	{{ template "\_foo.html.tmpl" }}
+//	{{ template "_foo.html.tmpl" }}
 //
 // Any referenced templates will be loaded as well,
 // and attached to the main template.
@@ -318,7 +318,7 @@ func sub(a, b int) int {
 // For example, if tmplDir is src/templates and t has the following fragment in it,
 // loadDeps will attempt to read, parse, and load src/templates/_foot.html.tmpl into t.
 //
-//	{{ template "\_foo.html.tmpl" }}
+//	{{ template "_foo.html.tmpl" }}
 //
 // It repeats this recursively until t and all associated templates are fully resolved.
 // No templates are executed.
