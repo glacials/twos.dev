@@ -14,7 +14,7 @@ Find me at [Mastodon](https://hachyderm.io/@glacials),
 [LinkedIn](https://linkedin.com/in/ben), or
 [ben@twos.dev](mailto:ben@twos.dev).
 
-Some recent posts of mine are below.
+My most recent posts are below.
 
 ---
 

@@ -185,5 +185,5 @@ func parserHook(data []byte) (ast.Node, []byte, int) {
 	if end < 0 {
 		return nil, data, 0
 	}
-	return &ast.Text{Leaf: ast.Leaf{Literal: data}}, data[0:start], end + len(templateEnd)
+	return &ast.Text{Leaf: ast.Leaf{Literal: data}}, nil, end + len(templateEnd)
 }

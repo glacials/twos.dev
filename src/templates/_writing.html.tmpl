@@ -4,6 +4,7 @@
       {{ continue }}
     {{ end }}
     <div class="post">
+      <a href="{{ .Metadata.WebPath }}"><h1>{{ .Metadata.Title }}</h1></a>
       {{ if .Metadata.IsType "draft" }}
         <div class="draft">Draft</div>
       {{ end }}

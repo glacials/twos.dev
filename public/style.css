@@ -185,9 +185,22 @@ h1 {
   line-height: 0.9;
 }
 
-a.post-title h1 {
-  font-size: 2.5rem;
-  margin-top: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 /* Text document hero images */
@@ -221,24 +234,13 @@ h6:has(small) {
   margin-bottom: 0;
 }
 
-h1.site-title {
-  font-size: 3rem !important;
-}
-
 h2 {
-  font-size: 2rem;
   margin-top: 4rem;
 }
 
 h2,
 h3 {
   color: var(--page-fg);
-}
-
-h3,
-h3 a,
-h3 a:visited {
-  font-size: 1.1em;
 }
 
 h3,
@@ -431,27 +433,6 @@ p:has(.gallery-item) {
   z-index: 1;
 }
 
-/* Instead of hiding the fullsize images,
- * we load them as 1x1 pixels so they can be "zoomed" instantly.
- * Even changing this to 0x0 or to left:-1px;top:-1px;
- * prevents the browser from (down?)loading them,
- * causing a blip when zooming.
- *
- * This solution is not great, but it works.
- * Downloading the fullsize images is at least deferred via <img loading="lazy" />.
- */
-.gallery-item:has(input:checked) img.thumbnail,
-.gallery-item:not(:has(input:checked)) img.fullsize {
-  height: 1px;
-  position: absolute;
-  width: 1px;
-}
-
-.gallery-item:has(input:checked) img.fullsize,
-.gallery-item:not(:has(input:checked)) img.thumbnail {
-  display: block;
-}
-
 .gallery-item:has(input:checked) img.fullsize {
   cursor: zoom-out;
   left: 50%;
@@ -516,6 +497,7 @@ p:has(.gallery-item input:checked) + p {
 .publish-date {
   display: block;
   font-size: 0.75em;
+  text-align: center;
 }
 
 .selected {

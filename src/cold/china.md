@@ -8,7 +8,7 @@ type: post
 
 Summer and I recently stayed a few weeks with her parents in Harbin, China.
 
-[![A satellite map zoomed out to see most of china. Harbin is circled in the far northeast.](/img/china-harbin.png)](/img/china-harbin.png)
+![A satellite map zoomed out to see most of china. Harbin is circled in the far northeast.](/img/china-harbin.png)
 
 Harbin is near the northern border, far from the popular coastal cities.
 
