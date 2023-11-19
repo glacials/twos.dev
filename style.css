@@ -185,9 +185,22 @@ h1 {
   line-height: 0.9;
 }
 
-a.post-title h1 {
-  font-size: 2.5rem;
-  margin-top: 0;
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-size: 1em;
+}
+
+h1 {
+  text-align: center;
+  text-transform: uppercase;
+}
+
+h2 {
+  text-transform: uppercase;
 }
 
 /* Text document hero images */
@@ -221,24 +234,13 @@ h6:has(small) {
   margin-bottom: 0;
 }
 
-h1.site-title {
-  font-size: 3rem !important;
-}
-
 h2 {
-  font-size: 2rem;
   margin-top: 4rem;
 }
 
 h2,
 h3 {
   color: var(--page-fg);
-}
-
-h3,
-h3 a,
-h3 a:visited {
-  font-size: 1.1em;
 }
 
 h3,
@@ -289,6 +291,28 @@ li p {
 nav {
   margin-left: 1.25rem;
   overflow-x: auto;
+}
+
+@media (max-width: 50rem) {
+  nav {
+    margin: 0;
+  }
+  nav a {
+    background-color: var(--raised-bg);
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  nav a::after {
+    content: " >";
+  }
+  nav a::before {
+    content: "< ";
+  }
+  nav .separator {
+    display: none;
+  }
 }
 
 nav > * {
@@ -349,6 +373,10 @@ ul {
 
 video + video {
   margin-left: 1rem;
+}
+
+.brand {
+  white-space: nowrap;
 }
 
 .container {
@@ -431,27 +459,6 @@ p:has(.gallery-item) {
   z-index: 1;
 }
 
-/* Instead of hiding the fullsize images,
- * we load them as 1x1 pixels so they can be "zoomed" instantly.
- * Even changing this to 0x0 or to left:-1px;top:-1px;
- * prevents the browser from (down?)loading them,
- * causing a blip when zooming.
- *
- * This solution is not great, but it works.
- * Downloading the fullsize images is at least deferred via <img loading="lazy" />.
- */
-.gallery-item:has(input:checked) img.thumbnail,
-.gallery-item:not(:has(input:checked)) img.fullsize {
-  height: 1px;
-  position: absolute;
-  width: 1px;
-}
-
-.gallery-item:has(input:checked) img.fullsize,
-.gallery-item:not(:has(input:checked)) img.thumbnail {
-  display: block;
-}
-
 .gallery-item:has(input:checked) img.fullsize {
   cursor: zoom-out;
   left: 50%;
@@ -465,10 +472,11 @@ p:has(.gallery-item) {
 
 /* Show caption on top of zoomed image. */
 p:has(.gallery-item input:checked) + p {
-  background: var(--page-bg);
+  background: var(--raised-bg);
   display: block;
   left: 15%;
   margin: 0;
+  max-width: 50rem;
   padding: 1rem;
   position: fixed;
   top: 5%;
@@ -516,6 +524,7 @@ p:has(.gallery-item input:checked) + p {
 .publish-date {
   display: block;
   font-size: 0.75em;
+  text-align: center;
 }
 
 .selected {
