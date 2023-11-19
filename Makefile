@@ -1,8 +1,9 @@
 .PHONY : build build_twos.dev build_winter clean download serve
 
-build: clean build_winter build_twos.dev
+build: clean test build_winter build_twos.dev
 
 build_twos.dev:
+
 	./w build $(WINTER_ARGS)
 
 build_winter:
@@ -17,3 +18,6 @@ download:
 serve: clean
 	@echo Building.
 	@gow run . serve
+
+test:
+	gow test ./...

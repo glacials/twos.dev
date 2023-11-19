@@ -48,6 +48,9 @@ type Metadata struct {
 	// SourcePath is the location on disk of the original file that this document represents.
 	// It is relative to the working directory.
 	SourcePath string `yaml:"-"`
+	// TemplateDir is the location on disk of a directory containing any templates that will be used in the document.
+	// By default, it is src/templates.
+	TemplateDir string `yaml:"-"`
 	// Title is the human-readable title of the document.
 	Title string `yaml:"title,omitempty"`
 	// TOC is whether a table of contents should be rendered with the
@@ -72,7 +75,7 @@ type Metadata struct {
 // Defaults that depend on parsing the content of the document,
 // such as a Preview generated from its content,
 // are not filled in.
-func NewMetadata(src string) *Metadata {
+func NewMetadata(src, tmplDir string) *Metadata {
 	filename := filepath.Base(src)
 	i := strings.IndexRune(filename, '.')
 	if i < 0 {
@@ -84,11 +87,12 @@ func NewMetadata(src string) *Metadata {
 		webPath = fmt.Sprintf("%s.html", noExt)
 	}
 	return &Metadata{
-		Kind:       draft,
-		Layout:     "src/templates/text_document.html.tmpl",
-		SourcePath: src,
-		Title:      noExt,
-		WebPath:    webPath,
+		Kind:        draft,
+		Layout:      filepath.Join(tmplDir, "text_document.html.tmpl"),
+		SourcePath:  src,
+		TemplateDir: tmplDir,
+		Title:       noExt,
+		WebPath:     webPath,
 	}
 }
 

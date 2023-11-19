@@ -54,7 +54,7 @@ type TemplateDocument struct {
 
 // NewTemplateDocument returns a template document with the given pointers to existing document metadata,
 // substructure docs, and substructure photos.
-func NewTemplateDocument(src string, meta *Metadata, docs []Document, photos map[string][]*img, tmplDir string, next Document) *TemplateDocument {
+func NewTemplateDocument(src string, meta *Metadata, docs []Document, photos map[string][]*img, next Document) *TemplateDocument {
 	return &TemplateDocument{
 		deps: map[string]struct{}{
 			src:                {},
@@ -64,7 +64,7 @@ func NewTemplateDocument(src string, meta *Metadata, docs []Document, photos map
 		meta:    meta,
 		next:    next,
 		photos:  photos,
-		tmplDir: tmplDir,
+		tmplDir: meta.TemplateDir,
 	}
 }
 
@@ -90,7 +90,7 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 // If called more than once, the last call wins.
 func (doc *TemplateDocument) Load(r io.Reader) error {
 	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.docs, doc.photos, tmplPath, nil)
+		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent, tmplPath), doc.docs, doc.photos, nil)
 	}
 	docBytes, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {

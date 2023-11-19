@@ -3,6 +3,7 @@ package winter
 import (
 	"bytes"
 	"fmt"
+	"path/filepath"
 	"strings"
 	"testing"
 
@@ -26,12 +27,12 @@ func TestMarkdown(t *testing.T) {
 		{
 			name:     "SimpleTemplate",
 			input:    `{{ add 1 2 }}`,
-			expected: "<p>{{ add 1 2 }}</p>\n",
+			expected: "{{ add 1 2 }}",
 		},
 		{
 			name:     "Template",
 			input:    `{{ template "_writing.html.tmpl" }}`,
-			expected: "<p>{{ template \"_writing.html.tmpl\" }}</p>\n",
+			expected: "{{ template \"_writing.html.tmpl\" }}",
 		},
 		{
 			name:     "Bold",
@@ -41,7 +42,7 @@ func TestMarkdown(t *testing.T) {
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			src := fmt.Sprintf("src/test/%s", test.name)
-			doc := NewMarkdownDocument(src, NewMetadata(src), nil)
+			doc := NewMarkdownDocument(src, NewMetadata(src, filepath.Join("testdata", "templates")), nil)
 			if err := doc.Load(strings.NewReader(test.input)); err != nil {
 				t.Errorf("load failed: %s", err)
 			}

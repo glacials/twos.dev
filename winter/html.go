@@ -72,8 +72,7 @@ type HTMLDocument struct {
 	result []byte
 	// root is the topmost HTML tag in the parsed document,
 	// usually <html> or its parent.
-	root    *html.Node
-	tmplDir string
+	root *html.Node
 }
 
 // NewHTMLDocument creates a new document whose original source is at path src.
@@ -81,15 +80,14 @@ type HTMLDocument struct {
 // Nothing is read from disk; src is metadata.
 // It may or may not point to a file containing HTML.
 // To read and parse HTML, call [Load].
-func NewHTMLDocument(src string, meta *Metadata, tmplDir string, next Document) *HTMLDocument {
+func NewHTMLDocument(src string, meta *Metadata, next Document) *HTMLDocument {
 	return &HTMLDocument{
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
 		},
-		meta:    meta,
-		next:    next,
-		tmplDir: tmplDir,
+		meta: meta,
+		next: next,
 	}
 }
 
@@ -266,7 +264,7 @@ func (doc *HTMLDocument) insertTOC() error {
 	}
 
 	tocPath := "_toc.html.tmpl"
-	tocbody, err := os.ReadFile(filepath.Join(doc.tmplDir, tocPath))
+	tocbody, err := os.ReadFile(filepath.Join(doc.meta.TemplateDir, tocPath))
 	if err != nil {
 		return fmt.Errorf("cannot read toc for %q: %w", doc.meta.SourcePath, err)
 	}
@@ -275,7 +273,7 @@ func (doc *HTMLDocument) insertTOC() error {
 		return fmt.Errorf("cannot parse toc for %q: %w; %s", doc.meta.SourcePath, err, tocbody)
 	}
 	subtocPath := "_subtoc.html.tmpl"
-	subtocbody, err := os.ReadFile(filepath.Join(doc.tmplDir, subtocPath))
+	subtocbody, err := os.ReadFile(filepath.Join(doc.meta.TemplateDir, subtocPath))
 	if err != nil {
 		return fmt.Errorf("cannot read subtoc for %q: %w", doc.meta.SourcePath, err)
 	}

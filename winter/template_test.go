@@ -15,27 +15,26 @@ func TestTemplate(t *testing.T) {
 		{
 			name:     "NoOp",
 			input:    "abc123",
-			expected: "abc123",
+			expected: "abc123\n",
 		},
 		{
 			name:     "SimpleTemplate",
 			input:    "{{ add 1 2 }}",
-			expected: "3",
+			expected: "3\n",
 		},
 		{
 			name:     "Template",
 			input:    `{{ template "hello_world.tmpl" }}`,
-			expected: "Hello, world!\n",
+			expected: "Hello, world!\n\n",
 		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			src := fmt.Sprintf("src/test/%s", test.name)
 			doc := NewTemplateDocument(
 				src,
-				NewMetadata(src),
+				NewMetadata(src, filepath.Join("testdata", "templates")),
 				nil,
 				nil,
-				filepath.Join("testdata", "templates"),
 				nil,
 			)
 			if err := doc.Load(strings.NewReader(test.input)); err != nil {

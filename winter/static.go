@@ -21,7 +21,7 @@ type StaticDocument struct {
 // Nothing is read from disk; src is metadata.
 // To read the static file, call [Load].
 func NewStaticDocument(src, webPath string) *StaticDocument {
-	m := NewMetadata(src)
+	m := NewMetadata(src, tmplPath)
 	m.WebPath = webPath
 	return &StaticDocument{
 		SourcePath: src,

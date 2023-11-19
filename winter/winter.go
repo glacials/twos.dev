@@ -476,10 +476,10 @@ func (s *Substructure) discoverHTML(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		meta := NewMetadata(src)
+		meta := NewMetadata(src, tmplPath)
 		s.add(
-			NewHTMLDocument(src, meta, tmplPath,
-				NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+			NewHTMLDocument(src, meta,
+				NewTemplateDocument(src, meta, s.docs, s.galleries, nil),
 			),
 		)
 	}
@@ -515,11 +515,11 @@ func (s *Substructure) discoverMarkdown(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		meta := NewMetadata(src)
+		meta := NewMetadata(src, tmplPath)
 		s.add(
 			NewMarkdownDocument(src, meta,
-				NewHTMLDocument(src, meta, tmplPath,
-					NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+				NewHTMLDocument(src, meta,
+					NewTemplateDocument(src, meta, s.docs, s.galleries, nil),
 				),
 			),
 		)
@@ -550,11 +550,11 @@ func (s *Substructure) discoverOrg(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		meta := NewMetadata(src)
+		meta := NewMetadata(src, tmplPath)
 		s.add(
 			NewOrgDocument(src, meta,
-				NewHTMLDocument(src, meta, tmplPath,
-					NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+				NewHTMLDocument(src, meta,
+					NewTemplateDocument(src, meta, s.docs, s.galleries, nil),
 				),
 			),
 		)
@@ -629,10 +629,10 @@ func (s *Substructure) discoverTemplates(path string) error {
 		if shouldIgnore(src) {
 			continue
 		}
-		meta := NewMetadata(src)
+		meta := NewMetadata(src, tmplPath)
 		s.add(
-			NewHTMLDocument(src, meta, tmplPath,
-				NewTemplateDocument(src, meta, s.docs, s.galleries, tmplPath, nil),
+			NewHTMLDocument(src, meta,
+				NewTemplateDocument(src, meta, s.docs, s.galleries, nil),
 			),
 		)
 	}
