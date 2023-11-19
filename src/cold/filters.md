@@ -5,9 +5,12 @@ preview: Interesting solutions to the Fermi Paradox.
 type: draft
 ---
 
+TODO: Remove all the "maybes" and just use present tense.
+
+TODO: Rename article "Wholesome Great Filters"?
+
 # Unpopular Great Filters
 
-Great Filters are a possible solution to the Fermi paradox.
 The Fermi paradox is the idea that based on the number of stars in the universe,
 the probabilities of each having a habitable planet,
 the rough odds of life having developed there, and so on;
@@ -18,44 +21,41 @@ If such a civilization exists we should have heard from them by now, but we have
 That's the paradox.
 
 The Great Filter is one solution to this paradox.
-It proposes that every advanced civilization hits some wall that stops it,
-the same wall every time.
+It proposes that some big bad event inevitably happens in the course of any developing civilization that dooms it,
+and it's the same event for every civilization.
 
-Usually, ideas for possible Great Filters are extinction-level events.
-Nuclear war, climate change, hyperintelligent AI, plague, exhaustion of resources.
+Usually, ideas for possible Great Filters are dramatic extinction-level events like
+nuclear war, climate change, hyperintelligent AI, plague, or exhaustion of resources.
 
 I'd like to propose some less popular alternatives.
 
-## Stopped Having Happy Accidents
+## Stopped Having Accidents
 
-We already know that as populations develop, birth rates decline.
-Contraceptives, family planning, education, individual freedoms, and opportunity
-all work together to create more thoughtful and intentional individual reproduction.
-
-When speaking about population levels, an average person producing 1.0 children is called **replacement**.
-Mathematically, it's vital to the continuation of the species that we are at or above replacement.
+When speaking about populations, **replacement** is when the average person produces 1.0 children.
+Mathematically replacement is vital to the continuation of any species.
 An average production of even 0.9 children per person means each generation is smaller than the last,
 until there is simply no next generation.
 
-Historically, reaching replacement has been easy. It's why we are 8 billion strong.
-It turns out when the process that makes children is fun, children get made.
+We already know that as populations develop, birth rates decline.
+Contraceptives, family planning, education, individual freedoms, and opportunity
+all work together to create more thoughtful and intentional reproduction.
 
-But if we reach a world where every child is planned—no "oopsies"—would we even be _close_ to replacement?
+Historically, reaching replacement has been easy.
+The process that makes children is fun, so children get made.
+But as we approach a world that disconnects recreational sex from pregnancy,
+it's possible we won't reach replacement.
+It's possible we won't even get _close_.
+How many couples do you know who _plan_ to have 3+ children?
 
-Do you know any couples who _plan_ to have 3+ children,
-or any other configuration that would beat replacement?
-I bet your social circle is biased towards the first world,
-but it's only a matter of time before those freedoms become available to everyone.
-
-It's a good thing we're working towards that.
+Perhaps the largest human generation ever to exist already does.
+It will be a fantastic thing for each individual to lead their life how they want.
 Also, it might end the species.
+Lack of reproductive freedom is one of the more sinister evolutionary necessities.
+Perhaps once a species advances enough to fix that, it's the beginning of the end.
 
-It may have already ended other species.
-Perhaps we’re the most populous generation of humans the universe will ever see, and it will just go down from here.
-Lack of birth control is an evolutionary necessity,
-so perhaps once a species advances enough to fix it, that's the end.
+Perhaps thousands of civilizations have already gone through this.
 
-## Never Developed the Tools to be Heard
+## Purposefully Stopped Inventing
 
 Humans are unique on the planet for two reasons.
 First, we’re toolmakers.
@@ -64,33 +64,26 @@ More everything.
 The richest among us still want more.
 This carnal desire has brought us far evolutionarily, intellectually, and economically.
 
-Maybe we’ll grow out of it.
-Maybe we’ll realize there’s no point in optimizing for excess, for GDP, for efficiency.
+The desire for excess might be a prerequisite for a species to become advanced.
+But perhaps that desire eventually causes enough planet-scale issues that it forces a realization that it can be overcome,
+in the same way that a little drinking or drug use is fine but a lot can cause a problem to be realized and fixed.
+
 Maybe we’ll reach some philosophical understanding of the universe and our own nature that shuts down that optimization,
 that makes every human being happy and healthy but doesn't also advance science,
 or at least spacefaring science.
 
-Maybe that will be a good thing.
+If so, every civilization that has the necessary properties to grow
+is necessarily stopped from growing by those very same properties' eventual destructive tendencies.
 
-The ability for a species to advance might be deeply entwined with its tendency to desire excess.
-Perhaps the tendency to desire excess is entwined with a delayed philosophical realization that our desire for excess causes issues, and can be overcome.
-
-Maybe it has happened to countless species on countless worlds already,
-and maybe they’ve overcome it,
-ceasing extraplanetary operations and living out the lives they have on the planet they grew up on,
+Once overcome, perhaps we'll stop extraplanetary operations and live out our lives on the planet we grew up on,
 solarpunk style.
+
+Perhaps thousands of civilizations have already gone through this.
 
 ![An illustration of a solarpunk landscape, heavy with greenery and windmills.](/img/solarpunk.jpg)
 
-## Thrust into a Capitalist Hellscape
 
-Maybe the logical end state of capitalism is not what we think.
-Maybe it’s a cyberpunk future where corporations run amok
-(in a more existentially dangerous way than today)
-and either stunt our growth permanently,
-or accidentally make us extinct.
-
-## Destroyed by its Greater System
+## Destroyed by its Carrier
 
 We're only starting to understand the complexity of the gut biome.
 It is an entire colony of bacteria—a civilization, you might say—that operates inside us in symbiosis.
@@ -98,31 +91,55 @@ It is an entire colony of bacteria—a civilization, you might say—that operat
 The bacteria in the biome probably don't "know" that their world is inside a person,
 who lives in an ever larger world.
 
-Maybe we're someone else's gut biome;
-a civilization unknowingly making up part of some larger being.
-Maybe that larger being has some defense mechanism,
+Maybe we're in else's gut biome.
+In the same way a bacterium doesn't have concepts for a coffee table or a planet,
+we could be missing concepts much larger than us—outside the visible universe, maybe—that
+influence our world or galaxy or universe the same way our bodies influence our gut biomes.
+
+Maybe that larger "being" has some defense mechanism,
 like we have white blood cells,
-that hunts down and destroys worlds that get into a bad state.
+that hunts down and destroys civilizations or worlds that get into a bad state.
+
+Perhaps thousands of civilizations have already gone through this.
 
 ## Left
 
 Maybe every civilization advanced to the point where they found a way out.
-Out of our universe, or our of our spatial dimensions.
+Out of our universe, or our of our spatial or temporal dimensions.
 Maybe they discovered time travel and there’s some reason they really wanted to use it, so they time traveled their entire civilization far into the future, like past the heat death of the universe.
 
 Maybe that’s what dark energy is—planets or star systems or galaxies that are “currently” time traveling from the past into the future.
-If you imagine spacetime like a two-dimensional piece of fabric, maybe they were weighing it down so deeply and then poof disappeared from it, leaving the fabric to spring back upwards and disturb everything around it.
-
 Maybe that’s what time travel is.
-Taking the fake-two-dimensional fabric of spacetime and pulling it up instead of weight it down.
+Taking the fake-two-dimensional fabric of spacetime and pulling it up instead of weighing it down.
 
-- Every civilization so far has discovered forward time travel and also discovered something they’d like to skip over, e.g. the heat death of the universe, so they have time-traveled their entire empires out of the present.
-    - Maybe this is what dark matter is. Empires that are “currently” time traveling from the past into the future.
+Perhaps thousands of civilizations have already gone through this.
 
-#There’s No Filter, We Just Aren’t Perceptually Compatible
 
-Maybe everything is perfect and many extraterrestrial civilizations exist, just in ways we can’t perceive, and maybe they equally cannot perceive us.
+## #nofilter
+
+Maybe everything is perfect and many extraterrestrial civilizations exist just fine.
+But maybe it's in ways we can’t perceive, and maybe they equally cannot perceive us.
 Maybe they are what dark matter is.
 Maybe there are entire empires spread across the galaxies thriving, but they somehow exist and have always existed in a perceptual corner of the universe we don’t even know about, like radio waves in the 1700s.
 
+Perhaps thousands of civilizations have already gone through this.
+
+
 ## Would It Be Bad to be Filtered?
+
+Some of these ideas for Great Filters are wholesome.
+It would be great to reach fully reproductive freedom,
+or to re-achieve symbiosis with the resources available to us.
+
+It pulls at me, though, that in these scenarios the species will stop existing,
+because I really want us to continue existing.
+I'm a curious person.
+I'm so curious, that even after I'm dead I want others to uncover all my unsatisfied curiosities of physics and the universe,
+even if I won't be around to be curious about them anymore.
+
+That's not my choice to make, though.
+If everyone alive is happy,
+and our species dwindles into nothingness because of it,
+is that bad?
+
+Perhaps thousands of civilizations have already gone through this.

@@ -3,7 +3,7 @@
     {{ if lt .Metadata.CreatedAt.Year now.Year }}
       {{ continue }}
     {{ end }}
-    <div class="post">
+    <article class="post">
       <a href="{{ .Metadata.WebPath }}"><h1>{{ .Metadata.Title }}</h1></a>
       {{ if .Metadata.IsType "draft" }}
         <div class="draft">Draft</div>
@@ -27,7 +27,7 @@
         </div>
       {{ end }}
       {{ render . }}
-    </div>
+    </article>
   {{ end }}
   <div><a href="/archives.html">Archives &rarr;</a></div>
 </div>

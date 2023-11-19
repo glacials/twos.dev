@@ -92,7 +92,7 @@ article {
   padding: 0;
 }
 
-article > *:not(.photo-grid),
+article > *:not(:has(.gallery-item)),
 footer {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -304,7 +304,7 @@ nav {
   }
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   nav {
     margin: 0;
   }
@@ -400,7 +400,7 @@ video + video {
   }
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   .container {
     margin: 0;
   }
@@ -559,7 +559,7 @@ pre code {
   padding: 1rem 0;
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   pre {
     margin: 0 !important;
   }
@@ -956,7 +956,7 @@ h3.company {
 
 /* End syntax highlighting (see https://github.com/alecthomas/chroma) */
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   .left {
     float: left;
     margin-top: 1rem;

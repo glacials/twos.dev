@@ -176,7 +176,6 @@ func (doc *TemplateDocument) funcmap(tmplPath string) (template.FuncMap, error) 
 			}
 			for _, d := range doc.docs {
 				if d.Metadata().WebPath == doc.meta.ParentFilename {
-					fmt.Println("found parent", d.Metadata().WebPath)
 					return d
 				}
 			}
