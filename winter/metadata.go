@@ -91,7 +91,6 @@ func NewMetadata(src, tmplDir string) *Metadata {
 		Layout:      filepath.Join(tmplDir, "text_document.html.tmpl"),
 		SourcePath:  src,
 		TemplateDir: tmplDir,
-		Title:       noExt,
 		WebPath:     webPath,
 	}
 }
