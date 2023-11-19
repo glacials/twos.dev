@@ -293,35 +293,49 @@ nav {
   overflow-x: auto;
 }
 
+@media (min-width: 50rem) {
+  .breadcrumb,
+  .nav-text,
+  .nav-wrapper {
+    display: inline;
+  }
+  .nav-wrapper + .nav-wrapper::before {
+    content: "∙";
+  }
+  .breadcrumb::after {
+    content: "/";
+  }
+}
+
 @media (max-width: 50rem) {
   nav {
     margin: 0;
   }
   nav a {
-    background-color: var(--raised-bg);
     display: block;
-    margin-bottom: 0.5rem;
-    padding: 0.5rem;
-    text-align: center;
+    margin: 0;
   }
-  nav a::after {
-    content: " >";
+  .nav-text {
+    display: flex;
+    justify-content: space-evenly;
+    padding: 1rem;
   }
-  nav a::before {
-    content: "< ";
+  .nav-text::content,
+  .nav-text::after,
+  .nav-text::before {
+    padding: 1rem 0.5rem;
+  }
+  .nav-text::after {
+    content: "]";
+  }
+  .nav-text::before {
+    content: "[";
   }
   nav .separator {
     display: none;
   }
 }
 
-nav > * {
-  margin-right: 0.5rem;
-}
-
-nav > *:not(:nth-child(1)) {
-  margin-left: 0.5rem;
-}
 nav.socials {
   display: inline;
   margin-left: 0.65rem;
@@ -373,10 +387,6 @@ ul {
 
 video + video {
   margin-left: 1rem;
-}
-
-.brand {
-  white-space: nowrap;
 }
 
 .container {
