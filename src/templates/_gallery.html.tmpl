@@ -1,14 +1,9 @@
 <div class="photo-grid">
   <h2>{{ . }}</h2>
-  <!--
-    TODO: This loads images based on viewport size, not image size.
-    It's complicated to find out the right size because the photo grid has a variable number of columns.
-    See: https://stackoverflow.com/q/47750594/392225
-  -->
   {{ range (gallery .) }}
     <label class="gallery-item">
       <input type="checkbox" />
-      <img class="fullsize" loading="lazy" src="{{ .WebPath }}" />
+      <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" />
     </label>
   {{ end }}
 </div>

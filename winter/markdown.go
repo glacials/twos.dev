@@ -125,17 +125,15 @@ func (doc *MarkdownDocument) Render(w io.Writer) error {
 // It makes unlinked images clickable for a zoomed / gallery view.
 func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 	if entering {
+		// TODO: Replace with a template execution of _gallery.html.tmpl.
+		// TODO: Convert these images to WebP.
 		if _, err := io.WriteString(
 			w,
 			fmt.Sprintf(`
 				<label class="gallery-item">
 			    <input type="checkbox" />
-					<img alt="%s" class="thumbnail" src="%s" title="%s" />
 				  <img alt="%s" class="fullsize" src="%s" title="%s" />
 				`,
-				img.Children[0].AsLeaf().Literal,
-				img.Destination,
-				img.Title,
 				img.Children[0].AsLeaf().Literal,
 				img.Destination,
 				img.Title,
