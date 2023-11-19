@@ -178,23 +178,20 @@ footer {
   line-height: 1.1em;
 }
 
-h1 {
-  color: var(--traditional-fg);
-  font-size: 3rem;
-  hyphens: none;
-  line-height: 0.9;
-}
-
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
+  display: block;
   font-size: 1em;
 }
 
 h1 {
+  color: var(--traditional-fg);
+  hyphens: none;
+  line-height: 0.9;
   text-align: center;
   text-transform: uppercase;
 }
