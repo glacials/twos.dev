@@ -293,6 +293,28 @@ nav {
   overflow-x: auto;
 }
 
+@media (max-width: 50rem) {
+  nav {
+    margin: 0;
+  }
+  nav a {
+    background-color: var(--raised-bg);
+    display: block;
+    margin-bottom: 0.5rem;
+    padding: 0.5rem;
+    text-align: center;
+  }
+  nav a::after {
+    content: " >";
+  }
+  nav a::before {
+    content: "< ";
+  }
+  nav .separator {
+    display: none;
+  }
+}
+
 nav > * {
   margin-right: 0.5rem;
 }
@@ -351,6 +373,10 @@ ul {
 
 video + video {
   margin-left: 1rem;
+}
+
+.brand {
+  white-space: nowrap;
 }
 
 .container {
@@ -446,10 +472,11 @@ p:has(.gallery-item) {
 
 /* Show caption on top of zoomed image. */
 p:has(.gallery-item input:checked) + p {
-  background: var(--page-bg);
+  background: var(--raised-bg);
   display: block;
   left: 15%;
   margin: 0;
+  max-width: 50rem;
   padding: 1rem;
   position: fixed;
   top: 5%;
