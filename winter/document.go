@@ -28,37 +28,14 @@ const (
 `
 )
 
-var (
-	hi = map[atom.Atom]int{
-		atom.H1: 1,
-		atom.H2: 2,
-		atom.H3: 3,
-		atom.H4: 4,
-		atom.H5: 5,
-		atom.H6: 6,
-	}
-
-	styleWrapper = []byte("<span style=\"font-family: sans-serif\">$0</span>")
-	replacements = map[string][]byte{
-		// Break some special characters out of monospace homogeneity
-		"—":       styleWrapper, // Em dash
-		"&mdash;": styleWrapper, // Em dash
-		"–":       styleWrapper, // En dash
-		"&ndash;": styleWrapper, // En dash
-		"ƒ":       styleWrapper, // f-stop symbol
-		// Figure dash is included but commented to call out that we do NOT want
-		// to change its font as it would violate the whole point of the figure dash to make its font
-		// different from surrounding digits.
-		// "‒":       styleWrapper, // Figure dash
-		"―": styleWrapper, // Horizontal bar
-		"⁃": styleWrapper, // Hyphen bullet
-		"⁓": styleWrapper, // Swung dash
-
-		"&#34;":  []byte("\""),
-		"&#39;":  []byte("'"),
-		"&quot;": []byte("\""),
-	}
-)
+var hi = map[atom.Atom]int{
+	atom.H1: 1,
+	atom.H2: 2,
+	atom.H3: 3,
+	atom.H4: 4,
+	atom.H5: 5,
+	atom.H6: 6,
+}
 
 // Document is something that can be built,
 // usually from a source file on disk to a destination file on disk.

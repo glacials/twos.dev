@@ -34,7 +34,6 @@ const (
 type TemplateDocument struct {
 	Parent Document
 
-	body *bytes.Buffer
 	deps map[string]struct{}
 	// docs is a reference to the substructure's set of docs.
 	// It should be populated fully before any call to [TemplateDocument.Load],
@@ -46,9 +45,11 @@ type TemplateDocument struct {
 	// It should be populated fully before any call to [TemplateDocument.Load],
 	// so that those calls can use the gallery function in their [html/template.FuncMap] to discover and list images.
 	photos map[string][]*img
+	result []byte
 	// tmplDir is the path to the directory containing templates,
 	// usually src/templates.
-	tmplDir string
+	tmplDir       string
+	unparsedBytes []byte
 }
 
 // NewTemplateDocument returns a template document with the given pointers to existing document metadata,
@@ -88,33 +89,14 @@ func (doc *TemplateDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *TemplateDocument) Load(r io.Reader) error {
+	if doc.meta.Parent != "" {
+		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.docs, doc.photos, tmplPath, nil)
+	}
 	docBytes, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {
 		return fmt.Errorf("cannot load template frontmatter for %q: %w", doc.meta.SourcePath, err)
 	}
-	if doc.meta.Parent != "" {
-		doc.Parent = NewTemplateDocument(doc.meta.Parent, NewMetadata(doc.meta.Parent), doc.docs, doc.photos, tmplPath, nil)
-	}
-	funcs, err := doc.funcmap(doc.tmplDir)
-	if err != nil {
-		return fmt.Errorf("cannot generate funcmap for %q: %w", doc.meta.SourcePath, err)
-	}
-	tdoc, err := template.New(doc.meta.SourcePath).Funcs(funcs).Parse(string(docBytes))
-	if err != nil {
-		return fmt.Errorf("cannot parse template document %q: %w %s", doc.meta.SourcePath, err, docBytes)
-	}
-	if err := loadDeps(doc.tmplDir, tdoc); err != nil {
-		return fmt.Errorf("cannot load dependencies for %q: %s", doc.meta.SourcePath, err)
-	}
-	for _, depTmpl := range tdoc.Templates() {
-		if depTmpl.Name() != "body" && depTmpl.Name() != doc.meta.SourcePath {
-			doc.deps[depTmpl.Name()] = struct{}{}
-		}
-	}
-	doc.body = &bytes.Buffer{}
-	if err := tdoc.Execute(doc.body, doc.meta); err != nil {
-		return fmt.Errorf("cannot execute tmain for %q: %w", doc.meta.SourcePath, err)
-	}
+	doc.unparsedBytes = docBytes
 	return nil
 }
 
@@ -123,13 +105,54 @@ func (doc *TemplateDocument) Metadata() *Metadata {
 }
 
 func (doc *TemplateDocument) Render(w io.Writer) error {
+	funcs, err := doc.funcmap(doc.tmplDir)
+	if err != nil {
+		return fmt.Errorf("cannot generate funcmap for %q: %w", doc.meta.SourcePath, err)
+	}
+	var mainTmpl *template.Template
+	if doc.meta.Layout == "" {
+		tdoc, err := template.New(doc.meta.SourcePath).Funcs(funcs).Parse(string(doc.unparsedBytes))
+		if err != nil {
+			return fmt.Errorf("cannot parse template document %q: %w", doc.meta.SourcePath, err)
+		}
+		mainTmpl = tdoc
+	} else {
+		layoutBytes, err := os.ReadFile(doc.meta.Layout)
+		if err != nil {
+			return fmt.Errorf("cannot load template frontmatter for %q: %w", doc.meta.SourcePath, err)
+		}
+		layoutTmpl, err := template.New(doc.meta.Layout).Funcs(funcs).Parse(string(layoutBytes))
+		if err != nil {
+			return fmt.Errorf("cannot parse layout template %q for document %q: %w", doc.meta.Layout, doc.meta.SourcePath, err)
+		}
+		if _, err = layoutTmpl.New("body").Parse(string(doc.unparsedBytes)); err != nil {
+			return fmt.Errorf("cannot parse document %q for inclusion in layout %q: %w", doc.meta.SourcePath, doc.meta.Layout, err)
+		}
+		mainTmpl = layoutTmpl
+	}
+	if err := loadDeps(doc.tmplDir, mainTmpl); err != nil {
+		return fmt.Errorf("cannot load dependencies for %q: %s", doc.meta.SourcePath, err)
+	}
+	for _, depTmpl := range mainTmpl.Templates() {
+		if depTmpl.Name() != "body" && depTmpl.Name() != doc.meta.SourcePath {
+			doc.deps[depTmpl.Name()] = struct{}{}
+		}
+	}
+	var buf bytes.Buffer
+	if err := mainTmpl.Execute(&buf, doc.meta); err != nil {
+		return fmt.Errorf("cannot execute tmain for %q: %w", doc.meta.SourcePath, err)
+	}
+	doc.result = buf.Bytes()
 	if doc.next == nil {
-		if _, err := io.Copy(w, doc.body); err != nil {
+		if _, err := io.Copy(w, bytes.NewReader(doc.result)); err != nil {
 			return fmt.Errorf("cannot render template document %q: %w", doc.meta.SourcePath, err)
 		}
 		return nil
 	}
-	return doc.next.Render(w)
+	if err := doc.next.Render(w); err != nil {
+		return fmt.Errorf("cannot render from %T to %T: %w", doc, doc.next, err)
+	}
+	return nil
 }
 
 // funcmap returns a [template.FuncMap] for the document.
@@ -169,12 +192,13 @@ func (doc *TemplateDocument) galleryFunc(name string) []*img {
 // postsFunc is a function to be used by templates.
 // It retrieves a slice of metadatas for all documents of type post.
 func (doc *TemplateDocument) postsFunc() []Document {
-	posts := make([]Document, 0, len(doc.docs))
+	posts := make(documents, 0, len(doc.docs))
 	for _, doc := range doc.docs {
 		if doc.Metadata().Kind == post {
 			posts = append(posts, doc)
 		}
 	}
+	sort.Sort(posts)
 	return posts
 }
 

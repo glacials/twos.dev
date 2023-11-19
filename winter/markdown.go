@@ -31,15 +31,11 @@ var (
 // The MarkdownDocument is transitory;
 // its only purpose is to create a [TemplateDocument].
 type MarkdownDocument struct {
-	// SourcePath is the path on disk to the file this Markdown is read from or generated from.
-	// The path is relative to the working directory.
-	SourcePath string
-
 	deps map[string]struct{}
 	meta *Metadata
 	// next is a pointer to the incarnation of this document that comes after Markdown rendering is complete.
 	next   Document
-	result *bytes.Buffer
+	result []byte
 }
 
 type TemplateNode struct {
@@ -53,8 +49,6 @@ type TemplateNode struct {
 // To read and parse Markdown, call [Load].
 func NewMarkdownDocument(src string, meta *Metadata, next Document) *MarkdownDocument {
 	return &MarkdownDocument{
-		SourcePath: src,
-
 		deps: map[string]struct{}{
 			src:                {},
 			"public/style.css": {},
@@ -82,9 +76,8 @@ func (doc *MarkdownDocument) Load(r io.Reader) error {
 	// Fields removed from frontmatter shouldn't hold onto previous values.
 	body, err := frontmatter.Parse(r, doc.meta)
 	if err != nil {
-		return fmt.Errorf("can't parse %s: %w", doc.SourcePath, err)
+		return fmt.Errorf("can't parse %s: %w", doc.meta.SourcePath, err)
 	}
-
 	p := parser.NewWithExtensions(
 		parser.Attributes |
 			parser.Autolink |
@@ -97,15 +90,15 @@ func (doc *MarkdownDocument) Load(r io.Reader) error {
 	)
 	p.Opts.ParserHook = parserHook
 
-	buf := markdown.ToHTML(body, p, newRenderer())
+	byts := markdown.ToHTML(body, p, newRenderer())
 	for old, new := range mdrepl {
-		buf = bytes.ReplaceAll(buf, []byte(old), new)
+		byts = bytes.ReplaceAll(byts, []byte(old), new)
 	}
-	doc.result = bytes.NewBuffer(buf)
+	doc.result = byts
 	if doc.next == nil {
 		return nil
 	}
-	if err := doc.next.Load(doc.result); err != nil {
+	if err := doc.next.Load(bytes.NewReader(doc.result)); err != nil {
 		return fmt.Errorf("cannot load from %T to %T: %w", doc, doc.next, err)
 	}
 	return nil
@@ -116,10 +109,10 @@ func (doc *MarkdownDocument) Metadata() *Metadata {
 }
 
 func (doc *MarkdownDocument) Render(w io.Writer) error {
-	if _, err := io.Copy(w, doc.result); err != nil {
-		return fmt.Errorf("cannot render Markdown: %w", err)
-	}
 	if doc.next == nil {
+		if _, err := io.Copy(w, bytes.NewReader(doc.result)); err != nil {
+			return fmt.Errorf("cannot render Markdown: %w", err)
+		}
 		return nil
 	}
 	if err := doc.next.Render(w); err != nil {
@@ -181,13 +174,16 @@ func newRenderer() *mdhtml.Renderer {
 }
 
 func parserHook(data []byte) (ast.Node, []byte, int) {
-	if !(bytes.Contains(data, templateStart) && bytes.Contains(data, templateEnd)) {
+	if !bytes.HasPrefix(data, templateStart) {
+		return nil, nil, 0
+	}
+	start := bytes.Index(data, templateStart)
+	if start < 0 {
 		return nil, nil, 0
 	}
 	end := bytes.Index(data, templateEnd)
 	if end < 0 {
-		panic("cannot find end of template (`}}`)")
+		return nil, data, 0
 	}
-	fmt.Println("node is", string(data))
-	return &ast.Text{Leaf: ast.Leaf{Literal: data}}, nil, end + len(templateEnd)
+	return &ast.Text{Leaf: ast.Leaf{Literal: data}}, data[0:start], end + len(templateEnd)
 }

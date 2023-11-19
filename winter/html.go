@@ -11,12 +11,46 @@ import (
 	"regexp"
 	"strings"
 
+	"github.com/adrg/frontmatter"
 	"github.com/alecthomas/chroma"
 	chromahtml "github.com/alecthomas/chroma/formatters/html"
 	"github.com/alecthomas/chroma/lexers"
 	"github.com/alecthomas/chroma/styles"
 	"golang.org/x/net/html"
 	"golang.org/x/net/html/atom"
+)
+
+var (
+	// styleWrapper is used to surround any text that,
+	// if the entire page is in a monospace font,
+	// deserves to be in a variable-width font.
+	//
+	// For example, dashes.html shows the difference between the en and em dashes.
+	// In a monospace font, they're nearly identical.
+	styleWrapper = []byte("<span style=\"font-family: sans-serif\">$0</span>")
+	// earlyReplacements are raw text replacements that will happen before HTML is parsed or rendered.
+	earlyReplacements = map[string][]byte{
+		// Break some special characters out of monospace homogeneity
+		"—":       styleWrapper, // Em dash
+		"&mdash;": styleWrapper, // Em dash
+		"–":       styleWrapper, // En dash
+		"&ndash;": styleWrapper, // En dash
+		"ƒ":       styleWrapper, // f-stop symbol
+		// Figure dash is included but commented to call out that we do NOT want
+		// to change its font as it would violate the whole point of the figure dash to make its font
+		// different from surrounding digits.
+		// "‒":       styleWrapper, // Figure dash
+		"―": styleWrapper, // Horizontal bar
+		"⁃": styleWrapper, // Hyphen bullet
+		"⁓": styleWrapper, // Swung dash
+
+	}
+	// lateReplacements are raw text replacements that will happen after HTML has been parsed and rendered.
+	lateReplacements = map[string][]byte{
+		"&#34;":  []byte("\""),
+		"&#39;":  []byte("'"),
+		"&quot;": []byte("\""),
+	}
 )
 
 // HTMLDocument represents the HTML for a source file.
@@ -35,7 +69,7 @@ type HTMLDocument struct {
 	deps   map[string]struct{}
 	meta   *Metadata
 	next   Document
-	result *bytes.Buffer
+	result []byte
 	// root is the topmost HTML tag in the parsed document,
 	// usually <html> or its parent.
 	root    *html.Node
@@ -82,7 +116,18 @@ func (doc *HTMLDocument) DependsOn(src string) bool {
 //
 // If called more than once, the last call wins.
 func (doc *HTMLDocument) Load(r io.Reader) error {
-	root, err := html.Parse(r)
+	body, err := frontmatter.Parse(r, doc.meta)
+	if err != nil {
+		return fmt.Errorf("can't parse %s: %w", doc.meta.SourcePath, err)
+	}
+	for old, new := range earlyReplacements {
+		re, err := regexp.Compile(old)
+		if err != nil {
+			return err
+		}
+		body = re.ReplaceAll(body, new)
+	}
+	root, err := html.Parse(bytes.NewReader(body))
 	if err != nil {
 		return err
 	}
@@ -90,23 +135,23 @@ func (doc *HTMLDocument) Load(r io.Reader) error {
 	if err := doc.Massage(); err != nil {
 		return err
 	}
-	doc.result = &bytes.Buffer{}
-	if err := html.Render(doc.result, doc.root); err != nil {
+	var buf bytes.Buffer
+	if err := html.Render(&buf, doc.root); err != nil {
 		return fmt.Errorf("cannot render HTML to build %q: %w", doc.meta.WebPath, err)
 	}
-	buf := doc.result.Bytes()
-	for old, new := range replacements {
+	byts := buf.Bytes()
+	for old, new := range lateReplacements {
 		re, err := regexp.Compile(old)
 		if err != nil {
 			return err
 		}
-		buf = re.ReplaceAll(buf, new)
+		byts = re.ReplaceAll(byts, new)
 	}
-	doc.result = bytes.NewBuffer(buf)
+	doc.result = byts
 	if doc.next == nil {
 		return nil
 	}
-	if err := doc.next.Load(doc.result); err != nil {
+	if err := doc.next.Load(bytes.NewReader(doc.result)); err != nil {
 		return fmt.Errorf("cannot load from %T to %T: %w", doc, doc.next, err)
 	}
 	return nil
@@ -154,10 +199,10 @@ func (doc *HTMLDocument) Post() bool {
 
 // Render encodes any loaded content into HTML and writes it to w.
 func (doc *HTMLDocument) Render(w io.Writer) error {
-	if _, err := io.Copy(w, doc.result); err != nil {
-		return fmt.Errorf("cannot render HTML: %w", err)
-	}
 	if doc.next == nil {
+		if _, err := io.Copy(w, bytes.NewReader(doc.result)); err != nil {
+			return fmt.Errorf("cannot render HTML: %w", err)
+		}
 		return nil
 	}
 	if err := doc.next.Render(w); err != nil {
@@ -260,7 +305,7 @@ func (doc *HTMLDocument) insertTOC() error {
 }
 
 func (doc *HTMLDocument) replaceSpecialText() error {
-	for old, new := range replacements {
+	for old, new := range lateReplacements {
 		re, err := regexp.Compile(old)
 		if err != nil {
 			return err
@@ -297,6 +342,9 @@ func (doc *HTMLDocument) setPreview() error {
 	return nil
 }
 
+// setTitle finds the first level-1 heading in the document,
+// sets the document title to its contents,
+// then removes it.
 func (doc *HTMLDocument) setTitle() error {
 	h1 := firstTag(doc.root, atom.H1)
 	if h1 == nil {
@@ -310,18 +358,7 @@ func (doc *HTMLDocument) setTitle() error {
 	if doc.meta.Title == "" {
 		return fmt.Errorf("no title found in %s", doc.meta.SourcePath)
 	}
-	link := html.Node{
-		Attr: []html.Attribute{
-			{Key: "href", Val: doc.meta.WebPath},
-			{Key: "class", Val: "post-title"},
-		},
-		DataAtom: atom.A,
-		Data:     "a",
-		Type:     html.ElementNode,
-	}
-	h1.Parent.InsertBefore(&link, h1)
 	h1.Parent.RemoveChild(h1)
-	link.InsertBefore(h1, nil)
 	return nil
 }
 
