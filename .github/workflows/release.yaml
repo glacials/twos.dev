@@ -6,7 +6,7 @@ jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout 🛎️
+      - name: Checkout
         uses: actions/checkout@v2
 
       - name: Set up Go
@@ -17,13 +17,20 @@ jobs:
       - name: Pull down config.org
         run: curl https://raw.githubusercontent.com/glacials/dotfiles/main/dot_config/emacs/config.org > src/warm/config.org
 
-      - name: Install and Build 🔧
-        run: make build
+      - name: Test & build Winter
+        run: |
+          go test ./...
+          go build -o w .
+
+      - name: Build twos.dev
+        run: |
+          ./w clean
+          ./w build
 
       - name: Sanity check
         run: test -f dist/index.html
 
-      - name: Deploy 🚀
+      - name: Deploy
         uses: JamesIves/github-pages-deploy-action@v4.3.3
         with:
           branch: gh-pages
