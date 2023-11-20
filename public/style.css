@@ -296,8 +296,16 @@ nav .hierarchy {
 @media (min-width: 50rem) {
   nav {
     display: grid;
+  }
+  nav:has(.breadcrumb) {
     grid-column-gap: 5px;
     grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  nav h1,
+  .title {
+    margin: auto 0;
+    margin: auto 0;
   }
 
   nav > *:nth-child(1) {
