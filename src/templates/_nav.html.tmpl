@@ -19,25 +19,30 @@
       <a href="/archives.html"><div class="nav-text">Writing</div></a>
     </div>
   {{- else -}}
-    <div class="breadcrumb">
-      <a href="/"><div class="nav-text">Ben Carlsson</div></a>
-    </div>
-    {{- if .IsType "post" -}}
+    <div class="hierarchy">
       <div class="breadcrumb">
-        <a href="archives.html"><div class="nav-text">Writing</div></a>
+        <a href="/"><div class="nav-text">Ben Carlsson</div></a>
       </div>
-    {{- end -}}
-    {{- if parent -}}
-      {{- if or (.IsType "post") (parent.Metadata.IsType "post") -}}
+      {{- if .IsType "post" -}}
         <div class="breadcrumb">
           <a href="archives.html"><div class="nav-text">Writing</div></a>
         </div>
       {{- end -}}
-      <div class="breadcrumb">
-        <a href="{{ parent.Metadata.WebPath }}"
-          ><div class="nav-text">{{ parent.Metadata.Title }}</div></a
-        >
-      </div>
-    {{- end -}}
+      {{- if parent -}}
+        {{- if or (.IsType "post") (parent.Metadata.IsType "post") -}}
+          <div class="breadcrumb">
+            <a href="archives.html"><div class="nav-text">Writing</div></a>
+          </div>
+        {{- end -}}
+        <div class="breadcrumb">
+          <a href="{{ parent.Metadata.WebPath }}"
+            ><div class="nav-text">{{ parent.Metadata.Title }}</div></a
+          >
+        </div>
+      {{- end -}}
+    </div>
+    <div class="breadcrumb title">
+      <a href="{{ .WebPath }}"><h1>{{ .Title }}</h1></a>
+    </div>
   {{- end -}}
 </nav>

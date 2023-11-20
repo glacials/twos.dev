@@ -353,16 +353,17 @@ func (s *Substructure) Rebuild(src string) error {
 
 // add adds the given document to the substructure,
 // removing any old versions in the process.
-func (s *Substructure) add(d Document) {
+func (s *Substructure) add(doc Document) {
 	// dedupe
-	for i, doc := range s.docs {
-		if doc.Metadata().SourcePath == d.Metadata().SourcePath {
-			s.docs[i] = d
+	for i, d := range s.docs {
+		if d.Metadata().SourcePath == doc.Metadata().SourcePath {
+			s.docs[i] = doc
+			// Sort again in case d's creation date changed.
 			sort.Sort(s.docs)
 			return
 		}
 	}
-	s.docs = append(s.docs, d)
+	s.docs = append(s.docs, doc)
 	sort.Sort(s.docs)
 }
 
@@ -397,26 +398,26 @@ func (s *Substructure) discover() error {
 
 // discoverAtPath discovers all documents in or at the given path glob.
 func (s *Substructure) discoverAtPath(path string) error {
-	if err := s.discoverHTML(path); err != nil {
-		return err
-	}
-	// For now, Markdown files are gathered by discoverTemplates.
-	//	if err := s.discoverMarkdown(path); err != nil {
-	//		return err
-	//	}
-	if err := s.discoverOrg(path); err != nil {
-		return err
-	}
 	if err := s.discoverGalleries(path); err != nil {
+		return err
+	}
+	if err := s.discoverHTML(path); err != nil {
 		return err
 	}
 	if err := s.discoverMarkdown(path); err != nil {
 		return err
 	}
+	if err := s.discoverOrg(path); err != nil {
+		return err
+	}
+	// TODO: Calling discoverTemplates once misses *.html.tmpl files.
+	// Calling it twice doesn't. Fix?
 	if err := s.discoverTemplates(path); err != nil {
 		return err
 	}
-
+	if err := s.discoverTemplates(path); err != nil {
+		return err
+	}
 	sort.Sort(s.docs)
 	return nil
 }
@@ -464,10 +465,11 @@ func (s *Substructure) discoverHTML(path string) error {
 			return err
 		}
 	} else if stat.IsDir() {
-		htmlFiles, err = filepathx.Glob(filepath.Join(path, "**", "*.html"))
+		htmlf, err := filepathx.Glob(filepath.Join(path, "**", "*.html"))
 		if err != nil {
 			return err
 		}
+		htmlFiles = append(htmlFiles, htmlf...)
 	} else if strings.HasSuffix(path, ".html") {
 		htmlFiles = append(htmlFiles, path)
 	}
@@ -608,7 +610,7 @@ func (s *Substructure) discoverStatic(path string) error {
 	return nil
 }
 
-// discoverTemplates adds all *.tmpl documents in or at the given path glob to the substructure.
+// discoverTemplates adds all *.html.tmpl documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverTemplates(path string) error {
 	var tmplFiles []string
 	if stat, err := os.Stat(path); err != nil {
@@ -621,7 +623,7 @@ func (s *Substructure) discoverTemplates(path string) error {
 			return err
 		}
 		tmplFiles = append(tmplFiles, tmplf...)
-	} else if strings.HasSuffix(path, ".tmpl") {
+	} else if strings.HasSuffix(path, ".html.tmpl") {
 		tmplFiles = append(tmplFiles, path)
 	}
 
@@ -635,6 +637,14 @@ func (s *Substructure) discoverTemplates(path string) error {
 				NewTemplateDocument(src, meta, s.docs, s.galleries, nil),
 			),
 		)
+	}
+	for _, d := range s.docs {
+		if p, _, ok := strings.Cut(d.Metadata().WebPath, "_"); ok {
+			parent, ok := s.DocBySourcePath(p)
+			if ok {
+				d.Metadata().ParentFilename = parent.Metadata().WebPath
+			}
+		}
 	}
 
 	return nil

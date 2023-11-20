@@ -205,6 +205,7 @@ func (doc *TemplateDocument) postsFunc() []Document {
 	posts := make(documents, 0, len(doc.docs))
 	for _, doc := range doc.docs {
 		if doc.Metadata().Kind == post {
+			fmt.Println("found post", doc.Metadata().SourcePath)
 			posts = append(posts, doc)
 		}
 	}

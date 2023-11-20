@@ -8,7 +8,7 @@
     <div class="container">
       {{ template "_nav.html.tmpl" . }}
       <article>
-        <a href="{{ .WebPath }}"><h1>{{ .Title }}</h1></a>
+        <!--        <a href="{{ .WebPath }}"><h1>{{ .Title }}</h1></a> Handled by nav -->
         {{ if .IsType "draft" }}
           <div class="draft">Draft</div>
         {{ end }}
