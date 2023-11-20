@@ -92,7 +92,7 @@ article {
   padding: 0;
 }
 
-article > *:not(.photo-grid),
+article > *:not(:has(.gallery-item)),
 footer {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -286,36 +286,71 @@ li p {
 }
 
 nav {
-  margin-left: 1.25rem;
   overflow-x: auto;
 }
 
+nav .hierarchy {
+  margin: auto 0;
+}
+
 @media (min-width: 50rem) {
+  nav {
+    display: grid;
+    grid-column-gap: 5px;
+    grid-template-columns: 1fr 1fr 1fr;
+  }
+
+  nav > *:nth-child(1) {
+    margin-left: 1.75rem;
+  }
+}
+
+@media not (min-width: 50rem) {
+  nav h1 {
+    display: inline;
+  }
+
+  nav a:has(h1) {
+    text-align: center;
+  }
+
+  .breadcrumb:nth-child(1) {
+    grid-column-start: 1;
+  }
+  .breadcrumb:nth-child(2) {
+    grid-column-start: 2;
+  }
+  .breadcrumb:nth-child(4) {
+    margin-left: auto;
+  }
+}
+
+@media (min-width: 50rem) {
+  .breadcrumb:not(.title)::after {
+    content: "/";
+  }
   .breadcrumb,
   .nav-text,
   .nav-wrapper {
     display: inline;
+    white-space: nowrap;
   }
   .nav-wrapper + .nav-wrapper::before {
     content: "∙";
   }
-  .breadcrumb::after {
-    content: "/";
-  }
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   nav {
     margin: 0;
   }
-  nav a {
-    display: block;
-    margin: 0;
+  nav .title {
+    margin-top: 1rem;
   }
   .nav-text {
     display: flex;
     justify-content: space-evenly;
-    padding: 1rem;
+    padding-top: 1rem;
   }
   .nav-text::content,
   .nav-text::after,
@@ -327,9 +362,6 @@ nav {
   }
   .nav-text::before {
     content: "[";
-  }
-  nav .separator {
-    display: none;
   }
 }
 
@@ -400,7 +432,7 @@ video + video {
   }
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   .container {
     margin: 0;
   }
@@ -559,7 +591,7 @@ pre code {
   padding: 1rem 0;
 }
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   pre {
     margin: 0 !important;
   }
@@ -956,7 +988,7 @@ h3.company {
 
 /* End syntax highlighting (see https://github.com/alecthomas/chroma) */
 
-@media (max-width: 50rem) {
+@media not (min-width: 50rem) {
   .left {
     float: left;
     margin-top: 1rem;
