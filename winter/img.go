@@ -94,7 +94,6 @@ func (im *img) Render(w io.Writer) error {
 	if err := webpbin.Encode(w, srcPhoto); err != nil {
 		return fmt.Errorf("cannot encode source image %q to WebP: %w", im.SourcePath, err)
 	}
-
 	im.EXIF, err = photodata(im.SourcePath)
 	if err != nil {
 		return fmt.Errorf(
@@ -103,7 +102,6 @@ func (im *img) Render(w io.Writer) error {
 			err,
 		)
 	}
-
 	thmdest := filepath.Dir(strings.Replace(
 		filepath.Join("dist", im.WebPath),
 		filepath.FromSlash("/img/"),
@@ -113,7 +111,6 @@ func (im *img) Render(w io.Writer) error {
 	if err := im.thumbnails(srcPhoto, im.SourcePath, thmdest); err != nil {
 		return fmt.Errorf("can't generate thumbnails: %w", err)
 	}
-
 	return nil
 }
 

@@ -492,6 +492,14 @@ p:has(.gallery-item) {
   text-align: center;
 }
 
+.gallery-item + .caption.exif {
+  display: none;
+}
+
+.gallery-item:has(input:checked) + .caption.exif {
+  display: block;
+}
+
 .gallery-item:has(input:checked) {
   background: var(--page-bg);
   cursor: zoom-out;
@@ -518,7 +526,8 @@ p:has(.gallery-item) {
 }
 
 /* Show caption on top of zoomed image. */
-p:has(.gallery-item input:checked) + p {
+p:has(.gallery-item input:checked) + p,
+.caption {
   background: var(--raised-bg);
   display: block;
   left: 15%;
@@ -529,6 +538,14 @@ p:has(.gallery-item input:checked) + p {
   top: 5%;
   transform: translate(-15%, -15%);
   z-index: 2;
+}
+
+.caption.exif {
+  background-color: var(--traditional-bg);
+  bottom: 0%;
+  font-size: 0.8rem;
+  line-height: 1rem;
+  top: auto;
 }
 
 .light-only {

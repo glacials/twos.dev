@@ -137,6 +137,7 @@ package winter
 
 import (
 	"fmt"
+	"io/ioutil"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -263,29 +264,6 @@ func (s *Substructure) DocBySourcePath(path string) (doc Document, ok bool) {
 // ExecuteAll builds all documents known to the substructure,
 // as well as any site-scoped non-documents such as RSS feeds.
 func (s *Substructure) ExecuteAll(dist string) error {
-	builtDocs := map[string]Document{}
-	for _, doc := range s.docs {
-		if prev, ok := builtDocs[doc.Metadata().WebPath]; ok {
-			return fmt.Errorf(
-				"both %s (%T) and %s (%T) wanted to build to %s/%s; remove one",
-				doc.Metadata().SourcePath,
-				doc,
-				prev.Metadata().SourcePath,
-				prev,
-				s.cfg.Hostname,
-				doc.Metadata().WebPath,
-			)
-		}
-		if err := s.Rebuild(doc.Metadata().SourcePath); err != nil {
-			return fmt.Errorf(
-				"cannot execute %q during ExecuteAll: %w",
-				doc.Metadata().SourcePath,
-				err,
-			)
-		}
-		builtDocs[doc.Metadata().WebPath] = doc
-	}
-
 	builtIMGs := map[string]*img{}
 	for _, gallery := range s.galleries {
 		for _, img := range gallery {
@@ -321,6 +299,28 @@ func (s *Substructure) ExecuteAll(dist string) error {
 			}
 			builtIMGs[img.WebPath] = img
 		}
+	}
+	builtDocs := map[string]Document{}
+	for _, doc := range s.docs {
+		if prev, ok := builtDocs[doc.Metadata().WebPath]; ok {
+			return fmt.Errorf(
+				"both %s (%T) and %s (%T) wanted to build to %s/%s; remove one",
+				doc.Metadata().SourcePath,
+				doc,
+				prev.Metadata().SourcePath,
+				prev,
+				s.cfg.Hostname,
+				doc.Metadata().WebPath,
+			)
+		}
+		if err := s.Rebuild(doc.Metadata().SourcePath); err != nil {
+			return fmt.Errorf(
+				"cannot execute %q during ExecuteAll: %w",
+				doc.Metadata().SourcePath,
+				err,
+			)
+		}
+		builtDocs[doc.Metadata().WebPath] = doc
 	}
 
 	if err := s.writefeed(); err != nil {
@@ -448,6 +448,11 @@ func (s *Substructure) discoverGalleries(src string) error {
 		im, err := NewIMG(src, s.cfg)
 		if err != nil {
 			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
+		}
+		// TODO: Remove this render.
+		// It gathers EXIF info before the image is displayed in the gallery.
+		if err := im.Render(ioutil.Discard); err != nil {
+			return fmt.Errorf("cannot render image to devnull: %w", err)
 		}
 		if err := s.addIMG(im); err != nil {
 			return err

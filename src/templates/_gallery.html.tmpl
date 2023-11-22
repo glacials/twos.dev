@@ -3,7 +3,19 @@
   {{ range (gallery .) }}
     <label class="gallery-item">
       <input type="checkbox" />
-      <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" />
+      <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" title="" />
     </label>
+    <p class="caption exif">
+      <span style="font-style:italic;"> {{ .Camera }}</span><br />
+      <span style="font-style:italic;">
+        {{ .FocalLength }}mm &bull; ƒ{{ .Aperture }} &bull; {{ .ShutterSpeed }}s
+        &bull; ISO
+        {{ .ISO }}
+      </span>
+      <br />
+      <span style="font-style:italic">
+        &copy; {{ .TakenAt.Year }} Benjamin Carlsson
+      </span>
+    </p>
   {{ end }}
 </div>
