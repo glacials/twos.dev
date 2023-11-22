@@ -137,7 +137,7 @@ package winter
 
 import (
 	"fmt"
-	"io/ioutil"
+	"io"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -451,7 +451,7 @@ func (s *Substructure) discoverGalleries(src string) error {
 		}
 		// TODO: Remove this render.
 		// It gathers EXIF info before the image is displayed in the gallery.
-		if err := im.Render(ioutil.Discard); err != nil {
+		if err := im.Render(io.Discard); err != nil {
 			return fmt.Errorf("cannot render image to devnull: %w", err)
 		}
 		if err := s.addIMG(im); err != nil {
