@@ -426,6 +426,33 @@ video + video {
   margin-left: 1rem;
 }
 
+.caption {
+  font-style: italic;
+}
+
+/* Show caption on top of zoomed image. */
+p:has(.gallery-item input:checked) + p,
+.caption {
+  background: var(--traditional-bg);
+  display: block;
+  left: 15%;
+  margin: 0;
+  max-width: 50rem;
+  padding: 1rem;
+  position: fixed;
+  top: 5%;
+  transform: translate(-15%, -15%);
+  z-index: 2;
+}
+
+.caption.exif {
+  background-color: var(--traditional-bg);
+  bottom: 0%;
+  font-size: 0.75rem;
+  line-height: 1rem;
+  top: auto;
+}
+
 .container {
   background: var(--traditional-bg);
   max-width: var(--container-width);
@@ -492,6 +519,14 @@ p:has(.gallery-item) {
   text-align: center;
 }
 
+.gallery-item + .caption.exif {
+  display: none;
+}
+
+.gallery-item:has(input:checked) + .caption.exif {
+  display: block;
+}
+
 .gallery-item:has(input:checked) {
   background: var(--page-bg);
   cursor: zoom-out;
@@ -515,20 +550,6 @@ p:has(.gallery-item) {
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
-}
-
-/* Show caption on top of zoomed image. */
-p:has(.gallery-item input:checked) + p {
-  background: var(--raised-bg);
-  display: block;
-  left: 15%;
-  margin: 0;
-  max-width: 50rem;
-  padding: 1rem;
-  position: fixed;
-  top: 5%;
-  transform: translate(-15%, -15%);
-  z-index: 2;
 }
 
 .light-only {
