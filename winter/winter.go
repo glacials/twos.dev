@@ -138,6 +138,7 @@ package winter
 import (
 	"fmt"
 	"io"
+	"log"
 	"net/url"
 	"os"
 	"path/filepath"
@@ -338,13 +339,13 @@ func (s *Substructure) Rebuild(src string) error {
 	fmt.Printf("%s ↓\n", src)
 	if doc, ok := s.DocBySourcePath(src); ok {
 		if err := s.Build(doc); err != nil {
-			return err
+			return fmt.Errorf("cannot retrieve doc at %q: %w", src, err)
 		}
 	}
 	for _, doc := range s.docs {
 		if doc.DependsOn(src) {
 			if err := s.Build(doc); err != nil {
-				return err
+				return fmt.Errorf("cannot build %q (dependent of %q): %w", doc.Metadata().SourcePath, src, err)
 			}
 		}
 	}
@@ -384,6 +385,7 @@ func (s *Substructure) addIMG(im *img) error {
 
 // discover clears the substructure of any known documents and discovers all documents from scratch on the filesystem.
 func (s *Substructure) discover() error {
+	log.Println("Starting discovery.")
 	paths := append(s.cfg.Src, "src")
 	for _, path := range paths {
 		if err := s.discoverAtPath(path); err != nil {
@@ -424,6 +426,7 @@ func (s *Substructure) discoverAtPath(path string) error {
 
 // discoverGalleries adds all documents matching galleryGlobs in or at the given path glob to the substructure.
 func (s *Substructure) discoverGalleries(src string) error {
+	log.Println("Discovering galleries.")
 	stat, err := os.Stat(src)
 	if err != nil {
 		return fmt.Errorf("cannot discovery galleries at %q: %w", src, err)
@@ -464,6 +467,7 @@ func (s *Substructure) discoverGalleries(src string) error {
 
 // discoverHTML adds all *.html documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverHTML(path string) error {
+	log.Println("Discovering HTML.")
 	var htmlFiles []string
 	if stat, err := os.Stat(path); err != nil {
 		if !os.IsNotExist(err) {
@@ -504,6 +508,7 @@ func (s *Substructure) discoverHTML(path string) error {
 
 // discoverMarkdown adds all *.md documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverMarkdown(path string) error {
+	log.Println("Discovering markdown.")
 	var mdFiles []string
 	if stat, err := os.Stat(path); err != nil {
 		if !os.IsNotExist(err) {
@@ -537,6 +542,7 @@ func (s *Substructure) discoverMarkdown(path string) error {
 
 // discoverOrg adds all *.org documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverOrg(path string) error {
+	log.Println("Discovering Org.")
 	// TODO: Allow looking in user's org directory.
 	// TODO: Allow rendering only a subsection of an org file.
 	var orgFiles []string
@@ -617,6 +623,7 @@ func (s *Substructure) discoverStatic(path string) error {
 
 // discoverTemplates adds all *.html.tmpl documents in or at the given path glob to the substructure.
 func (s *Substructure) discoverTemplates(path string) error {
+	log.Println("Discovering templates.")
 	var tmplFiles []string
 	if stat, err := os.Stat(path); err != nil {
 		if !os.IsNotExist(err) {

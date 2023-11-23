@@ -21,12 +21,31 @@ import (
 )
 
 type EXIF struct {
-	Camera       string
-	FocalLength  float64
-	Aperture     float64
+	Aperture    float64
+	Camera      string
+	FocalLength float64
+	ISO         string
+	// Lens holds information about the lens used for the photo.
+	// If the photo EXIF data has no or insufficient lens information,
+	// Lens is nil.
+	Lens         *Lens
 	ShutterSpeed string
-	ISO          string
 	TakenAt      time.Time
+}
+
+type Lens struct {
+	Link  string
+	Make  string
+	Model string
+}
+
+const (
+	Olympus = "Olympus"
+)
+
+// lenses is a map of lens makes to maps of lens models to Amazon links.
+var lenses = map[string]map[string]string{
+	Olympus: {},
 }
 
 type img struct {
@@ -202,44 +221,39 @@ func photodata(src string) (EXIF, error) {
 		return EXIF{}, fmt.Errorf("can't open photo: %w", err)
 	}
 	defer f.Close()
-
 	exif.RegisterParsers(mknote.All...)
-
 	x, err := exif.Decode(f)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't read exif data: %w", err)
 	}
-
-	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
-	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
-	}
-
 	camModel, err := x.Get(exif.Model)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't get camera model: %w", err)
 	}
-
 	cam, err := camModel.StringVal()
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't render camera as string: %w", err)
 	}
-
 	fnum, err := exifFractionToDecimal(x, exif.FNumber)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
 	}
-
+	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
+	if err != nil {
+		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
+	}
 	exposure, err := x.Get(exif.ExposureTime)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't get exposure: %w", err)
 	}
-
 	iso, err := x.Get(exif.ISOSpeedRatings)
 	if err != nil {
 		return EXIF{}, fmt.Errorf("can't get ISO: %w", err)
 	}
-
+	lens, err := findLens(x)
+	if err != nil {
+		return EXIF{}, fmt.Errorf("can't get lens: %w", err)
+	}
 	timestamp, err := x.DateTime()
 	if err != nil {
 		if errors.Is(err, exif.TagNotPresentError("")) {
@@ -257,12 +271,13 @@ func photodata(src string) (EXIF, error) {
 	}
 
 	return EXIF{
-		cam,
-		focalLength,
-		fnum,
-		strings.Replace(exposure.String(), "\"", "", 2),
-		iso.String(),
-		timestamp,
+		Camera:       cam,
+		Aperture:     fnum,
+		FocalLength:  focalLength,
+		ISO:          iso.String(),
+		Lens:         lens,
+		ShutterSpeed: strings.Replace(exposure.String(), "\"", "", 2),
+		TakenAt:      timestamp,
 	}, nil
 }
 
@@ -337,4 +352,37 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 	}
 
 	return nil
+}
+
+// findLens returns a Lens built from the given EXIF data.
+// If the EXIF data contains no or insufficient lens info,
+// (nil, nil) is returned.
+func findLens(x *exif.Exif) (*Lens, error) {
+	lensMake, err := x.Get(exif.LensMake)
+	if err != nil {
+		if !errors.Is(err, exif.TagNotPresentError(exif.LensMake)) {
+			return nil, fmt.Errorf("can't get lens make: %w", err)
+		}
+		return nil, nil
+	}
+	lensModel, err := x.Get(exif.LensModel)
+	if err != nil {
+		if !errors.Is(err, exif.TagNotPresentError(exif.LensModel)) {
+			return nil, fmt.Errorf("can't get lens model: %w", err)
+		}
+		return nil, nil
+	}
+	models, ok := lenses[lensMake.String()]
+	if !ok {
+		return nil, fmt.Errorf("unknown lens make %q", lensMake)
+	}
+	lensLink, ok := models[lensModel.String()]
+	if !ok {
+		return nil, fmt.Errorf("unknown lens model %q", lensModel)
+	}
+	return &Lens{
+		Link:  lensLink,
+		Make:  lensMake.String(),
+		Model: lensModel.String(),
+	}, nil
 }

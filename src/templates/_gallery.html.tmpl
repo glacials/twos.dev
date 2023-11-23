@@ -8,8 +8,13 @@
     <p class="caption exif">
       <span style="font-style:italic;"> {{ .Camera }}</span><br />
       <span style="font-style:italic;">
-        {{ .FocalLength }}mm &bull; ƒ{{ .Aperture }} &bull; {{ .ShutterSpeed }}s
-        &bull; ISO
+        {{ with .Lens }}
+          <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
+          @
+        {{ end }}
+        {{ .FocalLength }}mm &bull;
+        ƒ{{ .Aperture }}
+        &bull; {{ .ShutterSpeed }}s &bull; ISO
         {{ .ISO }}
       </span>
       <br />
