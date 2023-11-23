@@ -8,6 +8,7 @@ import (
 	"os"
 	"path/filepath"
 	"sort"
+	"strings"
 	"text/template/parse"
 	"time"
 
@@ -175,7 +176,7 @@ func (doc *TemplateDocument) funcmap(tmplPath string) (template.FuncMap, error) 
 				return nil
 			}
 			for _, d := range doc.docs {
-				if d.Metadata().WebPath == doc.meta.ParentFilename {
+				if strings.TrimPrefix(d.Metadata().WebPath, "/") == strings.TrimPrefix(doc.meta.ParentFilename, "/") {
 					return d
 				}
 			}

@@ -171,7 +171,7 @@ func (doc *HTMLDocument) Massage() error {
 	if err := doc.setPreview(); err != nil {
 		return err
 	}
-	doc.setFilename()
+	doc.setWebPath()
 	if err := doc.insertTOC(); err != nil {
 		return err
 	}
@@ -315,16 +315,6 @@ func (doc *HTMLDocument) replaceSpecialText() error {
 	return nil
 }
 
-// setFilename sets a shortname for the document if one was not manually specified,
-// and sanitizes any existing shortname to remove extensions.
-func (doc *HTMLDocument) setFilename() {
-	if doc.meta.WebPath == "" {
-		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
-	}
-	shortname, _, _ := strings.Cut(doc.meta.WebPath, ".")
-	doc.meta.WebPath = fmt.Sprintf("%s.html", shortname)
-}
-
 // setPreview extracts information needed for processing from the document's HTML.
 func (doc *HTMLDocument) setPreview() error {
 	if doc.meta.Preview != "" {
@@ -358,6 +348,16 @@ func (doc *HTMLDocument) setTitle() error {
 	}
 	h1.Parent.RemoveChild(h1)
 	return nil
+}
+
+// setWebPath sets a web path for the document if one was not manually specified,
+// and sanitizes any existing web path to remove extraneous extensions.
+func (doc *HTMLDocument) setWebPath() {
+	if doc.meta.WebPath == "" {
+		doc.meta.WebPath = filepath.Base(doc.meta.SourcePath)
+	}
+	shortname, _, _ := strings.Cut(doc.meta.WebPath, ".")
+	doc.meta.WebPath = fmt.Sprintf("/%s.html", shortname)
 }
 
 // allOfNodeTypes returns all descendant nodes of n with any of the given types.
