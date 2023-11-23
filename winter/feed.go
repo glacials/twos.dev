@@ -13,22 +13,24 @@ import (
 func (s *Substructure) writefeed() error {
 	now := time.Now()
 	feed := feeds.Feed{
-		Title:       s.cfg.Name,
-		Description: s.cfg.Description,
 		Author: &feeds.Author{
 			Name:  s.cfg.Author.Name,
 			Email: s.cfg.Author.Email,
 		},
-		Link: &feeds.Link{Href: (&url.URL{Scheme: "https", Host: s.cfg.Hostname}).String()},
 		Copyright: fmt.Sprintf(
 			"Copyright %d–%d %s",
 			s.cfg.Since,
 			now.Year(),
 			s.cfg.Author.Name,
 		),
-		Items: []*feeds.Item{},
-
-		Created: now,
+		Created:     now,
+		Description: s.cfg.Description,
+		Image: &feeds.Image{
+			Url: "https://twos.dev/favicon.ico",
+		},
+		Items:   []*feeds.Item{},
+		Link:    &feeds.Link{Href: (&url.URL{Scheme: "https", Host: s.cfg.Hostname}).String()},
+		Title:   s.cfg.Name,
 		Updated: now,
 	}
 
