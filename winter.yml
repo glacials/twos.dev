@@ -1,11 +1,11 @@
 # Winter configuration
 author:
-  name: Benjamin Carlsson
+  name: Ben Carlsson
   email: ben@twos.dev
 debug: false
 description: misc thoughts
 dist: dist
-name: twos.dev
+name: Ben Carlsson
 since: 2021
 
 development:

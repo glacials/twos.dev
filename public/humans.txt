@@ -1,5 +1,5 @@
 /* TEAM */
-	Me: Benjamin Carlsson
+	Me: Ben Carlsson
 	Contact: ben@twos.dev
 	Twitter: @glcls
 	Mastodon: @glacials@hachyderm.io
