@@ -6,21 +6,19 @@
       <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" title="" />
     </label>
     <p class="caption exif">
-      <span style="font-style:italic;"> {{ .Camera }}</span><br />
-      <span style="font-style:italic;">
-        {{ with .Lens }}
-          <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
-          @
-        {{ end }}
-        {{ .FocalLength }}mm &bull;
-        ƒ{{ .Aperture }}
-        &bull; {{ .ShutterSpeed }}s &bull; ISO
-        {{ .ISO }}
-      </span>
+      {{ with .Camera }}
+        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a><br />
+      {{ end }}
+      {{ with .Lens }}
+        <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
+        @
+      {{ end }}
+      {{ .FocalLength }}mm &bull;
+      ƒ{{ .Aperture }}
+      &bull; {{ .ShutterSpeed }}s &bull; ISO
+      {{ .ISO }}
       <br />
-      <span style="font-style:italic">
-        &copy; {{ .TakenAt.Year }} Benjamin Carlsson
-      </span>
+      &copy; {{ .TakenAt.Year }} Benjamin Carlsson
     </p>
   {{ end }}
 </div>

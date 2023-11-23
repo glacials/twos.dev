@@ -137,7 +137,6 @@ package winter
 
 import (
 	"fmt"
-	"io"
 	"log"
 	"net/url"
 	"os"
@@ -279,7 +278,15 @@ func (s *Substructure) ExecuteAll(dist string) error {
 					img.WebPath,
 				)
 			}
+			srcf, err := os.Open(img.SourcePath)
+			if err != nil {
+				return fmt.Errorf("cannot open image: %w", err)
+			}
+			defer srcf.Close()
 			dest := filepath.Join(dist, img.WebPath)
+			if err := img.Load(srcf); err != nil {
+				return fmt.Errorf("cannot load image: %w", err)
+			}
 			fresh, err := img.generatedPhotosAreFresh(img.SourcePath)
 			if err != nil {
 				return fmt.Errorf("cannot check freshness of %q: %w", img.SourcePath, err)
@@ -287,12 +294,15 @@ func (s *Substructure) ExecuteAll(dist string) error {
 			if fresh {
 				continue
 			}
-			f, err := os.Create(dest)
+			if err := os.MkdirAll(filepath.Dir(dest), 0o755); err != nil {
+				return fmt.Errorf("cannot make gallery dir %q: %w", filepath.Dir(dest), err)
+			}
+			destf, err := os.Create(dest)
 			if err != nil {
 				return fmt.Errorf("cannot write image %q to %q during ExecuteAll: %w", img.SourcePath, dest, err)
 			}
-			defer f.Close()
-			if err := img.Render(f); err != nil {
+			defer destf.Close()
+			if err := img.Render(destf); err != nil {
 				return err
 			}
 			if err := s.Rebuild(img.SourcePath); err != nil {
@@ -451,11 +461,6 @@ func (s *Substructure) discoverGalleries(src string) error {
 		im, err := NewIMG(src, s.cfg)
 		if err != nil {
 			return fmt.Errorf("cannot create gallery document from %s: %w", src, err)
-		}
-		// TODO: Remove this render.
-		// It gathers EXIF info before the image is displayed in the gallery.
-		if err := im.Render(io.Discard); err != nil {
-			return fmt.Errorf("cannot render image to devnull: %w", err)
 		}
 		if err := s.addIMG(im); err != nil {
 			return err

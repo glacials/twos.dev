@@ -20,32 +20,51 @@ import (
 	"golang.org/x/image/draw"
 )
 
+const (
+	Canon   = "Canon"
+	Olympus = "Olympus"
+)
+
 type EXIF struct {
 	Aperture    float64
-	Camera      string
+	Camera      *Gear
 	FocalLength float64
 	ISO         string
 	// Lens holds information about the lens used for the photo.
 	// If the photo EXIF data has no or insufficient lens information,
 	// Lens is nil.
-	Lens         *Lens
+	Lens         *Gear
 	ShutterSpeed string
 	TakenAt      time.Time
 }
 
-type Lens struct {
+type Gear struct {
 	Link  string
 	Make  string
 	Model string
 }
 
-const (
-	Olympus = "Olympus"
-)
-
-// lenses is a map of lens makes to maps of lens models to Amazon links.
-var lenses = map[string]map[string]string{
-	Olympus: {},
+// gear is a mapping of makes to models to details.
+var gear = map[string]map[string]*Gear{
+	"Canon": {
+		"Canon EOS Rebel T6": {
+			Link:  "https://amzn.to/3MWZLUy",
+			Make:  Canon,
+			Model: "EOS Rebel T6",
+		},
+		"Canon EOS Rebel T7": {
+			Link:  "https://amzn.to/3uoMmOJ",
+			Make:  Canon,
+			Model: "EOS Rebel T7",
+		},
+	},
+	"OLYMPUS CORPORATION": {
+		"E-M5MarkIII": {
+			Link:  "https://amzn.to/47nR3a9",
+			Make:  Olympus,
+			Model: "OM-D E-M5 Mark III",
+		},
+	},
 }
 
 type img struct {
@@ -96,6 +115,17 @@ func NewIMG(src string, cfg Config) (*img, error) {
 	}, nil
 }
 
+func (im *img) Load(r io.Reader) error {
+	if err := im.loadEXIF(r); err != nil {
+		return fmt.Errorf(
+			"cannot get camera for %q: %w",
+			im.SourcePath,
+			err,
+		)
+	}
+	return nil
+}
+
 func (im *img) Render(w io.Writer) error {
 	srcf, err := os.Open(im.SourcePath)
 	if err != nil {
@@ -112,14 +142,6 @@ func (im *img) Render(w io.Writer) error {
 	}
 	if err := webpbin.Encode(w, srcPhoto); err != nil {
 		return fmt.Errorf("cannot encode source image %q to WebP: %w", im.SourcePath, err)
-	}
-	im.EXIF, err = photodata(im.SourcePath)
-	if err != nil {
-		return fmt.Errorf(
-			"cannot get camera for %q: %w",
-			im.SourcePath,
-			err,
-		)
 	}
 	thmdest := filepath.Dir(strings.Replace(
 		filepath.Join("dist", im.WebPath),
@@ -213,72 +235,65 @@ func (d *img) generatedPhotosAreFresh(src string) (bool, error) {
 	return false, nil
 }
 
-// photodata extracts the EXIF string (including lens, etc.) and timestamp from
-// the image at the given path.
-func photodata(src string) (EXIF, error) {
-	f, err := os.Open(src)
-	if err != nil {
-		return EXIF{}, fmt.Errorf("can't open photo: %w", err)
-	}
-	defer f.Close()
+// loadEXIF extracts the EXIF string
+// (including lens, etc.)
+// and timestamp from the image at the given path.
+func (im *img) loadEXIF(r io.Reader) error {
 	exif.RegisterParsers(mknote.All...)
-	x, err := exif.Decode(f)
+	x, err := exif.Decode(r)
 	if err != nil {
-		return EXIF{}, fmt.Errorf("can't read exif data: %w", err)
+		return fmt.Errorf("cannot read exif data: %w", err)
 	}
-	camModel, err := x.Get(exif.Model)
+	camera, err := findGear(x, exif.Make, exif.Model)
 	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get camera model: %w", err)
-	}
-	cam, err := camModel.StringVal()
-	if err != nil {
-		return EXIF{}, fmt.Errorf("can't render camera as string: %w", err)
-	}
-	fnum, err := exifFractionToDecimal(x, exif.FNumber)
-	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
-	}
-	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
-	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get focal length: %w", err)
+		return fmt.Errorf("cannot get camera: %w", err)
 	}
 	exposure, err := x.Get(exif.ExposureTime)
 	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get exposure: %w", err)
+		return fmt.Errorf("cannot get exposure: %w", err)
+	}
+	fnum, err := exifFractionToDecimal(x, exif.FNumber)
+	if err != nil {
+		return fmt.Errorf("cannot get focal length: %w", err)
+	}
+	focalLength, err := exifFractionToDecimal(x, exif.FocalLength)
+	if err != nil {
+		return fmt.Errorf("cannot get focal length: %w", err)
 	}
 	iso, err := x.Get(exif.ISOSpeedRatings)
 	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get ISO: %w", err)
+		return fmt.Errorf("cannot get ISO: %w", err)
 	}
-	lens, err := findLens(x)
+	lens, err := findGear(x, exif.LensMake, exif.LensModel)
 	if err != nil {
-		return EXIF{}, fmt.Errorf("can't get lens: %w", err)
+		return fmt.Errorf("cannot get lens: %w", err)
 	}
 	timestamp, err := x.DateTime()
 	if err != nil {
 		if errors.Is(err, exif.TagNotPresentError("")) {
-			return EXIF{}, fmt.Errorf(
+			return fmt.Errorf(
 				"photo has no EXIF timestamp... what do?",
 			)
 		}
-		return EXIF{}, fmt.Errorf("can't get photo datetime: %w", err)
+		return fmt.Errorf("cannot get photo datetime: %w", err)
 	}
 
 	_, err = x.Get(exif.GPSInfoIFDPointer)
 	if err == nil {
 		// location data is set! no no no!
-		panic(fmt.Sprintf("photo %s has location data! please strip it.", src))
+		panic(fmt.Sprintf("photo %s has location data! please strip it.", im.SourcePath))
 	}
 
-	return EXIF{
-		Camera:       cam,
+	im.EXIF = EXIF{
 		Aperture:     fnum,
+		Camera:       camera,
 		FocalLength:  focalLength,
 		ISO:          iso.String(),
 		Lens:         lens,
 		ShutterSpeed: strings.Replace(exposure.String(), "\"", "", 2),
 		TakenAt:      timestamp,
-	}, nil
+	}
+	return nil
 }
 
 // thumbnails makes WebP thumbnails of several sizes from the photo srcPhoto located at srcPath,
@@ -354,35 +369,34 @@ func (d *img) thumbnails(srcPhoto image.Image, srcPath, dest string) error {
 	return nil
 }
 
-// findLens returns a Lens built from the given EXIF data.
-// If the EXIF data contains no or insufficient lens info,
+// findGear returns a Gear built from the given EXIF data.
+// If the EXIF data contains no or insufficient info,
 // (nil, nil) is returned.
-func findLens(x *exif.Exif) (*Lens, error) {
-	lensMake, err := x.Get(exif.LensMake)
+func findGear(x *exif.Exif, make, model exif.FieldName) (*Gear, error) {
+	gearMake, err := x.Get(make)
 	if err != nil {
-		if !errors.Is(err, exif.TagNotPresentError(exif.LensMake)) {
-			return nil, fmt.Errorf("can't get lens make: %w", err)
+		if !errors.Is(err, exif.TagNotPresentError(make)) {
+			return nil, fmt.Errorf("can't get gear make: %w", err)
 		}
 		return nil, nil
 	}
-	lensModel, err := x.Get(exif.LensModel)
+	gearModel, err := x.Get(model)
 	if err != nil {
-		if !errors.Is(err, exif.TagNotPresentError(exif.LensModel)) {
-			return nil, fmt.Errorf("can't get lens model: %w", err)
+		if !errors.Is(err, exif.TagNotPresentError(model)) {
+			return nil, fmt.Errorf("can't get gear model: %w", err)
 		}
 		return nil, nil
 	}
-	models, ok := lenses[lensMake.String()]
+	cutset := " \""
+	gearMakeStr := strings.Trim(gearMake.String(), cutset)
+	models, ok := gear[gearMakeStr]
 	if !ok {
-		return nil, fmt.Errorf("unknown lens make %q", lensMake)
+		return nil, fmt.Errorf("unknown gear make %q", gearMakeStr)
 	}
-	lensLink, ok := models[lensModel.String()]
+	gearModelStr := strings.Trim(gearModel.String(), cutset)
+	gearItem, ok := models[gearModelStr]
 	if !ok {
-		return nil, fmt.Errorf("unknown lens model %q", lensModel)
+		return nil, fmt.Errorf("unknown gear model %q", gearModelStr)
 	}
-	return &Lens{
-		Link:  lensLink,
-		Make:  lensMake.String(),
-		Model: lensModel.String(),
-	}, nil
+	return gearItem, nil
 }
