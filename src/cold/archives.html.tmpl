@@ -6,6 +6,13 @@ type: page
 
 <h1>Writing</h1>
 
+<p>
+  <small>
+    Feeds: <a href="/feed.atom">Atom (better)</a> /
+    <a href="feed.rss">RSS</a>
+  </small>
+</p>
+
 {{ with yearly posts }}
   {{ $prev := (index . 0).Year }}
   {{ range . }}

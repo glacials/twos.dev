@@ -37,9 +37,12 @@ func (s *Substructure) writefeed() error {
 			continue
 		}
 		var buf bytes.Buffer
+		layout := doc.Metadata().Layout
+		doc.Metadata().Layout = ""
 		if err := doc.Render(&buf); err != nil {
 			return err
 		}
+		doc.Metadata().Layout = layout
 
 		bodyStr := buf.String()
 		feed.Items = append(feed.Items, &feeds.Item{
