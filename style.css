@@ -92,7 +92,7 @@ article {
   padding: 0;
 }
 
-article > *:not(:has(.gallery-item)),
+article > *:not(:has(img)):not(article),
 footer {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
@@ -493,30 +493,35 @@ p:has(.gallery-item input:checked) + p,
   line-height: 1.5em;
 }
 
-.gallery-item {
-  line-height: 0;
-  text-align: center;
-}
-
-.gallery-item img {
-  cursor: zoom-in;
+p > img {
   margin: auto;
-}
-
-.gallery-item:not(:has(input:checked)) img {
   max-height: 60vh;
 }
 
-.gallery-item:has(input:checked) img {
-  max-height: 100vh;
-}
-
-.gallery-item input {
-  display: none;
-}
-
-p:has(.gallery-item) {
+/* Image captions are defined as a paragraph entirely in italics after an image. */
+p:has(img) + p:has(i:only-child),
+p:has(img) + p:has(em:only-child) {
+  font-size: 0.85rem;
+  margin: 1rem auto 4rem !important;
+  max-width: 30rem;
   text-align: center;
+}
+
+p:has(img),
+p img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.gallery-item:has(input[type="checkbox"]) img {
+  cursor: zoom-in;
+}
+.gallery-item:has(input[type="checkbox"]:checked) img {
+  cursor: zoom-out;
+}
+
+.gallery-item input[type="checkbox"] {
+  display: none;
 }
 
 .gallery-item + .caption.exif {
@@ -529,7 +534,6 @@ p:has(.gallery-item) {
 
 .gallery-item:has(input:checked) {
   background: var(--page-bg);
-  cursor: zoom-out;
   display: fixed;
   height: 100vh;
   left: 0;
@@ -542,7 +546,6 @@ p:has(.gallery-item) {
 }
 
 .gallery-item:has(input:checked) img.fullsize {
-  cursor: zoom-out;
   left: 50%;
   max-height: 100vh;
   max-width: 100vw;
