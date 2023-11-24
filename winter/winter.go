@@ -274,7 +274,7 @@ func (s *Substructure) ExecuteAll(dist string) error {
 					img,
 					prev.SourcePath,
 					prev,
-					s.cfg.Hostname,
+					s.cfg.Production.URL,
 					img.WebPath,
 				)
 			}
@@ -320,7 +320,7 @@ func (s *Substructure) ExecuteAll(dist string) error {
 				doc,
 				prev.Metadata().SourcePath,
 				prev,
-				s.cfg.Hostname,
+				s.cfg.Production.URL,
 				doc.Metadata().WebPath,
 			)
 		}

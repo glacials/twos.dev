@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"net/url"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/gorilla/feeds"
@@ -12,7 +13,7 @@ import (
 
 func (s *Substructure) writefeed() error {
 	now := time.Now()
-	siteURL := url.URL{Scheme: "https", Host: s.cfg.Hostname}
+	siteURL := url.URL{Scheme: "https", Host: s.cfg.Production.URL}
 
 	feed := feeds.Feed{
 		Author: &feeds.Author{
@@ -47,14 +48,16 @@ func (s *Substructure) writefeed() error {
 			return err
 		}
 		doc.Metadata().Layout = layout
-
 		bodyStr := buf.String()
+
+		bodyStr = strings.ReplaceAll(bodyStr, "&#34;", "\"")
+
 		itemURL := siteURL
 		itemURL.Path = doc.Metadata().WebPath
 		feed.Items = append(feed.Items, &feeds.Item{
+			Author:      feed.Author,
 			Id:          doc.Metadata().WebPath,
 			Title:       doc.Metadata().Title,
-			Author:      feed.Author,
 			Content:     bodyStr,
 			Description: bodyStr,
 			Link:        &feeds.Link{Href: itemURL.String()},

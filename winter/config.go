@@ -43,11 +43,15 @@ type Config struct {
 	// is equivalent to the path component of the URL for that file.
 	//
 	// If blank, defaults to ./dist.
-	Dist string `yaml:"dist,omitempty"`
-	// Hostname is the host portion of the website URL
-	// (e.g. "one.twos.dev" for a URL of "https://one.twos.dev/index.html").
-	// This is used in various backlinks, like those in the RSS feed.
-	Hostname string `yaml:"hostname,omitempty"`
+	Dist       string `yaml:"dist,omitempty"`
+	Production struct {
+		// URL is the base URL you will connect to to view your deployed website
+		// (e.g. twos.dev or one.twos.dev or twos.dev:6667).
+		// This is used in various backlinks, like those in the RSS feed.
+		//
+		// Must not be blank.
+		URL string `yaml:"url,omitempty"`
+	} `yaml:"production,omitempty"`
 	// Known helps the generated site follow the "Cool URIs don't change" rule
 	// by remembering certain facts about what the site looks like,
 	// and checking newly-generated sites against that memory.
@@ -89,6 +93,9 @@ func NewConfig() (Config, error) {
 	}
 	if c.Development.URL == "" {
 		c.Development.URL = "http://localhost:8100"
+	}
+	if c.Production.URL == "" {
+		return Config{}, fmt.Errorf("production.url must be specified in winter.yml")
 	}
 	if c.Known.URIs == "" {
 		c.Known.URIs = "src/uris.txt"

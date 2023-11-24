@@ -1,12 +1,16 @@
-# Winter configuration
+# Winter configuration.
+# Commented values are defaults; uncomment to change.
 author:
   name: changeme
   email: changeme
-debug: false
+# debug: false
 description: My Winter website.
-dist: dist
-hostname: changeme.com
+# development:
+#   url: localhost:8100
+# dist: dist
 name: Change Me
+# production:
+#   url: twos.dev
 since: 2021
-src:
-  - ./src # ./src is implied so unneeded, but included for example
+# src:
+#   - ./src

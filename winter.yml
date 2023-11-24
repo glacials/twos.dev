@@ -6,12 +6,6 @@ debug: false
 description: misc thoughts
 dist: dist
 name: Ben Carlsson
-since: 2021
-
-development:
-  protocol: http
-  host: localhost
-  port: 8100
 production:
-  protocol: https
-  host: twos.dev
+  url: twos.dev
+since: 2021
