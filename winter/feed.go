@@ -12,6 +12,8 @@ import (
 
 func (s *Substructure) writefeed() error {
 	now := time.Now()
+	siteURL := url.URL{Scheme: "https", Host: s.cfg.Hostname}
+
 	feed := feeds.Feed{
 		Author: &feeds.Author{
 			Name:  s.cfg.Author.Name,
@@ -23,13 +25,13 @@ func (s *Substructure) writefeed() error {
 			now.Year(),
 			s.cfg.Author.Name,
 		),
-		Created:     now,
+		Created:     time.Date(2022, 4, 7, 0, 0, 0, 0, time.UTC),
 		Description: s.cfg.Description,
 		Image: &feeds.Image{
 			Url: "https://twos.dev/favicon.ico",
 		},
 		Items:   []*feeds.Item{},
-		Link:    &feeds.Link{Href: (&url.URL{Scheme: "https", Host: s.cfg.Hostname}).String()},
+		Link:    &feeds.Link{Href: siteURL.String()},
 		Title:   s.cfg.Name,
 		Updated: now,
 	}
@@ -47,17 +49,17 @@ func (s *Substructure) writefeed() error {
 		doc.Metadata().Layout = layout
 
 		bodyStr := buf.String()
+		itemURL := siteURL
+		itemURL.Path = doc.Metadata().WebPath
 		feed.Items = append(feed.Items, &feeds.Item{
 			Id:          doc.Metadata().WebPath,
 			Title:       doc.Metadata().Title,
 			Author:      feed.Author,
 			Content:     bodyStr,
 			Description: bodyStr,
-			Link: &feeds.Link{
-				Href: fmt.Sprintf("%s/%s.html", feed.Link.Href, doc.Metadata().WebPath),
-			},
-			Created: doc.Metadata().CreatedAt,
-			Updated: doc.Metadata().UpdatedAt,
+			Link:        &feeds.Link{Href: itemURL.String()},
+			Created:     doc.Metadata().CreatedAt,
+			Updated:     doc.Metadata().UpdatedAt,
 		})
 	}
 

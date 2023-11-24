@@ -27,6 +27,11 @@ func TestTemplate(t *testing.T) {
 			input:    `{{ template "hello_world.tmpl" }}`,
 			expected: "Hello, world!\n\n",
 		},
+		{
+			name:     "Image",
+			input:    `<img src="/path/to/image.jpg" alt="Alt text" />`,
+			expected: "<img src=\"/path/to/image.jpg\" alt=\"Alt text\" />\n",
+		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			src := fmt.Sprintf("src/test/%s", test.name)

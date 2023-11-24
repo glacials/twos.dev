@@ -39,6 +39,11 @@ func TestMarkdown(t *testing.T) {
 			input:    `**foo**`,
 			expected: "<p><strong>foo</strong></p>\n",
 		},
+		{
+			name:     "Image",
+			input:    `![Alt text](/path/to/image.png)`,
+			expected: "<p><img src=\"/path/to/image.png\" alt=\"Alt text\" /></p>\n",
+		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			src := fmt.Sprintf("src/test/%s", test.name)

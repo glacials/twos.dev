@@ -124,33 +124,6 @@ func (doc *MarkdownDocument) Render(w io.Writer) error {
 	return nil
 }
 
-// renderImage overrides the standard Markdown-to-HTML renderer.
-// It makes unlinked images clickable for a zoomed / gallery view.
-func renderImage(w io.Writer, img *ast.Image, entering bool) error {
-	if entering {
-		// TODO: Replace with a template execution of _gallery.html.tmpl.
-		// TODO: Convert these images to WebP.
-		if _, err := io.WriteString(
-			w,
-			fmt.Sprintf(`
-				<label class="gallery-item">
-				  <img alt="%s" class="fullsize" src="%s" title="%s" />
-				`,
-				img.Children[0].AsLeaf().Literal,
-				img.Destination,
-				img.Title,
-			),
-		); err != nil {
-			return err
-		}
-	} else {
-		if _, err := io.WriteString(w, `</label>`); err != nil {
-			return err
-		}
-	}
-	return nil
-}
-
 func newRenderer() *mdhtml.Renderer {
 	opts := mdhtml.RendererOptions{
 		Flags: mdhtml.FlagsNone,

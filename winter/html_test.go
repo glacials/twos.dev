@@ -31,6 +31,11 @@ func TestHTML(t *testing.T) {
 			input:    `{{ template "_writing.html.tmpl" }}`,
 			expected: surround("{{ template \"_writing.html.tmpl\" }}"),
 		},
+		{
+			name:     "Image",
+			input:    `<img src="/path/to/image.jpg" alt="Alt text" />`,
+			expected: surround("<img src=\"/path/to/image.jpg\" alt=\"Alt text\"/>"),
+		},
 	} {
 		t.Run(test.name, func(t *testing.T) {
 			src := fmt.Sprintf("src/test/%s", test.name)

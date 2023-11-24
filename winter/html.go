@@ -45,7 +45,7 @@ var (
 		"⁓": styleWrapper, // Swung dash
 
 	}
-	// lateReplacements are raw text replacements that will happen after HTML has been parsed and rendered.
+	// lateReplacements are raw text replacements that will happen after HTML has been parsed.
 	lateReplacements = map[string][]byte{
 		"&#34;":  []byte("\""),
 		"&#39;":  []byte("'"),
