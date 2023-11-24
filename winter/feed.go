@@ -63,20 +63,20 @@ func (s *Substructure) writefeed() error {
 		})
 	}
 
-	atom, err := feed.ToAtom()
+	atom, err := os.Create("dist/feed.atom")
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot create Atom feed: %w", err)
 	}
-	if err := os.WriteFile("dist/feed.atom", []byte(atom), 0o644); err != nil {
-		return err
+	if err := feed.WriteAtom(atom); err != nil {
+		return fmt.Errorf("cannot write Atom feed: %w", err)
 	}
 
-	rss, err := feed.ToRss()
+	rss, err := os.Create("dist/feed.rss")
 	if err != nil {
-		return err
+		return fmt.Errorf("cannot create RSS feed: %w", err)
 	}
-	if err := os.WriteFile("dist/feed.rss", []byte(rss), 0o644); err != nil {
-		return err
+	if err := feed.WriteRss(rss); err != nil {
+		return fmt.Errorf("cannot write RSS feed: %w", err)
 	}
 
 	return nil
