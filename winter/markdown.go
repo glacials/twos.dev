@@ -62,6 +62,9 @@ func (doc *MarkdownDocument) DependsOn(src string) bool {
 	if _, ok := doc.deps[src]; ok {
 		return true
 	}
+	if doc.meta.WebPath == "/archives.html" || doc.meta.WebPath == "/writing.html" || doc.meta.WebPath == "/index.html" {
+		return true
+	}
 	if strings.HasPrefix(filepath.Clean(src), "src/templates/") {
 		return true
 	}
@@ -131,7 +134,6 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 			w,
 			fmt.Sprintf(`
 				<label class="gallery-item">
-			    <input type="checkbox" />
 				  <img alt="%s" class="fullsize" src="%s" title="%s" />
 				`,
 				img.Children[0].AsLeaf().Literal,
@@ -150,23 +152,8 @@ func renderImage(w io.Writer, img *ast.Image, entering bool) error {
 }
 
 func newRenderer() *mdhtml.Renderer {
-	insideLink := false
 	opts := mdhtml.RendererOptions{
 		Flags: mdhtml.FlagsNone,
-		RenderNodeHook: func(w io.Writer, node ast.Node, entering bool) (ast.WalkStatus, bool) {
-			if img, ok := node.(*ast.Image); ok && !insideLink {
-				if err := renderImage(w, img, entering); err != nil {
-					panic(err)
-				}
-				// Alt text is a "child" of ast.Image,
-				// but we handle it inside the tag in renderImage.
-				return ast.SkipChildren, true
-			}
-			if _, ok := node.(*ast.Link); ok {
-				insideLink = entering
-			}
-			return ast.GoToNext, false
-		},
 	}
 	return mdhtml.NewRenderer(opts)
 }

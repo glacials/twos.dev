@@ -10,7 +10,7 @@ Summer and I recently stayed a few weeks with her parents in Harbin, China.
 
 ![A satellite map zoomed out to see most of china. Harbin is circled in the far northeast.](/img/china-harbin.png)
 
-Harbin is near the northern border, far from the popular coastal cities.
+_Harbin is near the northern border, far from the popular coastal cities._
 
 A few things caught me off guard about the culture.
 Things nobody really talks about,
@@ -26,11 +26,11 @@ Kitchens this far north use their pantries as natural refrigerators, with the fr
 ![Another photo of the same, but a different building.](/img/china-pantries4.jpeg)
 ![Another photo of the same, but a different building.](/img/china-pantries6.jpeg)
 
-More exposed surface area means more and faster cooling.
+_More exposed surface area means more and faster cooling._
 
 ![A photo of a wire rack with vegetables laying on it, like cabbage and green onions.](/img/china-pantry.jpeg)
 
-The pantry can be used to both cool and dry food.
+_The pantry can be used to both cool and dry food._
 
 Summer shared a half-joke that if you want a cold beer in the winter,
 you get it from the pantry.
@@ -73,30 +73,30 @@ Some notable items I tried:
 
 ![A photo of a clear bottle of gold-colored fizzy liquid, with a label depicting a loaf of bread.](/img/china-breadsoda.jpg)
 
-Bread soda, with real yeast. My stomach doesn't recommend more than one at a time.
+_Bread soda, with real yeast. My stomach doesn't recommend more than one at a time._
 
 ![A photo of a small disposable bowl of wide noodles with veggies mixed in. In the background is a night market.](/img/china-kaolengmian.jpeg)
 
-烤冷面 kǎolěngmiàn ("grilled cold noodles"), my years-long favorite Chinese food.
+_烤冷面 kǎolěngmiàn ("grilled cold noodles"), my years-long favorite Chinese food._
 
 ![A photo of me, a white man, dipping a long donut-looking item in a cup of soy milk. We are sitting at a table on the street and the sun is rising.](/img/china-youtiao.jpeg)
 
-Plain donuts (油条 yóutiáo) dipped in soy milk (豆浆 dòujiāng), a common if unhealthy breakfast.
+_Plain donuts (油条 yóutiáo) dipped in soy milk (豆浆 dòujiāng), a common if unhealthy breakfast._
 
 ![A photo of seemingly normal cheese pizza.](/img/china-pizza.jpeg)
 
-Pizza Hut is a pseudodelicacy in China, similar to sushi in the US.
-It looks the same, but this pizza uses cream cheese and has a sweet, oily crust.
+_Pizza Hut is a pseudodelicacy in China, similar to sushi in the US.
+It looks the same, but this pizza uses cream cheese and has a sweet, oily crust._
 
 ![A photo of an egg tart in KFC packaging.](/img/china-kfc.jpeg)
 
-KFC sells egg tarts and a few other Chinese items.
-Neither of us enjoyed them, but it was interesting exploring international chains' local menus.
+_KFC sells egg tarts and a few other Chinese items.
+Neither of us enjoyed them, but it was interesting exploring international chains' local menus._
 
 ![A photo of yumi lao, which looks like like (and is) a sugary mass of fried corn.](/img/china-yumilao.jpeg)
 
-Fried corn fritters (玉米烙 yùmǐlào) are a sweet cross between popcorn, kettle corn, and corn.
-If you like those flavors, you'll love these.
+_Fried corn fritters (玉米烙 yùmǐlào) are a sweet cross between popcorn, kettle corn, and corn.
+If you like those flavors, you'll love these._
 
 ## Payments
 
@@ -127,7 +127,7 @@ Everything is city.
 
 ![The city limits of New York, NY, USA overlaid on the city limits of Harbin, Heilongjiang, China. New York City's city limits are tiny in comparison, only about 2% of the size.](/img/china-ny.png)
 
-New York City (solid red, superimposed) is ~2% the area of Harbin (dotted red).
+_New York City (solid red, superimposed) is ~2% the area of Harbin (dotted red)._
 
 There is plenty of rural land.
 It's just that every square centimeter of it is technically in a city.
@@ -183,7 +183,7 @@ I'm very white.
 
 ![A photo of me and Summer dressed up at a nice dinner. I am white. Summer is Chinese. We are both laughing and I am showing the 'sign of the horns'.](/img/china-white.jpg)
 
-Me and Summer.
+_Me and Summer._
 
 Most people in China this far north don't really see white people.
 After two weeks walking the busy streets of Harbin,
@@ -207,7 +207,7 @@ Chinese plumbing tends not to use traps, which are plumbing tricks that prevent 
 
 ![A sketch of two types of traps, which look like capital 'N' shapes where the water comes in the top-right of the 'N' and leaves the bottom-left of it, leaving the middle section always full with a buffer of water, preventing air from traveling from the bottom-left to the top-right.](/img/china-trap.png)
 
-Traps make pipes airtight but not watertight. (Image: [Nordisk Familjebok, 1921](https://commons.wikimedia.org/wiki/File:Vattenlaas.png))
+_Traps make pipes airtight but not watertight. (Image: [Nordisk Familjebok, 1921](https://commons.wikimedia.org/wiki/File:Vattenlaas.png))_
 
 Traps are all over the place in western plumbing but virtually nowhere in Chinese plumbing,
 and you can tell within a couple of hours of landing.

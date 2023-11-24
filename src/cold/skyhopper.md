@@ -10,7 +10,7 @@ type: post
 
 ![Photo of a pale blue drink.](/img/skyhopper-smallglass.JPEG)
 
-A grasshopper-adjacent cocktail.
+_A grasshopper-adjacent cocktail._
 
 ## Recipe
 

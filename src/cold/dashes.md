@@ -10,7 +10,7 @@ updated: 2023-08-11
 
 ![A photo of a restaurant storefront reading Supreme: New York Style Pizza-Liquor, but the dash between pizza and liquor could be mistaken for a hyphen.](/img/dashes-supreme.jpeg)
 
-I love pizza-liquor, but I've never had it New York style.
+_I love pizza-liquor, but I've never had it New York style._
 
 There are three common dashes in written English:
 

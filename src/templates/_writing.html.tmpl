@@ -1,33 +1,31 @@
-<div class="writing">
-  {{ range posts }}
-    {{ if lt .Metadata.CreatedAt.Year now.Year }}
-      {{ continue }}
-    {{ end }}
-    <article class="post">
-      <a href="{{ .Metadata.WebPath }}"><h1>{{ .Metadata.Title }}</h1></a>
-      {{ if .Metadata.IsType "draft" }}
-        <div class="draft">Draft</div>
-      {{ end }}
-      {{ if and (.Metadata.IsType "post") (not .Metadata.CreatedAt.IsZero) }}
-        <div class="publish-date">
-          <i>
-            published
-            {{ .Metadata.CreatedAt.Format "2006 January" }}{{ if not .Metadata.UpdatedAt.IsZero }}
-              / last updated
-              {{ .Metadata.UpdatedAt.Format "2006 January" }}
-            {{ end }}</i
-          >
-        </div>
-      {{ end }}
-      {{ with .Metadata.Category }}
-        <div
-          style="text-align: center; text-transform: uppercase; margin-top: 2em"
-        >
-          — a {{ . }} —
-        </div>
-      {{ end }}
-      {{ render . }}
-    </article>
+{{ range posts }}
+  {{ if lt .Metadata.CreatedAt.Year now.Year }}
+    {{ continue }}
   {{ end }}
-  <div><a href="/archives.html">Archives &rarr;</a></div>
-</div>
+  <article class="post">
+    <a href="{{ .Metadata.WebPath }}"><h1>{{ .Metadata.Title }}</h1></a>
+    {{ if .Metadata.IsType "draft" }}
+      <div class="draft">Draft</div>
+    {{ end }}
+    {{ if and (.Metadata.IsType "post") (not .Metadata.CreatedAt.IsZero) }}
+      <div class="publish-date">
+        <i>
+          published
+          {{ .Metadata.CreatedAt.Format "2006 January" }}{{ if not .Metadata.UpdatedAt.IsZero }}
+            / last updated
+            {{ .Metadata.UpdatedAt.Format "2006 January" }}
+          {{ end }}</i
+        >
+      </div>
+    {{ end }}
+    {{ with .Metadata.Category }}
+      <div
+        style="text-align: center; text-transform: uppercase; margin-top: 2em"
+      >
+        — a {{ . }} —
+      </div>
+    {{ end }}
+    {{ render . }}
+  </article>
+{{ end }}
+<div><a href="/archives.html">Archives &rarr;</a></div>
