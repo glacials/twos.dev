@@ -35,6 +35,11 @@ func TestMarkdown(t *testing.T) {
 			expected: "{{ template \"_writing.html.tmpl\" }}",
 		},
 		{
+			name:     "Template and image",
+			input:    "{{ template \"_writing.html.tmpl\" }}\n\nParagraph.\n\n![Alt text](/path/to/image.jpg)",
+			expected: "{{ template \"_writing.html.tmpl\" }}<p>Paragraph.</p>\n\n<p><img src=\"/path/to/image.jpg\" alt=\"Alt text\" /></p>\n",
+		},
+		{
 			name:     "Bold",
 			input:    `**foo**`,
 			expected: "<p><strong>foo</strong></p>\n",

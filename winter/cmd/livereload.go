@@ -6,6 +6,7 @@ import (
 	"log"
 	"os"
 	"path/filepath"
+	"strings"
 	"sync"
 	"time"
 
@@ -144,6 +145,12 @@ func (r *Reloader) listen() {
 			}
 			if err := r.Substructure.Rebuild(event.Name); err != nil {
 				log.Println(err.Error())
+			}
+			// If gow is going to restart the server,
+			// don't immediately tell the browser to refresh.
+			// It will fail.
+			if strings.HasSuffix(event.Name, ".go") {
+				continue
 			}
 			r.Reload()
 		case err := <-r.watcher.Errors:

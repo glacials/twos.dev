@@ -80,14 +80,14 @@ service agents.
 ![Screenshot of iOS App Store showing multiple active subscriptions](/img/apple-subscriptions-dark.png)
 ![iOS App Store showing options to change or cancel a subscription](/img/apple-subscription-dark.png)
 
-The App Store's subscriptions management menus.
+_The App Store's subscriptions management menus._
 
 Another example: If your app allows signing in with any third party auth
 providers, Apple must be one of them. As a developer, this means building
 another sign-in flow and database table. As a user, this means I get a native,
 one-tap, FaceID sign-in.
 
-{{ template "_videos.html.tmpl" "/img/apple-signin" }}
+{{ template "_videos.html.tmpl" "/img/apple-signin-dark" }}
 
 These examples continue throughout the ecosystem, and the more I see the more
 I believe Apple thinks of itself as a government providing "public goods",
@@ -229,7 +229,7 @@ previous screen.
 ![A screenshot of the Wikipedia app on iPhone.](/img/apple-iphone-dark.png)
 ![A screenshot of the Wikipedia app on iPad, using extra space for navigation.](/img/apple-ipad-dark.png)
 
-Wikipedia on iPhone vs. iPad.
+_Wikipedia on iPhone vs. iPad._
 
 A bit ago, Apple rebranded iOS-on-iPad to iPadOS. At the time I saw this as a
 marketing move, but I've learned they really did push the needle more in the
@@ -268,10 +268,10 @@ The more native apps, the better the UX.
 
 For example, multi-touch can be used to drag-and-drop items between apps.
 
-{{ template "_videos.html.tmpl" "/img/apple-drag-photos" }}
-{{ template "_videos.html.tmpl" "/img/apple-drag-text" }}
+{{ template "_videos.html.tmpl" "/img/apple-drag-photos-dark" }}
+{{ template "_videos.html.tmpl" "/img/apple-drag-text-dark" }}
 
-Using multi-touch to drag and drop items between apps.
+_Using multi-touch to drag and drop items between apps._
 
 FaceID is about on par with fingerprint unlock on Pixel.
 They each encounter their own troubles,
@@ -340,7 +340,7 @@ and automatically entering SMS or email 2FA codes on any device.
 
 ![Screenshot of a 2FA prompt suggesting an auto-fill from iMessage.](/img/apple-2fa-dark.png)
 
-Signing into a website on macOS using the SMS 2FA code from iPhone.
+_Signing into a website on macOS using the SMS 2FA code from iPhone._
 
 ### ✔ Moto 360 → Apple Watch {#watch}
 
@@ -530,7 +530,7 @@ Thankfully macOS natively supports rebinding shortcuts for any app.
 
 ![A screenshot of macOS's Settings.app rebinding a key for Mail.app.](/img/apple-rebind-dark.png)
 
-Any macOS app's menu actions (e.g. File → Save) can be [re]bound natively.
+_Any macOS app's menu actions (e.g. File → Save) can be [re]bound natively._
 
 If you want a Mail-like experience with Gmail as a backend, instead of using
 SMTP I recommend [Mimestream](https://mimestream.com); it is written by a former
@@ -562,7 +562,7 @@ week, and does not do a good job showing you which day today is.
 
 ![A screenshot of Calendar.app on macOS showing a week with a red line across it.](/img/apple-calendar-dark.png)
 
-Week view in Apple Calendar. At a glance, can you tell what day it is?
+_Week view in Apple Calendar. At a glance, can you tell what day it is?_
 
 This has led me to misread the current day multiple times, inducing panic
 about being late for meetings. I now use Day view, where the bar only shows
@@ -576,9 +576,9 @@ switching to Google Calendar as a backend I've learned to RSVP using the
 embedded buttons which (outside of Gmail) open a web browser to the Google
 Calendar UI.
 
-{{ template "_videos.html.tmpl" "/img/apple-mail" }}
+{{ template "_videos.html.tmpl" "/img/apple-mail-dark" }}
 
-Opening a Google Calendar invitation from within the Apple ecosystem.
+_Opening a Google Calendar invitation from within the Apple ecosystem._
 
 Apple Calendar’s UI is prettier than Google Calendar’s, which hasn’t seemed to
 have a refresh in a decade. Apple Calendar can automatically generate “travel
@@ -681,8 +681,9 @@ identify.
 
 When it works it's beautiful and useful, but when it doesn't it's jarring.
 
-{{ template "_videos.html.tmpl" "/img/apple-back"}}
-Navigating through history in Safari with swipe gestures.
+{{ template "_videos.html.tmpl" "/img/apple-back-dark"}}
+
+_Navigating through history in Safari with swipe gestures._
 
 I tend to switch back to Chrome for Meet meetings, as I’ve experienced some local-only
 webcam freezing in Safari of myself or others.
@@ -823,7 +824,7 @@ scripts.
 
 ![A screenshot of a shortcut on iOS.](/img/apple-shortcuts-dark.png)
 
-I use Shortcuts.app to block times on my work calendar based on personal events.
+_I use Shortcuts.app to block times on my work calendar based on personal events._
 
 As one example, when I wrote in the iA Writer mobile app I would use Shortcuts to
 automatically commit and push my writing to twos.dev daily. Because iA
@@ -911,8 +912,9 @@ The experience of managing an Apple Card in Wallet is also the first credit card
 experience that feels like it was made this century. The app is beautiful,
 snappy, and simple. The rewards (2% cashback on everything via Apple Pay, 1% on everything else) are good but beatable; several banks now have universal 2% cashback cards.
 
-{{ template "_videos.html.tmpl" "/img/apple-card" }}
-Drilling into Apple Card transactions using Wallet.
+{{ template "_videos.html.tmpl" "/img/apple-card-dark" }}
+
+_Drilling into Apple Card transactions using Wallet._
 
 ### ✔ Google Podcasts → Apple Podcasts {#podcasts}
 
