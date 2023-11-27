@@ -66,15 +66,19 @@
   }
 }
 
+a.black-icon:hover {
+  filter: invert();
+}
+
+a.white-icon:hover img {
+  filter: invert();
+}
+
 a[href],
 a[href]:hover,
 a[href]:visited {
   color: inherit;
   text-decoration: underline;
-}
-
-a:hover:has(img) {
-  background: inherit;
 }
 
 a:has(h1),
@@ -85,6 +89,10 @@ a:has(h5),
 a:has(h6) {
   display: block;
   text-decoration: none;
+}
+
+a:hover:has(img) {
+  background: inherit;
 }
 
 article {
@@ -383,14 +391,6 @@ nav.socials a {
   padding: 1rem;
 }
 
-a.black-icon:hover {
-  filter: invert();
-}
-
-a.white-icon:hover img {
-  filter: invert();
-}
-
 nav.socials a:hover {
   background-color: var(--traditional-fg-pop);
 }
@@ -500,8 +500,11 @@ p > img {
 
 /* Image captions are defined as a paragraph entirely in italics after an image. */
 p:has(img) + p:has(i:only-child),
-p:has(img) + p:has(em:only-child) {
+p:has(img) + p:has(em:only-child),
+figure + p:has(i:only-child),
+figure + p:has(em:only-child) {
   font-size: 0.85rem;
+  font-style: italic;
   margin: 1rem auto 4rem !important;
   max-width: 30rem;
   text-align: center;
