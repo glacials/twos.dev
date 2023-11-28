@@ -50,7 +50,7 @@ last for years or decades without babysittting its existence.
 
 ### Technical Documentation
 
-If you are using the Winter CLI, see [twos.dev/winter](https://twos.dev/winter)
+If you are using the Winter CLI, see [twos.dev/winter](https://twos.dev/winter.html)
 for documentation. If you are using the Go library, see
 [pkg.go.dev/twos.dev/winter](https://pkg.go.dev/twos.dev/winter) for
 documentation.
