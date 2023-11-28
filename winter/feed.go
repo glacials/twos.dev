@@ -11,6 +11,8 @@ import (
 	"github.com/gorilla/feeds"
 )
 
+const favicon = "/favicon.ico"
+
 func (s *Substructure) writefeed() error {
 	now := time.Now()
 	siteURL := url.URL{Scheme: "https", Host: s.cfg.Production.URL}
@@ -29,13 +31,15 @@ func (s *Substructure) writefeed() error {
 		Created:     time.Date(2022, 4, 7, 0, 0, 0, 0, time.UTC),
 		Description: s.cfg.Description,
 		Image: &feeds.Image{
-			Url: "https://twos.dev/favicon.ico",
+			Url: (&url.URL{Scheme: "https", Host: s.cfg.Production.URL, Path: favicon}).String(),
 		},
 		Items:   []*feeds.Item{},
 		Link:    &feeds.Link{Href: siteURL.String()},
 		Title:   s.cfg.Name,
 		Updated: now,
 	}
+	atomFeed := (&feeds.Atom{Feed: &feed}).AtomFeed()
+	atomFeed.Icon = (&url.URL{Scheme: "https", Host: s.cfg.Production.URL, Path: favicon}).String()
 
 	for _, doc := range s.docs {
 		if doc.Metadata().Kind != post {
