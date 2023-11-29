@@ -1,8 +1,0 @@
-<ol id="toc">
-  {{ range .Items }}
-    <li><a href="#{{ .Anchor }}">{{ .HTML }}</a></li>
-    {{ if .Items }}
-      {{ template "_subtoc.html.tmpl" .Items }}
-    {{ end }}
-  {{ end }}
-</ol>

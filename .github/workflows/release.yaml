@@ -19,13 +19,12 @@ jobs:
 
       - name: Test & build Winter
         run: |
-          go test ./...
-          go build -o w .
+          go install twos.dev/winter
 
       - name: Build twos.dev
         run: |
-          ./w clean
-          ./w build
+          winter clean
+          winter build
 
       - name: Sanity check
         run: test -f dist/index.html

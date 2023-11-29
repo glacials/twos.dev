@@ -1,23 +1,19 @@
-.PHONY : build build_twos.dev build_winter clean download serve
+.PHONY : build build_twos.dev clean install_winter serve
 
-build: clean test build_winter build_twos.dev
+build: clean test install_winter build_twos.dev
 
-build_twos.dev:
+build_twos.dev: install_winter
+	winter build $(WINTER_ARGS)
 
-	./w build $(WINTER_ARGS)
+clean: install_winter
+	winter clean
 
-build_winter:
-	go build -o w .
-
-clean: build_winter
-	./w clean
-
-download:
-	go mod download
+install_winter:
+	go install twos.dev/winter@latest
 
 serve: clean
 	@echo Building.
-	@gow run . serve
+	@gow run twos.dev/winter serve
 
 test:
-	gow test ./...
+	gow test twos.dev/winter/...

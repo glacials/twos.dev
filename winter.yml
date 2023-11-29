@@ -2,6 +2,7 @@
 author:
   name: Ben Carlsson
   email: ben@twos.dev
+channel: local
 debug: false
 description: misc thoughts
 dist: dist
