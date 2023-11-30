@@ -19,7 +19,7 @@ jobs:
 
       - name: Test & build Winter
         run: |
-          go install twos.dev/winter
+          go install twos.dev/winter@latest
 
       - name: Build twos.dev
         run: |
