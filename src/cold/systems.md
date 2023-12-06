@@ -1,7 +1,7 @@
 ---
 date: 2023-12-05
 filename: systems.html
-type: draft
+type: post
 ---
 
 # Ignore Individuals. Fix Systems
