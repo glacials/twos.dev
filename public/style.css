@@ -518,7 +518,11 @@ p img {
 
 .gallery-item:has(input[type="checkbox"]) img {
   cursor: zoom-in;
+  height: 100%;
+  object-fit: cover;
+  width: 100%;
 }
+
 .gallery-item:has(input[type="checkbox"]:checked) img {
   cursor: zoom-out;
 }
@@ -527,11 +531,11 @@ p img {
   display: none;
 }
 
-.gallery-item + .caption.exif {
+.gallery-item .caption.exif {
   display: none;
 }
 
-.gallery-item:has(input:checked) + .caption.exif {
+.gallery-item:has(input:checked) .caption.exif {
   display: block;
 }
 

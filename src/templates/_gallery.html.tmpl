@@ -4,21 +4,22 @@
     <label class="gallery-item">
       <input type="checkbox" />
       <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" title="" />
+      <p class="caption exif">
+        {{ with .Camera }}
+          <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a
+          ><br />
+        {{ end }}
+        {{ with .Lens }}
+          <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
+          @
+        {{ end }}
+        {{ .FocalLength }}mm &bull;
+        ƒ{{ .Aperture }}
+        &bull; {{ .ShutterSpeed }}s &bull; ISO
+        {{ .ISO }}
+        <br />
+        &copy; {{ .TakenAt.Year }} Ben Carlsson
+      </p>
     </label>
-    <p class="caption exif">
-      {{ with .Camera }}
-        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a><br />
-      {{ end }}
-      {{ with .Lens }}
-        <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
-        @
-      {{ end }}
-      {{ .FocalLength }}mm &bull;
-      ƒ{{ .Aperture }}
-      &bull; {{ .ShutterSpeed }}s &bull; ISO
-      {{ .ISO }}
-      <br />
-      &copy; {{ .TakenAt.Year }} Ben Carlsson
-    </p>
   {{ end }}
 </div>
