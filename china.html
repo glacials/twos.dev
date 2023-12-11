@@ -412,6 +412,46 @@ If so, I'd love to hear about it on <a href="https://hachyderm.io/@glacials" tar
   if (document.location.pathname === "/winter") {
     window.location.replace("https://pkg.go.dev/twos.dev/winter");
   }
+
+  
+  document.addEventListener("keydown", (event) => {
+    switch (event.keyCode) {
+      case 37: 
+        const moveLeftFrom = document.querySelector(
+          ".gallery-item input:checked",
+        );
+        const moveLeftTo = document.querySelector(
+          ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+        );
+        if (moveLeftFrom) {
+          moveLeftFrom.checked = false;
+        }
+        if (moveLeftTo) {
+          moveLeftTo.checked = true;
+        }
+        break;
+      case 39: 
+        const moveRightFrom = document.querySelector(
+          ".gallery-item input:checked",
+        );
+        const moveRightTo = document.querySelector(
+          ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+        );
+        if (moveRightFrom) {
+          moveRightFrom.checked = false;
+        }
+        if (moveRightTo) {
+          moveRightTo.checked = true;
+        }
+        break;
+      case 27: 
+        const current = document.querySelector(".gallery-item input:checked");
+        if (current) {
+          current.checked = false;
+        }
+        break;
+    }
+  });
 </script>
 
   </body>
