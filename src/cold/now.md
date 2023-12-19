@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2023-10-26
+updated: 2023-12-18
 ---
 
 # Now
@@ -20,14 +20,13 @@ I'm as into games as ever. I'm currently playing:
 
 - [Baldur's Gate 3](https://store.steampowered.com/app/1086940/Baldurs_Gate_3/)
 - [Nova Drift](https://store.steampowered.com/app/858210/Nova_Drift/)
-- [Cyberpunk 2077](https://store.steampowered.com/app/1091500/Cyberpunk_2077/)
-- [Distance](https://store.steampowered.com/app/233610/Distance/)
+- World of Warcraft Classic Hardcore
 
 I recently completed:
 
+- [Cyberpunk 2077](https://store.steampowered.com/app/1091500/Cyberpunk_2077/)
 - [Elden Ring](https://store.steampowered.com/app/1245620/ELDEN_RING/) at level 1 ([proof](https://www.youtube.com/playlist?list=PLOh5StMt-uPV1_11e9XKVNtBcmGMKDaHd))
 - [Armored Core VI](https://store.steampowered.com/app/1888160/ARMORED_CORE_VI_FIRES_OF_RUBICON/) all endings
-- [Valheim](https://store.steampowered.com/app/892970/Valheim/)
 
 ## Climate
 
