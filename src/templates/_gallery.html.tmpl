@@ -3,7 +3,17 @@
   {{ range (gallery .) }}
     <label class="gallery-item">
       <input type="checkbox" />
-      <img alt="{{ .Alt }}" class="fullsize" src="{{ .WebPath }}" title="" />
+      {{ $img := . }}
+      {{ range .Thumbnails }}
+        {{ if eq .Height 2048 }}
+          <img
+            alt="{{ $img.Alt }}"
+            class="fullsize"
+            src="{{ .WebPath }}"
+            title=""
+          />
+        {{ end }}
+      {{ end }}
       <p class="caption exif">
         {{ with .Camera }}
           <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a
