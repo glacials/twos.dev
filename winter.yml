@@ -6,6 +6,25 @@ channel: local
 debug: false
 description: misc thoughts
 dist: dist
+gear:
+  - make: Canon
+    model: EOS Rebel T6
+    link: https://amzn.to/3MWZLUy
+    exif:
+      make: Canon
+      model: Canon EOS Rebel T6
+  - make: Canon
+    model: EOS Rebel T7
+    link: https://amzn.to/3uoMmOJ
+    exif:
+      make: Canon
+      model: Canon EOS Rebel T7
+  - make: Olympus
+    model: OM-D E-M5 Mark III
+    link: https://amzn.to/47nR3a9
+    exif:
+      make: OLYMPUS CORPORATION
+      model: E-M5MarkIII
 name: Ben Carlsson
 production:
   url: twos.dev
