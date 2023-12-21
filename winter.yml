@@ -25,6 +25,18 @@ gear:
     exif:
       make: OLYMPUS CORPORATION
       model: E-M5MarkIII
+  - make: Olympus
+    model: M.Zuiko 14–150mm F4.0–5.6 II
+    link: https://amzn.to/48im3IS
+  - make: Olympus
+    model: M.Zuiko 17mm F1.8
+    link: https://amzn.to/3vaUaUT
+  - make: Olympus
+    model: M.Zuiko 25mm F1.8
+    link: https://amzn.to/3tv8Eyj
+  - make: Olympus
+    model: M.Zuiko 45mm F1.8
+    link: https://amzn.to/3NATgXT
 name: Ben Carlsson
 production:
   url: twos.dev
