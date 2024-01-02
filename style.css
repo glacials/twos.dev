@@ -671,16 +671,6 @@ pre {
   margin-bottom: 2rem;
 }
 
-/* CV-specific */
-h3.company {
-  margin-bottom: 0;
-  margin-top: 0;
-}
-
-.role {
-  padding-left: 1rem;
-}
-
 /* Background */
 .bg {
   color: var(--page-fg);
