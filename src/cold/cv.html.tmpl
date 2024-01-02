@@ -7,6 +7,10 @@ updated: 2023-12-20
 
 <style>
   @media print {
+    body,
+    html {
+      margin: 0;
+    }
     html {
       font-size: 0.5rem;
     }
@@ -31,14 +35,13 @@ updated: 2023-12-20
   .role {
     display: inline;
     font-style: italic;
-    font-weight: bold;
   }
 </style>
 
 <div style="margin: auto; text-align: center">
   <h1>CV</h1>
   <h2>Ben Carlsson</h2>
-  <p>Principal Software Engineer</p>
+  <p>Seattle, WA</p>
   <p>
     <a
       class="print-hidden"
@@ -50,25 +53,28 @@ updated: 2023-12-20
     </a>
   </p>
   <p>
-    <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>,
-    <a
-      href="https://twitter.com/glcls"
-      style="white-space: nowrap"
-      target="_blank"
-      >@glacials@hachyderm.io</a
-    >,
+    <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a> /
     <a
       href="https://github.com/glacials"
       style="white-space: nowrap"
       target="_blank"
       >github.com/glacials</a
-    >,
+    >
+    /
     <a
       href="https://linkedin.com/in/ben"
       style="white-space: nowrap"
       target="_blank"
       >linkedin.com/in/ben</a
     >
+    / (925) 979-5797
+  </p>
+  <p style="margin: 1.25rem;">
+    Detail-oriented and anlytical backend engineer with 10+ years experience in
+    development, architecture, and mentoring. Background in open source and deep
+    expertise in Go, Ruby, and Python. Known for excelling in low-JS full-stack,
+    and creating first-class developer experience and documentation practices.
+    Experience in two acquisitions, one by Amazon.
   </p>
 </div>
 <h2>Job History</h2>
@@ -77,25 +83,18 @@ updated: 2023-12-20
   @
   <h3 class="company">SunPower</h3>
   <div class="location">Seattle, WA</div>
-  July 2022&ndash;Present
+  July 2022–Present
   <ul>
     <li>
-      Founded new workflow orchestration team to democratize automation of
-      solar- and team-specific workflows, with goals to speed up installation
-      and repair of solar panels
+      Led design and development of a unified workflow orchestration team and
+      service by seeking out and talking to internal engineers and customers,
+      freeing engineers across three teams from working on similar solutions
     </li>
     <li>
-      Performed user interviews, rapid prototyping, and architecture design to
-      build orchestration service
-    </li>
-    <li>
-      Worked independently for 10 months during hiring freeze, on a project
-      meant for 4 engineers
-    </li>
-    <li>
-      Reported directly to Sr. Director of Engineering, performing org-level
-      functions like architecture reviews, postmortem reviews, and interfacing
-      with vendors
+      Championed a blameless incident postmortem culture by mentoring managers
+      and engineers, and coordinating & collaborating with principal engineers
+      to create a template and review pipeline, leading the company from
+      performing ~1 to performing ~10 postmortems per month
     </li>
   </ul>
 </div>
@@ -104,16 +103,12 @@ updated: 2023-12-20
   @
   <h3 class="company">FalconX</h3>
   <div class="location">Seattle, WA</div>
-  January 2022&ndash;June 2022
+  January 2022–June 2022
   <ul>
-    <li>Joined via YourBase acquisition</li>
     <li>
-      Worked with backend team and Head of Engineering to improve test cycle and
-      developer experience
-    </li>
-    <li>
-      Built internal CLI to manage complexity; reduced new developer spin-up
-      time from 3 weeks → 2 days
+      Improved internal developer experience and onboarding by building internal
+      CLI to manage monolith complexity, reducing time-to-first-commit for new
+      engineers from 3 weeks to 2 days
     </li>
   </ul>
 </div>
@@ -122,31 +117,27 @@ updated: 2023-12-20
   @
   <h3 class="company">YourBase</h3>
   <div class="location">Seattle, WA</div>
-  April 2020&ndash;March 2022
+  April 2020–January 2022
   <ul>
     <li>
-      Ideated & led pivot of primary product—a tool to accelerate software
-      tests—from a proprietary CI platform to an
+      Ideated & led a company pivot from proprietary CI product to an
       <a href="https://vimeo.com/530517699" target="_blank"
         >installable library</a
-      >, directly leading to signing our biggest customers, Yelp and PayPal
+      >
+      which gave an ~80% benefit for ~1% onboarding effort, directly leading to
+      signing large B2B customers including Yelp, PayPal, Gusto, and Instacart
     </li>
     <li>
-      Created and scaled test selection libraries for Python and Ruby using a
-      packaged Go binary as a performant backend, that can trace and understand
-      code paths to skip tests that don't need to run, bringing customer test
-      times from 1+ hour to ~10 minutes
+      Further scaled test selection libraries for Python and Ruby using a
+      packaged Go binary as a performant backend, bringing customer test times
+      from 1+ hour to ~10 minutes
     </li>
     <li>
-      Independently discovered and optimized a >12s API endpoint to &lt;50ms
-      immediately after joining
+      Independently discovered and optimized slow database queries within 2
+      weeks of joining by replacing raw queries with ORM relationships, bringing
+      the most-used API endpoint from &gt;12s down to &lt;50ms
     </li>
-    <li>
-      Optimized the company's most expensive API endpoint from 12s+ to &lt;50ms
-      within four weeks of joining
-    </li>
-    <li>Python, Go, Ruby, Docker</li>
-    <li>Exited via acquisition in January 2022</li>
+    <li>Exited via acquisition January 2022</li>
   </ul>
 </div>
 <div class="job">
@@ -154,16 +145,27 @@ updated: 2023-12-20
   @
   <h3 class="company">Splits.io</h3>
   <div class="location">Seattle, WA</div>
-  January 2019&ndash;April 2020
+  January 2019–April 2020
   <ul>
     <li>
-      Converted a costly unstable side project of 5 years into a
-      self-sustaining, profitable, and stable product
+      Improved and hardened infrastructure by moving from raw EC2 instances to
+      autoscaled, fault-tolerant, and load-balanced containers, reducing
+      incidents from ~2/week to ~1/6mo and reducing ongoing infrastructure needs
+      ever since to ~nothing
     </li>
-    <li>Led a team of three in engineering, product, and design</li>
     <li>
-      Today, serves 15k+ monthly active users with zero maintenance effort and
-      continues to be profitable
+      Improved business strategy and finances by performing user interviews and
+      creating premium product tier, bringing revenue from ~$30/mo to ~$500/mo
+    </li>
+    <li>
+      Wore many hats by engaging in customer support, events, and product-based
+      marketing, improving monthly active users from ~10k to ~15k in one year
+    </li>
+    <li>
+      Recruited and led a team of three by hiring from existing open source
+      contributors and community members, ~doubling engineering velocity and
+      creating our first sales and ops roles, leading to partnerships with
+      external organizations like Games Done Quick
     </li>
   </ul>
 </div>
@@ -172,38 +174,28 @@ updated: 2023-12-20
   @
   <h3 class="company">Twitch</h3>
   <div class="location">San Francisco, CA</div>
-  2014&ndash;2019
+  2014–2019
   <ul>
     <li>
-      Built & scaled foundational products like Twitch Chat to 46B message
-      deliveries / day
-    </li>
-    <li>
-      Built backend for Host Mode, which succeeded for years after in increasing
-      engagement and viewership
+      Built, scaled, and
+      <a href="https://www.twitch.tv/videos/93570710">ran panels on</a>
+      foundational products like Twitch Chat, improving user trust and community
+      building
     </li>
     <li>
       Rearchitected authentication and authorization in follow-up response to
-      security P1 by advocating for, founding, and building the Identity team
+      security P1 by advocating for, founding, and building the Identity team,
+      removing credential-related information from all future known security
+      incidents
     </li>
     <li>
-      On Identity team, designed services that handled highly sensitive auth
-      information with stringent security controls, successfully reducing attack
-      surface area for user credentials by orders of magnitude
+      Built the platform's first spam filter using a naive Bayes classifier,
+      reducing on-site bots, scams, and abuse
     </li>
     <li>
-      On Chat team, built Twitch's first spam filter to protect users from
-      scammers and abusers
-    </li>
-    <li>
-      On Social team, led interoperability and merging effort for acquired
-      company Curse, allowing users of either platform to sign in to both and
-      merge their accounts, social graphs, and DMs transparently
-    </li>
-    <li>
-      Successfully ideated, pitched, and executed project to move Twitch from
-      HTTP to HTTPS, coordinating across multiple teams, stacks, and
-      repositories to protect users from security and privacy concerns
+      Merged disparate social graphs with an acquired company by building a
+      transitionary interoperability service, quickly enabling a seamless,
+      interleaved user experience far ahead of merged databases
     </li>
     <li>
       Ran
@@ -218,7 +210,7 @@ updated: 2023-12-20
   @
   <h3 class="company">Lawrence Livermore National Laboratory</h3>
   <div class="location">Livermore, CA</div>
-  2010&ndash;2013 (summers)
+  2010–2013 (summers)
   <ul>
     <li>
       Built
@@ -228,54 +220,19 @@ updated: 2023-12-20
   </ul>
 </div>
 
-<h2>Projects</h2>
-<ul>
-  <li>
-    <a href="https://license.land" target="_blank">Licenseland</a>
-    (2019&ndash;present)
-    <ul>
-      <li>Dead simple dual-licensing for open source projects</li>
-      <li>Vue, Firebase, Stripe Connect</li>
-    </ul>
-  </li>
-  <li>
-    <a href="https://whatsinstandard.com" target="_blank"
-      >What's in Standard?</a
-    >
-    (2013&ndash;present)
-    <ul>
-      <li>A reference tool for Magic: The Gathering players</li>
-      <li>Twitter bot, mobile app, and web app all powered by one API</li>
-      <li>Firebase, Flutter, and Vue respectively</li>
-    </ul>
-  </li>
-  <li>
-    <a href="https://github.com/glacials/housebot" target="_blank">Housebot</a>
-    (2014&ndash;2015)
-    <ul>
-      <li>
-        A Twitch bot that lets chat participants vote to control my lights
-      </li>
-      <li>Node.js, Z-Wave API, Phillips Hue API</li>
-      <li>
-        In retrospect I wouldn't recommend letting the internet control pieces
-        of your house :)
-      </li>
-    </ul>
-  </li>
-</ul>
-
 <h2>Skills</h2>
-<ul>
-  <li>Soft: Community management, technical writing, open source</li>
-  <li>Code: Go, Ruby, Python, JavaScript, HTML/CSS, Vue</li>
-  <li>Tools: Docker, PostgreSQL, Terraform, Firebase, AWS</li>
-</ul>
+<li>
+  Software engineering, architecture design, rapid prototyping, developer
+  operations, incident management, mentoring, technical writing, open source /
+  community management
+</li>
 
-<h2>Education</h2>
+<h2>Technical Skills</h2>
 <ul>
-  <li>Bachelor of Science in Computer science</li>
-  <li>California State University, Chico</li>
+  <li>
+    Go, Ruby, Python, JavaScript, HTML/CSS, AWS, DynamoDB, Firebase, Vue,
+    Docker, PostgreSQL, Terraform, AWS CDK
+  </li>
 </ul>
 
 <div class="print-hidden">
@@ -287,3 +244,11 @@ updated: 2023-12-20
     >
   </p>
 </div>
+
+<h2>Education</h2>
+<ul>
+  <li>
+    <b>Bachelor of Science</b> in <b>Computer Science</b> from California State
+    University, Chico
+  </li>
+</ul>
