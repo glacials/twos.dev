@@ -6,14 +6,21 @@
       {{ $img := . }}
       {{ $downscaled := . }}
       {{ range .Thumbnails }}
-        {{ if eq .Height 2048 }}
+        {{ if eq .Height 256 }}
           {{ $downscaled = . }}
         {{ end }}
       {{ end }}
       <img
         alt="{{ $img.Alt }}"
-        class="fullsize"
+        class="thumbnail"
         src="{{ $downscaled.WebPath }}"
+        title=""
+      />
+      <img
+        alt="{{ $img.Alt }}"
+        class="fullsize"
+        loading="lazy"
+        src="{{ $img.WebPath }}"
         title=""
       />
       <p class="caption exif">

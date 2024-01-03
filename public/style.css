@@ -442,7 +442,7 @@ p:has(.gallery-item input:checked) + p,
   position: fixed;
   top: 5%;
   transform: translate(-15%, -15%);
-  z-index: 2;
+  z-index: 10;
 }
 
 .caption.exif {
@@ -552,7 +552,20 @@ p img {
   z-index: 1;
 }
 
-.gallery-item:has(input:checked) img.fullsize {
+.gallery-item:has(input) img.thumbnail {
+  display: block;
+}
+
+.gallery-item:has(input) img.fullsize {
+  display: none;
+}
+
+.gallery-item:has(input:checked) img.thumbnail {
+}
+
+.gallery-item:has(input:checked) img.fullsize,
+.gallery-item:has(input:checked) img.thumbnail {
+  display: block;
   left: 50%;
   max-height: 100vh;
   max-width: 100vw;
@@ -560,6 +573,10 @@ p img {
   position: fixed;
   top: 50%;
   transform: translate(-50%, -50%);
+}
+
+.gallery-item:has(input:checked) img.fullsize {
+  z-index: 9;
 }
 
 .light-only {
