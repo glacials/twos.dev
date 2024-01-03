@@ -1,5 +1,5 @@
 {{ range posts }}
-  {{ if lt .Metadata.CreatedAt.Year now.Year }}
+  {{ if .Metadata.CreatedAt.Before (now.AddDate 0 -6 0) }}
     {{ continue }}
   {{ end }}
   <article class="post">
@@ -27,5 +27,8 @@
     {{ end }}
     {{ render . }}
   </article>
+  <hr />
 {{ end }}
-<div><a href="/archives.html">Archives &rarr;</a></div>
+<div style="margin: 3rem 0;text-align:center">
+  <a href="/archives.html">Archives &rarr;</a>
+</div>
