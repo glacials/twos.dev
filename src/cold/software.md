@@ -7,7 +7,7 @@ updated: 2023-02-10
 
 # Software
 
-See also: [github.com/glacials](https://github.com/glacials)
+See also [github.com/glacials](https://github.com/glacials).
 
 ## Creations
 

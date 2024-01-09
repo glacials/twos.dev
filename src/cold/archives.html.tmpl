@@ -12,17 +12,19 @@ type: page
   </small>
 </p>
 
-{{ with yearly posts }}
-  {{ range . }}
-    <h2>{{ .Year }}</h2>
+<div style="margin:auto; max-width: 20rem">
+  {{ with yearly posts }}
+    {{ range . }}
+      <h2>{{ .Year }}</h2>
 
-    {{ range .Documents.All }}
-      {{ with .Metadata }}
-        <li>
-          {{ with .Category }}{{ . }}:{{ end }}
-          <a href="{{ .WebPath }}">{{ .Title }}</a>
-        </li>
+      {{ range .Documents.All }}
+        {{ with .Metadata }}
+          <li>
+            {{ with .Category }}{{ . }}:{{ end }}
+            <a href="{{ .WebPath }}">{{ .Title }}</a>
+          </li>
+        {{ end }}
       {{ end }}
     {{ end }}
   {{ end }}
-{{ end }}
+</div>

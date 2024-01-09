@@ -8,9 +8,8 @@ other random things here.
 twos.dev is a low-tech website. It does not require JavaScript and it is
 composed entirely of static files served by GitHub Pages.
 
-These static files are built by a bespoke static website generator created for twos.dev called
-Winter, which is written in Go and embedded in this repository at `winter/`. See
-more about Winter below.
+These static files are built by
+[Winter](https://github.com/glacials/winter).
 
 ## First run
 

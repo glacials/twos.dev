@@ -5,10 +5,13 @@ type: page
 updated: 2023-11-10
 ---
 
-I'm **Ben**,
-and you are a person who has just reached my dumping ground for various hobbies.
-Those include the climate crisis, open source software, photography, interior
-design, and video games.
+I'm **Ben**
+and this is website and dumping ground.
+I'm interested in the climate crisis,
+open source software,
+photography,
+interior design,
+and video games.
 
 Find me at [Mastodon](https://hachyderm.io/@glacials),
 [LinkedIn](https://linkedin.com/in/ben), or
