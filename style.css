@@ -3,7 +3,7 @@
  */
 
 :root {
-  --container-width: 70rem;
+  --container-width: 33rem;
 }
 
 @media (prefers-color-scheme: light) {
@@ -34,23 +34,23 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --traditional-bg: rgba(34, 34, 34, 1);
-    --traditional-fg: rgba(235, 255, 240, 1);
+    --traditional-bg: rgb(46, 30, 30);
+    --traditional-fg: rgba(244, 214, 205, 1);
     --traditional-fg-mute: rgba(235, 255, 240, 0.6);
     --traditional-fg-pop: rgba(245, 222, 153, 1);
 
-    --page-bg: rgb(34, 34, 34);
+    --page-bg: rgb(46, 30, 30);
     --page-border: rgb(34, 34, 34);
-    --page-fg: rgba(248, 248, 242, 1);
+    --page-fg: rgba(244, 214, 205, 1);
 
     --lighter-bg: rgba(240, 240, 240, 1);
     --lighter-fg: rgb(132, 117, 45);
 
     /* Use raised colors for items that should appear as if they are above the page. */
-    --raised-bg: rgba(50, 50, 50, 1);
-    --raised-fg: rgba(255, 255, 255, 1);
+    --raised-bg: rgb(60, 40, 40);
+    --raised-fg: rgba(244, 214, 205, 1);
 
-    --shadow: rgb(0, 0, 0);
+    --shadow: rgb(0, 0, 0, 0.25);
 
     --under-white: rgba(34, 34, 34, 1);
   }
@@ -77,8 +77,10 @@ a.white-icon:hover img {
 a[href],
 a[href]:hover,
 a[href]:visited {
-  color: inherit;
+  color: #c8ada6;
   text-decoration: underline;
+  text-decoration-color: #705b58;
+  text-underline-offset: 0.25rem;
 }
 
 a:has(h1),
@@ -107,7 +109,7 @@ footer {
 }
 
 @media (min-width: 55rem) {
-  article > *:not(.photo-grid),
+  article > *:not(.photo-grid):not(article),
   footer {
     margin-left: 1.75rem;
     margin-right: 1.75rem;
@@ -133,10 +135,23 @@ blockquote {
 body {
   background: var(--page-bg);
   color: var(--traditional-fg);
-  font-family: monospace;
-  font-size: 1.3em;
+  /*  font-family: monospace; */
+  font-family:
+    -apple-system,
+    BlinkMacSystemFont,
+    avenir next,
+    avenir,
+    segoe ui,
+    helvetica neue,
+    helvetica,
+    Cantarell,
+    Ubuntu,
+    roboto,
+    noto,
+    arial,
+    sans-serif;
   height: 100%;
-  line-height: 1.7em;
+  line-height: 1.7rem;
   margin: 0;
 }
 
@@ -157,12 +172,6 @@ input[type="submit"] {
   background: none;
   border: 1px solid var(--traditional-fg);
   color: inherit;
-}
-
-code {
-  color: var(--traditional-fg-mute);
-  padding-left: 0.5em;
-  padding-right: 0.5em;
 }
 
 /* Nesting em/i should drop styling. Extend nesting levels as needed. */
@@ -193,19 +202,25 @@ h4,
 h5,
 h6 {
   display: block;
-  font-size: 1em;
+  font-family:
+    Iowan Old Style,
+    Apple Garamond,
+    Baskerville,
+    Times New Roman,
+    Droid Serif,
+    Times,
+    Source Serif Pro,
+    serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  font-style: italic;
 }
 
 h1 {
-  color: var(--traditional-fg);
   hyphens: none;
   line-height: 0.9;
   text-align: center;
-  text-transform: uppercase;
-}
-
-h2 {
-  text-transform: uppercase;
 }
 
 /* Text document hero images */
@@ -294,11 +309,29 @@ li p {
 }
 
 nav {
+  color: #705b58;
+  font-family:
+    Iowan Old Style,
+    Apple Garamond,
+    Baskerville,
+    Times New Roman,
+    Droid Serif,
+    Times,
+    Source Serif Pro,
+    serif,
+    Apple Color Emoji,
+    Segoe UI Emoji,
+    Segoe UI Symbol;
+  font-style: italic;
   overflow-x: auto;
 }
 
 nav .hierarchy {
   margin: auto 0;
+}
+
+nav h1 {
+  font-size: 1em;
 }
 
 @media (min-width: 50rem) {
@@ -315,9 +348,16 @@ nav .hierarchy {
     margin: auto 0;
     margin: auto 0;
   }
+}
 
+@media (min-width: 55rem) {
   nav > *:nth-child(1) {
     margin-left: 1.75rem;
+  }
+}
+@media not (min-width: 55rem) {
+  nav > *:nth-child(1) {
+    margin-left: 1.25rem;
   }
 }
 
@@ -739,7 +779,7 @@ pre {
   user-select: none;
   margin-right: 0.4rem;
   padding: 0 0.4rem 0 0.4rem;
-  color: #7f7f7f;
+  color: rgba(255, 255, 255, 0.1);
 }
 
 /* LineNumbers */
@@ -748,7 +788,7 @@ pre {
   user-select: none;
   margin-right: 0.4rem;
   padding: 0 0.4rem 0 0.4rem;
-  color: #7f7f7f;
+  color: rgba(255, 255, 255, 0.1);
 }
 
 /* Line */
