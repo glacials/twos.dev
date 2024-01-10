@@ -6,7 +6,7 @@ updated: 2023-11-10
 ---
 
 I'm **Ben**
-and this is website and dumping ground.
+and this is my website and dumping ground.
 I'm interested in the climate crisis,
 open source software,
 photography,
