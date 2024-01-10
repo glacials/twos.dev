@@ -1,0 +1,81 @@
+# Software
+
+See also github.com/glacials.
+
+=> https://github.com/glacials github.com/glacials
+
+## Creations
+
+*Solid hearts are active; hollow hearts are inactive but stable.*
+
+* ♥ Winter: Static website generator powering this website (Go)
+* ♥ What's in Standard?: Reference tool for Magic: The Gathering (Vue, Flutter)
+* ♡ Splits.io: Strava for game speedrunning (Ruby on Rails, Vue)
+* ♡ Pricegun: Estimate how much to charge for a side project (React)
+* ♡ Licenseland: Dual-license provider for open source developers (Vue)
+* ♡ FriendlyUUID: Zero-config stateless UUID-based URL slugs (Ruby on Rails)
+* ♡ Indenter: Syntactic sugar for neatly-indented CLI output (Python)
+* Housebot: Twitch-controlled smart lights (Node, CoffeeScript)
+* Mainframe: A bespoke home server running on an RPi in my closet (Go)
+* kure: A flat-file blogging engine (PHP)
+
+=> /winter Winter
+=> https://whatsinstandard.com What's in Standard?
+=> https://splits.io Splits.io
+=> https://pricegun.twos.dev Pricegun
+=> https://license.land Licenseland
+=> https://github.com/glacials/friendly_uuid FriendlyUUID
+=> https://github.com/glacials/indenter Indenter
+=> https://github.com/glacials/housebot Housebot
+=> https://github.com/glacials/mainframe Mainframe
+=> https://github.com/glacials/kure kure
+
+## Contributions
+
+Other open source projects I've contributed to:
+
+* Emacs (docs only): #60263 Correct wrong info in (info)Go to node
+* Coverage.py: #1210 Fix an incompatibility with pyarmor
+* Ruby on Rails (docs only): #37190 Fix a button_to documentation example
+* vim-kitty: #20 Recognize `#:` comment syntax in `kitty.conf`
+* Highcharts Regression: #84 Add extrapolation for exponential, linear, power, & log
+* ruby-gettext: #32 Support Pathnames in $LOAD_PATH
+* Unidiff: #75 Fix an error when the first change is a binary, #82 Add type hints
+* android-bundle-uploader: #3 Allow setting release notes, #7 Convert into a first-class CLI
+* timeago: #128 Make en_short consistent with other sites
+* oauth2_client: #29 Add clientSecret param to Authorization Code Grant examples, #53 Handle provider errors when refreshing tokens
+* HttpAcceptLanguage: #41 Make language comparisons case-insensitive
+* Cockatrice: #6 Fixed a cursor bug, #7 Added a UI option to play all nonlands to the stack instead of the battlefield
+
+=> https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263 Emacs
+=> https://debbugs.gnu.org/cgi/bugreport.cgi?bug=60263 #60263
+=> https://github.com/nedbat/coveragepy Coverage.py
+=> https://github.com/nedbat/coveragepy/pull/1210 #1210
+=> https://github.com/rails/rails Ruby on Rails
+=> https://github.com/rails/rails/pull/37190 #37190
+=> https://github.com/fladson/vim-kitty vim-kitty
+=> https://github.com/fladson/vim-kitty/pull/20 #20
+=> https://github.com/streamlinesocial/highcharts-regression Highcharts Regression
+=> https://github.com/streamlinesocial/highcharts-regression/pull/84 #84
+=> https://github.com/ruby-gettext/gettext ruby-gettext
+=> https://github.com/ruby-gettext/gettext/pull/32 #32
+=> https://github.com/matiasb/python-unidiff Unidiff
+=> https://github.com/matiasb/python-unidiff/pull/75 #75
+=> https://github.com/matiasb/python-unidiff/pull/82 #82
+=> https://github.com/german1608/android-bundle-uploader android-bundle-uploader
+=> https://github.com/german1608/android-bundle-uploader/pull/3 #3
+=> https://github.com/german1608/android-bundle-uploader/pull/7 #7
+=> https://github.com/andresaraujo/timeago.dart timeago
+=> https://github.com/andresaraujo/timeago.dart/pull/128 #128
+=> https://github.com/teranetsrl/oauth2_client oauth2_client
+=> https://github.com/teranetsrl/oauth2_client/pull/29 #29
+=> https://github.com/teranetsrl/oauth2_client/pull/53 #53
+=> https://github.com/iain/http_accept_language HttpAcceptLanguage
+=> https://github.com/iain/http_accept_language/pull/41 #41
+=> https://github.com/Cockatrice/Cockatrice Cockatrice
+=> https://github.com/Cockatrice/Cockatrice/pull/6 #6
+=> https://github.com/Cockatrice/Cockatrice/pull/7 #7
+
+(see all)
+
+=> https://github.com/search?o=desc&q=is%3Apr+author%3Aglacials+archived%3Afalse+is%3Aclosed+-user%3Ayourbase+-user%3Aglacials+&s=created&type=Issues see all

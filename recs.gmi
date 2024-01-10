@@ -1,0 +1,134 @@
+# Recommendations
+
+There are a small number of products in my life that, in little ways, are life-changing. These are them.
+
+## 5.11 Belt
+
+I wear a belt every day. I used to buy a new one every 1–2 years, then I got this belt.
+
+=> https://amzn.to/3ptyErI this belt
+
+That was 10 years ago. I have worn it > 95% of days since then and it shows nearly no signs of wear. I expect I will never buy another belt.
+
+Amazon / 5.11
+
+=> https://amzn.to/3ptyErI Amazon
+=> https://www.511tactical.com/tdu-belt-15-plastic-buckle.html 5.11
+
+## Micro Four Thirds
+
+For photography folks.
+
+Micro Four Thirds is a camera and lens conector. Unlike most proprietary systems, it's an open standard with many companies participating. The de facto flagships are OM System (formerly Olympus) and Panasonic.
+
+Its biggest advantage is its high `photo quality : gear size` ratio. My archenemy is not having my camera with me; every time I have to settle for my phone camera I question having a camera at all.
+
+Since I switched to micro 4/3 I can fit my setup in ~half the space as before. That means a full-day setup in a 20L backpack, a camera + couple lenses in a 6L sling, or a camera + lens in a 2L chest pouch.
+
+I'm using the Olympus OM-D E-M5 Mark III (Amazon / OM System). My everyday versatile lens is the Olympus M.Zuiko 14–150mm F4.0–5.6.
+
+=> https://amzn.to/3PtUO81 Amazon
+=> https://explore.omsystem.com/us/en/om-d-e-m5-mark-iii OM System
+=> https://amzn.to/3FxQYEP Olympus M.Zuiko 14–150mm F4.0–5.6
+
+## A Long, Mountable Power Strip
+
+Mounting a hilariously long power strip under every desk in my house, paired with any cheap cable basket, has given me the best and easiest cable management I've ever had.
+
+=> https://amzn.to/3XAxIPa any cheap
+
+It's important to overbudget your outlets by ~2x and to go long, not fat, so cables can plug in where they are instead of playing musical chairs with a rat's nest of wall warts.
+
+Any will do, but I use these: Amazon / KungFuKingSocket
+
+=> https://amzn.to/44e4c3W Amazon
+=> https://kungfukingsocket.com/products/power-strip-6 KungFuKingSocket
+
+## Noctua Fans
+
+As a noise-sensitive person whose hobbies involve computers, silence is important to me in a gaming machine. Noctua makes giant, silent, brown fans. That's it.
+
+=> autism.html noise-sensitive
+
+Once I got one I could never switch back. My build is centered around their obnoxiously large fanned heatsink, and has been purring for six years. I expect to reuse the same fans for my next build, whenever it is.
+
+=> https://amzn.to/3pyrIJU fanned heatsink
+
+=> https://amzn.to/3LR2Y7J Amazon
+
+## Jetz Scrubz Sponges
+
+These kitchen sponges are easily a 10x–100x improvement over the traditional sponges, in all of these categories:
+
+* Lifespan before getting damaged
+* Lifespan before getting permanently gross
+* Tendancy to get temporarily gross
+* Ease of cleaning once temporarily gross
+
+They're pricier upfront, but cheaper long-term.
+
+=> https://amzn.to/46nSjKq Amazon
+
+## Bidets
+
+If someone came up to you in the street and smeared poop all over you, would you wipe it off with a paper towel, or would you take a shower?
+
+Before I tried one, I had three fundamental misunderstandings about bidets:
+
+1. Bidets are separate from toilets.
+2. Bidets are expensive.
+3. It's a big deal to install a bidet.
+
+**None of these is true.** It takes about 15 minutes to install a bidet onto your toilet, and you can get one for under fifty bucks. It's just a piece of plastic that goes between the toilet and the seat. You do not need to put your hands inside the toilet bowl to install it.
+
+=> https://amzn.to/3McRz2a under fifty bucks
+
+Bidets pay for themselves in unused toilet paper. I use between 1–10% of the toilet paper I used before. Its only function now is drying.
+
+Bidets feel weird for about 10 seconds, then never again. It's honestly disgusting *not* to use one now.
+
+Buy whichever one makes you try it, but here are some options:
+
+* ($) Attachment: Simple, replaces nothing about your toilet, sprays cold water only. I promise it doesn't feel like a cold shower. That area of your body doesn't experience temperature the same.
+* ($$) Seat: The weight distribution of my seat got worse with just an attachment, so a combination seat/bidet is something to consider if that bugs you. Otherwise, the functions are ~the same as the attachment.
+* ($$$) Air Dry; Seats that plug in jump in price and feature set drastically, but I think air dry is the only big one to consider. Warm water is overrated. If you're not sure if you need a heated seat, you don't.
+
+=> https://amzn.to/3McRz2a Attachment
+=> https://amzn.to/3PYqFwc Seat
+=> https://amzn.to/3S9PBn9 Air Dry
+
+# In Search Of
+
+I'm in search of a life-changing product for these categories. Please email me if you have recommendations.
+
+=> mailto:ben@twos.dev email me
+
+## Water Bottle
+
+I am in search of a reusable water bottle with the following qualities:
+
+* Can last 10+ years
+* Can last a week of no washing without getting funky
+* Is less than ~9cm in diameter (i.e. a comfortable size for a Peak Design Everyday Backpack V1 20L cup holder)
+* Holds about 1L
+* Attached or attachable lid
+* Ability to stay cold ~1 day preferred
+
+The closest I ever came was the Thermos Element 5 32 oz, but I lost mine and the product has since discontinued.
+
+=> https://amzn.to/42XJaoR Thermos Element 5 32 oz
+
+## Hair Trimmer
+
+I am in search of a combination beard and head trimmer with these qualities:
+
+* Can last 3+ years
+* USB-C chargeable
+* Has two or fewer attachments, or a good organization system for attachments
+* Can trim beards in the 1~6mm range
+* Can trim head hair in the 1~3cm range
+* Requires no more than two passes for reasonable coverage
+
+The closest I've found in my research is the MANSCAPED Beard Hedger, but it seems to need five or more passes for good coverage.
+
+=> https://amzn.to/3rFxMBB MANSCAPED Beard Hedger

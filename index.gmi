@@ -1,0 +1,13 @@
+I'm **Ben** and this is my website and dumping ground. I'm interested in the climate crisis, open source software, photography, interior design, and video games.
+
+Find me at Mastodon, LinkedIn, or ben@twos.dev.
+
+=> https://hachyderm.io/@glacials Mastodon
+=> https://linkedin.com/in/ben LinkedIn
+=> mailto:ben@twos.dev ben@twos.dev
+
+My most recent posts are below.
+
+---
+
+{{ template "_writing.html.tmpl" }}
