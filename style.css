@@ -10,8 +10,8 @@
   :root {
     --traditional-bg: rgba(255, 255, 255, 1);
     --traditional-fg: rgba(0, 0, 0, 1);
-    --traditional-fg-mute: rgba(0, 0, 0, 0.6);
-    --traditional-fg-pop: rgba(200, 100, 100, 1);
+    --traditional-fg-mute: rgba(150, 90, 50, 0.3);
+    --traditional-fg-pop: rgba(150, 90, 50, 1);
 
     --page-bg: rgb(255, 255, 255);
     --page-border: rgb(0, 0, 0);
@@ -36,8 +36,8 @@
   :root {
     --traditional-bg: rgb(46, 30, 30);
     --traditional-fg: rgba(244, 214, 205, 1);
-    --traditional-fg-mute: rgba(235, 255, 240, 0.6);
-    --traditional-fg-pop: rgba(245, 222, 153, 1);
+    --traditional-fg-mute: #705b58;
+    --traditional-fg-pop: #c8ada6;
 
     --page-bg: rgb(46, 30, 30);
     --page-border: rgb(34, 34, 34);
@@ -77,9 +77,9 @@ a.white-icon:hover img {
 a[href],
 a[href]:hover,
 a[href]:visited {
-  color: #c8ada6;
+  color: var(--traditional-fg-pop);
   text-decoration: underline;
-  text-decoration-color: #705b58;
+  text-decoration-color: var(--traditional-fg-mute);
   text-underline-offset: 0.25rem;
 }
 
