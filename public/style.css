@@ -469,6 +469,7 @@ video + video {
 .alert {
   background: var(--raised-bg);
   color: var(--raised-fg);
+  margin: 0;
   margin-bottom: 3rem;
   margin-top: 2rem;
   padding: 1.25rem;
