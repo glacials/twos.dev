@@ -14,6 +14,13 @@ Read on to answer the question "What is Ben doing now?".
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}**
 from my home in **Seattle, WA**.
 
+## Work
+
+I'm no longer at SunPower and am looking for my next full-time gig.
+[Let me know](mailto:ben@twos.dev) if you have any recommendations.
+Bonus points for climate, gaming, open source, devx/vel, or
+<code style="white-space:nowrap">size < 100</code>.
+
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
@@ -53,13 +60,6 @@ my answer is always the same: **become active in local politics**. Yes, vote, bu
 You don't have to become active in every little thing.
 Pick one or two issues that are close to you.
 Personally I'm interested in walkable neighborhoods and improving public transit, so I take a liking to anything that makes building housing easier.
-
-## SunPower
-
-On that note, since July 2022 I've worked at [SunPower](https://sunpower.com),
-a consumer solar panel company serving the US.
-
-I've jumped around a bit internally, working on this and that.
 
 ## Photography
 

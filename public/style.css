@@ -466,6 +466,21 @@ video + video {
   margin-left: 1rem;
 }
 
+.alert {
+  background: var(--raised-bg);
+  color: var(--raised-fg);
+  margin-bottom: 3rem;
+  margin-top: 2rem;
+  padding: 1.25rem;
+  padding-top: 2rem;
+}
+
+@media (min-width: 50rem) {
+  .alert {
+    box-shadow: 0.5rem 0.5rem var(--shadow);
+  }
+}
+
 .caption {
   font-style: italic;
 }
@@ -521,7 +536,6 @@ p:has(.gallery-item input:checked) + p,
   color: var(--traditional-fg-pop);
   font-size: 2rem;
   text-align: center;
-  text-transform: uppercase;
 }
 
 .footnote-ref {
