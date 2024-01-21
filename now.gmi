@@ -4,6 +4,12 @@ Has it been a while since you've caught up with me? Read on to answer the questi
 
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}** from my home in **Seattle, WA**.
 
+## Work
+
+I'm no longer at SunPower and am looking for my next full-time gig. Let me know if you have any recommendations. Bonus points for climate, gaming, open source, devx/vel, or size < 100.
+
+=> mailto:ben@twos.dev Let me know
+
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
@@ -40,14 +46,6 @@ When I get questions from friends and family about what they can do to help, my 
 4. National politics trail local politics.
 
 You don't have to become active in every little thing. Pick one or two issues that are close to you. Personally I'm interested in walkable neighborhoods and improving public transit, so I take a liking to anything that makes building housing easier.
-
-## SunPower
-
-On that note, since July 2022 I've worked at SunPower, a consumer solar panel company serving the US.
-
-=> https://sunpower.com SunPower
-
-I've jumped around a bit internally, working on this and that.
 
 ## Photography
 
