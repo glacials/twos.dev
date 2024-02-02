@@ -8,7 +8,7 @@ type: post
 
 # Skyhopper
 
-![Photo of a pale blue drink.](/img/skyhopper-smallglass.JPEG)
+![Photo of a pale blue drink.](/img/skyhopper-smallglass.jpeg)
 
 _A grasshopper-adjacent cocktail._
 
