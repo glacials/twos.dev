@@ -1,6 +1,6 @@
 # Skyhopper
 
-=> /img/skyhopper-smallglass.JPEG Photo of a pale blue drink.
+=> /img/skyhopper-smallglass.jpeg Photo of a pale blue drink.
 
 *A grasshopper-adjacent cocktail.*
 
