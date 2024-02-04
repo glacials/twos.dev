@@ -1,4 +1,14 @@
 /*
+ * Unique Markdown-compatible features of this stylesheet:
+ *
+ * - When the exact text "macos" is in an <img>'s src attribute,
+ *   the image is a bit wider on the page to make it look like
+ *   macOS's added drop shadow is not part of the image.
+ * - When several images are in a paragraph together,
+ *   they appear in a grid.
+ */
+
+/*
  * Each set of variables that shares the same first word looks good with or on each other.
  */
 
@@ -102,17 +112,19 @@ article {
   padding: 0;
 }
 
-article > *:not(:has(img)):not(article),
+article > *:not(:has(img)):not(article):not(pre),
 footer {
   margin-left: 1.25rem;
   margin-right: 1.25rem;
 }
 
 @media (min-width: 55rem) {
-  article > *:not(.photo-grid):not(article),
+  article
+    > *:not(.photo-grid):not(article):not(p:has(img[src*="macos"])):not(pre),
   footer {
-    margin-left: 1.75rem;
-    margin-right: 1.75rem;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--container-width);
   }
 }
 
@@ -447,6 +459,44 @@ p {
   margin: 1.5em 0;
 }
 
+p > img {
+  margin: auto;
+  max-height: 60vh;
+}
+
+/* Image captions are defined as a paragraph entirely in italics after an image. */
+p:has(img) + p:has(i:only-child),
+p:has(img) + p:has(em:only-child),
+figure + p:has(i:only-child),
+figure + p:has(em:only-child) {
+  font-size: 0.85rem;
+  font-style: italic;
+  margin: 1rem auto 4rem !important;
+  max-width: 30rem;
+  text-align: center;
+}
+
+/* Show caption on top of zoomed image. */
+p:has(.gallery-item input:checked) + p,
+.caption {
+  background: var(--traditional-bg);
+  display: block;
+  left: 15%;
+  margin: 0;
+  max-width: 50rem;
+  padding: 1rem;
+  position: fixed;
+  top: 5%;
+  transform: translate(-15%, -15%);
+  z-index: 10;
+}
+
+p:has(img),
+p img {
+  margin-left: auto;
+  margin-right: auto;
+}
+
 /*
  * The paragraph after an image or image set must be a caption.
  * Captions are italic.
@@ -486,21 +536,6 @@ video + video {
   font-style: italic;
 }
 
-/* Show caption on top of zoomed image. */
-p:has(.gallery-item input:checked) + p,
-.caption {
-  background: var(--traditional-bg);
-  display: block;
-  left: 15%;
-  margin: 0;
-  max-width: 50rem;
-  padding: 1rem;
-  position: fixed;
-  top: 5%;
-  transform: translate(-15%, -15%);
-  z-index: 10;
-}
-
 .caption.exif {
   background-color: var(--traditional-bg);
   bottom: 0%;
@@ -511,7 +546,6 @@ p:has(.gallery-item input:checked) + p,
 
 .container {
   background: var(--traditional-bg);
-  max-width: var(--container-width);
   margin: auto;
   margin-top: 2rem;
   padding: 0;
@@ -525,7 +559,7 @@ p:has(.gallery-item input:checked) + p,
 
 @media not (min-width: 50rem) {
   .container {
-    margin: 0;
+    margin: auto;
   }
 }
 
@@ -546,29 +580,6 @@ p:has(.gallery-item input:checked) + p,
 .footnotes {
   font-size: 0.6em;
   line-height: 1.5em;
-}
-
-p > img {
-  margin: auto;
-  max-height: 60vh;
-}
-
-/* Image captions are defined as a paragraph entirely in italics after an image. */
-p:has(img) + p:has(i:only-child),
-p:has(img) + p:has(em:only-child),
-figure + p:has(i:only-child),
-figure + p:has(em:only-child) {
-  font-size: 0.85rem;
-  font-style: italic;
-  margin: 1rem auto 4rem !important;
-  max-width: 30rem;
-  text-align: center;
-}
-
-p:has(img),
-p img {
-  margin-left: auto;
-  margin-right: auto;
 }
 
 .gallery-item:has(input[type="checkbox"]) img {
@@ -697,20 +708,24 @@ p img {
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
+pre {
+  margin-left: auto;
+  margin-right: auto;
+  width: fit-content;
+}
+
 pre code {
-  background-color: var(--raised-bg);
-  color: var(--raised-fg);
+  background-color: var(--under-white);
+  color: white;
   display: block;
   padding: 1rem 0;
+  white-space: normal;
 }
 
 @media not (min-width: 50rem) {
   pre {
-    margin: 0 !important;
-  }
-
-  pre code {
-    overflow-x: scroll;
+    margin-left: 0 !important;
+    margin-right: 0 !important;
   }
 }
 
