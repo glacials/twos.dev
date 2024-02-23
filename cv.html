@@ -240,10 +240,6 @@
       transitionary interoperability service, quickly enabling a seamless,
       interleaved user experience far ahead of merged databases
     </li>
-    <li>
-      Ran
-      <a href="https://www.twitch.tv/videos/93570710" target="_blank">panels</a>; helped creators and fans interact in socially healthy ways
-    </li>
     <li>Led to $1B acquisition by Amazon</li>
   </ul>
 </div>
@@ -401,6 +397,25 @@
         }
         break;
     }
+  });
+
+  document.querySelectorAll("img[src*=macos]").forEach((element) => {
+    console.log("Set up macOS image trigger");
+    const containerWidth = window
+      .getComputedStyle(document.documentElement)
+      .getPropertyValue("--container-width");
+    const widthAdjustment = 223 * (element.width / element.naturalWidth);
+    const finalWidth = `calc(${containerWidth} + ${widthAdjustment}px)`;
+
+    console.log(
+      `containerWidth=${containerWidth}; naturalWidth=${
+        element.naturalWidth
+      }; width=${element.width}; ratio=${
+        element.width / element.naturalWidth
+      } widthAdjustment=${widthAdjustment}; finalWidth=${finalWidth}`,
+    );
+    element.parentElement.style.maxWidth = finalWidth;
+    element.style.maxWidth = finalWidth;
   });
 </script>
 
