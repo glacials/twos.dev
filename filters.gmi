@@ -1,6 +1,6 @@
 # Wholesome Great Filters
 
-The Fermi paradox is the idea that based on the number of stars in the universe, each's probability of each having a habitable planet, each of those planets' odds of developing life, and so on; statistically it's virtually certain some other civilization has become obscenely advanced, far beyond our own.
+The Fermi paradox is the idea that based on the number of stars in the universe, each's probability of having a habitable planet, each of those planets' odds of developing life, and so on; statistically it's virtually certain some other civilization has become obscenely advanced, far beyond our own.
 
 If such a civilization exists we should have heard from them by now, but we haven't. That's the paradox.
 
