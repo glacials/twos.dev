@@ -37,9 +37,10 @@ Contraceptives, family planning, education, individual freedoms, and opportunity
 all work together to create more thoughtful and intentional reproduction.
 
 Historically, reaching replacement has been easy.
-It has to be, evolutionarily.
-The… *process* that makes children is fun, so children get made.
-But as we approach a world that disconnects recreational sex from pregnancy,
+It has had to be.
+Sex is fun, and sex makes children, so children get made.
+
+But as we approach a world that disconnects recreational sex from conception,
 it's possible we won't reach replacement.
 It's possible we won't even get _close_.
 How many couples do you know who _plan_ to have 3+ children?
@@ -58,12 +59,13 @@ Humans are unique on the planet for two reasons.
 First, we’re toolmakers.
 Second, we pine for more.
 More everything.
-The richest among us still want more.
+The richest and most accomplished among us still want more.
 This carnal desire has brought us far evolutionarily, intellectually, and economically.
 
-The desire for excess might be a prerequisite for a species to become advanced.
-But perhaps that desire eventually causes enough planet-scale issues that it forces the realization that it can be overcome,
-in the same way that a little drug use is fine but a lot can cause a problem to be realized and fixed.
+This desire for excess is probably a prerequisite for any species to become advanced.
+But perhaps that desire eventually causes enough planet-scale issues that it forces the realization that it can be overcome.
+
+A small problem is ignorable and a medium problem is annoying, but a big problem is fixed.
 
 Maybe we’ll reach some philosophical understanding of the universe and our own nature that shuts down that desire for excess,
 that makes every human being happy and healthy but doesn't also advance science,
