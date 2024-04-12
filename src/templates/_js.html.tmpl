@@ -80,23 +80,4 @@
         break;
     }
   });
-
-  document.querySelectorAll("img[src*=macos]").forEach((element) => {
-    console.log("Set up macOS image trigger");
-    const containerWidth = window
-      .getComputedStyle(document.documentElement)
-      .getPropertyValue("--container-width");
-    const widthAdjustment = 223 * (element.width / element.naturalWidth);
-    const finalWidth = `calc(${containerWidth} + ${widthAdjustment}px)`;
-
-    console.log(
-      `containerWidth=${containerWidth}; naturalWidth=${
-        element.naturalWidth
-      }; width=${element.width}; ratio=${
-        element.width / element.naturalWidth
-      } widthAdjustment=${widthAdjustment}; finalWidth=${finalWidth}`,
-    );
-    element.parentElement.style.maxWidth = finalWidth;
-    element.style.maxWidth = finalWidth;
-  });
 </script>

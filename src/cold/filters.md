@@ -1,15 +1,10 @@
 ---
-date: 2023-11-03
+date: 2024-04-12
 filename: filters.html
-preview: Interesting solutions to the Fermi Paradox.
-type: draft
+type: post
 ---
 
-TODO: Remove all the "maybes" and just use present tense.
-
-TODO: Rename article "Wholesome Great Filters"?
-
-# Unpopular Great Filters
+# Wholesome Great Filters
 
 The Fermi paradox is the idea that based on the number of stars in the universe,
 each's probability of each having a habitable planet,
