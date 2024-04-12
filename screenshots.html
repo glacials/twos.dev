@@ -1,0 +1,494 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta
+  name="go-import"
+  content="twos.dev
+           git https://github.com/glacials/twos.dev"
+/>
+<meta
+  name="go-source"
+  content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
+/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="description" content="Aligning macOS Screenshots Ignoring Drop Shadows" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="twos.dev"
+  href="/feed.rss"
+/>
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="twos.dev"
+  href="/feed.atom"
+/>
+<title>Ben Carlsson / Aligning macOS Screenshots Ignoring Drop Shadows</title>
+<link rel="stylesheet" href="/style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+  crossorigin="anonymous"
+/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+<link rel="manifest" href="/site.webmanifest?v=2" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#5bbad5" />
+<link rel="shortcut icon" href="/favicon.ico?v=2" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#ffffff" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="primary"><div class="hierarchy">
+      <div class="breadcrumb">
+        <a href="/"><div class="nav-text">Ben Carlsson</div></a>
+      </div></div>
+    <div class="breadcrumb title">
+      <a href="/screenshots.html"><h1>Aligning macOS Screenshots Ignoring Drop Shadows</h1></a>
+    </div></nav>
+
+      <article>
+        
+        
+          <div class="draft">Draft</div>
+        
+        
+        
+        <html><head></head><body>
+
+<p>Today, I found myself writing a post for this site that included some screenshots from macOS.</p>
+
+<p>Although my CSS skills are flawless<sup class="footnote-ref" id="fnref:ahahahahahahahah"><a href="#fn:ahahahahahahahah">1</a></sup> the macOS screenshots looked a little timid:</p>
+
+<p><img src="/img/screenshots-1-dark.png" alt="A screenshot of a twos.dev post embedding a macOS screenshot. The screenshot is noticeably narrower than the rest of the post above and below it."/></p>
+
+<p><em>The screenshot is skinnier than the rest of the content.</em></p>
+
+<p>This is because Apple adds a drop shadow to any window you screenshot with ⌘⇧4 → Space.</p>
+
+<p><img src="/img/screenshots-2-dark.png" alt="A screenshot of the same content as before, but with developer tools enabled and showing that the screenshot is much wider than it looks to be, to account for the drop shadow embedded in it."/></p>
+
+<p>I like this behavior.
+It makes screenshots look like they belong,
+whether you're sharing them in a blog or an iMessage conversation.</p>
+
+<p>However, it of course makes the CSS a bit harder.
+How can we expand the actual window part of the screenshot to be the same width as the content,
+and let the drop shadows bleed over into the margins?</p>
+
+<h2>Option 1: Screenshot without Shadows</h2>
+
+<p>We can disable the screenshot drop shadow forever system-wide with a simple command:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">defaults write com.apple.screencapture disable-shadow <span class="nb">true</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">killall SystemUIServer <span class="c1"># Or reboot</span>
+</span></span></code></pre>
+
+<p>There are a few things I didn't like about this solution:</p>
+
+<ol>
+<li>This would leave some older posts that use macOS screenshots behind,
+or require me to manually edit or recreate them.</li>
+<li>I will 100% forget that I did this,
+and my next system will just reintroduce the problem.
+I could add it to my system setup scripts in <a href="https://github.com/glacials/dotfiles" target="_blank">dot files</a>,
+but that's just another thing that could break later.</li>
+<li>As I said, I enjoy the drop shadow.</li>
+</ol>
+
+<h2>Option 2: Manually Remove Shadows</h2>
+
+<p>I could opt to remove the shadows from each screenshot I take before adding it to a blog post,
+either manually or by adding some workflow with <code>ffmpeg</code> or similar.</p>
+
+<p>This has nearly the same problems as above.
+It leaves older posts behind,
+and adds another moving part that can break in the future,
+and removes something I like from the screenshots.</p>
+
+<h2>Option 3: Make macOS Screenshots Bigger</h2>
+
+<p>The option I'll go for is to write some CSS to make the macOS screenshots bigger on the page.
+Here are our requirements:</p>
+
+<ol>
+<li>Only macOS screenshots must be bigger; other images should be unaffected.</li>
+<li>The borders of the screenshotted windows should align visually with the content above and below them.</li>
+<li>In accordance with my <a href="meta.html">goals for twos.dev</a> and <a href="https://twos.dev/winter" target="_blank">Winter</a>,
+it should be compatible with Markdown,
+not require HTML,
+and gracefully degrade into invisible non-syntax when viewed in other contexts.
+This ensures that if I change stylesheets,
+static site generators,
+and/or websites,
+I don't have to comb through all my previous posts and fix a bunch of broken-looking stuff.
+At that point it's okay if the shadow correction doesn't work anymore,
+but it's not okay if my posts have some weird [[ REMOVE_SHADOWS(...) ]] syntax or somesuch.</li>
+</ol>
+
+<h3>Step 1: Move Widths to the Children</h3>
+
+<p>The first issue is that even when we get a way to make the image bigger,
+it is still bound by the width of its container.</p>
+
+<p><img src="/img/screenshots-2-dark.png" alt="A screenshot of the same content as before, but with developer tools enabled and showing that the post container spreads the entire height of the page, preventing anything inside it from sticking out on the left or right sides."/></p>
+
+<p><em>The post <code>article</code> (blue) and its auto margins (orange).</em></p>
+
+<p>We need to break out of the <code>article</code> for macOS screenshots only.</p>
+
+<p>We could to this is to stop the <code>article</code> just before the screenshot,
+then display the image,
+then start a new <code>article</code> afterwards;
+however this violates the semantics of the article,
+whose job is to contain one piece of content.</p>
+
+<p>Even if it looks perfect,
+accessibility tools may trip over it.
+There's also no doubt that in 1 or 5 or 10 years future-me will come along and accidentally (and silently) break it.</p>
+
+<p>Instead, let's kill the max-width on the container and move it to the children:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">:root {
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  --container-width: 33rem;
+</span></span><span class="line"><span class="ln">3</span><span class="cl">}
+</span></span><span class="line"><span class="ln">4</span><span class="cl">
+</span></span><span class="line"><span class="ln">5</span><span class="cl"><span class="gd">- article {
+</span></span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="gd"></span><span class="gi">+ article &gt; * {
+</span></span></span><span class="line"><span class="ln">7</span><span class="cl"><span class="gi"></span>  max-width: var(--container-width);
+</span></span><span class="line"><span class="ln">8</span><span class="cl">}
+</span></span></code></pre>
+
+<p>Our page should look the same,
+but each immediate child of <code>article</code> is now responsible for its own width.
+Depending on how you have your <code>article</code> aligned,
+you may need to port some more code:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">article &gt; * {
+</span></span><span class="line"><span class="ln">2</span><span class="cl"><span class="gi">+ margin: auto;
+</span></span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="gi"></span>  max-width: var(--container-width);
+</span></span><span class="line"><span class="ln">4</span><span class="cl">}
+</span></span></code></pre>
+
+<p>You may opt to manually add a class to each element you place inside <code>article</code> instead.
+I'm a forgetful person and I'm making a small website for myself only.
+I like being able to build features once then forget about them,
+so I reach for heuristics that will be good enough to free up my brain to worry about other things.</p>
+
+<p>Now we can vary our widths per element.
+Let's make sure only the right ones vary.</p>
+
+<h3>Step 2: Pick Out Only macOS Screenshots</h3>
+
+<p>Our goal now is something similar to this:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">img</span><span class="p">.</span><span class="nc">macos</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>Actually,
+most Markdown renderers put lonesome images in their own paragraphs,
+so we actually need to complicate this a little to:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="p">.</span><span class="nc">macos</span><span class="o">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>But there are still two problems.</p>
+
+<p>The first issue is rule 3 prevents us from tagging macOS images with their own class,
+because we want to keep all that ugly HTML out of our futureproofed Markdown.
+We need another way for this.</p>
+
+<p>The second issue I'll come back to.</p>
+
+<p>Markdown is pretty limited in the control we have over the <code>&lt;img&gt;</code> elements it produces,
+with good reason.
+Without any Markdown extensions,
+and without mucking up our futureproof Markdown,
+the only two attributes that get sent from Markdown to HTML are the <code>alt</code> and the <code>src</code> attributes.</p>
+
+<p>We could hijack the <code>alt</code> attribute for our purposes:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">![<span class="nt">macOS</span>](<span class="na">/img/screenshot.png</span>)
+</span></span></code></pre>
+
+<p>produces:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="p">&lt;</span><span class="nt">img</span> <span class="na">alt</span><span class="o">=</span><span class="s">"macos"</span> <span class="na">src</span><span class="o">=</span><span class="s">"/img/screenshot.png"</span> <span class="p">/&gt;</span>
+</span></span></code></pre>
+
+<p>which we can select using:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">alt</span><span class="o">=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>but this completely destroys the ability for assistive technologies like screen readers operate on our images,
+which is not an acceptable solution.</p>
+
+<p>The only other attribute we can impact from clean Markdown is <code>src</code>,
+but we need that to find our image!</p>
+
+<p>Luckily, CSS has a seldom-used selector for this:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors" target="_blank"><code>[attr*=value]</code></a> selector matches any element whose <code>attr</code> contains at least one occurrence of <code>value</code>.</p>
+
+<p>All we have to do, then, is add a sort of tag to our macOS screenshots.
+In fact, if you exclusively share screenshots of entire windows
+(and never, say, subportions)
+you could forego any special naming conventions and just match against what macOS names its screenshots by default:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">Screenshot</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>I share multiple types of screenshots, though.
+<a href="https://twos.dev/winter.html" target="_blank">Winter</a> also already supports a rudimentary tagging system for post images: ending a pre-extension filename in <code>-dark</code> or <code>-light</code> will select the correct image for the user's color scheme preference.</p>
+
+<p>We can extend this simple system and say that any image with the word <code>macos</code> in it will be formatted as a macOS window screenshot:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">my-screenshot-macos-dark.png
+</span></span><span class="line"><span class="ln">2</span><span class="cl">my-screenshot-macos-light.png
+</span></span></code></pre>
+
+<p>Our macOS screenshots can now be wider,
+but there's one thing still constraining them.
+In most Markdown renderers images,
+even alone,
+are inside <code>&lt;p&gt;</code> tags.
+We'll apply the treatment to those:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p><img src="/img/screenshots-4-dark.png" alt="A screenshot of the same content as earlier, but the macOS screenshot visually lines up with the text, mostly."/></p>
+
+<p>Now we've got our macOS screenshots <em>roughly</em> lining up with the rest of the content.
+That brings us to our last problem.</p>
+
+<h3>Step 3: Figure Out How Much Wider macOS Screenshots Should Be</h3>
+
+<p>Now we've improved our example CSS to pick out only macOS screenshots:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="p">.</span><span class="nc">macos</span><span class="o">)</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>There's one remaining issue,
+which is that <code>40rem</code> is just a number I pulled out of thin air.
+It won't hold water if we use screenshots of different sizes or aspect ratios:</p>
+
+<p><img src="/img/screenshots-4-dark.png" alt="A screenshot of the same dang content, but with a newer macOS screenshot below the older one, of a different shape and size. It doesn't line up with the text."/></p>
+
+<p>Let's try to be more precise with this.
+What are we actually trying to achieve,
+in precise terms?</p>
+
+<p>We want the edges of the window in the screenshot to line up with some content.
+The edges of the window can be found at the edges of the image,
+inset by some amount.</p>
+
+<p>With some quick pixel peeping in <a href="https://apps.apple.com/us/app/acorn-7/id1547371478?mt=12" target="_blank">Acorn</a>,
+we can see that the macOS window screenshots use the same number of pixels for the shadow every time,
+whether the window is small or large, tall or wide.</p>
+
+<p><img src="/img/screenshots-8-dark.png" alt="A screenshot of a zoomed-in screenshot, with a select box dragged around the drop shadow portion. A status bar below says it is 112px wide."/></p>
+
+<p><em>112px.</em></p>
+
+<p>It's the same every time. 112px on the left and right sides.</p>
+
+<p>But wait.
+What if we hook up another monitor,
+and screenshot on that one?</p>
+
+<p><img src="/img/screenshots-7-dark.png" alt="A screenshot of a zoomed-in screenshot, with a select box dragged around the drop shadow portion. A status bar below says it is 112px wide."/></p>
+
+<p><em>Dang it, 56px.</em></p>
+
+<p>It's different!</p>
+
+<p>Acorn reports the screenshot from this external monitor at 2560x1440 is 72 DPI,
+while the original, from my MacBook Pro's 13" Retina display at 2560x1600,
+is 144 DPI.
+Exactly double.</p>
+
+<p>The number of shadow pixels<span style="font-family: sans-serif">—</span>56px and 112px<span style="font-family: sans-serif">—</span>are also apart by a factor of 2.
+There's something here.
+If we can find a way to get the DPI of the image,
+we can use some CSS math to figure out how much space to give it:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">src</span><span class="o">*=</span><span class="s2">"macos"</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nb">calc</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">)</span> <span class="o">+</span> <span class="nb">calc</span><span class="p">(</span><span class="n">DPI_HERE</span> <span class="o">*</span> <span class="mi">2</span><span class="p">));</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>There's one last problem.
+We're setting the right width for images at their full size,
+but the page often doesn't display them at full size<span style="font-family: sans-serif">—</span>they have to shrink to reasonably fit in it.</p>
+
+<p>So the shadow, although it takes up <code>x</code> pixels in reality,
+when the image is shrunk only takes up <code>y</code> pixels.
+We need our container to also shrink by only <code>y</code> pixels.</p>
+
+<div class="footnotes">
+
+<hr/>
+
+<ol>
+<li id="fn:ahahahahahahahah">ahahahahahahahahahahaha</li>
+</ol>
+
+</div>
+</body></html>
+      </article>
+      <footer>
+        <p>
+          <small>
+            <i>
+              
+                source:
+                <a
+                  href="https://github.com/glacials/twos.dev/blob/main/src/cold/screenshots.md"
+                  target="_blank"
+                  >src/cold/screenshots.md</a
+                >
+              
+              <br />
+              
+                published
+                2024 February
+                
+              
+            </i>
+          </small>
+        </p>
+      </footer>
+    </div>
+    <script
+  crossorigin="anonymous"
+  defer
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+></script>
+<script
+  crossorigin="anonymous"
+  defer
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  onload="renderMathInElement(document.body);"
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+></script>
+<script>
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if (document.location.pathname === "/winter") {
+    window.location.replace("https://pkg.go.dev/twos.dev/winter");
+  }
+
+  
+  document.addEventListener("keydown", (event) => {
+    switch (event.keyCode) {
+      case 37: 
+        const moveLeftFrom = document.querySelector(
+          ".gallery-item input:checked",
+        );
+        const moveLeftTo = document.querySelector(
+          ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+        );
+        if (moveLeftFrom) {
+          moveLeftFrom.checked = false;
+        }
+        if (moveLeftTo) {
+          moveLeftTo.checked = true;
+        }
+        break;
+      case 39: 
+        const moveRightFrom = document.querySelector(
+          ".gallery-item input:checked",
+        );
+        const moveRightTo = document.querySelector(
+          ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+        );
+        if (moveRightFrom) {
+          moveRightFrom.checked = false;
+        }
+        if (moveRightTo) {
+          moveRightTo.checked = true;
+        }
+        break;
+      case 27: 
+        const current = document.querySelector(".gallery-item input:checked");
+        if (current) {
+          current.checked = false;
+        }
+        break;
+    }
+  });
+</script>
+
+  </body>
+</html>

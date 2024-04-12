@@ -1,5 +1,3 @@
-   Hire me   As seen on Internet!        As of January 2024 I'm open to new full-time work, remote or in Seattle.           I'm an ex-founder Staff/Principal Software Engineer, formerly #90 at Twitch.     I can be deployed pure backend or low-JS full-stack. I'm a polyglot, but an     expert in Go and Ruby.           Bonus points for climate, gaming, open source, devx/vel, or     size < 100.           See my CV or     email me.    
-
 I'm **Ben** and this is my website and dumping ground. I'm interested in the climate crisis, open source software, photography, interior design, and video games.
 
 Find me at Mastodon, LinkedIn, or ben@twos.dev.

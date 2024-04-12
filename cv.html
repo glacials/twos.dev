@@ -66,10 +66,17 @@
         
         
         <html><head><style>
-  .container {
-    max-width: 50rem;
-  }
   @media print {
+    .container {
+      max-width: 50rem;
+    }
+    article {
+      max-width: unset !important;
+    }
+    article > *,
+    .container > * {
+      max-width: unset !important;
+    }
     body,
     html {
       margin: 0;
@@ -92,7 +99,8 @@
   .company {
     display: inline;
   }
-  .job {
+  .job,
+  .section {
     margin-bottom: 3rem;
   }
   .role {
@@ -101,7 +109,7 @@
   }
 </style>
 
-</head><body><div style="margin: auto; text-align: center">
+</head><body><div style="margin: auto; max-width: unset; text-align: center">
   
   <h2>Ben Carlsson</h2>
   <p>Seattle, WA</p>
@@ -118,8 +126,8 @@
     / (925) 979-5797
   </p>
   <p style="margin: 1.25rem;">
-    Former early Twitch engineer with 10+ years experience in engineering and
-    technical leadership.<br/>Proven in backend and low-JS full-stack roles.
+    Early Twitch engineer with 10+ years experience in backend &amp; full-stack
+    engineering and technical leadership, specializing in developer velocity.
   </p>
 </div>
 <h2>Job History</h2>
@@ -150,6 +158,7 @@
   <div class="location">Seattle, WA</div>
   January 2022<span style="font-family: sans-serif">–</span>June 2022
   <ul>
+    <li>Entered via acquisition of YourBase January 2022</li>
     <li>
       Improved internal developer experience and onboarding by building internal
       CLI to manage monolith complexity, reducing time-to-first-commit for new
@@ -180,7 +189,7 @@
       weeks of joining by replacing raw queries with ORM relationships, bringing
       the most-used API endpoint from &gt;12s down to &lt;50ms
     </li>
-    <li>Exited via acquisition January 2022</li>
+    <li>Exited via acquisition by FalconX January 2022</li>
   </ul>
 </div>
 <div class="job">
@@ -259,17 +268,27 @@
 </div>
 
 <h2>Skills</h2>
-<li>
-  Software engineering, architecture design, rapid prototyping, developer
-  operations, incident management, mentoring, technical writing, open source /
-  community management
-</li>
+<ul class="section">
+  <li>
+    Software engineering, architecture design, rapid prototyping, developer
+    operations, incident management, mentoring, technical writing, open source /
+    community management
+  </li>
+</ul>
 
 <h2>Technical Skills</h2>
-<ul>
+<ul class="section">
   <li>
     Go, Ruby, Python, JavaScript, HTML/CSS, AWS, DynamoDB, Firebase, Vue,
     Docker, PostgreSQL, Terraform, AWS CDK
+  </li>
+</ul>
+
+<h2>Education</h2>
+<ul class="section">
+  <li>
+    <b>Bachelor of Science</b> in <b>Computer Science</b> from California State
+    University, Chico
   </li>
 </ul>
 
@@ -280,14 +299,6 @@
     <a href="https://twos.dev/ben-carlsson-resume.pdf" target="_blank">see a PDF version</a>
   </p>
 </div>
-
-<h2>Education</h2>
-<ul>
-  <li>
-    <b>Bachelor of Science</b> in <b>Computer Science</b> from California State
-    University, Chico
-  </li>
-</ul>
 </body></html>
       </article>
       <footer>
@@ -397,25 +408,6 @@
         }
         break;
     }
-  });
-
-  document.querySelectorAll("img[src*=macos]").forEach((element) => {
-    console.log("Set up macOS image trigger");
-    const containerWidth = window
-      .getComputedStyle(document.documentElement)
-      .getPropertyValue("--container-width");
-    const widthAdjustment = 223 * (element.width / element.naturalWidth);
-    const finalWidth = `calc(${containerWidth} + ${widthAdjustment}px)`;
-
-    console.log(
-      `containerWidth=${containerWidth}; naturalWidth=${
-        element.naturalWidth
-      }; width=${element.width}; ratio=${
-        element.width / element.naturalWidth
-      } widthAdjustment=${widthAdjustment}; finalWidth=${finalWidth}`,
-    );
-    element.parentElement.style.maxWidth = finalWidth;
-    element.style.maxWidth = finalWidth;
   });
 </script>
 
