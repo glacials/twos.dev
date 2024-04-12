@@ -22,7 +22,8 @@ and it's the same event or events for every civilization.
 Usually, ideas for possible Great Filters are dramatic and looming like
 nuclear war, climate change, hyperintelligent AI, plague, or exhaustion of resources.
 
-I'd like to propose some more wholesome alternatives.
+I'd like to propose some more wholesome alternatives,
+each a little more unhinged than the last.
 
 ## Stopped Having "Happy Accidents"
 
