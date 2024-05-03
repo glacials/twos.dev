@@ -1,8 +1,10 @@
 ---
-date: 2024-03-19
+date: 2024-05-02
 filename: brownnote.html
-type: page
+type: post
 ---
+
+<link rel="stylesheet" type="text/css" href="/devices.min.css" />
 
 # Brown Note
 
@@ -10,7 +12,7 @@ I've been working on an iOS app recently,
 which is new for me.
 The app is called [Brown Note][appstore]
 and it is a food journal designed to solve the biggest problem I have had with other food journal apps:
-logging entries is so complex that my brain stops doing it.
+logging entries is so complex that my brain unconsciously stops doing it.
 
 ## Customer Need
 
@@ -43,22 +45,24 @@ I realized my issue was the friction of log entry.
 I would be eating among friends,
 or sitting down in pain,
 and a lightweight thought of "I should log this" would brush over my arm
-only to be dismissed—"I'll log it when I'm free"—and that would be the last thought I had on it.
+only to be dismissed—"I'll log it when I'm free".
+Only when later came, it was still too heavy a process
+(and too delayed a gratification)
+to convince myself to do.
 
 I realized I needed to remove as much friction from the process as I could.
-I would simplify my process so much that that light brushing over my arm would be a strong enough signal to initiate.
+I would simplify my process so much that that light brushing over my arm would be a strong enough signal to log immediately.
 
 ## Product Discovery
 
-I didn't initially mean to solve this problem for anyone but myself.
-My first iteration on solving it was carrying a pen and a folded up piece of paper in my pocket,
+I carried a pen and a folded up piece of paper in my pocket,
 writing down everything that went into and out of me,
 occasionally copying them into a spreadsheet by hand,
 and doing some eyeball analysis—and later some Python scripting—to find problem foods.
 
-I did this because I thought having a physical pen would literally poke me whenever I sit down to do my business,
-and it did,
-but there was something magical about how brief each log entry needed to be that allowed me to build a routine around it.
+I did this because the physical pen would literally poke me whenever I sit down to do my business,
+but there was something magical about how the small size of the folded piece of paper forced each log entry to be brief.
+That magic allowed me to build a routine around it.
 
 Version 2 was opening the aforementioned spreadsheet on my phone and directly logging there,
 but this slog quickly led me to version 3,
@@ -92,10 +96,11 @@ _An excerpt from my v2 spreadsheet._
 
 I'm not separating "foods" and "poops" into two categories of thing.
 I'm not typing out a bunch of tags or ingredients with every food item.
-If I zero in on a food that's too ambiguous—say, "pizza"—I _then and only then_ will start logging its components:
+If I zero in on a food that's too ambiguous—say, "pizza"—only then will I start logging its components:
 cheese, bread, tomatoes.
 Until and unless that happens,
-simplicity is queen because keeping the routine going is more important than anything.
+simplicity wins.
+Keeping the routine going is more important than anything.
 
 ## Into Swift
 
@@ -108,34 +113,95 @@ I started learning Swift and SwiftUI again, this time with SwiftData too.
 
 The result is [Brown Note][appstore].
 
-![A screenshot of the Brown Note app, on a screen listing a few days' worth of food journal entries.](/img/brownnote-home-ios-light.png)
-![A screenshot of the Brown Note app, on a screen asking the user to input a food item.](/img/brownnote-enter-ios-light.png)
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img
+    alt="A screenshot of Brown Note showing how a specific food, chai in this case, impacts poops, including percentages of good vs. bad poops that come after."
+    class="device-screen"
+    src="/img/brownnote-correlate.png"
+    style="margin-top: 0"
+    />
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
 
-![A screenshot of the Brown Note app, on a screen showing a bar chart of good poops vs. bad poops that happened soon after chai latte entries.](/img/brownnote-chart-ios-light.png)
-
-_Brown Note is available on the [App Store][appstore] for iOS._
 
 It was insanely easy to get Brown Note to a stage where I can use it for personal logging.
-The most complex parts of the app are the analytics and insights,
-which aren't part of its everyday use cases and so don't block me from onboarding as a user.
+The complexity all lies in the analytics and insights,
+which aren't part of its everyday use cases and so didn't block me from onboarding myself as a user.
+
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img
+    alt="A screenshot of Brown Note showing the user some meals they have tracked."
+    class="device-screen"
+    src="/img/brownnote-trackmeals.png"
+    style="margin-top: 0"
+    />
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
 
 This helped immensely with design,
 as I would personally use the app several times a day,
 noting every rough edge and feature need.
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img
+    alt="A screenshot of Brown Note showing the user a poop they have tracked, and the estimated inputs (recent meals) to that poop."
+    class="device-screen"
+    src="/img/brownnote-trackpoops.png"
+    style="margin-top: 0"
+    />
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
 
 I'm still in constant development,
 but the simple use cases are covered.
 As I build out more advanced ones, I'm being cognizant about keeping the logging experience dead simple.
 
 For example,
-I'm building a feature where the app can understand food components
+the app can understand food components
 (e.g. `latte` contains `milk` and `coffee`)
 but I'm shielding the logging experience from being impacted by it.
-When the app needs more info from you,
-it will ask you asynchronously.
+When the app needs more info,
+it asks asynchronously.
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img
+    alt="A screenshot of Brown Note asking the user for the ingredients of saag paneer."
+    class="device-screen"
+    src="/img/brownnote-honein.png"
+    style="margin-top: 0"
+    />
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
 
 Let me know what you think,
 or join the [TestFlight][testflight] group to give me some feedback before proper release.
 
-[appstore]: https://apps.apple.com/us/app/core-data-lab/id6479333983
-[testflight]: https://testflight.apple.com/join/HgAgdX48
+<!-- _Brown Note is available on the [App Store][appstore] for iOS._ -->
+
+[appstore]: https://apps.apple.com/us/app/brown-note/id6479333983
+[testflight]: https://testflight.apple.com/join/ww7RII5M
