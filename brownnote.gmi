@@ -1,8 +1,10 @@
+
+
 # Brown Note
 
-I've been working on an iOS app recently, which is new for me. The app is called Brown Note and it is a food journal designed to solve the biggest problem I have had with other food journal apps: logging entries is so complex that my brain stops doing it.
+I've been working on an iOS app recently, which is new for me. The app is called Brown Note and it is a food journal designed to solve the biggest problem I have had with other food journal apps: logging entries is so complex that my brain unconsciously stops doing it.
 
-=> https://apps.apple.com/us/app/core-data-lab/id6479333983 Brown Note
+=> https://apps.apple.com/us/app/brown-note/id6479333983 Brown Note
 
 ## Customer Need
 
@@ -20,15 +22,15 @@ Thus started a cycle:
 4. Weeks later, I realize I have stopped logging and completely forgetten about it.
 5. Repeat from 1.
 
-As I tried more apps this way, and became more conscious over time about my falling off the wagon, I realized my issue was the friction of log entry. I would be eating among friends, or sitting down in pain, and a lightweight thought of "I should log this" would brush over my arm only to be dismissed—"I'll log it when I'm free"—and that would be the last thought I had on it.
+As I tried more apps this way, and became more conscious over time about my falling off the wagon, I realized my issue was the friction of log entry. I would be eating among friends, or sitting down in pain, and a lightweight thought of "I should log this" would brush over my arm only to be dismissed—"I'll log it when I'm free". Only when later came, it was still too heavy a process (and too delayed a gratification) to convince myself to do.
 
-I realized I needed to remove as much friction from the process as I could. I would simplify my process so much that that light brushing over my arm would be a strong enough signal to initiate.
+I realized I needed to remove as much friction from the process as I could. I would simplify my process so much that that light brushing over my arm would be a strong enough signal to log immediately.
 
 ## Product Discovery
 
-I didn't initially mean to solve this problem for anyone but myself. My first iteration on solving it was carrying a pen and a folded up piece of paper in my pocket, writing down everything that went into and out of me, occasionally copying them into a spreadsheet by hand, and doing some eyeball analysis—and later some Python scripting—to find problem foods.
+I carried a pen and a folded up piece of paper in my pocket, writing down everything that went into and out of me, occasionally copying them into a spreadsheet by hand, and doing some eyeball analysis—and later some Python scripting—to find problem foods.
 
-I did this because I thought having a physical pen would literally poke me whenever I sit down to do my business, and it did, but there was something magical about how brief each log entry needed to be that allowed me to build a routine around it.
+I did this because the physical pen would literally poke me whenever I sit down to do my business, but there was something magical about how the small size of the folded piece of paper forced each log entry to be brief. That magic allowed me to build a routine around it.
 
 Version 2 was opening the aforementioned spreadsheet on my phone and directly logging there, but this slog quickly led me to version 3, an iOS Shortcut placed on my Home Screen that prompts for a single line of text, which it appends to the spreadsheet.
 
@@ -40,7 +42,7 @@ All I'm entering in these lines is plain text like "Good poop", "Bad poop", or a
 
 *An excerpt from my v2 spreadsheet.*
 
-I'm not separating "foods" and "poops" into two categories of thing. I'm not typing out a bunch of tags or ingredients with every food item. If I zero in on a food that's too ambiguous—say, "pizza"—I *then and only then* will start logging its components: cheese, bread, tomatoes. Until and unless that happens, simplicity is queen because keeping the routine going is more important than anything.
+I'm not separating "foods" and "poops" into two categories of thing. I'm not typing out a bunch of tags or ingredients with every food item. If I zero in on a food that's too ambiguous—say, "pizza"—only then will I start logging its components: cheese, bread, tomatoes. Until and unless that happens, simplicity wins. Keeping the routine going is more important than anything.
 
 ## Into Swift
 
@@ -53,25 +55,24 @@ After stalling out trying to make an unrelated app with a lot of complexity, I f
 
 The result is Brown Note.
 
-=> https://apps.apple.com/us/app/core-data-lab/id6479333983 Brown Note
+=> https://apps.apple.com/us/app/brown-note/id6479333983 Brown Note
 
-=> /img/brownnote-home-ios-light.png A screenshot of the Brown Note app, on a screen listing a few days' worth of food journal entries.
-=> /img/brownnote-enter-ios-light.png A screenshot of the Brown Note app, on a screen asking the user to input a food item.
+                           
 
-=> /img/brownnote-chart-ios-light.png A screenshot of the Brown Note app, on a screen showing a bar chart of good poops vs. bad poops that happened soon after chai latte entries.
+It was insanely easy to get Brown Note to a stage where I can use it for personal logging. The complexity all lies in the analytics and insights, which aren't part of its everyday use cases and so didn't block me from onboarding myself as a user.
 
-*Brown Note is available on the App Store for iOS.*
-
-=> https://apps.apple.com/us/app/core-data-lab/id6479333983 App Store
-
-It was insanely easy to get Brown Note to a stage where I can use it for personal logging. The most complex parts of the app are the analytics and insights, which aren't part of its everyday use cases and so don't block me from onboarding as a user.
+                           
 
 This helped immensely with design, as I would personally use the app several times a day, noting every rough edge and feature need.
 
+                           
+
 I'm still in constant development, but the simple use cases are covered. As I build out more advanced ones, I'm being cognizant about keeping the logging experience dead simple.
 
-For example, I'm building a feature where the app can understand food components (e.g. `latte` contains `milk` and `coffee`) but I'm shielding the logging experience from being impacted by it. When the app needs more info from you, it will ask you asynchronously.
+For example, the app can understand food components (e.g. `latte` contains `milk` and `coffee`) but I'm shielding the logging experience from being impacted by it. When the app needs more info, it asks asynchronously.
+
+                           
 
 Let me know what you think, or join the TestFlight group to give me some feedback before proper release.
 
-=> https://testflight.apple.com/join/HgAgdX48 TestFlight
+=> https://testflight.apple.com/join/ww7RII5M TestFlight

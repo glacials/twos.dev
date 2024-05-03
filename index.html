@@ -96,6 +96,205 @@ and video games.</p>
 
   
   <article class="post">
+    <a href="/brownnote.html"><h1>Brown Note</h1></a>
+    
+    
+      <div class="publish-date">
+        <i>
+          published
+          2024 May</i
+        >
+      </div>
+    
+    
+    <html><head></head><body><p><link rel="stylesheet" type="text/css" href="/devices.min.css"/></p>
+
+
+
+<p>I've been working on an iOS app recently,
+which is new for me.
+The app is called <a href="https://apps.apple.com/us/app/brown-note/id6479333983" target="_blank">Brown Note</a>
+and it is a food journal designed to solve the biggest problem I have had with other food journal apps:
+logging entries is so complex that my brain unconsciously stops doing it.</p>
+
+<h2>Customer Need</h2>
+
+<p>I'm slow to realize biological correlations.
+There are several weird things about my body,
+so it's not always obvious that when I eat <code>A</code> it causes poor experience <code>B</code>.
+Lots of things cause poor experience <code>B</code>,
+and also poor experiences <code>C</code>, <code>D</code>, and <code>E</code>,
+so I'm not always on the lookout.</p>
+
+<p>It took me months just to realize that I didn't always have "stomach issues",
+a phrase I'll use as a shorthand for some combination of urgent, painful, and/or frequent poops,
+and that they might be fixable.</p>
+
+<p>When my doctor suggested food journaling,
+I was diligent about looking for a high-tech solution in the form of a mobile app,
+and I found several.</p>
+
+<p>Thus started a cycle:</p>
+
+<ol>
+<li>I choose a fantastic mobile app to use for food journaling.</li>
+<li>I use it to log every meal and poop.</li>
+<li>?</li>
+<li>Weeks later, I realize I have stopped logging and completely forgetten about it.</li>
+<li>Repeat from 1.</li>
+</ol>
+
+<p>As I tried more apps this way,
+and became more conscious over time about my falling off the wagon,
+I realized my issue was the friction of log entry.
+I would be eating among friends,
+or sitting down in pain,
+and a lightweight thought of "I should log this" would brush over my arm
+only to be dismissed<span style="font-family: sans-serif">—</span>"I'll log it when I'm free".
+Only when later came, it was still too heavy a process
+(and too delayed a gratification)
+to convince myself to do.</p>
+
+<p>I realized I needed to remove as much friction from the process as I could.
+I would simplify my process so much that that light brushing over my arm would be a strong enough signal to log immediately.</p>
+
+<h2>Product Discovery</h2>
+
+<p>I carried a pen and a folded up piece of paper in my pocket,
+writing down everything that went into and out of me,
+occasionally copying them into a spreadsheet by hand,
+and doing some eyeball analysis<span style="font-family: sans-serif">—</span>and later some Python scripting<span style="font-family: sans-serif">—</span>to find problem foods.</p>
+
+<p>I did this because the physical pen would literally poke me whenever I sit down to do my business,
+but there was something magical about how the small size of the folded piece of paper forced each log entry to be brief.
+That magic allowed me to build a routine around it.</p>
+
+<p>Version 2 was opening the aforementioned spreadsheet on my phone and directly logging there,
+but this slog quickly led me to version 3,
+an iOS Shortcut placed on my Home Screen that prompts for a single line of text,
+which it appends to the spreadsheet.</p>
+
+<h2>Simple Works</h2>
+
+<p>All I'm entering in these lines is plain text like
+"Good poop",
+"Bad poop",
+or a few words describing a food item.
+In some iterations,
+I didn't even include a date;
+order was enough.</p>
+
+<blockquote>
+<ul>
+<li>Bad poop</li>
+<li>Mango lassi</li>
+<li>Chinese</li>
+<li>Taco Bell</li>
+<li>CookUnity</li>
+<li>Soylent</li>
+<li>Good poop</li>
+<li>Taco Bell</li>
+<li>Whiskey</li>
+<li>Good poop</li>
+<li>Chinese</li>
+<li>Bubble tea</li>
+</ul>
+</blockquote>
+
+<p><em>An excerpt from my v2 spreadsheet.</em></p>
+
+<p>I'm not separating "foods" and "poops" into two categories of thing.
+I'm not typing out a bunch of tags or ingredients with every food item.
+If I zero in on a food that's too ambiguous<span style="font-family: sans-serif">—</span>say, "pizza"<span style="font-family: sans-serif">—</span>only then will I start logging its components:
+cheese, bread, tomatoes.
+Until and unless that happens,
+simplicity wins.
+Keeping the routine going is more important than anything.</p>
+
+<h2>Into Swift</h2>
+
+<p>In the background of all this I'd become more and more interested in native iOS development,
+for <a href="/apple.html">several</a> <a href="https://whatsinstandard.com/" target="_blank">unrelated</a> reasons.</p>
+
+<p>After stalling out trying to make an unrelated app with a lot of complexity,
+I figured this was the perfect do-over to start simple.
+I started learning Swift and SwiftUI again, this time with SwiftData too.</p>
+
+<p>The result is <a href="https://apps.apple.com/us/app/brown-note/id6479333983" target="_blank">Brown Note</a>.</p>
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img alt="A screenshot of Brown Note showing how a specific food, chai in this case, impacts poops, including percentages of good vs. bad poops that come after." class="device-screen" src="/img/brownnote-correlate.png" style="margin-top: 0"/>
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
+
+<p>It was insanely easy to get Brown Note to a stage where I can use it for personal logging.
+The complexity all lies in the analytics and insights,
+which aren't part of its everyday use cases and so didn't block me from onboarding myself as a user.</p>
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img alt="A screenshot of Brown Note showing the user some meals they have tracked." class="device-screen" src="/img/brownnote-trackmeals.png" style="margin-top: 0"/>
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
+
+<p>This helped immensely with design,
+as I would personally use the app several times a day,
+noting every rough edge and feature need.</p>
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img alt="A screenshot of Brown Note showing the user a poop they have tracked, and the estimated inputs (recent meals) to that poop." class="device-screen" src="/img/brownnote-trackpoops.png" style="margin-top: 0"/>
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
+
+<p>I'm still in constant development,
+but the simple use cases are covered.
+As I build out more advanced ones, I'm being cognizant about keeping the logging experience dead simple.</p>
+
+<p>For example,
+the app can understand food components
+(e.g. <code>latte</code> contains <code>milk</code> and <code>coffee</code>)
+but I'm shielding the logging experience from being impacted by it.
+When the app needs more info,
+it asks asynchronously.</p>
+
+<div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
+  <div class="device-frame">
+    <img alt="A screenshot of Brown Note asking the user for the ingredients of saag paneer." class="device-screen" src="/img/brownnote-honein.png" style="margin-top: 0"/>
+  </div>
+  <div class="device-stripe"></div>
+  <div class="device-header"></div>
+  <div class="device-sensors"></div>
+  <div class="device-btns"></div>
+  <div class="device-power"></div>
+</div>
+
+<p>Let me know what you think,
+or join the <a href="https://testflight.apple.com/join/ww7RII5M" target="_blank">TestFlight</a> group to give me some feedback before proper release.</p>
+
+
+</body></html>
+  </article>
+  <hr />
+
+  
+  <article class="post">
     <a href="/filters.html"><h1>Wholesome Great Filters</h1></a>
     
     
