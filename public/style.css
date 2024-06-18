@@ -128,6 +128,12 @@ footer {
   }
 }
 
+article a h1 {
+  /* background: rgba(0, 0, 0, 0.05); */
+  color: var(--page-fg);
+  font-size: 2rem;
+}
+
 article img {
   max-width: 100%;
 }
