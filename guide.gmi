@@ -4,10 +4,6 @@ Below is what I value at work. This is descriptive of me, not prescriptive to yo
 
 ## Communication
 
-I have a unique history with communication. Ask me about it some time.
-
-Here are the cliffs notes.
-
 #### 1. I work best with coordinated *why*s and uncoordinated *how*s.
 
 Coordination is slow. As long as we share a common vision, I trust you to make two-way door decisions in motion without blocking on consensus. I ask that you trust me to do the same. We can continue to share progress in nonblocking ways[^1]. More
