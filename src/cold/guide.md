@@ -20,11 +20,6 @@ at your discretion, and share your own guide with me!
    more](http://www.paulgraham.com/useful.html)
 -->
 
-I have a unique history with communication.
-Ask me about it some time.
-
-Here are the cliffs notes.
-
 #### 1. I work best with coordinated *why*s and uncoordinated *how*s.
 
 Coordination is slow. As long as we share a common vision,
