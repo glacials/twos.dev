@@ -736,7 +736,7 @@ pre code {
 }
 
 @media (min-width: 50rem) {
-  pre {
+  pre:has(code) {
     box-shadow: 0.5rem 0.5rem var(--shadow);
   }
 }
