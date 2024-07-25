@@ -4,7 +4,7 @@ For the benefit of my coworkers and future coworkers, this is how I work. This i
 
 ## Meetings
 
-Because of my schedule (below) I'm not a fan of morning meetings, especially recurring ones. I can do one-offs when needed.
+Because of my schedule I'm not a fan of morning meetings, especially recurring ones. I can do one-offs when needed.
 
 I like meetings with well-defined outputs ("At the end of this meeting, we will have decided…"). They help me prepare and keep the meeting on-task.
 
@@ -12,15 +12,15 @@ If the meeting output is arrived at quickly, I would rather end the meeting earl
 
 I prefer asynchrony over ad hoc, ad hoc over scheduled:
 
-                             ┌───────┐                             │ Start │                             └───────┘                                │                       Need for communication                                │                                ▼                          ┌────────────┐      Presentation        │  Message   │    ┌───or demo───────────│(e.g. Slack)│─────────────────────┐    │                     └────────────┘   Lots of back-and-forth    │                            │                           │    │                            │                           │    │                            │                           │    │            Explanation     │                           │    │         difficult in text──┘                           │    │         │                                              │    │         │                                              │    │         │                                              │    │         ▼                                              ▼    │  ┌─────────────┐                                  ┌─────────┐    │  │  Recording  │     Lots of back-and-forth       │ Ad hoc  │    └─▶│ (e.g. Loom) │─────────────────────────────────▶│ meeting │       └─────────────┘                                  └─────────┘                                                             │                                                             │                                                       Not online at                                                       the same time                                                             │                                                             │                                                             ▼                                                       ┌───────────┐                                                       │ Scheduled │                                                       │  meeting  │                                                       └───────────┘                                                             │                                                             │                                                       All above happen                                                    consistently on a                                                       recurring basis                                                             │                                                             │                                                             ▼                                                       ┌───────────┐                                                       │ Scheduled │                                                       │ recurring │                                                       │  meeting  │                                                       └───────────┘ 
+                             ┌───────┐                             │ Start │                             └───────┘                                │                       Need for communication                                │                                ▼                          ┌────────────┐      Presentation        │  Message   │    ┌───or demo───────────│(e.g. Slack)│─────────────────────┐    │                     └────────────┘   Lots of back-and-forth    │                            │                           │    │                            │                           │    │                            │                           │    │            Explanation     │                           │    │         difficult in text──┘                           │    │         │                                              │    │         │                                              │    │         │                                              │    │         ▼                                              ▼    │  ┌─────────────┐                                  ┌─────────┐    │  │  Recording  │     Lots of back-and-forth       │ Ad hoc  │    └─▶│ (e.g. Loom) │─────────────────────────────────▶│ meeting │       └─────────────┘                                  └─────────┘                                                             │                                                             │                                                       Not online at                                                       the same time                                                             │                                                             │                                                             ▼                                                       ┌───────────┐                                                       │ Scheduled │                                                       │  meeting  │                                                       └───────────┘                                                             │                                                             │                                                       All above happen                                                      consistently on a                                                       recurring basis                                                             │                                                             │                                                             ▼                                                       ┌───────────┐                                                       │ Scheduled │                                                       │ recurring │                                                       │  meeting  │                                                       └───────────┘ 
 
 ## Schedule
 
 My body demands a lot of sleep. By default I do not use alarms and let my body wake itself when it's ready. After my morning routine, the bell curve for my coming online has a median around 9:30AM pacific, with a ~45 min standard deviation.
 
-Inspiration strikes me randomly—sometimes during a workday, but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight. To harness it, I have to also be sure not to overwork.
+Inspiration strikes me randomly—sometimes during a workday, but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight. I'm very productive during these random bursts, but having a habit of overworking leads me to burnout.
 
-To counterbalance, I shorten my standard workday and the math roughly works out. If you see emails or commits from me with unhealthy-feeling timestamps, keep in mind my default workday is at ~70% capacity.
+To counterbalance, I shorten my standard workday a bit and the math roughly works out. If you see emails or commits from me with unhealthy-feeling timestamps, keep in mind my default workday is at ~70% capacity.
 
 ## My Promises to You
 
@@ -28,15 +28,15 @@ To counterbalance, I shorten my standard workday and the math roughly works out.
 2. I will respond to you within one business day.
 3. I promise to put my ego in the back seat to learning.
 4. I promise to be receptive and thankful when you give me a piece of feedback.
-5. I promise to share the *whys* behind any feedback I give (whether personal, professional, and code).
+5. I promise to share the *whys* behind any feedback I give (whether personal, professional, or code).
 6. I promise to be supportive and (if you want) helpful when you tell me about something that makes you feel uncomfortable.
 
 ## My Weaknesses
 
 * I am weak to heat. My mood and productivity negatively coorelate with the temperature outside.
-* I process poorly when interacting in realtime. Social interaction costs me brainpower so I am better at problem-solving when I have time alone to digest.
+* Social interaction costs me brainpower so I am better at problem-solving when I have time alone to digest.
 * I don't handle interruptions well, regardless of duration.[^1][^2] Notifications for my Slack are often off while I am in flow. (If it's urgent, use the on-call flow.)
-* I go rogue. Sometimes I'm so passionate about something that I'll do it without tracking it because the overhead—or its emotional burden— is bigger than the job itself. 
+* I go rogue. Sometimes I'm so passionate about fixing or building something that I'll do it without tracking it because the overhead—or its emotional burden— is bigger than the job itself. I'll still run it by people before shipping. 
 
 [^1]: twos.dev/img/guide-programmerinterrupted.png
 [^2]: paulgraham.com/makersschedule.html
@@ -58,7 +58,7 @@ Coordination is slow. As long as we share a common vision, I trust you to make t
 
 #### 2. I love when information has a home.
 
-I'm forgetful. I can more easily (re)gain context for an issue when discussion is concentrated in one place, like comments on the ticket or pull request. I will leave breadcrumbs in these places for posterity if I feel things are missing.
+I'm forgetful. I can more easily (re)gain context for an issue when discussion is concentrated in one place, like comments on the relevant ticket or pull request. I will leave breadcrumbs in these places for posterity if I feel things are missing.
 
 #### 3. I focus on customer problems.
 
