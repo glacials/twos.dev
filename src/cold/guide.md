@@ -15,7 +15,7 @@ Use or ignore at your discretion,
 and share your own guide with me!
 
 ## Meetings
-Because of my schedule (below) I'm not a fan of morning meetings,
+Because of my schedule I'm not a fan of morning meetings,
 especially recurring ones. I can do one-offs when needed.
 
 I like meetings with well-defined outputs
@@ -27,7 +27,7 @@ I would rather end the meeting early than use all time available.
 
 I prefer asynchrony over ad hoc, ad hoc over scheduled:
 
-<pre style="line-height: 1rem; font-size: 0.8rem">
+<pre aria-label="A flow chart that details my communicaation preferences. It starts with messaging (e.g. Slack). That flows to a recording (e.g. Loom) if the explanation is difficult in text or if it is a presentation or demo. From there flows to an ad hoc meeting if there is lots of back-and-forth; the first node (messaging) also flows to ad hoc meeting if there is a lot of back and forth. Ad hoc meeting flows to scheduled meeting if the participants are not online at the same time. Scheduled meeting flows to recurring scheduled meeting if all of the above consistently happen on a recurring basis." style="line-height: 1rem; font-size: 0.8rem">
                             ┌───────┐
                             │ Start │
                             └───────┘
@@ -66,7 +66,7 @@ I prefer asynchrony over ad hoc, ad hoc over scheduled:
                                                             │
                                                             │
                                                       All above happen
-                                                   consistently on a
+                                                     consistently on a
                                                       recurring basis
                                                             │
                                                             │
@@ -87,9 +87,10 @@ with a ~45 min standard deviation.
 
 Inspiration strikes me randomly—sometimes during a workday,
 but also sometimes on a Sunday, or at 4 AM, or for 16 hours straight.
-To harness it, I have to also be sure not to overwork.
+I'm very productive during these random bursts,
+but having a habit of overworking leads me to burnout.
 
-To counterbalance, I shorten my standard workday and the math roughly works out.
+To counterbalance, I shorten my standard workday a bit and the math roughly works out.
 If you see emails or commits from me with unhealthy-feeling timestamps,
 keep in mind my default workday is at ~70% capacity.
 
@@ -99,22 +100,22 @@ keep in mind my default workday is at ~70% capacity.
 2. I will respond to you within one business day.
 3. I promise to put my ego in the back seat to learning.
 4. I promise to be receptive and thankful when you give me a piece of feedback.
-5. I promise to share the _whys_ behind any feedback I give (whether personal, professional, and code).
+5. I promise to share the _whys_ behind any feedback I give (whether personal, professional, or code).
 6. I promise to be supportive and (if you want) helpful when you tell me about something that makes you feel uncomfortable.
 
 ## My Weaknesses
 
 - I am weak to heat. My mood and productivity negatively coorelate with the temperature outside.
-- I process poorly when interacting in realtime.
-  Social interaction [costs me brainpower](autism.html#masking)
+- Social interaction [costs me brainpower](autism.html#masking)
   so I am better at problem-solving when I have time alone to digest.
 - I don't handle interruptions well, regardless of duration.^[[twos.dev/img/guide-programmerinterrupted.png](img/guide-programmerinterrupted.png)]^[[paulgraham.com/makersschedule.html](http://www.paulgraham.com/makersschedule.html)]
   Notifications for my Slack are often off while I am in flow.
   (If it's urgent, use the on-call flow.)
 - I go rogue.
-  Sometimes I'm so passionate about something that
+  Sometimes I'm so passionate about fixing or building something that
   I'll do it without tracking it because the overhead—or its emotional burden—
   is bigger than the job itself.
+  I'll still run it by people before shipping.
 <!-- Commented because the above was migrated from "Communication",
      but it doesn't make sense to brag about this here in Weaknesses.
   Some
@@ -147,7 +148,7 @@ We can continue to share progress in nonblocking ways.^[[communitywiki.org/wiki/
 
 I'm forgetful.
 I can more easily (re)gain context for an issue when discussion is concentrated in one place,
-like comments on the ticket or pull request.
+like comments on the relevant ticket or pull request.
 I will leave breadcrumbs in these places for posterity if I feel things are missing.
 
 #### 3. I focus on customer problems.
@@ -156,6 +157,11 @@ Even if a solution "feels right" be prepared for me to ask what customer problem
 
 #### 4. [Don't say hello](https://nohello.net/).
 
+<!-- Commented to help build this a bit before publishing.
+## Interesting Things About Me
+
+- As a kid, I was selectively mute for 9 years.
+-->
 ---
 
 _This page is in the form of
