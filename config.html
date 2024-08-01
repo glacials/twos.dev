@@ -99,95 +99,100 @@ Small Efficiencies
     
   
     <li><a href="#headline-4"><span>
-Visuals
+Initialization
 </span></a></li>
     
   
     <li><a href="#headline-5"><span>
+Visuals
+</span></a></li>
+    
+  
+    <li><a href="#headline-6"><span>
 Packages
 </span></a></li>
     
       <ol>
   
     <li>
-      <a href="#headline-6"><span>
+      <a href="#headline-7"><span>
 Formatting
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-7"><span>
+      <a href="#headline-8"><span>
 Integrations
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-8"><span>
+      <a href="#headline-9"><span>
 Autocompletion
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-9"><span>
+      <a href="#headline-10"><span>
 Splash Screen
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-10"><span>
+      <a href="#headline-11"><span>
 Language Support
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-11"><span>
+      <a href="#headline-12"><span>
 Display
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-12"><span>
+      <a href="#headline-13"><span>
 System Tweaks
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-13"><span>
+      <a href="#headline-14"><span>
 Org Mode
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-14"><span>
+      <a href="#headline-15"><span>
 Project management
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-15"><span>
+      <a href="#headline-16"><span>
 Newbie Helpers
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-16"><span>
+      <a href="#headline-17"><span>
 Efficiencies
 </span></a>
       
     </li>
   
     <li>
-      <a href="#headline-17"><span>
+      <a href="#headline-18"><span>
 Modern Niceties
 </span></a>
       
@@ -197,7 +202,7 @@ Modern Niceties
 
     
   
-    <li><a href="#headline-18"><span>
+    <li><a href="#headline-19"><span>
 The End
 </span></a></li>
     
@@ -223,14 +228,14 @@ Traditional Configuration
 	(setq-default mac-right-option-modifier 'hyper) ; Make Right Option act as Hyper
 	(setq-default ns-function-modifier 'hyper)      ; Make Fn act as Hyper
 
-	(setq-default ring-bell-function 'ignore) ; Disable the audible bell
+	(setq-default ring-bell-function 'ignore)    ; Disable the audible bell
 	(setq-default sentence-end-double-space nil) ; End sentences with single spaces
-	(setq-default display-line-numbers t) ; Show line numbers
-	(delete-selection-mode 1) ; Delete selected text when starting to type
-	(setq-default fill-column 80) ; Wrap at 80 characters
-	(add-hook 'prog-mode-hook #'auto-fill-mode) ; Autowrap when coding
-	(add-hook 'text-mode-hook #'auto-fill-mode) ; Autowrap when writing
-	(global-hl-line-mode 1) ; Highlight cursor line
+	(setq-default display-line-numbers t)        ; Show line numbers
+	(delete-selection-mode 1)                    ; Delete selected text when starting to type
+	(setq-default fill-column 80)                ; Wrap at 80 characters
+	(add-hook 'prog-mode-hook #'auto-fill-mode)  ; Autowrap when coding
+	(add-hook 'text-mode-hook #'auto-fill-mode)  ; Autowrap when writing
+	(global-hl-line-mode 1)                      ; Highlight cursor line
 
 	;; Unicode everywhere
 	(set-charset-priority 'unicode)
@@ -256,11 +261,21 @@ Small Efficiencies
 <p>Now we'll start with some of the less obvious stuff.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (ido-mode 1) ; Autocomplete M-x among other things
+<pre>  (ido-mode 1)                              ; Autocomplete M-x among other things
   (setq-default ido-enable-flex-matching t) ; Don't require exact matches in ido-mode
-  (defalias 'yes-or-no-p 'y-or-n-p) ; Allow y/n in yes/no prompts
-  ;; Make C-x k kill focused buffer instead of promptingexpand-region
+  (defalias 'yes-or-no-p 'y-or-n-p)         ; Allow y/n in yes/no prompts
+
+  ;; Make C-x k kill focused buffer instead of prompting
   (global-set-key (kbd "C-x k") #'kill-this-buffer)
+</pre>
+</div>
+</div>
+<p>
+This will allow us to navigate windows using
+S-&lt;up&gt;, S-&lt;down&gt;, S-&lt;left&gt;, and S-&lt;right&gt;.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (windmove-default-keybindings)
 </pre>
 </div>
 </div>
@@ -273,11 +288,11 @@ affect mouse-1, see <a href="https://emacs.stackexchange.com/questions/35536/dir
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (eval-after-load "dired"
-    '(progn
-       (define-key
-         dired-mode-map
-         [mouse-2]
-         'dired-mouse-find-file)))
+  	'(progn
+  		 (define-key
+  			dired-mode-map
+  			[mouse-2]
+  			'dired-mouse-find-file)))
 </pre>
 </div>
 </div>
@@ -299,7 +314,7 @@ Some keybinds that work in macOS but are overridden by Emacs's use of modifiers:
 </div>
 </div>
 <p>
-  The last small thing: open this config file with <code class="verbatim">C-c i</code>:</p>
+The last small thing: open this config file with <code class="verbatim">C-c i</code>:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (global-set-key
@@ -313,10 +328,39 @@ Some keybinds that work in macOS but are overridden by Emacs's use of modifiers:
 </div>
 <div id="outline-container-headline-4" class="outline-2">
 <h2 id="headline-4">
-Visuals
+Initialization
 </h2>
 <div id="outline-text-headline-4" class="outline-text-2">
+<p>
+When Emacs is booted it inherits a copy of the environment it was
+created in. This is fine when you run <code class="verbatim">emacs</code> from the command line,
+but when you start Emacs from somewhere like the macOS dock, it's
+missing a lot.</p>
+<p>
+The most important missing variable is <code class="verbatim">$PATH</code>, as it means Emacs
+can't access any CLI tools installed with Homebrew, Go, or the
+like. This includes Chezmoi, <code class="verbatim">gopls</code>, a modern version of Git, etc.</p>
+<p>
+The following code block installs <code class="verbatim">exec-path-from-shell</code>, which
+fetches environment info from the shell and copies it into Emacs
+explicitly.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'exec-path-from-shell)
+  (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize))
+</pre>
+</div>
+</div>
+</div>
+</div>
+<div id="outline-container-headline-5" class="outline-2">
+<h2 id="headline-5">
+Visuals
+</h2>
+<div id="outline-text-headline-5" class="outline-text-2">
 <p>This section deals with minimizing visual noise and making things pretty.</p>
+<p>
+Set font:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (add-to-list 'default-frame-alist '(font . "JetBrains Mono" ))
@@ -324,6 +368,8 @@ Visuals
 </pre>
 </div>
 </div>
+<p>
+More:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  ;; Delete-auto-save-files
@@ -336,7 +382,7 @@ Visuals
   (setq-default backup-directory-alist
                 '((".*" . "~/.cache/emacs")))
   (setq-default auto-save-file-name-transforms
-        '((".*" "~/.cache/emacs/" t)))
+  							'((".*" "~/.cache/emacs/" t)))
 
   ;; Delete old backups silently.
   (setq-default delete-old-versions t)
@@ -346,58 +392,58 @@ Visuals
 
   ;; Custom ligatures
   (setq-default prettify-symbols-alist
-        '(("TODO" . "")
-          ("BLKD" . "")        
-          ("CNCL" . "")
-          ("DONE" . "")
-          ("-&gt;&gt;"  . "↠")
-          ("-&gt;"   . "→")
-          ("&lt;-"   . "←")
-          ("&lt;-"   . "←")
-          ("=&gt;"   . "⇒")
-          ("&lt;="   . "≤")
-          ("&gt;="   . "≥")
-          ;; Below are commented until/unless I start using them frequently.
-  ;				("[#A]" . "")
-  ;				("[#B]" . "")
-  ;				("[#C]" . "")
-  ;				("[ ]" . "")
-  ;				("[X]" . "")
-  ;				("[-]" . "")
-  ;				("#+BEGIN_SRC" . "")
-  ;				("#+END_SRC" . "<span style="font-family: sans-serif">―</span>")
-  ;				(":PROPERTIES:" . "")
-  ;				(":END:" . "<span style="font-family: sans-serif">―</span>")
-  ;				("#+STARTUP:" . "")
-  ;				("#+TITLE: " . "")
-  ;				("#+RESULTS:" . "")
-  ;				("#+NAME:" . "")
-  ;				("#+ROAM_TAGS:" . "")
-  ;				("#+FILETAGS:" . "")
-  ;				("#+HTML_HEAD:" . "")
-  ;				("#+SUBTITLE:" . "")
-  ;				("#+AUTHOR:" . "")
-  ;				(":Effort:" . "")
-  ;				("SCHEDULED:" . "")
-  ;				("DEADLINE:" . "")
-          ))
+  							'(("TODO" . "")
+  								("BLKD" . "")        
+  								("CNCL" . "")
+  								("DONE" . "")
+  								("-&gt;&gt;"  . "↠")
+  								("-&gt;"   . "→")
+  								("&lt;-"   . "←")
+  								("&lt;-"   . "←")
+  								("=&gt;"   . "⇒")
+  								("&lt;="   . "≤")
+  								("&gt;="   . "≥")
+  								;; Below are commented until/unless I start using them frequently.
+  																				;				("[#A]" . "")
+  																				;				("[#B]" . "")
+  																				;				("[#C]" . "")
+  																				;				("[ ]" . "")
+  																				;				("[X]" . "")
+  																				;				("[-]" . "")
+  																				;				("#+BEGIN_SRC" . "")
+  																				;				("#+END_SRC" . "<span style="font-family: sans-serif">―</span>")
+  																				;				(":PROPERTIES:" . "")
+  																				;				(":END:" . "<span style="font-family: sans-serif">―</span>")
+  																				;				("#+STARTUP:" . "")
+  																				;				("#+TITLE: " . "")
+  																				;				("#+RESULTS:" . "")
+  																				;				("#+NAME:" . "")
+  																				;				("#+ROAM_TAGS:" . "")
+  																				;				("#+FILETAGS:" . "")
+  																				;				("#+HTML_HEAD:" . "")
+  																				;				("#+SUBTITLE:" . "")
+  																				;				("#+AUTHOR:" . "")
+  																				;				(":Effort:" . "")
+  																				;				("SCHEDULED:" . "")
+  																				;				("DEADLINE:" . "")
+  								))
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-5" class="outline-2">
-<h2 id="headline-5">
+<div id="outline-container-headline-6" class="outline-2">
+<h2 id="headline-6">
 Packages
 </h2>
-<div id="outline-text-headline-5" class="outline-text-2">
+<div id="outline-text-headline-6" class="outline-text-2">
 <p>
 The meat of it.</p>
-<div id="outline-container-headline-6" class="outline-3">
-<h3 id="headline-6">
+<div id="outline-container-headline-7" class="outline-3">
+<h3 id="headline-7">
 Formatting
 </h3>
-<div id="outline-text-headline-6" class="outline-text-3">
+<div id="outline-text-headline-7" class="outline-text-3">
 <p>
 The following package and associated settings deal with indentation and
 formatting on a language-agnostic basis.</p>
@@ -419,11 +465,11 @@ Some automatic indentation:</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-7" class="outline-3">
-<h3 id="headline-7">
+<div id="outline-container-headline-8" class="outline-3">
+<h3 id="headline-8">
 Integrations
 </h3>
-<div id="outline-text-headline-7" class="outline-text-3">
+<div id="outline-text-headline-8" class="outline-text-3">
 <p>
 Magit is the de facto Git interface in Emacs. This package surprised
 me with its convenience; having come from Vim I was expecting
@@ -462,11 +508,11 @@ don't use it unless you're already a <code class="verbatim">chezmoi</code> user.
 </div>
 </div>
 </div>
-<div id="outline-container-headline-8" class="outline-3">
-<h3 id="headline-8">
+<div id="outline-container-headline-9" class="outline-3">
+<h3 id="headline-9">
 Autocompletion
 </h3>
-<div id="outline-text-headline-8" class="outline-text-3">
+<div id="outline-text-headline-9" class="outline-text-3">
 <p>
 The next code block sets up autocompletion with <code class="verbatim">company</code>, the most
 popular generic autocompletion package for Emacs. Generally, LSP
@@ -480,37 +526,13 @@ minibuffer near point.</p>
 </pre>
 </div>
 </div>
-<p>
-GitHub Copilot has its issues, but there's nothing like autocompleting
-an <code>if err != nil { return fmt.Sprintf("helpful context: %w", err) }</code>
-when writing Go. There's no official Copilot package for GitHub, but
-zerolfx has a pretty good unofficial one.</p>
-<div class="src src-emacs-lisp">
-<div class="highlight">
-<pre>  (straight-use-package
-   '(copilot
-     :type git
-     :host github
-     :repo "zerolfx/copilot.el"
-     :files ("dist" "*.el")))
-  (add-hook 'prog-mode-hook 'copilot-mode)
-  (defun my/copilot-tab ()
-    (interactive)
-    (or (copilot-accept-completion) (indent-for-tab-command)))
-  (with-eval-after-load 'copilot
-    (define-key copilot-mode-map
-      (kbd "&lt;tab&gt;")
-      #'my/copilot-tab))
-</pre>
 </div>
 </div>
-</div>
-</div>
-<div id="outline-container-headline-9" class="outline-3">
-<h3 id="headline-9">
+<div id="outline-container-headline-10" class="outline-3">
+<h3 id="headline-10">
 Splash Screen
 </h3>
-<div id="outline-text-headline-9" class="outline-text-3">
+<div id="outline-text-headline-10" class="outline-text-3">
 <p>
 The following code sets up the splash screen that shows when Emacs
 boots, which is usually an empty buffer. It pulls some info from
@@ -519,27 +541,27 @@ history like recent files and projects opened, and some info from
 out to <code class="verbatim">fortune</code> to render a random quote from my <a href="https://github.com/glacials/dotfiles" target="_blank">dotfiles repo</a>.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>   (straight-use-package 'dashboard)
-   (setq-default dashboard-items '((recents . 5)
-                           (agenda . 5)
-                           (bookmarks . 5)
-                           (projects . 5)
-                           (registers . 5)))
-   (setq-default dashboard-banner-logo-title
-         (shell-command-to-string "fortune ~/.config/fortune"))
-   (setq-default dashboard-startup-banner 'logo)
-   (require 'dashboard)
-   (dashboard-setup-startup-hook)
+<pre>  (straight-use-package 'dashboard)
+  (setq-default dashboard-items '((recents . 5)
+  																(agenda . 5)
+  																(bookmarks . 5)
+  																(projects . 5)
+  																(registers . 5)))
+  (setq-default dashboard-banner-logo-title
+  							(shell-command-to-string "fortune ~/.config/fortune"))
+  (setq-default dashboard-startup-banner 'logo)
+  (require 'dashboard)
+  (dashboard-setup-startup-hook)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-10" class="outline-3">
-<h3 id="headline-10">
+<div id="outline-container-headline-11" class="outline-3">
+<h3 id="headline-11">
 Language Support
 </h3>
-<div id="outline-text-headline-10" class="outline-text-3">
+<div id="outline-text-headline-11" class="outline-text-3">
 <p>This section loads various types of support for programming languages, markups, and similar.</p>
 <p>
 And how can we do any of that without the miracle of LSP and an appropriate UI for it?</p>
@@ -560,12 +582,25 @@ And how can we do any of that without the miracle of LSP and an appropriate UI f
 For Go, we need to do some work to automatically run <code class="verbatim">gofmt</code> and friends:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>    (straight-use-package 'go-mode)
-    (defun lsp-go-install-save-hooks ()
-      (add-hook 'before-save-hook #'lsp-format-buffer t t)
-      (add-hook 'before-save-hook #'lsp-organize-imports t t))
-    (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
-    (add-hook 'go-mode-hook #'lsp-deferred)
+<pre>  (straight-use-package 'go-mode)
+  (defun lsp-go-install-save-hooks ()
+    (add-hook 'before-save-hook #'lsp-format-buffer t t)
+    (add-hook 'before-save-hook #'lsp-organize-imports t t))
+  (add-hook 'go-mode-hook #'lsp-go-install-save-hooks)
+  (add-hook 'go-mode-hook #'lsp-deferred)
+</pre>
+</div>
+</div>
+<p>
+For Ruby:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (add-hook 'ruby-mode-hook #'lsp) ; Init LSP whenever Ruby mode is entered
+
+  (straight-use-package 'rubocop)
+  (require 'rubocop)
+  (add-hook 'ruby-mode-hook #'rubocop-mode) ; Enter Rubocop mode whenever Ruby mode is entered
+  (setq rubocop-autocorect-on-save t)       ; Autocorrect + autoformat on save
 </pre>
 </div>
 </div>
@@ -583,8 +618,8 @@ For YAML:</p>
 </div>
 </div>
 <p>
-  Finally, some support for miscellaneous languages whose packages have
-  good enough defaults that I don't need to configure anything.</p>
+Finally, some support for miscellaneous languages whose packages have
+good enough defaults that I don't need to configure anything.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'dockerfile-mode)
@@ -596,11 +631,11 @@ For YAML:</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-11" class="outline-3">
-<h3 id="headline-11">
+<div id="outline-container-headline-12" class="outline-3">
+<h3 id="headline-12">
 Display
 </h3>
-<div id="outline-text-headline-11" class="outline-text-3">
+<div id="outline-text-headline-12" class="outline-text-3">
 <p>A beautiful editor is important to me whether it was made in 2015 or 1976.</p>
 <p>
 I started my Emacs journey with <a href="https://doomemacs.org" target="_blank">Doom</a> and eventually migrated to
@@ -660,31 +695,11 @@ And some final small tweaks:</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-12" class="outline-3">
-<h3 id="headline-12">
+<div id="outline-container-headline-13" class="outline-3">
+<h3 id="headline-13">
 System Tweaks
 </h3>
-<div id="outline-text-headline-12" class="outline-text-3">
-<p>
-When Emacs is booted it inherits a copy of the environment it was
-created in. This is fine when you run <code class="verbatim">emacs</code> from the command line,
-but when you start Emacs from somewhere like the macOS dock, it's
-missing a lot.</p>
-<p>
-The most important missing variable is <code class="verbatim">$PATH</code>, as it means Emacs
-can't access any CLI tools installed with Homebrew, Go, or the
-like. This includes Chezmoi, <code class="verbatim">gopls</code>, a modern version of Git, etc.</p>
-<p>
-The following code block installs <code class="verbatim">exec-path-from-shell</code>, which
-fetches environment info from the shell and copies it into Emacs
-explicitly.</p>
-<div class="src src-emacs-lisp">
-<div class="highlight">
-<pre>  (straight-use-package 'exec-path-from-shell)
-  (when (memq window-system '(mac ns x)) (exec-path-from-shell-initialize))
-</pre>
-</div>
-</div>
+<div id="outline-text-headline-13" class="outline-text-3">
 <p>
 <code class="verbatim">highlight-indent-guides</code> makes indentation levels visually distinct
 columns down down the left side of the file, making it easy to tell at
@@ -730,11 +745,11 @@ the sacrifice. This may change later.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-13" class="outline-3">
-<h3 id="headline-13">
+<div id="outline-container-headline-14" class="outline-3">
+<h3 id="headline-14">
 Org Mode
 </h3>
-<div id="outline-text-headline-13" class="outline-text-3">
+<div id="outline-text-headline-14" class="outline-text-3">
 <p>
 Org Mode has already been loaded by the <code class="verbatim">straight.el</code> package in
 <code class="verbatim">init.el</code> (that's how the Org file you're reading was tangled into an
@@ -744,9 +759,9 @@ of Org.</p>
 First, we'll set up some basic configuration.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (setq-default org-directory "~/org")
-  (setq-default org-default-notes-file (concat org-directory "/notes.org"))
-  (setq-default org-agenda-files '("~/org/notes.org" "~/sync/org-roam"))
+<pre>  (setq-default org-directory "~/icloud/Documents/storage/org")
+  (setq-default org-default-notes-file "~/icloud/Documents/storage/org/notes.org")
+  (setq-default org-agenda-files '("~/icloud/Documents/storage/org/notes.org" "~/icloud/Documents/storage/org-roam"))
 </pre>
 </div>
 </div>
@@ -772,7 +787,7 @@ Now, for some shortcuts to skip around Org Mode.</p>
    (kbd "C-c o")
    (lambda ()
      (interactive)
-     (find-file "~/org/notes.org")))
+     (find-file "~/icloud/Documents/storage/org/notes.org")))
 
   ;; Drag and drop images into Org mode
   (straight-use-package 'org-download)
@@ -813,21 +828,21 @@ entry, or <code class="verbatim">C-c c h</code> to create a new generic note.</p
            "Task"
            entry
            (file+olp+datetree
-            "~/org/notes.org"
+	    "~/icloud/Documents/storage/org/notes.org"
             "Daily log")
            "* TODO %?")
           ("h"
            "Headline"
            entry
            (file+olp+datetree
-            "~/org/notes.org"
+	    "~/icloud/Documents/storage/org/notes.org"
             "Daily log")
            "* %?")
           ("m"
            "Meeting"
            entry
            (file+olp+datetree
-            "~/org/notes.org"
+	    "~/icloud/Documents/storage/org/notes.org"
             "Daily log")
            "* %t %? :meeting:")))
 </pre>
@@ -881,7 +896,7 @@ We'll also add <a href="https://www.orgroam.com/" target="_blank">Org-roam</a>, 
   (straight-use-package 'org-roam-ui)
   (straight-use-package 'emacsql)
   (straight-use-package 'emacsql-sqlite)
-  (setq-default org-roam-directory "~/sync/org-roam")
+  (setq-default org-roam-directory "/Users/ben/Library/Mobile Documents/com~apple~CloudDocs/Documents/storage/org-roam")
   (org-roam-db-autosync-mode)
   (setq-default org-roam-completion-everywhere t)
 </pre>
@@ -985,18 +1000,19 @@ is to get my calendar and email readable and writable inside Emacs.</p>
    (string-trim
     (shell-command-to-string
      "op item get 'Emacs Google Client' --fields password"))
-   org-gcal-fetch-file-alist '(("ben@twos.dev" .  "~/org/schedule.org")))
+   org-gcal-fetch-file-alist '(("ben@twos.dev" . "~/icloud/Documents/storage/org/schedule.org")))
+	    
   (require 'org-gcal)
 </pre>
 </div>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-14" class="outline-3">
-<h3 id="headline-14">
+<div id="outline-container-headline-15" class="outline-3">
+<h3 id="headline-15">
 Project management
 </h3>
-<div id="outline-text-headline-14" class="outline-text-3">
+<div id="outline-text-headline-15" class="outline-text-3">
 <p>
 Because Emacs runs as a daemon with any number of frames connected to
 it, it doesn't place the same emphasis on a working directory as
@@ -1030,11 +1046,11 @@ test file, closing every buffer for a project, etc.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-15" class="outline-3">
-<h3 id="headline-15">
+<div id="outline-container-headline-16" class="outline-3">
+<h3 id="headline-16">
 Newbie Helpers
 </h3>
-<div id="outline-text-headline-15" class="outline-text-3">
+<div id="outline-text-headline-16" class="outline-text-3">
 <p>
 These packages help me out as a new Emacs user.</p>
 <div class="src src-emacs-lisp">
@@ -1050,11 +1066,11 @@ These packages help me out as a new Emacs user.</p>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-16" class="outline-3">
-<h3 id="headline-16">
+<div id="outline-container-headline-17" class="outline-3">
+<h3 id="headline-17">
 Efficiencies
 </h3>
-<div id="outline-text-headline-16" class="outline-text-3">
+<div id="outline-text-headline-17" class="outline-text-3">
 <p>Use <code class="verbatim">C-=</code> to smartly select based on semantics of the language being selected.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
@@ -1093,11 +1109,11 @@ SPC s</code> performs <code class="verbatim">C-x s</code>)</li>
 </div>
 </div>
 </div>
-<div id="outline-container-headline-17" class="outline-3">
-<h3 id="headline-17">
+<div id="outline-container-headline-18" class="outline-3">
+<h3 id="headline-18">
 Modern Niceties
 </h3>
-<div id="outline-text-headline-17" class="outline-text-3">
+<div id="outline-text-headline-18" class="outline-text-3">
 <p>Emacs was written in 1976, and it takes a bit of configuration to get
 up to speed with modern standard practices.</p>
 <p>
@@ -1106,6 +1122,28 @@ up to speed with modern standard practices.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico
+</pre>
+</div>
+</div>
+<p>
+<code class="verbatim">super-save</code> auto-saves buffers when they lose focus.
+Note that Emacs has a built-in auto-save,
+but it only refers to saving to temporary files.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'super-save)
+  (super-save-mode +1)
+  (setq super-save-auto-save-when-idle t)
+</pre>
+</div>
+</div>
+<p>
+<code class="verbatim">winner-mode</code> is built into Emacs but disabled by default.
+When enabled, it tracks changes to window configurations and allows undoing with
+<code class="verbatim">C-c left</code>.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (winner-mode)
 </pre>
 </div>
 </div>
@@ -1143,11 +1181,11 @@ And <a href="https://github.com/minad/vertico" target="_blank"><code class="verb
 </div>
 </div>
 </div>
-<div id="outline-container-headline-18" class="outline-2">
-<h2 id="headline-18">
+<div id="outline-container-headline-19" class="outline-2">
+<h2 id="headline-19">
 The End
 </h2>
-<div id="outline-text-headline-18" class="outline-text-2">
+<div id="outline-text-headline-19" class="outline-text-2">
 <p>
 Thanks for reading my Emacs config! Please let me know if you have any
 questions or improvement suggestions! <a href="mailto:ben@twos.dev">ben@twos.dev</a></p>
