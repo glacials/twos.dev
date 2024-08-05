@@ -26,7 +26,7 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Ben Carlsson / {{ .Title }}</title>
+<title>Ben Carlsson{{ with .Title }} / {{ . }}{{ end }}</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link

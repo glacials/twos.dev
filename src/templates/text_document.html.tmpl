@@ -37,15 +37,19 @@
           <small>
             <i>
               {{ with .SourcePath }}
+							{{ if eq . "src/warm/config.org" }}
+							source: <a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org">~/.config/emacs/config.org</a>
+							{{ else }}
                 source:
                 <a
                   href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
                   target="_blank"
                   >{{ . }}</a
-                >
+														>
+								{{ end }}
               {{ else }}
                 <a href="https://github.com/glacials/twos.dev" target="_blank"
-                  >Source</a
+                  >source</a
                 >
               {{ end }}
               <br />
