@@ -579,6 +579,28 @@ And how can we do any of that without the miracle of LSP and an appropriate UI f
 </div>
 </div>
 <p>
+We'll also add tree-sitter bindings:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'tree-sitter)
+  (straight-use-package 'tree-sitter-langs)
+
+  (require 'tree-sitter)
+  (require 'tree-sitter-langs)
+
+  (global-tree-sitter-mode)
+  (add-hook 'tree-sitter-after-on-hook #'tree-sitter-hl-mode)
+</pre>
+</div>
+</div>
+<table>
+<tbody>
+<tr>
+<td>tree-sitter-hl-mode</td>
+</tr>
+</tbody>
+</table>
+<p>
 For Go, we need to do some work to automatically run <code class="verbatim">gofmt</code> and friends:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
@@ -1200,12 +1222,9 @@ questions or improvement suggestions! <a href="mailto:ben@twos.dev">ben@twos.dev
           <small>
             <i>
               
-                source:
-                <a
-                  href="https://github.com/glacials/twos.dev/blob/main/src/warm/config.org"
-                  target="_blank"
-                  >src/warm/config.org</a
-                >
+							
+							source: <a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org">~/.config/emacs/config.org</a>
+							
               
               <br />
               
