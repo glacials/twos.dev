@@ -1,44 +1,42 @@
-<div class="photo-grid">
-  <h2>{{ . }}</h2>
-  {{ range (gallery .) }}
-    <label class="gallery-item">
-      <input type="checkbox" />
-      {{ $img := . }}
-      {{ $downscaled := . }}
-      {{ range .Thumbnails }}
-        {{ if eq .Height 256 }}
-          {{ $downscaled = . }}
-        {{ end }}
+<h2>{{ . }}&rarr;</h2>
+{{ range (gallery .) }}
+  <label class="gallery-item">
+    <input type="checkbox" />
+    {{ $img := . }}
+    {{ $downscaled := . }}
+    {{ range .Thumbnails }}
+      {{ if eq .Height 256 }}
+        {{ $downscaled = . }}
       {{ end }}
-      <img
-        alt="{{ $img.Alt }}"
-        class="thumbnail"
-        src="{{ $downscaled.WebPath }}"
-        title=""
-      />
-      <img
-        alt="{{ $img.Alt }}"
-        class="fullsize"
-        loading="lazy"
-        src="{{ $img.WebPath }}"
-        title=""
-      />
-      <p class="caption exif">
-        {{ with .Camera }}
-          <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a
-          ><br />
-        {{ end }}
-        {{ with .Lens }}
-          <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
-          @
-        {{ end }}
-        {{ .FocalLength }}mm &bull;
-        ƒ{{ .Aperture }}
-        &bull; {{ .ShutterSpeed }}s &bull; ISO
-        {{ .ISO }}
-        <br />
-        &copy; {{ .TakenAt.Year }} Ben Carlsson
-      </p>
-    </label>
-  {{ end }}
-</div>
+    {{ end }}
+    <img
+      alt="{{ $img.Alt }}"
+      class="thumbnail"
+      src="{{ $downscaled.WebPath }}"
+      title=""
+    />
+    <img
+      alt="{{ $img.Alt }}"
+      class="fullsize"
+      loading="lazy"
+      src="{{ $img.WebPath }}"
+      title=""
+    />
+    <p class="caption exif">
+      {{ with .Camera }}
+        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a
+        ><br />
+      {{ end }}
+      {{ with .Lens }}
+        <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
+        @
+      {{ end }}
+      {{ .FocalLength }}mm &bull;
+      ƒ{{ .Aperture }}
+      &bull; {{ .ShutterSpeed }}s &bull; ISO
+      {{ .ISO }}
+      <br />
+      &copy; {{ .TakenAt.Year }} Ben Carlsson
+    </p>
+  </label>
+{{ end }}
