@@ -369,6 +369,19 @@ Set font:</p>
 </div>
 </div>
 <p>
+By default, Emacs's BufferMenu feature opens with <code class="verbatim">C-c C-b</code>.
+This opens a buffer that displays all open buffers and their statuses.</p>
+<p>
+Since Emacs 22, IBuffer Mode accomplishes the same thing but with a more modern
+and advanced feature set and display.
+We'll simply override the BufferMenu to use IBuffer Mode instead:</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (global-set-key (kbd "C-x C-b") 'ibuffer)
+</pre>
+</div>
+</div>
+<p>
 More:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
@@ -392,17 +405,19 @@ More:</p>
 
   ;; Custom ligatures
   (setq-default prettify-symbols-alist
-  							'(("TODO" . "")
-  								("BLKD" . "")        
-  								("CNCL" . "")
-  								("DONE" . "")
-  								("-&gt;&gt;"  . "↠")
-  								("-&gt;"   . "→")
-  								("&lt;-"   . "←")
-  								("&lt;-"   . "←")
-  								("=&gt;"   . "⇒")
-  								("&lt;="   . "≤")
-  								("&gt;="   . "≥")
+  							'(("TODO"        . "")
+  								("BLKD"        . "")        
+  								("CNCL"        . "")
+  								("DONE"        . "")
+  								("-&gt;&gt;"         . "↠")
+  								("-&gt;"          . "→")
+  								("&lt;-"          . "←")
+  								("&lt;-"          . "←")
+  								("=&gt;"          . "⇒")
+  								("&lt;="          . "≤")
+  								("&gt;="          . "≥")
+  								("#+BEGIN_SRC" . "")
+  								("#+END_SRC"   . "<span style="font-family: sans-serif">―</span>")
   								;; Below are commented until/unless I start using them frequently.
   																				;				("[#A]" . "")
   																				;				("[#B]" . "")
@@ -410,8 +425,6 @@ More:</p>
   																				;				("[ ]" . "")
   																				;				("[X]" . "")
   																				;				("[-]" . "")
-  																				;				("#+BEGIN_SRC" . "")
-  																				;				("#+END_SRC" . "<span style="font-family: sans-serif">―</span>")
   																				;				(":PROPERTIES:" . "")
   																				;				(":END:" . "<span style="font-family: sans-serif">―</span>")
   																				;				("#+STARTUP:" . "")
@@ -430,6 +443,8 @@ More:</p>
 </pre>
 </div>
 </div>
+<pre class="example">((TODO . ) (BLKD . ) (CNCL . ) (DONE . ) (-&gt;&gt; . ↠) (-&gt; . →) (&lt;- . ←) (&lt;- . ←) (=&gt; . ⇒) (&lt;= . ≤) (&gt;= . ≥) (#+BEGIN_SRC . ) (#+END_SRC . <span style="font-family: sans-serif">―</span>))
+</pre>
 </div>
 </div>
 <div id="outline-container-headline-6" class="outline-2">
@@ -593,13 +608,6 @@ We'll also add tree-sitter bindings:</p>
 </pre>
 </div>
 </div>
-<table>
-<tbody>
-<tr>
-<td>tree-sitter-hl-mode</td>
-</tr>
-</tbody>
-</table>
 <p>
 For Go, we need to do some work to automatically run <code class="verbatim">gofmt</code> and friends:</p>
 <div class="src src-emacs-lisp">
@@ -1113,6 +1121,10 @@ SPC s</code> performs <code class="verbatim">C-x s</code>)</li>
 <li>Starting a key sequence with <code class="verbatim">C-</code> stops God mode from affecting that sequence
 (e.g. <code class="verbatim">C-x C-s</code> performs itself: <code class="verbatim">C-x C-s</code>)</li>
 </ul>
+<p>The point of god-mode is to prevent "Emacs pinky",
+but after 10 years of Vim I honestly just need some level of protection between
+me and inserting random characters into files unknowingly,
+especially with hard auto-save on.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'god-mode)
@@ -1144,6 +1156,16 @@ up to speed with modern standard practices.</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
 <pre>  (straight-use-package 'savehist) ; Save minibuffer histories; pairs with frecency of vertico
+</pre>
+</div>
+</div>
+<p>
+<code class="verbatim">dired-sidebar</code> shows a directory explorer a la NERDTree.</p>
+<div class="src src-emacs-lisp">
+<div class="highlight">
+<pre>  (straight-use-package 'dired-sidebar)
+  (require 'dired-sidebar)
+  (dired-sidebar-toggle-sidebar)
 </pre>
 </div>
 </div>
