@@ -1,7 +1,7 @@
 ---
 date: 2007-12-25
 filename: wow.html
-type: post
+type: page
 ---
 
 _This post from 2007 was migrated from my old blog [I FEEL

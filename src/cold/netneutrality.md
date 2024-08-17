@@ -1,7 +1,7 @@
 ---
 date: 2013-03-08
 filename: netneutrality.html
-type: post
+type: page
 ---
 
 _This post from 2013 was migrated from my old blog._

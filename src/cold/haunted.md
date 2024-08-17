@@ -1,7 +1,7 @@
 ---
 date: 2007-10-14
 filename: haunted.html
-type: post
+type: page
 ---
 
 _This post from 2007 was migrated from my old blog [I FEEL

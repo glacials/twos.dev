@@ -1,7 +1,7 @@
 ---
 date: 2007-10-03
 filename: phantoms.html
-type: post
+type: pagez
 ---
 
 _This post from 2007 was migrated from my old blog [I FEEL
