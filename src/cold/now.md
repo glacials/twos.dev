@@ -3,44 +3,41 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2023-12-18
+updated: 2024-08-19
 ---
 
 # Now
 
 Has it been a while since you've caught up with me?
-Read on to answer the question "What is Ben doing now?".
+Read on to see what I've been up to recently.
 
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}**
 from my home in **Seattle, WA**.
 
 ## Work
 
-I'm no longer at SunPower and am looking for my next full-time gig.
-[Let me know](mailto:ben@twos.dev) if you have any recommendations.
-Bonus points for climate, gaming, open source, devx/vel, or
-<code style="white-space:nowrap">size < 100</code>.
+Since 2024 July I've been happily working at [Fathom](https://fathom.video),
+a small startup building virtual meeting tools.
 
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
 
-- [Baldur's Gate 3](https://store.steampowered.com/app/1086940/Baldurs_Gate_3/)
-- [Nova Drift](https://store.steampowered.com/app/858210/Nova_Drift/)
-- World of Warcraft Classic Hardcore
+- [Rabbit and Steel](https://store.steampowered.com/app/2132850/Rabbit_and_Steel/)
+- [Heretic's Fork](https://store.steampowered.com/app/2181610/Heretics_Fork/)
+- An Unnamed Game in Alpha State
 
 I recently completed:
 
-- [Cyberpunk 2077](https://store.steampowered.com/app/1091500/Cyberpunk_2077/)
-- [Elden Ring](https://store.steampowered.com/app/1245620/ELDEN_RING/) at level 1 ([proof](https://www.youtube.com/playlist?list=PLOh5StMt-uPV1_11e9XKVNtBcmGMKDaHd))
-- [Armored Core VI](https://store.steampowered.com/app/1888160/ARMORED_CORE_VI_FIRES_OF_RUBICON/) all endings
+- [Pacific Drive](https://store.steampowered.com/app/1458140/Pacific_Drive/) (40 h)
+- [Elden Ring: Shadow of the Erdtree](https://store.steampowered.com/app/2778580/ELDEN_RING_Shadow_of_the_Erdtree/) (601 h)
+- [Nova Drift](https://store.steampowered.com/app/858210/Nova_Drift/) (143 h)
 
 ## Climate
 
 Since 2021 I've been passionate about climate change thanks to a
 [permanent reminder from my past self](/tattoo.html).
-I now work at a clean energy company (see next),
-have become more outspoken and cognizant about issues,
+I have become more outspoken and cognizant about issues,
 and am becoming more politically active.
 
 When I get questions from friends and family about what they can do to help,
@@ -69,6 +66,9 @@ For my first two years I used an old hobby-grade Canon DSLR my mom had lying aro
 For 2023, I decided to switch to the [Micro Four Thirds](https://www.four-thirds.org/en/) system for its open standard and smaller size.
 I use an [Olympus OM-D E-M5 Mark III](https://amzn.to/3Qaj7qm).
 
+I have committed to adding exactly 13 photos per year.
+I usually post them in bulk in late December or early January.
+
 ## This Website
 
 Somehow after a dozen attempts over two dozen years I finally have a
@@ -86,7 +86,7 @@ or the [documentation](/winter.html) for the generator.
 
 I found out in 2020 that I'm autistic.
 It has been a fantastic and eye-opening experience.
-Every few weeks I learn that some weird behavior I've had is attributable to autism,
+Every few weeks I learn that some weird behavior I've always had is attributable to autism,
 and that there's a pool of people I can talk to about it.
 
 These vary from having been mute for 9 years as a child,
@@ -94,17 +94,17 @@ to spending multiple hours a day preparing and retrospecting conversations,
 to not liking hot weather,
 to sometimes feeling like every little noise is far too loud.
 
-If you know me and your first reaction to this is that I don't seem autistic, I wrote [Anonymously Autistic](/autism.html) just for you.
+If you know me and your first reaction to this is that I don't seem autistic,
+I wrote [Anonymously Autistic](/autism.html) just for you.
 
 ## Mastodon
 
-I've mostly jumped ship from Twitter and have switched to Mastodon:
+I jumped ship from Twitter in 2022 and have switched to Mastodon:
 [@glacials@hachyderm.io](https://hachyderm.io/@glacials).
 
-I self-hosted a single-user instance for a year and don't regret it.
-I know a lot more about the fediverse than when I started.
-But the benefits started to flatten and the costs were high,
-so I recently moved to Hachyderm.
+I self-hosted a single-user instance for a year and learned a lot,
+but the benefits started to flatten and the costs were high,
+so I moved to Hachyderm.
 Their code of ethics and governance model is impressive.
 
 ---
