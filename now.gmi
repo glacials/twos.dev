@@ -1,40 +1,39 @@
 # Now
 
-Has it been a while since you've caught up with me? Read on to answer the question "What is Ben doing now?".
+Has it been a while since you've caught up with me? Read on to see what I've been up to recently.
 
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}** from my home in **Seattle, WA**.
 
 ## Work
 
-I'm no longer at SunPower and am looking for my next full-time gig. Let me know if you have any recommendations. Bonus points for climate, gaming, open source, devx/vel, or size < 100.
+Since 2024 July I've been happily working at Fathom, a small startup building virtual meeting tools.
 
-=> mailto:ben@twos.dev Let me know
+=> https://fathom.video Fathom
 
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
 
-* Baldur's Gate 3
-* Nova Drift
-* World of Warcraft Classic Hardcore
+* Rabbit and Steel
+* Heretic's Fork
+* An Unnamed Game in Alpha State
 
-=> https://store.steampowered.com/app/1086940/Baldurs_Gate_3/ Baldur's Gate 3
-=> https://store.steampowered.com/app/858210/Nova_Drift/ Nova Drift
+=> https://store.steampowered.com/app/2132850/Rabbit_and_Steel/ Rabbit and Steel
+=> https://store.steampowered.com/app/2181610/Heretics_Fork/ Heretic's Fork
 
 I recently completed:
 
-* Cyberpunk 2077
-* Elden Ring at level 1 (proof)
-* Armored Core VI all endings
+* Pacific Drive (40 h)
+* Elden Ring: Shadow of the Erdtree (601 h)
+* Nova Drift (143 h)
 
-=> https://store.steampowered.com/app/1091500/Cyberpunk_2077/ Cyberpunk 2077
-=> https://store.steampowered.com/app/1245620/ELDEN_RING/ Elden Ring
-=> https://www.youtube.com/playlist?list=PLOh5StMt-uPV1_11e9XKVNtBcmGMKDaHd proof
-=> https://store.steampowered.com/app/1888160/ARMORED_CORE_VI_FIRES_OF_RUBICON/ Armored Core VI
+=> https://store.steampowered.com/app/1458140/Pacific_Drive/ Pacific Drive
+=> https://store.steampowered.com/app/2778580/ELDEN_RING_Shadow_of_the_Erdtree/ Elden Ring: Shadow of the Erdtree
+=> https://store.steampowered.com/app/858210/Nova_Drift/ Nova Drift
 
 ## Climate
 
-Since 2021 I've been passionate about climate change thanks to a permanent reminder from my past self. I now work at a clean energy company (see next), have become more outspoken and cognizant about issues, and am becoming more politically active.
+Since 2021 I've been passionate about climate change thanks to a permanent reminder from my past self. I have become more outspoken and cognizant about issues, and am becoming more politically active.
 
 => /tattoo.html permanent reminder from my past self
 
@@ -54,6 +53,8 @@ I've been into amateur photography since 2021, as you can see in the navigation 
 => https://www.four-thirds.org/en/ Micro Four Thirds
 => https://amzn.to/3Qaj7qm Olympus OM-D E-M5 Mark III
 
+I have committed to adding exactly 13 photos per year. I usually post them in bulk in late December or early January.
+
 ## This Website
 
 Somehow after a dozen attempts over two dozen years I finally have a website that I've stuck with for a while, twos.dev. The secret sauce turned out to be building the static generator myself.
@@ -67,7 +68,7 @@ For more information see Inside twos.dev, or the documentation for the generator
 
 ## I'm Autistic
 
-I found out in 2020 that I'm autistic. It has been a fantastic and eye-opening experience. Every few weeks I learn that some weird behavior I've had is attributable to autism, and that there's a pool of people I can talk to about it.
+I found out in 2020 that I'm autistic. It has been a fantastic and eye-opening experience. Every few weeks I learn that some weird behavior I've always had is attributable to autism, and that there's a pool of people I can talk to about it.
 
 These vary from having been mute for 9 years as a child, to spending multiple hours a day preparing and retrospecting conversations, to not liking hot weather, to sometimes feeling like every little noise is far too loud.
 
@@ -77,11 +78,11 @@ If you know me and your first reaction to this is that I don't seem autistic, I 
 
 ## Mastodon
 
-I've mostly jumped ship from Twitter and have switched to Mastodon: @glacials@hachyderm.io.
+I jumped ship from Twitter in 2022 and have switched to Mastodon: @glacials@hachyderm.io.
 
 => https://hachyderm.io/@glacials @glacials@hachyderm.io
 
-I self-hosted a single-user instance for a year and don't regret it. I know a lot more about the fediverse than when I started. But the benefits started to flatten and the costs were high, so I recently moved to Hachyderm. Their code of ethics and governance model is impressive.
+I self-hosted a single-user instance for a year and learned a lot, but the benefits started to flatten and the costs were high, so I moved to Hachyderm. Their code of ethics and governance model is impressive.
 
 ---
 
