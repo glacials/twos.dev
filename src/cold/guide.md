@@ -50,7 +50,7 @@ I prefer asynchrony over ad hoc, ad hoc over scheduled:
    │         ▼                                              ▼
    │  ┌─────────────┐                                  ┌─────────┐
    │  │  Recording  │     Lots of back-and-forth       │ Ad hoc  │
-   └─▶│ (e.g. Loom) │─────────────────────────────────▶│ meeting │
+   └─>│ (e.g. Loom) │─────────────────────────────────>│ meeting │
       └─────────────┘                                  └─────────┘
                                                             │
                                                             │
