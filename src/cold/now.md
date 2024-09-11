@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2024-08-19
+updated: 2024-09-11
 ---
 
 # Now
@@ -13,8 +13,6 @@ Read on to see what I've been up to recently.
 
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}**
 from my home in **Seattle, WA**.
-
-## Work
 
 ## Video Games
 
