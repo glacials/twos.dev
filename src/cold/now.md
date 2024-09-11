@@ -16,16 +16,13 @@ from my home in **Seattle, WA**.
 
 ## Work
 
-Since 2024 July I've been happily working at [Fathom](https://fathom.video),
-a small startup building virtual meeting tools.
-
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
 
 - [Rabbit and Steel](https://store.steampowered.com/app/2132850/Rabbit_and_Steel/)
 - [Heretic's Fork](https://store.steampowered.com/app/2181610/Heretics_Fork/)
-- An Unnamed Game in Alpha State
+- [Deadlock](https://store.steampowered.com/app/1422450/Deadlock/)
 
 I recently completed:
 
