@@ -6,20 +6,13 @@ Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}** from my home in **
 
 ## Work
 
-Since 2024 July I've been happily working at Fathom, a small startup building virtual meeting tools.
-
-=> https://fathom.video Fathom
-
 ## Video Games
 
 I'm as into games as ever. I'm currently playing:
 
-* Rabbit and Steel
-* Heretic's Fork
-* An Unnamed Game in Alpha State
-
 => https://store.steampowered.com/app/2132850/Rabbit_and_Steel/ Rabbit and Steel
 => https://store.steampowered.com/app/2181610/Heretics_Fork/ Heretic's Fork
+=> https://store.steampowered.com/app/1422450/Deadlock/ Deadlock
 
 I recently completed:
 
