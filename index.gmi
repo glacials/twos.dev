@@ -1,4 +1,4 @@
-I'm **Ben** and this is my website and dumping ground. I'm interested in the climate crisis, open source software, photography, interior design, and video games.
+I'm **Ben** and this is my website. I'm interested in the climate crisis, open source software, photography, interior design, and video games.
 
 Find me at Mastodon, LinkedIn, or ben@twos.dev.
 

@@ -1,12 +1,6 @@
 
 
-# Brown Note
-
-I've been working on an iOS app recently, which is new for me. The app is called Brown Note and it is a food journal designed to solve the biggest problem I have had with other food journal apps: logging entries is so complex that my brain unconsciously stops doing it.
-
-=> https://apps.apple.com/us/app/brown-note/id6479333983 Brown Note
-
-## Customer Need
+# Toying with Toilet Tech
 
 I'm slow to realize biological correlations. There are several weird things about my body, so it's not always obvious that when I eat `A` it causes poor experience `B`. Lots of things cause poor experience `B`, and also poor experiences `C`, `D`, and `E`, so I'm not always on the lookout.
 
@@ -73,6 +67,7 @@ For example, the app can understand food components (e.g. `latte` contains `milk
 
                            
 
-Let me know what you think, or join the TestFlight group to give me some feedback before proper release.
+Let me know what you think by grabbing it from the App Store, or join the TestFlight group to give me some feedback before proper releases.
 
+=> appstore grabbing it from the App Store
 => https://testflight.apple.com/join/ww7RII5M TestFlight
