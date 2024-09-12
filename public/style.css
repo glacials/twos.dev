@@ -16,14 +16,29 @@
   --container-width: 33rem;
 }
 
+@media (min-width: 55rem) {
+  :root {
+    --margin-left-standard: 5rem;
+  }
+}
+
+
+@media not (min-width: 55rem) {
+  :root {
+    --margin-left-standard: .75rem;
+  }
+}
+
 @media (prefers-color-scheme: light) {
   :root {
-    --traditional-bg: rgba(255, 255, 255, 1);
+    --all-bg:  rgba(255, 255, 255, 1);
+
+    --traditional-bg: var(--all-bg);
     --traditional-fg: rgba(0, 0, 0, 1);
     --traditional-fg-mute: rgba(150, 90, 50, 0.3);
     --traditional-fg-pop: rgba(150, 90, 50, 1);
 
-    --page-bg: rgb(255, 255, 255);
+    --page-bg: var(--all-bg);
     --page-border: rgb(0, 0, 0);
     --page-fg: rgba(0, 0, 0, 1);
 
@@ -37,19 +52,21 @@
     --shadow: rgba(0, 0, 0, 0.5);
 
     /* --under-white looks good as a background under a white foreground,
-     * regardless of color scheme. e.g. nav.socials uses white images.
+     * regardless of color scheme.
      */
     --under-white: rgba(50, 50, 50, 1);
   }
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --traditional-bg: rgb(46, 30, 30);
+    --all-bg:  rgb(36, 36, 36);
+
+    --traditional-bg: var(--all-bg);
     --traditional-fg: rgba(244, 214, 205, 1);
     --traditional-fg-mute: #705b58;
     --traditional-fg-pop: #c8ada6;
 
-    --page-bg: rgb(46, 30, 30);
+    --page-bg: var(--all-bg);
     --page-border: rgb(34, 34, 34);
     --page-fg: rgba(244, 214, 205, 1);
 
@@ -114,15 +131,15 @@ article {
 
 article > *:not(:has(img)):not(article):not(pre),
 footer {
-  margin-left: 1.25rem;
-  margin-right: 1.25rem;
+  margin-left: var(--margin-left-standard);
+  margin-right: var(--margin-left-standard);
 }
 
 @media (min-width: 55rem) {
   article
     > *:not(.photo-grid):not(article):not(p:has(img[src*="macos"])):not(pre),
   footer {
-    margin-left: auto;
+    margin-left: var(--margin-left-standard);
     margin-right: auto;
     max-width: var(--container-width);
   }
@@ -153,8 +170,8 @@ blockquote {
 body {
   background: var(--page-bg);
   color: var(--traditional-fg);
-  /*  font-family: monospace; */
   font-family:
+    inconsolata,
     -apple-system,
     BlinkMacSystemFont,
     avenir next,
@@ -173,7 +190,7 @@ body {
   margin: 0;
 }
 
-@media (max-width: 50rem) {
+@media (max-width: 55rem) {
   body {
     /* Prevent mobile rubber-band-scrolling from revealing a contrasting color. */
     background: var(--traditional-bg);
@@ -220,18 +237,6 @@ h4,
 h5,
 h6 {
   display: block;
-  font-family:
-    Iowan Old Style,
-    Apple Garamond,
-    Baskerville,
-    Times New Roman,
-    Droid Serif,
-    Times,
-    Source Serif Pro,
-    serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol;
   font-style: italic;
 }
 
@@ -313,11 +318,6 @@ hr + p:has(em) {
   text-align: center;
 }
 
-html {
-  hyphens: auto;
-  -webkit-hyphens: auto;
-}
-
 li {
   margin: 0.4rem 0;
 }
@@ -328,19 +328,9 @@ li p {
 
 nav {
   color: #705b58;
-  font-family:
-    Iowan Old Style,
-    Apple Garamond,
-    Baskerville,
-    Times New Roman,
-    Droid Serif,
-    Times,
-    Source Serif Pro,
-    serif,
-    Apple Color Emoji,
-    Segoe UI Emoji,
-    Segoe UI Symbol;
   font-style: italic;
+  margin: 1rem var(--margin-left-standard);
+  max-width: var(--container-width);
   overflow-x: auto;
 }
 
@@ -352,113 +342,34 @@ nav h1 {
   font-size: 1em;
 }
 
-@media (min-width: 50rem) {
-  nav {
-    display: grid;
-  }
-  nav:has(.breadcrumb) {
-    grid-column-gap: 5px;
-    grid-template-columns: 1fr 1fr 1fr;
-  }
-
-  nav h1,
-  .title {
-    margin: auto 0;
-    margin: auto 0;
-  }
+nav {
+  display: grid;
 }
 
-@media (min-width: 55rem) {
-  nav > *:nth-child(1) {
-    margin-left: 1.75rem;
-  }
-}
-@media not (min-width: 55rem) {
-  nav > *:nth-child(1) {
-    margin-left: 1.25rem;
-  }
+nav:has(.breadcrumb) {
+  grid-column-gap: 5px;
+  grid-template-columns: 1fr 1fr 1fr;
 }
 
-@media not (min-width: 50rem) {
-  nav h1 {
-    display: inline;
-  }
-
-  nav a:has(h1) {
-    text-align: center;
-  }
-
-  .breadcrumb:nth-child(1) {
-    grid-column-start: 1;
-  }
-  .breadcrumb:nth-child(2) {
-    grid-column-start: 2;
-  }
-  .breadcrumb:nth-child(4) {
-    margin-left: auto;
-  }
+nav h1,
+.title {
+  margin: auto 0;
+  margin: auto 0;
 }
 
-@media (min-width: 50rem) {
-  .breadcrumb:not(.title)::after {
-    content: "/";
-  }
-  .breadcrumb,
-  .nav-text,
-  .nav-wrapper {
-    display: inline;
-    white-space: nowrap;
-  }
-  .nav-wrapper + .nav-wrapper::before {
-    content: "∙";
-  }
+.breadcrumb:not(.title)::after {
+  content: "/";
 }
 
-@media not (min-width: 50rem) {
-  nav {
-    margin: 0;
-  }
-  nav .title {
-    margin-top: 1rem;
-  }
-  .nav-text {
-    display: flex;
-    justify-content: space-evenly;
-    padding-top: 1rem;
-  }
-  .nav-text::content,
-  .nav-text::after,
-  .nav-text::before {
-    padding: 1rem 0.5rem;
-  }
-  .nav-text::after {
-    content: "]";
-  }
-  .nav-text::before {
-    content: "[";
-  }
-}
-
-nav.socials {
+.breadcrumb,
+.nav-text,
+.nav-wrapper {
   display: inline;
-  margin-left: 0.65rem;
+  white-space: nowrap;
 }
 
-nav.socials a {
-  margin: 0;
-  padding: 1rem;
-}
-
-nav.socials a:hover {
-  background-color: var(--traditional-fg-pop);
-}
-
-nav.socials a:hover {
-  background-color: var(--lighter-bg);
-}
-
-nav.socials img {
-  width: 1.1rem;
+.nav-wrapper + .nav-wrapper::before {
+  content: "∙";
 }
 
 p {
@@ -477,7 +388,7 @@ figure + p:has(i:only-child),
 figure + p:has(em:only-child) {
   font-size: 0.85rem;
   font-style: italic;
-  margin: 1rem auto 4rem !important;
+  margin: 1rem 5rem 4rem !important;
   max-width: 30rem;
   text-align: center;
 }
@@ -532,7 +443,7 @@ video + video {
   padding-top: 2rem;
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 55rem) {
   .alert {
     box-shadow: 0.5rem 0.5rem var(--shadow);
   }
@@ -557,13 +468,13 @@ video + video {
   padding: 0;
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 55rem) {
   .container {
     margin-bottom: 2rem;
   }
 }
 
-@media not (min-width: 50rem) {
+@media not (min-width: 55rem) {
   .container {
     margin: auto;
   }
@@ -683,7 +594,7 @@ video + video {
   padding: 2rem 0 0 0;
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 55rem) {
   .post {
     padding: 0;
     margin-bottom: 6rem;
@@ -715,7 +626,7 @@ video + video {
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
 pre {
-  margin-left: auto;
+  margin-left: var(--margin-left-standard);
   margin-right: auto;
   width: fit-content;
 }
@@ -728,14 +639,14 @@ pre code {
   white-space: normal;
 }
 
-@media not (min-width: 50rem) {
+@media not (min-width: 55rem) {
   pre {
     margin-left: 0 !important;
     margin-right: 0 !important;
   }
 }
 
-@media (min-width: 50rem) {
+@media (min-width: 55rem) {
   pre:has(code) {
     box-shadow: 0.5rem 0.5rem var(--shadow);
   }
@@ -1112,7 +1023,7 @@ pre {
 
 /* End syntax highlighting (see https://github.com/alecthomas/chroma) */
 
-@media not (min-width: 50rem) {
+@media not (min-width: 55rem) {
   .left {
     float: left;
     margin-top: 1rem;

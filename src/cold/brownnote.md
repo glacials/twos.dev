@@ -6,15 +6,7 @@ type: post
 
 <link rel="stylesheet" type="text/css" href="/devices.min.css" />
 
-# Brown Note
-
-I've been working on an iOS app recently,
-which is new for me.
-The app is called [Brown Note][appstore]
-and it is a food journal designed to solve the biggest problem I have had with other food journal apps:
-logging entries is so complex that my brain unconsciously stops doing it.
-
-## Customer Need
+# Toying with Toilet Tech
 
 I'm slow to realize biological correlations.
 There are several weird things about my body,
@@ -198,8 +190,8 @@ it asks asynchronously.
   <div class="device-power"></div>
 </div>
 
-Let me know what you think,
-or join the [TestFlight][testflight] group to give me some feedback before proper release.
+Let me know what you think by [grabbing it from the App Store](appstore),
+or join the [TestFlight][testflight] group to give me some feedback before proper releases.
 
 <!-- _Brown Note is available on the [App Store][appstore] for iOS._ -->
 

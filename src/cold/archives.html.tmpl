@@ -8,13 +8,11 @@ type: page
 
 <p>
   <small>
-    <center>
-      <a href="/feed.atom">Feed</a>
-    </center>
+    <a href="/feed.atom">Feed</a>
   </small>
 </p>
 
-<div style="margin:auto; max-width: 20rem">
+<div style="max-width: 20rem">
   {{ with yearly posts }}
     {{ range . }}
       <h2>{{ .Year }}</h2>

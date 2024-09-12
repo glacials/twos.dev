@@ -225,7 +225,7 @@ The **hyphen bullet** is a hyphen to be used in place of a bullet point.
 The **figure dash** is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.
 
 <pre><span style="font-family:serif"><span style="font-family:monospace">Figure dash: </span><span style="font-size:2em">867‒5309</span> ← same as below
-<span style="font-family:monospace">Number:      </span><span style="font-size:2em">86705309</span> ← same as above
+<span style="font-family:monospace">Number:      </span><span style="font-size:2em">86715309</span> ← same as above
 <span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867–5309</span> ← longer
 <span style="font-family:monospace">Hyphen:      </span><span style="font-size:2em">867-5309</span> ← shorter
 </span></pre>
@@ -242,6 +242,11 @@ ocious
 Soft hyphen after 'istic':
 Supercalifragilistic-
 expialidocious
+```
+
+```plain
+Soft hyphen after 'istic' but no need to wrap:
+Supercalifragilisticexpialidocious
 ```
 
 You can see the soft hyphen in action when viewing the article titles of [Why Be
