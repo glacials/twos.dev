@@ -70,6 +70,9 @@
         
         
         <html><head><style>
+  .print {
+    display: none;
+  }
   @media print {
     .container {
       max-width: 50rem;
@@ -96,6 +99,25 @@
     .container {
       max-width: 75rem;
     }
+    .print {
+      display: inherit;
+    }
+  }
+  body {
+    font-family:
+      -apple-system,
+      BlinkMacSystemFont,
+      avenir next,
+      avenir,
+      segoe ui,
+      helvetica neue,
+      helvetica,
+      Cantarell,
+      Ubuntu,
+      roboto,
+      noto,
+      arial,
+      sans-serif !important;
   }
   h2 + * {
     margin-top: 0;
@@ -123,7 +145,7 @@
     </a>
   </p>
   <p>
-   <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>
+    <a href="mailto:ben@twos.dev" style="white-space: nowrap">ben@twos.dev</a>
     / (925) 979-5797
     <br/>
     <a href="https://github.com/glacials" style="white-space: nowrap" target="_blank">github.com/glacials</a>
@@ -131,42 +153,55 @@
     <a href="https://linkedin.com/in/ben" style="white-space: nowrap" target="_blank">linkedin.com/in/ben</a>
   </p>
   <p>
-    Early Twitch engineer with 10+ years experience in full-stack &amp; backend
-    engineering and tech leadership,<br/>with an eye for developer velocity and
-    user experience.
+    Early Twitch engineer with 10+ years experience in full stack &amp; backend
+    engineering and tech leadership, <br class="print"/>with an eye for
+    developer velocity and user experience.
   </p>
 </div>
 <h2>Job History</h2>
+<div class="job">
+  <div class="role">iOS Engineer</div>
+  @
+  <h3 class="company">Brown Note</h3>
+  <div>Self-Employed</div>
+  <div class="location">Seattle, WA</div>
+  January 2024<span style="font-family: sans-serif">–</span>Present
+  <ul>
+    <li>
+      A side project that got out of hand and became a full-time job, Brown Note
+      is an iOS and iPadOS app that codifies a pen-and-paper technique I
+      developed to help diagnose gastrointenstinal issues
+    </li>
+    <li>
+      Talked to users and rapidly prototyped new ideas, leading to users
+      ultimately discovering problem foods
+    </li>
+    <li>
+      Self-taught Swift, SwiftUI, and SwiftData using modern iOS standards and
+      practices, leading to first-try App Store approval
+    </li>
+    <li>
+      Wore many hats serving roles from engineer to designer to customer support
+    </li>
+  </ul>
+</div>
 <div class="job">
   <div class="role">Principal Software Engineer</div>
   @
   <h3 class="company">SunPower</h3>
   <div class="location">Seattle, WA</div>
-  July 2022<span style="font-family: sans-serif">–</span>Present
+  July 2022<span style="font-family: sans-serif">–</span>January 2024
   <ul>
     <li>
-      Foundeded, designed, &amp; built a new solar workflow orchestration team and system,
-      resolving coordination issues between five "boots on the ground" teams
-      operating across hundreds of jurisdictions with minutely different laws
+      Founded, designed, &amp; built a new solar workflow orchestration team and
+      system, resolving coordination issues between five "boots on the ground"
+      teams operating across hundreds of jurisdictions with minutely different
+      laws
     </li>
     <li>
-      Mentored senior engineers to bring organization up to modern software standards including
-      blameless portmortems, on-call flows, and design document review
-    </li>
-  </ul>
-</div>
-<div class="job">
-  <div class="role">Staff Software Engineer</div>
-  @
-  <h3 class="company">FalconX</h3>
-  <div class="location">Seattle, WA</div>
-  January 2022<span style="font-family: sans-serif">–</span>June 2022
-  <ul>
-    <li>Entered via acquisition of YourBase January 2022</li>
-    <li>
-      Improved internal developer experience and onboarding by building internal
-      CLI to manage monolith complexity, reducing time-to-first-commit for new
-      engineers from 3 weeks to 2 days
+      Mentored senior engineers to bring organization up to modern software
+      standards including blameless portmortems, on-call flows, and design
+      document review
     </li>
   </ul>
 </div>
@@ -175,7 +210,7 @@
   @
   <h3 class="company">YourBase</h3>
   <div class="location">Seattle, WA</div>
-  April 2020<span style="font-family: sans-serif">–</span>January 2022
+  April 2020<span style="font-family: sans-serif">–</span>June 2022
   <ul>
     <li>
       Ideated &amp; led a company pivot from proprietary CI product to an
@@ -193,11 +228,10 @@
       weeks of joining by replacing raw queries with ORM relationships, bringing
       the most-used API endpoint from &gt;12s down to &lt;50ms
     </li>
-    <li>Exited via acquisition by FalconX January 2022</li>
   </ul>
 </div>
 <div class="job">
-  <div class="role">Technical Founder</div>
+  <div class="role">CEO &amp; Technical Founder</div>
   @
   <h3 class="company">Splits.io</h3>
   <div class="location">Seattle, WA</div>
@@ -230,7 +264,7 @@
   @
   <h3 class="company">Twitch</h3>
   <div class="location">San Francisco, CA</div>
-  2014<span style="font-family: sans-serif">–</span>2019
+  January 2014<span style="font-family: sans-serif">–</span>January 2019
   <ul>
     <li>
       Built, scaled, and
