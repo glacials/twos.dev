@@ -14,7 +14,7 @@ interior design,
 and video games.
 
 Find me at [Mastodon](https://hachyderm.io/@glacials),
-[LinkedIn](https://linkedin.com/in/ben), or
+[LinkedIn](https://linkedin.com/in/ben),  [GitHub](https://github.com/glacials), or
 [ben@twos.dev](mailto:ben@twos.dev).
 
 My most recent posts are below.

@@ -59,16 +59,16 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --all-bg:  rgb(36, 36, 36);
+    --all-bg:  rgb(53, 60, 65);
 
     --traditional-bg: var(--all-bg);
-    --traditional-fg: rgba(244, 214, 205, 1);
-    --traditional-fg-mute: #705b58;
-    --traditional-fg-pop: #c8ada6;
+    --traditional-fg: rgb(166, 194, 202);
+    --traditional-fg-mute: #606e70;
+    --traditional-fg-pop: #baeee3;
 
     --page-bg: var(--all-bg);
     --page-border: rgb(34, 34, 34);
-    --page-fg: rgba(244, 214, 205, 1);
+    --page-fg:  rgb(215, 229, 255);
 
     --lighter-bg: rgba(240, 240, 240, 1);
     --lighter-fg: rgb(132, 117, 45);
@@ -107,7 +107,17 @@ a[href]:visited {
   color: var(--traditional-fg-pop);
   text-decoration: underline;
   text-decoration-color: var(--traditional-fg-mute);
+  text-decoration-thickness: 3px;
   text-underline-offset: 0.25rem;
+}
+
+a[href]:hover {
+  background: var(--traditional-fg-pop);
+  color: var(--traditional-bg);
+}
+
+small a[href], small a[href]:hover, small a[href]:visited {
+  text-decoration: none; /* Small lines are too close together for an underline to look okay. */
 }
 
 a:has(h1),
@@ -145,10 +155,28 @@ footer {
   }
 }
 
-article a h1 {
+h1 {
   /* background: rgba(0, 0, 0, 0.05); */
   color: var(--page-fg);
+}
+
+article a h1 {
   font-size: 2rem;
+}
+
+/* Addenda (level-1 headings NOT at the top of pages */
+article:not(.post) > h1 {
+  display: block;
+  font-size: 1em;
+  margin-top: 4rem;
+  text-align: center;
+}
+
+article:not(.post) > h1:after {
+  opacity: 0.3;
+  content: "an addendum";
+  display: block;
+  margin-top: 1rem;
 }
 
 article img {
@@ -171,6 +199,7 @@ body {
   background: var(--page-bg);
   color: var(--traditional-fg);
   font-family:
+    Fira Code,
     inconsolata,
     -apple-system,
     BlinkMacSystemFont,
@@ -185,6 +214,7 @@ body {
     noto,
     arial,
     sans-serif;
+  font-size: 15px;
   height: 100%;
   line-height: 1.7rem;
   margin: 0;
@@ -243,7 +273,6 @@ h6 {
 h1 {
   hyphens: none;
   line-height: 0.9;
-  text-align: center;
 }
 
 /* Text document hero images */
@@ -327,11 +356,10 @@ li p {
 }
 
 nav {
-  color: #705b58;
+  color: var(--traditional-fg-pop);
   font-style: italic;
   margin: 1rem var(--margin-left-standard);
   max-width: var(--container-width);
-  overflow-x: auto;
 }
 
 nav .hierarchy {
@@ -340,6 +368,7 @@ nav .hierarchy {
 
 nav h1 {
   font-size: 1em;
+  margin-top: 1rem;
 }
 
 nav {
@@ -351,10 +380,15 @@ nav:has(.breadcrumb) {
   grid-template-columns: 1fr 1fr 1fr;
 }
 
-nav h1,
-.title {
-  margin: auto 0;
-  margin: auto 0;
+nav h1.post-title {
+  margin: 2rem auto 0;
+}
+
+nav h1.website-title {
+  display: inline;
+  font-size: 1em;
+  margin-bottom: 1rem;
+  text-align: inherit;
 }
 
 .breadcrumb:not(.title)::after {
@@ -610,11 +644,6 @@ video + video {
 .selected {
   color: var(--traditional-fg-pop);
   cursor: default;
-}
-
-.welcome {
-  margin: auto;
-  text-align: center;
 }
 
 @media (prefers-color-scheme: light) {

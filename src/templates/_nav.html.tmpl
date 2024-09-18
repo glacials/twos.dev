@@ -1,50 +1,35 @@
 <nav class="primary">
-  {{- if eq .WebPath "/index.html" -}}
-    <div class="hierarchy">
-      <div class="nav-wrapper">
-        <a href="/"><div class="nav-text">Ben Carlsson</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/now.html"><div class="nav-text">Now</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/photos.html"><div class="nav-text">Photos</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/software.html"><div class="nav-text">Software</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/guide.html"><div class="nav-text">User Guide</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/archives.html"><div class="nav-text">Writing</div></a>
-      </div>
-    </div>
-  {{- else -}}
-    <div class="hierarchy">
-      <div class="breadcrumb">
-        <a href="/"><div class="nav-text">Ben Carlsson</div></a>
-      </div>
+  <h1 class="website-title">
+    Ben Carlsson
+    {{- if ne .WebPath "/index.html" }}
       {{- if .IsType "post" -}}
-        <div class="breadcrumb">
-          <a href="archives.html"><div class="nav-text">Writing</div></a>
-        </div>
+          's Blog
+      {{- else -}}
+        's {{ .Title }}
       {{- end -}}
-      {{- if parent -}}
-        {{- if or (.IsType "post") (parent.Metadata.IsType "post") -}}
-          <div class="breadcrumb">
-            <a href="archives.html"><div class="nav-text">Writing</div></a>
-          </div>
-        {{- end -}}
-        <div class="breadcrumb">
-          <a href="{{ parent.Metadata.WebPath }}"
-            ><div class="nav-text">{{ parent.Metadata.Title }}</div></a
-          >
-        </div>
-      {{- end -}}
+    {{- end -}}
+  </h1>
+  <div class="hierarchy">
+    <div class="nav-wrapper">
+      <a href="/"><div class="nav-text">Home</div></a>
     </div>
-    <div class="breadcrumb title">
-      <a href="{{ .WebPath }}"><h1>{{ .Title }}</h1></a>
+    <div class="nav-wrapper">
+      <a href="/archives.html"><div class="nav-text">Blog</div></a>
     </div>
-  {{- end -}}
+    <div class="nav-wrapper">
+      <a href="/now.html"><div class="nav-text">Now</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/photos.html"><div class="nav-text">Photos</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/software.html"><div class="nav-text">Software</div></a>
+    </div>
+    <div class="nav-wrapper">
+      <a href="/guide.html"><div class="nav-text">User Guide</div></a>
+    </div>
+  </div>
+{{- if .IsType "post" -}}
+  <h1 class="post-title">{{ .Title }}</h1>
+{{- end -}}
 </nav>

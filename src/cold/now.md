@@ -6,7 +6,7 @@ type: page
 updated: 2024-09-11
 ---
 
-# Now
+# Now Page
 
 Has it been a while since you've caught up with me?
 Read on to see what I've been up to recently.
