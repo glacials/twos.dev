@@ -198,22 +198,11 @@ blockquote {
 body {
   background: var(--page-bg);
   color: var(--traditional-fg);
+  font-display: optional;
   font-family:
     Fira Code,
     inconsolata,
-    -apple-system,
-    BlinkMacSystemFont,
-    avenir next,
-    avenir,
-    segoe ui,
-    helvetica neue,
-    helvetica,
-    Cantarell,
-    Ubuntu,
-    roboto,
-    noto,
-    arial,
-    sans-serif;
+    monospace;
   font-size: 15px;
   height: 100%;
   line-height: 1.7rem;
