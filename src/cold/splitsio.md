@@ -8,9 +8,9 @@ type: page
 
 'Hoy.
 
-I'm very sad to share that Splits.io will shut down December 1, 2024.
+I'm very sad to share that Splits.io will shut down December 31, 2024.
 
-You can export runs as normal until December 1. After that date, `splits.io` will be replaced with an export-only web page where you can fetch runs by permalink or in bulk by username. You can test that page [here](https://retriever.splits.io), although before December 1 it will only have data through 2023.
+You can export runs as normal until December 31. After that date, `splits.io` will be replaced with an export-only web page where you can fetch runs by permalink or in bulk by username. You can test that page [here](https://retriever.splits.io), although before December 31 it will only have data through 2023.
 
 I plan to keep `splits.io` in that state for one year, but will keep it online indefinitely beyond that within reason. Storage was always the cheapest part of Splits.io.
 
