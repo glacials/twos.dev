@@ -4,7 +4,7 @@ filename: splitsio.html
 type: page
 ---
 
-# Goodbye, Splits.io
+# Goodbye to Splits.io
 
 'Hoy.
 
@@ -37,3 +37,10 @@ Signed,
 - Franklyn "Tuna" Rodriguez
 
 (>-.-)>
+
+## PS
+
+I plan to write more about the Splits.io journey and the decisions we made on it.
+You can follow this website with your RSS reader,
+subscribe to my low-volume [newsletter](/newsletter.html),
+or follow me on Mastodon to hear from me when I do: [@glacials@hachyderm.io](https://hachyderm.io/@glacials).

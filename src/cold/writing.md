@@ -4,4 +4,6 @@ filename: writing.html
 type: page
 ---
 
+# Writing
+
 {{ template "_writing.html.tmpl" }}

@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2024-09-11
+updated: 2024-10-05
 ---
 
 # Now Page
@@ -18,8 +18,8 @@ from my home in **Seattle, WA**.
 
 I'm as into games as ever. I'm currently playing:
 
+- [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/)
 - [Rabbit and Steel](https://store.steampowered.com/app/2132850/Rabbit_and_Steel/)
-- [Heretic's Fork](https://store.steampowered.com/app/2181610/Heretics_Fork/)
 - [Deadlock](https://store.steampowered.com/app/1422450/Deadlock/)
 
 I recently completed:
