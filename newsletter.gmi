@@ -1,0 +1,25 @@
+# Newsletter
+
+Once in a long while I send out an email with personal updates about my life, hobbies, and passions.
+
+This is a bit more personal than my blog. If you don't use RSS it can also be a way to hear about my blog posts, if a bit delayed.
+
+No spam, no ads, no sponsors. Volume is ~4 emails per year.
+
+To subscribe, send a blank email with the subject `SUBSCRIBE` to `newsletter@twos.dev`. Use this link to do that in your default mail client:
+
+=> mailto:newsletter@twos.dev?subject=SUBSCRIBE `newsletter@twos.dev`
+
+ SUBSCRIBE 
+
+=> mailto:newsletter@twos.dev?subject=SUBSCRIBE SUBSCRIBE
+
+To unsubscribe at any time, send a blank email with subject `UNSUBSCRIBE` to `newsletter@twos.dev`:
+
+=> mailto:newsletter@twos.dev?subject=UNSUBSCRIBE `newsletter@twos.dev`
+
+ UNSUBSCRIBE 
+
+=> mailto:newsletter@twos.dev?subject=UNSUBSCRIBE UNSUBSCRIBE
+
+Talk to you there.

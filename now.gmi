@@ -8,8 +8,8 @@ Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}** from my home in **
 
 I'm as into games as ever. I'm currently playing:
 
+=> https://store.steampowered.com/app/526870/Satisfactory/ Satisfactory
 => https://store.steampowered.com/app/2132850/Rabbit_and_Steel/ Rabbit and Steel
-=> https://store.steampowered.com/app/2181610/Heretics_Fork/ Heretic's Fork
 => https://store.steampowered.com/app/1422450/Deadlock/ Deadlock
 
 I recently completed:
