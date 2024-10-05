@@ -87,7 +87,17 @@
   title="twos.dev"
   href="/feed.atom"
 />
-<title>Ben Carlsson{{ with .Title }} / {{ . }}{{ end }}</title>
+<title>
+  Ben Carlsson
+  {{- if ne .WebPath "/index.html" }}
+    {{- if .IsType "post" -}}
+      's Blog
+    {{- else -}}
+      's
+      {{ .Title }}
+    {{- end -}}
+  {{- end -}}
+</title>
 <link rel="stylesheet" href="/style.css" />
 
 <link
