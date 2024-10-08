@@ -28,7 +28,7 @@ Thus started a cycle:
 1. I choose a fantastic mobile app to use for food journaling.
 2. I use it to log every meal and poop.
 3. ?
-4. Weeks later, I realize I have stopped logging and completely forgetten about it.
+4. Weeks later, I realize I have stopped logging and completely forgotten about it.
 5. Repeat from 1.
 
 As I tried more apps this way,
