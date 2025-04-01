@@ -1,7 +1,8 @@
 ---
-created: 2024-10-03
+date: 2024-10-03
 filename: splitsio.html
-type: page
+type: post
+updated: 2025-03-31
 ---
 
 # Goodbye to Splits.io

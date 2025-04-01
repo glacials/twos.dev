@@ -1,5 +1,5 @@
 ---
-created: 2024-10-05
+date: 2024-10-05
 filename: newsletter.html
 type: page
 ---
