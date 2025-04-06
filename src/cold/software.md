@@ -18,12 +18,12 @@ between the project name and the heart. -->
 
 - <div style="text-align:left">♥ [Brown Note](https://brown-note.app): iOS app to root-cause poor bowel movements (Swift)</div>
 - <div style="text-align:left">♥ [What's in Standard?](https://whatsinstandard.com): Reference tool for Magic: The Gathering (Vue, Flutter)</div>
-- <div style="text-align:left">♡ [Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails, Vue)</div>
 - <div style="text-align:left">♡ [Pricegun](https://pricegun.twos.dev): Estimator for how much to charge for a side project (React)</div>
 - <div style="text-align:left">♡ [Licenseland](https://license.land): Dual-license provider for open source developers (Vue)</div>
 - <div style="text-align:left">♡ [FriendlyUUID](https://github.com/glacials/friendly_uuid): Library adding zero-config stateless URL slugs to Rails (Ruby)</div>
 - <div style="text-align:left">♡ [Indenter](https://github.com/glacials/indenter): Library adding syntactic sugar for arbitrarily deeply indented output (Python)</div>
 - <div style="text-align:left">♡ [Winter](/winter): Static website generator powering this website (Go)</div>
+- <div style="text-align:left">[Splits.io](https://splits.io): Strava for game speedrunning (Ruby on Rails, Vue)</div>
 - <div style="text-align:left">[Housebot](https://github.com/glacials/housebot): CLI to allow Twitch chat to control smart lights (Node, CoffeeScript)</div>
 - <div style="text-align:left">[Mainframe](https://github.com/glacials/mainframe): Bespoke home server running on a Raspberry Pi in my closet (Go)</div>
 - <div style="text-align:left">[kure](https://github.com/glacials/kure): Flat-file blogging engine with plugin support (PHP)</div>
