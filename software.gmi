@@ -10,24 +10,24 @@ See also github.com/glacials.
 
 * ♥ Brown Note: iOS app to root-cause poor bowel movements (Swift)
 * ♥ What's in Standard?: Reference tool for Magic: The Gathering (Vue, Flutter)
-* ♡ Splits.io: Strava for game speedrunning (Ruby on Rails, Vue)
 * ♡ Pricegun: Estimator for how much to charge for a side project (React)
 * ♡ Licenseland: Dual-license provider for open source developers (Vue)
 * ♡ FriendlyUUID: Library adding zero-config stateless URL slugs to Rails (Ruby)
 * ♡ Indenter: Library adding syntactic sugar for arbitrarily deeply indented output (Python)
 * ♡ Winter: Static website generator powering this website (Go)
+* Splits.io: Strava for game speedrunning (Ruby on Rails, Vue)
 * Housebot: CLI to allow Twitch chat to control smart lights (Node, CoffeeScript)
 * Mainframe: Bespoke home server running on a Raspberry Pi in my closet (Go)
 * kure: Flat-file blogging engine with plugin support (PHP)
 
 => https://brown-note.app Brown Note
 => https://whatsinstandard.com What's in Standard?
-=> https://splits.io Splits.io
 => https://pricegun.twos.dev Pricegun
 => https://license.land Licenseland
 => https://github.com/glacials/friendly_uuid FriendlyUUID
 => https://github.com/glacials/indenter Indenter
 => /winter Winter
+=> https://splits.io Splits.io
 => https://github.com/glacials/housebot Housebot
 => https://github.com/glacials/mainframe Mainframe
 => https://github.com/glacials/kure kure

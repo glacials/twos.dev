@@ -1,38 +1,54 @@
-# Elden Ring’s Imperfect Problem
+# Why Are Soulslikes Fun?
 
-I had not played a lot of soulslikes before *Elden Ring*. But when my fingers slipped and I dumped 350 hours into it, I figured I should pay my respects to its forebears. Now, I've roughly doubled that playtime among previous From Software games.
+I had not played many soulslikes before *Elden Ring*. But when I lost track of time and dumped 350 hours into it, I figured I should pay my respects to its forebears.
 
-Having done this in a short timespan, I've seen patterns emerge.
+I played through the whole From Software catalog, and after staring at the gameless void on the other side I turned to other developers' soulslikes. It was there I learned that there's nothing like a From Software soulslike.
 
-## On Constraints
+There's something different about them. No soulslike I played afterward felt quite the same, as if they had only one foot in the genre I thought I had come to know, and the other in traditional action-adventure.
 
-Gaming is constraints. A game designer's goal is not to funnel the player from start to finish efficiently, like a SaaS product. That is the *player's* goal. The designer sets constraints. The player solves for the goal given the constraints.
+## Constraints
 
-The player will solve for the goal optimally, even if it's not fun for them. They will farm one monster for hours, loot treasure through walls, and spend skill points on the boring skills, all in the name of efficiency.
+Gaming is constraints. A game designer's aim is not to funnel the player to the goal efficiently, like a traditional software product. That is the *player's* goal.
 
-### Imperfect Information
+The designer's goal is for the player to have fun. It is not fun to start a game, walk forward one pace, and then have beaten the game. It's also not fun to be given the best weapon in the game in the first level and destroy everything without challenge. So a large part of game design is building obstacles.
 
-Before the aughts, something else people would do in the name of efficiency was talk to their friends about games at work or school. They would share ideas and strategies when stuck. This was a way to solve for optimality outside the bounds of the game.
+The player will solve for the goal optimally, even if it's not fun. They will farm boars for hours, loot treasure through walls, and spend skill points on the boring but effective skills, in the name of reaching their goal.
 
-And it was fun. It brought a social component to single player games. I'll never forget getting stuck in The Legend of Zelda: Ocarina of Time for over a week after two friends independently told me I had to shoot Lord Jabu-Jabu's eye to get him to open his mouth (not at all correct); spiraling me into the most desperate and creative slingshot angles ever conceived and hours upon hours of farming deku nuts for ammo.
+### Constraints Lost to Time
 
-This is an imperfect information constraint. I did not know how to open Jabu-Jabu's mouth. When I tried to learn from others, the latency was high, the bandwidth was low, and the reliability was bad. *This was a fun constraint.* Going back to school every day ready to explain everything I tried and the suspicions I gained ("the game must be bugged!") was an exciting social experience.
+A long time ago, a large part of single-player gaming was strategizing with friends. You would play some game alone at home, then the next day you'd exchange ideas and strategies with your buddies.
 
-It would not have come about today, where that one moment would instead tap into every conversation ever had about the game anywhere on the planet in about three seconds.
+It was fun, in the same way it's fun when a TV series trickles out one episode a week and you get to theorize and bet with friends on what's coming next. (It's fantastic marketing, actually.)
 
-In this world, no one ever gets stuck trying to open Jabu-Jabu's mouth. We've optimized away the imperfect information constraint, and the unique social experience went with it.
+This brought a social component to single player games. I'll never forget getting stuck outside Jabu Jabu in The Legend of Zelda: Ocarina of Time because two friends *independently* told me you have to shoot Jabu-Jabu's eye to get him to open his mouth, spiraling me into desperate and creative slingshot angles and hours of farming deku nuts for ammo. (The real answer was... not that.)
 
-### Messing with the Denominator
+This social aspect is the player's solution to an **imperfect information constraint**. Solving that constraint was fun and challenging in and of itself.
 
-What can we fix about this? In what modern day situation would I *have* to socialize with friends to get this information again, knowing the internet is at my fingertips? Take a minute before continuing, see if you can workshop at a solution.
+I did not know how to open Jabu-Jabu's mouth, and when I tried to learn, the latency was high, the bandwidth low, and the accuracy poor.
+
+This was itself **another constraint**. It was a constraint on the *transfer* of information. Going back to school every day, ready to explain everything I'd tried and the suspicions I'd gained ("the game must be bugged!") is an exciting social experience.
+
+### Aged Out
+
+It would not have come about today, where the transfer of information is no longer constraining. Any attempt to find that same information today gives every conversation anyone has ever had about the game, anywhere on the planet, in about three seconds.
+
+No one ever gets stuck trying to open Jabu-Jabu's mouth anymore. By improving the transfer of information's latency, bandwidth, and accuracy concerns, we've optimized away the imperfect information constraint. With it goes unique social experience of solving mysteries with friends.
+
+## Messing with the Denominator
+
+What can we fix about this? In what modern day situation would you *have* to socialize with friends to get information, knowing the internet is at your fingertips? Take a minute before continuing and see if you can workshop a solution.
 
 ---
 
-Here's how From Software approaches it. The way to prevent a player from looking something up is a three-pronged approach:
+How do you stop a player from looking something up?
 
-1. Make it optional.
-2. Don’t draw attention to it.
-3. Make required routes feel optional.
+1. Prevent them from knowing there is anything *to* look up.
+2. Drip-feed them outside information.
+
+From Software does this in three ways, and I've
+
+1. Don’t draw attention to it.
+2. Make required routes feel optional.
 
 The way to stop a player from looking something up is to stop them from knowing, noticing, or remembering that there is anything *to* look up. If Jabu-Jabu was an optional dungeon and it wasn’t apparent you could enter him, I wouldn’t have a clue I was even missing anything—until a friend exclaims how excited they were to discover it serendipitously.
 
@@ -67,3 +83,5 @@ Something From Software does better than anyone is **make routes feel unintended
 #### Conclusion
 
 These three things together have created a magical experience where you stumble upon something major,
+
+TODO: Mention player notes. Very important piece.
