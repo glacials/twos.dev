@@ -1,87 +1,91 @@
 # Why Are Soulslikes Fun?
 
-I had not played many soulslikes before *Elden Ring*. But when I lost track of time and dumped 350 hours into it, I figured I should pay my respects to its forebears.
+I had barely played soulslikes before *Elden Ring* so when I lost track of time and accidentally dumped 350 hours into it, I figured I should pay my respects to its forebears.
 
-I played through the whole From Software catalog, and after staring at the gameless void on the other side I turned to other developers' soulslikes. It was there I learned that there's nothing like a From Software soulslike.
+I played through the whole *From Software* catalog, and after staring at the gameless void on the other side I turned to other developers' soulslikes. It was there I learned that there's nothing like a *From* soulslike.
 
-There's something different about them. No soulslike I played afterward felt quite the same, as if they had only one foot in the genre I thought I had come to know, and the other in traditional action-adventure.
+There's something different about them. No soulslike I played afterward felt quite the same, as if they had only one foot in the genre I thought I had come to know, and the other in a more traditional action-adventure pond.
+
+What makes *From*'s so different?
 
 ## Constraints
 
-Gaming is constraints. A game designer's aim is not to funnel the player to the goal efficiently, like a traditional software product. That is the *player's* goal.
+A game designer's aim is not to funnel players to the goal efficiently, like in other software products. That's the **player's** goal.
 
-The designer's goal is for the player to have fun. It is not fun to start a game, walk forward one pace, and then have beaten the game. It's also not fun to be given the best weapon in the game in the first level and destroy everything without challenge. So a large part of game design is building obstacles.
+The designer's goal is for the player to have fun. It's not fun in and of itself to make getting from A to B faster, or easier, or more straightforward. In the extreme case, it's not fun start the game in front of the finish line and then walk over it. So, a large part of game design is building obstacles.
 
-The player will solve for the goal optimally, even if it's not fun. They will farm boars for hours, loot treasure through walls, and spend skill points on the boring but effective skills, in the name of reaching their goal.
+### Gaming's Oldest Obstacle
 
-### Constraints Lost to Time
+Before the modern internet, part of single-player gaming took place outside the game. Players would play alone at home, then exchange ideas and strategies with friends the next day.
 
-A long time ago, a large part of single-player gaming was strategizing with friends. You would play some game alone at home, then the next day you'd exchange ideas and strategies with your buddies.
+It was fun! In the way it's fun when a TV series trickles out an episode per week and you can theorize with friends about what's next.
 
-It was fun, in the same way it's fun when a TV series trickles out one episode a week and you get to theorize and bet with friends on what's coming next. (It's fantastic marketing, actually.)
+This brought a social component to single-player games. I'll never forget getting stuck outside the whale Jabu Jabu in The Legend of Zelda: Ocarina of Time because two friends *independently* told me to shoot his eyes to open his mouth, spiraling me into desperate and creative slingshot angles and hours of farming. (I'm still not sure if that was a coordinated effort to torment me.)
 
-This brought a social component to single player games. I'll never forget getting stuck outside Jabu Jabu in The Legend of Zelda: Ocarina of Time because two friends *independently* told me you have to shoot Jabu-Jabu's eye to get him to open his mouth, spiraling me into desperate and creative slingshot angles and hours of farming deku nuts for ammo. (The real answer was... not that.)
+Sharing strategies was a solution to the **imperfect information constraint**. I had all the right gear, experience, and items. The only thing standing between me and Jabu-Jabu's belly was knowing how to get in.
 
-This social aspect is the player's solution to an **imperfect information constraint**. Solving that constraint was fun and challenging in and of itself.
+There are ways to learn this knowledge in-game, but not foolproof ones. The fallback mechanism—obtaining the knowledge from friends—is challenging, having high latency, low bandwidth, and poor accuracy. This solution to imperfect information itself has obstacles. This made it fun, just like the game it was solving.
 
-I did not know how to open Jabu-Jabu's mouth, and when I tried to learn, the latency was high, the bandwidth low, and the accuracy poor.
+### Getting Stuck For The Last Time
 
-This was itself **another constraint**. It was a constraint on the *transfer* of information. Going back to school every day, ready to explain everything I'd tried and the suspicions I'd gained ("the game must be bugged!") is an exciting social experience.
+This type of social strategizing doesn't occur today. The modern internet's speed, accessibility, and wealth of knowledge means every player has access to the final solution in under a minute, written collaboratively by people who have already figured it out and peer-reviewed each other.
 
-### Aged Out
+No one gets stuck outside Jabu-Jabu's belly anymore, at least not long enough to need collaboration and discussion. The imperfect information constraint has been optimized away, and with it, the unique social experience of solving mysteries with friends.
 
-It would not have come about today, where the transfer of information is no longer constraining. Any attempt to find that same information today gives every conversation anyone has ever had about the game, anywhere on the planet, in about three seconds.
+### Designing Around The Internet
 
-No one ever gets stuck trying to open Jabu-Jabu's mouth anymore. By improving the transfer of information's latency, bandwidth, and accuracy concerns, we've optimized away the imperfect information constraint. With it goes unique social experience of solving mysteries with friends.
-
-## Messing with the Denominator
-
-What can we fix about this? In what modern day situation would you *have* to socialize with friends to get information, knowing the internet is at your fingertips? Take a minute before continuing and see if you can workshop a solution.
+We can't remove the internet, so how can game designers restore some of this lost magic? What modern solutions could compel players to socialize rather than look everything up online? Take a second before continuing and see if you can come up with some ideas.
 
 ---
 
-How do you stop a player from looking something up?
+## How To Stop Players From Looking It Up
 
-1. Prevent them from knowing there is anything *to* look up.
-2. Drip-feed them outside information.
+There are several solutions to this, actually. *From* does it from three angles:
 
-From Software does this in three ways, and I've
+### Prevent The Player From Knowing What To Research
 
-1. Don’t draw attention to it.
-2. Make required routes feel optional.
+If Jabu-Jabu's Belly was optional, and no big hints were dropped in-game about needing to go in, I wouldn't have realized I was missing something until a friend excitedly mentioned discovering it by chance.
 
-The way to stop a player from looking something up is to stop them from knowing, noticing, or remembering that there is anything *to* look up. If Jabu-Jabu was an optional dungeon and it wasn’t apparent you could enter him, I wouldn’t have a clue I was even missing anything—until a friend exclaims how excited they were to discover it serendipitously.
+This is how *Elden Ring* operates. It's like if the entirety of *Ocarina of Time* was optional, except the final fight, and the only reason to do anything was to gather strength for the final fight.
 
-This is how From Software builds its games:
+*The Legend of Zelda: Breath of the Wild* uses this very tactic, if to a lesser extent—everything is optional, but the game still makes it obvious that you're missing something. *Elden Ring* is like if no one ever told you there was something there to miss.
 
-#### Downplay
+### Drip-Feed Players Outside Information
 
-Almost everything is optional. This removes the opportunity for the player to know they’re stuck—*maybe it's just a dead end?* Large gameplay areas are hidden behind hard-to-find paths, but you can’t look up how to find it if you don't know it exists.
+Even if the player realizes they're missing something, they can sate their need for information in-game by reading extremely limited messages left by other players, rather than immediately turning to the big guns of googling it.
 
-#### Distract
+=> /img/soulslikes-messages-0.jpg A screenshot of a player message in Elden Ring that says 'First off, turn back, Seek grace'.
 
-Every fork in the road leads to two more. Enter a new room only to be greeted with two exits and a ladder. The open world itself is the grand example; even if your goal is required and you know it’s there, you may get swept up in a series of tangential routes and simply forget about it.
+*Only a small selection of words and phrases can be used to arrange messages.*
 
-#### Disguise
+Messages are constrained to selected words, providing just enough insight to inspire new angles without spoiling the solution. This introduces our bandwidth constraint back.
 
-Experienced players-of-game know there are three types of routes you can go down:
+There are even a significant number of troll messages, like "Try jumping" placed right in front of a cliff. The fact that sometimes jumping off a cliff *really is* the right thing to do earns even obvious troll messages a double-take. Now we have our accuracy constraint back.
 
-1. Required
-2. Optional or bonus
-3. Not intended
+And with limited ways to respond to the messages, we have a latency constraint back—and then some. This is starting to sound like imperfect information.
 
-**Required** routes are the big roads, the bridges, the big landmarks in the skybox: The Citadel in Half-Life 2, the street lamps in Alan Wake, and *to the right* in 2D Mario games. These routes go to the next level, next boss, or next story moment.
+### Convince The Player They're Off The Beaten Path
 
-**Optional** routes contain bonuses for players who take the time to explore: down a pipe, in a side room, or backtracking at a reverse-fork in the road. These routes have bonus items, bonus story content, or collectible.
+Experienced players-of-game recognize that in any given game hallway, metaphorical or not, there are three types of routes:
 
-**Unintended** routes are what folks like speedunners try to find. They are ways to use the game mechanics or geometry to get somewhere you're not supposed to be. Think jumping on an NPC's head to get onto a roof, or landing on small collidable surfaces like the tip of a tree, or attaching a car to a windmill to extend its jump distance.
+1. Required / main story (usually forward)
+2. Optional / side story / collectibles (usually sideways)
+3. Unintended by developers (usually up)
 
-=> https://www.twitch.tv/videos/28711958 attaching a car to a windmill to extend its jump distance
+*From Software* is unique in that actively avoids the first category. Main story routes feel optional, and optional routes feel unintended.
 
-Something From Software does better than anyone is **make routes feel unintended**. The way the cities are laid out, the way all the architecture feels like it was made for giants, and the notes players can leave behind all combine to **make you feel like you're getting away with something**, which means all the more in such a difficult game.
+{{ template "_video_subject.html.tmpl" "/img/soulslikes-trespassing" }}
 
-#### Conclusion
+*This jump and the following roof-tromp feels unintended, like you're breaking the game; but it's the only way to access these two areas.*
 
-These three things together have created a magical experience where you stumble upon something major,
+The architecture and city layouts, often oversized and mysterious, combine with cryptic player hints to create a sense that you're getting away with something.
 
-TODO: Mention player notes. Very important piece.
+When the player has such a feeling, like they're in semi- or un-charted territory, they're less inclined to seek solutions online. Reaching a dead end feels more like a conclusion than a failure when one feels like a trailblazer.
+
+### The "X" Factor
+
+Restoring the imperfect information constraint, embedding community into gameplay, and instilling in the player a sense of trespass together create a magical experience. Players who stumble upon discoveries feel special and share their findings socially, creating and spreading even more new imperfect information challenges for others.
+
+This experience scales even when the entire internet is involved, due to the sprawling, nonlinear nature of the game. Walkthroughs are necessarily opinionated about what content to skip. Players relying solely on their instincts may completely miss major areas like Consecrated Snowfield or Miquella's Haligtree, improving the payoff of socializing.
+
+This blend makes *From Software*’s soulslikes unmatched for me. Modern game design requires new strategies to replace premodern-internet-era adventure game constraints, and *From* has mastered it.
