@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2024-10-05
+updated: 2025-04-13
 ---
 
 # Now Page
@@ -18,15 +18,17 @@ from my home in **Seattle, WA**.
 
 I'm as into games as ever. I'm currently playing:
 
-- [Satisfactory](https://store.steampowered.com/app/526870/Satisfactory/)
-- [Rabbit and Steel](https://store.steampowered.com/app/2132850/Rabbit_and_Steel/)
-- [Deadlock](https://store.steampowered.com/app/1422450/Deadlock/)
+- [Haste](https://store.steampowered.com/app/1796470/Haste/)
+- [Stardew Valley](https://store.steampowered.com/app/413150/Stardew_Valley/) Co-op with Summer
+- [Rogue Legacy 2](https://store.steampowered.com/app/1253920/Rogue_Legacy_2/)
+- [Monster Hunter Wilds](https://store.steampowered.com/app/2246340/Monster_Hunter_Wilds/)
+- [Beat Saber](https://store.steampowered.com/app/620980/Beat_Saber/)
 
 I recently completed:
 
-- [Pacific Drive](https://store.steampowered.com/app/1458140/Pacific_Drive/) (40 h)
-- [Elden Ring: Shadow of the Erdtree](https://store.steampowered.com/app/2778580/ELDEN_RING_Shadow_of_the_Erdtree/) (601 h)
-- [Nova Drift](https://store.steampowered.com/app/858210/Nova_Drift/) (143 h)
+- [Factorio: Space Age](https://store.steampowered.com/app/645390/Factorio_Space_Age/)
+- [Grand Theft Auto Online](https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_Enhanced/) ("completed" everything I wanted)
+- [Ravenswatch](https://store.steampowered.com/app/2071280/Ravenswatch/) Co-op
 
 ## Climate
 
@@ -92,15 +94,10 @@ to sometimes feeling like every little noise is far too loud.
 If you know me and your first reaction to this is that I don't seem autistic,
 I wrote [Anonymously Autistic](/autism.html) just for you.
 
-## Mastodon
+## Social Media
 
-I jumped ship from Twitter in 2022 and have switched to Mastodon:
-[@glacials@hachyderm.io](https://hachyderm.io/@glacials).
-
-I self-hosted a single-user instance for a year and learned a lot,
-but the benefits started to flatten and the costs were high,
-so I moved to Hachyderm.
-Their code of ethics and governance model is impressive.
+I jumped ship from Twitter in 2022 and have been social-media-lite since.
+It's great.
 
 ---
 
