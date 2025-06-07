@@ -104,7 +104,7 @@ there are three types of routes:
 2. Optional / side story / collectibles (usually sideways)
 3. Unintended by developers (usually up)
 
-*From Software* is unique in that actively avoids the first category.
+*From Software* is unique in that it actively avoids the first category.
 Main story routes feel optional,
 and optional routes feel unintended.
 
