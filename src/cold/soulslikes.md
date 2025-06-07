@@ -110,7 +110,7 @@ and optional routes feel unintended.
 
 {{ template "_video_subject.html.tmpl" "/img/soulslikes-trespassing" }}
 
-_This jump and the following roof-tromp feels unintended, like you're breaking the game; but it's the only way to access these two areas._
+_This jump and the following roof-tromp feel unintended, like you're breaking the game; but it's the only way to access these two areas._
 
 The architecture and city layouts, often oversized and mysterious, combine with cryptic player hints to create a sense that you're getting away with something.
 
