@@ -72,7 +72,7 @@ Experienced players-of-game recognize that in any given game hallway, metaphoric
 2. Optional / side story / collectibles (usually sideways)
 3. Unintended by developers (usually up)
 
-*From Software* is unique in that actively avoids the first category. Main story routes feel optional, and optional routes feel unintended.
+*From Software* is unique in that it actively avoids the first category. Main story routes feel optional, and optional routes feel unintended.
 
 {{ template "_video_subject.html.tmpl" "/img/soulslikes-trespassing" }}
 
