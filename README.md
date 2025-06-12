@@ -36,5 +36,5 @@ refresh automatically.
 [![Go Reference](https://pkg.go.dev/badge/twos.dev/winter.svg)](https://pkg.go.dev/twos.dev/winter)
 
 Winter is the bespoke static website generator that powers twos.dev. It can be
-used to power your static website as well, as a CLI or Go library. See
-[`winter/README.md`](./winter) for details.
+used to power your static website as well, as a CLI or Go library. See the
+[winter README](https://github.com/glacials/winter) for details.
