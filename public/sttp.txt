@@ -1,0 +1,171 @@
+---
+date: 2025-06-29
+type: page
+---
+
+RFC 0001: Snail Text Transfer Protocol (STTP)
+
+A Protocol for the Analog Transfer of Textual Correspondence
+
+Author: Benjamin Carlsson
+Date: June 28, 2025
+Status: Draft
+
+---
+
+Abstract
+
+The Snail Text Transfer Protocol (STTP), or "snail://", defines an
+analog-friendly structure for many-to-many distribution of handwritten
+letters, delivered by mail carriers, through a multiplexer. STTP
+promotes clarity, conversational threading, community engagement, and
+authenticity.
+
+---
+
+Motivation
+
+Conventional post allows letters to be sent one-to-one, and services
+exist that allow one-to-many (e.g. for marketing), but the
+many-to-many structure resembling a public forum has long been held only
+by highly curated publishers like journals.
+
+Simple conventions inspired by digital protocols such as HTTP and SMTP
+define STTP with the goal of enriching the experience of analog
+correspondence, enhancing readability, and supporting organized
+exchanges.
+
+---
+
+STTP Structure
+
+Each STTP-compliant letter MUST include the following fields clearly
+presented as a header at the beginning of the first page:
+
+Field: Description (Example)
+
+* From: The name or alias of the author (Ben Carlsson)
+* Date: Date of writing (ISO or full month/day/year format) (2025-06-28
+  or June 28, 2025)
+* Category: Topical label for categorization, optional (Travel, Advice,
+  Poetry)
+* In-Reply-To: Letter ID this letter responds to, optional (Letter #23)
+* Signature: Unique hand-drawn symbol or stamp for sender identity
+  (\[Doodle of a wave])
+
+Fields MUST be clearly separated and legible.
+
+Example STTP Header:
+
+From: Ben Carlsson
+Date: 2025-06-28
+Category: Announcement
+In-Reply-To: Letter #57
+Signature: [Tree symbol]
+
+---
+
+Server Responsibilities
+
+The Server, the central entity facilitating STTP correspondence, has the
+following responsibilities:
+
+* Receive physical letters from authors via postal services.
+* Assign and clearly mark a unique numeric identifier (Letter ID) on
+  each letter upon receipt.
+* Maintain an organized archive of all letters received, enabling future
+  reference and retrieval.
+* Distribute copies of letters to subscribers, adhering to subscriber
+  preferences and subscription details.
+* Provide subscribers with Letter IDs to enable accurate referencing and
+  threading in replies.
+* Manage categorization, cataloging letters according to provided
+  metadata (if available).
+* Serve as a mediator, ensuring letters are clearly legible and
+  structured according to STTP guidelines before distribution.
+
+---
+
+Author Responsibilities
+
+* SHOULD ensure letters are handwritten to maintain the analog integrity
+  of the STTP correspondence.
+
+---
+
+Letter Identification
+
+Upon receipt, each letter is assigned a unique numeric identifier
+(Letter ID), sequentially incremented, which can be referenced in future
+correspondence. The letter IDs are handwritten on the letter upon
+cataloging by the Server.
+
+---
+
+Reply and Threading Conventions
+
+Replies to existing letters SHOULD reference the original letter’s ID in
+the "In-Reply-To" field. This convention creates conversational threads,
+aiding clarity and historical reference.
+
+---
+
+Verification and Signatures
+
+Authors are encouraged to adopt a consistent, unique hand-drawn symbol
+or stamp as a signature for informal identity verification. This fosters
+authenticity and personal recognition across multiple letters from the
+same author.
+
+Note on Authenticity and Verification: While STTP encourages unique
+signatures or stamps to maintain consistent identity, purely analog
+methods cannot provide mathematically rigorous cryptographic security.
+Participants should treat authenticity verification as informal, based
+on consistency of handwriting, signature style, stamps or marks, and
+contextual trust built over time.
+
+---
+
+Categories
+
+Authors MAY optionally categorize letters by topic or style, assisting
+recipients in anticipating letter content and building personal
+archives.
+
+Examples include:
+
+* Poetry
+* Project Update
+* Advice
+* Recipe
+* Short Story
+* Reflection
+
+---
+
+Implementation and Compliance
+
+Compliance is entirely voluntary but strongly encouraged. STTP aims to
+enrich analog correspondence and foster a vibrant, engaged community
+through simplicity and thoughtful exchange.
+
+---
+
+Future Considerations
+
+* Standardizing optional metadata (location, mood, or medium)
+* Defining formal archival conventions
+* Developing physical indexing and searching mechanisms
+
+---
+
+Community Feedback
+
+This RFC welcomes comments, improvements, and suggestions from the STTP
+community via the official postal address provided on the project’s
+website.
+
+---
+
+End of RFC 0001
+
