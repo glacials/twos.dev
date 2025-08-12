@@ -1,0 +1,11 @@
+---
+created: 2025-08-11
+filename: string.html
+type: draft
+---
+
+# The Cable Ties You've Always Had But Never Tried
+
+String.
+
+Find a home for a spool and keep a pair of scissors next to it.
