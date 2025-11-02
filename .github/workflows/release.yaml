@@ -15,7 +15,7 @@ jobs:
           go-version: "1.21"
 
       - name: Pull down config.org
-        run: curl https://raw.githubusercontent.com/glacials/dotfiles/main/dot_config/emacs/config.org > src/warm/config.org
+        run: curl https://raw.githubusercontent.com/glacials/dotfiles/main/emacs/.config/emacs/config.org > src/warm/config.org
 
       - name: Test & build Winter
         run: |
@@ -23,7 +23,6 @@ jobs:
 
       - name: Build twos.dev
         run: |
-          winter clean
           winter build
 
       - name: Sanity check
