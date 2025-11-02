@@ -2,15 +2,15 @@
 
 One sleepy Sunday morning in January 2021, I decided to write a Python library. This was no ordinary Python library, since its purpose was the same as that of the entire company of YourBase, the startup I worked at at the time.
 
-# Part 1
+## Part 1
 
 YourBase, which I had joined eight months prior, had a mission to accelerate software testing speed for monolithic applications. When I joined they already had some really clever techniques for doing this.
 
-The bulk of the magic happened in some low-level tracing code written in C and Rust, which operated at the kernel level and so required that we control the build machine. The magic code would track which specific test was currently executing, and inspect the function calls made during the life of the test. If a function was called during a test, that test was said to depend on that function. And if no function depended on by a test had changed since last time the test was run, that test could be completely skipped. There are some edge cases to this like environment variables and opened file pointers, but that's the simple explanation.
+The bulk of the magic happened in some low-level tracing code written in C and Rust, which operated at the kernel level and so required that we control the build machine. A Python or Ruby library would track which test was currently executing, and the magic kernel code would trace system calls made during the life of the test. If a file was read during a test, that test was said to depend on that file. And if no file depended on by a test had changed since last time the test was run, that test could be completely skipped. There are some edge cases to this like environment variables and opened file pointers, but that's the simple explanation.
 
 That we need control of the build machine necessitated that the build machine be part of a CI pipeline, which the company had custom-built. This meant on top of the build tracing tech we needed to spin our own CI infrastructure from scratch, including UI, user and role management, log streaming, etc.
 
-Worse, it was a monumental effort to convince customers to move entire CI systems, especially when our target customers by definition had large and monolithic code bases; there was little expectation that any would be nimble enough to swap entire CI platforms. Hindsight is 20/20, but it's clear now that it took a special type of company to agree to become a customer of ours.
+Worse, it was a monumental effort to convince customers to move entire CI systems, especially when our target customers by definition had large and monolithic code bases; these customers would rarely be nimble enough to swap entire CI platforms to test drive a new product. Hindsight is 20/20, but it's clear now that it took a special type of company to agree to become a customer of ours.
 
 Our salesperson had identified this problem, and was desperate for a solution.
 
