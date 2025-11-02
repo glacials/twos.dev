@@ -16,14 +16,14 @@ type: draft
     It's satisfying.
 3.  This is the life.
     It's so nice to carry things,
-    so you start expanding your everyday carry set from
+    you start expanding your everyday carry set from
     "things I need"
     to
     "things I might need".
 4.  Your bag still has plenty of capacity.
 5.  The "things I might need" category starts to broaden,
-    because there's no reason for it not to.
-    What was charger and dongles becomes backup battery, sunscreen, and hand sanitizer.
+    because there's no reason it shouldn't.
+    Charger and dongles get supplemented with backup battery, sunscreen, and hand sanitizer.
 6.  You spend a few years here.
     People are amazed and surprised when,
     once in a blue moon,
@@ -31,17 +31,16 @@ type: draft
     This is the life.
     You put an ounce of intention into preparing on their behalves.
     It's nice to feel useful.
-7.  You start bringing your bag most places even if you can see no reason to.
-8.  When you go on trips,
-    your bag is suddenly crammed.
-    You can't possibly see how you could fit travel needs
-    _and_
-    everyday carry in one bag.
+7.  You start bringing your bag most places even with no expected reason to,
+    because a reason might come up.
+8.  Now when you go on trips,
+    your bag is crammed.
+    You can't fit travel needs _and_ everyday carry in one bag.
 9.  You buy a travel bag.
     It's nice.
-10. Okay, the travel bag is a bit much to carry around town "on location".
+10. While traveling, the travel bag is a bit much for an everyday carry "on location".
     You look like a tourist.
-11. You think about getting a day bag.
+11. You think about getting a day bag for on-location use while traveling.
     But what about your everyday bag?
     Well, it'd be too much to bring both it and a travel bag.
     You need something that can fit _inside_ the travel bag.
