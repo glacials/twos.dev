@@ -4,7 +4,9 @@ Has it been a while since you've caught up with me? Read on to see what I've bee
 
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}** from my home in **Seattle, WA**.
 
-## Video Games
+## Media
+
+### Video Games
 
 I'm as into games as ever. I'm currently playing:
 
@@ -29,6 +31,25 @@ I recently completed:
 => https://store.steampowered.com/app/645390/Factorio_Space_Age/ Factorio: Space Age
 => https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_Enhanced/ Grand Theft Auto Online
 => https://store.steampowered.com/app/2071280/Ravenswatch/ Ravenswatch
+
+### Books
+
+I'm reading *Exposure* by Michael Woodford.
+
+=> https://amzn.to/484u6vx *Exposure*
+
+### Shows
+
+I'm currently watching:
+
+* *Star Trek* for the first time. All of it.
+	* Completed TOS, TAS, the first six films, TNG, and Generations
+	* Currently watching DS9
+	* See my unstructured thoughts
+* The various *Midnight Diner* shows
+* *Silicon Valley* (fourth watch)
+
+=> /startrek.html See my unstructured thoughts
 
 ## Climate
 

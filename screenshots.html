@@ -84,7 +84,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="Aligning macOS Screenshots Ignoring Drop Shadows" />
+<meta name="description" content="Aligning macOS Screenshots With CSS" />
 <link
   rel="alternate"
   type="application/rss+xml"
@@ -99,7 +99,7 @@
 />
 <title>
   Ben Carlsson's
-      Aligning macOS Screenshots Ignoring Drop Shadows</title>
+      Aligning macOS Screenshots With CSS</title>
 <link rel="stylesheet" href="style.css" />
 
 <link
@@ -125,7 +125,7 @@
       <nav class="primary">
   <h1 class="website-title">
     Ben Carlsson's
-        Aligning macOS Screenshots Ignoring Drop Shadows</h1>
+        Aligning macOS Screenshots With CSS</h1>
   <div class="hierarchy">
     <div class="nav-wrapper">
       <a href="/"><div class="nav-text">Home</div></a>
@@ -424,25 +424,23 @@ whether the window is small or large, tall or wide.</p>
 
 <p><em>112px.</em></p>
 
-<p>It's the same every time. 112px on the left and right sides.</p>
-
-<p>But wait.
-What if we hook up another monitor,
-and screenshot on that one?</p>
+<p>It's the same every time. 112px on the left and right sides.
+But then I tried it on my external monitor:</p>
 
 <p><img src="/img/screenshots-7-dark.png" alt="A screenshot of a zoomed-in screenshot, with a select box dragged around the drop shadow portion. A status bar below says it is 112px wide."/></p>
 
-<p><em>Dang it, 56px.</em></p>
+<p><em>56px.</em></p>
 
-<p>It's different!</p>
+<p>It's different!
+In fact it's <em>exactly</em> half: 56px vs. 112px.</p>
 
-<p>Acorn reports the screenshot from this external monitor at 2560x1440 is 72 DPI,
+<p>Looking at the image metadata,
+Acorn reports the screenshot from this external monitor at 2560x1440 is 72 DPI,
 while the original, from my MacBook Pro's 13" Retina display at 2560x1600,
 is 144 DPI.
 Exactly double.</p>
 
-<p>The number of shadow pixels<span style="font-family: sans-serif">—</span>56px and 112px<span style="font-family: sans-serif">—</span>are also apart by a factor of 2.
-There's something here.
+<p>There's something here.
 If we can find a way to get the DPI of the image,
 we can use some CSS math to figure out how much space to give it:</p>
 
@@ -458,6 +456,34 @@ but the page often doesn't display them at full size<span style="font-family: sa
 <p>So the shadow, although it takes up <code>x</code> pixels in reality,
 when the image is shrunk only takes up <code>y</code> pixels.
 We need our container to also shrink by only <code>y</code> pixels.</p>
+
+<p>The key insight is that the shadow is embedded in the image file itself,
+so it scales proportionally with the image.
+If a screenshot is 2000px wide and has a 112px shadow on each side,
+the shadow is 5.6% of the image width.
+When the image scales down to fit the page,
+the shadow also scales down by that same percentage.</p>
+
+<p>So instead of adding a fixed pixel value,
+we can scale the container width by the percentage that the shadow occupies.
+Since we know the shadow is 5.6% on either side,
+we can scale the container width up by <code>5.6% * 2 = 11.2%</code>.</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
+</span></span><span class="line"><span class="ln">3</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">4</span><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="ln">5</span><span class="cl">
+</span></span><span class="line"><span class="ln">6</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">src</span><span class="o">*=</span><span class="s2">"macos"</span><span class="o">])</span> <span class="p">{</span>
+</span></span><span class="line"><span class="ln">7</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="nb">calc</span><span class="p">(</span><span class="nf">var</span><span class="p">(</span><span class="o">--</span><span class="kc">container</span><span class="o">-</span><span class="n">width</span><span class="p">)</span> <span class="o">*</span> <span class="mf">1.112</span><span class="p">);</span>
+</span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
+</span></span></code></pre>
+
+<p>This works at any display size because both the image and its embedded shadow scale together.</p>
+
+<p><img src="/img/screenshots-5-dark.png" alt="A screenshot of the final result: macOS screenshots align perfectly with the text content, with shadows bleeding into the margins."/></p>
+
+<p><em>Now they line up perfectly, regardless of the screenshot size or page zoom level.</em></p>
 
 <div class="footnotes">
 
