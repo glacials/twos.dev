@@ -71,7 +71,7 @@ Here are our requirements:
    and/or websites,
    I don't have to comb through all my previous posts and fix a bunch of broken-looking stuff.
    At that point it's okay if the shadow correction doesn't work anymore,
-   but it's not okay if my posts have some weird [[ REMOVE_SHADOWS(...) ]] syntax or somesuch.
+   but it's not okay if my posts have some weird [[REMOVE_SHADOWS(...)]] syntax or somesuch.
 
 ### Step 1: Move Widths to the Children
 
@@ -84,7 +84,7 @@ _The post `article` (blue) and its auto margins (orange)._
 
 We need to break out of the `article` for macOS screenshots only.
 
-We could to this is to stop the `article` just before the screenshot,
+We could stop the `article` just before the screenshot,
 then display the image,
 then start a new `article` afterwards;
 however this violates the semantics of the article,
@@ -142,9 +142,8 @@ article > img.macos {
 }
 ```
 
-Actually,
-most Markdown renderers put lonesome images in their own paragraphs,
-so we actually need to complicate this a little to:
+Technically these images are in their own paragraphs,
+so we need to complicate this a little to:
 
 ```css
 article > * {
@@ -161,7 +160,7 @@ But there are still two problems.
 
 The first issue is rule 3 prevents us from tagging macOS images with their own class,
 because we want to keep all that ugly HTML out of our futureproofed Markdown.
-We need another way for this.
+We need another way.
 
 The second issue I'll come back to.
 
@@ -176,13 +175,17 @@ We could hijack the `alt` attribute for our purposes:
 ```markdown
 ![macOS](/img/screenshot.png)
 ```
+
 produces:
+
 ```html
 <img alt="macos" src="/img/screenshot.png" />
 ```
+
 which we can select using:
+
 ```css
-article > p:has(img[alt=macos]) {
+article > p:has(img[alt="macos"]) {
   max-width: 40rem;
 }
 ```
@@ -196,12 +199,12 @@ but we need that to find our image!
 Luckily, CSS has a seldom-used selector for this:
 
 ```css
-p:has(img[attr*=macos]) {
+p:has(img[attr*="macos"]) {
   max-width: 40rem;
 }
 ```
 
-the [`[attr*=value]`](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) selector matches any element whose `attr` contains at least one occurrence of `value`.
+the [`[attr*=value]`](https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors) selector matches any element whose `attr` attribute contains at least one occurrence of `value`.
 
 All we have to do, then, is add a sort of tag to our macOS screenshots.
 In fact, if you exclusively share screenshots of entire windows
@@ -209,7 +212,7 @@ In fact, if you exclusively share screenshots of entire windows
 you could forego any special naming conventions and just match against what macOS names its screenshots by default:
 
 ```css
-p:has(img[attr*=Screenshot]) {
+p:has(img[src*="Screenshot"]) {
   max-width: 40rem;
 }
 ```
@@ -225,14 +228,10 @@ my-screenshot-macos-light.png
 ```
 
 Our macOS screenshots can now be wider,
-but there's one thing still constraining them.
-In most Markdown renderers images,
-even alone,
-are inside `<p>` tags.
-We'll apply the treatment to those:
+but we still have to account for the `<p>` around the image:
 
 ```css
-p:has(img[attr*=macos]) {
+p:has(img[src*="macos"]) {
   max-width: 40rem;
 }
 ```

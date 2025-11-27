@@ -9,3 +9,5 @@ type: draft
 String.
 
 Find a home for a spool and keep a pair of scissors next to it.
+
+TODO: Insert photo
