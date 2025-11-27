@@ -4,7 +4,7 @@ filename: screenshots.html
 type: draft
 ---
 
-# Aligning macOS Screenshots Ignoring Drop Shadows
+# Aligning macOS Screenshots With CSS
 
 Today, I found myself writing a post for this site that included some screenshots from macOS.
 
@@ -280,23 +280,21 @@ whether the window is small or large, tall or wide.
 _112px._
 
 It's the same every time. 112px on the left and right sides.
-
-But wait.
-What if we hook up another monitor,
-and screenshot on that one?
+But then I tried it on my external monitor:
 
 ![A screenshot of a zoomed-in screenshot, with a select box dragged around the drop shadow portion. A status bar below says it is 112px wide.](/img/screenshots-7-dark.png)
 
-_Dang it, 56px._
+_56px._
 
 It's different!
+In fact it's _exactly_ half: 56px vs. 112px.
 
+Looking at the image metadata,
 Acorn reports the screenshot from this external monitor at 2560x1440 is 72 DPI,
 while the original, from my MacBook Pro's 13" Retina display at 2560x1600,
 is 144 DPI.
 Exactly double.
 
-The number of shadow pixels—56px and 112px—are also apart by a factor of 2.
 There's something here.
 If we can find a way to get the DPI of the image,
 we can use some CSS math to figure out how much space to give it:
@@ -314,3 +312,32 @@ but the page often doesn't display them at full size—they have to shrink to re
 So the shadow, although it takes up `x` pixels in reality,
 when the image is shrunk only takes up `y` pixels.
 We need our container to also shrink by only `y` pixels.
+
+The key insight is that the shadow is embedded in the image file itself,
+so it scales proportionally with the image.
+If a screenshot is 2000px wide and has a 112px shadow on each side,
+the shadow is 5.6% of the image width.
+When the image scales down to fit the page,
+the shadow also scales down by that same percentage.
+
+So instead of adding a fixed pixel value,
+we can scale the container width by the percentage that the shadow occupies.
+Since we know the shadow is 5.6% on either side,
+we can scale the container width up by `5.6% * 2 = 11.2%`.
+
+```css
+article > * {
+  margin: auto;
+  max-width: var(--container-width);
+}
+
+article > p:has(img[src*="macos"]) {
+  max-width: calc(var(--container-width) * 1.112);
+}
+```
+
+This works at any display size because both the image and its embedded shadow scale together.
+
+![A screenshot of the final result: macOS screenshots align perfectly with the text content, with shadows bleeding into the margins.](/img/screenshots-5-dark.png)
+
+_Now they line up perfectly, regardless of the screenshot size or page zoom level._
