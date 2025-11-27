@@ -223,7 +223,7 @@ static site generators,
 and/or websites,
 I don't have to comb through all my previous posts and fix a bunch of broken-looking stuff.
 At that point it's okay if the shadow correction doesn't work anymore,
-but it's not okay if my posts have some weird [[ REMOVE_SHADOWS(...) ]] syntax or somesuch.</li>
+but it's not okay if my posts have some weird [[REMOVE_SHADOWS(...)]] syntax or somesuch.</li>
 </ol>
 
 <h3>Step 1: Move Widths to the Children</h3>
@@ -237,7 +237,7 @@ it is still bound by the width of its container.</p>
 
 <p>We need to break out of the <code>article</code> for macOS screenshots only.</p>
 
-<p>We could to this is to stop the <code>article</code> just before the screenshot,
+<p>We could stop the <code>article</code> just before the screenshot,
 then display the image,
 then start a new <code>article</code> afterwards;
 however this violates the semantics of the article,
@@ -292,9 +292,8 @@ Let's make sure only the right ones vary.</p>
 </span></span><span class="line"><span class="ln">8</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
 
-<p>Actually,
-most Markdown renderers put lonesome images in their own paragraphs,
-so we actually need to complicate this a little to:</p>
+<p>Technically these images are in their own paragraphs,
+so we need to complicate this a little to:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="o">*</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">margin</span><span class="p">:</span> <span class="kc">auto</span><span class="p">;</span>
@@ -310,7 +309,7 @@ so we actually need to complicate this a little to:</p>
 
 <p>The first issue is rule 3 prevents us from tagging macOS images with their own class,
 because we want to keep all that ugly HTML out of our futureproofed Markdown.
-We need another way for this.</p>
+We need another way.</p>
 
 <p>The second issue I'll come back to.</p>
 
@@ -332,7 +331,7 @@ the only two attributes that get sent from Markdown to HTML are the <code>alt</c
 
 <p>which we can select using:</p>
 
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">alt</span><span class="o">=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">article</span> <span class="o">&gt;</span> <span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">alt</span><span class="o">=</span><span class="s2">"macos"</span><span class="o">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
@@ -345,19 +344,19 @@ but we need that to find our image!</p>
 
 <p>Luckily, CSS has a seldom-used selector for this:</p>
 
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="s2">"macos"</span><span class="o">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
 
-<p>the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors" target="_blank"><code>[attr*=value]</code></a> selector matches any element whose <code>attr</code> contains at least one occurrence of <code>value</code>.</p>
+<p>the <a href="https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors" target="_blank"><code>[attr*=value]</code></a> selector matches any element whose <code>attr</code> attribute contains at least one occurrence of <code>value</code>.</p>
 
 <p>All we have to do, then, is add a sort of tag to our macOS screenshots.
 In fact, if you exclusively share screenshots of entire windows
 (and never, say, subportions)
 you could forego any special naming conventions and just match against what macOS names its screenshots by default:</p>
 
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">Screenshot</span><span class="o">])</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">src</span><span class="o">*=</span><span class="s2">"Screenshot"</span><span class="o">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre>
@@ -372,13 +371,9 @@ you could forego any special naming conventions and just match against what macO
 </span></span></code></pre>
 
 <p>Our macOS screenshots can now be wider,
-but there's one thing still constraining them.
-In most Markdown renderers images,
-even alone,
-are inside <code>&lt;p&gt;</code> tags.
-We'll apply the treatment to those:</p>
+but we still have to account for the <code>&lt;p&gt;</code> around the image:</p>
 
-<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">attr</span><span class="o">*=</span><span class="nt">macos</span><span class="o">])</span> <span class="p">{</span>
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl"><span class="nt">p</span><span class="p">:</span><span class="nd">has</span><span class="o">(</span><span class="nt">img</span><span class="o">[</span><span class="nt">src</span><span class="o">*=</span><span class="s2">"macos"</span><span class="o">])</span> <span class="p">{</span>
 </span></span><span class="line"><span class="ln">2</span><span class="cl">  <span class="k">max-width</span><span class="p">:</span> <span class="mi">40</span><span class="kt">rem</span><span class="p">;</span>
 </span></span><span class="line"><span class="ln">3</span><span class="cl"><span class="p">}</span>
 </span></span></code></pre>

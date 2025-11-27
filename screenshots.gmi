@@ -47,7 +47,7 @@ The option I'll go for is to write some CSS to make the macOS screenshots bigger
 
 1. Only macOS screenshots must be bigger; other images should be unaffected.
 2. The borders of the screenshotted windows should align visually with the content above and below them.
-3. In accordance with my goals for twos.dev and Winter, it should be compatible with Markdown, not require HTML, and gracefully degrade into invisible non-syntax when viewed in other contexts. This ensures that if I change stylesheets, static site generators, and/or websites, I don't have to comb through all my previous posts and fix a bunch of broken-looking stuff. At that point it's okay if the shadow correction doesn't work anymore, but it's not okay if my posts have some weird [[ REMOVE_SHADOWS(...) ]] syntax or somesuch.
+3. In accordance with my goals for twos.dev and Winter, it should be compatible with Markdown, not require HTML, and gracefully degrade into invisible non-syntax when viewed in other contexts. This ensures that if I change stylesheets, static site generators, and/or websites, I don't have to comb through all my previous posts and fix a bunch of broken-looking stuff. At that point it's okay if the shadow correction doesn't work anymore, but it's not okay if my posts have some weird [[REMOVE_SHADOWS(...)]] syntax or somesuch.
 
 => meta.html goals for twos.dev
 => https://twos.dev/winter Winter
@@ -62,7 +62,7 @@ The first issue is that even when we get a way to make the image bigger, it is s
 
 We need to break out of the `article` for macOS screenshots only.
 
-We could to this is to stop the `article` just before the screenshot, then display the image, then start a new `article` afterwards; however this violates the semantics of the article, whose job is to contain one piece of content.
+We could stop the `article` just before the screenshot, then display the image, then start a new `article` afterwards; however this violates the semantics of the article, whose job is to contain one piece of content.
 
 Even if it looks perfect, accessibility tools may trip over it. There's also no doubt that in 1 or 5 or 10 years future-me will come along and accidentally (and silently) break it.
 
@@ -107,7 +107,7 @@ article > img.macos {
 }
 ```
 
-Actually, most Markdown renderers put lonesome images in their own paragraphs, so we actually need to complicate this a little to:
+Technically these images are in their own paragraphs, so we need to complicate this a little to:
 
 ```css
 article > * {
@@ -122,7 +122,7 @@ article > p:has(img.macos) {
 
 But there are still two problems.
 
-The first issue is rule 3 prevents us from tagging macOS images with their own class, because we want to keep all that ugly HTML out of our futureproofed Markdown. We need another way for this.
+The first issue is rule 3 prevents us from tagging macOS images with their own class, because we want to keep all that ugly HTML out of our futureproofed Markdown. We need another way.
 
 The second issue I'll come back to.
 
@@ -143,7 +143,7 @@ produces:
 which we can select using:
 
 ```css
-article > p:has(img[alt=macos]) {
+article > p:has(img[alt="macos"]) {
   max-width: 40rem;
 }
 ```
@@ -155,19 +155,19 @@ The only other attribute we can impact from clean Markdown is `src`, but we need
 Luckily, CSS has a seldom-used selector for this:
 
 ```css
-p:has(img[attr*=macos]) {
+p:has(img[attr*="macos"]) {
   max-width: 40rem;
 }
 ```
 
-the `[attr*=value]` selector matches any element whose `attr` contains at least one occurrence of `value`.
+the `[attr*=value]` selector matches any element whose `attr` attribute contains at least one occurrence of `value`.
 
 => https://developer.mozilla.org/en-US/docs/Web/CSS/Attribute_selectors `[attr*=value]`
 
 All we have to do, then, is add a sort of tag to our macOS screenshots. In fact, if you exclusively share screenshots of entire windows (and never, say, subportions) you could forego any special naming conventions and just match against what macOS names its screenshots by default:
 
 ```css
-p:has(img[attr*=Screenshot]) {
+p:has(img[src*="Screenshot"]) {
   max-width: 40rem;
 }
 ```
@@ -183,10 +183,10 @@ my-screenshot-macos-dark.png
 my-screenshot-macos-light.png
 ```
 
-Our macOS screenshots can now be wider, but there's one thing still constraining them. In most Markdown renderers images, even alone, are inside `<p>` tags. We'll apply the treatment to those:
+Our macOS screenshots can now be wider, but we still have to account for the `<p>` around the image:
 
 ```css
-p:has(img[attr*=macos]) {
+p:has(img[src*="macos"]) {
   max-width: 40rem;
 }
 ```
