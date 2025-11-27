@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2025-04-13
+updated: 2025-11-26
 ---
 
 # Now Page
@@ -14,7 +14,9 @@ Read on to see what I've been up to recently.
 Last updated **{{ .UpdatedAt.Year }} {{ .UpdatedAt.Month }}**
 from my home in **Seattle, WA**.
 
-## Video Games
+## Media
+
+### Video Games
 
 I'm as into games as ever. I'm currently playing:
 
@@ -29,6 +31,21 @@ I recently completed:
 - [Factorio: Space Age](https://store.steampowered.com/app/645390/Factorio_Space_Age/)
 - [Grand Theft Auto Online](https://store.steampowered.com/app/3240220/Grand_Theft_Auto_V_Enhanced/) ("completed" everything I wanted)
 - [Ravenswatch](https://store.steampowered.com/app/2071280/Ravenswatch/) Co-op
+
+### Books
+
+I'm reading [_Exposure_](https://amzn.to/484u6vx) by Michael Woodford.
+
+### Shows
+
+I'm currently watching:
+
+- _Star Trek_ for the first time. All of it.
+  - Completed TOS, TAS, the first six films, TNG, and Generations
+  - Currently watching DS9
+  - [See my unstructured thoughts](/startrek.html)
+- The various _Midnight Diner_ shows
+- _Silicon Valley_ (fourth watch)
 
 ## Climate
 
