@@ -270,14 +270,18 @@ about this kind of stuff, so I don’t expect any problems to come up.</p>
 
   
   document.addEventListener("keydown", (event) => {
-    switch (event.keyCode) {
-      case 37: 
+    switch (event.key) {
+      case "ArrowLeft":
         const moveLeftFrom = document.querySelector(
           ".gallery-item input:checked",
         );
-        const moveLeftTo = document.querySelector(
-          ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
-        );
+        const moveLeftTo =
+          document.querySelector(
+            ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+          ) ??
+          document.querySelector(
+            ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
+          );
         if (moveLeftFrom) {
           moveLeftFrom.checked = false;
         }
@@ -285,13 +289,17 @@ about this kind of stuff, so I don’t expect any problems to come up.</p>
           moveLeftTo.checked = true;
         }
         break;
-      case 39: 
+      case "ArrowRight":
         const moveRightFrom = document.querySelector(
           ".gallery-item input:checked",
         );
-        const moveRightTo = document.querySelector(
-          ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
-        );
+        const moveRightTo =
+          document.querySelector(
+            ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+          ) ??
+          document.querySelector(
+            ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
+          );
         if (moveRightFrom) {
           moveRightFrom.checked = false;
         }
@@ -299,9 +307,11 @@ about this kind of stuff, so I don’t expect any problems to come up.</p>
           moveRightTo.checked = true;
         }
         break;
-      case 27: 
+      case " ": 
+      case "Escape":
         const current = document.querySelector(".gallery-item input:checked");
         if (current) {
+          event.preventDefault();
           current.checked = false;
         }
         break;
