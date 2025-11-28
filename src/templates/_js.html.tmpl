@@ -43,14 +43,18 @@
 
   // Change lightbox photo using arrow keys.
   document.addEventListener("keydown", (event) => {
-    switch (event.keyCode) {
-      case 37: // left arrow
+    switch (event.key) {
+      case "ArrowLeft":
         const moveLeftFrom = document.querySelector(
           ".gallery-item input:checked",
         );
-        const moveLeftTo = document.querySelector(
-          ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
-        );
+        const moveLeftTo =
+          document.querySelector(
+            ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+          ) ??
+          document.querySelector(
+            ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
+          );
         if (moveLeftFrom) {
           moveLeftFrom.checked = false;
         }
@@ -58,13 +62,17 @@
           moveLeftTo.checked = true;
         }
         break;
-      case 39: // right arrow
+      case "ArrowRight":
         const moveRightFrom = document.querySelector(
           ".gallery-item input:checked",
         );
-        const moveRightTo = document.querySelector(
-          ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
-        );
+        const moveRightTo =
+          document.querySelector(
+            ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+          ) ??
+          document.querySelector(
+            ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
+          );
         if (moveRightFrom) {
           moveRightFrom.checked = false;
         }
@@ -72,9 +80,11 @@
           moveRightTo.checked = true;
         }
         break;
-      case 27: // escape
+      case " ": // space
+      case "Escape":
         const current = document.querySelector(".gallery-item input:checked");
         if (current) {
+          event.preventDefault();
           current.checked = false;
         }
         break;
