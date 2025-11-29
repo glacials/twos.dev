@@ -22,16 +22,15 @@
   }
 }
 
-
 @media not (min-width: 55rem) {
   :root {
-    --margin-left-standard: .75rem;
+    --margin-left-standard: 0.75rem;
   }
 }
 
 @media (prefers-color-scheme: light) {
   :root {
-    --all-bg:  rgba(255, 255, 255, 1);
+    --all-bg: rgba(255, 255, 255, 1);
 
     --traditional-bg: var(--all-bg);
     --traditional-fg: rgba(0, 0, 0, 1);
@@ -59,7 +58,7 @@
 }
 @media (prefers-color-scheme: dark) {
   :root {
-    --all-bg:  rgb(53, 60, 65);
+    --all-bg: rgb(53, 60, 65);
 
     --traditional-bg: var(--all-bg);
     --traditional-fg: rgb(166, 194, 202);
@@ -68,7 +67,7 @@
 
     --page-bg: var(--all-bg);
     --page-border: rgb(34, 34, 34);
-    --page-fg:  rgb(215, 229, 255);
+    --page-fg: rgb(215, 229, 255);
 
     --lighter-bg: rgba(240, 240, 240, 1);
     --lighter-fg: rgb(132, 117, 45);
@@ -116,7 +115,9 @@ a[href]:hover {
   color: var(--traditional-bg);
 }
 
-small a[href], small a[href]:hover, small a[href]:visited {
+small a[href],
+small a[href]:hover,
+small a[href]:visited {
   text-decoration: none; /* Small lines are too close together for an underline to look okay. */
 }
 
@@ -152,6 +153,12 @@ footer {
     margin-left: var(--margin-left-standard);
     margin-right: auto;
     max-width: var(--container-width);
+  }
+  article > p:has(img[src*="macos"]) {
+    margin-left: calc(
+      var(--margin-left-standard) - (0.056 * var(--container-width))
+    );
+    max-width: calc(var(--container-width) * 1.112);
   }
 }
 
@@ -256,7 +263,6 @@ h4,
 h5,
 h6 {
   display: block;
-  font-style: italic;
 }
 
 h1 {
@@ -346,9 +352,13 @@ li p {
 
 nav {
   color: var(--traditional-fg-pop);
-  font-style: italic;
+  display: grid;
   margin: 1rem var(--margin-left-standard);
   max-width: var(--container-width);
+}
+
+nav.primary a[href] {
+  text-decoration: none;
 }
 
 nav .hierarchy {
@@ -356,12 +366,9 @@ nav .hierarchy {
 }
 
 nav h1 {
+  color: var(--traditional-fg);
   font-size: 1em;
   margin-top: 1rem;
-}
-
-nav {
-  display: grid;
 }
 
 nav:has(.breadcrumb) {
@@ -375,9 +382,21 @@ nav h1.post-title {
 
 nav h1.website-title {
   display: inline;
-  font-size: 1em;
+  font-size: 1.25em;
   margin-bottom: 1rem;
   text-align: inherit;
+}
+
+nav.primary + article:has(.publish-date) {
+  margin-top: 0;
+}
+
+nav.primary h1.website-title {
+  margin-bottom: 0.25em;
+}
+
+nav.primary:has(+ article) {
+  margin-bottom: 0;
 }
 
 .breadcrumb:not(.title)::after {
@@ -401,7 +420,7 @@ p {
 
 p > img {
   margin: auto;
-  max-height: 60vh;
+  /* max-height: 60vh; */
 }
 
 /* Image captions are defined as a paragraph entirely in italics after an image. */
@@ -522,7 +541,7 @@ video + video {
   line-height: 1.5em;
 }
 
-.gallery-item:has(input[type="checkbox"]) img {
+.gallery-item img {
   cursor: zoom-in;
   height: 100%;
   object-fit: cover;
@@ -566,9 +585,6 @@ video + video {
   display: none;
 }
 
-.gallery-item:has(input:checked) img.thumbnail {
-}
-
 .gallery-item:has(input:checked) img.fullsize,
 .gallery-item:has(input:checked) img.thumbnail {
   display: block;
@@ -587,6 +603,10 @@ video + video {
 
 .light-only {
   display: none;
+}
+
+.muted {
+  color: var(--traditional-fg-mute);
 }
 
 .photo-grid {
@@ -627,7 +647,6 @@ video + video {
 .publish-date {
   display: block;
   font-size: 0.75em;
-  text-align: center;
 }
 
 .selected {
