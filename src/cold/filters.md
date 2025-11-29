@@ -1,6 +1,7 @@
 ---
 date: 2024-04-12
 filename: filters.html
+preview: Feelgood ways we might go extinct.
 type: post
 ---
 
@@ -81,7 +82,6 @@ Perhaps countless of civilizations are currently doing this.
 
 ![An illustration of a solarpunk landscape, heavy with greenery and windmills.](/img/solarpunk.jpg)
 
-
 ## Stunted by our Carrier
 
 We're only starting to understand the complexity of the gut biome.
@@ -111,7 +111,6 @@ Maybe that’s what dark energy is—planets or star systems or galaxies that ar
 
 Perhaps countless civilizations will meet each other on the other side.
 
-
 ## #nofilter
 
 Maybe everything is perfect and many extraterrestrial civilizations exist just fine,
@@ -123,7 +122,6 @@ Maybe there are entire empires spread across the galaxies thriving, but they som
 like how my dog doesn't know about wifi.
 
 Perhaps countless civilizations are out there, existing among us.
-
 
 ## Would It Be Bad to be Filtered?
 

@@ -1,6 +1,7 @@
 ---
 date: 2023-06-24
 filename: recs.html
+preview: Products that have deeply impacted my life.
 type: post
 updated: 2023-10-21
 ---

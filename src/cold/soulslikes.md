@@ -1,22 +1,23 @@
 ---
 date: 2025-04-13
 filename: soulslikes.html
+preview: "How to disable gaming's biggest spoiler factory: the internet."
 type: post
 ---
 
-# Why Are Soulslikes Fun?
+# Why Makes _From_ Soulslikes Different?
 
-I had barely played soulslikes before *Elden Ring*
+I had barely played soulslikes before _Elden Ring_
 so when I lost track of time and accidentally dumped 350 hours into it,
 I figured I should pay my respects to its forebears.
 
-I played through the whole *From Software* catalog,
+I played through the whole _From Software_ catalog,
 and after staring at the gameless void on the other side I turned to other developers' soulslikes.
-It was there I learned that there's nothing like a *From* soulslike.
+It was there I learned that there's nothing like a _From_ soulslike.
 
 There's something different about them. No soulslike I played afterward felt quite the same, as if they had only one foot in the genre I thought I had come to know, and the other in a more traditional action-adventure pond.
 
-What makes *From*'s so different?
+What makes _From_'s so different?
 
 ## Constraints
 
@@ -32,18 +33,18 @@ It was fun! In the way it's fun when a TV series trickles out an episode per wee
 
 This brought a social component to single-player games.
 I'll never forget getting stuck outside the whale Jabu Jabu in The Legend of Zelda: Ocarina of Time because
-two friends *independently* told me to shoot his eyes to open his mouth, spiraling me into desperate and creative slingshot angles and hours of farming.
+two friends _independently_ told me to shoot his eyes to open his mouth, spiraling me into desperate and creative slingshot angles and hours of farming.
 (I'm still not sure if that was a coordinated effort to torment me.)
 
 Sharing strategies was a solution to the **imperfect information constraint**. I had all the right gear, experience, and items. The only thing standing between me and Jabu-Jabu's belly was knowing how to get in.
 
 There are ways to learn this knowledge in-game, but not foolproof ones. The fallback mechanism—obtaining the knowledge from friends—is challenging, having high latency, low bandwidth, and poor accuracy. This solution to imperfect information itself has obstacles. This made it fun, just like the game it was solving.
 
-
 <!-- *Outer Wilds* takes this concept to an extreme and places **no** obstacles between the start and  end of the game other than player knowledge. As you may expect it's a game particularly vulnerable to spoilers, and—having no replay value—the only one I consistently hear people say "I wish I could play it for the first time again" about.
 
 Being an extreme case, it has a sort of unspoken code that past players  must not reveal information to prospective players except when stuck—and even then, vaguely—in an effort to preserve the imperfect information constraint. This is  one way of getting that constraint back, but it's quite fragile and not the one we're here to talk about—*From Software's* games have a strong social aspect, while *Outer Wilds* works instead by being fragile enough to make people tiptoe around it.
  -->
+
 ### Getting Stuck For The Last Time
 
 This type of social strategizing doesn't occur today. The modern internet's speed, accessibility, and wealth of knowledge means every player has access to the final solution in under a minute, written collaboratively by people who have already figured it out and peer-reviewed each other.
@@ -64,14 +65,14 @@ There are several solutions to this, actually. *From* does it from three angles
 
 If Jabu-Jabu's Belly was optional, and no big hints were dropped in-game about needing to go in, I wouldn't have realized I was missing something until a friend excitedly mentioned discovering it by chance.
 
-This is how *Elden Ring* operates.
-It's like if the entirety of *Ocarina of Time* was optional, except the final fight,
+This is how _Elden Ring_ operates.
+It's like if the entirety of _Ocarina of Time_ was optional, except the final fight,
 and the only reason to do anything was to gather strength for the final fight.
 
-*The Legend of Zelda: Breath of the Wild* uses this very tactic,
+_The Legend of Zelda: Breath of the Wild_ uses this very tactic,
 if to a lesser extent—everything is optional,
 but the game still makes it obvious that you're missing something.
-*Elden Ring* is like if no one ever told you there was something there to miss.
+_Elden Ring_ is like if no one ever told you there was something there to miss.
 
 ### Drip-Feed Players Outside Information
 
@@ -87,7 +88,7 @@ Messages are constrained to selected words, providing just enough insight to ins
 
 There are even a significant number of troll messages,
 like "Try jumping" placed right in front of a cliff.
-The fact that sometimes jumping off a cliff *really is* the right thing to do earns even obvious troll messages a double-take.
+The fact that sometimes jumping off a cliff _really is_ the right thing to do earns even obvious troll messages a double-take.
 Now we have our accuracy constraint back.
 
 And with limited ways to respond to the messages,
@@ -104,7 +105,7 @@ there are three types of routes:
 2. Optional / side story / collectibles (usually sideways)
 3. Unintended by developers (usually up)
 
-*From Software* is unique in that it actively avoids the first category.
+_From Software_ is unique in that it actively avoids the first category.
 Main story routes feel optional,
 and optional routes feel unintended.
 
@@ -127,4 +128,4 @@ due to the sprawling, nonlinear nature of the game.
 Walkthroughs are necessarily opinionated about what content to skip.
 Players relying solely on their instincts may completely miss major areas like Consecrated Snowfield or Miquella's Haligtree, improving the payoff of socializing.
 
-This blend makes *From Software*’s soulslikes unmatched for me. Modern game design requires new strategies to replace premodern-internet-era adventure game constraints, and *From* has mastered it.
+This blend makes _From Software_’s soulslikes unmatched for me. Modern game design requires new strategies to replace premodern-internet-era adventure game constraints, and _From_ has mastered it.

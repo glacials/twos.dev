@@ -1,6 +1,7 @@
 ---
 date: 2024-01-20
 filename: english.html
+preview: A style guide for programmers.
 started: 2022-06-15
 type: post
 ---
@@ -8,8 +9,8 @@ type: post
 # Effective English
 
 Like a programming language,
-English's purpose is to taxi ideas.
-As well, there are many ways to do the same job,
+English's purpose is to move ideas.
+There are many ways to do the same job,
 some more effective than others.
 
 But unlike code,

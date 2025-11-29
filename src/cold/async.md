@@ -1,6 +1,7 @@
 ---
 date: 2022-07-06
 filename: async.html
+preview: A framework for choosing interpersonal asynchrony vs. synchrony.
 type: post
 updated: 2022-07-20
 ---

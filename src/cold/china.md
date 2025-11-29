@@ -1,6 +1,7 @@
 ---
 date: 2023-11-10
 filename: china.html
+preview: Things you've never thought about and how different they are in northern China.
 type: post
 ---
 

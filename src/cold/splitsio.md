@@ -1,6 +1,7 @@
 ---
 date: 2024-10-03
 filename: splitsio.html
+preview: After 11 years, Splits.io is saying goodbye.
 type: post
 updated: 2025-03-31
 ---
@@ -8,6 +9,7 @@ updated: 2025-03-31
 # Goodbye to Splits.io
 
 ## EDIT
+
 On October 9, 2024, we announced our shutdown along with this post.
 
 On October 14, 2024, we reached an agreement with Games Done Quick in which Splits.io would link to GDQ and show a banner during GDQ events,

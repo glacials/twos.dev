@@ -1,7 +1,7 @@
 ---
 date: 2024-05-02
 filename: brownnote.html
-preview: My journey creating an app to track my... outputs.
+preview: Creating an app to track my… outputs.
 type: post
 ---
 
