@@ -32,7 +32,7 @@
         {{ template "body" . }}
       </article>
       <footer>
-        <p>
+        <p class="mb-0">
           <small>
             <i>
               {{ with .SourcePath }}
@@ -57,17 +57,30 @@
               {{ end }}
               <br />
               {{ if not .CreatedAt.IsZero }}
-                published
-                {{ .CreatedAt.Format "2006 January" }}
-                {{ if not .UpdatedAt.IsZero }}
-                  / last updated
-                  {{ .UpdatedAt.Format "2006 January" }}
+                {{ if not (eq .WebPath "/index.html") }}
+                  published
+                  {{ .CreatedAt.Format "2006 January" }}
+                  {{ if not .UpdatedAt.IsZero }}
+                    / last updated
+                    {{ .UpdatedAt.Format "2006 January" }}
+                  {{ end }}
                 {{ end }}
               {{ end }}
             </i>
           </small>
         </p>
-        <p><a href="#">to top</a> / <a href="/">back home</a></p>
+        <p class="mt-0 muted">
+          <small>
+            <a href="#">to top</a>
+            {{ if not (eq .WebPath "/index.html") }}
+              / <a href="/">back home</a>
+            {{ end }}
+            /
+            <a href="https://ko-fi.com/glacials" target="_blank"
+              >buy me a coffee</a
+            ></small
+          >
+        </p>
       </footer>
     </div>
     {{ template "_js.html.tmpl" }}

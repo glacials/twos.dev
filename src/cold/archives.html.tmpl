@@ -11,19 +11,24 @@ type: page
   </small>
 </p>
 
-<div style="max-width: 20rem">
+<div class="archives">
   {{ with yearly posts }}
     {{ range . }}
       <h2>{{ .Year }}</h2>
 
-      {{ range .Documents.All }}
-        {{ with .Metadata }}
-          <li>
-            {{ with .Category }}{{ . }}:{{ end }}
-            <a href="{{ .WebPath }}">{{ .Title }}</a>
-          </li>
+      <ul>
+        {{ range .Documents.All }}
+          {{ with .Metadata }}
+            <li>
+              {{ with .Category }}{{ . }}:{{ end }}
+              <a href="{{ .WebPath }}">{{ .Title }}</a>
+              {{ with .Preview }}
+                <span class="archives-preview">{{ . }}</span>
+              {{ end }}
+            </li>
+          {{ end }}
         {{ end }}
-      {{ end }}
+      </ul>
     {{ end }}
   {{ end }}
 </div>

@@ -1,6 +1,7 @@
 ---
 date: 2024-05-02
 filename: brownnote.html
+preview: My journey creating an app to track my... outputs.
 type: post
 ---
 
@@ -121,11 +122,9 @@ The result is [Brown Note][appstore].
   <div class="device-power"></div>
 </div>
 
-
 It was insanely easy to get Brown Note to a stage where I can use it for personal logging.
 The complexity all lies in the analytics and insights,
 which aren't part of its everyday use cases and so didn't block me from onboarding myself as a user.
-
 
 <div class="device device-iphone-14-pro" style="zoom: 0.65; margin-bottom: 2rem">
   <div class="device-frame">

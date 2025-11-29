@@ -90,4 +90,12 @@
         break;
     }
   });
+
+  document.querySelectorAll(".archives-preview").forEach((preview) => {
+    const words = preview.textContent.trim().split(/\s+/);
+    const limit = 10;
+    if (words.length > limit) {
+      preview.textContent = words.slice(0, limit).join(" ");
+    }
+  });
 </script>
