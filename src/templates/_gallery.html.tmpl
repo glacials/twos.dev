@@ -3,10 +3,14 @@
   <label class="gallery-item">
     <input type="checkbox" />
     {{ $img := . }}
-    {{ $downscaled := . }}
+    {{ $downscaled := index .Thumbnails 0 }}
+    {{ $fullscreen := index .Thumbnails 0 }}
     {{ range .Thumbnails }}
-      {{ if eq .Height 256 }}
+      {{ if le .Height 256 }}
         {{ $downscaled = . }}
+      {{ end }}
+      {{ if le .Height 1024 }}
+        {{ $fullscreen = . }}
       {{ end }}
     {{ end }}
     <img
@@ -19,13 +23,12 @@
       alt="{{ $img.Alt }}"
       class="fullsize"
       loading="lazy"
-      src="{{ $img.WebPath }}"
+      src="{{ $fullscreen.WebPath }}"
       title=""
     />
     <p class="caption exif">
       {{ with .Camera }}
-        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a
-        ><br />
+        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a><br />
       {{ end }}
       {{ with .Lens }}
         <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>

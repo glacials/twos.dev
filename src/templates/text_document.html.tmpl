@@ -1,3 +1,5 @@
+<!-- This is the single-post template that renders on `/<post_title>.html`.
+     See _writing.html.tmpl for the multi-post page that renders on index.html. -->
 <!doctype html>
 <html lang="en">
   <head>
@@ -14,13 +16,10 @@
         {{ end }}
         {{ if and (.IsType "post") (not .CreatedAt.IsZero) }}
           <div class="publish-date">
-            <i>
-              published
-              {{ .CreatedAt.Format "2006 January" }}{{- if not .UpdatedAt.IsZero -}}
-                , last updated
-                {{ .UpdatedAt.Format "2006 January" }}
-              {{ end }}</i
-            >
+            {{ .CreatedAt.Format "2006 January" }}{{- if not .UpdatedAt.IsZero -}}
+              , last updated
+              {{ .UpdatedAt.Format "2006 January" }}
+            {{ end }}
           </div>
         {{ end }}
         {{ with .Category }}
@@ -37,16 +36,20 @@
           <small>
             <i>
               {{ with .SourcePath }}
-							{{ if eq . "src/warm/config.org" }}
-							source: <a href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org">~/.config/emacs/config.org</a>
-							{{ else }}
-                source:
-                <a
-                  href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
-                  target="_blank"
-                  >{{ . }}</a
-														>
-								{{ end }}
+                {{ if eq . "src/warm/config.org" }}
+                  source:
+                  <a
+                    href="https://github.com/glacials/dotfiles/blob/main/dot_config/emacs/config.org"
+                    >~/.config/emacs/config.org</a
+                  >
+                {{ else }}
+                  source:
+                  <a
+                    href="https://github.com/glacials/twos.dev/blob/main/{{ . }}"
+                    target="_blank"
+                    >{{ . }}</a
+                  >
+                {{ end }}
               {{ else }}
                 <a href="https://github.com/glacials/twos.dev" target="_blank"
                   >source</a

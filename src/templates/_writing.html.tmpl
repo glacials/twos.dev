@@ -1,3 +1,5 @@
+<!-- This is the multi-post template that renders on index.html.
+     See text_document.html.tmpl for the single-post page that renders on /<post_title>.html. -->
 {{ range posts }}
   {{ if .Metadata.CreatedAt.Before (now.AddDate 0 -6 0) }}
     {{ continue }}
@@ -9,13 +11,10 @@
     {{ end }}
     {{ if and (.Metadata.IsType "post") (not .Metadata.CreatedAt.IsZero) }}
       <div class="publish-date">
-        <i>
-          published
-          {{ .Metadata.CreatedAt.Format "2006 January" }}{{ if not .Metadata.UpdatedAt.IsZero }}
-            / last updated
-            {{ .Metadata.UpdatedAt.Format "2006 January" }}
-          {{ end }}</i
-        >
+        {{ .Metadata.CreatedAt.Format "2006 January" }}{{ if not .Metadata.UpdatedAt.IsZero }}
+          / last updated
+          {{ .Metadata.UpdatedAt.Format "2006 January" }}
+        {{ end }}
       </div>
     {{ end }}
     {{ with .Metadata.Category }}
