@@ -1,6 +1,6 @@
 # Effective English
 
-Like a programming language, English's purpose is to taxi ideas. As well, there are many ways to do the same job, some more effective than others.
+Like a programming language, English's purpose is to move ideas. There are many ways to do the same job, some more effective than others.
 
 But unlike code, English presents two roads that ideas can drive down: the spoken word and the written word. They lead the same place, but one is a windy one-lane dirt road full of intersections and backtracking. The other is a coastal highway.
 
