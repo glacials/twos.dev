@@ -5,7 +5,7 @@ preview: "How to disable gaming's biggest spoiler factory: the internet."
 type: post
 ---
 
-# Why Makes _From_ Soulslikes Different?
+# Why Are _From_ Soulslikes Different?
 
 I had barely played soulslikes before _Elden Ring_
 so when I lost track of time and accidentally dumped 350 hours into it,
