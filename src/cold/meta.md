@@ -75,8 +75,8 @@ are not necessarily 24/7, we can snatch the files from there.
 Enter
 [launchd](https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2),
 a hidden gem of macOS. It's a few things, but for our purposes it's basically cron
-purpose-built for laptops. It intelligently handles sleep, network loss, and ([charge
-state](https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac)). The
+purpose-built for laptops. It intelligently handles sleep, network loss, and [charge
+state](https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac). The
 specifics aren't important; suffice it to say It Just Works.
 
 As long as we install this on a machine or machines that get enough use—or that are
