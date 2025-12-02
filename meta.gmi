@@ -48,7 +48,7 @@ That leads us to our second option.
 
 There's no network API into iCloud Drive, but there is a local one: the filesystem. If we control a Mac that will be online enough to satisfy our synchronization needs, which are not necessarily 24/7, we can snatch the files from there.
 
-Enter launchd, a hidden gem of macOS. It's a few things, but for our purposes it's basically cron purpose-built for laptops. It intelligently handles sleep, network loss, and (charge state). The specifics aren't important; suffice it to say It Just Works.
+Enter launchd, a hidden gem of macOS. It's a few things, but for our purposes it's basically cron purpose-built for laptops. It intelligently handles sleep, network loss, and charge state. The specifics aren't important; suffice it to say It Just Works.
 
 => https://developer.apple.com/library/archive/documentation/MacOSX/Conceptual/BPSystemStartup/Chapters/ScheduledJobs.html#//apple_ref/doc/uid/10000172i-CH1-SW2 launchd
 => https://support.apple.com/guide/mac-help/what-is-power-nap-mh40773/mac charge state
