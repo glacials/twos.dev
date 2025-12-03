@@ -34,7 +34,7 @@
 
     --traditional-bg: var(--all-bg);
     --traditional-fg: rgba(0, 0, 0, 1);
-    --traditional-fg-mute: rgba(150, 90, 50, 0.3);
+    --traditional-fg-mute: rgba(224, 205, 193, 1);
     --traditional-fg-pop: rgba(150, 90, 50, 1);
 
     --page-bg: var(--all-bg);
@@ -108,6 +108,15 @@ a[href]:visited {
   text-decoration-color: var(--traditional-fg-mute);
   text-decoration-thickness: 3px;
   text-underline-offset: 0.25rem;
+}
+
+a[href]:hover h1,
+a[href]:hover h2,
+a[href]:hover h3,
+a[href]:hover h4,
+a[href]:hover h5,
+a[href]:hover h6 {
+  color: var(--traditional-fg-mute);
 }
 
 a[href]:hover {
