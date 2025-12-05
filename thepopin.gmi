@@ -24,7 +24,7 @@ At YourBase we decided we needed one. Rather than build another tool, we experim
 
 => /img/thepopin-0-dark.png A screenshot of a Discord server with several voice channels, some empty, some having one person in them.
 
-The company Discord server on a workday.
+*The company Discord server on a workday.*
 
 In our company Discord server, we give everyone one voice channel of their own. This is your "office". When you are online and able to be disturbed, you join your office, alone. You stay in there as long as you are "in".
 
