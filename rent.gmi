@@ -1,0 +1,145 @@
+# How to Split Rent
+
+Given a home with  unequal rooms and  roommates with unique preferences, what's the right way to split rent and assign rooms?
+
+Should the room with the attached bathroom cost more, or the one with the balcony?
+
+Should roommate A get the room with the view, or roommate B?
+
+How much should each room cost?
+
+Read below, or skip to the calculator to enter your own numbers.
+
+=> #calculator skip to the calculator
+
+## The Algorithm
+
+Each roommate privately writes down the price they’d be **happy to pay** for each bedroom, making sure the numbers they choose sum to .
+
+For example, in a 2-bedroom home with , I might write:
+
+```plain
+North bedroom: $1200
+South bedroom: $800
+```
+
+i.e. I strongly prefer the north bedroom, but I'd happily take the south bedroom if it were cheap.
+
+If a coin were flipped to decide which room I get at the price I listed, I'd be happy either way. It is crucial that each roommate decide their numbers like this, because that is functionally what will happen.[^1]
+
+[^1]: If a person cannot make such a split, then either rent is out of proportion with their expectations or they have budget constraints that limit their options. This algorithm cannot solve for these, but a transparent discussion can.
+
+Gather all slips of paper and average the numbers for each room.
+
+```
++---------+---------------+---------------+
+| Person  | North Bedroom | South Bedroom |
++---------+---------------+---------------+
+| Arnav   | $1000         | $1000         |
+| Carol   | $1300         | $700          |
+|         |               |               |
+| Average | $1150         | $850          |
++---------+---------------+---------------+
+```
+
+### Result
+
+The highest bidder gets the room. They pay the average.
+
+```
++--------+---------------+----------------+----------+
+| Person |    Bedroom    | Willing to Pay | Will Pay |
++--------+---------------+----------------+----------+
+| Arnav  | South Bedroom | $1000          | $850     |
+| Carol  | North Bedroom | $1300          | $1150    |
++--------+---------------+----------------+----------+
+```
+
+The averages always sum to .
+
+Almost always, each person pays less than what they would have been happy with so everyone feels like they got a deal.
+
+This works for any number of roommates.
+
+#### Edge Cases
+
+* If rounding down makes you come up short, someone needs to pony up the extra $1 or 1¢.
+* If multiple people bid the same amount for a room, or otherwise if "highest bidder gets it" becomes unclear, here's the nuanced algorithm.
+* In extreme situations, a person may pay more for a room than their chosen price. I've never seen this happen.
+
+=> /rent_algorithm.html here's
+
+## The Calculator
+
+Remember the rules:
+
+1. Each roommate should **privately** write down a price for each room that:
+	* they would be happy to pay if assigned that room randomly, and
+	* together sum to Rent.
+2. Once everyone has written these numbers down, collect them and enter them below to see room assignments and prices.
+3. Each roommate pays the Will\ Pay amount for Room. The numbers will sum to Rent.
+
+{{ template "_rent-widget-styles.html.tmpl" }}
+
+   
+
+```
+<label>
+  Roommates
+  <input type="number" min="1" max="8" value="3" data-rent-count />
+</label>
+<label>
+  Rent
+  <input
+    type="number"
+    min="0"
+    step="10"
+    value="2500"
+    data-rent-total
+  />
+</label>
+<button type="button" class="rent-widget__button" data-rent-reset>
+  Reset to example
+</button>
+```
+
+           {{ template "_rent-widget.html.tmpl" }}
+
+## Why Does This Work?
+
+Each room is a one-of-a-kind product in a marketplace. The marketplace is "rooms available in this home".
+
+Each buyer values each room differently. So we have to answer two questions:
+
+1. Who gets which room?
+2. How much does each room cost?
+
+So we turn to the standard way to discover these things for a one-of-a-kind items.
+
+### Auctions
+
+But there are some weird constraints. First, each roommate must buy exactly one room.
+
+We can't hold a standard auction; when any room is bid on, the other rooms' prices would change.[^2] What we can do is hold  auctions *simultaneously*. Numbers are recorded privately and in one turn to make it difficult to manipulate dependent prices.
+
+[^2]: This can technically work, but in practice would give a bad social foundation for a roommate relationship Imagine having a roommate that pays $0 because the other roommates got into a bidding war.
+
+The second constraint is that the sum of all rooms' prices must total to .
+
+If we were to simply charge the highest bidder their bid amount, the total would often exceed . Some common strategies exist to lower the amount the winner pays, such as making them pay the second-highest amount, but we need a guarantee of a specific sum, not just "lower than the sum of the highest bidders".
+
+=> https://en.wikipedia.org/wiki/Generalized_second-price_auction second-highest amount
+
+This is why each person's chosen prices must sum to . If you have a 2-dimensional table of numbers where the sum of every row is the same number , then the sum of the averages of every column is also .
+
+This is called *linearity of addition* and is how we can end up with a total of exactly  without throwing a wrench in anyone's expectations of price.
+
+## Conclusion
+
+Everyone has different preferences when it comes to room selection. I value sound isolation and light, but you may value an attached bathroom or extra space.
+
+Instead of picking randomly and silently settling to avoid tension, consider using basic economics to do proper price discovery and hopefully everyone can be a bit happier with how it turns out.
+
+I'd be delighted to hear if this helps you out. Reach me at ben@twos.dev. I'm not around much on social media these days.
+
+=> mailto:ben@twos.dev ben@twos.dev

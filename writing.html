@@ -124,9 +124,9 @@
   <body>
     <div class="container">
       <nav class="primary">
+  
   <h1 class="website-title">
-    Ben Carlsson /
-        Writing</h1>
+    Writing</h1>
   <div class="hierarchy">
       <div class="nav-wrapper">
         <a href="/"><div class="nav-text">Home</div></a>
@@ -157,6 +157,785 @@
         
         <html><head></head><body>
 
+
+  
+  <article class="post">
+    <a href="/rent.html"><h1>How to Split Rent</h1></a>
+    
+    
+      <div class="publish-date">
+        2025 November
+      </div>
+    
+    
+    <html><head></head><body>
+
+<p>Given a home with <span class="math inline">\(n\)</span> unequal rooms and <span class="math inline">\(n\)</span> roommates with unique preferences,
+what's the right way to split rent and assign rooms?</p>
+
+<p>Should the room with the attached bathroom cost more, or the one with the balcony?</p>
+
+<p>Should roommate A get the room with the view, or roommate B?</p>
+
+<p>How much should each room cost?</p>
+
+<p>Read below, or <a href="#calculator">skip to the calculator</a> to enter your own numbers.</p>
+
+<h2>The Algorithm</h2>
+
+<p>Each roommate privately writes down the price they’d be <strong>happy to pay</strong> for each bedroom,
+making sure the numbers they choose sum to <span class="math inline">\(Rent\)</span>.</p>
+
+<p>For example,
+in a 2-bedroom home with <span class="math inline">\(Rent = 2000\)</span>,
+I might write:</p>
+
+<pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">North bedroom: $1200
+</span></span><span class="line"><span class="ln">2</span><span class="cl">South bedroom: $800
+</span></span></code></pre>
+
+<p>i.e. I strongly prefer the north bedroom,
+but I'd happily take the south bedroom if it were cheap.</p>
+
+<p>If a coin were flipped to decide which room I get at the price I listed,
+I'd be happy either way.
+It is crucial that each roommate decide their numbers like this,
+because that is functionally what will happen.<sup class="footnote-ref" id="fnref:If-a-person-cann"><a href="#fn:If-a-person-cann">1</a></sup></p>
+
+<p>Gather all slips of paper and average the numbers for each room.</p>
+
+<table>
+<thead>
+<tr>
+<th>Person</th>
+<th>North Bedroom</th>
+<th>South Bedroom</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Arnav</td>
+<td>$1000</td>
+<td>$1000</td>
+</tr>
+
+<tr>
+<td>Carol</td>
+<td>$1300</td>
+<td>$700</td>
+</tr>
+
+<tr>
+<td></td>
+<td></td>
+<td></td>
+</tr>
+
+<tr>
+<td>Average</td>
+<td>$1150</td>
+<td>$850</td>
+</tr>
+</tbody>
+</table>
+
+<h3>Result</h3>
+
+<p>The highest bidder gets the room.
+They pay the average.</p>
+
+<table>
+<thead>
+<tr>
+<th>Person</th>
+<th>Bedroom</th>
+<th>Willing to Pay</th>
+<th>Will Pay</th>
+</tr>
+</thead>
+
+<tbody>
+<tr>
+<td>Arnav</td>
+<td>South Bedroom</td>
+<td>$1000</td>
+<td>$850</td>
+</tr>
+
+<tr>
+<td>Carol</td>
+<td>North Bedroom</td>
+<td>$1300</td>
+<td>$1150</td>
+</tr>
+</tbody>
+</table>
+<p>The averages always sum to <span class="math inline">\(Rent\)</span>.</p>
+
+<p>Almost always, each person pays less than what they would have been happy with
+so everyone feels like they got a deal.</p>
+
+<p>This works for any number of roommates.</p>
+
+<h4 id="edge">Edge Cases</h4>
+
+<ul>
+<li>If rounding down makes you come up short,
+someone needs to pony up the extra $1 or 1¢.</li>
+<li>If multiple people bid the same amount for a room,
+or otherwise if "highest bidder gets it" becomes unclear,
+<a href="/rent_algorithm.html">here's</a> the nuanced algorithm.</li>
+<li>In extreme situations,
+a person may pay more for a room than their chosen price.
+I've never seen this happen.</li>
+</ul>
+
+<h2 id="calculator">The Calculator</h2>
+
+<p>Remember the rules:</p>
+
+<ol>
+<li>Each roommate should <strong>privately</strong> write down a price for each room that:
+
+<ul>
+<li>they would be happy to pay if assigned that room randomly, and</li>
+<li>together sum to <span class="math inline">\(Rent\)</span>.</li>
+</ul></li>
+<li>Once everyone has written these numbers down,
+collect them and enter them below to see room assignments and prices.</li>
+<li>Each roommate pays the <span class="math inline">\(Will\ Pay\)</span> amount for <span class="math inline">\(Room\)</span>.
+The numbers will sum to <span class="math inline">\(Rent\)</span>.</li>
+</ol>
+<style>
+  .rent-widget {
+    background: var(--raised-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 0.75rem;
+    box-shadow: 0 0.75rem 2rem -1rem var(--shadow);
+    color: var(--raised-fg);
+    margin-top: 2rem;
+    padding: 1rem;
+  }
+
+  .rent-widget__controls {
+    align-items: flex-end;
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.75rem;
+    margin-bottom: 0.5rem;
+  }
+
+  .rent-widget__controls label {
+    color: inherit;
+    display: flex;
+    flex-direction: column;
+    font-size: 0.95rem;
+    font-weight: 600;
+  }
+
+  .rent-widget__controls input {
+    background: var(--traditional-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 0.35rem;
+    color: inherit;
+    min-width: 6rem;
+    padding: 0.35rem 0.45rem;
+  }
+
+  .rent-widget__button {
+    background: var(--traditional-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 0.4rem;
+    color: var(--traditional-fg);
+    cursor: pointer;
+    padding: 0.45rem 0.8rem;
+  }
+
+  .rent-widget__button--primary {
+    background: var(--traditional-fg-pop);
+    border-color: var(--traditional-fg-pop);
+    color: var(--traditional-bg);
+  }
+
+  .rent-widget__note {
+    color: var(--traditional-fg-mute);
+    margin: 0.5rem 0 0.75rem;
+  }
+
+  .rent-widget__table-wrap {
+    overflow-x: auto;
+  }
+
+  .rent-widget__table,
+  .rent-widget__results-table {
+    background: var(--traditional-bg);
+    border-collapse: collapse;
+    box-shadow: none;
+    margin: 0 0 0.75rem 0;
+    width: 100%;
+  }
+
+  .rent-widget__table th,
+  .rent-widget__table td,
+  .rent-widget__results-table th,
+  .rent-widget__results-table td {
+    border: 1px solid var(--page-border);
+    padding: 0.4rem;
+    text-align: left;
+  }
+
+  .rent-widget__table input[type="text"],
+  .rent-widget__table input[type="number"] {
+    background: var(--all-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 0.3rem;
+    box-sizing: border-box;
+    color: inherit;
+    padding: 0.3rem;
+    width: 100%;
+  }
+
+  .rent-widget__results-table th {
+    background: var(--raised-bg);
+    color: var(--raised-fg);
+  }
+
+  .rent-widget__result-note {
+    color: var(--traditional-fg-pop);
+  }
+
+  .rent-widget__messages ul {
+    color: var(--traditional-fg-pop);
+    margin: 0 0 0.75rem;
+    padding-left: 1rem;
+  }
+
+  .rent-widget__row--invalid th,
+  .rent-widget__row--invalid td {
+    background: var(--danger-bg);
+    color: var(--danger-fg);
+    border-color: var(--danger-bg);
+  }
+
+  .rent-widget__row--invalid input {
+    background: var(--danger-bg);
+    border-color: var(--danger-fg);
+  }
+
+  .rent-widget__row--invalid {
+    position: relative;
+  }
+
+  .rent-widget__row--invalid[data-error]:hover::after {
+    background: var(--traditional-bg);
+    border: 1px solid var(--page-border);
+    border-radius: 0.35rem;
+    box-shadow: 0 0.35rem 1rem rgba(0, 0, 0, 0.25);
+    color: var(--traditional-fg);
+    content: attr(data-error);
+    left: 0;
+    padding: 0.35rem 0.5rem;
+    position: absolute;
+    top: -0.35rem;
+    transform: translateY(-100%);
+    white-space: nowrap;
+    z-index: 2;
+  }
+
+  .rent-widget__results p {
+    margin: 0.35rem 0;
+  }
+</style>
+<p></p><div class="rent-widget" id="rent-widget">
+  <div class="rent-widget__controls">
+    <label>
+      Roommates
+      <input type="number" min="1" max="8" value="3" data-rent-count=""/>
+    </label>
+    <label>
+      Rent
+      <input type="number" min="0" step="10" value="2500" data-rent-total=""/>
+    </label>
+    <button type="button" class="rent-widget__button" data-rent-reset="">
+      Reset to example
+    </button>
+  </div>
+  <div class="rent-widget__table-wrap" id="rent-widget-grid"></div>
+  <div class="rent-widget__messages" id="rent-widget-messages" aria-live="polite"></div>
+  <div class="rent-widget__results" id="rent-widget-results" aria-live="polite"></div>
+</div>
+<script>
+  (() => {
+    const widget = document.querySelector("#rent-widget");
+    if (!widget) return;
+
+    const countInput = widget.querySelector("[data-rent-count]");
+    const rentInput = widget.querySelector("[data-rent-total]");
+    const resetButton = widget.querySelector("[data-rent-reset]");
+    const grid = widget.querySelector("#rent-widget-grid");
+    const messages = widget.querySelector("#rent-widget-messages");
+    const results = widget.querySelector("#rent-widget-results");
+
+    const currency = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    const formatMoney = (value) => currency.format(Math.round(value ?? 0));
+
+    const baseState = () => ({
+      rooms: 3,
+      roommates: 3,
+      rent: 2500,
+      roomNames: ["North Bedroom", "South Bedroom", "East Bedroom"],
+      roommateNames: ["Arnav", "Betty", "Carol"],
+      bids: [
+        [1000, 1000, 500],
+        [1100, 600, 800],
+        [1300, 600, 600],
+      ],
+    });
+
+    let state = baseState();
+
+    const MAX_COUNT = 8;
+    const clampCount = (value, fallback) => {
+      if (!Number.isFinite(value)) return fallback;
+      return Math.max(1, Math.min(MAX_COUNT, Math.floor(value)));
+    };
+    const parseCount = (input, fallback) =>
+      input?.value === ""
+        ? fallback
+        : clampCount(Number(input?.value ?? fallback), fallback);
+    const parseRent = (input, fallback) => {
+      const value = Number.parseFloat(input?.value ?? fallback);
+      return Number.isFinite(value) && value >= 0 ? value : fallback;
+    };
+
+    const readCount = () => {
+      const count = parseCount(countInput, state.rooms);
+      state.rooms = count;
+      state.roommates = count;
+      if (countInput) countInput.value = count;
+    };
+    const readRent = () => {
+      state.rent = parseRent(rentInput, state.rent);
+      if (rentInput) rentInput.value = state.rent;
+    };
+
+    const readGridIntoState = () => {
+      const roomNameInputs = grid.querySelectorAll("[data-room-name]");
+      if (roomNameInputs.length) {
+        state.roomNames = Array.from(roomNameInputs).map((input, idx) => {
+          const value = input.value.trim();
+          return value || `Room ${idx + 1}`;
+        });
+      }
+
+      const roommateNameInputs = grid.querySelectorAll("[data-roommate-name]");
+      if (roommateNameInputs.length) {
+        state.roommateNames = Array.from(roommateNameInputs).map(
+          (input, idx) => input.value.trim() || `Roommate ${idx + 1}`,
+        );
+      }
+
+      const bids = Array.from({ length: state.roommateNames.length }, () =>
+        Array.from({ length: state.roomNames.length }, () => 0),
+      );
+
+      grid.querySelectorAll("[data-bid]").forEach((input) => {
+        const roomIndex = Number(input.dataset.roomIndex);
+        const roommateIndex = Number(input.dataset.roommateIndex);
+        const value = Number.parseFloat(input.value);
+        if (
+          Number.isInteger(roomIndex) &&
+          Number.isInteger(roommateIndex) &&
+          roomIndex < state.roomNames.length &&
+          roommateIndex < state.roommateNames.length
+        ) {
+          bids[roommateIndex][roomIndex] = Number.isFinite(value) ? value : 0;
+        }
+      });
+
+      state.bids = bids;
+    };
+
+    const resizeState = () => {
+      state.roomNames = state.roomNames.slice(0, state.rooms);
+      while (state.roomNames.length < state.rooms) {
+        state.roomNames.push(`Room ${state.roomNames.length + 1}`);
+      }
+
+      state.roommateNames = state.roommateNames.slice(0, state.roommates);
+      while (state.roommateNames.length < state.roommates) {
+        state.roommateNames.push(`Roommate ${state.roommateNames.length + 1}`);
+      }
+
+      state.bids = state.bids.slice(0, state.roommates);
+      while (state.bids.length < state.roommates) {
+        state.bids.push(Array.from({ length: state.rooms }, () => 0));
+      }
+      state.bids = state.bids.map((row) => {
+        const updated = row.slice(0, state.rooms);
+        while (updated.length < state.rooms) {
+          updated.push(0);
+        }
+        return updated;
+      });
+    };
+
+    const renderGrid = () => {
+      grid.innerHTML = "";
+      const table = document.createElement("table");
+      table.className = "rent-widget__table";
+
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      const corner = document.createElement("th");
+      corner.textContent = "Roommate";
+      headerRow.appendChild(corner);
+
+      state.roomNames.forEach((name, idx) => {
+        const th = document.createElement("th");
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = name;
+        input.placeholder = `Room ${idx + 1}`;
+        input.dataset.roomName = "true";
+        input.dataset.roomIndex = String(idx);
+        th.appendChild(input);
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      state.roommateNames.forEach((name, roommateIndex) => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("th");
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.value = name;
+        nameInput.placeholder = `Roommate ${roommateIndex + 1}`;
+        nameInput.dataset.roommateName = "true";
+        nameInput.dataset.roommateIndex = String(roommateIndex);
+        nameCell.appendChild(nameInput);
+        row.appendChild(nameCell);
+
+        state.roomNames.forEach((_, roomIndex) => {
+          const cell = document.createElement("td");
+          const bidInput = document.createElement("input");
+          bidInput.type = "number";
+          bidInput.inputMode = "decimal";
+          bidInput.min = "0";
+          bidInput.step = "10";
+          const value = state.bids?.[roommateIndex]?.[roomIndex] ?? "";
+          bidInput.value = value;
+          bidInput.dataset.bid = "true";
+          bidInput.dataset.roomIndex = String(roomIndex);
+          bidInput.dataset.roommateIndex = String(roommateIndex);
+          cell.appendChild(bidInput);
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+
+      grid.appendChild(table);
+    };
+
+    const highestPerRoom = () => {
+      const highest = [];
+      for (let room = 0; room < state.rooms; room++) {
+        let top = -Infinity;
+        let winners = [];
+        state.bids.forEach((row, roommateIndex) => {
+          const value = row[room] ?? 0;
+          if (value > top) {
+            top = value;
+            winners = [roommateIndex];
+          } else if (value === top) {
+            winners.push(roommateIndex);
+          }
+        });
+        highest.push({ value: top, winners });
+      }
+      return highest;
+    };
+
+    const pickAssignment = () => {
+      if (state.rooms !== state.roommates) return null;
+
+      const indices = Array.from({ length: state.roommates }, (_, idx) => idx);
+      const max = highestPerRoom();
+      let best = null;
+
+      const permute = (prefix, remaining) => {
+        if (prefix.length === state.rooms) {
+          let topWins = 0;
+          let total = 0;
+          let slack = 0;
+
+          for (let room = 0; room < state.rooms; room++) {
+            const roommate = prefix[room];
+            const bid = state.bids?.[roommate]?.[room] ?? 0;
+            total += bid;
+            if (max[room].winners.includes(roommate)) {
+              topWins += 1;
+            } else {
+              slack += max[room].value - bid;
+            }
+          }
+
+          const candidate = { order: prefix.slice(), topWins, total, slack };
+          const better =
+            !best ||
+            candidate.topWins > best.topWins ||
+            (candidate.topWins === best.topWins &&
+              candidate.total > best.total) ||
+            (candidate.topWins === best.topWins &&
+              candidate.total === best.total &&
+              candidate.slack < best.slack);
+
+          if (better) best = candidate;
+          return;
+        }
+
+        remaining.forEach((value, idx) => {
+          const nextPrefix = prefix.concat(value);
+          const nextRemaining = remaining
+            .slice(0, idx)
+            .concat(remaining.slice(idx + 1));
+          permute(nextPrefix, nextRemaining);
+        });
+      };
+
+      permute([], indices);
+      return best?.order ?? null;
+    };
+
+    const renderResults = () => {
+      messages.innerHTML = "";
+      results.innerHTML = "";
+
+      const rowTotals = state.bids.map((row) =>
+        row.reduce(
+          (sum, value) => sum + (Number.isFinite(value) ? value : 0),
+          0,
+        ),
+      );
+      const target = Number.isFinite(state.rent) ? state.rent : null;
+
+      const rows = grid.querySelectorAll("tbody tr");
+      rows.forEach((row) => {
+        row.classList.remove("rent-widget__row--invalid");
+        row.removeAttribute("title");
+        row.removeAttribute("data-error");
+      });
+      const invalidRows = [];
+
+      if (target !== null) {
+        rowTotals.forEach((value, idx) => {
+          const bad = Math.abs(value - target) > 0.01;
+          if (bad) {
+            rows[idx]?.classList.add("rent-widget__row--invalid");
+            rows[idx]?.setAttribute(
+              "data-error",
+              `${
+                state.roommateNames[idx] ?? `Roommate ${idx + 1}`
+              }’s bids should sum to the rent (current sum: ${formatMoney(
+                value,
+              )}).`,
+            );
+            invalidRows.push(state.roommateNames[idx] ?? `Roommate ${idx + 1}`);
+          }
+        });
+      }
+
+      const averages = [];
+      for (let room = 0; room < state.rooms; room++) {
+        let total = 0;
+        for (let roommate = 0; roommate < state.roommates; roommate++) {
+          total += state.bids[roommate]?.[room] ?? 0;
+        }
+        averages.push(total / state.roommates);
+      }
+
+      const assignment = pickAssignment();
+      if (!assignment) {
+        const note = document.createElement("p");
+        note.textContent = "Enter bids to see who gets which room.";
+        results.appendChild(note);
+        return;
+      }
+
+      const highest = highestPerRoom();
+      const table = document.createElement("table");
+      table.className = "rent-widget__results-table";
+
+      const header = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      ["Room", "Occupant", "Willing To Pay", "Will Pay"].forEach((label) => {
+        const th = document.createElement("th");
+        th.textContent = label;
+        headRow.appendChild(th);
+      });
+      header.appendChild(headRow);
+      table.appendChild(header);
+
+      const body = document.createElement("tbody");
+      const masked = invalidRows.length > 0;
+      const roundedPays = averages.map((value) => Math.round(value ?? 0));
+      const adjustedPays = roundedPays.slice();
+      const targetTotal = Math.round(state.rent ?? 0);
+      const currentTotal = adjustedPays.reduce((a, b) => a + b, 0);
+      const diff = targetTotal - currentTotal;
+      if (!masked && diff !== 0 && adjustedPays.length > 0) {
+        let minIdx = 0;
+        for (let i = 1; i < adjustedPays.length; i++) {
+          if (adjustedPays[i] < adjustedPays[minIdx]) {
+            minIdx = i;
+          }
+        }
+        adjustedPays[minIdx] += diff;
+      }
+
+      assignment.forEach((roommateIndex, roomIndex) => {
+        const bid = state.bids?.[roommateIndex]?.[roomIndex] ?? 0;
+        const isTop = highest[roomIndex].winners.includes(roommateIndex);
+
+        const winnerName =
+          state.roommateNames[roommateIndex] ?? `Roommate ${roommateIndex + 1}`;
+
+        const row = document.createElement("tr");
+        [
+          state.roomNames[roomIndex] ?? `Room ${roomIndex + 1}`,
+          masked ? "—" : winnerName,
+          masked ? "—" : formatMoney(bid),
+          masked ? "—" : formatMoney(adjustedPays[roomIndex]),
+        ].forEach((value, idx) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        body.appendChild(row);
+      });
+
+      table.appendChild(body);
+      results.appendChild(table);
+
+    };
+
+    const handleRebuild = () => {
+      readGridIntoState();
+      readCount();
+      readRent();
+      resizeState();
+      renderGrid();
+      messages.innerHTML = "";
+      results.innerHTML = "";
+      renderResults();
+    };
+
+    countInput?.addEventListener("input", handleRebuild);
+    rentInput?.addEventListener("input", () => {
+      readRent();
+      renderResults();
+    });
+    grid.addEventListener("input", () => {
+      readGridIntoState();
+      renderResults();
+    });
+
+    resetButton?.addEventListener("click", () => {
+      state = baseState();
+      if (countInput) countInput.value = state.rooms;
+      if (rentInput) rentInput.value = state.rent;
+      renderGrid();
+      messages.innerHTML = "";
+      renderResults();
+    });
+
+    if (countInput) countInput.value = state.rooms;
+    if (rentInput) rentInput.value = state.rent;
+    renderGrid();
+    renderResults();
+  })();
+</script>
+<p></p>
+
+<h2>Why Does This Work?</h2>
+
+<p>Each room is a one-of-a-kind product in a marketplace.
+The marketplace is "rooms available in this home".</p>
+
+<p>Each buyer values each room differently.
+So we have to answer two questions:</p>
+
+<ol>
+<li>Who gets which room?</li>
+<li>How much does each room cost?</li>
+</ol>
+
+<p>So we turn to the standard way to discover these things for a one-of-a-kind items.</p>
+
+<h3>Auctions</h3>
+
+<p>But there are some weird constraints.
+First, each roommate must buy exactly one room.</p>
+
+<p>We can't hold a standard auction;
+when any room is bid on,
+the other rooms' prices would change.<sup class="footnote-ref" id="fnref:This-can-technic"><a href="#fn:This-can-technic">2</a></sup>
+What we can do is hold <span class="math inline">\(n\)</span> auctions <em>simultaneously</em>.
+Numbers are recorded privately and in one turn
+to make it difficult to manipulate dependent prices.</p>
+
+<p>The second constraint is that the sum of all rooms' prices must total to <span class="math inline">\(Rent\)</span>.</p>
+
+<p>If we were to simply charge the highest bidder their bid amount,
+the total would often exceed <span class="math inline">\(Rent\)</span>.
+Some common strategies exist to lower the amount the winner pays,
+such as making them pay the <a href="https://en.wikipedia.org/wiki/Generalized_second-price_auction" target="_blank">second-highest amount</a>,
+but we need a guarantee of a specific sum, not just "lower than the sum of the highest bidders".</p>
+
+<p>This is why each person's chosen prices must sum to <span class="math inline">\(Rent\)</span>.
+If you have a 2-dimensional table of numbers where the sum of every row is the same number <span class="math inline">\(T\)</span>,
+then the sum of the averages of every column is also <span class="math inline">\(T\)</span>.</p>
+
+<p>This is called <em>linearity of addition</em> and is how we can end up with a total of exactly <span class="math inline">\(Rent\)</span>
+without throwing a wrench in anyone's expectations of price.</p>
+
+<h2>Conclusion</h2>
+
+<p>Everyone has different preferences when it comes to room selection.
+I value sound isolation and light,
+but you may value an attached bathroom or extra space.</p>
+
+<p>Instead of picking randomly and silently settling to avoid tension,
+consider using basic economics to do proper price discovery and hopefully everyone can be a bit happier with how it turns out.</p>
+
+<p>I'd be delighted to hear if this helps you out.
+Reach me at <a href="mailto:ben@twos.dev">ben@twos.dev</a>.
+I'm not around much on social media these days.</p>
+
+<div class="footnotes">
+
+<hr/>
+
+<ol>
+<li id="fn:If-a-person-cann">If a person cannot make such a split, then either rent is out of proportion with their expectations or they have budget constraints that limit their options. This algorithm cannot solve for these, but a transparent discussion can.</li>
+
+<li id="fn:This-can-technic">This can technically work, but in practice would give a bad social foundation for a roommate relationship Imagine having a roommate that pays $0 because the other roommates got into a bidding war.</li>
+</ol>
+
+</div>
+</body></html>
+  </article>
+  <hr />
 
   
     
@@ -340,7 +1119,6 @@
         break;
     }
   });
-
 </script>
 
   </body>

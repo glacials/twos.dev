@@ -85,7 +85,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
-<meta name="description" content="They&#39;re taking over my room..." />
+<meta name="description" content="Detailed Rent Algorithm" />
 <link
   rel="alternate"
   type="application/rss+xml"
@@ -100,7 +100,7 @@
 />
 <title>
   Ben Carlsson's
-      They&#39;re taking over my room...</title>
+      Detailed Rent Algorithm</title>
 <link rel="stylesheet" href="style.css" />
 
 <link
@@ -125,28 +125,12 @@
     <div class="container">
       <nav class="primary">
   
+    <a class="muted" href="/rent.html"
+      ><div class="muted nav-text">&larr; How to Split Rent</div></a
+    >
+  
   <h1 class="website-title">
-    They&#39;re taking over my room...</h1>
-  <div class="hierarchy">
-      <div class="nav-wrapper">
-        <a href="/"><div class="nav-text">Home</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/archives.html"><div class="nav-text">Blog</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/newsletter.html"><div class="nav-text">Newsletter</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/now.html"><div class="nav-text">Now</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/photos.html"><div class="nav-text">Photos</div></a>
-      </div>
-      <div class="nav-wrapper">
-        <a href="/software.html"><div class="nav-text">Software</div></a>
-      </div>
-    </div>
+    Detailed Rent Algorithm</h1>
   
 </nav>
 
@@ -155,54 +139,31 @@
         
         
         
-        <html><head></head><body><p><em>This post from 2007 was migrated from my old blog <a href="https://ifeelasleep.wordpress.com/" target="_blank">I FEEL
-ASLEEP</a>, which was shared with
-Neverhitboxes.</em></p>
+        <html><head></head><body>
 
-<hr/>
+<p>See parent page for starting steps.</p>
 
+<p>This page covers a detailed way to assign a room to the highest bidder,
+when doing that is not obvious.</p>
 
+<ol>
+<li>Start with 0 room assignments.</li>
+<li>Sort all bids in descending order, labeling each with its bidder and room.
+There should be <span class="math inline">\(n^2\)</span> of them.</li>
+<li>If multiple bids for a room are equal,
+put them on the same line (mentally or literally).</li>
+<li>Go down the list of bids one by one. For each bid:
 
-<p>So the realtors have captured exactly one-half of my room. In the far end, my
-Nintendo character poster, my
-<a href="http://en.wikipedia.org/wiki/Avatar:_The_Last_Airbender" target="_blank">ATLA</a>
-<a href="http://en.wikipedia.org/wiki/Rasterbation" target="_blank">rasterbation</a> and my bed have all
-been defeated and replaced with schmancy art posters and thought-to-be-neat bed
-comforters. In the near end, my desk, my Kramer poster and my electronics have
-been untouched.</p>
+<ol>
+<li>If the bid's room is still unassigned, assign it to the bidder.</li>
+<li>If the bid's room is assigned, skip this and go to the next bid.</li>
+</ol></li>
+<li>If you reach two bids of the same amount for the same room,
+flip a coin.
+(Remember, everyone said they'd be happy with any of their selected room/price assignments.)</li>
+</ol>
 
-<p>It’s a square-off.</p>
-
-<p>A game of capture-the-point, if you will. We must reclaim the middle of my room!</p>
-
-<p>However, the opposing force has an unfair advantage: the window. It’s open, and
-come morning the sun will be a destructive force against our nocturnal nature.
-Even if we manage to capture the objective tonight, by tomorrow we will be
-unable to hold it. The only option is to retreat to a casing and live to fight
-another day. The casing may be flimsy, and it may break easily under rain, but
-this…this <em>cardboard box</em>…it is our only hope. We must accept it.</p>
-
-<p><em>Anyways</em>, today they painted the front door, so they needed to keep it <em>wide</em>
-open for a while so it could dry. Apparently they didn’t know I have three cats
-that are supposed to stay indoors and one that’s supposed to stay outdoors. I’m
-the only house resident around (my siblings are in college and my mom &amp; step-dad
-are on vacation), so not even the realtors knew about our cat situation until I
-got home from school. I managed to scrounge up two of the insider cats, and the
-contractor, a family friend, knew that the outside one was only supposed to come
-in to eat, so he took care of that.</p>
-
-<p>It’s 7:00p and I am now the only one home. And I’m not sure where one of the
-indoor cats is. She’s usually pretty reclusive, so I’m <em>hoping</em> she’s just
-hiding somewhere, but frankly I’ve looked everywhere she could viably be and
-have found no trace. She’s got a collar and everything, so if she did get out, I
-think we’ll be fine so long as she comes across any decent people, but I’m still
-in a nervous state until then. I emailed my mom to see if there’re any places
-she hides in that I don’t know about, but I don’t think there are many places I
-didn’t check.</p>
-
-<p>It’s too late to do much about it now; it’s very dark outside and I haven’t
-heard back from my mom yet, so I’ll have to wait until tomorrow in a situation
-that makes waiting horrible.</p>
+<p><a href="/rent.html#edge">back to Edge Cases heading</a></p>
 </body></html>
       </article>
       <footer>
@@ -213,9 +174,9 @@ that makes waiting horrible.</p>
                 
                   source:
                   <a
-                    href="https://github.com/glacials/twos.dev/blob/main/src/cold/realtors.md"
+                    href="https://github.com/glacials/twos.dev/blob/main/src/cold/rent_algorithm.md"
                     target="_blank"
-                    >src/cold/realtors.md</a
+                    >src/cold/rent_algorithm.md</a
                   >
                 
               
@@ -223,7 +184,7 @@ that makes waiting horrible.</p>
               
                 
                   published
-                  2007 October
+                  2025 December
                   
                 
               

@@ -1,0 +1,15 @@
+# Detailed Rent Algorithm
+
+See parent page for starting steps.
+
+This page covers a detailed way to assign a room to the highest bidder, when doing that is not obvious.
+
+1. Start with 0 room assignments.
+2. Sort all bids in descending order, labeling each with its bidder and room. There should be n^2 of them.
+3. If multiple bids for a room are equal, put them on the same line (mentally or literally).
+4. Go down the list of bids one by one. For each bid:
+	1. If the bid's room is still unassigned, assign it to the bidder.
+	2. If the bid's room is assigned, skip this and go to the next bid.
+5. If you reach two bids of the same amount for the same room, flip a coin. (Remember, everyone said they'd be happy with any of their selected room/price assignments.)
+
+=> /rent.html#edge back to Edge Cases heading
