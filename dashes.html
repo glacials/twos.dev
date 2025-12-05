@@ -150,13 +150,13 @@
 
 <ul>
 <li>Hyphen : <span style="“font-family:sans-serif”">-</span></li>
-<li>En dash: <span style="font-family: sans-serif">–</span></li>
-<li>Em dash: <span style="font-family: sans-serif">—</span></li>
+<li>En dash: &lt;span style="font-family: sans-serif"&gt;–&lt;/span&gt;</li>
+<li>Em dash: &lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;</li>
 </ul>
 
 <p>The hyphen is used to join words, prefixes, and/or suffixes together, like father-in-law.</p>
 
-<p>The en dash is used to create ranges, like 2020<span style="font-family: sans-serif">–</span>2030.</p>
+<p>The en dash is used to create ranges, like 2020&lt;span style="font-family: sans-serif"&gt;–&lt;/span&gt;2030.</p>
 
 <p>The em dash can be used as a more powerful parenthetical, a replacement for a colon, or to represent an interruption of a speaker.</p>
 
@@ -176,7 +176,7 @@
 
 <h4>The Em Dash</h4>
 
-<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash's bounding box is an exact square<span style="font-family: sans-serif">—</span>in any font, at any size.</p>
+<p>With the tailwind given by the definition of the em, the em dash is easily defined: a dash that is <code>1em</code> long. In a way, the em dash took up the mantle of the square <code>M</code> type. Because the em dash is <code>1em</code> long, and the em is defined as the height of the font, the em dash's bounding box is an exact square&lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;in any font, at any size.</p>
 
 <h4>The Root Em</h4>
 
@@ -206,9 +206,9 @@
 
 <h3>Em Dash Overuse</h3>
 
-<p>The em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode<span style="font-family: sans-serif">—</span>thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.</p>
+<p>The em dash tends to be a trap to a new writer. It is sympathetic to stream-of-consciousness writing, wherein the writer is in "append-only" mode&lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;thinking not of the structure of the sentence but of what new words may clarify it when tacked on. For people whose writings spring from internal monologues this seems a neat way to avoid adding structure to organic thoughts.</p>
 
-<p>Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which<span style="font-family: sans-serif">—</span>for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it<span style="font-family: sans-serif">—</span>can be hard to do.</p>
+<p>Organic thoughts have their place in writing, but it turns out spending time perfecting sentence structure pays dividends to the reader. Long flowing thoughts connected by em dashes take mental effort to keep up with. Because the pre-dash thought may continue post-dash, the reader must keep its grammar and intention in an internal buffer, which&lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;for example, if the author decides to describe something tangential or dive into an example to assist with understanding, hoping their explanation can let the rest of the sentence off the hook but ultimately making the reader do more work to understand it&lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;can be hard to do.</p>
 
 <p>Separately, the em dash is a large glyph and hard to go unnoticed. Its use is obvious even in peripheral vision, so its overuse becomes a stain on the page before reading it.</p>
 
@@ -236,17 +236,23 @@
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I am looking at dates about 20
+</span></span><span class="line"><span class="ln">3</span><span class="cl">–30 days out.
 </span></span></code></pre>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20</span></span></code></pre>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm looking at dates about 20–
+</span></span><span class="line"><span class="ln">3</span><span class="cl">30 days out.
+</span></span></code></pre>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
 </span></span><span class="line"><span class="ln">2</span><span class="cl">I am pleased they thought that
+</span></span><span class="line"><span class="ln">3</span><span class="cl">—however odd it may be.
 </span></span></code></pre>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that</span></span></code></pre>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I'm pleased they thought that—
+</span></span><span class="line"><span class="ln">3</span><span class="cl">however odd it may be.
+</span></span></code></pre>
 
 <p>Strangely, the hyphen is the only dash that has an option here: the <a href="https://en.wikipedia.org/wiki/Hyphen#Nonbreaking_hyphens" target="_blank">nonbreaking hyphen</a> or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.</p>
 
@@ -257,19 +263,25 @@
 <p>For example, see this simulation of left-aligned text:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓ left page edge             ↓ right page edge
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I said they were</span></span></code></pre>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I said they were—wolf
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
+</span></span></code></pre>
 
 <p>And this simulation of justified text:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were</span></span></code></pre>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I    said    they   were—wolf
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
+</span></span></code></pre>
 
-<p>In the justified simulation, "were<span style="font-family: sans-serif">—</span>wolf" may read like the mythical creature "were-wolf" because the em dash looks short relative to the longer spaces.</p>
+<p>In the justified simulation, "were&lt;span style="font-family: sans-serif"&gt;—&lt;/span&gt;wolf" may read like the mythical creature "were-wolf" because the em dash looks short relative to the longer spaces.</p>
 
 <p>A solution surrounds each parenthetical em dash with a space on either side, causing its total width to scale up at twice the rate of spaces:</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">↓                            ↓
-</span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  </span></span></code></pre>
+</span></span><span class="line"><span class="ln">2</span><span class="cl">I   said  they  were  —  wolf
+</span></span><span class="line"><span class="ln">3</span><span class="cl">playdates don't last forever!
+</span></span></code></pre>
 
 <h3>Input Difficulties</h3>
 
@@ -317,18 +329,18 @@ characters.</p>
 
 <p>The hyphen, en dash, and em dash get all the love, but behind the scenes are a silent majority of dashes that don't often get to see the light of day.</p>
 
-<p>The <strong>swung dash</strong> (<span style="font-family: sans-serif">⁓</span>) is an elongated tilde used to stand in for a word being defined in a dictionary.<sup class="footnote-ref" id="fnref:swung"><a href="#fn:swung">2</a></sup></p>
+<p>The <strong>swung dash</strong> (&lt;span style="font-family: sans-serif"&gt;⁓&lt;/span&gt;) is an elongated tilde used to stand in for a word being defined in a dictionary.<sup class="footnote-ref" id="fnref:swung"><a href="#fn:swung">2</a></sup></p>
 
 <blockquote>
 <p>boot (n)</p>
 
-<p>ex: Let me put on my other <span style="font-family: sans-serif">⁓</span>.</p>
+<p>ex: Let me put on my other &lt;span style="font-family: sans-serif"&gt;⁓&lt;/span&gt;.</p>
 </blockquote>
 
 <p>The <strong>horizontal bar</strong> is a way to introduce quotations. Confusingly, its length is almost always identical to the em dash.</p>
 
 <blockquote>
-<p><span style="font-family: sans-serif">―</span> O Miss Douce! Miss Kennedy protested. You horrid thing!</p>
+<p>&lt;span style="font-family: sans-serif"&gt;―&lt;/span&gt; O Miss Douce! Miss Kennedy protested. You horrid thing!</p>
 
 <p><em>James Joyce's Ulysses p. 335</em></p>
 </blockquote>
@@ -336,13 +348,14 @@ characters.</p>
 <p>The <strong>hyphen bullet</strong> is a hyphen to be used in place of a bullet point.</p>
 
 <pre tabindex="0" class="chroma"><code><span class="line"><span class="ln">1</span><span class="cl">- This is a hyphen
+</span></span><span class="line"><span class="ln">2</span><span class="cl">⁃ This is a hyphen bullet
 </span></span></code></pre>
 
 <p>The <strong>figure dash</strong> is a variant of the en dash having the same width as digits (which are uniformly wide in most fonts). It is meant for phone numbers and other numeric contexts where columnar alignment is required or pleasing.</p>
 
 <pre><span style="font-family:serif"><span style="font-family:monospace">Figure dash: </span><span style="font-size:2em">867‒5309</span> ← same as below
 <span style="font-family:monospace">Number:      </span><span style="font-size:2em">86715309</span> ← same as above
-<span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867<span style="font-family: sans-serif">–</span>5309</span> ← longer
+<span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867–5309</span> ← longer
 <span style="font-family:monospace">Hyphen:      </span><span style="font-size:2em">867-5309</span> ← shorter
 </span></pre>
 

@@ -398,8 +398,8 @@ Some keybinds:</p>
 Some keybinds that work in macOS but are overridden by Emacs's use of modifiers:</p>
 <div class="src src-emacs-lisp">
 <div class="highlight">
-<pre>  (global-set-key (kbd "s--") (lambda () (interactive) (insert "<span style="font-family: sans-serif">–</span>"))) ; En dash
-  (global-set-key (kbd "s-_") (lambda () (interactive) (insert "<span style="font-family: sans-serif">—</span>"))) ; Em dash
+<pre>  (global-set-key (kbd "s--") (lambda () (interactive) (insert "–"))) ; En dash
+  (global-set-key (kbd "s-_") (lambda () (interactive) (insert "—"))) ; Em dash
 </pre>
 </div>
 </div>
@@ -507,7 +507,7 @@ More:</p>
   								("&lt;="          . "≤")
   								("&gt;="          . "≥")
   								("#+BEGIN_SRC" . "")
-  								("#+END_SRC"   . "<span style="font-family: sans-serif">―</span>")
+  								("#+END_SRC"   . "―")
   								;; Below are commented until/unless I start using them frequently.
   																				;				("[#A]" . "")
   																				;				("[#B]" . "")
@@ -516,7 +516,7 @@ More:</p>
   																				;				("[X]" . "")
   																				;				("[-]" . "")
   																				;				(":PROPERTIES:" . "")
-  																				;				(":END:" . "<span style="font-family: sans-serif">―</span>")
+  																				;				(":END:" . "―")
   																				;				("#+STARTUP:" . "")
   																				;				("#+TITLE: " . "")
   																				;				("#+RESULTS:" . "")
@@ -533,7 +533,7 @@ More:</p>
 </pre>
 </div>
 </div>
-<pre class="example">((TODO . ) (BLKD . ) (CNCL . ) (DONE . ) (-&gt;&gt; . ↠) (-&gt; . →) (&lt;- . ←) (&lt;- . ←) (=&gt; . ⇒) (&lt;= . ≤) (&gt;= . ≥) (#+BEGIN_SRC . ) (#+END_SRC . <span style="font-family: sans-serif">―</span>))
+<pre class="example">((TODO . ) (BLKD . ) (CNCL . ) (DONE . ) (-&gt;&gt; . ↠) (-&gt; . →) (&lt;- . ←) (&lt;- . ←) (=&gt; . ⇒) (&lt;= . ≤) (&gt;= . ≥) (#+BEGIN_SRC . ) (#+END_SRC . ―))
 </pre>
 </div>
 </div>
