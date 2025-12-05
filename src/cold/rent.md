@@ -1,5 +1,5 @@
 ---
-date: 2025-11-30
+date: 2025-12-04
 filename: rent.html
 preview: A simple framework for deciding who should pay what for which room.
 type: post
