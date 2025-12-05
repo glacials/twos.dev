@@ -147,7 +147,7 @@ to make it difficult to manipulate dependent prices.
 The second constraint is that the sum of all rooms' prices must total to $Rent$.
 
 If we were to simply charge the highest bidder their bid amount,
-the total would often exceed $Rent$.
+the total would almost always exceed $Rent$.
 Some common strategies exist to lower the amount the winner pays,
 such as making them pay the [second-highest amount](https://en.wikipedia.org/wiki/Generalized_second-price_auction),
 but we need a guarantee of a specific sum, not just "lower than the sum of the highest bidders".
