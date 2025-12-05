@@ -2,6 +2,11 @@
   {{ if .IsType "post" -}}
     <a href="/"><div class="muted nav-text">&larr; twos.dev</div></a>
   {{- end -}}
+  {{ with parent }}
+    <a class="muted" href="{{ .Metadata.WebPath }}"
+      ><div class="muted nav-text">&larr; {{ .Metadata.Title }}</div></a
+    >
+  {{ end }}
   <h1 class="website-title">
     {{ if eq .WebPath "/index.html" }}
       Ben Carlsson
@@ -9,12 +14,11 @@
       {{- if .IsType "post" -}}
         {{ .Title }}
       {{- else -}}
-        Ben Carlsson /
         {{ .Title }}
       {{- end -}}
     {{- end -}}
   </h1>
-  {{ if not (.IsType "post") -}}
+  {{ if (and (not (.IsType "post")) (not parent)) -}}
     <div class="hierarchy">
       <div class="nav-wrapper">
         <a href="/"><div class="nav-text">Home</div></a>

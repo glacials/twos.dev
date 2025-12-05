@@ -1,0 +1,400 @@
+<script>
+  (() => {
+    const widget = document.querySelector("#rent-widget");
+    if (!widget) return;
+
+    const countInput = widget.querySelector("[data-rent-count]");
+    const rentInput = widget.querySelector("[data-rent-total]");
+    const resetButton = widget.querySelector("[data-rent-reset]");
+    const grid = widget.querySelector("#rent-widget-grid");
+    const messages = widget.querySelector("#rent-widget-messages");
+    const results = widget.querySelector("#rent-widget-results");
+
+    const currency = new Intl.NumberFormat("en-US", {
+      style: "currency",
+      currency: "USD",
+      maximumFractionDigits: 0,
+      minimumFractionDigits: 0,
+    });
+    const formatMoney = (value) => currency.format(Math.round(value ?? 0));
+
+    const baseState = () => ({
+      rooms: 3,
+      roommates: 3,
+      rent: 2500,
+      roomNames: ["North Bedroom", "South Bedroom", "East Bedroom"],
+      roommateNames: ["Arnav", "Betty", "Carol"],
+      bids: [
+        [1000, 1000, 500],
+        [1100, 600, 800],
+        [1300, 600, 600],
+      ],
+    });
+
+    let state = baseState();
+
+    const MAX_COUNT = 8;
+    const clampCount = (value, fallback) => {
+      if (!Number.isFinite(value)) return fallback;
+      return Math.max(1, Math.min(MAX_COUNT, Math.floor(value)));
+    };
+    const parseCount = (input, fallback) =>
+      input?.value === ""
+        ? fallback
+        : clampCount(Number(input?.value ?? fallback), fallback);
+    const parseRent = (input, fallback) => {
+      const value = Number.parseFloat(input?.value ?? fallback);
+      return Number.isFinite(value) && value >= 0 ? value : fallback;
+    };
+
+    const readCount = () => {
+      const count = parseCount(countInput, state.rooms);
+      state.rooms = count;
+      state.roommates = count;
+      if (countInput) countInput.value = count;
+    };
+    const readRent = () => {
+      state.rent = parseRent(rentInput, state.rent);
+      if (rentInput) rentInput.value = state.rent;
+    };
+
+    const readGridIntoState = () => {
+      const roomNameInputs = grid.querySelectorAll("[data-room-name]");
+      if (roomNameInputs.length) {
+        state.roomNames = Array.from(roomNameInputs).map((input, idx) => {
+          const value = input.value.trim();
+          return value || `Room ${idx + 1}`;
+        });
+      }
+
+      const roommateNameInputs = grid.querySelectorAll("[data-roommate-name]");
+      if (roommateNameInputs.length) {
+        state.roommateNames = Array.from(roommateNameInputs).map(
+          (input, idx) => input.value.trim() || `Roommate ${idx + 1}`,
+        );
+      }
+
+      const bids = Array.from({ length: state.roommateNames.length }, () =>
+        Array.from({ length: state.roomNames.length }, () => 0),
+      );
+
+      grid.querySelectorAll("[data-bid]").forEach((input) => {
+        const roomIndex = Number(input.dataset.roomIndex);
+        const roommateIndex = Number(input.dataset.roommateIndex);
+        const value = Number.parseFloat(input.value);
+        if (
+          Number.isInteger(roomIndex) &&
+          Number.isInteger(roommateIndex) &&
+          roomIndex < state.roomNames.length &&
+          roommateIndex < state.roommateNames.length
+        ) {
+          bids[roommateIndex][roomIndex] = Number.isFinite(value) ? value : 0;
+        }
+      });
+
+      state.bids = bids;
+    };
+
+    const resizeState = () => {
+      state.roomNames = state.roomNames.slice(0, state.rooms);
+      while (state.roomNames.length < state.rooms) {
+        state.roomNames.push(`Room ${state.roomNames.length + 1}`);
+      }
+
+      state.roommateNames = state.roommateNames.slice(0, state.roommates);
+      while (state.roommateNames.length < state.roommates) {
+        state.roommateNames.push(`Roommate ${state.roommateNames.length + 1}`);
+      }
+
+      state.bids = state.bids.slice(0, state.roommates);
+      while (state.bids.length < state.roommates) {
+        state.bids.push(Array.from({ length: state.rooms }, () => 0));
+      }
+      state.bids = state.bids.map((row) => {
+        const updated = row.slice(0, state.rooms);
+        while (updated.length < state.rooms) {
+          updated.push(0);
+        }
+        return updated;
+      });
+    };
+
+    const renderGrid = () => {
+      grid.innerHTML = "";
+      const table = document.createElement("table");
+      table.className = "rent-widget__table";
+
+      const thead = document.createElement("thead");
+      const headerRow = document.createElement("tr");
+      const corner = document.createElement("th");
+      corner.textContent = "Roommate";
+      headerRow.appendChild(corner);
+
+      state.roomNames.forEach((name, idx) => {
+        const th = document.createElement("th");
+        const input = document.createElement("input");
+        input.type = "text";
+        input.value = name;
+        input.placeholder = `Room ${idx + 1}`;
+        input.dataset.roomName = "true";
+        input.dataset.roomIndex = String(idx);
+        th.appendChild(input);
+        headerRow.appendChild(th);
+      });
+      thead.appendChild(headerRow);
+      table.appendChild(thead);
+
+      const tbody = document.createElement("tbody");
+      state.roommateNames.forEach((name, roommateIndex) => {
+        const row = document.createElement("tr");
+        const nameCell = document.createElement("th");
+        const nameInput = document.createElement("input");
+        nameInput.type = "text";
+        nameInput.value = name;
+        nameInput.placeholder = `Roommate ${roommateIndex + 1}`;
+        nameInput.dataset.roommateName = "true";
+        nameInput.dataset.roommateIndex = String(roommateIndex);
+        nameCell.appendChild(nameInput);
+        row.appendChild(nameCell);
+
+        state.roomNames.forEach((_, roomIndex) => {
+          const cell = document.createElement("td");
+          const bidInput = document.createElement("input");
+          bidInput.type = "number";
+          bidInput.inputMode = "decimal";
+          bidInput.min = "0";
+          bidInput.step = "10";
+          const value = state.bids?.[roommateIndex]?.[roomIndex] ?? "";
+          bidInput.value = value;
+          bidInput.dataset.bid = "true";
+          bidInput.dataset.roomIndex = String(roomIndex);
+          bidInput.dataset.roommateIndex = String(roommateIndex);
+          cell.appendChild(bidInput);
+          row.appendChild(cell);
+        });
+
+        tbody.appendChild(row);
+      });
+      table.appendChild(tbody);
+
+      grid.appendChild(table);
+    };
+
+    const highestPerRoom = () => {
+      const highest = [];
+      for (let room = 0; room < state.rooms; room++) {
+        let top = -Infinity;
+        let winners = [];
+        state.bids.forEach((row, roommateIndex) => {
+          const value = row[room] ?? 0;
+          if (value > top) {
+            top = value;
+            winners = [roommateIndex];
+          } else if (value === top) {
+            winners.push(roommateIndex);
+          }
+        });
+        highest.push({ value: top, winners });
+      }
+      return highest;
+    };
+
+    const pickAssignment = () => {
+      if (state.rooms !== state.roommates) return null;
+
+      const indices = Array.from({ length: state.roommates }, (_, idx) => idx);
+      const max = highestPerRoom();
+      let best = null;
+
+      const permute = (prefix, remaining) => {
+        if (prefix.length === state.rooms) {
+          let topWins = 0;
+          let total = 0;
+          let slack = 0;
+
+          for (let room = 0; room < state.rooms; room++) {
+            const roommate = prefix[room];
+            const bid = state.bids?.[roommate]?.[room] ?? 0;
+            total += bid;
+            if (max[room].winners.includes(roommate)) {
+              topWins += 1;
+            } else {
+              slack += max[room].value - bid;
+            }
+          }
+
+          const candidate = { order: prefix.slice(), topWins, total, slack };
+          const better =
+            !best ||
+            candidate.topWins > best.topWins ||
+            (candidate.topWins === best.topWins &&
+              candidate.total > best.total) ||
+            (candidate.topWins === best.topWins &&
+              candidate.total === best.total &&
+              candidate.slack < best.slack);
+
+          if (better) best = candidate;
+          return;
+        }
+
+        remaining.forEach((value, idx) => {
+          const nextPrefix = prefix.concat(value);
+          const nextRemaining = remaining
+            .slice(0, idx)
+            .concat(remaining.slice(idx + 1));
+          permute(nextPrefix, nextRemaining);
+        });
+      };
+
+      permute([], indices);
+      return best?.order ?? null;
+    };
+
+    const renderResults = () => {
+      messages.innerHTML = "";
+      results.innerHTML = "";
+
+      const rowTotals = state.bids.map((row) =>
+        row.reduce(
+          (sum, value) => sum + (Number.isFinite(value) ? value : 0),
+          0,
+        ),
+      );
+      const target = Number.isFinite(state.rent) ? state.rent : null;
+
+      const rows = grid.querySelectorAll("tbody tr");
+      rows.forEach((row) => {
+        row.classList.remove("rent-widget__row--invalid");
+        row.removeAttribute("title");
+        row.removeAttribute("data-error");
+      });
+      const invalidRows = [];
+
+      if (target !== null) {
+        rowTotals.forEach((value, idx) => {
+          const bad = Math.abs(value - target) > 0.01;
+          if (bad) {
+            rows[idx]?.classList.add("rent-widget__row--invalid");
+            rows[idx]?.setAttribute(
+              "data-error",
+              `${
+                state.roommateNames[idx] ?? `Roommate ${idx + 1}`
+              }’s bids should sum to the rent (current sum: ${formatMoney(
+                value,
+              )}).`,
+            );
+            invalidRows.push(state.roommateNames[idx] ?? `Roommate ${idx + 1}`);
+          }
+        });
+      }
+
+      const averages = [];
+      for (let room = 0; room < state.rooms; room++) {
+        let total = 0;
+        for (let roommate = 0; roommate < state.roommates; roommate++) {
+          total += state.bids[roommate]?.[room] ?? 0;
+        }
+        averages.push(total / state.roommates);
+      }
+
+      const assignment = pickAssignment();
+      if (!assignment) {
+        const note = document.createElement("p");
+        note.textContent = "Enter bids to see who gets which room.";
+        results.appendChild(note);
+        return;
+      }
+
+      const highest = highestPerRoom();
+      const table = document.createElement("table");
+      table.className = "rent-widget__results-table";
+
+      const header = document.createElement("thead");
+      const headRow = document.createElement("tr");
+      ["Room", "Occupant", "Willing To Pay", "Will Pay"].forEach((label) => {
+        const th = document.createElement("th");
+        th.textContent = label;
+        headRow.appendChild(th);
+      });
+      header.appendChild(headRow);
+      table.appendChild(header);
+
+      const body = document.createElement("tbody");
+      const masked = invalidRows.length > 0;
+      const roundedPays = averages.map((value) => Math.round(value ?? 0));
+      const adjustedPays = roundedPays.slice();
+      const targetTotal = Math.round(state.rent ?? 0);
+      const currentTotal = adjustedPays.reduce((a, b) => a + b, 0);
+      const diff = targetTotal - currentTotal;
+      if (!masked && diff !== 0 && adjustedPays.length > 0) {
+        let minIdx = 0;
+        for (let i = 1; i < adjustedPays.length; i++) {
+          if (adjustedPays[i] < adjustedPays[minIdx]) {
+            minIdx = i;
+          }
+        }
+        adjustedPays[minIdx] += diff;
+      }
+
+      assignment.forEach((roommateIndex, roomIndex) => {
+        const bid = state.bids?.[roommateIndex]?.[roomIndex] ?? 0;
+        const isTop = highest[roomIndex].winners.includes(roommateIndex);
+
+        const winnerName =
+          state.roommateNames[roommateIndex] ?? `Roommate ${roommateIndex + 1}`;
+
+        const row = document.createElement("tr");
+        [
+          state.roomNames[roomIndex] ?? `Room ${roomIndex + 1}`,
+          masked ? "—" : winnerName,
+          masked ? "—" : formatMoney(bid),
+          masked ? "—" : formatMoney(adjustedPays[roomIndex]),
+        ].forEach((value, idx) => {
+          const cell = document.createElement("td");
+          cell.textContent = value;
+          row.appendChild(cell);
+        });
+        body.appendChild(row);
+      });
+
+      table.appendChild(body);
+      results.appendChild(table);
+
+    };
+
+    const handleRebuild = () => {
+      readGridIntoState();
+      readCount();
+      readRent();
+      resizeState();
+      renderGrid();
+      messages.innerHTML = "";
+      results.innerHTML = "";
+      renderResults();
+    };
+
+    countInput?.addEventListener("input", handleRebuild);
+    rentInput?.addEventListener("input", () => {
+      readRent();
+      renderResults();
+    });
+    grid.addEventListener("input", () => {
+      readGridIntoState();
+      renderResults();
+    });
+
+    resetButton?.addEventListener("click", () => {
+      state = baseState();
+      if (countInput) countInput.value = state.rooms;
+      if (rentInput) rentInput.value = state.rent;
+      renderGrid();
+      messages.innerHTML = "";
+      renderResults();
+    });
+
+    if (countInput) countInput.value = state.rooms;
+    if (rentInput) rentInput.value = state.rent;
+    renderGrid();
+    renderResults();
+  })();
+</script>
