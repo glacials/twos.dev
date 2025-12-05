@@ -226,8 +226,8 @@ The **figure dash** is a variant of the en dash having the same width as digits 
 
 <pre><span style="font-family:serif"><span style="font-family:monospace">Figure dash: </span><span style="font-size:2em">867‒5309</span> ← same as below
 <span style="font-family:monospace">Number:      </span><span style="font-size:2em">86715309</span> ← same as above
-<span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867–5309</span> ← longer
 <span style="font-family:monospace">Hyphen:      </span><span style="font-size:2em">867-5309</span> ← shorter
+<span style="font-family:monospace">En dash:     </span><span style="font-size:2em">867–5309</span> ← longer
 </span></pre>
 
 Lastly, my favorite: the **soft hyphen** is a zero-width, **invisible** character that (opposite to the hard hyphen) denotes a place the word wrapper is _welcome_ to wrap. This can be used in the middle of a compound word or long line of inert code to provide a cleaner wrap.
