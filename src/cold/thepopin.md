@@ -47,7 +47,7 @@ open-office pop-in: the inability to shut your damned door.
 
 ![A screenshot of a Discord server with several voice channels, some empty, some having one person in them.](/img/thepopin-0-dark.png)
 
-The company Discord server on a workday.
+_The company Discord server on a workday._
 
 In our company Discord server, we give everyone one voice channel of their
 own. This is your "office". When you are online and able to be disturbed, you
