@@ -29,7 +29,7 @@ higher in number) and even to the replacement of trackers, emails, and wikis
 with DMs.
 
 There's a lot wrong with the pop-in, but like any tool it has its uses. Many
-great products&mdash;companies, even&mdash;have been built on the shoulders of
+great products—companies, even—have been built on the shoulders of
 the pop-in.
 
 ## The Remote Pop-In
