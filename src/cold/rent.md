@@ -166,7 +166,7 @@ I value sound isolation and light,
 but you may value an attached bathroom or extra space.
 
 Instead of picking randomly and silently settling to avoid tension,
-consider using basic economics to do proper price discovery and hopefully everyone can be a bit happier with how it turns out.
+consider using basic economics to do price discovery and hopefully everyone can be a bit happier with how it turns out.
 
 I'd be delighted to hear if this helps you out.
 Reach me at [ben@twos.dev](mailto:ben@twos.dev).
