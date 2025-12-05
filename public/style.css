@@ -423,7 +423,6 @@ nav.primary:has(+ article) {
 .nav-text,
 .nav-wrapper {
   display: inline;
-  white-space: nowrap;
 }
 
 .nav-wrapper + .nav-wrapper::before {
