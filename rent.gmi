@@ -57,7 +57,7 @@ The highest bidder gets the room. They pay the average.
 
 The averages always sum to .
 
-Almost always, each person pays less than what they would have been happy with so everyone feels like they got a deal.
+Almost always, each person pays less than what they would have been happy with; everyone feels like they got a deal.
 
 This works for any number of roommates.
 
