@@ -131,7 +131,7 @@ I'm pleased they thought that—
 however odd it may be.
 ```
 
-Strangely, the hyphen is the only dash that has an option here: the [non-breaking hyphen](https://en.wikipedia.org/wiki/Hyphen#Non-breaking_hyphens) or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.
+Strangely, the hyphen is the only dash that has an option here: the [non-breaking hyphen](https://en.wikipedia.org/wiki/Hyphen#Nonbreaking_hyphens) or "hard hyphen" is a hyphen glyph that sends a signal to the word wrapper that a wrap must not happen after it.
 
 ### Drowned Dashes
 
