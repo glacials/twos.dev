@@ -126,7 +126,7 @@ We can't hold a standard auction; when any room is bid on, the other rooms' pric
 
 The second constraint is that the sum of all rooms' prices must total to .
 
-If we were to simply charge the highest bidder their bid amount, the total would often exceed . Some common strategies exist to lower the amount the winner pays, such as making them pay the second-highest amount, but we need a guarantee of a specific sum, not just "lower than the sum of the highest bidders".
+If we were to simply charge the highest bidder their bid amount, the total would almost always exceed . Some common strategies exist to lower the amount the winner pays, such as making them pay the second-highest amount, but we need a guarantee of a specific sum, not just "lower than the sum of the highest bidders".
 
 => https://en.wikipedia.org/wiki/Generalized_second-price_auction second-highest amount
 
