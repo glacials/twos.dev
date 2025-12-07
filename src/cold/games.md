@@ -36,3 +36,7 @@ Story.
 ## Titanfall 2
 
 Story.
+
+# Sekiro
+
+Gameplay.
