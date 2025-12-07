@@ -15,7 +15,7 @@ I wish I could play for the first time again.
 
 ## Celeste
 
-Story.
+Story and gameplay.
 
 ## Control
 
