@@ -3,7 +3,7 @@ date: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page
-updated: 2025-12-04
+updated: 2026-01-03
 ---
 
 # Now Page
@@ -21,13 +21,13 @@ from my home in **Seattle, WA**.
 I'm as into games as ever. I'm currently playing:
 
 - [ARC Raiders](https://store.steampowered.com/app/1808500/ARC_Raiders/)
-- [Beat Saber](https://store.steampowered.com/app/620980/Beat_Saber/)
-- [The Last Caretaker](https://store.steampowered.com/app/1783560/The_Last_Caretaker/)
+- [Cult of the Lamb](https://store.steampowered.com/app/1313140/Cult_of_the_Lamb/)
+- [Clair Obscur: Expedition 33](https://store.steampowered.com/app/1903340/Clair_Obscur_Expedition_33/)
 
 I recently completed:
 
+- [The Last Caretaker](https://store.steampowered.com/app/1783560/The_Last_Caretaker/)
 - [Stardew Valley](https://store.steampowered.com/app/413150/Stardew_Valley/)
-- [Rogue Legacy 2](https://store.steampowered.com/app/1253920/Rogue_Legacy_2/)
 
 ### Books
 
