@@ -37,6 +37,18 @@ gear:
   - make: Olympus
     model: M.Zuiko 45mm F1.8
     link: https://amzn.to/3NATgXT
+  - make: Fujifilm
+    model: X-T5
+    link: https://amzn.to/49qlsqL
+    exif:
+      make: FUJIFILM
+      model: X-T5
+  - make: Fujifilm
+    model: 16-50mm F2.8
+    link: https://amzn.to/4piU57J
+    exif:
+      make: FUJIFILM
+      model: XF16-50mmF2.8-4.8 R LM WR
 name: Ben Carlsson
 production:
   url: twos.dev

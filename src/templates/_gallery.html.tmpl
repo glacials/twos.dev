@@ -4,13 +4,10 @@
     <input type="checkbox" />
     {{ $img := . }}
     {{ $downscaled := index .Thumbnails 0 }}
-    {{ $fullscreen := index .Thumbnails 0 }}
+    {{ $fullscreen := . }}
     {{ range .Thumbnails }}
       {{ if le .Height 256 }}
         {{ $downscaled = . }}
-      {{ end }}
-      {{ if le .Height 1024 }}
-        {{ $fullscreen = . }}
       {{ end }}
     {{ end }}
     <img
