@@ -662,11 +662,11 @@ video + video {
   display: block;
 }
 
-.gallery-item:has(input) img.fullsize {
+.gallery-item:has(input) .fullsize {
   display: none;
 }
 
-.gallery-item:has(input:checked) img.fullsize,
+.gallery-item:has(input:checked) .fullsize,
 .gallery-item:has(input:checked) img.thumbnail {
   display: block;
   left: 50%;
@@ -678,7 +678,7 @@ video + video {
   transform: translate(-50%, -50%);
 }
 
-.gallery-item:has(input:checked) img.fullsize {
+.gallery-item:has(input:checked) .fullsize {
   z-index: 9;
 }
 
