@@ -1,0 +1,3 @@
+# Japan 2026 Trip
+
+   {{ template "_gallery.html.tmpl" "2026-japan" }} 
