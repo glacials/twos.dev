@@ -16,12 +16,11 @@
       src="{{ $downscaled.WebPath }}"
       title=""
     />
-    <span class="fullsize fullsize-loading">
-      loading fullsize
-    </span>
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
     <img
       alt="{{ $img.Alt }}"
-      class="fullsize"
+      class="fullsize fullsize-photo"
+      decoding="async"
       loading="lazy"
       src="{{ $fullscreen.WebPath }}"
       title=""
