@@ -41,6 +41,104 @@
     window.location.replace("https://pkg.go.dev/twos.dev/winter");
   }
 
+  const galleryHashPrefix = "photo=";
+  const galleryInputSelector = ".gallery-item input[type=checkbox]";
+
+  function getGalleryPhoto(input) {
+    return input.closest(".gallery-item")?.dataset.galleryPhoto;
+  }
+
+  function getGalleryPhotoFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (!hasGalleryHash()) {
+      return null;
+    }
+
+    try {
+      return decodeURIComponent(hash.slice(galleryHashPrefix.length));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function hasGalleryHash() {
+    return window.location.hash.slice(1).startsWith(galleryHashPrefix);
+  }
+
+  function findGalleryInput(photo) {
+    return Array.from(document.querySelectorAll(".gallery-item"))
+      .find((item) => item.dataset.galleryPhoto === photo)
+      ?.querySelector("input[type=checkbox]");
+  }
+
+  function replaceGalleryHash(hash) {
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}${hash}`,
+    );
+  }
+
+  function syncGalleryHash(input) {
+    const photo = getGalleryPhoto(input);
+    if (!photo) {
+      return;
+    }
+
+    replaceGalleryHash(`#${galleryHashPrefix}${encodeURIComponent(photo)}`);
+  }
+
+  function clearGalleryHash() {
+    if (hasGalleryHash()) {
+      replaceGalleryHash("");
+    }
+  }
+
+  function openGalleryInput(input, updateHash = true) {
+    const current = document.querySelector(".gallery-item input:checked");
+    if (current && current !== input) {
+      current.checked = false;
+    }
+
+    input.checked = true;
+
+    if (updateHash) {
+      syncGalleryHash(input);
+    }
+  }
+
+  function closeGalleryInput(input) {
+    input.checked = false;
+    clearGalleryHash();
+  }
+
+  function syncGalleryFromHash() {
+    const input = findGalleryInput(getGalleryPhotoFromHash());
+    const current = document.querySelector(".gallery-item input:checked");
+
+    if (input) {
+      openGalleryInput(input, false);
+    } else if (current) {
+      current.checked = false;
+    }
+  }
+
+  document.addEventListener("change", (event) => {
+    const input = event.target.closest?.(galleryInputSelector);
+    if (!input) {
+      return;
+    }
+
+    if (input.checked) {
+      openGalleryInput(input);
+    } else if (!document.querySelector(".gallery-item input:checked")) {
+      clearGalleryHash();
+    }
+  });
+
+  window.addEventListener("hashchange", syncGalleryFromHash);
+  syncGalleryFromHash();
+
   // Change lightbox photo using arrow keys.
   document.addEventListener("keydown", (event) => {
     switch (event.key) {
@@ -55,11 +153,12 @@
           document.querySelector(
             ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
           );
-        if (moveLeftFrom) {
-          moveLeftFrom.checked = false;
-        }
         if (moveLeftTo) {
-          moveLeftTo.checked = true;
+          event.preventDefault();
+          openGalleryInput(moveLeftTo);
+        } else if (moveLeftFrom) {
+          event.preventDefault();
+          closeGalleryInput(moveLeftFrom);
         }
         break;
       case "ArrowRight":
@@ -73,11 +172,12 @@
           document.querySelector(
             ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
           );
-        if (moveRightFrom) {
-          moveRightFrom.checked = false;
-        }
         if (moveRightTo) {
-          moveRightTo.checked = true;
+          event.preventDefault();
+          openGalleryInput(moveRightTo);
+        } else if (moveRightFrom) {
+          event.preventDefault();
+          closeGalleryInput(moveRightFrom);
         }
         break;
       case " ": // space
@@ -85,7 +185,7 @@
         const current = document.querySelector(".gallery-item input:checked");
         if (current) {
           event.preventDefault();
-          current.checked = false;
+          closeGalleryInput(current);
         }
         break;
     }

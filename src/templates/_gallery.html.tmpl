@@ -1,6 +1,6 @@
 <h2>{{ . }}&rarr;</h2>
 {{ range (gallery .) }}
-  <label class="gallery-item">
+  <label class="gallery-item" data-gallery-photo="{{ .WebPath }}">
     <input type="checkbox" />
     {{ $img := . }}
     {{ $downscaled := index .Thumbnails 0 }}
@@ -16,10 +16,7 @@
       src="{{ $downscaled.WebPath }}"
       title=""
     />
-    <span
-      class="fullsize"
-      style="padding-left: 2em; padding-right: 2em; background-color: black; position: absolute; left: 50%; top: 50%;"
-    >
+    <span class="fullsize fullsize-loading">
       loading fullsize
     </span>
     <img
@@ -34,7 +31,7 @@
         <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a><br />
       {{ end }}
       {{ with .Lens }}
-        <a href="{{ .Link }}">{{ .Make }} {{ .Model }}</a>
+        <a href="{{ .Link }}" target="_blank">{{ .Make }} {{ .Model }}</a>
         @
       {{ end }}
       {{ .FocalLength }}mm &bull;

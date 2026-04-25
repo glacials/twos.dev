@@ -682,6 +682,13 @@ video + video {
   z-index: 9;
 }
 
+.gallery-item .fullsize-loading {
+  background-color: black;
+  color: white;
+  padding-left: 2em;
+  padding-right: 2em;
+}
+
 .light-only {
   display: none;
 }
