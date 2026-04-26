@@ -525,10 +525,10 @@
   const galleryHashPrefix = "photo=";
   const galleryInputSelector = ".gallery-item input[type=checkbox]";
   const galleryItemSelector = ".gallery-item";
-  const galleryAnimationMs = 420;
-  const galleryClosePaddingMs = 40;
+  const galleryCloseFallbackMs = 30000;
   const galleryLoadTokens = new WeakMap();
   const galleryCloseTimers = new WeakMap();
+  let gallerySwapToken = 0;
 
   function getGalleryPhoto(input) {
     return input.closest(".gallery-item")?.dataset.galleryPhoto;
@@ -624,9 +624,9 @@
   }
 
   function clearGalleryCloseTimer(item) {
-    const timer = galleryCloseTimers.get(item);
-    if (timer) {
-      window.clearTimeout(timer);
+    const cleanup = galleryCloseTimers.get(item);
+    if (cleanup) {
+      cleanup();
       galleryCloseTimers.delete(item);
     }
   }
@@ -636,10 +636,13 @@
     item.classList.remove(
       "is-active",
       "is-animating",
+      "is-backdrop-visible",
       "is-closing",
       "is-expanded",
       "is-loaded",
       "is-loading",
+      "is-motion-fullsize",
+      "is-settled",
     );
     galleryLoadTokens.delete(item);
   }
@@ -650,10 +653,27 @@
       return Promise.resolve();
     }
 
+    fullsize.loading = "eager";
+
     if (fullsize.complete && fullsize.naturalWidth > 0) {
       return fullsize.decode
         ? fullsize.decode().catch(() => {})
         : Promise.resolve();
+    }
+
+    if (fullsize.decode) {
+      return fullsize.decode().catch(
+        () =>
+          new Promise((resolve) => {
+            const done = () => {
+              fullsize.removeEventListener("load", done);
+              fullsize.removeEventListener("error", done);
+              resolve();
+            };
+            fullsize.addEventListener("load", done);
+            fullsize.addEventListener("error", done);
+          }),
+      );
     }
 
     return new Promise((resolve) => {
@@ -667,6 +687,58 @@
     }).then(() =>
       fullsize.decode ? fullsize.decode().catch(() => {}) : Promise.resolve(),
     );
+  }
+
+  function getGalleryMotionElement(item) {
+    if (item.classList.contains("is-motion-fullsize")) {
+      return item.querySelector("img.fullsize-photo");
+    }
+
+    return item.querySelector("img.thumbnail");
+  }
+
+  function isGalleryFullsizeReady(item) {
+    const fullsize = item.querySelector("img.fullsize-photo");
+    return Boolean(fullsize?.complete && fullsize.naturalWidth > 0);
+  }
+
+  function waitForGalleryMotionTransition(item) {
+    if (prefersReducedGalleryMotion()) {
+      return Promise.resolve();
+    }
+
+    const motionElement = getGalleryMotionElement(item);
+    if (!motionElement) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      let didResolve = false;
+      const pendingProperties = new Set(["height", "left", "top", "width"]);
+      const resolveOnce = () => {
+        if (didResolve) {
+          return;
+        }
+
+        didResolve = true;
+        motionElement.removeEventListener("transitionend", onTransitionEnd);
+        window.clearTimeout(fallback);
+        resolve();
+      };
+      const onTransitionEnd = (event) => {
+        if (event.target !== motionElement) {
+          return;
+        }
+
+        pendingProperties.delete(event.propertyName);
+        if (pendingProperties.size === 0) {
+          resolveOnce();
+        }
+      };
+      const fallback = window.setTimeout(resolveOnce, galleryCloseFallbackMs);
+
+      motionElement.addEventListener("transitionend", onTransitionEnd);
+    });
   }
 
   function openGalleryInput(input, updateHash = true) {
@@ -683,7 +755,18 @@
     clearGalleryCloseTimer(item);
     setGalleryRectVars(item);
     input.checked = true;
-    item.classList.remove("is-animating", "is-closing", "is-loaded");
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-motion-fullsize",
+      "is-settled",
+    );
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+
     item.classList.add("is-active", "is-loading");
 
     if (updateHash) {
@@ -698,19 +781,19 @@
         return;
       }
 
-      item.classList.add("is-animating", "is-expanded");
-      waitForGalleryFullsize(item).then(() => {
+      const zoomReady = waitForGalleryMotionTransition(item);
+      item.classList.add("is-animating", "is-backdrop-visible", "is-expanded");
+      zoomReady.then(() => {
         if (galleryLoadTokens.get(item) !== loadToken) {
           return;
         }
 
-        const fullsize = item.querySelector("img.fullsize-photo");
-        if (fullsize?.naturalWidth && fullsize?.naturalHeight) {
-          setGalleryExpandedRectVars(
-            item,
-            fullsize.naturalWidth,
-            fullsize.naturalHeight,
-          );
+        item.classList.add("is-settled");
+      });
+
+      waitForGalleryFullsize(item).then(() => {
+        if (galleryLoadTokens.get(item) !== loadToken) {
+          return;
         }
 
         item.classList.remove("is-loading");
@@ -719,12 +802,108 @@
     });
   }
 
+  function prepareGalleryFullscreenItem(
+    item,
+    showBackdrop = true,
+    updateRects = true,
+  ) {
+    clearGalleryCloseTimer(item);
+    if (updateRects) {
+      setGalleryRectVars(item);
+    }
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loading",
+      "is-motion-fullsize",
+    );
+    item.classList.add(
+      "is-active",
+      "is-expanded",
+      "is-loaded",
+      "is-settled",
+    );
+    if (showBackdrop) {
+      item.classList.add("is-backdrop-visible");
+    }
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+  }
+
+  function prepareGalleryLoadingItem(item, showBackdrop = true) {
+    clearGalleryCloseTimer(item);
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-motion-fullsize",
+    );
+    item.classList.add(
+      "is-active",
+      "is-expanded",
+      "is-loading",
+      "is-settled",
+    );
+    if (showBackdrop) {
+      item.classList.add("is-backdrop-visible");
+    }
+  }
+
+  function replaceGalleryInput(fromInput, toInput) {
+    const fromItem = getGalleryItem(fromInput);
+    const toItem = getGalleryItem(toInput);
+    if (!fromItem || !toItem || fromItem === toItem) {
+      return;
+    }
+
+    const swapToken = ++gallerySwapToken;
+    galleryLoadTokens.delete(fromItem);
+    clearGalleryCloseTimer(fromItem);
+
+    setGalleryRectVars(toItem);
+    const targetAlreadyReady = isGalleryFullsizeReady(toItem);
+    const loadToken = Symbol("gallery-load");
+    galleryLoadTokens.set(toItem, loadToken);
+
+    fromInput.checked = false;
+    toInput.checked = true;
+    syncGalleryHash(toInput);
+
+    if (targetAlreadyReady) {
+      prepareGalleryFullscreenItem(toItem, true, false);
+    } else {
+      prepareGalleryLoadingItem(toItem);
+    }
+
+    resetGalleryItem(fromItem);
+
+    if (!targetAlreadyReady) {
+      waitForGalleryFullsize(toItem).then(() => {
+        if (
+          swapToken !== gallerySwapToken ||
+          galleryLoadTokens.get(toItem) !== loadToken ||
+          !toInput.checked ||
+          !toItem.classList.contains("is-active")
+        ) {
+          return;
+        }
+
+        toItem.classList.remove("is-loading");
+        toItem.classList.add("is-loaded");
+      });
+    }
+  }
+
   function closeGalleryInput(input, updateHash = true, animate = true) {
     const item = getGalleryItem(input);
     if (!item) {
       return;
     }
 
+    gallerySwapToken += 1;
     input.checked = false;
     galleryLoadTokens.delete(item);
 
@@ -737,17 +916,83 @@
       return;
     }
 
-    item.classList.remove("is-expanded", "is-loaded", "is-loading");
-    item.classList.add("is-closing");
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+
+    const motionElement = getGalleryMotionElement(item);
+    if (!motionElement) {
+      resetGalleryItem(item);
+      return;
+    }
 
     clearGalleryCloseTimer(item);
-    galleryCloseTimers.set(
-      item,
-      window.setTimeout(
-        () => resetGalleryItem(item),
-        galleryAnimationMs + galleryClosePaddingMs,
-      ),
+    let didReset = false;
+    let fallback = null;
+    const transitionProperties = new Set(["height", "left", "top", "width"]);
+    const resetOnce = () => {
+      if (didReset) {
+        return;
+      }
+
+      didReset = true;
+      if (fallback) {
+        window.clearTimeout(fallback);
+      }
+      motionElement.removeEventListener("transitionend", onTransitionEnd);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => resetGalleryItem(item));
+      });
+    };
+    const onTransitionEnd = (event) => {
+      if (
+        event.target === motionElement &&
+        transitionProperties.has(event.propertyName)
+      ) {
+        resetOnce();
+      }
+    };
+
+    galleryCloseTimers.set(item, () => {
+      if (fallback) {
+        window.clearTimeout(fallback);
+      }
+      motionElement.removeEventListener("transitionend", onTransitionEnd);
+    });
+
+    item.classList.add("is-animating");
+    motionElement.getBoundingClientRect();
+    motionElement.addEventListener("transitionend", onTransitionEnd);
+    item.classList.remove(
+      "is-expanded",
+      "is-loaded",
+      "is-loading",
+      "is-settled",
+      "is-backdrop-visible",
     );
+    item.classList.add("is-closing");
+
+    fallback = window.setTimeout(resetOnce, galleryCloseFallbackMs);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!motionElement.getAnimations) {
+          return;
+        }
+
+        const animations = motionElement
+          .getAnimations()
+          .filter((animation) => animation.playState !== "finished");
+        if (animations.length === 0) {
+          resetOnce();
+          return;
+        }
+
+        Promise.allSettled(
+          animations.map((animation) => animation.finished),
+        ).then(resetOnce);
+      });
+    });
   }
 
   function syncGalleryFromHash() {
@@ -813,7 +1058,7 @@
           );
         if (moveLeftTo) {
           event.preventDefault();
-          openGalleryInput(moveLeftTo);
+          replaceGalleryInput(moveLeftFrom, moveLeftTo);
         } else if (moveLeftFrom) {
           event.preventDefault();
           closeGalleryInput(moveLeftFrom);
@@ -832,7 +1077,7 @@
           );
         if (moveRightTo) {
           event.preventDefault();
-          openGalleryInput(moveRightTo);
+          replaceGalleryInput(moveRightFrom, moveRightTo);
         } else if (moveRightFrom) {
           event.preventDefault();
           closeGalleryInput(moveRightFrom);

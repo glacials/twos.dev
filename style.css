@@ -688,8 +688,8 @@ video + video {
 
 .gallery-item:has(input:checked)::before,
 .gallery-item.is-active::before {
-  backdrop-filter: blur(12px);
-  background: rgba(0, 0, 0, 0.82);
+  backdrop-filter: blur(0);
+  background: rgba(0, 0, 0, 0);
   content: "";
   inset: 0;
   position: fixed;
@@ -697,6 +697,12 @@ video + video {
     background 320ms ease,
     backdrop-filter 320ms ease;
   z-index: 7;
+}
+
+.gallery-item:has(input:checked):not(.is-active)::before,
+.gallery-item.is-active.is-backdrop-visible::before {
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.82);
 }
 
 .gallery-item.is-closing::before {
@@ -739,14 +745,29 @@ video + video {
   z-index: 8;
 }
 
-.gallery-item.is-active.is-animating img.thumbnail {
+.gallery-item.is-active.is-motion-fullsize img.thumbnail {
+  visibility: hidden;
+}
+
+.gallery-item.is-active.is-motion-fullsize .fullsize-photo {
+  height: var(--gallery-thumb-height);
+  left: var(--gallery-thumb-left);
+  object-fit: cover;
+  top: var(--gallery-thumb-top);
+  visibility: visible;
+  width: var(--gallery-thumb-width);
+  z-index: 8;
+}
+
+.gallery-item.is-active.is-animating img.thumbnail,
+.gallery-item.is-active.is-animating.is-motion-fullsize .fullsize-photo {
   transition:
-    filter 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    height 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    left 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
+    filter 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 420ms cubic-bezier(0.4, 0, 0.2, 1),
     opacity 180ms ease,
-    top 420ms cubic-bezier(0.2, 0.7, 0.2, 1),
-    width 420ms cubic-bezier(0.2, 0.7, 0.2, 1);
+    top 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 420ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .gallery-item:has(input:checked).is-active.is-expanded img.thumbnail,
@@ -754,9 +775,22 @@ video + video {
   filter: brightness(0.92);
   height: var(--gallery-expanded-height);
   left: var(--gallery-expanded-left);
-  object-fit: contain;
+  object-fit: cover;
   top: var(--gallery-expanded-top);
   width: var(--gallery-expanded-width);
+}
+
+.gallery-item.is-active.is-expanded.is-motion-fullsize .fullsize-photo {
+  filter: brightness(0.92);
+  height: var(--gallery-expanded-height);
+  left: var(--gallery-expanded-left);
+  object-fit: cover;
+  top: var(--gallery-expanded-top);
+  width: var(--gallery-expanded-width);
+}
+
+.gallery-item.is-active.is-expanded.is-loaded.is-settled .fullsize-photo {
+  object-fit: contain;
 }
 
 .gallery-item:has(input:checked) .fullsize,
@@ -793,16 +827,12 @@ video + video {
 }
 
 .gallery-item.is-active .fullsize-photo {
-  opacity: 0;
-  transition: opacity 220ms ease;
+  visibility: hidden;
 }
 
-.gallery-item.is-active.is-loaded .fullsize-photo {
-  opacity: 1;
-}
-
-.gallery-item.is-active.is-loaded img.thumbnail {
-  opacity: 0;
+.gallery-item.is-active.is-loaded.is-settled .fullsize-photo,
+.gallery-item.is-active.is-motion-fullsize .fullsize-photo {
+  visibility: visible;
 }
 
 @media (prefers-reduced-motion: reduce) {
