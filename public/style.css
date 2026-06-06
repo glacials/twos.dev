@@ -691,8 +691,12 @@ video + video {
   backdrop-filter: blur(0);
   background: rgba(0, 0, 0, 0);
   content: "";
-  inset: 0;
+  height: 100vh;
+  height: 100lvh;
+  left: 0;
   position: fixed;
+  right: 0;
+  top: 0;
   transition:
     background 320ms ease,
     backdrop-filter 320ms ease;
