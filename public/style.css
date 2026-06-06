@@ -635,6 +635,7 @@ video + video {
   --gallery-expanded-left: 0px;
   --gallery-expanded-top: 0px;
   --gallery-expanded-width: 100vw;
+  --gallery-swipe-offset: 0px;
 }
 
 .gallery-item img {
@@ -683,6 +684,7 @@ video + video {
 .gallery-item:has(input:checked),
 .gallery-item.is-active {
   overflow: visible;
+  touch-action: pan-y pinch-zoom;
   z-index: 20;
 }
 
@@ -837,6 +839,43 @@ video + video {
 .gallery-item.is-active.is-loaded.is-settled .fullsize-photo,
 .gallery-item.is-active.is-motion-fullsize .fullsize-photo {
   visibility: visible;
+}
+
+.gallery-item.is-swipe-active {
+  z-index: 22;
+}
+
+.gallery-item.is-swipe-peer {
+  z-index: 21;
+}
+
+.gallery-item.is-swipe-peer::before {
+  display: none;
+}
+
+.gallery-item.is-swipe-active .caption.exif,
+.gallery-item.is-swipe-peer .caption.exif,
+.gallery-item.is-swipe-active .fullsize-loading,
+.gallery-item.is-swipe-peer .fullsize-loading {
+  opacity: 0;
+  pointer-events: none;
+  transition-delay: 0ms;
+}
+
+.gallery-item.is-swipe-active img.thumbnail,
+.gallery-item.is-swipe-active .fullsize-photo,
+.gallery-item.is-swipe-peer img.thumbnail,
+.gallery-item.is-swipe-peer .fullsize-photo {
+  transform: translate3d(var(--gallery-swipe-offset), 0, 0);
+  transition: none;
+  will-change: transform;
+}
+
+.gallery-item.is-swipe-active.is-swipe-animating img.thumbnail,
+.gallery-item.is-swipe-active.is-swipe-animating .fullsize-photo,
+.gallery-item.is-swipe-peer.is-swipe-animating img.thumbnail,
+.gallery-item.is-swipe-peer.is-swipe-animating .fullsize-photo {
+  transition: transform 240ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 @media (prefers-reduced-motion: reduce) {
