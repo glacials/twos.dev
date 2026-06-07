@@ -271,9 +271,18 @@ Use this link to do that in your default mail client:</p>
   const galleryInputSelector = ".gallery-item input[type=checkbox]";
   const galleryItemSelector = ".gallery-item";
   const galleryCloseFallbackMs = 30000;
+  const gallerySwipeMinDistance = 48;
+  const gallerySwipeDragStartDistance = 8;
+  const gallerySwipeMaxVerticalRatio = 0.75;
+  const gallerySwipeEdgeResistance = 0.35;
+  const gallerySwipeAnimationMs = 240;
   const galleryLoadTokens = new WeakMap();
   const galleryCloseTimers = new WeakMap();
+  let gallerySwipeStart = null;
+  let gallerySuppressClickAfterSwipe = false;
+  let gallerySuppressClickTimer = null;
   let gallerySwapToken = 0;
+  let gallerySwipeAnimationToken = 0;
 
   function getGalleryPhoto(input) {
     return input.closest(".gallery-item")?.dataset.galleryPhoto;
@@ -376,8 +385,22 @@ Use this link to do that in your default mail client:</p>
     }
   }
 
+  function clearGallerySwipeStyles(item) {
+    if (!item) {
+      return;
+    }
+
+    item.classList.remove(
+      "is-swipe-active",
+      "is-swipe-animating",
+      "is-swipe-peer",
+    );
+    item.style.removeProperty("--gallery-swipe-offset");
+  }
+
   function resetGalleryItem(item) {
     clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
     item.classList.remove(
       "is-active",
       "is-animating",
@@ -499,6 +522,7 @@ Use this link to do that in your default mail client:</p>
 
     clearGalleryCloseTimer(item);
     setGalleryRectVars(item);
+    clearGallerySwipeStyles(item);
     input.checked = true;
     item.classList.remove(
       "is-animating",
@@ -553,6 +577,7 @@ Use this link to do that in your default mail client:</p>
     updateRects = true,
   ) {
     clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
     if (updateRects) {
       setGalleryRectVars(item);
     }
@@ -563,12 +588,7 @@ Use this link to do that in your default mail client:</p>
       "is-loading",
       "is-motion-fullsize",
     );
-    item.classList.add(
-      "is-active",
-      "is-expanded",
-      "is-loaded",
-      "is-settled",
-    );
+    item.classList.add("is-active", "is-expanded", "is-loaded", "is-settled");
     if (showBackdrop) {
       item.classList.add("is-backdrop-visible");
     }
@@ -579,6 +599,7 @@ Use this link to do that in your default mail client:</p>
 
   function prepareGalleryLoadingItem(item, showBackdrop = true) {
     clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
     item.classList.remove(
       "is-animating",
       "is-backdrop-visible",
@@ -586,12 +607,7 @@ Use this link to do that in your default mail client:</p>
       "is-loaded",
       "is-motion-fullsize",
     );
-    item.classList.add(
-      "is-active",
-      "is-expanded",
-      "is-loading",
-      "is-settled",
-    );
+    item.classList.add("is-active", "is-expanded", "is-loading", "is-settled");
     if (showBackdrop) {
       item.classList.add("is-backdrop-visible");
     }
@@ -751,7 +767,301 @@ Use this link to do that in your default mail client:</p>
     }
   }
 
+  function getCurrentGalleryInput() {
+    return document.querySelector(".gallery-item input:checked");
+  }
+
+  function getPreviousGalleryInput() {
+    return (
+      document.querySelector(
+        ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+      ) ??
+      document.querySelector(
+        ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
+      )
+    );
+  }
+
+  function getNextGalleryInput() {
+    return (
+      document.querySelector(
+        ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+      ) ??
+      document.querySelector(
+        ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
+      )
+    );
+  }
+
+  function moveGalleryInput(direction, closeAtEdge = true) {
+    const current = getCurrentGalleryInput();
+    if (!current) {
+      return false;
+    }
+
+    const next =
+      direction === "previous"
+        ? getPreviousGalleryInput()
+        : getNextGalleryInput();
+    if (next) {
+      replaceGalleryInput(current, next);
+      return true;
+    }
+
+    if (closeAtEdge) {
+      closeGalleryInput(current);
+      return true;
+    }
+
+    return false;
+  }
+
+  function getGallerySwipeWidth() {
+    return Math.max(
+      window.innerWidth,
+      document.documentElement.clientWidth || 0,
+      1,
+    );
+  }
+
+  function getGallerySwipeDirection(deltaX) {
+    if (deltaX > 0) {
+      return "previous";
+    }
+    if (deltaX < 0) {
+      return "next";
+    }
+
+    return null;
+  }
+
+  function getGalleryInputForDirection(direction) {
+    return direction === "previous"
+      ? getPreviousGalleryInput()
+      : getNextGalleryInput();
+  }
+
+  function prepareGallerySwipePeer(input) {
+    const item = getGalleryItem(input);
+    if (!item) {
+      return null;
+    }
+
+    clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
+    setGalleryRectVars(item);
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-loading",
+      "is-motion-fullsize",
+    );
+    item.classList.add(
+      "is-active",
+      "is-expanded",
+      "is-settled",
+      "is-swipe-peer",
+    );
+
+    const fullsize = item.querySelector("img.fullsize-photo");
+    if (fullsize) {
+      fullsize.loading = "eager";
+    }
+
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-loaded", "is-motion-fullsize");
+    }
+
+    return item;
+  }
+
+  function setGallerySwipeTarget(state, direction) {
+    if (state.direction === direction) {
+      return;
+    }
+
+    if (state.targetItem) {
+      resetGalleryItem(state.targetItem);
+    }
+
+    state.direction = direction;
+    state.targetInput = direction
+      ? getGalleryInputForDirection(direction)
+      : null;
+    state.targetItem = state.targetInput
+      ? prepareGallerySwipePeer(state.targetInput)
+      : null;
+    state.peerStartOffset =
+      direction === "previous" ? -state.swipeWidth : state.swipeWidth;
+
+    if (state.targetItem) {
+      state.targetItem.style.setProperty(
+        "--gallery-swipe-offset",
+        `${state.peerStartOffset}px`,
+      );
+    }
+  }
+
+  function beginGallerySwipeDrag(state) {
+    state.dragging = true;
+    state.swipeWidth = getGallerySwipeWidth();
+    state.item.classList.add("is-swipe-active");
+    state.item.style.setProperty("--gallery-swipe-offset", "0px");
+  }
+
+  function renderGallerySwipe(state) {
+    state.animationFrame = null;
+
+    const direction =
+      getGallerySwipeDirection(state.pendingDeltaX) ?? state.direction;
+    if (direction) {
+      setGallerySwipeTarget(state, direction);
+    }
+
+    const offset = state.targetItem
+      ? state.pendingDeltaX
+      : state.pendingDeltaX * gallerySwipeEdgeResistance;
+    state.item.style.setProperty("--gallery-swipe-offset", `${offset}px`);
+
+    if (state.targetItem) {
+      state.targetItem.style.setProperty(
+        "--gallery-swipe-offset",
+        `${offset + state.peerStartOffset}px`,
+      );
+    }
+  }
+
+  function updateGallerySwipeDrag(state, deltaX) {
+    if (!state.dragging) {
+      beginGallerySwipeDrag(state);
+    }
+
+    const direction = getGallerySwipeDirection(deltaX);
+    if (direction) {
+      setGallerySwipeTarget(state, direction);
+    }
+
+    state.lastDeltaX = deltaX;
+    state.pendingDeltaX = deltaX;
+    if (state.animationFrame) {
+      return;
+    }
+
+    state.animationFrame = requestAnimationFrame(() =>
+      renderGallerySwipe(state),
+    );
+  }
+
+  function finishGallerySwipe(state, commit) {
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+      state.animationFrame = null;
+    }
+
+    const targetInput = commit ? state.targetInput : null;
+    const targetItem = state.targetItem;
+    const finalCurrentOffset = commit
+      ? state.direction === "previous"
+        ? state.swipeWidth
+        : -state.swipeWidth
+      : 0;
+    const finalPeerOffset = commit ? 0 : state.peerStartOffset;
+    const animationToken = ++gallerySwipeAnimationToken;
+
+    state.item.classList.add("is-swipe-animating");
+    if (targetItem) {
+      targetItem.classList.add("is-swipe-animating");
+    }
+
+    state.item.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      state.item.style.setProperty(
+        "--gallery-swipe-offset",
+        `${finalCurrentOffset}px`,
+      );
+      if (targetItem) {
+        targetItem.style.setProperty(
+          "--gallery-swipe-offset",
+          `${finalPeerOffset}px`,
+        );
+      }
+
+      window.setTimeout(
+        () => {
+          if (animationToken !== gallerySwipeAnimationToken) {
+            return;
+          }
+
+          if (
+            commit &&
+            targetInput &&
+            state.input === getCurrentGalleryInput()
+          ) {
+            replaceGalleryInput(state.input, targetInput);
+            return;
+          }
+
+          clearGallerySwipeStyles(state.item);
+          if (targetItem) {
+            resetGalleryItem(targetItem);
+          }
+        },
+        prefersReducedGalleryMotion() ? 0 : gallerySwipeAnimationMs,
+      );
+    });
+  }
+
+  function resetGallerySwipe(animate = false) {
+    const state = gallerySwipeStart;
+    gallerySwipeStart = null;
+
+    if (!state) {
+      return;
+    }
+
+    if (state.dragging && animate && !prefersReducedGalleryMotion()) {
+      finishGallerySwipe(state, false);
+      return;
+    }
+
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+    }
+    clearGallerySwipeStyles(state.item);
+    if (state.targetItem) {
+      resetGalleryItem(state.targetItem);
+    }
+  }
+
+  function suppressNextGalleryClick() {
+    gallerySuppressClickAfterSwipe = true;
+    if (gallerySuppressClickTimer) {
+      window.clearTimeout(gallerySuppressClickTimer);
+    }
+    gallerySuppressClickTimer = window.setTimeout(() => {
+      gallerySuppressClickAfterSwipe = false;
+      gallerySuppressClickTimer = null;
+    }, 400);
+  }
+
+  function clearSuppressedGalleryClick() {
+    gallerySuppressClickAfterSwipe = false;
+    if (gallerySuppressClickTimer) {
+      window.clearTimeout(gallerySuppressClickTimer);
+      gallerySuppressClickTimer = null;
+    }
+  }
+
   document.addEventListener("click", (event) => {
+    if (gallerySuppressClickAfterSwipe) {
+      event.preventDefault();
+      clearSuppressedGalleryClick();
+      return;
+    }
+
     const item = event.target.closest?.(galleryItemSelector);
     if (!item || event.target.closest?.(".caption a")) {
       return;
@@ -787,50 +1097,142 @@ Use this link to do that in your default mail client:</p>
   window.addEventListener("hashchange", syncGalleryFromHash);
   syncGalleryFromHash();
 
+  document.addEventListener(
+    "touchstart",
+    (event) => {
+      const current = getCurrentGalleryInput();
+      const item = current ? getGalleryItem(current) : null;
+      if (
+        !current ||
+        !item ||
+        event.touches.length !== 1 ||
+        !item.classList.contains("is-expanded") ||
+        !item.classList.contains("is-settled") ||
+        item.classList.contains("is-closing") ||
+        item.classList.contains("is-swipe-animating")
+      ) {
+        resetGallerySwipe();
+        return;
+      }
+
+      const touch = event.touches[0];
+      gallerySwipeStart = {
+        animationFrame: null,
+        dragging: false,
+        direction: null,
+        input: current,
+        item,
+        lastDeltaX: 0,
+        peerStartOffset: 0,
+        pendingDeltaX: 0,
+        swipeWidth: getGallerySwipeWidth(),
+        targetInput: null,
+        targetItem: null,
+        x: touch.clientX,
+        y: touch.clientY,
+      };
+    },
+    { passive: true },
+  );
+
+  document.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!gallerySwipeStart || event.touches.length !== 1) {
+        return;
+      }
+
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - gallerySwipeStart.x;
+      const deltaY = touch.clientY - gallerySwipeStart.y;
+      const isHorizontal =
+        Math.abs(deltaX) > gallerySwipeDragStartDistance &&
+        Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+
+      if (isHorizontal && event.cancelable) {
+        event.preventDefault();
+      }
+
+      if (prefersReducedGalleryMotion()) {
+        return;
+      }
+
+      if (!gallerySwipeStart.dragging && !isHorizontal) {
+        if (
+          Math.abs(deltaY) > gallerySwipeDragStartDistance &&
+          Math.abs(deltaY) > Math.abs(deltaX)
+        ) {
+          resetGallerySwipe();
+        }
+        return;
+      }
+
+      updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+    },
+    { passive: false },
+  );
+
+  document.addEventListener(
+    "touchend",
+    (event) => {
+      const state = gallerySwipeStart;
+      if (!state || event.changedTouches.length === 0) {
+        resetGallerySwipe();
+        return;
+      }
+
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - state.x;
+      const deltaY = touch.clientY - state.y;
+      const isHorizontalSwipe =
+        Math.abs(deltaX) >= gallerySwipeMinDistance &&
+        Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+      const startedOnCurrent = state.input === getCurrentGalleryInput();
+
+      gallerySwipeStart = null;
+      if (!state.dragging) {
+        if (!isHorizontalSwipe || !startedOnCurrent) {
+          return;
+        }
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        suppressNextGalleryClick();
+        moveGalleryInput(deltaX > 0 ? "previous" : "next", false);
+        return;
+      }
+
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+      suppressNextGalleryClick();
+      finishGallerySwipe(
+        state,
+        isHorizontalSwipe && startedOnCurrent && Boolean(state.targetInput),
+      );
+    },
+    { passive: false },
+  );
+
+  document.addEventListener("touchcancel", () => resetGallerySwipe(true));
+
   
   document.addEventListener("keydown", (event) => {
     switch (event.key) {
       case "ArrowLeft":
-        const moveLeftFrom = document.querySelector(
-          ".gallery-item input:checked",
-        );
-        const moveLeftTo =
-          document.querySelector(
-            ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
-          ) ??
-          document.querySelector(
-            ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
-          );
-        if (moveLeftTo) {
+        if (moveGalleryInput("previous")) {
           event.preventDefault();
-          replaceGalleryInput(moveLeftFrom, moveLeftTo);
-        } else if (moveLeftFrom) {
-          event.preventDefault();
-          closeGalleryInput(moveLeftFrom);
         }
         break;
       case "ArrowRight":
-        const moveRightFrom = document.querySelector(
-          ".gallery-item input:checked",
-        );
-        const moveRightTo =
-          document.querySelector(
-            ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
-          ) ??
-          document.querySelector(
-            ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
-          );
-        if (moveRightTo) {
+        if (moveGalleryInput("next")) {
           event.preventDefault();
-          replaceGalleryInput(moveRightFrom, moveRightTo);
-        } else if (moveRightFrom) {
-          event.preventDefault();
-          closeGalleryInput(moveRightFrom);
         }
         break;
       case " ": 
       case "Escape":
-        const current = document.querySelector(".gallery-item input:checked");
+        const current = getCurrentGalleryInput();
         if (current) {
           event.preventDefault();
           closeGalleryInput(current);
