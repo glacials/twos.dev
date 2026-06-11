@@ -266,6 +266,7 @@ body.is-gallery-open .gallery-backdrop,
 body:has(.gallery-item input:checked) .gallery-backdrop,
 body:has(.gallery-item.is-active) .gallery-backdrop {
   display: block;
+  pointer-events: auto;
 }
 
 body.is-gallery-backdrop-visible .gallery-backdrop,
