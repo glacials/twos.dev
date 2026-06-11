@@ -765,6 +765,7 @@ of where it splits so it doesn't happen mid-syllable.</p>
       "is-swipe-animating",
       "is-swipe-close-active",
       "is-swipe-peer",
+      "is-swipe-returning",
     );
     item.style.removeProperty("--gallery-swipe-offset");
     item.style.removeProperty("--gallery-swipe-close-offset");
@@ -1498,6 +1499,29 @@ of where it splits so it doesn't happen mid-syllable.</p>
       state.animationFrame = null;
     }
 
+    if (commit && state.input === getCurrentGalleryInput()) {
+      const progress = getGalleryCloseProgress(state, state.lastDeltaY);
+      const scale = 1 - progress * gallerySwipeCloseMaxScaleReduction;
+
+      state.item.classList.add("is-swipe-returning");
+      state.item.style.setProperty("--gallery-swipe-offset", "0px");
+      state.item.style.setProperty(
+        "--gallery-swipe-close-offset",
+        `${state.lastDeltaY}px`,
+      );
+      state.item.style.setProperty("--gallery-swipe-scale", scale.toFixed(4));
+      setGallerySwipeBackdrop(state.item, progress);
+      syncGalleryBodyClasses();
+      state.item.getBoundingClientRect();
+
+      closeGalleryInput(state.input);
+      requestAnimationFrame(() => {
+        state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+        state.item.style.setProperty("--gallery-swipe-scale", "1");
+      });
+      return;
+    }
+
     const direction = getGalleryVerticalSwipeDirection(state.lastDeltaY);
     const finalOffset =
       commit && direction === "up"
@@ -1756,6 +1780,8 @@ of where it splits so it doesn't happen mid-syllable.</p>
       }
       suppressNextGalleryClick();
       if (state.mode === "close") {
+        state.lastDeltaY = deltaY;
+        state.pendingDeltaY = deltaY;
         finishGallerySwipeClose(state, isVerticalSwipe && startedOnCurrent);
         return;
       }
