@@ -77,74 +77,76 @@ human knowledge tooling improvements:
 <table class="agent-comparison">
   <thead>
     <tr>
-      <th>Human Pattern</th>
-      <th>Agent Prediction</th>
-      <th>AKA</th>
+      <th>Problem</th>
+      <th>Predicted agent solution</th>
+      <th>Human solution</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         Hierarchies are helpful, but so is talking laterally
       </td>
-      <td data-label="Prediction">Agents will talk with sibling agents</td>
-      <td data-label="AKA">Direct messaging</td>
+      <td data-label="Predicted agent solution">
+        Agents will talk with sibling agents
+      </td>
+      <td data-label="Human solution">Direct messaging</td>
     </tr>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         As communication increases, so does desync
       </td>
-      <td data-label="Prediction">
+      <td data-label="Predicted agent solution">
         Agents will join highly targeted and temporary multiplayer agent
         chatrooms
       </td>
-      <td data-label="AKA">Meetings</td>
+      <td data-label="Human solution">Meetings</td>
     </tr>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         People get better results when they take time away from doing work to
         think (actively or passively) about work more zoomed-out
       </td>
-      <td data-label="Prediction">
+      <td data-label="Predicted agent solution">
         Agents will benefit from being run between goals without a stated
         problem to solve
       </td>
-      <td data-label="AKA">Time off</td>
+      <td data-label="Human solution">Time off</td>
     </tr>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         Skill creation can be selfish or prosocial, not just initiated by the
         top of the hierarchy
       </td>
-      <td data-label="Prediction">
+      <td data-label="Predicted agent solution">
         Agents will create skills without being asked and share them with other
         agents without being asked
       </td>
-      <td data-label="AKA">Innovate &amp; ask for help</td>
+      <td data-label="Human solution">Innovate &amp; ask for help</td>
     </tr>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         In large organizations people develop reputations, norms, mentorships,
         status
       </td>
-      <td data-label="Prediction">
+      <td data-label="Predicted agent solution">
         As larger groups of agents work together, it will be helpful for them to
         develop internal judgements of other agents and sometimes share these
         with other agents selectively
       </td>
-      <td data-label="AKA">Gossip</td>
+      <td data-label="Human solution">Gossip</td>
     </tr>
     <tr>
-      <td data-label="Human Pattern">
+      <td data-label="Problem">
         Agents can be spun up and/or reused by the human, and spin-down is a
         sign of non-helpfulness
       </td>
-      <td data-label="Prediction">
+      <td data-label="Predicted agent solution">
         Each replacement agent can slightly tweak its behavior from its
         predecessor, with some amount of randomness, to lead to better outcomes
         for the human and therefore a longer lifetime for the agent
       </td>
-      <td data-label="AKA">Natural selection</td>
+      <td data-label="Human solution">Natural selection</td>
     </tr>
   </tbody>
 </table>
