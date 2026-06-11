@@ -365,15 +365,6 @@ I wish I could play for the first time again.</p>
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
-      galleryBackdropElement.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const current = getCurrentGalleryInput();
-        if (current) {
-          closeGalleryInput(current);
-        }
-      });
       document.body.append(galleryBackdropElement);
     }
 

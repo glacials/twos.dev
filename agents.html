@@ -227,76 +227,74 @@ human knowledge tooling improvements:</p>
 <table class="agent-comparison">
   <thead>
     <tr>
-      <th>Problem</th>
-      <th>Predicted agent solution</th>
-      <th>Human solution</th>
+      <th>Human Pattern</th>
+      <th>Agent Prediction</th>
+      <th>AKA</th>
     </tr>
   </thead>
   <tbody>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         Hierarchies are helpful, but so is talking laterally
       </td>
-      <td data-label="Predicted agent solution">
-        Agents will talk with sibling agents
-      </td>
-      <td data-label="Human solution">Direct messaging</td>
+      <td data-label="Prediction">Agents will talk with sibling agents</td>
+      <td data-label="AKA">Direct messaging</td>
     </tr>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         As communication increases, so does desync
       </td>
-      <td data-label="Predicted agent solution">
+      <td data-label="Prediction">
         Agents will join highly targeted and temporary multiplayer agent
         chatrooms
       </td>
-      <td data-label="Human solution">Meetings</td>
+      <td data-label="AKA">Meetings</td>
     </tr>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         People get better results when they take time away from doing work to
         think (actively or passively) about work more zoomed-out
       </td>
-      <td data-label="Predicted agent solution">
+      <td data-label="Prediction">
         Agents will benefit from being run between goals without a stated
         problem to solve
       </td>
-      <td data-label="Human solution">Time off</td>
+      <td data-label="AKA">Time off</td>
     </tr>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         Skill creation can be selfish or prosocial, not just initiated by the
         top of the hierarchy
       </td>
-      <td data-label="Predicted agent solution">
+      <td data-label="Prediction">
         Agents will create skills without being asked and share them with other
         agents without being asked
       </td>
-      <td data-label="Human solution">Innovate &amp; ask for help</td>
+      <td data-label="AKA">Innovate &amp; ask for help</td>
     </tr>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         In large organizations people develop reputations, norms, mentorships,
         status
       </td>
-      <td data-label="Predicted agent solution">
+      <td data-label="Prediction">
         As larger groups of agents work together, it will be helpful for them to
         develop internal judgements of other agents and sometimes share these
         with other agents selectively
       </td>
-      <td data-label="Human solution">Gossip</td>
+      <td data-label="AKA">Gossip</td>
     </tr>
     <tr>
-      <td data-label="Problem">
+      <td data-label="Human Pattern">
         Agents can be spun up and/or reused by the human, and spin-down is a
         sign of non-helpfulness
       </td>
-      <td data-label="Predicted agent solution">
+      <td data-label="Prediction">
         Each replacement agent can slightly tweak its behavior from its
         predecessor, with some amount of randomness, to lead to better outcomes
         for the human and therefore a longer lifetime for the agent
       </td>
-      <td data-label="Human solution">Natural selection</td>
+      <td data-label="AKA">Natural selection</td>
     </tr>
   </tbody>
 </table>
@@ -472,15 +470,6 @@ human knowledge tooling improvements:</p>
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
-      galleryBackdropElement.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const current = getCurrentGalleryInput();
-        if (current) {
-          closeGalleryInput(current);
-        }
-      });
       document.body.append(galleryBackdropElement);
     }
 

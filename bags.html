@@ -373,15 +373,6 @@ It doesn't fit as much, or it doesn't give things their little homes like you en
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
-      galleryBackdropElement.addEventListener("click", (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-
-        const current = getCurrentGalleryInput();
-        if (current) {
-          closeGalleryInput(current);
-        }
-      });
       document.body.append(galleryBackdropElement);
     }
 
