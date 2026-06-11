@@ -253,7 +253,7 @@ body:has(.gallery-item.is-active) {
   height: var(--gallery-backdrop-height, 100lvh);
   left: var(--gallery-backdrop-left, 0px);
   pointer-events: none;
-  position: absolute;
+  position: fixed;
   top: var(--gallery-backdrop-top, 0px);
   transition:
     background 320ms ease,
@@ -556,6 +556,59 @@ td {
 
 tr:last-child td {
   border-bottom: none;
+}
+
+@media (max-width: 42rem) {
+  .agent-comparison {
+    background-color: transparent;
+    box-shadow: none;
+  }
+
+  .agent-comparison thead {
+    display: none;
+  }
+
+  .agent-comparison,
+  .agent-comparison tbody,
+  .agent-comparison tr,
+  .agent-comparison td {
+    display: block;
+  }
+
+  .agent-comparison tr {
+    background-color: var(--raised-bg);
+    box-shadow: var(--shadow) 0.5rem 0.5rem 0;
+    margin-bottom: 1.25rem;
+    padding: 1rem;
+  }
+
+  .agent-comparison tr:last-child {
+    margin-bottom: 0;
+  }
+
+  .agent-comparison td {
+    border: 0;
+    padding: 0;
+  }
+
+  .agent-comparison td:first-child {
+    font-weight: bold;
+  }
+
+  .agent-comparison td::before {
+    content: attr(data-label);
+    display: block;
+    font-size: 0.75rem;
+    font-weight: normal;
+    opacity: 0.65;
+    text-transform: uppercase;
+  }
+
+  .agent-comparison td + td {
+    border-top: 1px solid var(--shadow);
+    margin-top: 0.75rem;
+    padding-top: 0.75rem;
+  }
 }
 
 ul {

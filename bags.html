@@ -420,16 +420,25 @@ It doesn't fit as much, or it doesn't give things their little homes like you en
     const top = viewport?.offsetTop || 0;
     const width = viewport?.width || fallbackWidth;
     const height = viewport?.height || fallbackHeight;
+    const layoutWidth = Math.max(
+      fallbackWidth,
+      document.documentElement.clientWidth || 0,
+      left + width,
+    );
     const layoutHeight = Math.max(
       fallbackHeight,
       document.documentElement.clientHeight || 0,
       top + height,
     );
+    const topGap = Math.max(0, top);
     const bottomGap = Math.max(0, layoutHeight - top - height);
     const bleed = Math.max(galleryBackdropBleedPx, bottomGap);
 
     return {
-      backdropHeight: height + bleed,
+      backdropHeight: topGap + height + bleed,
+      backdropLeft: 0,
+      backdropTop: 0,
+      backdropWidth: layoutWidth,
       height,
       left,
       pageLeft: window.scrollX + left,
@@ -453,15 +462,15 @@ It doesn't fit as much, or it doesn't give things their little homes like you en
     );
     backdrop.style.setProperty(
       "--gallery-backdrop-left",
-      `${viewport.pageLeft}px`,
+      `${viewport.backdropLeft}px`,
     );
     backdrop.style.setProperty(
       "--gallery-backdrop-top",
-      `${viewport.pageTop}px`,
+      `${viewport.backdropTop}px`,
     );
     backdrop.style.setProperty(
       "--gallery-backdrop-width",
-      `${viewport.width}px`,
+      `${viewport.backdropWidth}px`,
     );
 
     return viewport;
