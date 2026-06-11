@@ -910,6 +910,18 @@ body:has(.gallery-item.is-swipe-close-active.is-swipe-animating)
   will-change: transform;
 }
 
+.gallery-item.is-swipe-returning img.thumbnail,
+.gallery-item.is-swipe-returning .fullsize-photo {
+  transition:
+    filter 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    height 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    left 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    opacity 180ms ease,
+    top 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    transform 420ms cubic-bezier(0.4, 0, 0.2, 1),
+    width 420ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .gallery-item.is-swipe-active.is-swipe-animating img.thumbnail,
 .gallery-item.is-swipe-active.is-swipe-animating .fullsize-photo,
 .gallery-item.is-swipe-peer.is-swipe-animating img.thumbnail,
