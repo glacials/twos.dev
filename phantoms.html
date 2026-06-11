@@ -308,8 +308,14 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
   const gallerySwipeMinDistance = 48;
   const gallerySwipeDragStartDistance = 8;
   const gallerySwipeMaxVerticalRatio = 0.75;
+  const gallerySwipeCloseMaxHorizontalRatio = 0.75;
+  const gallerySwipeCloseMinDistance = 72;
   const gallerySwipeEdgeResistance = 0.35;
   const gallerySwipeAnimationMs = 240;
+  const gallerySwipeCloseBackdropAlpha = 0.82;
+  const gallerySwipeCloseBackdropBlurPx = 12;
+  const gallerySwipeCloseMaxScaleReduction = 0.12;
+  const galleryBackdropBleedPx = 256;
   const galleryLoadTokens = new WeakMap();
   const galleryCloseTimers = new WeakMap();
   let gallerySwipeStart = null;
@@ -317,6 +323,8 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
   let gallerySuppressClickTimer = null;
   let gallerySwapToken = 0;
   let gallerySwipeAnimationToken = 0;
+  let galleryViewportUpdateFrame = null;
+  let galleryBackdropElement = null;
 
   function getGalleryPhoto(input) {
     return input.closest(".gallery-item")?.dataset.galleryPhoto;
@@ -376,18 +384,127 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   }
 
+  function getGalleryBackdropElement() {
+    if (!galleryBackdropElement) {
+      galleryBackdropElement = document.createElement("div");
+      galleryBackdropElement.className = "gallery-backdrop";
+      galleryBackdropElement.setAttribute("aria-hidden", "true");
+      document.body.append(galleryBackdropElement);
+    }
+
+    return galleryBackdropElement;
+  }
+
+  function syncGalleryBodyClasses() {
+    const activeOrChecked = document.querySelector(
+      ".gallery-item.is-active, .gallery-item input:checked",
+    );
+    const backdropVisible = document.querySelector(
+      ".gallery-item.is-backdrop-visible",
+    );
+    const closing = document.querySelector(".gallery-item.is-closing");
+    const swipeClose = document.querySelector(
+      ".gallery-item.is-swipe-close-active",
+    );
+    const swipeAnimating = document.querySelector(
+      ".gallery-item.is-swipe-close-active.is-swipe-animating",
+    );
+
+    document.body.classList.toggle("is-gallery-open", Boolean(activeOrChecked));
+    document.body.classList.toggle(
+      "is-gallery-backdrop-visible",
+      Boolean(backdropVisible),
+    );
+    document.body.classList.toggle("is-gallery-closing", Boolean(closing));
+    document.body.classList.toggle(
+      "is-gallery-swipe-close-active",
+      Boolean(swipeClose),
+    );
+    document.body.classList.toggle(
+      "is-gallery-swipe-animating",
+      Boolean(swipeAnimating),
+    );
+  }
+
+  function getGalleryViewportRect() {
+    const viewport = window.visualViewport;
+    const fallbackWidth =
+      window.innerWidth || document.documentElement.clientWidth || 1;
+    const fallbackHeight =
+      window.innerHeight || document.documentElement.clientHeight || 1;
+    const left = viewport?.offsetLeft || 0;
+    const top = viewport?.offsetTop || 0;
+    const width = viewport?.width || fallbackWidth;
+    const height = viewport?.height || fallbackHeight;
+    const layoutHeight = Math.max(
+      fallbackHeight,
+      document.documentElement.clientHeight || 0,
+      top + height,
+    );
+    const bottomGap = Math.max(0, layoutHeight - top - height);
+    const bleed = Math.max(galleryBackdropBleedPx, bottomGap);
+
+    return {
+      backdropHeight: height + bleed,
+      height,
+      left,
+      pageLeft: window.scrollX + left,
+      pageTop: window.scrollY + top,
+      top,
+      width,
+    };
+  }
+
+  function setGalleryViewportVars(item) {
+    const viewport = getGalleryViewportRect();
+
+    item.style.setProperty("--gallery-viewport-height", `${viewport.height}px`);
+    item.style.setProperty("--gallery-viewport-left", `${viewport.left}px`);
+    item.style.setProperty("--gallery-viewport-top", `${viewport.top}px`);
+    item.style.setProperty("--gallery-viewport-width", `${viewport.width}px`);
+    const backdrop = getGalleryBackdropElement();
+    backdrop.style.setProperty(
+      "--gallery-backdrop-height",
+      `${viewport.backdropHeight}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-left",
+      `${viewport.pageLeft}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-top",
+      `${viewport.pageTop}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-width",
+      `${viewport.width}px`,
+    );
+
+    return viewport;
+  }
+
+  function getGalleryNaturalSize(item) {
+    const fullsize = item.querySelector("img.fullsize-photo");
+    const thumbnail = item.querySelector("img.thumbnail");
+    const image =
+      fullsize?.naturalWidth && fullsize?.naturalHeight ? fullsize : thumbnail;
+    const fallbackRect = thumbnail?.getBoundingClientRect();
+
+    return {
+      height: image?.naturalHeight || fallbackRect?.height || 1,
+      width: image?.naturalWidth || fallbackRect?.width || 1,
+    };
+  }
+
   function setGalleryRectVars(item) {
     const thumbnail = item.querySelector("img.thumbnail");
     if (!thumbnail) {
       return;
     }
 
+    const naturalSize = getGalleryNaturalSize(item);
     const thumbRect = thumbnail.getBoundingClientRect();
-    setGalleryExpandedRectVars(
-      item,
-      thumbnail.naturalWidth || thumbRect.width || 1,
-      thumbnail.naturalHeight || thumbRect.height || 1,
-    );
+    setGalleryExpandedRectVars(item, naturalSize.width, naturalSize.height);
 
     item.style.setProperty("--gallery-thumb-left", `${thumbRect.left}px`);
     item.style.setProperty("--gallery-thumb-top", `${thumbRect.top}px`);
@@ -396,20 +513,58 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
   }
 
   function setGalleryExpandedRectVars(item, naturalWidth, naturalHeight) {
+    const viewport = setGalleryViewportVars(item);
     const scale = Math.min(
-      window.innerWidth / naturalWidth,
-      window.innerHeight / naturalHeight,
+      viewport.width / naturalWidth,
+      viewport.height / naturalHeight,
     );
     const expandedWidth = naturalWidth * scale;
     const expandedHeight = naturalHeight * scale;
-    const expandedLeft = (window.innerWidth - expandedWidth) / 2;
-    const expandedTop = (window.innerHeight - expandedHeight) / 2;
+    const expandedLeft = viewport.left + (viewport.width - expandedWidth) / 2;
+    const expandedTop = viewport.top + (viewport.height - expandedHeight) / 2;
 
     item.style.setProperty("--gallery-expanded-left", `${expandedLeft}px`);
     item.style.setProperty("--gallery-expanded-top", `${expandedTop}px`);
     item.style.setProperty("--gallery-expanded-width", `${expandedWidth}px`);
     item.style.setProperty("--gallery-expanded-height", `${expandedHeight}px`);
   }
+
+  function refreshCurrentGalleryViewport() {
+    galleryViewportUpdateFrame = null;
+
+    const current = getCurrentGalleryInput();
+    const item = current ? getGalleryItem(current) : null;
+    if (!item) {
+      return;
+    }
+
+    const naturalSize = getGalleryNaturalSize(item);
+    setGalleryExpandedRectVars(item, naturalSize.width, naturalSize.height);
+  }
+
+  function scheduleGalleryViewportRefresh() {
+    if (!getCurrentGalleryInput()) {
+      return;
+    }
+
+    if (galleryViewportUpdateFrame) {
+      return;
+    }
+
+    galleryViewportUpdateFrame = requestAnimationFrame(
+      refreshCurrentGalleryViewport,
+    );
+  }
+
+  window.addEventListener("resize", scheduleGalleryViewportRefresh);
+  window.visualViewport?.addEventListener(
+    "resize",
+    scheduleGalleryViewportRefresh,
+  );
+  window.visualViewport?.addEventListener(
+    "scroll",
+    scheduleGalleryViewportRefresh,
+  );
 
   function clearGalleryCloseTimer(item) {
     const cleanup = galleryCloseTimers.get(item);
@@ -427,9 +582,23 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     item.classList.remove(
       "is-swipe-active",
       "is-swipe-animating",
+      "is-swipe-close-active",
       "is-swipe-peer",
     );
     item.style.removeProperty("--gallery-swipe-offset");
+    item.style.removeProperty("--gallery-swipe-close-offset");
+    item.style.removeProperty("--gallery-swipe-scale");
+    item.style.removeProperty("--gallery-swipe-backdrop-alpha");
+    item.style.removeProperty("--gallery-swipe-backdrop-blur");
+    if (galleryBackdropElement) {
+      galleryBackdropElement.style.removeProperty(
+        "--gallery-swipe-backdrop-alpha",
+      );
+      galleryBackdropElement.style.removeProperty(
+        "--gallery-swipe-backdrop-blur",
+      );
+    }
+    syncGalleryBodyClasses();
   }
 
   function resetGalleryItem(item) {
@@ -447,6 +616,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
       "is-settled",
     );
     galleryLoadTokens.delete(item);
+    syncGalleryBodyClasses();
   }
 
   function waitForGalleryFullsize(item) {
@@ -571,6 +741,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     }
 
     item.classList.add("is-active", "is-loading");
+    syncGalleryBodyClasses();
 
     if (updateHash) {
       syncGalleryHash(input);
@@ -586,6 +757,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
 
       const zoomReady = waitForGalleryMotionTransition(item);
       item.classList.add("is-animating", "is-backdrop-visible", "is-expanded");
+      syncGalleryBodyClasses();
       zoomReady.then(() => {
         if (galleryLoadTokens.get(item) !== loadToken) {
           return;
@@ -629,6 +801,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     if (isGalleryFullsizeReady(item)) {
       item.classList.add("is-motion-fullsize");
     }
+    syncGalleryBodyClasses();
   }
 
   function prepareGalleryLoadingItem(item, showBackdrop = true) {
@@ -645,6 +818,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     if (showBackdrop) {
       item.classList.add("is-backdrop-visible");
     }
+    syncGalleryBodyClasses();
   }
 
   function replaceGalleryInput(fromInput, toInput) {
@@ -766,6 +940,7 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
       "is-backdrop-visible",
     );
     item.classList.add("is-closing");
+    syncGalleryBodyClasses();
 
     fallback = window.setTimeout(resetOnce, galleryCloseFallbackMs);
 
@@ -858,6 +1033,50 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     );
   }
 
+  function getGallerySwipeHeight() {
+    return Math.max(
+      window.visualViewport?.height || 0,
+      window.innerHeight,
+      document.documentElement.clientHeight || 0,
+      1,
+    );
+  }
+
+  function clampGallerySwipeProgress(progress) {
+    return Math.max(0, Math.min(1, progress));
+  }
+
+  function getGalleryCloseProgress(state, deltaY) {
+    return clampGallerySwipeProgress(
+      Math.abs(deltaY) / Math.max(state.swipeHeight * 0.45, 1),
+    );
+  }
+
+  function setGallerySwipeBackdrop(item, progress) {
+    const remaining = 1 - clampGallerySwipeProgress(progress);
+    const alpha = (gallerySwipeCloseBackdropAlpha * remaining).toFixed(3);
+    const blur = `${(gallerySwipeCloseBackdropBlurPx * remaining).toFixed(
+      3,
+    )}px`;
+
+    item.style.setProperty("--gallery-swipe-backdrop-alpha", alpha);
+    item.style.setProperty("--gallery-swipe-backdrop-blur", blur);
+    const backdrop = getGalleryBackdropElement();
+    backdrop.style.setProperty("--gallery-swipe-backdrop-alpha", alpha);
+    backdrop.style.setProperty("--gallery-swipe-backdrop-blur", blur);
+  }
+
+  function getGalleryVerticalSwipeDirection(deltaY) {
+    if (deltaY > 0) {
+      return "down";
+    }
+    if (deltaY < 0) {
+      return "up";
+    }
+
+    return null;
+  }
+
   function getGallerySwipeDirection(deltaX) {
     if (deltaX > 0) {
       return "previous";
@@ -940,9 +1159,24 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
 
   function beginGallerySwipeDrag(state) {
     state.dragging = true;
+    state.mode = "browse";
     state.swipeWidth = getGallerySwipeWidth();
     state.item.classList.add("is-swipe-active");
     state.item.style.setProperty("--gallery-swipe-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-scale", "1");
+  }
+
+  function beginGallerySwipeCloseDrag(state) {
+    state.dragging = true;
+    state.mode = "close";
+    state.swipeHeight = getGallerySwipeHeight();
+    state.item.classList.add("is-swipe-active", "is-swipe-close-active");
+    state.item.style.setProperty("--gallery-swipe-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-scale", "1");
+    setGallerySwipeBackdrop(state.item, 0);
+    syncGalleryBodyClasses();
   }
 
   function renderGallerySwipe(state) {
@@ -985,6 +1219,35 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
 
     state.animationFrame = requestAnimationFrame(() =>
       renderGallerySwipe(state),
+    );
+  }
+
+  function renderGallerySwipeClose(state) {
+    state.animationFrame = null;
+
+    const progress = getGalleryCloseProgress(state, state.pendingDeltaY);
+    const scale = 1 - progress * gallerySwipeCloseMaxScaleReduction;
+    state.item.style.setProperty(
+      "--gallery-swipe-close-offset",
+      `${state.pendingDeltaY}px`,
+    );
+    state.item.style.setProperty("--gallery-swipe-scale", scale.toFixed(4));
+    setGallerySwipeBackdrop(state.item, progress);
+  }
+
+  function updateGallerySwipeCloseDrag(state, deltaY) {
+    if (!state.dragging) {
+      beginGallerySwipeCloseDrag(state);
+    }
+
+    state.lastDeltaY = deltaY;
+    state.pendingDeltaY = deltaY;
+    if (state.animationFrame) {
+      return;
+    }
+
+    state.animationFrame = requestAnimationFrame(() =>
+      renderGallerySwipeClose(state),
     );
   }
 
@@ -1048,6 +1311,53 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     });
   }
 
+  function finishGallerySwipeClose(state, commit) {
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+      state.animationFrame = null;
+    }
+
+    const direction = getGalleryVerticalSwipeDirection(state.lastDeltaY);
+    const finalOffset =
+      commit && direction === "up"
+        ? -state.swipeHeight
+        : commit && direction === "down"
+        ? state.swipeHeight
+        : 0;
+    const finalProgress = commit ? 1 : 0;
+    const finalScale = 1 - finalProgress * gallerySwipeCloseMaxScaleReduction;
+    const animationToken = ++gallerySwipeAnimationToken;
+
+    state.item.classList.add("is-swipe-animating");
+    syncGalleryBodyClasses();
+    state.item.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      state.item.style.setProperty(
+        "--gallery-swipe-close-offset",
+        `${finalOffset}px`,
+      );
+      state.item.style.setProperty("--gallery-swipe-scale", `${finalScale}`);
+      setGallerySwipeBackdrop(state.item, finalProgress);
+
+      window.setTimeout(
+        () => {
+          if (animationToken !== gallerySwipeAnimationToken) {
+            return;
+          }
+
+          if (commit && state.input === getCurrentGalleryInput()) {
+            closeGalleryInput(state.input, true, false);
+            return;
+          }
+
+          clearGallerySwipeStyles(state.item);
+        },
+        prefersReducedGalleryMotion() ? 0 : gallerySwipeAnimationMs,
+      );
+    });
+  }
+
   function resetGallerySwipe(animate = false) {
     const state = gallerySwipeStart;
     gallerySwipeStart = null;
@@ -1057,6 +1367,11 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
     }
 
     if (state.dragging && animate && !prefersReducedGalleryMotion()) {
+      if (state.mode === "close") {
+        finishGallerySwipeClose(state, false);
+        return;
+      }
+
       finishGallerySwipe(state, false);
       return;
     }
@@ -1157,8 +1472,12 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
         input: current,
         item,
         lastDeltaX: 0,
+        lastDeltaY: 0,
+        mode: null,
         peerStartOffset: 0,
         pendingDeltaX: 0,
+        pendingDeltaY: 0,
+        swipeHeight: getGallerySwipeHeight(),
         swipeWidth: getGallerySwipeWidth(),
         targetInput: null,
         targetItem: null,
@@ -1182,8 +1501,12 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
       const isHorizontal =
         Math.abs(deltaX) > gallerySwipeDragStartDistance &&
         Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+      const isVertical =
+        Math.abs(deltaY) > gallerySwipeDragStartDistance &&
+        Math.abs(deltaX) <=
+          Math.abs(deltaY) * gallerySwipeCloseMaxHorizontalRatio;
 
-      if (isHorizontal && event.cancelable) {
+      if ((isHorizontal || isVertical) && event.cancelable) {
         event.preventDefault();
       }
 
@@ -1191,17 +1514,19 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
         return;
       }
 
-      if (!gallerySwipeStart.dragging && !isHorizontal) {
-        if (
-          Math.abs(deltaY) > gallerySwipeDragStartDistance &&
-          Math.abs(deltaY) > Math.abs(deltaX)
-        ) {
-          resetGallerySwipe();
-        }
+      if (!gallerySwipeStart.dragging && !isHorizontal && !isVertical) {
         return;
       }
 
-      updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+      if (gallerySwipeStart.mode === "close") {
+        updateGallerySwipeCloseDrag(gallerySwipeStart, deltaY);
+      } else if (gallerySwipeStart.mode === "browse") {
+        updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+      } else if (isVertical) {
+        updateGallerySwipeCloseDrag(gallerySwipeStart, deltaY);
+      } else {
+        updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+      }
     },
     { passive: false },
   );
@@ -1221,11 +1546,15 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
       const isHorizontalSwipe =
         Math.abs(deltaX) >= gallerySwipeMinDistance &&
         Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+      const isVerticalSwipe =
+        Math.abs(deltaY) >= gallerySwipeCloseMinDistance &&
+        Math.abs(deltaX) <=
+          Math.abs(deltaY) * gallerySwipeCloseMaxHorizontalRatio;
       const startedOnCurrent = state.input === getCurrentGalleryInput();
 
       gallerySwipeStart = null;
       if (!state.dragging) {
-        if (!isHorizontalSwipe || !startedOnCurrent) {
+        if ((!isHorizontalSwipe && !isVerticalSwipe) || !startedOnCurrent) {
           return;
         }
 
@@ -1233,7 +1562,11 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
           event.preventDefault();
         }
         suppressNextGalleryClick();
-        moveGalleryInput(deltaX > 0 ? "previous" : "next", false);
+        if (isVerticalSwipe) {
+          closeGalleryInput(state.input);
+        } else {
+          moveGalleryInput(deltaX > 0 ? "previous" : "next", false);
+        }
         return;
       }
 
@@ -1241,6 +1574,11 @@ goal (having the games <em>on my computer</em>!) and not being able to reach it.
         event.preventDefault();
       }
       suppressNextGalleryClick();
+      if (state.mode === "close") {
+        finishGallerySwipeClose(state, isVerticalSwipe && startedOnCurrent);
+        return;
+      }
+
       finishGallerySwipe(
         state,
         isHorizontalSwipe && startedOnCurrent && Boolean(state.targetInput),
