@@ -2,6 +2,7 @@
 date: 2025-11-26
 filename: startrek.html
 type: page
+updated: 2026-06-10
 ---
 
 # Thoughts From A Star Trek Newbie
@@ -12,23 +13,40 @@ I don't want to know what it is similar to,
 I don't want to know that one season is bad and one is good,
 I don't want to know why you like it or whether you like it or what type of person likes it.
 
-These things get in my head and it's all I can think about when watching it.^[Once, a coworker recommended I play through a game. When I told him I would but gave him the above spiel, he told me "I'll only say this: They _didn't_ fuck up time travel." In that moment I winced and told him I really wish he hadn't said that, because now I know the game will involve time travel, and I'll be thinking about that the whole time up until the game reveals it. I played the entire game through. There was no time travel. Sean, you are the only person who can get away with this.]
+These things get in my head and it's all my brain can focus on when watching it.^[Once, a coworker recommended I play through a game. When I told him I would but gave him the above spiel, he told me "I'll only say this: They _didn't_ fuck up time travel." In that moment I winced and told him I really wish he hadn't said that, because now I know the game will involve time travel, and I'll be thinking about that the whole time up until the game reveals it. I played the entire game through. There was no time travel. Sean, you are the only person who can get away with this.]
+This is why I avoid them as much as I can, to prevent from ruining my
+experience.
+
 I've never met or heard about anyone with as deep a sensitivity to spoilers as me.
-It's hard to make people understand how small a revelation it takes to negatively impact my experience.
+It's hard to make people understand how small of a thing I consider a spoiler.
 
 For this reason, I'll usually avoid socializing about something until I'm completely done with it.
-But I can appreciate that some people enjoy hearing my thoughts about content they get really excited about.
+But I can appreciate that some people enjoy hearing my thoughts about content they really like.
+And for something like Star Trek, I'm going to forget all my notes by the time I finish.
 
-So I've started this page. I am watching through _all_ of Star Trek and post my thoughts on it below.
+So I've started this page. I am watching through _all_ of Star Trek and will continuously update my thoughts on it below.
 I'm doing this on my website so that people don't reply to me.
 
-## I Do Not Want Answers To These Questions
+## I Do Not Want Answers To These Questions. Not until I've caught up with the entire series.
+## Really, do not message me about the things I've written on this page. I don't care if you think the thing you're going to say isn't a spoiler. I don't want to know.
 
-Not until I've caught up.
+## Notes By Series
 
 ### Star Trek
 
 1. Why are the most crucial people to the operation of the ship the same ones that are constantly leaving the ship on missions?
+
+(_I didn't start taking any major notes until TNG._)
+
+### Star Trek: The Animated Series
+
+(_I didn't take any notes on this, but am including it to indicate that I
+watched it._)
+
+### The first six films (The Motion Picture – Star Trek VI: The Undiscovered Galaxy)
+
+(_I didn't take any notes on these, but am including them to indicate that I
+watched them._)
 
 ### Star Trek: The Next Generation
 
@@ -36,7 +54,7 @@ Not until I've caught up.
 2. Why is the Federation of Planets and the Enterprise crew primarily human?
 3. Why do they continue to have little-to-no security controls, blast doors, or quarantine procedures on the Enterprise despite obvious need?
    1. Once it was said (by Kirk or Picard, I don’t remember) that they have no need for such controls because they can trust everyone on the ship. This is obviously false, it seems like every fifth episode involves something bad that could have been stopped with standard physical digital security.
-4. How do the communicators work? Voice activated? Doesn’t add up. How do they know when to cut off? People frequently stop talking to their communicator and start talking to someone next to them without a significant pause.
+4. How do the communicators work? Voice activated? Doesn’t add up. How does the device know when to cut off? People frequently stop talking to their communicator and start talking to someone next to them without a significant pause.
 5. What does a video call with the Enterprise look like? In S4E4, Picard talks on a video call from all the way back by the Turbolift. Is there auto-tracking? If yes, why don't we ever see any?
 6. What’s the experience like when the Enterprise mutes your video call to discuss things amongst themselves?
 7. How does “come in” after a doorbell chime work? Is it recognized by the computer? Or does the person hear it and enter of their own authority?
@@ -51,10 +69,158 @@ Not until I've caught up.
 16. My favorite episode so far is where Picard falls asleep and lives a whole life as a memory of a civilization from star system Kataan (sp?).
 17. They have so many holodeck malfunctions that cause danger, shouldn’t they add some more safeguards?
 
-### Star Trek: Depp Space 9
+### Star Trek: Generations
+
+(_I didn't take any notes on this, but am including it to indicate that I
+watched it._)
+
+### Star Trek: Deep Space 9
 
 1. Season 1 is _really bad_.
    1. It feels like the early seasons of Stargate SG-1. Takes itself so seriously but the plots are so shallow
    2. Sisko feels like an actor, not a character.
 2. Why don’t ships just start beaming enemy ships' crew off their ships when the enemy ship's shields are down?
 3. Okay season 2 is getting good. I liked the episode when O'brien came back to the station to find everyone treating him weirdly.
+1. DS9: Past Tense Part 2: Why did Sisko, Bashir, and Dax get knocked out by transporting into the past, but the away team didn’t?
+2. S3E15 24:30: How does the door know not to open?
+3. S3E17 33:00: Did they forget to green screen the runabout’s screens in?
+1. Same ep: I like that the wrong Miles had to live.
+4. Starting in DS9 S3 (maybe earlier?) opening credits, Jake Sisko’s name comes before even Chief’s and Quark’s and Kira’s, despite appearing far less frequently. Every time I see it I think _Damn, he must have had a good agent._
+5. What do the colors on the uniforms mean?
+6. S3E21: Again, how does 100% of the essential crew of DS9 go off on a mission? 
+7. S4E14ish: I’m very tired of the “Oh no we are back in time / stuck in the holodeck past and now we must get along like we’re in the 50s/60s/70s/80s/90s” trope.
+8. S4E15: Wait so they don’t need consent to wipe a person’s memory and surgically alter them?
+9. S5E19 wait so why are all uniforms replaced with gray now? With sweaters beneath them with the original colors?
+10. Why do they depend so much on runabouts to get passengers to and from Bajor? Can’t they just beam?
+    1. Oh maybe because the station is orbiting the wormhole, not Bajor?
+11. S6: Wait so the replicators on the mines can print more replicators? How is that possible even interns of dimensions? And if that’s possible why have we heard stories before of civilizations being gifted more than one replicator at a time? Wouldn’t you only ever need one? And shouldn’t they be very cheap?
+    1. Why did they even need to deploy more than one mine to the minefield? Shouldn’t one be enough to populate the rest?
+12. Why does Benjamin both command the Defiant and the station? Is that normal? 
+13. S6 E18: Why did Bashir receive (fake) Worf’s breakfast while in the interrogation simulation? And why did Bashir not mention it when Sloan asked about his breakfast?
+14. Does DS9 not have a transporter room? Why not?
+15. How do holosuites handle people that are very far from each other? (More than the length of the room itself)
+16. S7 E5: uhh wow seems like a huge ethics violation to date your own patient?
+17. What is a sonic shower?
+18. S6/7: Why does Nog not really go to the academy? Why did he start going into combat so soon?
+19. S7E14: why does every changeling have a smooth face? I thought Odo just wasn’t good at the details and also decided even when he was that he wanted to keep his face. But even this new changeling has a similar face, but he has spent 200 years with humanoids. Though they do agree “faces aren’t easy”. But still, 200 years?
+    1. Also I’ve never seen any similar smoothness on other forms, only humanoid.
+20. Various: What’s up with the verbal authorization codes officers use to override door locks etc? Are they passwords? if so why say them out loud?
+21. Why does only Worf wear a sash of his house
+22. S7: what happened to all infiltration of founders into earth? For shapeshifters they don’t really take advantage of it much 
+23. Why was Worf a lawyer pre-TNG
+24. Why do computer panels explode when the ship takes fire (even with shields up) 
+25. S7E17: How can surgeons completely reconstruct someone into a different, SMALLER species? Cardassian to Bajoranu
+26. S7E25 21:10: How is it that the founders / Cardassia have the same computer voice as the federation?
+27. S7E26: So why would the prophets warn Sisko that marrying Cassidy would be a path of sorrow? Shouldn’t that warning be about getting in a serious relationship at all? What does marriage have to do with it?
+28. Finale: I have to say, I’m disappointed we didn’t get any closure around the other Founders, the Vorta, or the Jem’Hadar. Feels like the whole series was spent teasing a possible Jem’Hadar emancipation, and then we don’t even hear what happens? And what about the Dominion in the Gamma Quadrant? Only that one founder lady seems to be held responsible for the acts of an entire planet / government / sentience / being / military. The Federation spent the finale convincing themselves they needed to see the war to its end by attacking Cardassia even after its troops had withdrawn, but Cardassia isn’t the home of the Dominion, it was just a colony.
+
+### Star Trek: Voyager
+
+1. S1E1: with the doctor having made what I now realize is a guest appearance in DS9, I kind of wish my viewing order were interleaved. The recommendations I saw were that interleaving is not worth it, but it’s just a little immersion-breaking to not know whether Voyager’s doctor program was tee’d up by DS9 or vice versa.
+    1. S1E6: Another example: Voyager made contact with a Romulan vessel through a tiny wormhole, and I would have liked to know if the Romulans are currently allies or enemies of the federation (and for that matter, if they were at the time of Voyager’s departure from the alpha quadrant, and therefore in the minds of the crew).
+1. S1E1: I’m a little confused on why Janeway decided to destroy the caretaker’s installation. She said it was to save the underground people, and the other option was to let the above-ground people take the installation. But doesn’t that violate the prime directive? Also why would the underground people have died if the installation wasn’t destroyed?
+1. S1E4: First scene, Paris says “holding course 351 mark 10 warp 7”, but I thought the “x mark y” was supposed to be relative to the front of the ship—shouldn't that mean the ship is always heading in direction 0 mark 0? I remember Wesley Crusher explaining this once.
+   1. S4: Since I wrote this I've also heard "X mark Y" used to refer to
+      coordinates, literally someone said "they're at coordinates X mark Y".
+      I... don't get it? How can those be coordinates? How does this all work really?
+1. S1E4: Dang, so we’re still back to TOS’s “captain of the ship often leaves the ship to lead away missions even though it makes no sense”? I thought maybe it was just Kirk and Sisko. I miss TNG.
+   1. S4: Since I wrote this it has been better, with Chakotay mostly going, but Janeway not great.
+1. S1E4: I’ve been looking away during the title sequence since being bitter about seeing Quark in S1E1’s. I don't want to know ahead of time if he'll be a recurring character, and I'm afraid now if I see it in the title again it'll signal that somehow either he reaches Voyager or they reach him, soon; or that if I _don't_ see it again, it'll signal that they probably won’t. I hate being sensitive to spoilers.
+1. S1E4: So what happened to the “bioneural” controls for the Voyager helm? Seems like Paris is using manual controls even for very fine movement requirements.
+   1. S4: (Ben from the future) Yeah I've not heard or seen _anything_ about this.
+1. S1E4: Okay this was a great episode! Feels very TNG due to the moral concerns. And begins questioning the “life” of the doctor. I also like that Voyager feels a bit Battlestar Galactica esque in that they’re lost at sea with subpar components (no food replicators, no doctors, dwindling dilithium) and they have to make do and come up with creative solutions. If future episodes can be like this one, I’m calling it right now that I’ll like Voyager almost as much as TNG, certainly more than TOS/TAS/DS9.
+    1. I was surprised that after what’s her face helped the doctor through his small existential / professional crisis, during which he mentioned he’s doing the job of a doctor, a nurse, and a counselor, he asked her to basically become a nurse, not a counselor. She clearly showed good counseling skills to us and him by helping him get over his overwhelm and frustration. Maybe I don’t understand, and the role will actually include counseling?
+    2. It reminds me, I was a little disappointed that Ezri in DS9 S7 didn’t get a chance to show how good of a counselor she was / could be. There were only a couple of counseling situations and they mostly demonstrated that she was getting used to the role, and I would have liked to see more, and more interesting, counseling wins. Here’s hoping that Voyager will come through on this.
+1. S1E5: I’m a little confused if the fallback mission here is to get home by traveling for 75 years, or to find the second caretaker. They seem at odds, and I haven’t seen any progress, attempts at progress, or even mentions about finding the second caretaker. They just fly towards home whenever there’s nothing else to do.
+1. S1E5: I keep hearing “one quarter impulse”, “one third impulse”, “full impulse”, etc.; but isn’t it the case that different ships have different maximum impulse speeds? Why is warp defined in absolute terms but impulse is relative?
+    1. In fact, I’m curious to know what the difference is between different levels of warp. The output is speed, but what’s the input? Is each level of warp a different fundamental technology? Or is it the same as impulse where it’s literally just “faster”, but for some reason the galaxy has standardized?
+1. S1E5: Tuvac calls Kim a senior officer and compares him to junior officers, but isn’t Voyager Kim’s first assignment, and wasn’t his first mission S1E1? How can he be a senior officer if he’s fresh out of school? Maybe I don’t understand how officership works.
+1. S1E5: Janeway asks Engineering for opinions on bridge conversations without supplying more context. Does Engineering just have a persistently open com channel to the bridge?
+1. S1E5: What’s the difference between impulse and thrusters? I assumed impulse was thruster-based, but maybe not? I assume thrusters means maneuvering thrusters, but still, is impulse its own technology the same way the warp drive is?
+1. S1E5: Voyager seems to have an especially frontminded rationing of its energy reserves. Why haven’t we ever seen this before, in other series?
+   1. S4: Coming back to this, maybe it's just that they have no charts of
+      planets to refuel on?
+1. S1E5: Oh dang so it’s canon that what you eat and drink in a holosuite is “holographic”, not replicated? Soooo what does that do to your body? Does it just disappear once you swallow it? Once the program ends? That has got to be a weird feeling when walking out of the holosuite.
+1. S1E5: Oh dang am I far enough in Star Trek history now that I’ll start seeing actors I recognize from Seinfeld?
+   1. S4 (Ben from the future): Yes. Also, Andy Dick.
+1. S1E5: So what determines if a ship has civilians / families on board or not?
+1. S1E6: That’s the dad from Even Stevens!
+1. S1E6: Wait, so how are there quadrants in 3D space? I guess because the galaxy is relatively flat? Yeah, that makes sense.
+1. S1E6: Oh man, the Romulan who has been at space for a year and when asked how old his daughter is, replies “7 months”, that just started the tears flowing for me.
+1. S1E7: Doctor Spock?
+50. General: The fact that transporter clones can exist means each transportation is a destroy → create operation right? I’d love an episode that dives into the question of self.
+1. S1E13: Wait so we’re just going to ignore the fact that “extracting DNA” from someone yields two completely separate bodies and consciousnesses?
+1. S1E15: “Get the cheese to sick bay. The doctor should look at it as soon as possible.” is something I never thought I’d hear from Star Trek.
+1. S1E15: Wait so the ship has a biological component?
+1. S2E3: Ohh so this is the show that invented the phrase “Please state the nature of your medical emergency”! I didn’t realize it had a source. I hear that all over the place. I think Starcraft medics?
+1. S2E21: Pleasantly surprised that the worse ship is the one that survived, I expected them to erase all the bad events. I mean they effectively did with Kim and the baby coming through, but still—I like that there are imperfections in the final result.
+1. S2E22: Tuvok says multiple times there are no other life forms showing on his tricorder, but you can clearly hear birds and crickets. Do tricorders have a “no birds and crickets” mode?
+1. S2E23: How is Ensign Kim a senior officer? He responds to Captain Janeway’s calls for senior officers to report somewhere. I mean he certainly seems competent enough to be one, but he’s still an ensign?
+1. S2E24: The actor playing Tuvix (whoever it is) is amazing! He’s nailing both characters at the same time, I don’t see how he can do it.
+1. S2E24: What happened to transwarp? Paris successfully did it and sure, had a medical… issue, but he made a full recovery. Why isn’t Voyager doubling down on figuring out how to do this without the side effects / quickly curing the side effects? I mean, Paris is fine! He lives! He's healthy! Transwarp is possible! And everyone goes back to business as usual?!
+1. S2E24: Wow this was an amazing episode. This is the TNG feeling, with a little less certainty in its solution to a difficult problem.
+1. S2E25: I’m just now realizing, the doctor had a name—for one episode—and chose not to continue with it because of some romantic thing? But a couple of episodes ago he had what seemed like his first romantic encounter because he couldn’t figure out how to tell someone he liked them.
+1. S2E25: I’m just now realizing. What the fuck is a sonic shower
+1. S3E5: Why exactly does Voyager need to ration replicator use?
+1. S3E9: Why is it so often that “downloading data” means it is actually moved? i.e. the doctor 
+   1. S4: Wait yeah, as I mentioned above even transporters are technically
+      copies right, hence transporter clones? But transmitting a hologram program is by default a move not a copy?
+1. S3E15: Wait so what was the time loop? I don’t understand how the time loop was involved here. Was it a hallucination by the alien? If so why? Or was it real? If so what was the plot point and how did Janeway escape it?
+1. S3E18: Wait, Kes actually did break up with Neelix? I thought she was under the influence of that alien consciousness that hops hosts at the time. Did Kes and Neelix not undo that breakup?
+   1. S4: Damn, they just never mention this again do they?
+1. S3E20: Wow, first time I recall seeing this sink/faucet setup in quarters. It just starts dumping water when you pull it out, which is also how the lights go on? So water must not need to be conserved very much. Very interesting environment design based on the idea of utopian abundance! Wish we saw more of this that's not just "yeah replicators".
+1. S3E21: My favorite thing about Star Trek is that people believe each other. I feel like most shows have this trope of “person experiences thing that is crazy → other people think they are delusional or hallucinatory → person digs in while providing no evidence (though often it exists and need only be mentioned) → still not believed → person has to solve the problem themselves”.
+   In Star Trek it’s more often “person experiences thing that is crazy → other people check up to see if they might be delusional or hallucinatory but also put in effort to try to confirm the person’s claim → the effort yields fruit and they are believed, OR the effort yields no fruit but the person finds a way to prove it → they are believed”. For example in this episode, Kes can prove her time jumping on several occasions.
+1. S3E21: I’d be curious what Kes’s memory engrams look like 
+1. S3E21: Wait so Kes’s time jumps are just going to retcon her hair style? So that means the present is not the same present as we were in before this all happened? Did she relive her life?
+   1. S4: Seems like such a waste of an unexplored anomaly given she's about to disappear.
+   2. S4: Man, I'm getting tired of people disappearing into higher planes of
+      existence never to be heard from again. First Wesley, now Kes?
+      I feel like we need a Captain Marvel moment at some point where one of
+      these people just comes back and saves the day in a way that demonstrates both
+      how far they've come but also how important the work they're doing
+      elsewhere is. I mean, for all we know these people just literally died and
+      all the ascension stuff was fake.
+1. S3E26: I’m detecting more and more of a reluctantly flirty relationship between Janeway and Chakote à la Adama and Roslin.
+   1. (Yes, I know that Battlestar Galactica came after this.)
+1. S3E26: I’m getting a little tired of the whole “Try using System A” “System A is offline” “Try System B” “System B is offline” song and dance (e.g. transporters/tractor beam is a common one). TNG definitely had a lot more redundancies that actually worked, Voyager seems like it’s always first option works or none do.
+   1. I recall someone saying once that people like Star Trek because it feels
+      like a realistic demonstration of life on a starship, including
+      all the little things that don't matter to the story but happen
+      anyway—like a captain saying "person X, you have the bridge" when they
+      leave, and like night shift being a thing that's fleshed out including
+      dimming the lights, and like how we can see disciplinary actions taken
+      against crew members even when they're not exciting or emotional.
+   2. I like this take. And I think I'm just wishing this translated into battle scenarios.
+      When one normal everyday option doesn't work because the enemy has a scattering field or some shit,
+      the second everyday option should _often work_, but it _never works_.
+   2. Mind you, I'm not saying the writers should take the stories where no
+      everyday option works and just make one work, that would of course cripple
+      the story. But maybe they could take some everyday situations where they wrote that the first
+      everyday option _does_ work, and rewrite them so the first everyday
+      _doesn't_ work but the second does.
+   3. I'm not a writer and have no idea what I'm talking about, but maybe my
+      point got across.
+1. S4E1: Wait, so you’re telling me Voyager had in it a capability to create a singularity and enter another dimension, and all it took was one person reconfiguring some circuits for two minutes?
+1. S4E2: Is it me or has Kes got more monotone and lowkey emotionless the last several episodes.
+1. S4E2: Quite literally one scene Kes leaves the show and the next scene Seven of Nine becomes a stable cast member. They could at least leave a blank episode between them, don’t make it feel like such a trade. This roughly happened in DS9 too.
+1. S4E3: I’m surprised so many species come from worlds of thousands or millions—I don’t recall ever hearing of a world of billions.
+   1. S4: Also on that note, it's weird so many civilizations advanced to space
+      travel and yet have _very_ outdated notions of basic things like civil rights,
+      e.g. the Ferengi and their view on gender roles (at least, until late in DS9) or the Klingons and their violence-based command structure.
+   2. Of course I'm willing to believe the way that humans get to space will be
+      different than other races, but many of these things seem like just basic
+      fundamental _prerequisites_ for a space-faring civilization.
+      Ferengi don't go to _school_? How the hell do you invent rocket science
+      without _school_?
+1. S4E3: Okay they redesigned the bridge of Voyager and they didn’t even say a word about it? The viewscreen shape is different, the conn is much wider, the distance between the captain’s chair and the conn seems much longer too.
+1. S4E3: So they dumped the warp core. Why? It seemed like it was going to overload (breach?) and so they dumped it, and so it didn’t. What is it about dumping that prevents that? I thought dumping was just to get away from the antimatter explosion.
+1. S4E4: The way the natives talk in this episode is a little cringe. I get what the writers were trying to do, making their speech sound poetic and novel, but it’s too direct a translation. “The future” → “The soon after”, “See” → “Glimpse”, “Forest” → “Trunks”, “Kill” → “Nullify”.
+   1. Also,
+      why is it like this? Does the universal translator not account for this
+      stuff? If it didn't, why don't we ever hear more translations that differ
+      like this?
+1. S4E4: Overall I liked this episode, and loved the message. I saw the first twist coming (that the side Voyager was talking to wouldn’t be the one Chikote was allied with) but not the second—that Chikote was purposefully brainwashed into the hate.
+1. S4E14 (“Message in a Bottle”): This was an amazing episode, and with Andy Dick of all actors! I like that the doctors use medical knowledge to take back the Prometheus, and that they were horrible at piloting the ship—it would have been a disappointing cliche if they somehow were good at it. And I like that the conclusion left Voyager, and those in the alpha quadrant, in a more hopeful state.
+1. S4E15: Wow another banger! The letters being unexpectedly emotionally bad news was a fantastic plot point and made sense.
+   1. I'm sure the writers are thinking, "Janeway / Chakotay ship unlocked 🔓".
