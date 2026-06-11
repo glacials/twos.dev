@@ -484,6 +484,15 @@ or join the <a href="https://testflight.apple.com/join/ww7RII5M" target="_blank"
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
+      galleryBackdropElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const current = getCurrentGalleryInput();
+        if (current) {
+          closeGalleryInput(current);
+        }
+      });
       document.body.append(galleryBackdropElement);
     }
 

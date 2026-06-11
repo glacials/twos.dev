@@ -372,6 +372,15 @@ about this kind of stuff, so I don’t expect any problems to come up.</p>
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
+      galleryBackdropElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const current = getCurrentGalleryInput();
+        if (current) {
+          closeGalleryInput(current);
+        }
+      });
       document.body.append(galleryBackdropElement);
     }
 
