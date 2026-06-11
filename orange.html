@@ -405,6 +405,15 @@ would enjoy <em>Portal</em> despite their gaming background.</p>
       galleryBackdropElement = document.createElement("div");
       galleryBackdropElement.className = "gallery-backdrop";
       galleryBackdropElement.setAttribute("aria-hidden", "true");
+      galleryBackdropElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const current = getCurrentGalleryInput();
+        if (current) {
+          closeGalleryInput(current);
+        }
+      });
       document.body.append(galleryBackdropElement);
     }
 
