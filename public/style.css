@@ -253,7 +253,7 @@ body:has(.gallery-item.is-active) {
   height: var(--gallery-backdrop-height, 100lvh);
   left: var(--gallery-backdrop-left, 0px);
   pointer-events: none;
-  position: absolute;
+  position: fixed;
   top: var(--gallery-backdrop-top, 0px);
   transition:
     background 320ms ease,
