@@ -229,6 +229,7 @@ body {
   height: 100%;
   line-height: 1.7rem;
   margin: 0;
+  position: relative;
 }
 
 @media (max-width: 55rem) {
@@ -242,6 +243,41 @@ body {
 body:has(.gallery-item input:checked),
 body:has(.gallery-item.is-active) {
   overflow: hidden;
+}
+
+.gallery-backdrop {
+  backdrop-filter: blur(0);
+  background: rgba(0, 0, 0, 0);
+  content: "";
+  display: none;
+  height: var(--gallery-backdrop-height, 100lvh);
+  left: var(--gallery-backdrop-left, 0px);
+  pointer-events: none;
+  position: absolute;
+  top: var(--gallery-backdrop-top, 0px);
+  transition:
+    background 320ms ease,
+    backdrop-filter 320ms ease;
+  width: var(--gallery-backdrop-width, 100vw);
+  z-index: 19;
+}
+
+body.is-gallery-open .gallery-backdrop,
+body:has(.gallery-item input:checked) .gallery-backdrop,
+body:has(.gallery-item.is-active) .gallery-backdrop {
+  display: block;
+}
+
+body.is-gallery-backdrop-visible .gallery-backdrop,
+body:has(.gallery-item.is-backdrop-visible) .gallery-backdrop {
+  backdrop-filter: blur(12px);
+  background: rgba(0, 0, 0, 0.82);
+}
+
+body.is-gallery-closing .gallery-backdrop,
+body:has(.gallery-item.is-closing) .gallery-backdrop {
+  backdrop-filter: blur(0);
+  background: rgba(0, 0, 0, 0);
 }
 
 button,
@@ -636,6 +672,14 @@ video + video {
   --gallery-expanded-top: 0px;
   --gallery-expanded-width: 100vw;
   --gallery-swipe-offset: 0px;
+  --gallery-swipe-close-offset: 0px;
+  --gallery-swipe-scale: 1;
+  --gallery-swipe-backdrop-alpha: 0.82;
+  --gallery-swipe-backdrop-blur: 12px;
+  --gallery-viewport-height: 100vh;
+  --gallery-viewport-left: 0px;
+  --gallery-viewport-top: 0px;
+  --gallery-viewport-width: 100vw;
 }
 
 .gallery-item img {
@@ -688,32 +732,21 @@ video + video {
   z-index: 20;
 }
 
-.gallery-item:has(input:checked)::before,
-.gallery-item.is-active::before {
-  backdrop-filter: blur(0);
-  background: rgba(0, 0, 0, 0);
-  content: "";
-  height: 100vh;
-  height: 100lvh;
-  left: 0;
-  position: fixed;
-  right: 0;
-  top: 0;
+body.is-gallery-swipe-close-active.is-gallery-backdrop-visible
+  .gallery-backdrop,
+body:has(.gallery-item.is-swipe-close-active.is-backdrop-visible)
+  .gallery-backdrop {
+  backdrop-filter: blur(var(--gallery-swipe-backdrop-blur, 12px));
+  background: rgba(0, 0, 0, var(--gallery-swipe-backdrop-alpha, 0.82));
+  transition: none;
+}
+
+body.is-gallery-swipe-close-active.is-gallery-swipe-animating .gallery-backdrop,
+body:has(.gallery-item.is-swipe-close-active.is-swipe-animating)
+  .gallery-backdrop {
   transition:
-    background 320ms ease,
-    backdrop-filter 320ms ease;
-  z-index: 7;
-}
-
-.gallery-item:has(input:checked):not(.is-active)::before,
-.gallery-item.is-active.is-backdrop-visible::before {
-  backdrop-filter: blur(12px);
-  background: rgba(0, 0, 0, 0.82);
-}
-
-.gallery-item.is-closing::before {
-  background: rgba(0, 0, 0, 0);
-  backdrop-filter: blur(0);
+    background 240ms cubic-bezier(0.2, 0, 0, 1),
+    backdrop-filter 240ms cubic-bezier(0.2, 0, 0, 1);
 }
 
 .gallery-item:has(input) img.thumbnail {
@@ -866,7 +899,13 @@ video + video {
 .gallery-item.is-swipe-active .fullsize-photo,
 .gallery-item.is-swipe-peer img.thumbnail,
 .gallery-item.is-swipe-peer .fullsize-photo {
-  transform: translate3d(var(--gallery-swipe-offset), 0, 0);
+  transform: translate3d(
+      var(--gallery-swipe-offset),
+      var(--gallery-swipe-close-offset),
+      0
+    )
+    scale(var(--gallery-swipe-scale));
+  transform-origin: center;
   transition: none;
   will-change: transform;
 }
