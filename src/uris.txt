@@ -16,6 +16,7 @@
 /dashes.html
 /death.html
 /diagnostics.html
+/drafts.html
 /ds.html
 /emotion.html
 /feed.atom

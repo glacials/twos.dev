@@ -1,0 +1,34 @@
+---
+filename: drafts.html
+type: page
+---
+
+<h1>Drafts</h1>
+
+<p>
+  <small>
+    <a href="/archives.html">Blog</a>
+  </small>
+</p>
+
+<div class="archives">
+  {{ with yearly drafts }}
+    {{ range . }}
+      <h2>{{ if .Undated }}Undated{{ else }}{{ .Year }}{{ end }}</h2>
+
+      <ul>
+        {{ range .Documents.All }}
+          {{ with .Metadata }}
+            <li>
+              {{ with .Category }}{{ . }}:{{ end }}
+              <a href="{{ .WebPath }}">{{ .Title }}</a>
+              {{ with .Preview }}
+                <span class="archives-preview">{{ . }}</span>
+              {{ end }}
+            </li>
+          {{ end }}
+        {{ end }}
+      </ul>
+    {{ end }}
+  {{ end }}
+</div>
