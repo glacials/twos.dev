@@ -28,7 +28,7 @@ Whatever position you're in when you remember this method,
 be still.
 
 This is your default behavior for the rest of the night.
-No moving.
+No moving. Not even fingers or toes.
 
 Now, allocate yourself three "toss and turn" charges.
 You can use a charge to scratch an itch, or reposition yourself, or get up and use the bathroom, or flip your pillow over or whatever.
