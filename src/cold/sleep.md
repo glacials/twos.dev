@@ -1,7 +1,7 @@
 ---
 date: 2026-07-08
 filename: sleep.html
-preview: My personal mental trick that always cures my acute insomnia.
+preview: A trick that always cures my acute insomnia.
 type: post
 ---
 
