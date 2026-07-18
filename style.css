@@ -14,6 +14,7 @@
 
 :root {
   --container-width: 33rem;
+  color-scheme: dark;
 }
 
 @media (min-width: 55rem) {
@@ -28,64 +29,66 @@
   }
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    --all-bg: rgba(255, 255, 255, 1);
+/*
+ * Dark mode is intentionally the default regardless of OS preference. Keep the
+ * light theme behind an unused attribute so it remains easy to restore later.
+ */
+:root[data-theme="light"] {
+  --all-bg: rgba(255, 255, 255, 1);
 
-    --traditional-bg: var(--all-bg);
-    --traditional-fg: rgba(0, 0, 0, 1);
-    --traditional-fg-mute: rgba(224, 205, 193, 1);
-    --traditional-fg-pop: rgba(150, 90, 50, 1);
+  --traditional-bg: var(--all-bg);
+  --traditional-fg: rgba(0, 0, 0, 1);
+  --traditional-fg-mute: rgba(224, 205, 193, 1);
+  --traditional-fg-pop: rgba(150, 90, 50, 1);
 
-    --page-bg: var(--all-bg);
-    --page-border: rgb(0, 0, 0);
-    --page-fg: rgba(0, 0, 0, 1);
+  --page-bg: var(--all-bg);
+  --page-border: rgb(0, 0, 0);
+  --page-fg: rgba(0, 0, 0, 1);
 
-    --lighter-bg: rgba(255, 255, 255, 1);
-    --lighter-fg: rgba(200, 200, 200, 1);
+  --lighter-bg: rgba(255, 255, 255, 1);
+  --lighter-fg: rgba(200, 200, 200, 1);
 
-    /* Use raised colors for items that should appear as if they are above the page. */
-    --raised-bg: rgba(215, 215, 215, 1);
-    --raised-fg: rgba(10, 10, 10, 1);
+  /* Use raised colors for items that should appear as if they are above the page. */
+  --raised-bg: rgba(215, 215, 215, 1);
+  --raised-fg: rgba(10, 10, 10, 1);
 
-    --shadow: rgba(0, 0, 0, 0.5);
+  --shadow: rgba(0, 0, 0, 0.5);
 
-    /* --under-white looks good as a background under a white foreground,
-     * regardless of color scheme.
-     */
-    --under-white: rgba(50, 50, 50, 1);
+  /* --under-white looks good as a background under a white foreground,
+   * regardless of color scheme.
+   */
+  --under-white: rgba(50, 50, 50, 1);
 
-    --danger-fg: rgba(255, 0, 0, 1);
-    --danger-bg: rgba(255, 0, 0, 0.1);
-  }
+  --danger-fg: rgba(255, 0, 0, 1);
+  --danger-bg: rgba(255, 0, 0, 0.1);
+  color-scheme: light;
 }
-@media (prefers-color-scheme: dark) {
-  :root {
-    --all-bg: rgb(53, 60, 65);
 
-    --traditional-bg: var(--all-bg);
-    --traditional-fg: rgb(166, 194, 202);
-    --traditional-fg-mute: #606e70;
-    --traditional-fg-pop: #baeee3;
+:root {
+  --all-bg: rgb(53, 60, 65);
 
-    --page-bg: var(--all-bg);
-    --page-border: rgb(34, 34, 34);
-    --page-fg: rgb(215, 229, 255);
+  --traditional-bg: var(--all-bg);
+  --traditional-fg: rgb(166, 194, 202);
+  --traditional-fg-mute: #606e70;
+  --traditional-fg-pop: #baeee3;
 
-    --lighter-bg: rgba(240, 240, 240, 1);
-    --lighter-fg: rgb(132, 117, 45);
+  --page-bg: var(--all-bg);
+  --page-border: rgb(34, 34, 34);
+  --page-fg: rgb(215, 229, 255);
 
-    /* Use raised colors for items that should appear as if they are above the page. */
-    --raised-bg: rgb(60, 40, 40);
-    --raised-fg: rgba(244, 214, 205, 1);
+  --lighter-bg: rgba(240, 240, 240, 1);
+  --lighter-fg: rgb(132, 117, 45);
 
-    --shadow: rgb(0, 0, 0, 0.25);
+  /* Use raised colors for items that should appear as if they are above the page. */
+  --raised-bg: rgb(60, 40, 40);
+  --raised-fg: rgba(244, 214, 205, 1);
 
-    --under-white: rgba(34, 34, 34, 1);
+  --shadow: rgb(0, 0, 0, 0.25);
 
-    --danger-fg: rgba(255, 100, 100, 1);
-    --danger-bg: rgba(255, 0, 0, 0.1);
-  }
+  --under-white: rgba(34, 34, 34, 1);
+
+  --danger-fg: rgba(255, 100, 100, 1);
+  --danger-bg: rgba(255, 0, 0, 0.1);
 }
 
 @keyframes appear {
@@ -698,6 +701,10 @@ video + video {
   display: block;
 }
 
+:root[data-theme="light"] .dark-only {
+  display: none;
+}
+
 .draft {
   color: var(--traditional-fg-pop);
   font-size: 2rem;
@@ -996,6 +1003,10 @@ body:has(.gallery-item.is-swipe-close-active.is-swipe-animating)
   display: none;
 }
 
+:root[data-theme="light"] .light-only {
+  display: block;
+}
+
 .mb-0 {
   margin-bottom: 0 !important;
 }
@@ -1055,25 +1066,21 @@ body:has(.gallery-item.is-swipe-close-active.is-swipe-animating)
   cursor: default;
 }
 
-@media (prefers-color-scheme: light) {
-  .white-icon {
-    filter: invert();
-  }
+:root[data-theme="light"] .white-icon {
+  filter: invert();
 }
 
 /* Start syntax highlighting (see https://github.com/alecthomas/chroma) */
 
 /* Inline code styling */
 code {
-  background-color: rgba(0, 0, 0, 0.05);
+  background-color: rgba(255, 255, 255, 0.08);
   border-radius: 0.2rem;
   padding: 0.1rem 0.25rem;
 }
 
-@media (prefers-color-scheme: dark) {
-  code {
-    background-color: rgba(255, 255, 255, 0.08);
-  }
+:root[data-theme="light"] code {
+  background-color: rgba(0, 0, 0, 0.05);
 }
 
 pre {

@@ -85,6 +85,7 @@
 <meta charset="utf-8" />
 <meta http-equiv="X-UA-Compatible" content="IE=edge" />
 <meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
 <meta name="description" content="Anony­mously Autistic" />
 <link
   rel="alternate"
@@ -115,7 +116,7 @@
 <link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#5bbad5" />
 <link rel="shortcut icon" href="/favicon.ico?v=2" />
 <meta name="msapplication-TileColor" content="#da532c" />
-<meta name="theme-color" content="#ffffff" />
+<meta name="theme-color" content="#353c41" />
 
 
   </head>
@@ -142,31 +143,27 @@
   .spectrum {
     height: 10em;
     width: 10em;
-    background: conic-gradient(hsl(0, 90%, 65%),
-        hsl(36, 90%, 65%),
-        hsl(72, 90%, 65%),
-        hsl(108, 90%, 65%),
-        hsl(144, 90%, 65%),
-        hsl(180, 90%, 65%),
-        hsl(216, 90%, 65%),
-        hsl(252, 90%, 65%),
-        hsl(288, 90%, 65%),
-        hsl(324, 90%, 65%),
-        hsl(360, 90%, 65%));
+    background: conic-gradient(
+      hsl(0, 90%, 65%),
+      hsl(36, 90%, 65%),
+      hsl(72, 90%, 65%),
+      hsl(108, 90%, 65%),
+      hsl(144, 90%, 65%),
+      hsl(180, 90%, 65%),
+      hsl(216, 90%, 65%),
+      hsl(252, 90%, 65%),
+      hsl(288, 90%, 65%),
+      hsl(324, 90%, 65%),
+      hsl(360, 90%, 65%)
+    );
     border: 1px solid;
+    border-color: white;
     border-radius: 90%;
   }
 
-  @media (prefers-color-scheme:light) {
-    .spectrum {
-      border-color: black;
-    }
-
-    @media (prefers-color-scheme:dark) {
-      .spectrum {
-        border-color: white;
-      }
-    }
+  :root[data-theme="light"] .spectrum {
+    border-color: black;
+  }
 </style>
 
 </head><body>
@@ -438,10 +435,8 @@
   out.
 </p>
 <p style="text-align: center">
-  <picture>
-    <source srcset="img/autism-diagnosis-dark.png" media="(prefers-color-scheme: dark)"/>
-    <img src="img/autism-diagnosis-light.png" style="width: 50em; max-width: 100%"/>
-  </picture>
+  <img class="dark-only" src="img/autism-diagnosis-dark.png" style="width: 50em; max-width: 100%; margin: auto"/>
+  <img class="light-only" src="img/autism-diagnosis-light.png" style="width: 50em; max-width: 100%; margin: auto"/>
 </p>
 <footer>
   <p>
