@@ -39,6 +39,10 @@
       {{ .ISO }}
       <br />
       &copy; {{ .TakenAt.Year }} Ben Carlsson
+      {{ with .PurchaseURL }}
+        &bull;
+        <a class="muted" href="{{ . }}" target="_blank" rel="noopener">purchase</a>
+      {{ end }}
     </p>
   </label>
 {{ end }}
