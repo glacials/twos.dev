@@ -54,6 +54,18 @@ gear:
     exif:
       make: FUJIFILM
       model: XF35mmF2 R WR
+  - make: Fujifilm
+    model: XF56mm ƒ/1.2
+    link: https://amzn.to/3UkRFvw
+    exif:
+      make: FUJIFILM
+      model: XF56mmF1.2 R WR
+  - make: Fujifilm
+    model: XF70-300mm ƒ/4
+    link: https://amzn.to/4gm98MI
+    exif:
+      make: FUJIFILM
+      model: XF70-300mmF4-5.6 R LM OIS WR
   - make: Apple
     model: iPhone 17 Pro
     link: https://amzn.to/4t345UR
