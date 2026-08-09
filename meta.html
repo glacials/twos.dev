@@ -388,9 +388,13 @@ doodads and hardens the file against future changes to preprocessing.</p>
   const gallerySwipeCloseBackdropBlurPx = 12;
   const gallerySwipeCloseMaxScaleReduction = 0.12;
   const galleryBackdropBleedPx = 256;
+  const galleryZoomMaxScale = 4;
+  const galleryZoomSnapScale = 1.02;
   const galleryLoadTokens = new WeakMap();
   const galleryCloseTimers = new WeakMap();
+  const galleryZoomStates = new WeakMap();
   let gallerySwipeStart = null;
+  let galleryZoomGesture = null;
   let gallerySuppressClickAfterSwipe = false;
   let gallerySuppressClickTimer = null;
   let gallerySwapToken = 0;
@@ -630,6 +634,7 @@ doodads and hardens the file against future changes to preprocessing.</p>
 
     const naturalSize = getGalleryNaturalSize(item);
     setGalleryExpandedRectVars(item, naturalSize.width, naturalSize.height);
+    reapplyGalleryZoom(item);
   }
 
   function scheduleGalleryViewportRefresh() {
@@ -692,9 +697,175 @@ doodads and hardens the file against future changes to preprocessing.</p>
     syncGalleryBodyClasses();
   }
 
+  function getGalleryZoomState(item) {
+    return galleryZoomStates.get(item) ?? { scale: 1, x: 0, y: 0 };
+  }
+
+  function clampGalleryZoomOffset(item, scale, x, y) {
+    const viewport = getGalleryViewportRect();
+    const expandedWidth =
+      Number.parseFloat(
+        item.style.getPropertyValue("--gallery-expanded-width"),
+      ) || viewport.width;
+    const expandedHeight =
+      Number.parseFloat(
+        item.style.getPropertyValue("--gallery-expanded-height"),
+      ) || viewport.height;
+    const maxX = Math.max(0, (expandedWidth * scale - viewport.width) / 2);
+    const maxY = Math.max(0, (expandedHeight * scale - viewport.height) / 2);
+
+    return {
+      x: Math.max(-maxX, Math.min(maxX, x)),
+      y: Math.max(-maxY, Math.min(maxY, y)),
+    };
+  }
+
+  function applyGalleryZoom(item, scale, x, y) {
+    const nextScale = Math.max(1, Math.min(galleryZoomMaxScale, scale));
+    const offset =
+      nextScale === 1
+        ? { x: 0, y: 0 }
+        : clampGalleryZoomOffset(item, nextScale, x, y);
+    const state = { scale: nextScale, x: offset.x, y: offset.y };
+
+    galleryZoomStates.set(item, state);
+    item.style.setProperty("--gallery-zoom-scale", `${state.scale}`);
+    item.style.setProperty("--gallery-zoom-x", `${state.x}px`);
+    item.style.setProperty("--gallery-zoom-y", `${state.y}px`);
+    item.classList.toggle("is-zoomed", state.scale > 1);
+
+    return state;
+  }
+
+  function clearGalleryZoom(item) {
+    if (!item) {
+      return;
+    }
+
+    if (galleryZoomGesture?.item === item) {
+      galleryZoomGesture = null;
+    }
+    galleryZoomStates.delete(item);
+    item.classList.remove("is-zoom-active", "is-zoomed");
+    item.style.removeProperty("--gallery-zoom-scale");
+    item.style.removeProperty("--gallery-zoom-x");
+    item.style.removeProperty("--gallery-zoom-y");
+  }
+
+  function reapplyGalleryZoom(item) {
+    const state = galleryZoomStates.get(item);
+    if (state?.scale > 1) {
+      applyGalleryZoom(item, state.scale, state.x, state.y);
+    }
+  }
+
+  function getGalleryTouchMidpoint(touches) {
+    return {
+      x: (touches[0].clientX + touches[1].clientX) / 2,
+      y: (touches[0].clientY + touches[1].clientY) / 2,
+    };
+  }
+
+  function getGalleryTouchDistance(touches) {
+    return Math.hypot(
+      touches[0].clientX - touches[1].clientX,
+      touches[0].clientY - touches[1].clientY,
+    );
+  }
+
+  function beginGalleryPinch(item, touches, didMove = false) {
+    resetGallerySwipe();
+
+    const state = getGalleryZoomState(item);
+    const midpoint = getGalleryTouchMidpoint(touches);
+    const viewport = getGalleryViewportRect();
+    galleryZoomGesture = {
+      didMove,
+      distance: Math.max(getGalleryTouchDistance(touches), 1),
+      item,
+      midpoint,
+      mode: "pinch",
+      origin: {
+        x: viewport.left + viewport.width / 2,
+        y: viewport.top + viewport.height / 2,
+      },
+      scale: state.scale,
+      x: state.x,
+      y: state.y,
+    };
+    item.classList.add("is-zoom-active");
+  }
+
+  function beginGalleryZoomPan(item, touch, didMove = false) {
+    const state = getGalleryZoomState(item);
+    galleryZoomGesture = {
+      didMove,
+      item,
+      mode: "pan",
+      scale: state.scale,
+      touchX: touch.clientX,
+      touchY: touch.clientY,
+      x: state.x,
+      y: state.y,
+    };
+    item.classList.add("is-zoom-active");
+  }
+
+  function updateGalleryPinch(gesture, touches) {
+    const midpoint = getGalleryTouchMidpoint(touches);
+    const scale = Math.max(
+      1,
+      Math.min(
+        galleryZoomMaxScale,
+        gesture.scale *
+          (getGalleryTouchDistance(touches) / Math.max(gesture.distance, 1)),
+      ),
+    );
+    const scaleRatio = scale / gesture.scale;
+    const x =
+      midpoint.x -
+      gesture.origin.x -
+      scaleRatio * (gesture.midpoint.x - gesture.origin.x - gesture.x);
+    const y =
+      midpoint.y -
+      gesture.origin.y -
+      scaleRatio * (gesture.midpoint.y - gesture.origin.y - gesture.y);
+
+    applyGalleryZoom(gesture.item, scale, x, y);
+    gesture.didMove = true;
+  }
+
+  function updateGalleryZoomPan(gesture, touch) {
+    applyGalleryZoom(
+      gesture.item,
+      gesture.scale,
+      gesture.x + touch.clientX - gesture.touchX,
+      gesture.y + touch.clientY - gesture.touchY,
+    );
+    gesture.didMove = true;
+  }
+
+  function finishGalleryZoomGesture() {
+    const gesture = galleryZoomGesture;
+    galleryZoomGesture = null;
+    if (!gesture) {
+      return;
+    }
+
+    gesture.item.classList.remove("is-zoom-active");
+    const state = getGalleryZoomState(gesture.item);
+    if (state.scale < galleryZoomSnapScale) {
+      clearGalleryZoom(gesture.item);
+    }
+    if (gesture.didMove) {
+      suppressNextGalleryClick();
+    }
+  }
+
   function resetGalleryItem(item) {
     clearGalleryCloseTimer(item);
     clearGallerySwipeStyles(item);
+    clearGalleryZoom(item);
     item.classList.remove(
       "is-active",
       "is-animating",
@@ -716,6 +887,7 @@ doodads and hardens the file against future changes to preprocessing.</p>
       return Promise.resolve();
     }
 
+    fullsize.fetchPriority = "high";
     fullsize.loading = "eager";
 
     if (fullsize.complete && fullsize.naturalWidth > 0) {
@@ -750,6 +922,25 @@ doodads and hardens the file against future changes to preprocessing.</p>
     }).then(() =>
       fullsize.decode ? fullsize.decode().catch(() => {}) : Promise.resolve(),
     );
+  }
+
+  function preloadGalleryFullsize(input) {
+    if (!input) {
+      return;
+    }
+
+    const fullsize = getGalleryItem(input)?.querySelector("img.fullsize-photo");
+    if (!fullsize || (fullsize.complete && fullsize.naturalWidth > 0)) {
+      return;
+    }
+
+    fullsize.fetchPriority = "low";
+    fullsize.loading = "eager";
+  }
+
+  function preloadAdjacentGalleryFullsizes() {
+    preloadGalleryFullsize(getPreviousGalleryInput());
+    preloadGalleryFullsize(getNextGalleryInput());
   }
 
   function getGalleryMotionElement(item) {
@@ -816,6 +1007,7 @@ doodads and hardens the file against future changes to preprocessing.</p>
     }
 
     clearGalleryCloseTimer(item);
+    clearGalleryZoom(item);
     setGalleryRectVars(item);
     clearGallerySwipeStyles(item);
     input.checked = true;
@@ -859,7 +1051,9 @@ doodads and hardens the file against future changes to preprocessing.</p>
         item.classList.add("is-settled");
       });
 
-      waitForGalleryFullsize(item).then(() => {
+      const fullsizeReady = waitForGalleryFullsize(item);
+      preloadAdjacentGalleryFullsizes();
+      fullsizeReady.then(() => {
         if (galleryLoadTokens.get(item) !== loadToken) {
           return;
         }
@@ -943,7 +1137,9 @@ doodads and hardens the file against future changes to preprocessing.</p>
     resetGalleryItem(fromItem);
 
     if (!targetAlreadyReady) {
-      waitForGalleryFullsize(toItem).then(() => {
+      const fullsizeReady = waitForGalleryFullsize(toItem);
+      preloadAdjacentGalleryFullsizes();
+      fullsizeReady.then(() => {
         if (
           swapToken !== gallerySwapToken ||
           galleryLoadTokens.get(toItem) !== loadToken ||
@@ -956,6 +1152,8 @@ doodads and hardens the file against future changes to preprocessing.</p>
         toItem.classList.remove("is-loading");
         toItem.classList.add("is-loaded");
       });
+    } else {
+      preloadAdjacentGalleryFullsizes();
     }
   }
 
@@ -968,6 +1166,7 @@ doodads and hardens the file against future changes to preprocessing.</p>
     gallerySwapToken += 1;
     input.checked = false;
     galleryLoadTokens.delete(item);
+    clearGalleryZoom(item);
 
     if (updateHash) {
       clearGalleryHash();
@@ -1570,17 +1769,32 @@ doodads and hardens the file against future changes to preprocessing.</p>
       if (
         !current ||
         !item ||
-        event.touches.length !== 1 ||
         !item.classList.contains("is-expanded") ||
         !item.classList.contains("is-settled") ||
         item.classList.contains("is-closing") ||
         item.classList.contains("is-swipe-animating")
       ) {
         resetGallerySwipe();
+        finishGalleryZoomGesture();
+        return;
+      }
+
+      if (event.touches.length >= 2) {
+        beginGalleryPinch(item, event.touches);
+        return;
+      }
+
+      if (event.touches.length !== 1) {
         return;
       }
 
       const touch = event.touches[0];
+      if (getGalleryZoomState(item).scale > 1) {
+        resetGallerySwipe();
+        beginGalleryZoomPan(item, touch);
+        return;
+      }
+
       gallerySwipeStart = {
         animationFrame: null,
         dragging: false,
@@ -1607,6 +1821,26 @@ doodads and hardens the file against future changes to preprocessing.</p>
   document.addEventListener(
     "touchmove",
     (event) => {
+      if (galleryZoomGesture) {
+        if (event.touches.length >= 2) {
+          if (galleryZoomGesture.mode !== "pinch") {
+            const didMove = galleryZoomGesture.didMove;
+            beginGalleryPinch(galleryZoomGesture.item, event.touches, didMove);
+          }
+          updateGalleryPinch(galleryZoomGesture, event.touches);
+        } else if (
+          event.touches.length === 1 &&
+          galleryZoomGesture.mode === "pan"
+        ) {
+          updateGalleryZoomPan(galleryZoomGesture, event.touches[0]);
+        }
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        return;
+      }
+
       if (!gallerySwipeStart || event.touches.length !== 1) {
         return;
       }
@@ -1650,6 +1884,26 @@ doodads and hardens the file against future changes to preprocessing.</p>
   document.addEventListener(
     "touchend",
     (event) => {
+      if (galleryZoomGesture) {
+        const gesture = galleryZoomGesture;
+        const didMove = gesture.didMove;
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        if (event.touches.length >= 2) {
+          beginGalleryPinch(gesture.item, event.touches, didMove);
+        } else if (
+          event.touches.length === 1 &&
+          getGalleryZoomState(gesture.item).scale > 1
+        ) {
+          beginGalleryZoomPan(gesture.item, event.touches[0], didMove);
+        } else {
+          finishGalleryZoomGesture();
+        }
+        return;
+      }
+
       const state = gallerySwipeStart;
       if (!state || event.changedTouches.length === 0) {
         resetGallerySwipe();
@@ -1705,7 +1959,10 @@ doodads and hardens the file against future changes to preprocessing.</p>
     { passive: false },
   );
 
-  document.addEventListener("touchcancel", () => resetGallerySwipe(true));
+  document.addEventListener("touchcancel", () => {
+    finishGalleryZoomGesture();
+    resetGallerySwipe(true);
+  });
 
   
   document.addEventListener("keydown", (event) => {

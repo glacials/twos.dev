@@ -1606,7 +1606,7 @@
     },
     "public/style.css": {
       "generator": "winter-static-v1",
-      "hash": "b9e52c48d9bf1492a632de5e98e5fdc0e85232a3c0ce62e44527cb21fdc27aa2",
+      "hash": "6357369f84c8a91366915d50ad2131691c6ea0a8e95cf15462658cc932c971c4",
       "kind": "static",
       "outputs": [
         "style.css"
