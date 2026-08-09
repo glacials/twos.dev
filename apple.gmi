@@ -293,7 +293,7 @@ This has led me to misread the current day multiple times, inducing panic about 
 
 Mail has no special treatment of calendar invitations, which is to say they appear as raw attachments. When Google Calendar users send a calendar invitation there are two attachments, `invite.ics` and `mime-attachment.ics`. Each will pop up a Calendar float to add the event. I don't know the difference; since switching to Google Calendar as a backend I've learned to RSVP using the embedded buttons which (outside of Gmail) open a web browser to the Google Calendar UI.
 
-{{ template "_videos.html.tmpl" "/img/apple-mail-dark" }}
+                        
 
 *Opening a Google Calendar invitation from within the Apple ecosystem.*
 

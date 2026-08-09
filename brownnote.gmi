@@ -69,5 +69,5 @@ For example, the app can understand food components (e.g. `latte` contains `milk
 
 Let me know what you think by grabbing it from the App Store, or join the TestFlight group to give me some feedback before proper releases.
 
-=> appstore grabbing it from the App Store
+=> https://apps.apple.com/us/app/brown-note/id6479333983 grabbing it from the App Store
 => https://testflight.apple.com/join/ww7RII5M TestFlight

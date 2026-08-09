@@ -265,6 +265,6 @@ article > p:has(img[src*="macos"]) {
 
 This works at any display size because both the image and its embedded shadow scale together.
 
-=> /img/screenshots-5-dark.png A screenshot of the final result: macOS screenshots align perfectly with the text content, with shadows bleeding into the margins.
+=> /img/screenshots-5-macos-dark.png A screenshot of the final result: macOS screenshots align perfectly with the text content, with shadows bleeding into the margins.
 
 *Now they line up perfectly, regardless of the screenshot size or page zoom level.*

@@ -37,7 +37,7 @@ Since I'm still undergoing my Apple experiment, I've set myself a constraint of 
 iOS and macOS ship with Shortcuts, a no-code event-driven automation app. Using Shortcuts, I set up an automation that triggers when I switch away from the my writing app, and additionally on a cron. The automation adds a 1-2 line Winter frontmatter section to each document if needed, then pushes it to the `src/warm` directory in the twos.dev Git repository by invoking Working Copy. No interruption to UX; this happens in the background.
 
 => https://apps.apple.com/us/app/shortcuts/id1462947752 Shortcuts
-=> winter.html#frontmatter Winter frontmatter
+=> https://github.com/glacials/winter#frontmatter Winter frontmatter
 => https://workingcopyapp.com Working Copy
 
 I never thought a phone would be an integral part of my CI/CD pipeline, but here we are. It actually hummed along in the background for several months until an iOS update changed some minor behavior somewhere that broke it. I didn't have the motivation to fix it because the debugging experience for Shortcuts isn't great, but otherwise this was a surprisingly effective solution and it always triggered exactly when it was needed.
