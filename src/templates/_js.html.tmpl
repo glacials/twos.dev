@@ -1083,9 +1083,9 @@
       fullsize.loading = "eager";
     }
 
-    if (isGalleryFullsizeReady(item)) {
-      item.classList.add("is-loaded", "is-motion-fullsize");
-    }
+    // Keep the peer on its already-decoded thumbnail throughout the swipe.
+    // A preloaded full-size image can be complete but still waiting for its
+    // large bitmap to decode, which would otherwise leave a blank frame here.
 
     return item;
   }
