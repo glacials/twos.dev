@@ -852,6 +852,8 @@ but it seems to need five or more passes for good coverage.</p>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);

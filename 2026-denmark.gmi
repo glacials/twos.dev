@@ -1,0 +1,10 @@
+# Denmark 2026 Trip
+
+I'm trying out darktable for post-processing as a change from Darkroom. It's a little temperamental but after a solid day of use I see the appeal.
+
+=> https://www.darktable.org darktable
+=> https://darkroom.co Darkroom
+
+On my M1 it's also a lot more performant and has fewer crashes than Darkroom.
+
+   {{ template "_gallery.html.tmpl" "2026-denmark" }} 

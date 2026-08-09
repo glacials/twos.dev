@@ -745,6 +745,8 @@ about this kind of stuff, so I don’t expect any problems to come up.</p>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);

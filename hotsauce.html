@@ -864,6 +864,8 @@ be a little wacky to learn something new about the world.</p>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);

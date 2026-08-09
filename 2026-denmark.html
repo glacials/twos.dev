@@ -1,0 +1,5674 @@
+
+<!doctype html>
+<html lang="en">
+  <head>
+    
+
+<link rel="preconnect" href="https://fonts.googleapis.com" />
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+<style>
+   
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh0NSDulI.woff2)
+      format("woff2");
+    unicode-range: U+0460-052F, U+1C80-1C88, U+20B4, U+2DE0-2DFF, U+A640-A69F,
+      U+FE2E-FE2F;
+  }
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh2dSDulI.woff2)
+      format("woff2");
+    unicode-range: U+0301, U+0400-045F, U+0490-0491, U+04B0-04B1, U+2116;
+  }
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh0dSDulI.woff2)
+      format("woff2");
+    unicode-range: U+1F00-1FFF;
+  }
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh3tSDulI.woff2)
+      format("woff2");
+    unicode-range: U+0370-0377, U+037A-037F, U+0384-038A, U+038C, U+038E-03A1,
+      U+03A3-03FF;
+  }
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh09SDulI.woff2)
+      format("woff2");
+    unicode-range: U+0100-02AF, U+0304, U+0308, U+0329, U+1E00-1E9F, U+1EF2-1EFF,
+      U+2020, U+20A0-20AB, U+20AD-20C0, U+2113, U+2C60-2C7F, U+A720-A7FF;
+  }
+   
+  @font-face {
+    font-family: "Fira Code";
+    font-style: normal;
+    font-weight: 300 700;
+    src: url(https://fonts.gstatic.com/s/firacode/v22/uU9NCBsR6Z2vfE9aq3bh3dSD.woff2)
+      format("woff2");
+    unicode-range: U+0000-00FF, U+0131, U+0152-0153, U+02BB-02BC, U+02C6, U+02DA,
+      U+02DC, U+0304, U+0308, U+0329, U+2000-206F, U+2074, U+20AC, U+2122,
+      U+2191, U+2193, U+2212, U+2215, U+FEFF, U+FFFD;
+  }
+</style>
+
+<meta
+  name="go-import"
+  content="twos.dev
+           git https://github.com/glacials/twos.dev"
+/>
+<meta
+  name="go-source"
+  content="twos.dev
+           https://github.com/glacials/twos.dev
+           https://github.com/glacials/twos.dev/tree/main{/dir}
+           https://github.com/glacials/twos.dev/blob/main{/dir}/{file}#L{line}"
+/>
+<meta charset="utf-8" />
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width,initial-scale=1.0" />
+<meta name="color-scheme" content="dark" />
+<meta name="description" content="Denmark 2026 Trip" />
+<link
+  rel="alternate"
+  type="application/rss+xml"
+  title="twos.dev"
+  href="/feed.rss"
+/>
+<link
+  rel="alternate"
+  type="application/atom+xml"
+  title="twos.dev"
+  href="/feed.atom"
+/>
+<title>
+  Ben Carlsson's
+      Denmark 2026 Trip</title>
+<link rel="stylesheet" href="style.css" />
+
+<link
+  rel="stylesheet"
+  href="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.css"
+  integrity="sha384-Xi8rHCmBmhbuyyhbI88391ZKP2dmfnOl4rT9ZfRI7mLTdk1wblIUnrIq35nqwEvC"
+  crossorigin="anonymous"
+/>
+<link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=2" />
+<link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png?v=2" />
+<link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png?v=2" />
+<link rel="manifest" href="/site.webmanifest?v=2" />
+<link rel="mask-icon" href="/safari-pinned-tab.svg?v=2" color="#5bbad5" />
+<link rel="shortcut icon" href="/favicon.ico?v=2" />
+<meta name="msapplication-TileColor" content="#da532c" />
+<meta name="theme-color" content="#353c41" />
+
+
+  </head>
+
+  <body>
+    <div class="container">
+      <nav class="primary">
+  
+  <h1 class="website-title">
+    Denmark 2026 Trip</h1>
+  <div class="hierarchy">
+      <div class="nav-wrapper">
+        <a href="/"><div class="nav-text">Home</div></a>
+      </div>
+      <div class="nav-wrapper">
+        <a href="/archives.html"><div class="nav-text">Blog</div></a>
+      </div>
+      <div class="nav-wrapper">
+        <a href="/newsletter.html"><div class="nav-text">Newsletter</div></a>
+      </div>
+      <div class="nav-wrapper">
+        <a href="/now.html"><div class="nav-text">Now</div></a>
+      </div>
+      <div class="nav-wrapper">
+        <a href="/photos.html"><div class="nav-text">Photos</div></a>
+      </div>
+      <div class="nav-wrapper">
+        <a href="/software.html"><div class="nav-text">Software</div></a>
+      </div>
+    </div>
+  
+</nav>
+
+      <article>
+        
+        
+        
+        
+        <html><head></head><body>
+
+<p>I'm trying out <a href="https://www.darktable.org" target="_blank">darktable</a> for post-processing as a
+change from <a href="https://darkroom.co" target="_blank">Darkroom</a>. It's a little temperamental but
+after a solid day of use I see the appeal.</p>
+
+<p>On my M1 it's also a lot more performant and has fewer crashes than Darkroom.</p>
+
+<div class="photo-grid">
+  <h2>2026-denmark&rarr;</h2>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6607.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6607.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6607.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ16
+      &bull; 10/850s &bull; ISO
+      2000
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6596.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6596.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6596.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/850s &bull; ISO
+      160
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6595.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6595.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6595.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/30000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6588.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6588.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6588.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ16
+      &bull; 10/850s &bull; ISO
+      1000
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6574.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6574.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6574.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ16
+      &bull; 10/850s &bull; ISO
+      160
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6571.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6571.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6571.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/80000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6564.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6564.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6564.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/32000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6532.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6532.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6532.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/35000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6458.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6458.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6458.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/80000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6457.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6457.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6457.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/60000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6429.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6429.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6429.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3UkRFvw" target="_blank">Fujifilm XF56mm ƒ/1.2</a>
+        @
+      
+      56mm &bull;
+      ƒ1.2
+      &bull; 10/6400s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6403.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6403.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6403.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/50000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6397.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6397.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6397.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/9000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6380.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6380.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6380.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ4.5
+      &bull; 10/2200s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6350.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6350.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6350.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/6400s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6327.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6327.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6327.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ16
+      &bull; 10/520s &bull; ISO
+      640
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6319.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6319.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6319.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/10000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6317.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6317.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6317.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/18000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6316.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6316.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6316.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/22000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6313.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6313.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6313.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ16
+      &bull; 10/520s &bull; ISO
+      400
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6281.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6281.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6281.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ4
+      &bull; 10/2200s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6276.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6276.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6276.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ4.5
+      &bull; 10/2100s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6257.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6257.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6257.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ5.6
+      &bull; 10/4200s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6152.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6152.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6152.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ14
+      &bull; 10/850s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6134.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6134.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6134.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/12500s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6129.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6129.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6129.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/6800s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6123.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6123.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6123.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/5000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6112.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6112.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6112.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/520s &bull; ISO
+      800
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6099.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6099.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6099.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/520s &bull; ISO
+      1000
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6097.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6097.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6097.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/900s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6084.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6084.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6084.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/600s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6080.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6080.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6080.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/520s &bull; ISO
+      320
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF6041.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF6041.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF6041.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3ORgIEa" target="_blank">Fujifilm XF35mm ƒ/2</a>
+        @
+      
+      35mm &bull;
+      ƒ2
+      &bull; 10/2800s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5989.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5989.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5989.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      300mm &bull;
+      ƒ8
+      &bull; 10/80s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5951.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5951.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5951.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      87.5mm &bull;
+      ƒ4.5
+      &bull; 10/1250s &bull; ISO
+      500
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5927.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5927.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5927.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      268.2mm &bull;
+      ƒ14
+      &bull; 10/20s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5910.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5910.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5910.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      70mm &bull;
+      ƒ4
+      &bull; 10/1050s &bull; ISO
+      200
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5905.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5905.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5905.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      70mm &bull;
+      ƒ4
+      &bull; 10/1050s &bull; ISO
+      1250
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5893.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5893.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5893.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      97.9mm &bull;
+      ƒ5.6
+      &bull; 10/2000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5888.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5888.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5888.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      177.9mm &bull;
+      ƒ5
+      &bull; 10/2500s &bull; ISO
+      640
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5885.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5885.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5885.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      258.4mm &bull;
+      ƒ5.6
+      &bull; 10/4000s &bull; ISO
+      1000
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5883.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5883.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5883.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      137mm &bull;
+      ƒ5
+      &bull; 10/3000s &bull; ISO
+      1250
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5878.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5878.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5878.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      132mm &bull;
+      ƒ5
+      &bull; 10/2000s &bull; ISO
+      160
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5877.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5877.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5877.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      70mm &bull;
+      ƒ5.6
+      &bull; 10/2000s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5875.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5875.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5875.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      70mm &bull;
+      ƒ5
+      &bull; 10/2100s &bull; ISO
+      125
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5865.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5865.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5865.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      231mm &bull;
+      ƒ5.6
+      &bull; 10/3400s &bull; ISO
+      2000
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5835.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5835.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5835.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/4gm98MI" target="_blank">Fujifilm XF70-300mm ƒ/4</a>
+        @
+      
+      231mm &bull;
+      ƒ5.6
+      &bull; 10/3400s &bull; ISO
+      1600
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5650.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5650.384x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5650.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3QiD81E" target="_blank">Fujifilm 16-50mm ƒ/2.8</a>
+        @
+      
+      50mm &bull;
+      ƒ22
+      &bull; 10/80s &bull; ISO
+      200
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5586.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5586.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5586.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3QiD81E" target="_blank">Fujifilm 16-50mm ƒ/2.8</a>
+        @
+      
+      50mm &bull;
+      ƒ11
+      &bull; 10/750s &bull; ISO
+      500
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+  <label class="gallery-item" data-gallery-photo="img/photography/2026-denmark/DSCF5517.webp">
+    <input type="checkbox" />
+    
+    
+    
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+        
+      
+    
+      
+    
+      
+    
+      
+    
+      
+    
+    <img
+      alt=""
+      class="thumbnail"
+      src="img/thumb/photography/2026-denmark/DSCF5517.170x256.webp"
+      title=""
+    />
+    <span class="fullsize fullsize-loading"> loading fullsize </span>
+    <img
+      alt=""
+      class="fullsize fullsize-photo"
+      decoding="async"
+      loading="lazy"
+      src="img/photography/2026-denmark/DSCF5517.webp"
+      title=""
+    />
+    <p class="caption exif">
+      
+        <a href="https://amzn.to/3Qv0vF9" target="_blank">Fujifilm X-T5</a><br />
+      
+      
+        <a href="https://amzn.to/3QiD81E" target="_blank">Fujifilm 16-50mm ƒ/2.8</a>
+        @
+      
+      50mm &bull;
+      ƒ4.8
+      &bull; 10/750s &bull; ISO
+      640
+      <br />
+      &copy; 2026 Ben Carlsson
+      
+    </p>
+  </label>
+
+
+</div>
+</body></html>
+      </article>
+      <footer>
+        <p class="mb-0">
+          <small>
+            <i>
+              
+                
+                  source:
+                  <a
+                    href="https://github.com/glacials/twos.dev/blob/main/src/cold/2026-denmark.md"
+                    target="_blank"
+                    >src/cold/2026-denmark.md</a
+                  >
+                
+              
+              <br />
+              
+                
+                  published
+                  2026 August
+                  
+                
+              
+            </i>
+          </small>
+        </p>
+        <p class="mt-0 muted">
+          <small>
+            <a href="#">to top</a>
+            
+              / <a href="/">back home</a>
+            
+            /
+            <a href="https://ko-fi.com/glacials" target="_blank"
+              >buy me a coffee</a
+            ></small
+          >
+        </p>
+      </footer>
+    </div>
+    <script
+  crossorigin="anonymous"
+  defer
+  integrity="sha384-X/XCfMm41VSsqRNQgDerQczD69XqmjOOOwYQvr/uuC+j4OPoNhVgjdGFwhvN02Ja"
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/katex.min.js"
+></script>
+<script
+  crossorigin="anonymous"
+  defer
+  integrity="sha384-+XBljXPPiv+OzfbB3cVmLHf4hdUFHlWNZN5spNQ7rmHTXpd7WvJum6fIACpNNfIR"
+  onload="renderMathInElement(document.body);"
+  src="https://cdn.jsdelivr.net/npm/katex@0.16.0/dist/contrib/auto-render.min.js"
+></script>
+<script>
+  
+  if (document.location.hostname == "localhost") {
+    const wsurl = "ws://localhost:8100/ws";
+    const socket = new WebSocket(wsurl);
+    socket.addEventListener("message", (event) => location.reload());
+    socket.addEventListener("close", (event) => {
+      console.log("backup initiating");
+      setInterval(() => {
+        const sock = new WebSocket("ws://localhost:8100/ws");
+        sock.addEventListener("open", (event) => {
+          location.reload();
+        });
+      }, 1000);
+    });
+  }
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  if (document.location.pathname === "/winter") {
+    window.location.replace("https://pkg.go.dev/twos.dev/winter");
+  }
+
+  const galleryHashPrefix = "photo=";
+  const galleryInputSelector = ".gallery-item input[type=checkbox]";
+  const galleryItemSelector = ".gallery-item";
+  const galleryCloseFallbackMs = 30000;
+  const gallerySwipeMinDistance = 48;
+  const gallerySwipeDragStartDistance = 8;
+  const gallerySwipeMaxVerticalRatio = 0.75;
+  const gallerySwipeCloseMaxHorizontalRatio = 0.75;
+  const gallerySwipeCloseMinDistance = 72;
+  const gallerySwipeEdgeResistance = 0.35;
+  const gallerySwipeAnimationMs = 240;
+  const gallerySwipeCloseBackdropAlpha = 0.82;
+  const gallerySwipeCloseBackdropBlurPx = 12;
+  const gallerySwipeCloseMaxScaleReduction = 0.12;
+  const galleryBackdropBleedPx = 256;
+  const galleryLoadTokens = new WeakMap();
+  const galleryCloseTimers = new WeakMap();
+  let gallerySwipeStart = null;
+  let gallerySuppressClickAfterSwipe = false;
+  let gallerySuppressClickTimer = null;
+  let gallerySwapToken = 0;
+  let gallerySwipeAnimationToken = 0;
+  let galleryViewportUpdateFrame = null;
+  let galleryBackdropElement = null;
+
+  function getGalleryPhoto(input) {
+    return input.closest(".gallery-item")?.dataset.galleryPhoto;
+  }
+
+  function getGalleryItem(input) {
+    return input.closest(galleryItemSelector);
+  }
+
+  function getGalleryPhotoFromHash() {
+    const hash = window.location.hash.slice(1);
+    if (!hasGalleryHash()) {
+      return null;
+    }
+
+    try {
+      return decodeURIComponent(hash.slice(galleryHashPrefix.length));
+    } catch (_) {
+      return null;
+    }
+  }
+
+  function hasGalleryHash() {
+    return window.location.hash.slice(1).startsWith(galleryHashPrefix);
+  }
+
+  function findGalleryInput(photo) {
+    return Array.from(document.querySelectorAll(".gallery-item"))
+      .find((item) => item.dataset.galleryPhoto === photo)
+      ?.querySelector("input[type=checkbox]");
+  }
+
+  function replaceGalleryHash(hash) {
+    window.history.replaceState(
+      null,
+      "",
+      `${window.location.pathname}${window.location.search}${hash}`,
+    );
+  }
+
+  function syncGalleryHash(input) {
+    const photo = getGalleryPhoto(input);
+    if (!photo) {
+      return;
+    }
+
+    replaceGalleryHash(`#${galleryHashPrefix}${encodeURIComponent(photo)}`);
+  }
+
+  function clearGalleryHash() {
+    if (hasGalleryHash()) {
+      replaceGalleryHash("");
+    }
+  }
+
+  function prefersReducedGalleryMotion() {
+    return window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  }
+
+  function getGalleryBackdropElement() {
+    if (!galleryBackdropElement) {
+      galleryBackdropElement = document.createElement("div");
+      galleryBackdropElement.className = "gallery-backdrop";
+      galleryBackdropElement.setAttribute("aria-hidden", "true");
+      galleryBackdropElement.addEventListener("click", (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+
+        const current = getCurrentGalleryInput();
+        if (current) {
+          closeGalleryInput(current);
+        }
+      });
+      document.body.append(galleryBackdropElement);
+    }
+
+    return galleryBackdropElement;
+  }
+
+  function syncGalleryBodyClasses() {
+    const activeOrChecked = document.querySelector(
+      ".gallery-item.is-active, .gallery-item input:checked",
+    );
+    const backdropVisible = document.querySelector(
+      ".gallery-item.is-backdrop-visible",
+    );
+    const closing = document.querySelector(".gallery-item.is-closing");
+    const swipeClose = document.querySelector(
+      ".gallery-item.is-swipe-close-active",
+    );
+    const swipeAnimating = document.querySelector(
+      ".gallery-item.is-swipe-close-active.is-swipe-animating",
+    );
+
+    document.body.classList.toggle("is-gallery-open", Boolean(activeOrChecked));
+    document.body.classList.toggle(
+      "is-gallery-backdrop-visible",
+      Boolean(backdropVisible),
+    );
+    document.body.classList.toggle("is-gallery-closing", Boolean(closing));
+    document.body.classList.toggle(
+      "is-gallery-swipe-close-active",
+      Boolean(swipeClose),
+    );
+    document.body.classList.toggle(
+      "is-gallery-swipe-animating",
+      Boolean(swipeAnimating),
+    );
+  }
+
+  function getGalleryViewportRect() {
+    const viewport = window.visualViewport;
+    const fallbackWidth =
+      window.innerWidth || document.documentElement.clientWidth || 1;
+    const fallbackHeight =
+      window.innerHeight || document.documentElement.clientHeight || 1;
+    const left = viewport?.offsetLeft || 0;
+    const top = viewport?.offsetTop || 0;
+    const width = viewport?.width || fallbackWidth;
+    const height = viewport?.height || fallbackHeight;
+    const layoutWidth = Math.max(
+      fallbackWidth,
+      document.documentElement.clientWidth || 0,
+      left + width,
+    );
+    const layoutHeight = Math.max(
+      fallbackHeight,
+      document.documentElement.clientHeight || 0,
+      top + height,
+    );
+    const topGap = Math.max(0, top);
+    const bottomGap = Math.max(0, layoutHeight - top - height);
+    const bleed = Math.max(galleryBackdropBleedPx, bottomGap);
+
+    return {
+      backdropHeight: topGap + height + bleed,
+      backdropLeft: 0,
+      backdropTop: 0,
+      backdropWidth: layoutWidth,
+      height,
+      left,
+      pageLeft: window.scrollX + left,
+      pageTop: window.scrollY + top,
+      top,
+      width,
+    };
+  }
+
+  function setGalleryViewportVars(item) {
+    const viewport = getGalleryViewportRect();
+
+    item.style.setProperty("--gallery-viewport-height", `${viewport.height}px`);
+    item.style.setProperty("--gallery-viewport-left", `${viewport.left}px`);
+    item.style.setProperty("--gallery-viewport-top", `${viewport.top}px`);
+    item.style.setProperty("--gallery-viewport-width", `${viewport.width}px`);
+    const backdrop = getGalleryBackdropElement();
+    backdrop.style.setProperty(
+      "--gallery-backdrop-height",
+      `${viewport.backdropHeight}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-left",
+      `${viewport.backdropLeft}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-top",
+      `${viewport.backdropTop}px`,
+    );
+    backdrop.style.setProperty(
+      "--gallery-backdrop-width",
+      `${viewport.backdropWidth}px`,
+    );
+
+    return viewport;
+  }
+
+  function getGalleryNaturalSize(item) {
+    const fullsize = item.querySelector("img.fullsize-photo");
+    const thumbnail = item.querySelector("img.thumbnail");
+    const image =
+      fullsize?.naturalWidth && fullsize?.naturalHeight ? fullsize : thumbnail;
+    const fallbackRect = thumbnail?.getBoundingClientRect();
+
+    return {
+      height: image?.naturalHeight || fallbackRect?.height || 1,
+      width: image?.naturalWidth || fallbackRect?.width || 1,
+    };
+  }
+
+  function setGalleryRectVars(item) {
+    const thumbnail = item.querySelector("img.thumbnail");
+    if (!thumbnail) {
+      return;
+    }
+
+    const naturalSize = getGalleryNaturalSize(item);
+    const thumbRect = thumbnail.getBoundingClientRect();
+    setGalleryExpandedRectVars(item, naturalSize.width, naturalSize.height);
+
+    item.style.setProperty("--gallery-thumb-left", `${thumbRect.left}px`);
+    item.style.setProperty("--gallery-thumb-top", `${thumbRect.top}px`);
+    item.style.setProperty("--gallery-thumb-width", `${thumbRect.width}px`);
+    item.style.setProperty("--gallery-thumb-height", `${thumbRect.height}px`);
+  }
+
+  function setGalleryExpandedRectVars(item, naturalWidth, naturalHeight) {
+    const viewport = setGalleryViewportVars(item);
+    const scale = Math.min(
+      viewport.width / naturalWidth,
+      viewport.height / naturalHeight,
+    );
+    const expandedWidth = naturalWidth * scale;
+    const expandedHeight = naturalHeight * scale;
+    const expandedLeft = viewport.left + (viewport.width - expandedWidth) / 2;
+    const expandedTop = viewport.top + (viewport.height - expandedHeight) / 2;
+
+    item.style.setProperty("--gallery-expanded-left", `${expandedLeft}px`);
+    item.style.setProperty("--gallery-expanded-top", `${expandedTop}px`);
+    item.style.setProperty("--gallery-expanded-width", `${expandedWidth}px`);
+    item.style.setProperty("--gallery-expanded-height", `${expandedHeight}px`);
+  }
+
+  function refreshCurrentGalleryViewport() {
+    galleryViewportUpdateFrame = null;
+
+    const current = getCurrentGalleryInput();
+    const item = current ? getGalleryItem(current) : null;
+    if (!item) {
+      return;
+    }
+
+    const naturalSize = getGalleryNaturalSize(item);
+    setGalleryExpandedRectVars(item, naturalSize.width, naturalSize.height);
+  }
+
+  function scheduleGalleryViewportRefresh() {
+    if (!getCurrentGalleryInput()) {
+      return;
+    }
+
+    if (galleryViewportUpdateFrame) {
+      return;
+    }
+
+    galleryViewportUpdateFrame = requestAnimationFrame(
+      refreshCurrentGalleryViewport,
+    );
+  }
+
+  window.addEventListener("resize", scheduleGalleryViewportRefresh);
+  window.visualViewport?.addEventListener(
+    "resize",
+    scheduleGalleryViewportRefresh,
+  );
+  window.visualViewport?.addEventListener(
+    "scroll",
+    scheduleGalleryViewportRefresh,
+  );
+
+  function clearGalleryCloseTimer(item) {
+    const cleanup = galleryCloseTimers.get(item);
+    if (cleanup) {
+      cleanup();
+      galleryCloseTimers.delete(item);
+    }
+  }
+
+  function clearGallerySwipeStyles(item) {
+    if (!item) {
+      return;
+    }
+
+    item.classList.remove(
+      "is-swipe-active",
+      "is-swipe-animating",
+      "is-swipe-close-active",
+      "is-swipe-peer",
+      "is-swipe-returning",
+    );
+    item.style.removeProperty("--gallery-swipe-offset");
+    item.style.removeProperty("--gallery-swipe-close-offset");
+    item.style.removeProperty("--gallery-swipe-scale");
+    item.style.removeProperty("--gallery-swipe-backdrop-alpha");
+    item.style.removeProperty("--gallery-swipe-backdrop-blur");
+    if (galleryBackdropElement) {
+      galleryBackdropElement.style.removeProperty(
+        "--gallery-swipe-backdrop-alpha",
+      );
+      galleryBackdropElement.style.removeProperty(
+        "--gallery-swipe-backdrop-blur",
+      );
+    }
+    syncGalleryBodyClasses();
+  }
+
+  function resetGalleryItem(item) {
+    clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
+    item.classList.remove(
+      "is-active",
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-expanded",
+      "is-loaded",
+      "is-loading",
+      "is-motion-fullsize",
+      "is-settled",
+    );
+    galleryLoadTokens.delete(item);
+    syncGalleryBodyClasses();
+  }
+
+  function waitForGalleryFullsize(item) {
+    const fullsize = item.querySelector("img.fullsize-photo");
+    if (!fullsize) {
+      return Promise.resolve();
+    }
+
+    fullsize.loading = "eager";
+
+    if (fullsize.complete && fullsize.naturalWidth > 0) {
+      return fullsize.decode
+        ? fullsize.decode().catch(() => {})
+        : Promise.resolve();
+    }
+
+    if (fullsize.decode) {
+      return fullsize.decode().catch(
+        () =>
+          new Promise((resolve) => {
+            const done = () => {
+              fullsize.removeEventListener("load", done);
+              fullsize.removeEventListener("error", done);
+              resolve();
+            };
+            fullsize.addEventListener("load", done);
+            fullsize.addEventListener("error", done);
+          }),
+      );
+    }
+
+    return new Promise((resolve) => {
+      const done = () => {
+        fullsize.removeEventListener("load", done);
+        fullsize.removeEventListener("error", done);
+        resolve();
+      };
+      fullsize.addEventListener("load", done);
+      fullsize.addEventListener("error", done);
+    }).then(() =>
+      fullsize.decode ? fullsize.decode().catch(() => {}) : Promise.resolve(),
+    );
+  }
+
+  function getGalleryMotionElement(item) {
+    if (item.classList.contains("is-motion-fullsize")) {
+      return item.querySelector("img.fullsize-photo");
+    }
+
+    return item.querySelector("img.thumbnail");
+  }
+
+  function isGalleryFullsizeReady(item) {
+    const fullsize = item.querySelector("img.fullsize-photo");
+    return Boolean(fullsize?.complete && fullsize.naturalWidth > 0);
+  }
+
+  function waitForGalleryMotionTransition(item) {
+    if (prefersReducedGalleryMotion()) {
+      return Promise.resolve();
+    }
+
+    const motionElement = getGalleryMotionElement(item);
+    if (!motionElement) {
+      return Promise.resolve();
+    }
+
+    return new Promise((resolve) => {
+      let didResolve = false;
+      const pendingProperties = new Set(["height", "left", "top", "width"]);
+      const resolveOnce = () => {
+        if (didResolve) {
+          return;
+        }
+
+        didResolve = true;
+        motionElement.removeEventListener("transitionend", onTransitionEnd);
+        window.clearTimeout(fallback);
+        resolve();
+      };
+      const onTransitionEnd = (event) => {
+        if (event.target !== motionElement) {
+          return;
+        }
+
+        pendingProperties.delete(event.propertyName);
+        if (pendingProperties.size === 0) {
+          resolveOnce();
+        }
+      };
+      const fallback = window.setTimeout(resolveOnce, galleryCloseFallbackMs);
+
+      motionElement.addEventListener("transitionend", onTransitionEnd);
+    });
+  }
+
+  function openGalleryInput(input, updateHash = true) {
+    const item = getGalleryItem(input);
+    if (!item) {
+      return;
+    }
+
+    const current = document.querySelector(".gallery-item input:checked");
+    if (current && current !== input) {
+      closeGalleryInput(current, false, false);
+    }
+
+    clearGalleryCloseTimer(item);
+    setGalleryRectVars(item);
+    clearGallerySwipeStyles(item);
+    input.checked = true;
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-motion-fullsize",
+      "is-settled",
+    );
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+
+    item.classList.add("is-active", "is-loading");
+    syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
+
+    if (updateHash) {
+      syncGalleryHash(input);
+    }
+
+    const loadToken = Symbol("gallery-load");
+    galleryLoadTokens.set(item, loadToken);
+
+    requestAnimationFrame(() => {
+      if (!input.checked || !item.classList.contains("is-active")) {
+        return;
+      }
+
+      const zoomReady = waitForGalleryMotionTransition(item);
+      item.classList.add("is-animating", "is-backdrop-visible", "is-expanded");
+      syncGalleryBodyClasses();
+      zoomReady.then(() => {
+        if (galleryLoadTokens.get(item) !== loadToken) {
+          return;
+        }
+
+        item.classList.add("is-settled");
+      });
+
+      waitForGalleryFullsize(item).then(() => {
+        if (galleryLoadTokens.get(item) !== loadToken) {
+          return;
+        }
+
+        item.classList.remove("is-loading");
+        item.classList.add("is-loaded");
+      });
+    });
+  }
+
+  function prepareGalleryFullscreenItem(
+    item,
+    showBackdrop = true,
+    updateRects = true,
+  ) {
+    clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
+    if (updateRects) {
+      setGalleryRectVars(item);
+    }
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loading",
+      "is-motion-fullsize",
+    );
+    item.classList.add("is-active", "is-expanded", "is-loaded", "is-settled");
+    if (showBackdrop) {
+      item.classList.add("is-backdrop-visible");
+    }
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+    syncGalleryBodyClasses();
+  }
+
+  function prepareGalleryLoadingItem(item, showBackdrop = true) {
+    clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-motion-fullsize",
+    );
+    item.classList.add("is-active", "is-expanded", "is-loading", "is-settled");
+    if (showBackdrop) {
+      item.classList.add("is-backdrop-visible");
+    }
+    syncGalleryBodyClasses();
+  }
+
+  function replaceGalleryInput(fromInput, toInput) {
+    const fromItem = getGalleryItem(fromInput);
+    const toItem = getGalleryItem(toInput);
+    if (!fromItem || !toItem || fromItem === toItem) {
+      return;
+    }
+
+    const swapToken = ++gallerySwapToken;
+    galleryLoadTokens.delete(fromItem);
+    clearGalleryCloseTimer(fromItem);
+
+    setGalleryRectVars(toItem);
+    const targetAlreadyReady = isGalleryFullsizeReady(toItem);
+    const loadToken = Symbol("gallery-load");
+    galleryLoadTokens.set(toItem, loadToken);
+
+    fromInput.checked = false;
+    toInput.checked = true;
+    syncGalleryHash(toInput);
+
+    if (targetAlreadyReady) {
+      prepareGalleryFullscreenItem(toItem, true, false);
+    } else {
+      prepareGalleryLoadingItem(toItem);
+    }
+
+    resetGalleryItem(fromItem);
+
+    if (!targetAlreadyReady) {
+      waitForGalleryFullsize(toItem).then(() => {
+        if (
+          swapToken !== gallerySwapToken ||
+          galleryLoadTokens.get(toItem) !== loadToken ||
+          !toInput.checked ||
+          !toItem.classList.contains("is-active")
+        ) {
+          return;
+        }
+
+        toItem.classList.remove("is-loading");
+        toItem.classList.add("is-loaded");
+      });
+    }
+  }
+
+  function closeGalleryInput(input, updateHash = true, animate = true) {
+    const item = getGalleryItem(input);
+    if (!item) {
+      return;
+    }
+
+    gallerySwapToken += 1;
+    input.checked = false;
+    galleryLoadTokens.delete(item);
+
+    if (updateHash) {
+      clearGalleryHash();
+    }
+
+    if (!animate || prefersReducedGalleryMotion()) {
+      resetGalleryItem(item);
+      return;
+    }
+
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-motion-fullsize");
+    }
+
+    const motionElement = getGalleryMotionElement(item);
+    if (!motionElement) {
+      resetGalleryItem(item);
+      return;
+    }
+
+    clearGalleryCloseTimer(item);
+    let didReset = false;
+    let fallback = null;
+    const transitionProperties = new Set(["height", "left", "top", "width"]);
+    const resetOnce = () => {
+      if (didReset) {
+        return;
+      }
+
+      didReset = true;
+      if (fallback) {
+        window.clearTimeout(fallback);
+      }
+      motionElement.removeEventListener("transitionend", onTransitionEnd);
+      requestAnimationFrame(() => {
+        requestAnimationFrame(() => resetGalleryItem(item));
+      });
+    };
+    const onTransitionEnd = (event) => {
+      if (
+        event.target === motionElement &&
+        transitionProperties.has(event.propertyName)
+      ) {
+        resetOnce();
+      }
+    };
+
+    galleryCloseTimers.set(item, () => {
+      if (fallback) {
+        window.clearTimeout(fallback);
+      }
+      motionElement.removeEventListener("transitionend", onTransitionEnd);
+    });
+
+    item.classList.add("is-animating");
+    motionElement.getBoundingClientRect();
+    motionElement.addEventListener("transitionend", onTransitionEnd);
+    item.classList.remove(
+      "is-expanded",
+      "is-loaded",
+      "is-loading",
+      "is-settled",
+      "is-backdrop-visible",
+    );
+    item.classList.add("is-closing");
+    syncGalleryBodyClasses();
+
+    fallback = window.setTimeout(resetOnce, galleryCloseFallbackMs);
+
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => {
+        if (!motionElement.getAnimations) {
+          return;
+        }
+
+        const animations = motionElement
+          .getAnimations()
+          .filter((animation) => animation.playState !== "finished");
+        if (animations.length === 0) {
+          resetOnce();
+          return;
+        }
+
+        Promise.allSettled(
+          animations.map((animation) => animation.finished),
+        ).then(resetOnce);
+      });
+    });
+  }
+
+  function syncGalleryFromHash() {
+    const input = findGalleryInput(getGalleryPhotoFromHash());
+    const current = document.querySelector(".gallery-item input:checked");
+
+    if (input) {
+      openGalleryInput(input, false);
+    } else if (current) {
+      closeGalleryInput(current, false);
+    }
+  }
+
+  function getCurrentGalleryInput() {
+    return document.querySelector(".gallery-item input:checked");
+  }
+
+  function getPreviousGalleryInput() {
+    return (
+      document.querySelector(
+        ".gallery-item:has(+ .gallery-item input:checked) input[type=checkbox]",
+      ) ??
+      document.querySelector(
+        ".gallery-item:has(+ h2 + .gallery-item input:checked) input[type=checkbox]",
+      )
+    );
+  }
+
+  function getNextGalleryInput() {
+    return (
+      document.querySelector(
+        ".gallery-item:has(input:checked) + .gallery-item input[type=checkbox]",
+      ) ??
+      document.querySelector(
+        ".gallery-item:has(input:checked) + h2 + .gallery-item input[type=checkbox]",
+      )
+    );
+  }
+
+  function moveGalleryInput(direction, closeAtEdge = true) {
+    const current = getCurrentGalleryInput();
+    if (!current) {
+      return false;
+    }
+
+    const next =
+      direction === "previous"
+        ? getPreviousGalleryInput()
+        : getNextGalleryInput();
+    if (next) {
+      replaceGalleryInput(current, next);
+      return true;
+    }
+
+    if (closeAtEdge) {
+      closeGalleryInput(current);
+      return true;
+    }
+
+    return false;
+  }
+
+  function getGallerySwipeWidth() {
+    return Math.max(
+      window.innerWidth,
+      document.documentElement.clientWidth || 0,
+      1,
+    );
+  }
+
+  function getGallerySwipeHeight() {
+    return Math.max(
+      window.visualViewport?.height || 0,
+      window.innerHeight,
+      document.documentElement.clientHeight || 0,
+      1,
+    );
+  }
+
+  function clampGallerySwipeProgress(progress) {
+    return Math.max(0, Math.min(1, progress));
+  }
+
+  function getGalleryCloseProgress(state, deltaY) {
+    return clampGallerySwipeProgress(
+      Math.abs(deltaY) / Math.max(state.swipeHeight * 0.45, 1),
+    );
+  }
+
+  function setGallerySwipeBackdrop(item, progress) {
+    const remaining = 1 - clampGallerySwipeProgress(progress);
+    const alpha = (gallerySwipeCloseBackdropAlpha * remaining).toFixed(3);
+    const blur = `${(gallerySwipeCloseBackdropBlurPx * remaining).toFixed(
+      3,
+    )}px`;
+
+    item.style.setProperty("--gallery-swipe-backdrop-alpha", alpha);
+    item.style.setProperty("--gallery-swipe-backdrop-blur", blur);
+    const backdrop = getGalleryBackdropElement();
+    backdrop.style.setProperty("--gallery-swipe-backdrop-alpha", alpha);
+    backdrop.style.setProperty("--gallery-swipe-backdrop-blur", blur);
+  }
+
+  function getGalleryVerticalSwipeDirection(deltaY) {
+    if (deltaY > 0) {
+      return "down";
+    }
+    if (deltaY < 0) {
+      return "up";
+    }
+
+    return null;
+  }
+
+  function getGallerySwipeDirection(deltaX) {
+    if (deltaX > 0) {
+      return "previous";
+    }
+    if (deltaX < 0) {
+      return "next";
+    }
+
+    return null;
+  }
+
+  function getGalleryInputForDirection(direction) {
+    return direction === "previous"
+      ? getPreviousGalleryInput()
+      : getNextGalleryInput();
+  }
+
+  function prepareGallerySwipePeer(input) {
+    const item = getGalleryItem(input);
+    if (!item) {
+      return null;
+    }
+
+    clearGalleryCloseTimer(item);
+    clearGallerySwipeStyles(item);
+    setGalleryRectVars(item);
+    item.classList.remove(
+      "is-animating",
+      "is-backdrop-visible",
+      "is-closing",
+      "is-loaded",
+      "is-loading",
+      "is-motion-fullsize",
+    );
+    item.classList.add(
+      "is-active",
+      "is-expanded",
+      "is-settled",
+      "is-swipe-peer",
+    );
+
+    const fullsize = item.querySelector("img.fullsize-photo");
+    if (fullsize) {
+      fullsize.loading = "eager";
+    }
+
+    if (isGalleryFullsizeReady(item)) {
+      item.classList.add("is-loaded", "is-motion-fullsize");
+    }
+
+    return item;
+  }
+
+  function setGallerySwipeTarget(state, direction) {
+    if (state.direction === direction) {
+      return;
+    }
+
+    if (state.targetItem) {
+      resetGalleryItem(state.targetItem);
+    }
+
+    state.direction = direction;
+    state.targetInput = direction
+      ? getGalleryInputForDirection(direction)
+      : null;
+    state.targetItem = state.targetInput
+      ? prepareGallerySwipePeer(state.targetInput)
+      : null;
+    state.peerStartOffset =
+      direction === "previous" ? -state.swipeWidth : state.swipeWidth;
+
+    if (state.targetItem) {
+      state.targetItem.style.setProperty(
+        "--gallery-swipe-offset",
+        `${state.peerStartOffset}px`,
+      );
+    }
+  }
+
+  function beginGallerySwipeDrag(state) {
+    state.dragging = true;
+    state.mode = "browse";
+    state.swipeWidth = getGallerySwipeWidth();
+    state.item.classList.add("is-swipe-active");
+    state.item.style.setProperty("--gallery-swipe-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-scale", "1");
+  }
+
+  function beginGallerySwipeCloseDrag(state) {
+    state.dragging = true;
+    state.mode = "close";
+    state.swipeHeight = getGallerySwipeHeight();
+    state.item.classList.add("is-swipe-active", "is-swipe-close-active");
+    state.item.style.setProperty("--gallery-swipe-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+    state.item.style.setProperty("--gallery-swipe-scale", "1");
+    setGallerySwipeBackdrop(state.item, 0);
+    syncGalleryBodyClasses();
+  }
+
+  function renderGallerySwipe(state) {
+    state.animationFrame = null;
+
+    const direction =
+      getGallerySwipeDirection(state.pendingDeltaX) ?? state.direction;
+    if (direction) {
+      setGallerySwipeTarget(state, direction);
+    }
+
+    const offset = state.targetItem
+      ? state.pendingDeltaX
+      : state.pendingDeltaX * gallerySwipeEdgeResistance;
+    state.item.style.setProperty("--gallery-swipe-offset", `${offset}px`);
+
+    if (state.targetItem) {
+      state.targetItem.style.setProperty(
+        "--gallery-swipe-offset",
+        `${offset + state.peerStartOffset}px`,
+      );
+    }
+  }
+
+  function updateGallerySwipeDrag(state, deltaX) {
+    if (!state.dragging) {
+      beginGallerySwipeDrag(state);
+    }
+
+    const direction = getGallerySwipeDirection(deltaX);
+    if (direction) {
+      setGallerySwipeTarget(state, direction);
+    }
+
+    state.lastDeltaX = deltaX;
+    state.pendingDeltaX = deltaX;
+    if (state.animationFrame) {
+      return;
+    }
+
+    state.animationFrame = requestAnimationFrame(() =>
+      renderGallerySwipe(state),
+    );
+  }
+
+  function renderGallerySwipeClose(state) {
+    state.animationFrame = null;
+
+    const progress = getGalleryCloseProgress(state, state.pendingDeltaY);
+    const scale = 1 - progress * gallerySwipeCloseMaxScaleReduction;
+    state.item.style.setProperty(
+      "--gallery-swipe-close-offset",
+      `${state.pendingDeltaY}px`,
+    );
+    state.item.style.setProperty("--gallery-swipe-scale", scale.toFixed(4));
+    setGallerySwipeBackdrop(state.item, progress);
+  }
+
+  function updateGallerySwipeCloseDrag(state, deltaY) {
+    if (!state.dragging) {
+      beginGallerySwipeCloseDrag(state);
+    }
+
+    state.lastDeltaY = deltaY;
+    state.pendingDeltaY = deltaY;
+    if (state.animationFrame) {
+      return;
+    }
+
+    state.animationFrame = requestAnimationFrame(() =>
+      renderGallerySwipeClose(state),
+    );
+  }
+
+  function finishGallerySwipe(state, commit) {
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+      state.animationFrame = null;
+    }
+
+    const targetInput = commit ? state.targetInput : null;
+    const targetItem = state.targetItem;
+    const finalCurrentOffset = commit
+      ? state.direction === "previous"
+        ? state.swipeWidth
+        : -state.swipeWidth
+      : 0;
+    const finalPeerOffset = commit ? 0 : state.peerStartOffset;
+    const animationToken = ++gallerySwipeAnimationToken;
+
+    state.item.classList.add("is-swipe-animating");
+    if (targetItem) {
+      targetItem.classList.add("is-swipe-animating");
+    }
+
+    state.item.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      state.item.style.setProperty(
+        "--gallery-swipe-offset",
+        `${finalCurrentOffset}px`,
+      );
+      if (targetItem) {
+        targetItem.style.setProperty(
+          "--gallery-swipe-offset",
+          `${finalPeerOffset}px`,
+        );
+      }
+
+      window.setTimeout(
+        () => {
+          if (animationToken !== gallerySwipeAnimationToken) {
+            return;
+          }
+
+          if (
+            commit &&
+            targetInput &&
+            state.input === getCurrentGalleryInput()
+          ) {
+            replaceGalleryInput(state.input, targetInput);
+            return;
+          }
+
+          clearGallerySwipeStyles(state.item);
+          if (targetItem) {
+            resetGalleryItem(targetItem);
+          }
+        },
+        prefersReducedGalleryMotion() ? 0 : gallerySwipeAnimationMs,
+      );
+    });
+  }
+
+  function finishGallerySwipeClose(state, commit) {
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+      state.animationFrame = null;
+    }
+
+    if (commit && state.input === getCurrentGalleryInput()) {
+      const progress = getGalleryCloseProgress(state, state.lastDeltaY);
+      const scale = 1 - progress * gallerySwipeCloseMaxScaleReduction;
+
+      state.item.classList.add("is-swipe-returning");
+      state.item.style.setProperty("--gallery-swipe-offset", "0px");
+      state.item.style.setProperty(
+        "--gallery-swipe-close-offset",
+        `${state.lastDeltaY}px`,
+      );
+      state.item.style.setProperty("--gallery-swipe-scale", scale.toFixed(4));
+      setGallerySwipeBackdrop(state.item, progress);
+      syncGalleryBodyClasses();
+      state.item.getBoundingClientRect();
+
+      closeGalleryInput(state.input);
+      requestAnimationFrame(() => {
+        state.item.style.setProperty("--gallery-swipe-close-offset", "0px");
+        state.item.style.setProperty("--gallery-swipe-scale", "1");
+      });
+      return;
+    }
+
+    const direction = getGalleryVerticalSwipeDirection(state.lastDeltaY);
+    const finalOffset =
+      commit && direction === "up"
+        ? -state.swipeHeight
+        : commit && direction === "down"
+        ? state.swipeHeight
+        : 0;
+    const finalProgress = commit ? 1 : 0;
+    const finalScale = 1 - finalProgress * gallerySwipeCloseMaxScaleReduction;
+    const animationToken = ++gallerySwipeAnimationToken;
+
+    state.item.classList.add("is-swipe-animating");
+    syncGalleryBodyClasses();
+    state.item.getBoundingClientRect();
+
+    requestAnimationFrame(() => {
+      state.item.style.setProperty(
+        "--gallery-swipe-close-offset",
+        `${finalOffset}px`,
+      );
+      state.item.style.setProperty("--gallery-swipe-scale", `${finalScale}`);
+      setGallerySwipeBackdrop(state.item, finalProgress);
+
+      window.setTimeout(
+        () => {
+          if (animationToken !== gallerySwipeAnimationToken) {
+            return;
+          }
+
+          if (commit && state.input === getCurrentGalleryInput()) {
+            closeGalleryInput(state.input, true, false);
+            return;
+          }
+
+          clearGallerySwipeStyles(state.item);
+        },
+        prefersReducedGalleryMotion() ? 0 : gallerySwipeAnimationMs,
+      );
+    });
+  }
+
+  function resetGallerySwipe(animate = false) {
+    const state = gallerySwipeStart;
+    gallerySwipeStart = null;
+
+    if (!state) {
+      return;
+    }
+
+    if (state.dragging && animate && !prefersReducedGalleryMotion()) {
+      if (state.mode === "close") {
+        finishGallerySwipeClose(state, false);
+        return;
+      }
+
+      finishGallerySwipe(state, false);
+      return;
+    }
+
+    if (state.animationFrame) {
+      cancelAnimationFrame(state.animationFrame);
+    }
+    clearGallerySwipeStyles(state.item);
+    if (state.targetItem) {
+      resetGalleryItem(state.targetItem);
+    }
+  }
+
+  function suppressNextGalleryClick() {
+    gallerySuppressClickAfterSwipe = true;
+    if (gallerySuppressClickTimer) {
+      window.clearTimeout(gallerySuppressClickTimer);
+    }
+    gallerySuppressClickTimer = window.setTimeout(() => {
+      gallerySuppressClickAfterSwipe = false;
+      gallerySuppressClickTimer = null;
+    }, 400);
+  }
+
+  function clearSuppressedGalleryClick() {
+    gallerySuppressClickAfterSwipe = false;
+    if (gallerySuppressClickTimer) {
+      window.clearTimeout(gallerySuppressClickTimer);
+      gallerySuppressClickTimer = null;
+    }
+  }
+
+  document.addEventListener("click", (event) => {
+    if (gallerySuppressClickAfterSwipe) {
+      event.preventDefault();
+      clearSuppressedGalleryClick();
+      return;
+    }
+
+    const item = event.target.closest?.(galleryItemSelector);
+    if (!item || event.target.closest?.(".caption a")) {
+      return;
+    }
+
+    const input = item.querySelector("input[type=checkbox]");
+    if (!input) {
+      return;
+    }
+
+    event.preventDefault();
+
+    if (input.checked || item.classList.contains("is-active")) {
+      closeGalleryInput(input);
+    } else {
+      openGalleryInput(input);
+    }
+  });
+
+  document.addEventListener("change", (event) => {
+    const input = event.target.closest?.(galleryInputSelector);
+    if (!input) {
+      return;
+    }
+
+    if (input.checked) {
+      openGalleryInput(input);
+    } else {
+      closeGalleryInput(input);
+    }
+  });
+
+  window.addEventListener("hashchange", syncGalleryFromHash);
+  syncGalleryFromHash();
+
+  document.addEventListener(
+    "touchstart",
+    (event) => {
+      const current = getCurrentGalleryInput();
+      const item = current ? getGalleryItem(current) : null;
+      if (
+        !current ||
+        !item ||
+        event.touches.length !== 1 ||
+        !item.classList.contains("is-expanded") ||
+        !item.classList.contains("is-settled") ||
+        item.classList.contains("is-closing") ||
+        item.classList.contains("is-swipe-animating")
+      ) {
+        resetGallerySwipe();
+        return;
+      }
+
+      const touch = event.touches[0];
+      gallerySwipeStart = {
+        animationFrame: null,
+        dragging: false,
+        direction: null,
+        input: current,
+        item,
+        lastDeltaX: 0,
+        lastDeltaY: 0,
+        mode: null,
+        peerStartOffset: 0,
+        pendingDeltaX: 0,
+        pendingDeltaY: 0,
+        swipeHeight: getGallerySwipeHeight(),
+        swipeWidth: getGallerySwipeWidth(),
+        targetInput: null,
+        targetItem: null,
+        x: touch.clientX,
+        y: touch.clientY,
+      };
+    },
+    { passive: true },
+  );
+
+  document.addEventListener(
+    "touchmove",
+    (event) => {
+      if (!gallerySwipeStart || event.touches.length !== 1) {
+        return;
+      }
+
+      const touch = event.touches[0];
+      const deltaX = touch.clientX - gallerySwipeStart.x;
+      const deltaY = touch.clientY - gallerySwipeStart.y;
+      const isHorizontal =
+        Math.abs(deltaX) > gallerySwipeDragStartDistance &&
+        Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+      const isVertical =
+        Math.abs(deltaY) > gallerySwipeDragStartDistance &&
+        Math.abs(deltaX) <=
+          Math.abs(deltaY) * gallerySwipeCloseMaxHorizontalRatio;
+
+      if ((isHorizontal || isVertical) && event.cancelable) {
+        event.preventDefault();
+      }
+
+      if (prefersReducedGalleryMotion()) {
+        return;
+      }
+
+      if (!gallerySwipeStart.dragging && !isHorizontal && !isVertical) {
+        return;
+      }
+
+      if (gallerySwipeStart.mode === "close") {
+        updateGallerySwipeCloseDrag(gallerySwipeStart, deltaY);
+      } else if (gallerySwipeStart.mode === "browse") {
+        updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+      } else if (isVertical) {
+        updateGallerySwipeCloseDrag(gallerySwipeStart, deltaY);
+      } else {
+        updateGallerySwipeDrag(gallerySwipeStart, deltaX);
+      }
+    },
+    { passive: false },
+  );
+
+  document.addEventListener(
+    "touchend",
+    (event) => {
+      const state = gallerySwipeStart;
+      if (!state || event.changedTouches.length === 0) {
+        resetGallerySwipe();
+        return;
+      }
+
+      const touch = event.changedTouches[0];
+      const deltaX = touch.clientX - state.x;
+      const deltaY = touch.clientY - state.y;
+      const isHorizontalSwipe =
+        Math.abs(deltaX) >= gallerySwipeMinDistance &&
+        Math.abs(deltaY) <= Math.abs(deltaX) * gallerySwipeMaxVerticalRatio;
+      const isVerticalSwipe =
+        Math.abs(deltaY) >= gallerySwipeCloseMinDistance &&
+        Math.abs(deltaX) <=
+          Math.abs(deltaY) * gallerySwipeCloseMaxHorizontalRatio;
+      const startedOnCurrent = state.input === getCurrentGalleryInput();
+
+      gallerySwipeStart = null;
+      if (!state.dragging) {
+        if ((!isHorizontalSwipe && !isVerticalSwipe) || !startedOnCurrent) {
+          return;
+        }
+
+        if (event.cancelable) {
+          event.preventDefault();
+        }
+        suppressNextGalleryClick();
+        if (isVerticalSwipe) {
+          closeGalleryInput(state.input);
+        } else {
+          moveGalleryInput(deltaX > 0 ? "previous" : "next", false);
+        }
+        return;
+      }
+
+      if (event.cancelable) {
+        event.preventDefault();
+      }
+      suppressNextGalleryClick();
+      if (state.mode === "close") {
+        state.lastDeltaY = deltaY;
+        state.pendingDeltaY = deltaY;
+        finishGallerySwipeClose(state, isVerticalSwipe && startedOnCurrent);
+        return;
+      }
+
+      finishGallerySwipe(
+        state,
+        isHorizontalSwipe && startedOnCurrent && Boolean(state.targetInput),
+      );
+    },
+    { passive: false },
+  );
+
+  document.addEventListener("touchcancel", () => resetGallerySwipe(true));
+
+  
+  document.addEventListener("keydown", (event) => {
+    switch (event.key) {
+      case "ArrowLeft":
+        if (moveGalleryInput("previous")) {
+          event.preventDefault();
+        }
+        break;
+      case "ArrowRight":
+        if (moveGalleryInput("next")) {
+          event.preventDefault();
+        }
+        break;
+      case " ": 
+      case "Escape":
+        const current = getCurrentGalleryInput();
+        if (current) {
+          event.preventDefault();
+          closeGalleryInput(current);
+        }
+        break;
+    }
+  });
+</script>
+
+  </body>
+</html>

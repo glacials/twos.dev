@@ -833,6 +833,8 @@ doodads and hardens the file against future changes to preprocessing.</p>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);

@@ -765,6 +765,8 @@ errors when refreshing tokens</li>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);

@@ -2496,6 +2496,8 @@ users. Some are meant just for me. Some start one way and end the other.</span>
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);
