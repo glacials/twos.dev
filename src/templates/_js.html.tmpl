@@ -501,6 +501,8 @@
 
     item.classList.add("is-active", "is-loading");
     syncGalleryBodyClasses();
+    // Commit the thumbnail-sized fixed position before expanding it.
+    getGalleryMotionElement(item)?.getBoundingClientRect();
 
     if (updateHash) {
       syncGalleryHash(input);
