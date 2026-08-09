@@ -258,6 +258,7 @@ body:has(.gallery-item.is-active) {
   pointer-events: none;
   position: fixed;
   top: var(--gallery-backdrop-top, 0px);
+  touch-action: none;
   transition:
     background 320ms ease,
     backdrop-filter 320ms ease;
@@ -735,6 +736,9 @@ video + video {
   --gallery-swipe-offset: 0px;
   --gallery-swipe-close-offset: 0px;
   --gallery-swipe-scale: 1;
+  --gallery-zoom-scale: 1;
+  --gallery-zoom-x: 0px;
+  --gallery-zoom-y: 0px;
   --gallery-swipe-backdrop-alpha: 0.82;
   --gallery-swipe-backdrop-blur: 12px;
   --gallery-viewport-height: 100vh;
@@ -789,7 +793,7 @@ video + video {
 .gallery-item:has(input:checked),
 .gallery-item.is-active {
   overflow: visible;
-  touch-action: pan-y pinch-zoom;
+  touch-action: none;
   z-index: 20;
 }
 
@@ -933,6 +937,21 @@ body:has(.gallery-item.is-swipe-close-active.is-swipe-animating)
 .gallery-item.is-active.is-loaded.is-settled .fullsize-photo,
 .gallery-item.is-active.is-motion-fullsize .fullsize-photo {
   visibility: visible;
+}
+
+.gallery-item.is-zoomed img.thumbnail,
+.gallery-item.is-zoomed .fullsize-photo {
+  cursor: grab;
+  transform: translate3d(var(--gallery-zoom-x), var(--gallery-zoom-y), 0)
+    scale(var(--gallery-zoom-scale));
+  transform-origin: center;
+  transition: none;
+  will-change: transform;
+}
+
+.gallery-item.is-zoom-active img.thumbnail,
+.gallery-item.is-zoom-active .fullsize-photo {
+  cursor: grabbing;
 }
 
 .gallery-item.is-swipe-active {
