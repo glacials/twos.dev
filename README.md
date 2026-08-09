@@ -15,7 +15,7 @@ These static files are built by
 
 ### Dependencies
 
-- Go 1.18+
+- Go 1.23+
 
 ### Starting a dev server
 
@@ -38,3 +38,27 @@ refresh automatically.
 Winter is the bespoke static website generator that powers twos.dev. It can be
 used to power your static website as well, as a CLI or Go library. See the
 [winter README](https://github.com/glacials/winter) for details.
+
+## Deploying
+
+Push `main` normally:
+
+```sh
+git push
+```
+
+The tracked GitHub Actions workflow runs on every push, checks out the existing
+`gh-pages` branch as `dist`, and runs `winter publish --allow-dirty`. Publishing
+is incremental and append-only: unchanged generated images and static files are
+reused, changed files are overlaid, and removed source files do not silently
+remove old public URLs. Winter checks every local link and resource before it
+commits and pushes the deployment branch.
+
+This workflow is stored in the repository, so the automatic deployment behavior
+works on every clone without installing a local Git hook. If an immediate local
+deployment is useful, install Winter v0.6.1 or newer and run `winter publish`;
+that is optional, not part of the normal deployment routine.
+
+A weekly and manually dispatchable audit performs a clean build and compares it
+with the persistent deployment. It is intentionally separate from normal pushes
+because regenerating every image is slow.

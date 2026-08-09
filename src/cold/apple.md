@@ -576,7 +576,13 @@ switching to Google Calendar as a backend I've learned to RSVP using the
 embedded buttons which (outside of Gmail) open a web browser to the Google
 Calendar UI.
 
-{{ template "_videos.html.tmpl" "/img/apple-mail-dark" }}
+<p>
+  <figure style="text-align: center">
+    <video autoplay loop muted style="max-height: 40em; max-width: 100%">
+      <source src="/img/apple-mail-dark.mp4" type="video/mp4" />
+    </video>
+  </figure>
+</p>
 
 _Opening a Google Calendar invitation from within the Apple ecosystem._
 

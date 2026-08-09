@@ -189,7 +189,7 @@ it asks asynchronously.
   <div class="device-power"></div>
 </div>
 
-Let me know what you think by [grabbing it from the App Store](appstore),
+Let me know what you think by [grabbing it from the App Store][appstore],
 or join the [TestFlight][testflight] group to give me some feedback before proper releases.
 
 <!-- _Brown Note is available on the [App Store][appstore] for iOS._ -->

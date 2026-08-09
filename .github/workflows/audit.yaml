@@ -1,22 +1,29 @@
-name: Build and deploy
+name: Audit production build
+
 on:
-  push:
-    branches: [main]
+  schedule:
+    - cron: "17 10 * * 1"
+  workflow_dispatch:
 
 permissions:
-  contents: write
+  contents: read
 
 concurrency:
-  group: production-deploy
-  cancel-in-progress: false
+  group: production-audit
+  cancel-in-progress: true
 
 jobs:
-  build-and-deploy:
+  audit:
     runs-on: ubuntu-latest
     timeout-minutes: 90
     steps:
-      - name: Checkout
+      - name: Checkout source
         uses: actions/checkout@v4
+
+      - name: Check out persistent production output
+        run: |
+          git fetch origin refs/heads/gh-pages:refs/remotes/origin/gh-pages
+          git worktree add -B gh-pages dist origin/gh-pages
 
       - name: Set up Go
         uses: actions/setup-go@v5
@@ -30,10 +37,5 @@ jobs:
       - name: Install Winter
         run: go install twos.dev/winter@v0.6.1
 
-      - name: Configure deployment commits
-        run: |
-          git config user.name "github-actions[bot]"
-          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
-
-      - name: Incrementally build, check, and deploy
-        run: winter publish --allow-dirty
+      - name: Audit persistent output against a clean build
+        run: winter audit

@@ -53,7 +53,7 @@ iOS and macOS ship with
 [Shortcuts](https://apps.apple.com/us/app/shortcuts/id1462947752), a no-code
 event-driven automation app. Using Shortcuts, I set up an automation that triggers when
 I switch away from the my writing app, and additionally on a cron. The automation adds a
-1-2 line [Winter frontmatter](winter.html#frontmatter) section to each document if
+1-2 line [Winter frontmatter](https://github.com/glacials/winter#frontmatter) section to each document if
 needed, then pushes it to the `src/warm` directory in the twos.dev Git repository by
 invoking [Working Copy](https://workingcopyapp.com). No interruption to UX; this happens
 in the background.
