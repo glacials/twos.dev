@@ -1668,7 +1668,7 @@
     },
     "src/cold/agents.md": {
       "generator": "winter-document-v1",
-      "hash": "a7d547b21dbcd9b50e3ac3ff8c12fd8719b413bd4fdd515cea54081d4c291183",
+      "hash": "1e8ea6b10b6e88226af54030b68d350c845ce17c57f115f0698371f6d55b5c86",
       "kind": "document",
       "outputs": [
         "/agents.html",
@@ -5687,7 +5687,7 @@
     },
     "src/warm/config.org": {
       "generator": "winter-document-v1",
-      "hash": "1141614abc59e69cb19a81ab625d96fa36e0c5694d64e62fa4adedf210353f1a",
+      "hash": "8a526db0bbe0e904b15ae740724b0c609acbd6fcce0f392aef77d6001bfa463c",
       "kind": "document",
       "outputs": [
         "/emacs.html",
