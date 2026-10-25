@@ -67,6 +67,15 @@ human knowledge tooling.
       </td>
       <td data-label="Human solution">Security clearance &amp; controls</td>
     </tr>
+    <tr>
+      <td data-label="Problem">
+        Agents don't make enough progress independently
+      </td>
+      <td data-label="Agent solution">
+        Set a /goal
+      </td>
+      <td data-label="Human solution">Set goals</td>
+    </tr>
   </tbody>
 </table>
 
