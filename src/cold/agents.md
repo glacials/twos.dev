@@ -1,5 +1,5 @@
 ---
-date: 2026-04-18
+date: 2026-10-25
 filename: agents.html
 preview: How harness engineering keeps rediscovering office work.
 type: post
