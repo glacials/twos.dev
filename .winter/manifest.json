@@ -1668,7 +1668,7 @@
     },
     "src/cold/agents.md": {
       "generator": "winter-document-v1",
-      "hash": "3fe99d0008de7d1b7780733edd0dcac1c6fb1480feef8d9e2915ff8ded7222c8",
+      "hash": "2ca8ad7d72cc400cef4356aa07e3c81721391c0a353c557bf7e41d822a0ff2d0",
       "kind": "document",
       "outputs": [
         "/agents.html",
