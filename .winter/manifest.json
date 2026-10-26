@@ -1606,7 +1606,7 @@
     },
     "public/style.css": {
       "generator": "winter-static-v1",
-      "hash": "6357369f84c8a91366915d50ad2131691c6ea0a8e95cf15462658cc932c971c4",
+      "hash": "7e32754368ee6a06138cadee4062d26d3828938693fc7cbcd5a50deb850ded9d",
       "kind": "static",
       "outputs": [
         "style.css"
@@ -1668,7 +1668,7 @@
     },
     "src/cold/agents.md": {
       "generator": "winter-document-v1",
-      "hash": "1e8ea6b10b6e88226af54030b68d350c845ce17c57f115f0698371f6d55b5c86",
+      "hash": "3fe99d0008de7d1b7780733edd0dcac1c6fb1480feef8d9e2915ff8ded7222c8",
       "kind": "document",
       "outputs": [
         "/agents.html",

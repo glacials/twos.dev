@@ -166,12 +166,21 @@ footer {
 
 @media (min-width: 55rem) {
   article
-    > *:not(.photo-grid):not(article):not(p:has(img[src*="macos"])):not(pre),
+    > *:not(.wide):not(.photo-grid):not(article):not(p:has(img[src*="macos"])):not(pre),
   footer {
     margin-left: var(--margin-left-standard);
     margin-right: auto;
     max-width: var(--container-width);
   }
+
+  /* Let wide content use the space to the right of the reading column. */
+  article > .wide {
+    width: calc(100% - var(--margin-left-standard) - 2rem);
+    max-width: 64rem;
+    margin-left: var(--margin-left-standard);
+    margin-right: 2rem;
+  }
+
   article > p:has(img[src*="macos"]) {
     margin-left: calc(
       var(--margin-left-standard) - (0.056 * var(--container-width))
@@ -526,6 +535,7 @@ p:has(.gallery-item) + p {
 
 table {
   background-color: var(--raised-bg);
+  color: var(--raised-fg);
   box-shadow: var(--shadow) 1rem 1rem 0;
   margin-bottom: 3rem;
   margin-top: 3rem;
