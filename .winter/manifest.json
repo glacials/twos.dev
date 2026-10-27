@@ -1623,7 +1623,7 @@
     },
     "src/cold/2023.md": {
       "generator": "winter-document-v1",
-      "hash": "ba5d84747bd0f552b0c2e93408ab49fdf8532d40ccb2bf3e65af89a1711cd924",
+      "hash": "1b4aeb7f09c3725be1c0f4e4579eabeec8a83f6cab6e984cb3acffaefe8e6283",
       "kind": "document",
       "outputs": [
         "/2023.html",
@@ -1632,7 +1632,7 @@
     },
     "src/cold/2026-denmark.md": {
       "generator": "winter-document-v1",
-      "hash": "f3d964f44e15b8d061849cd6f0e1a01fb5cb7a538908c77247d512633a8a4218",
+      "hash": "79ed7920ad9b5ab91b65041fdabae291623533341d6111e2b3c960914fc79b91",
       "kind": "document",
       "outputs": [
         "/2026-denmark.html",
@@ -1641,7 +1641,7 @@
     },
     "src/cold/2026-japan.md": {
       "generator": "winter-document-v1",
-      "hash": "1f37f8b7c5dc37af24662b2ef3fb97017d1e1ecd00aecc762fed5d375b84f385",
+      "hash": "fc0c9b2661ba0cbf2c2656a402df178ac876b38803b7277b908a7cf5fbbea080",
       "kind": "document",
       "outputs": [
         "/2026-japan.html",
@@ -1650,7 +1650,7 @@
     },
     "src/cold/2142.md": {
       "generator": "winter-document-v1",
-      "hash": "9e11ddc0c7c0518c0ea50115088758b2ac4b350e2e96bd3db64fa1c2f436c2be",
+      "hash": "02ae75e35add27b5e9fb30d8040522c87cf5083865e696a895a3ea37911d3246",
       "kind": "document",
       "outputs": [
         "/2142.html",
@@ -1659,7 +1659,7 @@
     },
     "src/cold/90.md": {
       "generator": "winter-document-v1",
-      "hash": "b8fbb8dd82310b0a6b16784413e9f7b3e3432712224c9f336bd58f8158476705",
+      "hash": "cbcaff63f24f6317dac4a3265b674fe7cfb9b2446641e041ac7cdb5efa615244",
       "kind": "document",
       "outputs": [
         "/90.html",
@@ -1668,7 +1668,7 @@
     },
     "src/cold/agents.md": {
       "generator": "winter-document-v1",
-      "hash": "2ca8ad7d72cc400cef4356aa07e3c81721391c0a353c557bf7e41d822a0ff2d0",
+      "hash": "ed782bcdc7197e3a630214890592516484b4de421dec27fa8cfbf460e6369e35",
       "kind": "document",
       "outputs": [
         "/agents.html",
@@ -1677,7 +1677,7 @@
     },
     "src/cold/apple.md": {
       "generator": "winter-document-v1",
-      "hash": "bfd49d5f92a18b61f1e78a2f024ff6c97cfc8ddcdb200269422b1678a12399a6",
+      "hash": "12c060700cf1c9eea43ca99a150b6c74d438b4d65898920fcc80b5d50356dc4f",
       "kind": "document",
       "outputs": [
         "/apple.html",
@@ -1686,7 +1686,7 @@
     },
     "src/cold/archives.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "b3a4249b18db9bc002927eb008228282c2ca513f9acf4e9477ce55cd6b183e77",
+      "hash": "01618eca183dc6bdd0e743d2fc4048b503445717ed3a692540665ed762a839b8",
       "kind": "document",
       "outputs": [
         "/archives.html",
@@ -1695,7 +1695,7 @@
     },
     "src/cold/async.md": {
       "generator": "winter-document-v1",
-      "hash": "0ad8de3f45e57e9ffa4dc49e31f2e0a28cd89b137eb1ee45df96942231fb651a",
+      "hash": "73e24752a945f748de963f579f66831f7baf645c2ddd063be884fae87d4859d3",
       "kind": "document",
       "outputs": [
         "/async.html",
@@ -1704,7 +1704,7 @@
     },
     "src/cold/autism.html": {
       "generator": "winter-document-v1",
-      "hash": "afabc6d595bda6b567591393670b691aac37a84bcf53fd63913fb85dd5993f8b",
+      "hash": "bcbe534e2f168ec4bd8f6078cf566c346318c3e1680fc23f0f7a5328442381c6",
       "kind": "document",
       "outputs": [
         "/autism.html",
@@ -1722,7 +1722,7 @@
     },
     "src/cold/brownnote.md": {
       "generator": "winter-document-v1",
-      "hash": "be5a2b7efab610ab8191a868297c91143fd065dd40b3b1618036596af7ada4f8",
+      "hash": "30bad3acdfa85577f46964f508964b439ccb14952012cb3d8354d4912ecb4003",
       "kind": "document",
       "outputs": [
         "/brownnote.html",
@@ -1731,7 +1731,7 @@
     },
     "src/cold/buttons.html": {
       "generator": "winter-document-v1",
-      "hash": "94f58f899844010168c3bab0e8ca457ffc156db63a4e556b03d383372d84ff1a",
+      "hash": "66481bfe0443c1b1d0f9cbf93ea5c758ac004ef116695ede7cc7f3cd6558cf23",
       "kind": "document",
       "outputs": [
         "/buttons.html",
@@ -1740,7 +1740,7 @@
     },
     "src/cold/china.md": {
       "generator": "winter-document-v1",
-      "hash": "e78fbd3da13131c4f8bc5ab493a8b7bcb1430502a4f1ee3148e755c3e7f5cdea",
+      "hash": "802ab493c68c95c48ecfb2e7c63788cdd5d7d8f0fb708e94b361194e5b294625",
       "kind": "document",
       "outputs": [
         "/china.html",
@@ -1749,7 +1749,7 @@
     },
     "src/cold/creamsicle.md": {
       "generator": "winter-document-v1",
-      "hash": "1436f5924de635cdf145d8c42a66aa7f7776316e1d23662e1bbe3f9c78c51c05",
+      "hash": "a74ae2bc96f9394cb4c556a7c64da00c782a8dc92d305165e6858f16ddda12ba",
       "kind": "document",
       "outputs": [
         "/creamsicle.html",
@@ -1758,7 +1758,7 @@
     },
     "src/cold/crysis.md": {
       "generator": "winter-document-v1",
-      "hash": "efa18b39bc1497d1afbbf5580d0cf29c4838793d4cd2d007d1fd7d15ef5582a6",
+      "hash": "1f5d0538b2c9eb029902c976e4bb22e76338d827c11c6e8d0640826ba9ab054e",
       "kind": "document",
       "outputs": [
         "/crysis.html",
@@ -1767,7 +1767,7 @@
     },
     "src/cold/cv.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "7e55f9e13925a078e2f11bc0fac5f38fd645d1635bf389b4124b7240eaa82d30",
+      "hash": "8b5545213740d2a67b20a3ef6c95cac3af8a564a2683531ab85bdeb1d7a28dfa",
       "kind": "document",
       "outputs": [
         "/cv.html",
@@ -1776,7 +1776,7 @@
     },
     "src/cold/dashes.md": {
       "generator": "winter-document-v1",
-      "hash": "d7b4171eee1a2c9c1b27c68d5147d4eb4efb963f1285803c9b36e09bce2904aa",
+      "hash": "7d2b80f0a6a1d430214c90c50ce855e6096a1dd039c3c60bdf12f5dcd6329d65",
       "kind": "document",
       "outputs": [
         "/dashes.html",
@@ -1785,7 +1785,7 @@
     },
     "src/cold/documentation.md": {
       "generator": "winter-document-v1",
-      "hash": "c443a6a8b299a45ecfa5484cad8df3efd681f55ce0eafebf2cead12b06e0585b",
+      "hash": "d6c0d5c4eb8d7de4869a6a1c990ad9883b0306ab4a87b96460463932391e083f",
       "kind": "document",
       "outputs": [
         "/documentation.html",
@@ -1794,7 +1794,7 @@
     },
     "src/cold/drafts.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "cd752289fba6b2fef0783a1a54da07472c0f89f2a6b6356e9cfbc2a348194b48",
+      "hash": "0c83b16ed369080f25962b3f08d9dfd8439c634fd1ad042eaff0c7551bfc6e63",
       "kind": "document",
       "outputs": [
         "/drafts.html",
@@ -1803,7 +1803,7 @@
     },
     "src/cold/ds.md": {
       "generator": "winter-document-v1",
-      "hash": "be8e7a7f9cc205cee8241259c86f1e7713d77ec2fef0e0bdbac92e99b004a5c3",
+      "hash": "4e53ffbcef4769877fc1025f938ffa80fc344ba5377062d23a66d38d86bb6fc3",
       "kind": "document",
       "outputs": [
         "/ds.html",
@@ -1812,7 +1812,7 @@
     },
     "src/cold/emotion.md": {
       "generator": "winter-document-v1",
-      "hash": "a0c26956c9b884687a6ffc40896538f76da6d857ac02544690bb6d99b234101b",
+      "hash": "86b0432e77a6e47eb3c6cee897acfa159dc9311527eea12826664ac086c09c6d",
       "kind": "document",
       "outputs": [
         "/emotion.html",
@@ -1821,7 +1821,7 @@
     },
     "src/cold/english.md": {
       "generator": "winter-document-v1",
-      "hash": "2e6cffa32f06b514cdfd826126794cdfdb9410caf1070c7f7293854a9f4ad68a",
+      "hash": "9bafca618db748769b773e3015cd63479f8594279d1d4e76ee41d1d04fd3feec",
       "kind": "document",
       "outputs": [
         "/english.html",
@@ -1830,7 +1830,7 @@
     },
     "src/cold/filters.md": {
       "generator": "winter-document-v1",
-      "hash": "cc686ba1964a3d381e049fc27f03067d408585d2fd57f11744814f6e27704680",
+      "hash": "18a05582ec9da67c22c8a409152b069c3a563e771a7f527fea14e42d06d65d06",
       "kind": "document",
       "outputs": [
         "/filters.html",
@@ -1839,7 +1839,7 @@
     },
     "src/cold/form.md": {
       "generator": "winter-document-v1",
-      "hash": "547bda4035fc5294bbe62fa4497904d6da15672852879f87f0005c09fb77c319",
+      "hash": "743ebc38464fd1dab57d743fae3d7197dd71e0a24056e9ec22b6e5d48395ad8f",
       "kind": "document",
       "outputs": [
         "/form.html",
@@ -1848,7 +1848,7 @@
     },
     "src/cold/games.md": {
       "generator": "winter-document-v1",
-      "hash": "2143df4333ae3d615aa6d61006ef1ecaaf2658029222531c55286f6824d59fb0",
+      "hash": "d1203d3cc2427d8ba7195572dcec61fac0aa697a5d819f2e1a35300dc97759df",
       "kind": "document",
       "outputs": [
         "/games.html",
@@ -1857,7 +1857,7 @@
     },
     "src/cold/guide.md": {
       "generator": "winter-document-v1",
-      "hash": "cef7aa01e1931bc15c87af2268df242f4dd6990f62fd5cdfd2f19eff3f2bec32",
+      "hash": "d1ee39dcbbd942c418683ad3a4e6f80ea1d218a1a85c20eef10337e8a4c3be58",
       "kind": "document",
       "outputs": [
         "/guide.html",
@@ -1866,7 +1866,7 @@
     },
     "src/cold/gut.html": {
       "generator": "winter-document-v1",
-      "hash": "1ea5f95c0bf2ca4b03827986560edcace411b80d88046123cecca565aa1722c9",
+      "hash": "6e3db83303ead595a9384dec81e289d6fb4cf4134922b6057f168fec38201247",
       "kind": "document",
       "outputs": [
         "/gut.html",
@@ -1875,7 +1875,7 @@
     },
     "src/cold/halo3.md": {
       "generator": "winter-document-v1",
-      "hash": "fc965390eb679dcf56183f8afff36fd89d6b661990abef68bc6b424d4bf3b4ec",
+      "hash": "08b970bbf77f054e240141eda570b2e87ba22748f52822bd56be960548ec6700",
       "kind": "document",
       "outputs": [
         "/halo3.html",
@@ -1884,7 +1884,7 @@
     },
     "src/cold/haunted.md": {
       "generator": "winter-document-v1",
-      "hash": "125f73808a83b641a9062072e419675daefd25f5d3cdb7b2dc28649588f18ecd",
+      "hash": "af140ee4f04adb45546eb695482b5c80024912dd83b8d95439d1ecbd7ff99a56",
       "kind": "document",
       "outputs": [
         "/haunted.html",
@@ -1893,7 +1893,7 @@
     },
     "src/cold/hotsauce.md": {
       "generator": "winter-document-v1",
-      "hash": "6513939af3545af05e1735f60424a842e2c19136c441b0d67cf6423774c7da47",
+      "hash": "09cf50b1779b27ef65c962b07e430677202d081863030cdbb9915e96537f8f45",
       "kind": "document",
       "outputs": [
         "/hotsauce.html",
@@ -1902,7 +1902,7 @@
     },
     "src/cold/index.md": {
       "generator": "winter-document-v1",
-      "hash": "43ebaa2bd0da4f67a9e29bcc1f9a89d33381f345345f5e9f2976ca06978c8a52",
+      "hash": "7ff18ccedd64bb44598c88277b2044b73bf771a3fbb4a55bd6a6fa9daa0fb276",
       "kind": "document",
       "outputs": [
         "/index.html",
@@ -1911,7 +1911,7 @@
     },
     "src/cold/infra.org": {
       "generator": "winter-document-v1",
-      "hash": "4749ab2499b4b9c02dad02fd1546bc2c9e5011161574e5182cd5ffa0b8189f9d",
+      "hash": "abe90acebaced15474241a0a271ae30add7213fee9646bdf28318bffcc156c5a",
       "kind": "document",
       "outputs": [
         "/infra.html",
@@ -1920,7 +1920,7 @@
     },
     "src/cold/juven.md": {
       "generator": "winter-document-v1",
-      "hash": "87ab2691ab89ab5cdba645bb28a71eb92abcaf83ef417fb7c25f52a29811f7d1",
+      "hash": "7cc1595431da5cf4eda559eee593b69f1eb4735459c408b31e032b9ff7404736",
       "kind": "document",
       "outputs": [
         "/juven.html",
@@ -1929,7 +1929,7 @@
     },
     "src/cold/juven2.md": {
       "generator": "winter-document-v1",
-      "hash": "09357dcc18a8679a01c6ad696f3eb68a55eec73775c3bd6d287c551b66db7a93",
+      "hash": "3c905d02afc870da9e5f9c9a91969c7d357bf299e6a06a26cdfd5fca2c63d786",
       "kind": "document",
       "outputs": [
         "/juven2.html",
@@ -1938,7 +1938,7 @@
     },
     "src/cold/juven3.md": {
       "generator": "winter-document-v1",
-      "hash": "27ff212e5fdd5478f9d7c6d19037d08ccc25efe6bed829d820c834f614533a70",
+      "hash": "9329ff41b0c99f3ca7aa7c0641200a75071f5cc72f1c9b97253c4b150e0811bc",
       "kind": "document",
       "outputs": [
         "/juven3.html",
@@ -1947,7 +1947,7 @@
     },
     "src/cold/mainframe.md": {
       "generator": "winter-document-v1",
-      "hash": "abfed91ebe4b1b3b5dca29f9ca8ab0e7b765aa0a95c234e8794de8d6439079f0",
+      "hash": "6a76eb9dd8d6fe103b23837218c0b196733ff0eaeb5653301ca99447d91c8758",
       "kind": "document",
       "outputs": [
         "/mainframe.html",
@@ -1956,7 +1956,7 @@
     },
     "src/cold/meta.md": {
       "generator": "winter-document-v1",
-      "hash": "9de79ee913116a96ad44681e2dd128fafd46b278a062aea63a636ebaba131d9f",
+      "hash": "5dac7df9a351bc7145eaacb0b0f63efef5b808776136169514f39aeca039254f",
       "kind": "document",
       "outputs": [
         "/meta.html",
@@ -1965,7 +1965,7 @@
     },
     "src/cold/netneutrality.md": {
       "generator": "winter-document-v1",
-      "hash": "284a7fc9000b14a5c471afcf1bdace81aafad639f7b228981fe574fe00d6b4ca",
+      "hash": "57e11669c53f0d71cf4df6bf5fcdda94f5ecaf6fcc15669b787efb8a1b779002",
       "kind": "document",
       "outputs": [
         "/netneutrality.html",
@@ -1974,7 +1974,7 @@
     },
     "src/cold/newsletter.md": {
       "generator": "winter-document-v1",
-      "hash": "8f750b54203dd8378e2a3bdeaebb064a077359b86d3c91ac64b1ba12a353d8f0",
+      "hash": "407f97d039eb8df5745b34474d3c4acdb1bf353884fc61f1cd22a359ccd73702",
       "kind": "document",
       "outputs": [
         "/newsletter.html",
@@ -1983,7 +1983,7 @@
     },
     "src/cold/nosleep.md": {
       "generator": "winter-document-v1",
-      "hash": "353612a3f3ef1b823d436d48a61d141a65962662e14ec925c20edb4b7c6a8759",
+      "hash": "179d0af0e9edb8922eb88d57ce7a1559fb5671bfd398a09d53d3bd711a16236d",
       "kind": "document",
       "outputs": [
         "/nosleep.html",
@@ -1992,7 +1992,7 @@
     },
     "src/cold/now.md": {
       "generator": "winter-document-v1",
-      "hash": "0d096c531e79abaadef15086f198c904bcff8191d9d752d7a7dcdf3e83e5d03f",
+      "hash": "09be0999ec6eaefe25a2e297f1b05cb02d0c0b3511db63133388c013add5efc1",
       "kind": "document",
       "outputs": [
         "/now.html",
@@ -2001,7 +2001,7 @@
     },
     "src/cold/obsidian.md": {
       "generator": "winter-document-v1",
-      "hash": "d0b23b028dfa13434aab583a2e1d74b9553760cb0f0d911f281139187d9d9870",
+      "hash": "db670a77ffd4bb47af85f096f4bd5afffddba010d891205c90beb432ea65368b",
       "kind": "document",
       "outputs": [
         "/obsidian.html",
@@ -2010,7 +2010,7 @@
     },
     "src/cold/orange.md": {
       "generator": "winter-document-v1",
-      "hash": "c32ba337bbbb7c5da4eeae1cd29a3183d4c9aa7c61b6dc7887a0122ee89b1faf",
+      "hash": "ab80f6b2a94798641a9a473e9f48c77818cd35d863a87e4e939de714984d5f36",
       "kind": "document",
       "outputs": [
         "/orange.html",
@@ -2019,7 +2019,7 @@
     },
     "src/cold/overlord.md": {
       "generator": "winter-document-v1",
-      "hash": "73f1814e42bee7c084ca97a3a71cf91a9f4fb5da18879ef6f5f745048e95589f",
+      "hash": "f3f296bc51ec94e87e3c5a284278e7d181e9b5edcac4b9e62e3aad4053c6a03e",
       "kind": "document",
       "outputs": [
         "/overlord.html",
@@ -2028,7 +2028,7 @@
     },
     "src/cold/phantoms.md": {
       "generator": "winter-document-v1",
-      "hash": "ae47efcc14275d30a427faa4ed3c1b34a9bb888a95ab6c4169cb70bb2f7ab1a9",
+      "hash": "c6f50728663d7b016bd6ea056e454820d2a2a11cae9bdab584d0e2670819d3eb",
       "kind": "document",
       "outputs": [
         "/phantoms.html",
@@ -2037,7 +2037,7 @@
     },
     "src/cold/photos.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "2a44fd90687bc55462d811fb11aa1f264956bc572f3ab02fd09962ee56e50b9e",
+      "hash": "0662ea2d7e7192292bb7394d05df2f4b43fc5268befd115a95b09340deafcdc4",
       "kind": "document",
       "outputs": [
         "/photos.html",
@@ -2046,7 +2046,7 @@
     },
     "src/cold/play.md": {
       "generator": "winter-document-v1",
-      "hash": "8a6ab2a02e363a7b6b346ac9f8ab1505299ded666fddb56d10c15a0bb57c7923",
+      "hash": "8035f323d958edf91401b1b5d64e529fe1db53835e587d4ab09831ee07fc4d43",
       "kind": "document",
       "outputs": [
         "/play.html",
@@ -2055,7 +2055,7 @@
     },
     "src/cold/realtors.md": {
       "generator": "winter-document-v1",
-      "hash": "52c5f2aacb2bff322069bbfc1993a57624425b5ef4e7f314fc58a094cfa2d855",
+      "hash": "c60c185155a610db59678a43e9191b8b4be392bb431f8db7e445ca17c303656c",
       "kind": "document",
       "outputs": [
         "/realtors.html",
@@ -2064,7 +2064,7 @@
     },
     "src/cold/recs.md": {
       "generator": "winter-document-v1",
-      "hash": "4398f244429ceb1d6e16b6d5d4be106058e31e3d1950363b0d7e3b4e33887f61",
+      "hash": "57d4e8e7c97b20dc5d8f87f73515d160194e703777ea5635ffa2eda3b126d879",
       "kind": "document",
       "outputs": [
         "/recs.html",
@@ -2073,7 +2073,7 @@
     },
     "src/cold/recs2024.md": {
       "generator": "winter-document-v1",
-      "hash": "48a42ff001972646f84d9f2f53cd8caf8d371d3527b3509094568704dba139c0",
+      "hash": "ee4b3f52855338ace5245ad5560c8983bc5e802c58a6fa7259156685e018b7a6",
       "kind": "document",
       "outputs": [
         "/recs2024.html",
@@ -2082,7 +2082,7 @@
     },
     "src/cold/rent.md": {
       "generator": "winter-document-v1",
-      "hash": "cb3ac8103bc44b27dba6d5fa57d93b115fdf580539c4ee53595b4c3c3b5fe0c6",
+      "hash": "1975d3c2e31ca3a1ec3e11bb60de056478fa0ff8bc2f248f1a90d4f25d78b961",
       "kind": "document",
       "outputs": [
         "/rent.html",
@@ -2091,7 +2091,7 @@
     },
     "src/cold/rent_algorithm.md": {
       "generator": "winter-document-v1",
-      "hash": "c863522d0559bc4efe474d312de6cb471cf106301349b395b1774aa9418fe1ac",
+      "hash": "f166dd2b17ffa8a5ff5a14aae884ea5a9f8d9264e85f06e8317706e58f068336",
       "kind": "document",
       "outputs": [
         "/rent_algorithm.html",
@@ -2100,7 +2100,7 @@
     },
     "src/cold/screenshots.md": {
       "generator": "winter-document-v1",
-      "hash": "c62ae77ec4725713421e8324f02289bf7f180eef254c1b031a470979e0343667",
+      "hash": "92145f1d38b3374f9f2a964e9f676d71c038a0e83477ea251204e64e3b6365ff",
       "kind": "document",
       "outputs": [
         "/screenshots.html",
@@ -2109,7 +2109,7 @@
     },
     "src/cold/skyhopper.md": {
       "generator": "winter-document-v1",
-      "hash": "40eefbb677c19cf3b7ebfa284491eb14124d2077d9a9b29258483a89e480dc6c",
+      "hash": "4507a8ecc3d8b7f1d49870b82d916ee29450181786450d26140671afe04c4deb",
       "kind": "document",
       "outputs": [
         "/skyhopper.html",
@@ -2118,7 +2118,7 @@
     },
     "src/cold/sleep.md": {
       "generator": "winter-document-v1",
-      "hash": "a64988635745ffac74ade37b2cffaedadff38abc916ab6f2b7f9af383c30bbdc",
+      "hash": "6478cb864ed6cee5e7b934f735ac6cc54ef935780a4ee785d2de4dc480dfc7e2",
       "kind": "document",
       "outputs": [
         "/sleep.html",
@@ -2127,7 +2127,7 @@
     },
     "src/cold/software.md": {
       "generator": "winter-document-v1",
-      "hash": "9b165ba8a3a5521db96e5de5814a4b13cf0b8c5bf4a0dbbabc93308122c15f81",
+      "hash": "4ad361a4ff6be3222e2b06a9fb9d7008bbf15bf107ae9f4ce9a71890886327e3",
       "kind": "document",
       "outputs": [
         "/software.html",
@@ -2136,7 +2136,7 @@
     },
     "src/cold/soulslikes.md": {
       "generator": "winter-document-v1",
-      "hash": "6eab8aa18703f20388d7f252b0bb3bd5b48b25e049b9398d10afaee7b9b2e8a3",
+      "hash": "4757793f676bedf63a944dd935647e3fd280c44e46fd649910330f81c3535cf7",
       "kind": "document",
       "outputs": [
         "/soulslikes.html",
@@ -2145,7 +2145,7 @@
     },
     "src/cold/splitsio.md": {
       "generator": "winter-document-v1",
-      "hash": "0b8bbe53711c9d932bf283f1522b64ffacb33b2dd67c8ca5acab2e17bfeec371",
+      "hash": "bce650098832808288f772e31a098dc19e5e04bf3ddac422c7a012e7ec0f78e8",
       "kind": "document",
       "outputs": [
         "/splitsio.html",
@@ -2154,7 +2154,7 @@
     },
     "src/cold/startrek.md": {
       "generator": "winter-document-v1",
-      "hash": "900741b111e3b47d27fc5b436359ad6ce2e4ab61e0739b4459cbf7ac54eac00f",
+      "hash": "5db71c267a973b6bea2be87e2c65c688140996e0db20ca38be844f38adce220b",
       "kind": "document",
       "outputs": [
         "/startrek.html",
@@ -2172,7 +2172,7 @@
     },
     "src/cold/systems.md": {
       "generator": "winter-document-v1",
-      "hash": "4980382f106364d65ab98e2c71757db6eb6b4d9821f1da62ce9e86c44aa78451",
+      "hash": "60a6fa20ba67ddb1bc28e63cc4a48f42d7a0b078dce1a09f19fb6ebcb3426933",
       "kind": "document",
       "outputs": [
         "/systems.html",
@@ -2181,7 +2181,7 @@
     },
     "src/cold/tattoo.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "bb544bc8d2e80f4d54ee7d50c79832e1c3b77d8e4bad6bfa006ccc05392f50a1",
+      "hash": "6cb0a716eef7134fc43106e3dee11e0208b23b5a6c92d81f7826de5797bf823a",
       "kind": "document",
       "outputs": [
         "/tattoo.html",
@@ -2190,7 +2190,7 @@
     },
     "src/cold/tattoo_symbols.html.tmpl": {
       "generator": "winter-document-v1",
-      "hash": "c577c9ce2f547582dc1245060415e4d2c3aace34ba987716b9fdb914ca166a6b",
+      "hash": "03d401cad8c459bffe45e68407c393489d0d1cfa194289c7815fff2f8fcf65af",
       "kind": "document",
       "outputs": [
         "/tattoo_symbols.html",
@@ -2199,7 +2199,7 @@
     },
     "src/cold/thepopin.md": {
       "generator": "winter-document-v1",
-      "hash": "47fd5c809dcb2b4ee86c235b979ccd20a3c50d848d3445316bf113fdf00a2218",
+      "hash": "4f56e7f096959e8650c9246cd6a0453470c848cdd2373d0c30adad53d1d16838",
       "kind": "document",
       "outputs": [
         "/thepopin.html",
@@ -2208,7 +2208,7 @@
     },
     "src/cold/thinking.md": {
       "generator": "winter-document-v1",
-      "hash": "a4a4cfd721b23466402998805abe15b5a5f2fb6b3203b9da1968c5e347d45023",
+      "hash": "3aa9f26d8fa5166b90593e4b5f4c3af32b46f6274a3d54b54bdae0196ee69839",
       "kind": "document",
       "outputs": [
         "/thinking.html",
@@ -2217,7 +2217,7 @@
     },
     "src/cold/wow.md": {
       "generator": "winter-document-v1",
-      "hash": "1fd913f601ca64535d4edc7a2f116bb603df47d0546b91ad073e923107573119",
+      "hash": "9b8bc419ef3899aa9c192d12b09c1713dce638398522e0a94eb769e55924374d",
       "kind": "document",
       "outputs": [
         "/wow.html",
@@ -2226,7 +2226,7 @@
     },
     "src/cold/writing.md": {
       "generator": "winter-document-v1",
-      "hash": "3d56f68de336beed8014c9b88d5a14e106111656b91fe8f3f6c7aec1d7f8224c",
+      "hash": "0d841dfa374c793e6f6f34281be83745585dfb2fbb8835cb377777f76342cb58",
       "kind": "document",
       "outputs": [
         "/writing.html",
@@ -2235,7 +2235,7 @@
     },
     "src/cold/yourbase.md": {
       "generator": "winter-document-v1",
-      "hash": "baa486b472739ef3072219e533d88b797099685f8af9418f933656be6c4c5089",
+      "hash": "fc54a605e4e5773c471834593e98e22cfd8a37a233ec2afe0b0c8eb899cd5987",
       "kind": "document",
       "outputs": [
         "/yourbase.html",
@@ -5696,7 +5696,7 @@
     },
     "src/warm/death.md": {
       "generator": "winter-document-v1",
-      "hash": "7f04e8767717b5c56404665da4001dd461398547c6a4f18eb18893a94980c4ae",
+      "hash": "efa6cd8130bb80d262f2a1e975f226e98176884429cc69d807f8129776744875",
       "kind": "document",
       "outputs": [
         "/death.html",
@@ -5705,7 +5705,7 @@
     },
     "src/warm/diagnostics.md": {
       "generator": "winter-document-v1",
-      "hash": "1f0955f95b7baa6533c611d628bce3d50bea1e2624da5270b7aeb2ff9241fed0",
+      "hash": "c1092ee223dae03869c68b3e4d28c11e012480ee22fe3cb23dd7c8722c511699",
       "kind": "document",
       "outputs": [
         "/diagnostics.html",
@@ -5714,7 +5714,7 @@
     },
     "src/warm/japan.md": {
       "generator": "winter-document-v1",
-      "hash": "473e197f09753b3ac68971a4d632e667f24460f133e748e52cd5105b691151e9",
+      "hash": "771f4b9279b1e46d49263f6571c9504d31cd181d27500f2779e2b9ba924cd622",
       "kind": "document",
       "outputs": [
         "/japan.html",
