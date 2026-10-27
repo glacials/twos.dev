@@ -14,7 +14,7 @@ This repo hosts the twos.dev static website. Pages are authored in Markdown/HTML
 ## Build, Test, and Development Commands
 - `make serve`: Start Winter dev server with live rebuilds.
 - `make build`: Build static site into `dist/` (honors `WINTER_ARGS`). Example: `WINTER_ARGS="--drafts" make build`.
-- `make tools`: Install Winter CLI (`go install twos.dev/winter@latest`). Ensure Go 1.18+.
+- `make tools`: Install Winter CLI (`go install twos.dev/winter@v0.7.0`). Ensure Go 1.23+.
 - Optional formatting: `npx prettier --write "src/**/*.{md,html,tmpl}"`.
 
 ## Coding Style & Naming Conventions

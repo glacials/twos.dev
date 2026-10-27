@@ -28,7 +28,7 @@ jobs:
         run: curl --fail --location --retry 3 --output src/warm/config.org https://raw.githubusercontent.com/glacials/dotfiles/main/emacs/.config/emacs/config.org
 
       - name: Install Winter
-        run: go install twos.dev/winter@v0.6.1
+        run: go install twos.dev/winter@v0.7.0
 
       - name: Configure deployment commits
         run: |
