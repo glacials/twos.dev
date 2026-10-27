@@ -1,5 +1,6 @@
 ---
-date: 2023-02-16
+created: 2023-02-17
+published: 2023-02-16
 filename: now.html
 preview: The answer to "What am I up to?", updated occasionally.
 type: page

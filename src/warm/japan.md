@@ -1,5 +1,6 @@
 ---
-date: 2023-09-26
+created: 2023-09-26
+published: 2023-09-26
 filename: japan.html
 type: draft
 ---

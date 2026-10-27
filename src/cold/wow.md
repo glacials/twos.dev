@@ -1,5 +1,6 @@
 ---
-date: 2007-12-25
+created: 2022-07-07
+published: 2007-12-25
 filename: wow.html
 type: page
 ---

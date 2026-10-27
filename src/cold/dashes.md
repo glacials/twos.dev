@@ -1,5 +1,6 @@
 ---
-date: 2022-07-05
+created: 2022-06-18
+published: 2022-07-05
 filename: dashes.html
 preview: Everything you never wanted to know about the various dashes of the English language.
 type: post

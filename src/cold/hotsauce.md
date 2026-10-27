@@ -1,5 +1,6 @@
 ---
-date: 2022-06-05
+created: 2022-06-17
+published: 2022-06-05
 filename: hotsauce.html
 preview: How to fake a product launch, and then actually launch it.
 type: post

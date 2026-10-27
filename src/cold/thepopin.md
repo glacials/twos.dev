@@ -1,5 +1,6 @@
 ---
-date: 2021-05-01
+created: 2023-10-25
+published: 2021-05-01
 filename: thepopin.html
 preview: How to pop in on someone when fully distributed.
 type: post

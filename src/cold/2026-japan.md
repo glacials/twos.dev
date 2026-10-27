@@ -1,5 +1,6 @@
 ---
-date: 2026-04-19
+created: 2026-04-19
+published: 2026-04-19
 filename: 2026-japan.html
 type: page
 ---

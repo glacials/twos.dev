@@ -1,5 +1,6 @@
 ---
-date: 2022-08-29
+created: 2025-12-04
+published: 2022-08-29
 filename: play.html
 preview: What secrets lifetime game players don't realize they know.
 type: draft

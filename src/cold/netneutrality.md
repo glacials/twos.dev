@@ -1,5 +1,6 @@
 ---
-date: 2013-03-08
+created: 2022-07-07
+published: 2013-03-08
 filename: netneutrality.html
 type: page
 ---

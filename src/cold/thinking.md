@@ -1,5 +1,6 @@
 ---
-date: 2007-12-06
+created: 2022-07-07
+published: 2007-12-06
 filename: thinking.html
 type: page
 ---

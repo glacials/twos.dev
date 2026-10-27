@@ -1,5 +1,6 @@
 ---
-date: 2007-10-25
+created: 2022-07-07
+published: 2007-10-25
 filename: juven.html
 type: page
 ---

@@ -1,5 +1,6 @@
 ---
-date: 2025-04-13
+created: 2025-03-06
+published: 2025-04-13
 filename: soulslikes.html
 preview: "How to disable gaming's biggest spoiler factory: the internet."
 type: post

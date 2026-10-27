@@ -1,5 +1,6 @@
 ---
-date: 2025-12-04
+created: 2025-12-04
+published: 2025-12-04
 filename: rent_algorithm.html
 parent: rent.html
 type: page

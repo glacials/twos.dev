@@ -1,5 +1,6 @@
 ---
-date: 2023-08-18  
+created: 2023-10-17
+published: 2023-08-18
 filename: diagnostics.html  
 type: draft  
 ---

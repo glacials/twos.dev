@@ -1,5 +1,6 @@
 ---
-date: 2025-10-28
+created: 2025-10-28
+published: 2025-10-28
 filename: games.html
 type: draft
 ---

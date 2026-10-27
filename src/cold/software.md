@@ -1,5 +1,6 @@
 ---
-date: 2022-06-23
+created: 2022-06-23
+published: 2022-06-23
 filename: software.html
 type: page
 updated: 2023-02-10

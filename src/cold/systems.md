@@ -1,5 +1,6 @@
 ---
-date: 2023-12-05
+created: 2023-12-05
+published: 2023-12-05
 filename: systems.html
 preview: It's not about accountability, it's about defining which equilibrium market forces should trend toward.
 type: post

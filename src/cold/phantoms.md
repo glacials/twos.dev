@@ -1,5 +1,6 @@
 ---
-date: 2007-10-03
+created: 2022-07-07
+published: 2007-10-03
 filename: phantoms.html
 type: page
 ---

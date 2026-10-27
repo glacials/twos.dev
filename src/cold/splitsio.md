@@ -1,5 +1,6 @@
 ---
-date: 2024-10-03
+created: 2024-10-04
+published: 2024-10-03
 filename: splitsio.html
 preview: After 11 years, Splits.io is saying goodbye.
 type: post

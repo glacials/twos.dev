@@ -1,5 +1,6 @@
 ---
-date: 2024-05-02
+created: 2024-04-12
+published: 2024-05-02
 filename: brownnote.html
 preview: Creating an app to track my… outputs.
 type: post

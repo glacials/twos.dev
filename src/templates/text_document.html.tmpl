@@ -14,9 +14,9 @@
         {{ if .IsType "draft" }}
           <div class="draft">Draft</div>
         {{ end }}
-        {{ if and (.IsType "post") (not .CreatedAt.IsZero) }}
+        {{ if and (.IsType "post") (not .PublishedAt.IsZero) }}
           <div class="publish-date">
-            {{ .CreatedAt.Format "2006 January" }}{{- if not .UpdatedAt.IsZero -}}
+            {{ .PublishedAt.Format "2006 January" }}{{- if not .UpdatedAt.IsZero -}}
               , last updated
               {{ .UpdatedAt.Format "2006 January" }}
             {{ end }}
@@ -56,10 +56,10 @@
                 >
               {{ end }}
               <br />
-              {{ if not .CreatedAt.IsZero }}
+              {{ if not .PublishedAt.IsZero }}
                 {{ if not (eq .WebPath "/index.html") }}
                   published
-                  {{ .CreatedAt.Format "2006 January" }}
+                  {{ .PublishedAt.Format "2006 January" }}
                   {{ if not .UpdatedAt.IsZero }}
                     / last updated
                     {{ .UpdatedAt.Format "2006 January" }}

@@ -1,5 +1,6 @@
 ---
-date: 2022-05-25
+created: 2022-06-23
+published: 2022-05-25
 filename: apple.html
 preview: Notes on my years-long journey to switch from Google products to Apple products.
 toc: true

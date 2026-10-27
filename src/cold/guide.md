@@ -1,5 +1,6 @@
 ---
-date: 2024-08-05
+created: 2022-05-17
+published: 2024-08-05
 filename: guide.html
 type: page
 updated: 2023-03-28

@@ -1,5 +1,6 @@
 ---
-date: 2007-12-10
+created: 2022-07-07
+published: 2007-12-10
 filename: emotion.html
 type: page
 ---

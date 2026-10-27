@@ -1,5 +1,6 @@
 ---
-date: 2023-07-09
+created: 2023-07-09
+published: 2023-07-09
 filename: obsidian.html
 preview: My setup of Obsidian plugins.
 type: post

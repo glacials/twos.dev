@@ -1,5 +1,6 @@
 ---
-date: 2026-07-08
+created: 2026-07-08
+published: 2026-07-08
 filename: sleep.html
 preview: A trick that always cures my acute insomnia.
 type: post

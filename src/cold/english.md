@@ -1,8 +1,8 @@
 ---
-date: 2024-01-20
+published: 2024-01-20
 filename: english.html
 preview: A style guide for programmers.
-started: 2022-06-15
+created: 2024-01-20
 type: post
 ---
 

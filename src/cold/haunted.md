@@ -1,5 +1,6 @@
 ---
-date: 2007-10-14
+created: 2022-07-07
+published: 2007-10-14
 filename: haunted.html
 type: page
 ---

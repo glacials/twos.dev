@@ -1,6 +1,7 @@
 ---
+created: 2022-10-12
 category: cocktail
-date: 2022-07-21
+published: 2022-07-21
 filename: creamsicle.html
 preview: A recipe for a creamy orange drink, optionally alcoholic.
 type: post

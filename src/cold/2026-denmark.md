@@ -1,5 +1,6 @@
 ---
-date: 2026-08-08
+created: 2026-08-08
+published: 2026-08-08
 filename: 2026-denmark.html
 type: page
 ---

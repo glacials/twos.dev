@@ -1,5 +1,6 @@
 ---
-date: 2025-11-26
+created: 2025-11-26
+published: 2025-11-26
 filename: startrek.html
 type: page
 updated: 2026-06-10

@@ -1,5 +1,6 @@
 ---
-date: 2024-04-12
+created: 2023-11-10
+published: 2024-04-12
 filename: filters.html
 preview: Feelgood ways we might go extinct.
 type: post

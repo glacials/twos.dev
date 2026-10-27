@@ -1,5 +1,6 @@
 ---
-date: 2023-03-09
+created: 2023-03-08
+published: 2023-03-09
 filename: form.html
 preview: Why do aesthetics matter?
 type: post

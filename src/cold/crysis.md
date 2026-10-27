@@ -1,5 +1,6 @@
 ---
-date: 2007-11-19
+created: 2022-07-07
+published: 2007-11-19
 filename: crysis.html
 type: page
 ---

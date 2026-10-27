@@ -1,5 +1,6 @@
 ---
-date: 2022-06-18
+created: 2022-05-18
+published: 2022-06-18
 updated: 2023-02-20
 filename: meta.html
 preview: How does this website even work?
